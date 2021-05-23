@@ -1237,7 +1237,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #49d290;
+  background: #e36fa8;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1971,6 +1971,7 @@ pre .javascript .function {
 .post-tags a {
   display: inline-block;
   font-size: 0.8125em;
+  border-bottom: none;
 }
 .post-tags a:not(:last-child) {
   margin-right: 10px;
@@ -2202,9 +2203,15 @@ ul.breadcrumb li + li:last-child {
 .tag-cloud {
   text-align: center;
 }
+@media (max-width: 767px) {
+  .tag-cloud {
+    border-bottom: none;
+  }
+}
 .tag-cloud a {
   display: inline-block;
   margin: 10px;
+  border-bottom: none;
 }
 .tag-cloud a:hover {
   color: var(--link-hover-color) !important;
