@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Hello of World Old</title>
-    <url>/Test-cate/Hello-of-World-Test.html</url>
+    <url>/Test-cate/Subtest/Hello-of-World-Test.html</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="quick-start">Quick Start</h2>
 <h3 id="create-a-new-post-long-long-long-long-long-long-long-long">Create a new post long long long long long long long long</h3>
@@ -20,6 +20,7 @@
 ]]></content>
       <categories>
         <category>Test cate</category>
+        <category>Subtest</category>
       </categories>
       <tags>
         <tag>test Tags</tag>
