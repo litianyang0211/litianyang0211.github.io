@@ -1,72 +1,263 @@
-<?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>Set</title>
-    <url>/Mathematics/Real-analysis/Set.html</url>
-    <content><![CDATA[<h1 id="set-operation">Set Operation</h1>
-<h2 id="symmetric-difference">Symmetric Difference</h2>
-<p><strong>Definition 1.1</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are two sets. The <strong>symmetric difference</strong> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(A \triangle B\)</span>, is the set <span class="math inline">\((A \setminus B) \cup (B \setminus A)\)</span>. The symmetric difference of two sets, a.k.a. the <strong>disjunctive union</strong> is the set of elements which are in either of the sets, but not in their intersection.</p>
-<p><strong>Property 1.1</strong>    Suppose <span class="math inline">\(A, B\)</span> and <span class="math inline">\(C\)</span> are sets, and <span class="math inline">\(X\)</span> is a <strong>universal set</strong>:</p>
-<p>    (1) <span class="math inline">\(A \cup B=(A \cap B) \cup (A \triangle B)\)</span>;</p>
-<p>    (2) <span class="math inline">\(A \triangle \varnothing=A, A \triangle A=\varnothing, A \triangle A^c=X, A \triangle X=A^c\)</span>;</p>
-<p>    (3) <span class="math inline">\(A \triangle B=B \triangle A\)</span>;</p>
-<p>    (4) <span class="math inline">\((A \triangle B) \triangle C=A \triangle (B \triangle C)\)</span>;</p>
-<p>    (5) <span class="math inline">\(A \cap (B \triangle C)=(A \cap B) \triangle (A \cap C)\)</span>;</p>
-<p>    (6) <span class="math inline">\(A^c \triangle B^c= A \triangle B\)</span>;</p>
-<p>    (7) <span class="math inline">\(A=A \triangle B \Leftrightarrow B=\varnothing\)</span>;</p>
-<p>    (8) For any <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, there exists an only set <span class="math inline">\(E\)</span> s.t. <span class="math inline">\(E \triangle A=B.\)</span> In fact, <span class="math inline">\(E=B \triangle A\)</span>.</p>
-<h2 id="limit-of-a-sequence-of-sets">Limit of a Sequence of Sets</h2>
-<p><strong>Definition 1.2</strong>    Suppose <span class="math inline">\(\{A_k\}\)</span> is a sequence of sets. If <span class="math display">\[A_1 \supset \cdots \supset A_k \supset \cdots,\]</span> then <span class="math inline">\(\{A_k\}\)</span> is a <strong>decreasing sequence of sets</strong>. The limit of <span class="math inline">\(\{A_k\}\)</span>, denoted <span class="math inline">\(\displaystyle \lim_{k \to \infty} A_k\)</span>, is <span class="math inline">\(\displaystyle \bigcap_{k=1}^\infty A_k\)</span>.</p>
-<p>If <span class="math display">\[A_1 \subset \cdots \subset A_k \subset \cdots,\]</span> then <span class="math inline">\(\{A_k\}\)</span> is a <strong>increasing sequence of sets</strong>. The limit of <span class="math inline">\(\{A_k\}\)</span>, denoted <span class="math inline">\(\displaystyle \lim_{k \to \infty} A_k\)</span>, is <span class="math inline">\(\displaystyle \bigcup_{k=1}^\infty A_k\)</span>.</p>
-<p><strong>Example 1.1</strong>    Suppose <span class="math inline">\(A_n=[n, \infty), n \in \mathbb{N}\)</span>, then <span class="math inline">\(\displaystyle \lim_{n \to \infty} A_n=\varnothing\)</span>.</p>
-<p><strong>Example 1.2</strong>    Suppose <span class="math display">\[f_1(x) \leq \cdots \leq f_n(x) \leq \cdots, x \in \mathbb{R},\]</span> and <span class="math inline">\(\displaystyle \lim_{n \to \infty} f_n(x)=f(x).\)</span> For a given real number <span class="math inline">\(t\)</span>, let <span class="math display">\[E_n=\{x: f_n(x)&gt;t\}.\]</span> Obviously, <span class="math inline">\(E_1 \subset \cdots \subset E_n \subset \cdots\)</span>, and <span class="math display">\[\lim_{n \to \infty} E_n=\bigcup_{n=1}^\infty \{x: f_n(x)&gt;t\}=\{x: f(x)&gt;t\}.\]</span></p>
-<p><strong>Definition 1.3</strong>    Suppose <span class="math inline">\(\{A_k\}\)</span> is a sequence of sets. Let <span class="math display">\[B_j=\bigcup_{k=j}^\infty A_k, j \in \mathbb{N}.\]</span> Since <span class="math inline">\(B_j \supset B_{j+1}\)</span>, then we define <span class="math display">\[\lim_{k \to \infty} B_k=\bigcap_{j=1}^\infty B_j=\bigcap_{j=1}^\infty \bigcup_{k=j}^\infty A_k\]</span> as the <strong>upper limit of sets</strong> of <span class="math inline">\(\{A_k\}\)</span>, denoted as <span class="math inline">\(\displaystyle \varlimsup_{k \to \infty} A_k.\)</span></p>
-<p>Similarly, we define <span class="math display">\[\varliminf_{k \to \infty} A_k= \bigcup_{j=1}^\infty \bigcap_{k=j}^\infty A_k\]</span> as the <strong>lower limit of sets</strong> of <span class="math inline">\(\{A_k\}\)</span>.</p>
-<p>If <span class="math inline">\(\displaystyle \varlimsup_{k \to \infty} A_k=\varliminf_{k \to \infty} A_k\)</span>, then we say the limit of <span class="math inline">\(\{A_k\}\)</span> exists, denoted as <span class="math inline">\(\displaystyle \lim_{k \to \infty} A_k\)</span>.</p>
-<p><strong>Example 1.3</strong>    Suppose <span class="math inline">\(E\)</span> and <span class="math inline">\(F\)</span> are sets. Let <span class="math display">\[A_k=\begin{cases}
-E, &amp;k\ \text{is odd}, \\
-F, &amp;k\ \text{is even}.
-\end{cases}\]</span> Then we have <span class="math display">\[\varliminf_{k \to \infty} A_k=E \cup F, \varliminf_{k \to \infty} A_k=E \cap F.\]</span></p>
-<p><strong>Theorem 1.2</strong>    Suppose <span class="math inline">\(\{A_k\}\)</span> is a sequence of sets, then <span class="math display">\[\varlimsup_{k \to \infty} A_k=\{x: \forall j \in \mathbb{N}, \exists k \geq j\ \text{s.t.}\ x \in A_k\},\]</span> and <span class="math display">\[\varliminf_{k \to \infty} A_k=\{x: \exists j_0 \in \mathbb{N}\ \text{s.t.}\ k \geq j_0 \Rightarrow x \in A_k\}.\]</span></p>
-<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(\displaystyle x \in \varlimsup_{k \to \infty} A_k=\bigcap_{j=1}^\infty \bigcup_{k=j}^\infty A_k.\)</span> This is equivalent to <span class="math display">\[\forall j \in \mathbb{N}, x \in \bigcup_{k=j}^\infty A_k,\]</span> which is equivalent to <span class="math display">\[\forall j \in \mathbb{N}, \exists k \geq j\ \text{s.t.}\ x \in A_k.\]</span></p>
-Suppose <span class="math inline">\(\displaystyle x \in \varliminf_{k \to \infty} A_k=\bigcup_{j=1}^\infty \bigcap_{k=j}^\infty A_k.\)</span> This is equivalent to <span class="math display">\[\exists j_0 \in \mathbb{N}\ \text{s.t.}\ x \in \bigcap_{k=j_0}   ^\infty A_k,\]</span> which is equivalent to <span class="math display">\[\exists j_0 \in \mathbb{N}\ \text{s.t.}\ k \geq j_0 \Rightarrow x \in A_k.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong><em>Note.</em></strong>    The upper limit of <span class="math inline">\(\{A_k\}\)</span> includes the elements that belong to an infinite number of sets in <span class="math inline">\(\{A_k\}\)</span>. The lower limit of <span class="math inline">\(\{A_k\}\)</span> includes the elements that do not belong to only finitely many sets in <span class="math inline">\(\{A_k\}\)</span>. Therefore, <span class="math inline">\(\displaystyle \varlimsup_{k \to \infty} A_k \subset \varliminf_{k \to \infty} A_k.\)</span></p>
-<p><strong>Example 1.4</strong>    Suppose <span class="math display">\[A_{2m+1}=\left[0, 2-\frac{1}{2m+1}\right], m=0, 1, \cdots\]</span> and <span class="math display">\[A_{2m}=\left[0, 1+\frac{1}{2m}\right], m=1, 2, \cdots.\]</span> Find <span class="math inline">\(\displaystyle \varlimsup_{n \to \infty} A_n\)</span> and <span class="math inline">\(\displaystyle \varliminf_{n \to \infty} A_n\)</span>.</p>
-<p><strong><em>Solution.</em></strong> Obviously, <span class="math inline">\([0, 1] \subset A_n\)</span>. For every <span class="math inline">\(x \in (1, 2)\)</span>, when <span class="math inline">\(m \to \infty\)</span>, there are infinite many sets in <span class="math inline">\(\{A_{2m}\}\)</span> such that <span class="math inline">\(x \notin A_{2m}\)</span>, and thus <span class="math inline">\(\displaystyle x \notin \varliminf_{n \to \infty} A_n\)</span>. There are infinite many sets in <span class="math inline">\(\{A_{2m+1}\}\)</span> such that <span class="math inline">\(x \in A_{2m+1}\)</span>, and thus <span class="math inline">\(\displaystyle \varlimsup_{n \to \infty} A_n=[0, 2)\)</span> and <span class="math inline">\(\displaystyle\varliminf_{n \to \infty} A_n=[0, 1]\)</span>.</p>
-<p><strong>Example 1.5</strong>    Use set notation to represent <span class="math inline">\(\displaystyle \lim_{n \to \infty} a_n=a\)</span>.</p>
-<p><strong><em>Solution.</em></strong> Since <span class="math inline">\(\displaystyle \lim_{n \to \infty} a_n=a\)</span>, then <span class="math display">\[\forall \varepsilon&gt;0, \exists N \in \mathbb{N}\ \text{s.t.}\ \forall n \geq N, |a_n-a|&lt;\varepsilon.\]</span> Therefore <span class="math display">\[a \in \bigcap_{\varepsilon \in \mathbb{R}^+} \bigcup_{N=1}^\infty \bigcap_{n \geq N} \{x: |a_n-x|&lt;\varepsilon\}=\bigcap_{\varepsilon \in \mathbb{R}^+} \varliminf_{n \to \infty} \{x: |a_n-x|&lt;\varepsilon\}.\]</span></p>
-<h1 id="cardinal-number">Cardinal Number</h1>
-<p><strong>Definition 2.1</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are sets. If there exists a bijection from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span>, then we say <span class="math inline">\(A\)</span> is <strong>equipotent</strong> to <span class="math inline">\(B\)</span>, denoted as <span class="math inline">\(A \sim B\)</span>. Specifically, <span class="math inline">\(\varnothing \sim \varnothing\)</span>.</p>
-<p><strong>Property 2.1</strong>    An equipotent relationship is an equivalence relation, i.e., for any sets <span class="math inline">\(A, B\)</span> and <span class="math inline">\(C\)</span>:</p>
-<p>    (1) <span class="math inline">\(A \sim A\)</span>;</p>
-<p>    (2) If <span class="math inline">\(A \sim B\)</span>, then <span class="math inline">\(B \sim A\)</span>;</p>
-<p>    (3) If <span class="math inline">\(A \sim B\)</span> and <span class="math inline">\(B \sim C\)</span>, then <span class="math inline">\(A \sim C\)</span>.</p>
-<p><strong>Definition 2.2</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are sets. If <span class="math inline">\(A \sim B\)</span>, then the <strong>cardinal number</strong> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are equal, denoted as <span class="math inline">\(\overset{=}{A}=\overset{=}{B}\)</span>.</p>
-<p><font face="STKaiti" font color="#696969" font size=2>说明：基数的概念可以看作有限集合中所含元素个数的推广，在此并未作出严格的定义，我们再进行一个大致的描述——对于一个集合<span class="math inline">\(A\)</span>，我们考虑所有与<span class="math inline">\(A\)</span>对等的集合所构成的类. 公理集合论允许我们从每一个这样的类中按确定的方式选出一个代表（即所谓良序集——依某种意义排好了次序的集），我们把这个代表定义为这一类中各个集合的基数，记之为<span class="math inline">\(\overset{=}{A}\)</span>.</font></p>
-<p><strong>Definition 2.3</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are sets. If <span class="math inline">\(A \not\sim B\)</span>, and <span class="math inline">\(B^* \sim A\)</span> where <span class="math inline">\(B^* \subset B\)</span>, then <span class="math inline">\(\overset{=}{A}&lt;\overset{=}{B}\)</span> or <span class="math inline">\(\overset{=}{B}&gt;\overset{=}{A}\)</span>.</p>
-<p><strong><em>Note.</em></strong>    We can show that for any two sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, one and only one of the relations holds: <span class="math inline">\(\overset{=}{A}&lt;\overset{=}{B}, \overset{=}{A}=\overset{=}{B}, \overset{=}{A}&gt;\overset{=}{B}\)</span>.</p>
-<p><strong>Theorem 2.2 (Cantor-Bernstein Theorem)</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are non-empty sets. If <span class="math inline">\(A\)</span> is equipotent to a subset of <span class="math inline">\(B\)</span>, and <span class="math inline">\(B\)</span> is equipotent to a subset of <span class="math inline">\(A\)</span>, then <span class="math inline">\(A \sim B\)</span>.</p>
-<p><strong>Corollary 2.3</strong>    If <span class="math inline">\(A \supset B \supset C\)</span> and <span class="math inline">\(A \sim C\)</span>, then <span class="math inline">\(A \sim B\)</span>.</p>
-<h1 id="countable-set-and-uncountable-set">Countable Set and Uncountable Set</h1>
-<p><strong>Definition 3.1</strong>    The <strong>countable sets</strong> are the sets that are equipotent to <span class="math inline">\(\mathbb{N}\)</span>. Note that <span class="math inline">\(\overset{=}{\mathbb{N}}=\aleph_0\)</span>.</p>
-<p><strong>Definition 3.2</strong>    The <strong>uncountable sets</strong> are the sets that are not countable sets.</p>
-<p><font face="STKaiti" font color="#696969" font size=2>说明：关于可数集与不可数集的相关定理与推论在抽象数学一课中已经进行了详细探讨，在此不再赘述. 但我们仍应当记得——任何无限集合都至少包含一个可数子集，也意味着可数集在所有无限集中有最小的基数；可数集的任何无限子集仍是可数集；至多可数个至多可数集的并仍是至多可数集；<span class="math inline">\(\mathbb{Q}\)</span>是可数集；代数数集<span class="math inline">\(\mathcal{A}\)</span>是可数集；有限个至多可数集的直积是至多可数集；<span class="math inline">\(\mathbb{R}\)</span>是不可数集且<strong>连续基数</strong>记为<span class="math inline">\(\overset{=}{\mathbb{R}}=c&gt;\aleph_0\)</span>；至多可数个不可数集的并或直积是不可数集；值得特别注意的是：可数个至多可数集的直积<strong>不一定</strong>可数；<span class="math inline">\(c\)</span>个基数为<span class="math inline">\(c\)</span>的集合的并的基数仍然是<span class="math inline">\(c\)</span>.</font></p>
-]]></content>
-      <categories>
-        <category>Mathematics</category>
-        <category>Real analysis</category>
-      </categories>
-      <tags>
-        <tag>Set</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Point Set</title>
-    <url>/Mathematics/Real-analysis/Point_Set.html</url>
-    <content><![CDATA[<h1 id="metric-space">Metric Space</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Palatino:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="A quick review of point set.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Point Set">
+<meta property="og:url" content="https://litianyang0211.github.io/Mathematics/Real-analysis/Point_Set">
+<meta property="og:site_name" content="Tianyang Li">
+<meta property="og:description" content="A quick review of point set.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-05-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-06-06T16:00:00.000Z">
+<meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Set">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://litianyang0211.github.io/Mathematics/Real-analysis/Point_Set.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Point Set | Tianyang Li</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tianyang Li</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-blog">
+
+    <a href="/blog/" rel="section"><i class="fa fa-blog fa-fw"></i>Blog</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-projects">
+
+    <a href="/projects/" rel="section"><i class="fa fa-code fa-fw"></i>Projects</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Mathematics/Real-analysis/Point_Set">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Tianyang Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianyang Li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Point Set
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-lightbulb"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-06-01 00:00:00" itemprop="dateCreated datePublished" datetime="2021-06-01T00:00:00+08:00">2021-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-edit"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-07 00:00:00" itemprop="dateModified" datetime="2021-06-07T00:00:00+08:00">2021-06-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
+                </span>
+                  /
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Mathematics/Real-analysis/" itemprop="url" rel="index"><span itemprop="name">Real analysis</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">A quick review of point set.</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="metric-space">Metric Space</h1>
 <p><strong>Definition 1.1</strong>    Suppose <span class="math inline">\(X\)</span> is a set, and <span class="math inline">\(d: X \times X \to \mathbb{R}\)</span> satisfies</p>
 <p>    (1) <span class="math inline">\(\forall x, y \in X, d(x, y) \geq 0\)</span>;</p>
 <p>    (2) <span class="math inline">\(\forall x, y \in X, d(x, y)=d(y, x)\)</span>;</p>
@@ -179,13 +370,267 @@ Suppose <span class="math inline">\(\alpha \in G\)</span>, then <span class="mat
 <p><strong>Property 5.6</strong>    <span class="math inline">\(\overset{=}{P}=c\)</span>.</p>
 <p><strong>Property 5.7</strong>    The length of <span class="math inline">\(P\)</span> is 0.</p>
 <p><font face="STKaiti" font color="#696969" font size=2>说明：不难发现，<span class="math inline">\(P\)</span>是一个非常“古怪”的集合，因此引申出一个<strong>分形（Fractal）</strong>的概念.</font></p>
-]]></content>
-      <categories>
-        <category>Mathematics</category>
-        <category>Real analysis</category>
-      </categories>
-      <tags>
-        <tag>Set</tag>
-      </tags>
-  </entry>
-</search>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Set/" rel="tag"><i class="fa fa-tag"></i> Set</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Mathematics/Real-analysis/Set" rel="prev" title="Set">
+      <i class="fa fa-chevron-left"></i> Set
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#metric-space"><span class="nav-number">1.</span> <span class="nav-text">Metric Space</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cluster-point-interior-point-and-boundary-point"><span class="nav-number">2.</span> <span class="nav-text">Cluster Point, Interior Point and Boundary Point</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#open-set-and-closed-set"><span class="nav-number">3.</span> <span class="nav-text">Open Set and Closed Set</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#compact-set-and-complete-set"><span class="nav-number">4.</span> <span class="nav-text">Compact Set and Complete Set</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#construction-of-open-set-closed-set-and-complete-set-on-mathbbr"><span class="nav-number">5.</span> <span class="nav-text">Construction of Open Set, Closed Set, and Complete Set on \(\mathbb{R}\)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cantor-ternary-set"><span class="nav-number">5.1.</span> <span class="nav-text">Cantor Ternary Set</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tianyang Li"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">Tianyang Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/litianyang0211" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;litianyang0211" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:litianyangchn@gmail.com" title="Email → mailto:litianyangchn@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/derekli0211" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;derekli0211" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tianyang Li</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
