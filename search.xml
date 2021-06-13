@@ -1,6 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Measure Theory</title>
+    <url>/Mathematics/Real-analysis/Measure_Theory.html</url>
+    <content><![CDATA[<h1 id="outer-measure">Outer Measure</h1>
+<h2 id="definition-and-example">Definition and Example</h2>
+<p><strong>Definition 1.1</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span>. The <strong>outer measure</strong> of <span class="math inline">\(E\)</span> is <span class="math display">\[m^*(E):=\inf\left\{\sum_{i=1}^\infty |I_i|: \bigcup_{i=1}^\infty I_i \supset E \right\},\]</span> where <span class="math inline">\(I_i\)</span> is open, and <span class="math inline">\(|I_i|\)</span> is the volume of <span class="math inline">\(I_i\)</span>.</p>
+<p><strong><em>Note.</em></strong>    In the definition, we need <strong>at most countable</strong> <span class="math inline">\(\{I_i\}\)</span>. For example, if <span class="math inline">\([0, 1] \cap \mathbb{Q}\)</span> is covered by finite intervals, then those finite intervals and endpoints cover <span class="math inline">\([0, 1]\)</span>. Therefore, <span class="math inline">\(m^*([0, 1] \cap \mathbb{Q}) \geq 1\)</span>. Similarly, <span class="math inline">\(m^*([0, 1] \cap \mathbb{Q}^c) \geq 1\)</span>, and thus <span class="math inline">\(m^*([0, 1]) \geq 2\)</span>. In other cases, <span class="math inline">\(I_i\)</span> can be an empty set and thus <span class="math inline">\(\{I_i\}\)</span> can be finite.</p>
+<p><strong>Example 1.1</strong>    <span class="math inline">\(m^*(\varnothing)=0\)</span>.</p>
+<p><strong>Example 1.2</strong>    If <span class="math inline">\(p \in \mathbb{R}\)</span>, then <span class="math inline">\(m^*(\{p\})=0\)</span>.</p>
+<strong><em>Proof.</em></strong> <span class="math inline">\(\forall \varepsilon&gt;0\)</span>, define <span class="math inline">\(\displaystyle I=\left(x-\frac{\varepsilon}{2}, x+\frac{\varepsilon}{2}\right)\)</span>. We have <span class="math inline">\(|I|=\varepsilon\)</span> and <span class="math inline">\(\{p\} \subset I\)</span>. Therefore, <span class="math inline">\(m^*(\{p\}) \leq \varepsilon\)</span>, i.e., <span class="math inline">\(m^*(\{p\})=0\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Example 1.3</strong>    If <span class="math inline">\(p_1, \cdots, p_k \in \mathbb{R}\)</span>, then <span class="math inline">\(m^*(\{p_1, \cdots, p_k\})=0\)</span>.</p>
+<strong><em>Proof.</em></strong> <span class="math inline">\(\forall \varepsilon&gt;0\)</span>, define <span class="math inline">\(\displaystyle I_i=\left(p_i-\frac{\varepsilon}{2k}, p_i+\frac{\varepsilon}{2k}\right)\)</span>, we have <span class="math inline">\(\displaystyle |I_i|=\frac{\varepsilon}{k}\)</span>. Hence, <span class="math inline">\(\displaystyle \{p_1, \cdots, p_k\} \subset \bigcup_{i=1}^k I_i\)</span> and <span class="math inline">\(\displaystyle \sum_{i=1}^n |I_i|=\varepsilon\)</span>. Therefore, <span class="math inline">\(m^*(\{p_1, \cdots, p_n\}) \leq \varepsilon\)</span>, i.e., <span class="math inline">\(m^*(\{p_1, \cdots, p_n\})=0\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Example 1.4</strong>    If <span class="math inline">\(p_1, \cdots, p_n, \cdots \in \mathbb{R}\)</span>, then <span class="math inline">\(m^*(\{p_1, \cdots, p_n, \cdots\})=0\)</span>.</p>
+<strong><em>Hint of proof.</em></strong> Take <span class="math inline">\(\displaystyle I_i=\left(x_i-\frac{\varepsilon}{2^{i+1}}, x_i+\frac{\varepsilon}{2^{i+1}}\right)\)</span>, then <span class="math inline">\(\displaystyle |I_i|=\frac{\varepsilon}{2^i}\)</span>, and <span class="math inline">\(\displaystyle \sum_{i=1}^\infty \frac{\varepsilon}{2^i}=\varepsilon\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Example 1.5</strong>    <span class="math inline">\(m^*([0, 1] \cap \mathbb{Q})=0\)</span>.</p>
+<h2 id="basic-property">Basic Property</h2>
+<p><strong>Property 1.1 (Nonnegativity)</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span>, <span class="math inline">\(m^*(E) \geq 0\)</span>. Besides, <span class="math inline">\(m^*(\varnothing)=0\)</span>.</p>
+<p><strong>Property 1.2 (Countable Subadditivity)</strong>    Suppose <span class="math inline">\(A_i \subset \mathbb{R}^n\)</span>. <span class="math inline">\(\displaystyle m^*\left(\bigcup_{i=1}^\infty A_i\right) \leq \sum_{i=1}^\infty m^*(A_i)\)</span>.</p>
+<strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists an open covering of <span class="math inline">\(A_i\)</span>, <span class="math inline">\(\displaystyle \bigcup_{m=1}^\infty I_{i, m}\)</span> such that <span class="math display">\[m^*(A_i) \geq \sum_{m=1}^\infty |I_{i, m}|-\frac{\varepsilon}{2^i}, \bigcup_{i=1}^\infty A_i \subset \bigcup_{i, m=1}^\infty I_{i, m}.\]</span> Therefore, <span class="math display">\[\begin{aligned}
+m^*\left(\bigcup_{i=1}^\infty A_i\right) &amp;\leq \sum_{i, m=1}^\infty |I_{i, m}| \\
+&amp;\leq \sum_{i=1}^\infty m^*(A_i)+\sum_{i=1}^\infty \frac{\varepsilon}{2^i} \\
+&amp;=\sum_{i=1}^\infty m^*(A_i)+\varepsilon.
+\end{aligned}\]</span> Hence, <span class="math inline">\(\displaystyle m^*\left(\bigcup_{i=1}^\infty A_i\right) \leq \sum_{i=1}^\infty m^*(A_i).\)</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Property 1.3 (Monotonicity)</strong>    Suppose <span class="math inline">\(A \subset B\)</span>, then <span class="math inline">\(m^*(A) \leq m^*(B)\)</span>.</p>
+<strong><em>Proof.</em></strong> Take an arbitrary open covering of <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(\{I_i\}_{i=1}^\infty\)</span>. Since <span class="math inline">\(A \subset B\)</span>, then <span class="math inline">\(\{I_i\}_{i=1}^\infty\)</span> is an open covering of <span class="math inline">\(A\)</span>, and thus <span class="math inline">\(\displaystyle m^*(A) \leq \sum_{i=1}^\infty |I_i|\)</span>. By the definition of outer measure and infimum, we have <span class="math inline">\(m^*(B) \geq m^*(A)\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 1.4</strong>    Suppose <span class="math inline">\(I\)</span> is an interval, then <span class="math inline">\(m^*(I)=|I|\)</span>.</p>
+<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(I\)</span> is a closed interval. Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, we can find an open interval <span class="math inline">\(I&#39; \supset I\)</span> such that <span class="math inline">\(|I&#39;| \leq |I|+\varepsilon\)</span>. Hence, <span class="math inline">\(m^*(I) \leq |I&#39;| \leq |I|+\varepsilon\)</span>, i.e., <span class="math inline">\(m^*(I) \leq |I|\)</span>.</p>
+<p>Besides, we can find an open covering of <span class="math inline">\(I\)</span>, denoted <span class="math inline">\(\{I_i\}_{i=1}^\infty\)</span>, such that <span class="math inline">\(\displaystyle m^*(I) \geq \sum_{i=1}^\infty |I_i|-\varepsilon\)</span>. Since <span class="math inline">\(I\)</span> is bounded and closed, then there exists a finite open covering of <span class="math inline">\(I\)</span>, denoted <span class="math inline">\(\{I_i\}_{i=1}^m\)</span>, such that <span class="math inline">\(\displaystyle m^*(I) \geq \sum_{i=1}^m |I_i|-\varepsilon\)</span>. Since <span class="math inline">\(\displaystyle \sum_{i=1}^m |I_i| \geq |I|\)</span>, then <span class="math inline">\(m^*(I) \geq |I|-\varepsilon\)</span>, i.e., <span class="math inline">\(m^*(I) \geq |I|\)</span>.</p>
+<p>Therefore, <span class="math inline">\(m^*(I)=|I|\)</span>.</p>
+We now suppose <span class="math inline">\(I\)</span> is an arbitrary interval. We have <span class="math inline">\(\forall \varepsilon&gt;0, \exists I_1, I_2\)</span> s.t. <span class="math inline">\(I_1 \subset I \subset I_2\)</span>, where <span class="math inline">\(I_1, I_2\)</span> are closed, <span class="math inline">\(|I_1|+\varepsilon&gt;|I|\)</span>, and <span class="math inline">\(|I_2|-\varepsilon&lt;|I|\)</span>. Therefore, <span class="math display">\[|I|-\varepsilon&lt;m^*(I_1) \leq m^*(I) \leq m^*(I_2)&lt;|I|+\varepsilon.\]</span> As a consequence, <span class="math inline">\(m^*(I)=|I|\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="measurable-set">Measurable Set</h1>
+<h2 id="definition">Definition</h2>
+<p><strong>Definition 2.1</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is bounded, and <span class="math inline">\(I \supset E\)</span> is open. The <strong>inner measure</strong> of <span class="math inline">\(E\)</span> is <span class="math display">\[m_*(E)=|I|-m^*(I-E).\]</span></p>
+<p><font face="SimSun" font color="#696969" font size=2>说明：显然，若<span class="math inline">\(E\)</span>有界，且<span class="math inline">\(m^*(E)=m_*(E)\)</span>，我们能得到<strong>可测</strong>的定义. 然而，我们希望能对任何一个<span class="math inline">\(E\)</span>定义可测，而上述的定义则有所限制. 此外，这一定义需要同时使用内外测度的定义. 因此，Carathéodory提出了一个更简洁地等价定义.</font></p>
+<p><strong>Definition 2.2</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is a set. If for any set <span class="math inline">\(T \subset \mathbb{R}^n\)</span>, we have <span class="math display">\[m^*(T)=m^*(T \cap E)+m^*(T \cap E^c),\]</span> then <span class="math inline">\(E\)</span> is <strong>L-measurable</strong> or <strong>measurable</strong>. The <strong>L-measure</strong>, denoted <span class="math inline">\(m(E)\)</span>, equals to <span class="math inline">\(m^*(E)\)</span>.</p>
+<p><span id="thm2.1"><strong>Theorem 2.1</strong></span>    <span class="math inline">\(E\)</span> is measurable if and only if for any <span class="math inline">\(A \subset E\)</span> and <span class="math inline">\(B \subset E^c\)</span>, we have <span class="math display">\[m^*(A \cup B)=m^*(A)+m^*(B).\]</span></p>
+<p><strong><em>Proof.</em></strong> <span class="math inline">\((\Rightarrow)\)</span> Take <span class="math inline">\(T=A \cup B\)</span> for any <span class="math inline">\(A \subset E\)</span> and <span class="math inline">\(B \subset E^c\)</span>. Then <span class="math display">\[m^*(A \cup B)+m^*((A \cup B) \cap E)+m^*((A \cup B) \cap E^c)=m^*(A)+m^*(B).\]</span></p>
+            <span class="math inline">\((\Leftarrow)\)</span> Take <span class="math inline">\(A=T \cap E\)</span> and <span class="math inline">\(B=T \cap E^c\)</span> for any <span class="math inline">\(T\)</span>. Then <span class="math display">\[m^*(T \cap E)+m^*(T \cap E^c)=m^*(A)+m^*(B)=m^*(A \cup B)=m^*(T).\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h2 id="operation">Operation</h2>
+<p><strong>Theorem 2.2</strong>    <span class="math inline">\(S\)</span> is measurable if and only if <span class="math inline">\(S^c\)</span> is measurable.</p>
+<strong><em>Proof.</em></strong> If <span class="math inline">\(S\)</span> is measurable, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[m^*(T)=m^*(T \cap S)+m^*(T \cap S^c)=m^*(T \cap (S^c)^c)+m^*(T \cap S^c),\]</span> which is equivalent to say that <span class="math inline">\(S^c\)</span> is measurable.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.3</strong>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, then <span class="math inline">\(S_1 \cup S_2\)</span> is measurable.</p>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[\begin{aligned}
+m^*(T)&amp;=m^*(T \cap S_1)+m^*(T \cap S_1^c) \\
+&amp;=m^*((T \cap (S_1 \cup S_2)) \cap S_1)+[m^*((T \cap S_1^c) \cap S_2)+m^*((T \cap S_1^c) \cap S_2^c))] \\
+&amp;=m^*((T \cap (S_1 \cup S_2)) \cap S_1)+[m^*((T \cap (S_1 \cup S_2)) \cap S_1^c)+m^*(T \cap (S_1 \cup S_2)^c)] \\
+&amp;=m^*(T \cap (S_1 \cup S_2))+m^*(T \cap (S_1 \cup S_2)^c).
+\end{aligned}\]</span> Therefore, <span class="math inline">\(S_1 \cup S_2\)</span> is measurable.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><font face="SimSun" font color="#696969" font size=2>说明：对于不熟悉集合运算的读者，我们建议利用韦恩图逆推.</font></p>
+<p><strong>Theorem 2.4</strong>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, and <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[m^*(T \cap (S_1 \cup S_2))=m^*(T \cap S_1)+m^*(T \cap S_2).\]</span></p>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then for any set <span class="math inline">\(T\)</span>, we have <span class="math inline">\(T \cap S_1 \subset S_1\)</span> and <span class="math inline">\(T \cap S^2 \subset S_1^c\)</span>. Since <span class="math inline">\(S_1\)</span> is measurable, then by <a href="#thm2.1">theorem 2.1</a>, <span class="math display">\[m^*(T \cap (S_1 \cup S_2))=m^*((T \cap S_1) \cup (T \cap S_2))=m^*(T \cap S_1)+m^*(T \cap S_2).\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><span id="cor2.5"><strong>Corollary 2.5</strong></span>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, and <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then <span class="math display">\[m(S_1 \cup S_2)=m(S_1)+m(S_2).\]</span></p>
+<p><strong>Corollary 2.6</strong>    If <span class="math inline">\(S_1, \cdots, S_k\)</span> are measurable, then <span class="math inline">\(\displaystyle \bigcup_{i=1}^k S_i\)</span> and <span class="math inline">\(\displaystyle \bigcap_{i=1}^k S_i\)</span> are measurable. Moreover, if <span class="math inline">\(S_1 \cap \cdots \cap S_k=\varnothing\)</span>, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[m^*(T \cap (S_1 \cup \cdots \cup S_k))=m^*(T \cap S_1)+\cdots+m^*(T \cap S_k).\]</span> Specifically, <span class="math display">\[m(S_1 \cup \cdots \cup S_k)=m(S_1)+\cdots+m(S_k),\]</span> which is <strong>finite additivity</strong>.</p>
+<p><strong>Corollary 2.7</strong>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, then <span class="math inline">\(S_1 \setminus S_2\)</span> is measurable.</p>
+<p><strong>Theorem 2.8</strong>    If <span class="math inline">\(S_1 \supset S_2\)</span> and <span class="math inline">\(m(S_2)&lt;\infty\)</span>, then <span class="math display">\[m(S_1 \setminus S_2)=m(S_1)-m(S_2).\]</span></p>
+<strong><em>Proof.</em></strong> We know <span class="math inline">\(S_1=(S_1 \setminus S_2) \cup S_2\)</span> and <span class="math inline">\((S_1 \setminus S_2) \cap S_2=\varnothing\)</span>. Then by <a href="#cor2.5">corollary 2.5</a>, <span class="math display">\[m(S_1)=m(S_1 \setminus S_2)+m(S_2).\]</span> Since <span class="math inline">\(m(S_2)&lt;\infty\)</span>, then <span class="math inline">\(m(S_1 \setminus S_2)=m(S_1)-m(S_2)\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.9</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of mutually disjoint measurable sets, then <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable. Besides, <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right)=\sum_{i=1}^\infty m(S_i)\)</span>, which is <strong>countable additivity</strong>.</p>
+<p><strong><em>Proof.</em></strong> We know <span class="math display">\[\begin{align}
+m^*(T)&amp;=m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)^c\right) \nonumber \\
+&amp;\geq m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \tag{Monotonicity} \\
+&amp;=\sum_{i=1}^k m^*(T \cap S_i)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right). \nonumber \\
+\end{align}\]</span> Take <span class="math inline">\(k \to \infty\)</span>, then <span class="math display">\[\begin{align}
+m^*(T)&amp;\geq \sum_{i=1}^\infty m^*(T \cap S_i)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \nonumber \\
+&amp;\geq m^*\left(\bigcup_{i=1}^\infty (T \cap S_i)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \tag{Countable Subadditivity} \\
+&amp;=m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right). \nonumber
+\end{align}\]</span> Because of countable subadditivity, we know <span class="math display">\[m^*(T) \leq m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right),\]</span> and thus <span class="math display">\[m^*(T)=m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right),\]</span> i.e., <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable.</p>
+Let <span class="math inline">\(\displaystyle T=\bigcup_{i=1}^\infty S_i\)</span>, then <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right) \geq \sum_{i=1}^\infty m(S_i)\)</span>. Because of countable subadditivity, we have <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right) \leq \sum_{i=1}^\infty m(S_i)\)</span>. Hence, <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right)=\sum_{i=1}^\infty m(S_i)\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.10</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of measurable sets, then <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable.</p>
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(S_0=\varnothing\)</span>, and <span class="math inline">\(\displaystyle \widetilde{S}_i=S_i-\bigcup_{k=0}^{i-1} S_k\)</span>, where <span class="math inline">\(i \geq 1\)</span>. Then <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i=\bigcup_{i=1}^\infty \widetilde{S}_i\)</span>, and <span class="math inline">\(\{\widetilde{S}_i\}_{i=1}^\infty\)</span> is a collection of mutually disjoint measurable sets. Hence, <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty \widetilde{S}_i\)</span> is measurable, i.e., <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Corollary 2.11</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of measurable sets, then <span class="math inline">\(\displaystyle \bigcap_{i=1}^\infty S_i\)</span> is measurable.</p>
+<p><strong>Theorem 2.12</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of increasing measurable sets, then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i\)</span> is measurable, and <span class="math inline">\(\displaystyle m\left(\lim_{i \to \infty} S_i\right)=\lim_{i \to \infty} m(S_i)\)</span>.</p>
+<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i=\bigcup_{i=1}^\infty S_i\)</span>, then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i\)</span> is measurable.</p>
+Let <span class="math inline">\(S_0=\varnothing\)</span>, and <span class="math inline">\(\widetilde{S}_i=S_i-S_{i-1}\)</span>, where <span class="math inline">\(i \geq 1\)</span>. Then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i=\bigcup_{i=1}^\infty S_i=\bigcup_{i=1}^\infty \widetilde{S}_i\)</span>, and <span class="math inline">\(\{\widetilde{S}_i\}_{i=1}^\infty\)</span> is a collection of mutually disjoint measurable sets. Hence, <span class="math display">\[\begin{aligned}
+m\left(\lim_{i \to \infty} S_i\right)&amp;=\sum_{i=1}^\infty m(\widetilde{S}_i) \\
+&amp;=\sum_{i=1}^\infty m(S_i-S_{i-1}) \\
+&amp;=\lim_{k \to \infty}\sum_{i=1}^k m(S_i-S_{i-1}) \\
+&amp;=\lim_{k \to \infty}m\left(\bigcup_{i=1}^k (S_i-S_{i-1})\right) \\
+&amp;=\lim_{k \to \infty}m(S_k)=\lim_{i \to \infty}m(S_i).
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.13</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of decreasing measurable sets, then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i\)</span> is measurable. Moreover, when <span class="math inline">\(m(S_1)&lt;\infty\)</span>, <span class="math inline">\(\displaystyle m\left(\lim_{i \to \infty} S_i\right)=\lim_{i \to \infty} m(S_i)\)</span>.</p>
+<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i=\bigcap_{i=1}^\infty S_i\)</span>, then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i\)</span> is measurable.</p>
+<p>Let <span class="math inline">\(\widetilde{S}_i=S_1-S_i\)</span>, then <span class="math inline">\(\{\widetilde{S}_i=S_1-S_i\}_{i=1}^\infty\)</span> is a collection of increasing sets. Therefore, <span class="math display">\[m\left(\lim_{i \to \infty} (S_1-S_i)\right)=\lim_{i \to \infty} m(S_1-S_i).\]</span> Since <span class="math inline">\(m(S_1)&lt;\infty\)</span>, then <span class="math inline">\(m(S_i)&lt;\infty\)</span> and <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i&lt;\infty\)</span>. Hence, <span class="math display">\[m\left(\lim_{i \to \infty} (S_1-S_i)\right)=m\left(S_1-\lim_{i \to \infty} S_i\right)=m(S_1)-m\left(\lim_{i \to \infty} S_i\right),\]</span> and <span class="math display">\[\lim_{i \to \infty} m(S_1-S_i)=\lim_{i \to \infty} (m(S_1)-m(S_i))=m(S_1)-\lim_{i \to \infty} m(S_i).\]</span> Therefore, <span class="math inline">\(\displaystyle m\left(\lim_{i \to \infty} S_i\right)=\lim_{i \to \infty} m(S_i)\)</span>.</p>
+<p><strong><em>Note.</em></strong>    The condition <span class="math inline">\(m(S_1)&lt;\infty\)</span> is important. For example, <span class="math inline">\(S_n=(n, \infty)\)</span>. It is obvious that <span class="math inline">\(\{S_n\}\)</span> is decreasing. Therefore, <span class="math inline">\(\displaystyle \lim_{n \to \infty} S_n=\bigcap_{n=1}^\infty S_n=\varnothing\)</span>, and <span class="math inline">\(\displaystyle m\left(\lim_{n \to \infty} S_n\right)=0\)</span>. However, <span class="math inline">\(m(S_n)=\infty\)</span>, and <span class="math inline">\(\displaystyle \lim_{n \to \infty} m(S_n)=\infty\)</span>.</p>
+<p><strong>Theorem 2.14</strong>    Suppose <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of measurable sets. If the upper limit and lower limit of <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> and measure exist, then <span class="math inline">\(\displaystyle m\left(\varliminf_{i \to \infty} S_i \right) \leq \varliminf_{i \to \infty} m(S_i) \leq \varlimsup_{i \to \infty} m(S_i) \leq m\left(\varlimsup_{i \to \infty} S_i\right)\)</span>. Note that we need <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right)&lt;\infty\)</span> to prove <span class="math inline">\(\displaystyle \varlimsup_{i \to \infty} m(S_i) \leq m\left(\varlimsup_{i \to \infty} S_i\right)\)</span>.</p>
+]]></content>
+      <categories>
+        <category>Mathematics</category>
+        <category>Real analysis</category>
+      </categories>
+      <tags>
+        <tag>Outer measure</tag>
+        <tag>Measurable set</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Set</title>
     <url>/Mathematics/Real-analysis/Set.html</url>
     <content><![CDATA[<h1 id="set-operation">Set Operation</h1>
@@ -45,7 +181,7 @@ Suppose <span class="math inline">\(\displaystyle x \in \varliminf_{k \to \infty
 <p>    (2) If <span class="math inline">\(A \sim B\)</span>, then <span class="math inline">\(B \sim A\)</span>;</p>
 <p>    (3) If <span class="math inline">\(A \sim B\)</span> and <span class="math inline">\(B \sim C\)</span>, then <span class="math inline">\(A \sim C\)</span>.</p>
 <p><strong>Definition 2.2</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are sets. If <span class="math inline">\(A \sim B\)</span>, then the <strong>cardinal number</strong> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are equal, denoted as <span class="math inline">\(\overset{=}{A}=\overset{=}{B}\)</span>.</p>
-<p><font face="STKaiti" font color="#696969" font size=2>说明：基数的概念可以看作有限集合中所含元素个数的推广，在此并未作出严格的定义，我们再进行一个大致的描述——对于一个集合<span class="math inline">\(A\)</span>，我们考虑所有与<span class="math inline">\(A\)</span>对等的集合所构成的类. 公理集合论允许我们从每一个这样的类中按确定的方式选出一个代表（即所谓良序集——依某种意义排好了次序的集），我们把这个代表定义为这一类中各个集合的基数，记之为<span class="math inline">\(\overset{=}{A}\)</span>.</font></p>
+<p><font face="SimSun" font color="#696969" font size=2>说明：基数的概念可以看作有限集合中所含元素个数的推广，在此并未作出严格的定义，我们再进行一个大致的描述——对于一个集合<span class="math inline">\(A\)</span>，我们考虑所有与<span class="math inline">\(A\)</span>对等的集合所构成的类. 公理集合论允许我们从每一个这样的类中按确定的方式选出一个代表（即所谓良序集——依某种意义排好了次序的集），我们把这个代表定义为这一类中各个集合的基数，记之为<span class="math inline">\(\overset{=}{A}\)</span>.</font></p>
 <p><strong>Definition 2.3</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are sets. If <span class="math inline">\(A \not\sim B\)</span>, and <span class="math inline">\(B^* \sim A\)</span> where <span class="math inline">\(B^* \subset B\)</span>, then <span class="math inline">\(\overset{=}{A}&lt;\overset{=}{B}\)</span> or <span class="math inline">\(\overset{=}{B}&gt;\overset{=}{A}\)</span>.</p>
 <p><strong><em>Note.</em></strong>    We can show that for any two sets <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, one and only one of the relations holds: <span class="math inline">\(\overset{=}{A}&lt;\overset{=}{B}, \overset{=}{A}=\overset{=}{B}, \overset{=}{A}&gt;\overset{=}{B}\)</span>.</p>
 <p><strong>Theorem 2.2 (Cantor-Bernstein Theorem)</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are non-empty sets. If <span class="math inline">\(A\)</span> is equipotent to a subset of <span class="math inline">\(B\)</span>, and <span class="math inline">\(B\)</span> is equipotent to a subset of <span class="math inline">\(A\)</span>, then <span class="math inline">\(A \sim B\)</span>.</p>
@@ -53,7 +189,7 @@ Suppose <span class="math inline">\(\displaystyle x \in \varliminf_{k \to \infty
 <h1 id="countable-set-and-uncountable-set">Countable Set and Uncountable Set</h1>
 <p><strong>Definition 3.1</strong>    The <strong>countable sets</strong> are the sets that are equipotent to <span class="math inline">\(\mathbb{N}\)</span>. Note that <span class="math inline">\(\overset{=}{\mathbb{N}}=\aleph_0\)</span>.</p>
 <p><strong>Definition 3.2</strong>    The <strong>uncountable sets</strong> are the sets that are not countable sets.</p>
-<p><font face="STKaiti" font color="#696969" font size=2>说明：关于可数集与不可数集的相关定理与推论在抽象数学一课中已经进行了详细探讨，在此不再赘述. 但我们仍应当记得——任何无限集合都至少包含一个可数子集，也意味着可数集在所有无限集中有最小的基数；可数集的任何无限子集仍是可数集；至多可数个至多可数集的并仍是至多可数集；<span class="math inline">\(\mathbb{Q}\)</span>是可数集；代数数集<span class="math inline">\(\mathcal{A}\)</span>是可数集；有限个至多可数集的直积是至多可数集；<span class="math inline">\(\mathbb{R}\)</span>是不可数集且<strong>连续基数</strong>记为<span class="math inline">\(\overset{=}{\mathbb{R}}=c&gt;\aleph_0\)</span>；至多可数个不可数集的并或直积是不可数集；值得特别注意的是：可数个至多可数集的直积<strong>不一定</strong>可数；<span class="math inline">\(c\)</span>个基数为<span class="math inline">\(c\)</span>的集合的并的基数仍然是<span class="math inline">\(c\)</span>.</font></p>
+<p><font face="SimSun" font color="#696969" font size=2>说明：关于可数集与不可数集的相关定理与推论在抽象数学一课中已经进行了详细探讨，在此不再赘述. 但我们仍应当记得——任何无限集合都至少包含一个可数子集，也意味着可数集在所有无限集中有最小的基数；可数集的任何无限子集仍是可数集；至多可数个至多可数集的并仍是至多可数集；<span class="math inline">\(\mathbb{Q}\)</span>是可数集；代数数集<span class="math inline">\(\mathcal{A}\)</span>是可数集；有限个至多可数集的直积是至多可数集；<span class="math inline">\(\mathbb{R}\)</span>是不可数集且<strong>连续基数</strong>记为<span class="math inline">\(\overset{=}{\mathbb{R}}=c&gt;\aleph_0\)</span>；至多可数个不可数集的并或直积是不可数集；值得特别注意的是：可数个至多可数集的直积<strong>不一定</strong>可数；<span class="math inline">\(c\)</span>个基数为<span class="math inline">\(c\)</span>的集合的并的基数仍然是<span class="math inline">\(c\)</span>.</font></p>
 ]]></content>
       <categories>
         <category>Mathematics</category>
@@ -107,7 +243,7 @@ Suppose <span class="math inline">\(\displaystyle x \in \varliminf_{k \to \infty
 <p>    (2) <span class="math inline">\((\overline{E})^c=(E^c)^\circ\)</span>;</p>
 <p>    (3) <span class="math inline">\((A \cup B)&#39;=A&#39; \cup B&#39;\)</span>.</p>
 <p><strong>Theorem 2.3</strong>    If <span class="math inline">\(E \subset \mathbb{R}^n \neq \varnothing\)</span> and <span class="math inline">\(E \neq \mathbb{R}^n\)</span>, then <span class="math inline">\(\partial E \neq \varnothing\)</span>.</p>
-<p><font face="STKaiti" font color="#696969" font size=2>说明：定理2.3的证明可以利用<span class="math inline">\(\mathbb{R}^n\)</span>的连通性. </font></p>
+<p><font face="SimSun" font color="#696969" font size=2>说明：定理2.3的证明可以利用<span class="math inline">\(\mathbb{R}^n\)</span>的连通性. </font></p>
 <p><strong>Theorem 2.4 (Bolzano–Weierstrass Theorem)</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is a bounded and infinite set, then <span class="math inline">\(E\)</span> includes at least one cluster point.</p>
 <h1 id="open-set-and-closed-set">Open Set and Closed Set</h1>
 <p><strong>Definition 3.1</strong>    If <span class="math inline">\(\forall x \in E\)</span>, <span class="math inline">\(x\)</span> are interior point, then <span class="math inline">\(E\)</span> is an <strong>open set</strong>. If <span class="math inline">\(\forall x \in E&#39;: x \in E\)</span>, then <span class="math inline">\(E\)</span> is a <strong>closed set</strong>.</p>
@@ -123,14 +259,14 @@ Suppose <span class="math inline">\(\displaystyle x \in \varliminf_{k \to \infty
 <p>Suppose <span class="math inline">\(E\)</span> is a closed set. Take an arbitrary <span class="math inline">\(x \in E^c\)</span>. Suppose <span class="math inline">\(x\)</span> is not an interior point of <span class="math inline">\(E^c\)</span>, then <span class="math inline">\(\forall B_r(x): B_r(x) \cap E \neq \varnothing\)</span>. Since <span class="math inline">\(x \notin E\)</span>, then <span class="math inline">\(\forall B_r(x), \exists x&#39; \neq x\)</span> s.t. <span class="math inline">\(x&#39; \in E\)</span>. Therefore, <span class="math inline">\(x\)</span> is a cluster point of <span class="math inline">\(E\)</span> and. thus <span class="math inline">\(x \in E\)</span>, which is a contradiction. Hence, <span class="math inline">\(x\)</span> is an interior point of <span class="math inline">\(E^c\)</span>, and <span class="math inline">\(E^c\)</span> is an open set.</p>
 <p><strong>Theorem 3.4</strong>    The union of any number of open sets is an open set. The intersection of a finite number of open sets is an open set. The intersection of any number of closed sets is a closed set. The union of a finite number of closed sets is a closed set.</p>
 <p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(G_\lambda\)</span> are open sets, where <span class="math inline">\(\lambda \in \Lambda\)</span>, and <span class="math inline">\(\Lambda\)</span> is an arbitrary indicator set. We have <span class="math display">\[\forall x \in \bigcup_{\lambda \in \Lambda} G_\lambda, \exists \lambda \in \Lambda\ \text{s.t.}\ x \in G_\lambda,\]</span> and thus <span class="math display">\[\exists \delta&gt;0\ \text{s.t.}\ B_\delta(x) \subset G_\lambda \subset \bigcup_{\lambda \in \Lambda} G_\lambda.\]</span> Therefore, <span class="math inline">\(x\)</span> is an interior point of <span class="math inline">\(\displaystyle \bigcup_{\lambda \in \Lambda} G_\lambda\)</span>, and thus <span class="math inline">\(\displaystyle \bigcup_{\lambda \in \Lambda} G_\lambda\)</span> is an open set.</p>
-<p>Suppose <span class="math inline">\(G_i\)</span> are open sets, where <span class="math inline">\(i=1, \cdots, n.\)</span> If <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i=\varnothing\)</span>, then <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i\)</span> is an open set. If <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i \neq \varnothing\)</span>, then take an arbitrary <span class="math inline">\(\displaystyle x \in \bigcap_{i=1}^n G_i\)</span>, we have <span class="math inline">\(x \in G_i\)</span>. Hence, <span class="math inline">\(\exists \delta_i&gt;0\)</span> s.t. <span class="math inline">\(B_{\delta_i}(x) \subset G_i\)</span>. Take <span class="math inline">\(\delta=\min\{\delta_1, \cdots, \delta_n\}&gt;0\)</span>, then <span class="math inline">\(B_\delta(x) \subset G_i\)</span>, i.e., <span class="math inline">\(\displaystyle B_\delta(x) \subset \bigcap_{i=1}^n G_i\)</span>. Therefore, <span class="math inline">\(x\)</span> is an interior point of <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i\)</span>, and thus <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i\)</span> is an open set.</p>
+<p>Suppose <span class="math inline">\(G_i\)</span> are open sets, where <span class="math inline">\(i=1, \cdots, n.\)</span> If <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i=\varnothing\)</span>, then <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i\)</span> is an open set. If <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i \neq \varnothing\)</span>, then take an arbitrary <span class="math inline">\(\displaystyle x \in \bigcap_{i=1}^n G_i\)</span>, we have <span class="math inline">\(x \in G_i\)</span>. Hence, <span class="math inline">\(\exists \delta_i&gt;0\)</span> s.t. <span class="math inline">\(B_{\delta_i}(x) \subset G_i\)</span>. Take <span class="math inline">\(\delta=\min\{\delta_1, \cdots, \delta_n\}\)</span>, which is greater than <span class="math inline">\(0\)</span>, then <span class="math inline">\(B_\delta(x) \subset G_i\)</span>, i.e., <span class="math inline">\(\displaystyle B_\delta(x) \subset \bigcap_{i=1}^n G_i\)</span>. Therefore, <span class="math inline">\(x\)</span> is an interior point of <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i\)</span>, and thus <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i\)</span> is an open set.</p>
 As a consequence, <span class="math display">\[\left(\bigcup_{\lambda \in \Lambda}G_\lambda\right)^c=\bigcap_{\lambda \in \Lambda}G_\lambda^c\]</span> is a closed set, where <span class="math inline">\(G_\lambda^c\)</span> is a closed set; <span class="math display">\[\left(\bigcap_{i=1}^n G_i\right)^c=\bigcup_{i=1}^n G_i^c\]</span> is a closed set, where <span class="math inline">\(G_i^c\)</span> is a closed set.
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
 <p><strong><em>Note.</em></strong>    The intersection of any number of open sets is <strong>not necessarily</strong> an open set. For example, <span class="math display">\[G_n=\left(-1-\frac{1}{n}, 1+\frac{1}{n}\right),\]</span> where <span class="math inline">\(G_n\)</span> are open sets. However, <span class="math display">\[\bigcap_{n=1}^\infty G_n=[-1, 1],\]</span> which is a closed set.</p>
 <p>The union of any number of closed sets is <strong>not necessarily</strong> a closed set. For example, <span class="math display">\[F_n=\left[-1+\frac{1}{n}, 1-\frac{1}{n}\right],\]</span> where <span class="math inline">\(F_n\)</span> are closed sets. However, <span class="math display">\[\bigcup_{n=1}^\infty F_n=(-1, 1),\]</span> which is an open set.</p>
-<p><font face="STKaiti" font color="#696969" font size=2>说明：任意多个开集的交不一定是开集，那么在证明过程中，我们只能取<span class="math inline">\(\displaystyle \delta=\inf_{\lambda \in \Lambda} \delta_\lambda\)</span>，则<span class="math inline">\(\delta\)</span>有可能等于<span class="math inline">\(0\)</span>，则证明无法继续.</font></p>
+<p><font face="SimSun" font color="#696969" font size=2>说明：任意多个开集的交不一定是开集，那么在证明过程中，我们只能取<span class="math inline">\(\displaystyle \delta=\inf_{\lambda \in \Lambda} \delta_\lambda\)</span>，则<span class="math inline">\(\delta\)</span>有可能等于<span class="math inline">\(0\)</span>，则证明无法继续.</font></p>
 <p><strong>Example 3.1</strong>    Suppose <span class="math inline">\(F_1, F_2 \subset \mathbb{R}^n\)</span> are closed sets, and <span class="math inline">\(F_1 \cap F_2=\varnothing\)</span>.</p>
 <h1 id="compact-set-and-complete-set">Compact Set and Complete Set</h1>
 <p><strong>Definition 4.1</strong>    <span class="math inline">\(M\)</span> is a <strong>compact set</strong> if every open covering of <span class="math inline">\(M\)</span> has a finite sub-covering.</p>
@@ -150,7 +286,7 @@ Take <span class="math inline">\(\delta=\min\{\delta_{p_1}, \cdots, \delta_{p_n}
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<p><font face="STKaiti" font color="#696969" font size=2>说明：在<span class="math inline">\(\mathbb{R}^n\)</span>中，紧集和有界闭集是等价的. 但在一般空间中，不一定有<span class="math inline">\(n\)</span>维区间，而点<span class="math inline">\(p \neq q\)</span>不一定能被开集分开，因此上述两个定理无法推广到一般度量空间或一般拓扑空间中. 在一般度量空间中，我们可以找到反例说明有界闭集不是紧集. 在一般拓扑空间中，我们可以找到反例说明紧集不是闭集.</font></p>
+<p><font face="SimSun" font color="#696969" font size=2>说明：在<span class="math inline">\(\mathbb{R}^n\)</span>中，紧集和有界闭集是等价的. 但在一般空间中，不一定有<span class="math inline">\(n\)</span>维区间，而点<span class="math inline">\(p \neq q\)</span>不一定能被开集分开，因此上述两个定理无法推广到一般度量空间或一般拓扑空间中. 在一般度量空间中，我们可以找到反例说明有界闭集不是紧集. 在一般拓扑空间中，我们可以找到反例说明紧集不是闭集.</font></p>
 <p><strong>Definition 4.2</strong>    If <span class="math inline">\(E \subset E&#39;\)</span> (i.e., every point of <span class="math inline">\(E\)</span> is a cluster point, or <span class="math inline">\(E\)</span> does not have any isolated points), then <span class="math inline">\(E\)</span> is <strong>dense-in-itself</strong> or <strong>crowded</strong>. If <span class="math inline">\(E=E&#39;\)</span> (i.e., <span class="math inline">\(E\)</span> is a closed set without any isolated points), then <span class="math inline">\(E\)</span> is <strong>complete</strong>.</p>
 <p><strong>Example 4.1</strong>    <span class="math inline">\(\varnothing\)</span> is complete. <span class="math inline">\(\mathbb{Q}\)</span> is dense-in-itself. <span class="math inline">\([a, b]\)</span> is complete.</p>
 <h1 id="construction-of-open-set-closed-set-and-complete-set-on-mathbbr">Construction of Open Set, Closed Set, and Complete Set on <span class="math inline">\(\mathbb{R}\)</span></h1>
@@ -178,7 +314,7 @@ Suppose <span class="math inline">\(\alpha \in G\)</span>, then <span class="mat
 <p><strong>Definition 5.3</strong>    A set is <strong>nowhere dense</strong> or <strong>rare</strong> if its closure has empty interior.</p>
 <p><strong>Property 5.6</strong>    <span class="math inline">\(\overset{=}{P}=c\)</span>.</p>
 <p><strong>Property 5.7</strong>    The length of <span class="math inline">\(P\)</span> is 0.</p>
-<p><font face="STKaiti" font color="#696969" font size=2>说明：不难发现，<span class="math inline">\(P\)</span>是一个非常“古怪”的集合，因此引申出一个<strong>分形（Fractal）</strong>的概念.</font></p>
+<p><font face="SimSun" font color="#696969" font size=2>说明：不难发现，<span class="math inline">\(P\)</span>是一个非常“古怪”的集合，因此引申出一个<strong>分形（Fractal）</strong>的概念.</font></p>
 ]]></content>
       <categories>
         <category>Mathematics</category>

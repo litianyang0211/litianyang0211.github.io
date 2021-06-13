@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="//fonts.loli.net/css?family=Palatino:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Times New Roman:300,300italic,400,400italic,700,700italic|Garamond:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
@@ -202,7 +202,7 @@
     <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Mathematics/Real-analysis/Point_Set">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="Tianyang Li">
       <meta itemprop="description" content="">
     </span>
@@ -298,7 +298,7 @@
 <p>    (2) <span class="math inline">\((\overline{E})^c=(E^c)^\circ\)</span>;</p>
 <p>    (3) <span class="math inline">\((A \cup B)&#39;=A&#39; \cup B&#39;\)</span>.</p>
 <p><strong>Theorem 2.3</strong>    If <span class="math inline">\(E \subset \mathbb{R}^n \neq \varnothing\)</span> and <span class="math inline">\(E \neq \mathbb{R}^n\)</span>, then <span class="math inline">\(\partial E \neq \varnothing\)</span>.</p>
-<p><font face="STKaiti" font color="#696969" font size=2>说明：定理2.3的证明可以利用<span class="math inline">\(\mathbb{R}^n\)</span>的连通性. </font></p>
+<p><font face="SimSun" font color="#696969" font size=2>说明：定理2.3的证明可以利用<span class="math inline">\(\mathbb{R}^n\)</span>的连通性. </font></p>
 <p><strong>Theorem 2.4 (Bolzano–Weierstrass Theorem)</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is a bounded and infinite set, then <span class="math inline">\(E\)</span> includes at least one cluster point.</p>
 <h1 id="open-set-and-closed-set">Open Set and Closed Set</h1>
 <p><strong>Definition 3.1</strong>    If <span class="math inline">\(\forall x \in E\)</span>, <span class="math inline">\(x\)</span> are interior point, then <span class="math inline">\(E\)</span> is an <strong>open set</strong>. If <span class="math inline">\(\forall x \in E&#39;: x \in E\)</span>, then <span class="math inline">\(E\)</span> is a <strong>closed set</strong>.</p>
@@ -314,14 +314,14 @@
 <p>Suppose <span class="math inline">\(E\)</span> is a closed set. Take an arbitrary <span class="math inline">\(x \in E^c\)</span>. Suppose <span class="math inline">\(x\)</span> is not an interior point of <span class="math inline">\(E^c\)</span>, then <span class="math inline">\(\forall B_r(x): B_r(x) \cap E \neq \varnothing\)</span>. Since <span class="math inline">\(x \notin E\)</span>, then <span class="math inline">\(\forall B_r(x), \exists x&#39; \neq x\)</span> s.t. <span class="math inline">\(x&#39; \in E\)</span>. Therefore, <span class="math inline">\(x\)</span> is a cluster point of <span class="math inline">\(E\)</span> and. thus <span class="math inline">\(x \in E\)</span>, which is a contradiction. Hence, <span class="math inline">\(x\)</span> is an interior point of <span class="math inline">\(E^c\)</span>, and <span class="math inline">\(E^c\)</span> is an open set.</p>
 <p><strong>Theorem 3.4</strong>    The union of any number of open sets is an open set. The intersection of a finite number of open sets is an open set. The intersection of any number of closed sets is a closed set. The union of a finite number of closed sets is a closed set.</p>
 <p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(G_\lambda\)</span> are open sets, where <span class="math inline">\(\lambda \in \Lambda\)</span>, and <span class="math inline">\(\Lambda\)</span> is an arbitrary indicator set. We have <span class="math display">\[\forall x \in \bigcup_{\lambda \in \Lambda} G_\lambda, \exists \lambda \in \Lambda\ \text{s.t.}\ x \in G_\lambda,\]</span> and thus <span class="math display">\[\exists \delta&gt;0\ \text{s.t.}\ B_\delta(x) \subset G_\lambda \subset \bigcup_{\lambda \in \Lambda} G_\lambda.\]</span> Therefore, <span class="math inline">\(x\)</span> is an interior point of <span class="math inline">\(\displaystyle \bigcup_{\lambda \in \Lambda} G_\lambda\)</span>, and thus <span class="math inline">\(\displaystyle \bigcup_{\lambda \in \Lambda} G_\lambda\)</span> is an open set.</p>
-<p>Suppose <span class="math inline">\(G_i\)</span> are open sets, where <span class="math inline">\(i=1, \cdots, n.\)</span> If <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i=\varnothing\)</span>, then <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i\)</span> is an open set. If <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i \neq \varnothing\)</span>, then take an arbitrary <span class="math inline">\(\displaystyle x \in \bigcap_{i=1}^n G_i\)</span>, we have <span class="math inline">\(x \in G_i\)</span>. Hence, <span class="math inline">\(\exists \delta_i&gt;0\)</span> s.t. <span class="math inline">\(B_{\delta_i}(x) \subset G_i\)</span>. Take <span class="math inline">\(\delta=\min\{\delta_1, \cdots, \delta_n\}&gt;0\)</span>, then <span class="math inline">\(B_\delta(x) \subset G_i\)</span>, i.e., <span class="math inline">\(\displaystyle B_\delta(x) \subset \bigcap_{i=1}^n G_i\)</span>. Therefore, <span class="math inline">\(x\)</span> is an interior point of <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i\)</span>, and thus <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i\)</span> is an open set.</p>
+<p>Suppose <span class="math inline">\(G_i\)</span> are open sets, where <span class="math inline">\(i=1, \cdots, n.\)</span> If <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i=\varnothing\)</span>, then <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i\)</span> is an open set. If <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i \neq \varnothing\)</span>, then take an arbitrary <span class="math inline">\(\displaystyle x \in \bigcap_{i=1}^n G_i\)</span>, we have <span class="math inline">\(x \in G_i\)</span>. Hence, <span class="math inline">\(\exists \delta_i&gt;0\)</span> s.t. <span class="math inline">\(B_{\delta_i}(x) \subset G_i\)</span>. Take <span class="math inline">\(\delta=\min\{\delta_1, \cdots, \delta_n\}\)</span>, which is greater than <span class="math inline">\(0\)</span>, then <span class="math inline">\(B_\delta(x) \subset G_i\)</span>, i.e., <span class="math inline">\(\displaystyle B_\delta(x) \subset \bigcap_{i=1}^n G_i\)</span>. Therefore, <span class="math inline">\(x\)</span> is an interior point of <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i\)</span>, and thus <span class="math inline">\(\displaystyle \bigcap_{i=1}^n G_i\)</span> is an open set.</p>
 As a consequence, <span class="math display">\[\left(\bigcup_{\lambda \in \Lambda}G_\lambda\right)^c=\bigcap_{\lambda \in \Lambda}G_\lambda^c\]</span> is a closed set, where <span class="math inline">\(G_\lambda^c\)</span> is a closed set; <span class="math display">\[\left(\bigcap_{i=1}^n G_i\right)^c=\bigcup_{i=1}^n G_i^c\]</span> is a closed set, where <span class="math inline">\(G_i^c\)</span> is a closed set.
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
 <p><strong><em>Note.</em></strong>    The intersection of any number of open sets is <strong>not necessarily</strong> an open set. For example, <span class="math display">\[G_n=\left(-1-\frac{1}{n}, 1+\frac{1}{n}\right),\]</span> where <span class="math inline">\(G_n\)</span> are open sets. However, <span class="math display">\[\bigcap_{n=1}^\infty G_n=[-1, 1],\]</span> which is a closed set.</p>
 <p>The union of any number of closed sets is <strong>not necessarily</strong> a closed set. For example, <span class="math display">\[F_n=\left[-1+\frac{1}{n}, 1-\frac{1}{n}\right],\]</span> where <span class="math inline">\(F_n\)</span> are closed sets. However, <span class="math display">\[\bigcup_{n=1}^\infty F_n=(-1, 1),\]</span> which is an open set.</p>
-<p><font face="STKaiti" font color="#696969" font size=2>说明：任意多个开集的交不一定是开集，那么在证明过程中，我们只能取<span class="math inline">\(\displaystyle \delta=\inf_{\lambda \in \Lambda} \delta_\lambda\)</span>，则<span class="math inline">\(\delta\)</span>有可能等于<span class="math inline">\(0\)</span>，则证明无法继续.</font></p>
+<p><font face="SimSun" font color="#696969" font size=2>说明：任意多个开集的交不一定是开集，那么在证明过程中，我们只能取<span class="math inline">\(\displaystyle \delta=\inf_{\lambda \in \Lambda} \delta_\lambda\)</span>，则<span class="math inline">\(\delta\)</span>有可能等于<span class="math inline">\(0\)</span>，则证明无法继续.</font></p>
 <p><strong>Example 3.1</strong>    Suppose <span class="math inline">\(F_1, F_2 \subset \mathbb{R}^n\)</span> are closed sets, and <span class="math inline">\(F_1 \cap F_2=\varnothing\)</span>.</p>
 <h1 id="compact-set-and-complete-set">Compact Set and Complete Set</h1>
 <p><strong>Definition 4.1</strong>    <span class="math inline">\(M\)</span> is a <strong>compact set</strong> if every open covering of <span class="math inline">\(M\)</span> has a finite sub-covering.</p>
@@ -341,7 +341,7 @@ Take <span class="math inline">\(\delta=\min\{\delta_{p_1}, \cdots, \delta_{p_n}
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<p><font face="STKaiti" font color="#696969" font size=2>说明：在<span class="math inline">\(\mathbb{R}^n\)</span>中，紧集和有界闭集是等价的. 但在一般空间中，不一定有<span class="math inline">\(n\)</span>维区间，而点<span class="math inline">\(p \neq q\)</span>不一定能被开集分开，因此上述两个定理无法推广到一般度量空间或一般拓扑空间中. 在一般度量空间中，我们可以找到反例说明有界闭集不是紧集. 在一般拓扑空间中，我们可以找到反例说明紧集不是闭集.</font></p>
+<p><font face="SimSun" font color="#696969" font size=2>说明：在<span class="math inline">\(\mathbb{R}^n\)</span>中，紧集和有界闭集是等价的. 但在一般空间中，不一定有<span class="math inline">\(n\)</span>维区间，而点<span class="math inline">\(p \neq q\)</span>不一定能被开集分开，因此上述两个定理无法推广到一般度量空间或一般拓扑空间中. 在一般度量空间中，我们可以找到反例说明有界闭集不是紧集. 在一般拓扑空间中，我们可以找到反例说明紧集不是闭集.</font></p>
 <p><strong>Definition 4.2</strong>    If <span class="math inline">\(E \subset E&#39;\)</span> (i.e., every point of <span class="math inline">\(E\)</span> is a cluster point, or <span class="math inline">\(E\)</span> does not have any isolated points), then <span class="math inline">\(E\)</span> is <strong>dense-in-itself</strong> or <strong>crowded</strong>. If <span class="math inline">\(E=E&#39;\)</span> (i.e., <span class="math inline">\(E\)</span> is a closed set without any isolated points), then <span class="math inline">\(E\)</span> is <strong>complete</strong>.</p>
 <p><strong>Example 4.1</strong>    <span class="math inline">\(\varnothing\)</span> is complete. <span class="math inline">\(\mathbb{Q}\)</span> is dense-in-itself. <span class="math inline">\([a, b]\)</span> is complete.</p>
 <h1 id="construction-of-open-set-closed-set-and-complete-set-on-mathbbr">Construction of Open Set, Closed Set, and Complete Set on <span class="math inline">\(\mathbb{R}\)</span></h1>
@@ -369,7 +369,7 @@ Suppose <span class="math inline">\(\alpha \in G\)</span>, then <span class="mat
 <p><strong>Definition 5.3</strong>    A set is <strong>nowhere dense</strong> or <strong>rare</strong> if its closure has empty interior.</p>
 <p><strong>Property 5.6</strong>    <span class="math inline">\(\overset{=}{P}=c\)</span>.</p>
 <p><strong>Property 5.7</strong>    The length of <span class="math inline">\(P\)</span> is 0.</p>
-<p><font face="STKaiti" font color="#696969" font size=2>说明：不难发现，<span class="math inline">\(P\)</span>是一个非常“古怪”的集合，因此引申出一个<strong>分形（Fractal）</strong>的概念.</font></p>
+<p><font face="SimSun" font color="#696969" font size=2>说明：不难发现，<span class="math inline">\(P\)</span>是一个非常“古怪”的集合，因此引申出一个<strong>分形（Fractal）</strong>的概念.</font></p>
 
     </div>
 
@@ -392,7 +392,10 @@ Suppose <span class="math inline">\(\alpha \in G\)</span>, then <span class="mat
     <a href="/Mathematics/Real-analysis/Set" rel="prev" title="Set">
       <i class="fa fa-chevron-left"></i> Set
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/Mathematics/Real-analysis/Measure_Theory" rel="next" title="Measure Theory">
+      Measure Theory <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -458,7 +461,7 @@ Suppose <span class="math inline">\(\alpha \in G\)</span>, then <span class="mat
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Tianyang Li"
-      src="/images/avatar.gif">
+      src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">Tianyang Li</p>
   <div class="site-description" itemprop="description"></div>
 </div>
