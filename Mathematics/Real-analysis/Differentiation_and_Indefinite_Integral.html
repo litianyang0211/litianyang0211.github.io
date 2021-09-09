@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="We introduce Vitali cover, Vitali covering theorem, Lebesgue&#39;s theorem, and bounded variation theorem with Jordan decomposition theorem. We then explore fundamental theorem of calculus with Lebesgue i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Differentiation and Indefinite Integral">
+<meta property="og:url" content="https://litianyang0211.github.io/Mathematics/Real-analysis/Differentiation_and_Indefinite_Integral">
+<meta property="og:site_name" content="Tianyang Li">
+<meta property="og:description" content="We introduce Vitali cover, Vitali covering theorem, Lebesgue&#39;s theorem, and bounded variation theorem with Jordan decomposition theorem. We then explore fundamental theorem of calculus with Lebesgue i">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-09-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-09-09T05:23:44.104Z">
+<meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Lebesgue integral">
+<meta property="article:tag" content="Differentiation">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://litianyang0211.github.io/Mathematics/Real-analysis/Differentiation_and_Indefinite_Integral.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Differentiation and Indefinite Integral | Tianyang Li</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tianyang Li</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-blog">
+
+    <a href="/blog/" rel="section"><i class="fa fa-blog fa-fw"></i>Blog</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-projects">
+
+    <a href="/projects/" rel="section"><i class="fa fa-code fa-fw"></i>Projects</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Mathematics/Real-analysis/Differentiation_and_Indefinite_Integral">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Tianyang Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianyang Li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Differentiation and Indefinite Integral
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-lightbulb"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-09-05 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-05T00:00:00+08:00">2021-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-edit"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-09-09 13:23:44" itemprop="dateModified" datetime="2021-09-09T13:23:44+08:00">2021-09-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
+                </span>
+                  /
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Mathematics/Real-analysis/" itemprop="url" rel="index"><span itemprop="name">Real analysis</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">We introduce Vitali cover, Vitali covering theorem, Lebesgue's theorem, and bounded variation theorem with Jordan decomposition theorem. We then explore fundamental theorem of calculus with Lebesgue integral using the concept of absolutely continuous function.</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="differentiability-of-monotonic-function">Differentiability of Monotonic Function</h1>
+<p><strong>Definition 1.1</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}\)</span>, <span class="math inline">\(\mathcal{V}=\{I_\alpha\}\)</span> is a family of intervals with all positive lengths. If <span class="math display">\[\forall x \in E, \forall \varepsilon&gt;0, \exists I_\alpha \in \mathcal{V}\ \text{s.t.}\ x \in I_\alpha, m(I_\alpha)&lt;\varepsilon,\]</span> then <span class="math inline">\(\mathcal{V}\)</span> is a <strong>Vitali cover</strong> of <span class="math inline">\(E\)</span>.</p>
+<p><strong>Theorem 1.1</strong>    <span class="math inline">\(\mathcal{V}\)</span> is a Vitali cover if and only if <span class="math display">\[\forall x \in E, \exists \{I_n\} \subset \mathcal{V}\ \text{s.t.}\ x \in I_n, m(I_n) \to 0.\]</span></p>
+<p><span id="thm1.2"><strong>Theorem 1.2 (Vitali Covering Theorem)</strong></span>    Suppose <span class="math inline">\(E \subset \mathbb{R}\)</span> and <span class="math inline">\(m^*(E)&lt;\infty\)</span>. If <span class="math inline">\(\mathcal{V}\)</span> is a Vitali cover of <span class="math inline">\(E\)</span>, then there exists a sequence of intervals <span class="math inline">\(\{I_n\} \subset \mathcal{V}\)</span> such that <span class="math inline">\(I_i \cap I_j=\varnothing\)</span> for all <span class="math inline">\(i \neq j\)</span>, and <span class="math display">\[m^*\left(E-\bigcup_{i=1}^\infty I_i\right)=0.\]</span></p>
+<div class="note ">
+            <p><span id="thm1.2.1"><strong>Lemma 1.2.1</strong></span>    For <span class="math inline">\(x \in E \cap U\)</span>, where <span class="math inline">\(U\)</span> is open, and a Vitali cover <span class="math inline">\(\mathcal{V}\)</span> of <span class="math inline">\(E\)</span>, there exists an <span class="math inline">\(I_x \in \mathcal{V}\)</span> such that <span class="math inline">\(x \in I_x\)</span> and <span class="math inline">\(I_x \subset U\)</span>.</p><strong><em>Proof.</em></strong> Since <span class="math inline">\(x \in U\)</span>, where <span class="math inline">\(U\)</span> is open, then <span class="math display">\[\exists \varepsilon&gt;0\ \text{s.t.}\ (x-\varepsilon, x+\varepsilon) \subset U.\]</span> Since <span class="math inline">\(\mathcal{V}\)</span> is a Vitali cover of <span class="math inline">\(E\)</span>, then <span class="math display">\[\exists I_x \in \mathcal{V}\ \text{s.t.}\ x \in I_x, m(I_x)&lt;\frac{\varepsilon}{4}.\]</span> Hence, <span class="math inline">\(I_x \subset (x-\varepsilon, x+\varepsilon) \subset U\)</span>.<p align="right"><span class="math inline">\(\square\)</span></p>
+          </div>
+<p><strong><em>Proof.</em></strong> Since <span class="math display">\[m^*\left(E-\bigcup_{i=1}^\infty I_i\right)=m^*\left(E-\bigcup_{i=1}^\infty \overline{I_i}\right),\]</span> then we can assume without loss of generality that <span class="math inline">\(I_i\)</span> is closed for all <span class="math inline">\(i\)</span>.</p>
+<p>In addition, since <span class="math inline">\(m^*(E)&lt;\infty\)</span>, then there exists an open set <span class="math inline">\(U \supset E\)</span> such that <span class="math inline">\(m(U)&lt;\infty\)</span>. Let <span class="math display">\[\mathcal{W}=\{I \in \mathcal{V}: I \subset U\}.\]</span> By <a href="#thm1.2.1">lemma 1.2.1</a>, for all <span class="math inline">\(x \in E\)</span>, there exists an <span class="math inline">\(I_x\)</span> such that <span class="math inline">\(x \in I_x \subset U\)</span>, and thus <span class="math inline">\(I_x \in \mathcal{W}\)</span>, i.e., <span class="math inline">\(\mathcal{W} \neq \varnothing\)</span>. Take an arbitrary <span class="math inline">\(\delta&gt;0\)</span>, <span class="math display">\[\exists \widetilde{I}_x \in \mathcal{V}\ \text{s.t.}\ x \in \widetilde{I}_x, m(\widetilde{I}_x)&lt;\min\left\{\frac{\varepsilon}{4}, \delta\right\}.\]</span> Hence, <span class="math inline">\(\widetilde{I}_x \in \mathcal{W}\)</span>, and thus <span class="math inline">\(\mathcal{W}\)</span> is a Vitali cover of <span class="math inline">\(E\)</span>. Therefore, we can assume without loss of generality that the intervals in <span class="math inline">\(\mathcal{V}\)</span> are all contained in an open set <span class="math inline">\(U\)</span> with a finite measure.</p>
+<p>Take an arbitrary <span class="math inline">\(I_1 \in \mathcal{V}\)</span>. If <span class="math inline">\(E-I_1=\varnothing\)</span>, then the theorem holds. If <span class="math inline">\(E-I_1 \neq \varnothing\)</span>, then for <span class="math inline">\(x \in E-I_1\)</span>, <span class="math inline">\(x \in I_1^c\)</span>, where <span class="math inline">\(I_1^c\)</span> is open. By <a href="#thm1.2.1">lemma 1.2.1</a>, there exists an <span class="math inline">\(I_x \in \mathcal{V}\)</span> such that <span class="math inline">\(x \in I_x\)</span> and <span class="math inline">\(I_x \subset I_1^c\)</span>, i.e., <span class="math inline">\(I_x \cap I_1=\varnothing\)</span>. Hence, <span class="math inline">\(\{I \in \mathcal{V}: I \cap I_1=\varnothing\} \neq \varnothing\)</span>. Let <span class="math inline">\(r_1=\sup\{m(I): I \in \mathcal{V}, I \cap I_1=\varnothing\} \leq m(U)&lt;\infty\)</span>. We now can find <span class="math inline">\(I_2 \in \mathcal{V}\)</span>, <span class="math inline">\(I_2 \cap I_1=\varnothing\)</span> such that <span class="math inline">\(\displaystyle m(I_2)&gt;\frac{r_1}{2}\)</span>. Similarly, we can find <span class="math inline">\(r_3, r_4, \cdots\)</span>. Therefore, we can find a sequence of intervals <span class="math inline">\(\{I_n\} \subset \mathcal{V}\)</span> such that <span class="math inline">\(I_i \cap I_j=\varnothing\)</span>, where <span class="math display">\[r_n=\sup\{m(I): I \in \mathcal{V}, I \cap I_1=\varnothing, \cdots, I \cap I_n=\varnothing\}\]</span> and <span class="math display">\[m(I_{n+1})&gt;\frac{r_n}{2}.\]</span></p>
+<p>Since <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty I_i \subset U\)</span>, then <span class="math display">\[\sum_{i=1}^\infty m(I_i)=m\left(\bigcup_{i=1}^\infty I_i\right) \leq m(U)&lt;\infty.\]</span> Hence, <span class="math inline">\(m(I_i) \to 0\)</span> as <span class="math inline">\(i \to \infty\)</span>, and <span class="math inline">\(\displaystyle \sum_{i=k+1}^\infty m(I_i) \to 0\)</span> as <span class="math inline">\(k \to \infty\)</span>.</p>
+<p>Take an arbitrary <span class="math inline">\(\displaystyle y \in E-\bigcup_{i=1}^\infty I_i\)</span>, and fix a <span class="math inline">\(k \in \mathbb{N}\)</span> such that <span class="math inline">\(\displaystyle y \notin \bigcap_{i=1}^k I_i\)</span>, i.e., <span class="math inline">\(\displaystyle y \in \left(\bigcup_{i=1}^k I_i\right)^c\)</span>. By <a href="#thm1.2.1">lemma 1.2.1</a>, there exists an <span class="math inline">\(I_y \in \mathcal{V}\)</span> such that <span class="math inline">\(y \in I_y\)</span> and <span class="math inline">\(\displaystyle I_y \subset \left(\bigcup_{i=1}^k I_i\right)^c\)</span>.</p>
+<p>We can find a <span class="math inline">\(n&gt;k\)</span> such that <span class="math inline">\(I_y \cap I_n \neq \varnothing\)</span>; otherwise, <span class="math inline">\(m(I_y) \leq r_n \to 0\)</span>, i.e., <span class="math inline">\(m(I_y)=0\)</span>, which is a contradiction. Take an <span class="math inline">\(n(y) \in \mathbb{N}\)</span> such that <span class="math inline">\(I_y \cap I_{n(y)} \neq \varnothing\)</span> and <span class="math inline">\(I_y \cap I_{n(y)-1}=\varnothing, \cdots, I_y \cap I_1=\varnothing\)</span>. Note that <span class="math inline">\(n(y)&gt;k\)</span>. Let <span class="math inline">\(x_{n(y)}\)</span> be the midpoint of <span class="math inline">\(I_{n(y)}\)</span>, then <span class="math display">\[\begin{aligned}
+|y-x_{n(y)}| &amp;\leq m(I_y)+\frac{1}{2}m(I_{n(y)})
+\\&amp;\leq r_{n(y)-1}+\frac{1}{2}m(I_{n(y)})
+\\&amp;&lt;2m(I_{n(y)})+\frac{1}{2}m(I_{n(y)})
+\\&amp;=\frac{5}{2}m(I_{n(y)}).
+\end{aligned}\]</span></p>
+<p>Let <span class="math inline">\(J_n\)</span> be a closed interval with the midpoint of <span class="math inline">\(I_n\)</span> as the midpoint, and a length that becomes five times that of <span class="math inline">\(I_n\)</span>, then <span class="math inline">\(y \in J_{n(y)}\)</span>. Since <span class="math inline">\(n(y)&gt;k\)</span>, then <span class="math inline">\(\displaystyle y \in \bigcup_{i=k+1}^\infty J_i\)</span>. Hence, <span class="math inline">\(\displaystyle E-\bigcup_{i=1}^\infty I_i \subset \bigcup_{i=k+1}^\infty J_i\)</span>.</p>
+Therefore, <span class="math display">\[m^*\left(E-\bigcup_{i=1}^\infty I_i\right) \leq m\left(\bigcup_{i=k+1}^\infty J_i\right) \leq \sum_{i=k+1}^\infty m(J_i)=5\sum_{i=k+1}^\infty m(I_i).\]</span> Since <span class="math inline">\(\displaystyle \sum_{i=k+1}^\infty m(I_i) \to 0\)</span> as <span class="math inline">\(k \to \infty\)</span>, then <span class="math display">\[m^*\left(E-\bigcup_{i=1}^\infty I_i\right)=0.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Corollary 1.3</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}\)</span> and <span class="math inline">\(m^*(E)&lt;\infty\)</span>. If <span class="math inline">\(\mathcal{V}\)</span> is a Vitali cover of <span class="math inline">\(E\)</span>, then for all <span class="math inline">\(\varepsilon&gt;0\)</span>, there exist finite disjoint intervals <span class="math inline">\(\{I_i\} \subset \mathcal{V}\)</span> such that <span class="math display">\[m^*\left(E-\bigcup_{i=1}^n I_i\right)&lt;\varepsilon.\]</span></p>
+<p><strong>Definition 1.2</strong>    The <strong>upper right-hand derivative</strong>, <strong>lower right-hand derivative</strong>, <strong>upper left-hand derivative</strong>, and <strong>lower left-hand derivative</strong> (collectively called <strong>Dini derivative</strong>) are defined as <span class="math display">\[\begin{aligned}
+D^+f(x_0)&amp;=\varlimsup_{h \to 0^+} \frac{f(x_0+h)-f(x_0)}{h},
+\\D_+f(x_0)&amp;=\varliminf_{h \to 0^+} \frac{f(x_0+h)-f(x_0)}{h},
+\\D^-f(x_0)&amp;=\varlimsup_{h \to 0^-} \frac{f(x_0+h)-f(x_0)}{h},
+\end{aligned}\]</span> and <span class="math display">\[D_-f(x_0)=\varliminf_{h \to 0^-} \frac{f(x_0+h)-f(x_0)}{h}.\]</span> Note that <span class="math inline">\(\displaystyle \lim_{h \to 0} \frac{f(x_0+h)-f(x_0)}{h}\)</span> exists if and only if <span class="math inline">\(D^+f(x_0)=D_+f(x_0)=D^-f(x_0)=D_-f(x_0)\)</span>. Moreover, <span class="math inline">\(f\)</span> is <strong>differentiable</strong> at <span class="math inline">\(x_0\)</span> if and only if <span class="math display">\[-\infty&lt;f&#39;(x_0)=\lim_{h \to 0} \frac{f(x_0+h)-f(x_0)}{h}=D^+f(x_0)=D_+f(x_0)=D^-f(x_0)=D_-f(x_0)&lt;\infty.\]</span></p>
+<p><strong>Definition 1.3</strong>    Let <span class="math display">\[Df(x_0)=\lim_{n \to \infty} \frac{f(x_0+h_n)-f(x_0)}{h_n},\]</span> where <span class="math inline">\(h_n \to 0\)</span> and <span class="math inline">\(Df(x_0)\)</span> exists.</p>
+<p><span id="thm1.4"><strong>Theorem 1.4</strong></span>    Suppose <span class="math inline">\(f\)</span> is a strictly increasing function on <span class="math inline">\([a, b]\)</span>, and <span class="math inline">\(E \subset [a, b]\)</span>. If for all <span class="math inline">\(x \in E\)</span>, there exists a sequence <span class="math inline">\(\{h_n\}\)</span>, where <span class="math inline">\(h_n \to 0\)</span> such that <span class="math inline">\(p \geq Df(x) \geq q\)</span>, where <span class="math inline">\(p, q \geq 0\)</span>, then <span class="math display">\[p \cdot m^*(E) \geq m^*(f(E)) \geq q \cdot m^*(E).\]</span></p>
+<p><strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists an open set <span class="math inline">\(G \supset E\)</span> such that <span class="math inline">\(m^*(E)&gt;m^*(G)-\varepsilon\)</span>. Let <span class="math inline">\(p_0&gt;p\)</span>, for <span class="math inline">\(x_0 \in E\)</span>, there exists a sequence <span class="math inline">\(\{h_n\}\)</span>, where <span class="math inline">\(h_n \to 0\)</span>, such that <span class="math display">\[\lim_{n \to \infty} \frac{f(x_0+h_n)-f(x_0)}{h_n}&lt;p_0.\]</span></p>
+<p>Let <span class="math display">\[I_n(x_0)=\begin{cases}
+[x_0, x_0+h_n], &amp;h_n&gt;0 \\
+[x_0+h_n, x_0], &amp;h_n&lt;0
+\end{cases},\]</span> and <span class="math display">\[\Delta_n(x_0)=\begin{cases}
+[f(x_0), f(x_0+h_n)], &amp;h_n&gt;0 \\
+[f(x_0+h_n), f(x_0)], &amp;h_n&lt;0
+\end{cases}.\]</span> Since <span class="math inline">\(f\)</span> is a strictly increasing function, then <span class="math inline">\(f(I_n(x_0)) \subset \Delta_n(x_0)\)</span>.</p>
+<p>When <span class="math inline">\(n\)</span> is large enough, <span class="math inline">\(I_n(x_0) \subset G\)</span>, and <span class="math display">\[\frac{f(x_0+h_n)-f(x_0)}{h_n}&lt;p_0.\]</span> By inequality above, <span class="math display">\[m^*(f(I_n(x_0))) \leq m^*(\Delta_n(x_0))&lt;p_0 \cdot m(I_n(x_0)).\]</span></p>
+<p>Since <span class="math inline">\(m^*(I_n(x_0)) \to 0\)</span>, then <span class="math inline">\(m^*(\Delta_n(x_0)) \to 0\)</span>, i.e., <span class="math inline">\(\{\Delta_n(x_0)\}\)</span> is a Vitali cover of <span class="math inline">\(f(E)\)</span>. By <a href="#thm1.2">Vitali covering theorem</a>, there exist countable disjoint intervals <span class="math inline">\(\{\Delta_{n_j}(x_j)\}\)</span> such that <span class="math display">\[m\left(f(E)-\bigcup_{j=1}^\infty \Delta_{n_j}(x_j)\right)=0.\]</span> Besides, <span class="math inline">\(\{I_{n_j}(x_j)\}\)</span> are disjoint. Hence, <span class="math display">\[m^*(f(E)) \leq \sum_{j=1}^\infty m^*(\Delta_{n_j}(x_j))&lt;p_0\sum_{j=1}^\infty m^*(I_{n_j}(x_j))=p_0 \cdot m^*\left(\bigcup_{j=1}^\infty I_{n_j}(x_j)\right).\]</span> Since <span class="math inline">\(\displaystyle \bigcup_{j=1}^\infty I_{n_j}(x_j) \subset G\)</span>, then <span class="math display">\[m^*(f(E))&lt;p_0 \cdot m^*(G)&lt;p_0(m^*(E)+\varepsilon).\]</span> Let <span class="math inline">\(\varepsilon \to 0\)</span> and <span class="math inline">\(p_0 \to p\)</span>, we have <span class="math inline">\(m^*(f(E)) \leq p \cdot m^*(E)\)</span>.</p>
+Assume without loss of generality that <span class="math inline">\(f\)</span> is continuous and <span class="math inline">\(q&gt;0\)</span>. Since <span class="math inline">\(f\)</span> is a strictly increasing function on <span class="math inline">\([a, b]\)</span>, then there is a strictly increasing function <span class="math inline">\(f^{-1}\)</span> on <span class="math inline">\(f([a, b])\)</span>. Take <span class="math inline">\(x_0 \in E\)</span> and <span class="math inline">\(y_0=f(x_0)\)</span>, we have <span class="math display">\[\lim_{n \to \infty} \frac{f^{-1}(y_0+k_n)-f^{-1}(y_0)}{k_n}=\lim_{n \to \infty} \frac{(x_0+h_n)-x_0}{f(x_0+h_n)-f(x_0)}=\frac{1}{Df(x_0)} \leq \frac{1}{q},\]</span> where <span class="math inline">\(k_n=f(x_0+h_n)-f(x_0) \to 0\)</span>. Hence, <span class="math display">\[m^*(f^{-1}(f(E))) \leq \frac{1}{q} \cdot m^*(f(E)),\]</span> i.e., <span class="math display">\[q \cdot m^*(E) \leq m^*(f(E)).\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><span id="thm1.5"><strong>Theorem 1.5 (Lebesgue's Theorem)</strong></span>    Suppose <span class="math inline">\(f\)</span> is an increasing function on <span class="math inline">\([a, b]\)</span>. Then <span class="math inline">\(f\)</span> is differentiable almost everywhere on <span class="math inline">\([a, b]\)</span>, <span class="math inline">\(f&#39;\)</span> is Lebesgue integrable on <span class="math inline">\([a, b]\)</span>, and <span class="math display">\[\int_a^b f&#39;(x)\text{d}x \leq f(b)-f(a).\]</span></p>
+<p><strong><em>Proof.</em></strong> Let <span class="math inline">\(g(x)=f(x)+x\)</span>, which is strictly increasing. Let <span class="math display">\[E=\{x \in [a, b]: \text{$g&#39;(x)$ does not exist}\}.\]</span> For all <span class="math inline">\(x \in E\)</span>, there exist <span class="math inline">\(D_1g(x)\)</span> and <span class="math inline">\(D_2g(x)\)</span> such that <span class="math inline">\(D_1g(x)&lt;D_2g(x)\)</span>. There exist <span class="math inline">\(p, q \in \mathbb{Q}\)</span> such that <span class="math inline">\(D_1g(x)&lt;p&lt;q&lt;D_2g(x)\)</span>. Let <span class="math inline">\(E_{pq}=\{x \in [a, b]: 0&lt;D_1g(x)&lt;p&lt;q&lt;D_2g(x)\}\)</span>, then <span class="math display">\[E=\bigcup_{p, q \in \mathbb{Q}} E_{pq}.\]</span></p>
+<p>By <a href="#thm1.4">theorem 1.4</a>, <span class="math display">\[q \cdot m^*(E_{pq}) \leq m^*(g(E_{pq})) \leq p \cdot m^*(E_{pq}).\]</span> Since <span class="math inline">\(q&gt;p\)</span>, then <span class="math inline">\(m^*(E_{pq})=0\)</span>, and thus <span class="math inline">\(m(E)=0\)</span>, i.e., <span class="math inline">\(g\)</span> is differentiable almost everywhere on <span class="math inline">\([a, b]\)</span>, and <span class="math inline">\(f\)</span> is differentiable almost everywhere on <span class="math inline">\([a, b]\)</span>.</p>
+Let <span class="math inline">\(\displaystyle g_n(x)=n\left(f\left(x+\frac{1}{n}\right)-f(x)\right)\)</span>, and <span class="math inline">\(f(x)=f(b)\)</span> when <span class="math inline">\(x \geq b\)</span>, then <span class="math inline">\(g_n(x) \to f&#39;(x)\ \text{a.e.}\ x \in [a, b]\)</span>, where <span class="math inline">\(g_n(x) \geq 0\)</span>. Let <span class="math inline">\(f&#39;(x)=0\)</span> if the derivative does not exist at <span class="math inline">\(x\)</span>. We have <span class="math display">\[\begin{aligned}
+\int_a^b f&#39;(x)\text{d}x &amp;\leq \varliminf_{n \to \infty} \int_a^b g_n(x)\text{d}x
+\\&amp;=\varliminf_{n \to \infty} \int_a^b n\left[f\left(x+\frac{1}{n}\right)-f(x)\right]\text{d}x
+\\&amp;=\varliminf_{n \to \infty} \left(n\int_a^b f\left(x+\frac{1}{n}\right)\text{d}x-n\int_a^b f(x)\text{d}x\right)
+\\&amp;=\varliminf_{n \to \infty} \left(n\int_{a+1/n}^{b+1/n} f(x)\text{d}x-n\int_a^b f(x)\text{d}x\right)
+\\&amp;=\varliminf_{n \to \infty} \left(n\int_b^{b+1/n} f(x)\text{d}x-n\int_a^{a+1/n} f(x)\text{d}x\right)
+\\&amp;=\varliminf_{n \to \infty} \left(f(b)-n\int_a^{a+1/n} f(x)\text{d}x\right)
+\\&amp;\leq \varliminf_{n \to \infty} (f(b)-f(a))
+\\&amp;=f(b)-f(a)&lt;\infty.
+\end{aligned}\]</span> Therefore, <span class="math inline">\(f&#39;\)</span> is Lebesgue integrable on <span class="math inline">\([a, b]\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Example 1.1</strong>    Suppose <span class="math inline">\(E \subset [a, b]\)</span> and <span class="math inline">\(m(E)=0\)</span>. Then there exists an increasing function <span class="math inline">\(f\)</span> on <span class="math inline">\([a, b]\)</span> such that for all <span class="math inline">\(x \in E\)</span>, <span class="math inline">\(f&#39;(x)=\infty\)</span>.</p>
+<p><strong><em>Proof.</em></strong> There exist open sets <span class="math inline">\(G_1 \supset G_2 \supset \cdots\)</span> such that <span class="math inline">\(E \subset G_n\)</span> and <span class="math inline">\(\displaystyle m(G_n)&lt;\frac{1}{2^n}\)</span>. Let <span class="math display">\[f_n(x)=m([a, x] \cap G_n),\]</span> where <span class="math inline">\(f_n\)</span> is increasing on <span class="math inline">\([a, b]\)</span>, and <span class="math inline">\(\displaystyle 0 \leq f_n(x) \leq m(G_n)&lt;\frac{1}{2^n}\)</span>. Besides, since <span class="math inline">\(f_n(x+h)-f_n(x) \leq |h|\)</span>, it is easy to show that <span class="math inline">\(f_n\)</span> is continuous on <span class="math inline">\([a, b]\)</span>. Let <span class="math display">\[f(x)=\sum_{n=1}^\infty f_n(x),\]</span> where <span class="math inline">\(f\)</span> is increasing and continuous on <span class="math inline">\([a, b]\)</span>.</p>
+For all <span class="math inline">\(x \in E\)</span>, when <span class="math inline">\(x \neq b\)</span>, take a <span class="math inline">\(k \in \mathbb{N}\)</span>, then <span class="math display">\[\exists \varepsilon&gt;0\ \text{s.t.}\ 0&lt;h&lt;\varepsilon, [x, x+h] \subset G_1, \cdots, G_k.\]</span> We have <span class="math display">\[\begin{aligned}
+\frac{f(x+h)-f(x)}{h}&amp;=\frac{1}{h}\left(\sum_{i=1}^\infty f_i(x+h)-\sum_{i=1}^\infty f_i(x)\right)
+\\&amp;=\sum_{i=1}^\infty \frac{f_i(x+h)-f_i(x)}{h}
+\\&amp;\geq \sum_{i=1}^k \frac{f_i(x+h)-f_i(x)}{h}
+\\&amp;=\sum_{i=1}^k \frac{m([a, x+h] \cap G_i)-m([a, x] \cap G_i)}{h}
+\\&amp;=\sum_{i=1}^k \frac{h}{h}=k.
+\end{aligned}\]</span> Hence, <span class="math inline">\(f&#39;_+(x)=\infty.\)</span> Similarly, for all <span class="math inline">\(x \in E\)</span>, when <span class="math inline">\(x \neq a\)</span>, we can show <span class="math inline">\(f&#39;_-(x)=\infty\)</span>. Therefore, <span class="math inline">\(f&#39;(x)=\infty\)</span> for all <span class="math inline">\(x \in E\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Example 1.2</strong>    In <a href="#thm1.5">Lebesgue's theorem</a>, we can find a function <span class="math inline">\(\theta\)</span> such that <span class="math display">\[\int_a^b \theta&#39;(x)\text{d}x&lt;\theta(b)-\theta(a).\]</span></p>
+<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(P_0\)</span> is a Cantor ternary set. Let <span class="math inline">\(\displaystyle G_0=P_0^c\)</span>. Define a function <span class="math inline">\(\theta\)</span> on <span class="math inline">\(G_0\)</span>: when <span class="math inline">\(\displaystyle x \in \left(\frac{1}{3}, \frac{2}{3}\right)\)</span>, <span class="math inline">\(\displaystyle \theta(x)=\frac{1}{2}\)</span>; when <span class="math inline">\(\displaystyle x \in \left(\frac{1}{9}, \frac{2}{9}\right)\)</span>, <span class="math inline">\(\displaystyle \theta(x)=\frac{1}{4}\)</span>; when <span class="math inline">\(\displaystyle x \in \left(\frac{7}{9}, \frac{8}{9}\right)\)</span>, <span class="math inline">\(\displaystyle \theta(x)=\frac{3}{4}\)</span>; <span class="math inline">\(\cdots\)</span>. For <span class="math inline">\(x_0 \in P_0\)</span>, let <span class="math display">\[\theta(x_0)=\sup_{\substack{x \in G_0 \\ x&lt;x_0}}\{\theta(x)\}.\]</span> Hence, <span class="math inline">\(\theta\)</span> is increasing. In addition, since <span class="math display">\[\lim_{x \to x_0^-} \theta(x)=\lim_{x \to x_0^+} \theta(x)=\theta(x_0),\]</span> then <span class="math inline">\(\theta\)</span> is continuous.</p>
+For <span class="math inline">\(x \in G_0\)</span>, <span class="math inline">\(\theta&#39;(x)=0\)</span>, i.e., <span class="math inline">\(\theta&#39;(x)=0\ \text{a.e.}\ x \in [0, 1]\)</span>. Hence, <span class="math display">\[0=\int_0^1 \theta&#39;(x)\text{d}x&lt;1=\theta(1)-\theta(0).\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="bounded-variation-function">Bounded Variation Function</h1>
+<p><strong>Definition 2.1</strong>    Suppose <span class="math inline">\(f\)</span> is a real function on <span class="math inline">\([a, b]\)</span>. Take a partition <span class="math inline">\(\Delta: a=x_0&lt;x_1&lt;\cdots&lt;x_n=b\)</span>. The <strong>variation</strong> of <span class="math inline">\(f\)</span> on <span class="math inline">\([a, b]\)</span> is <span class="math display">\[v_\Delta=\sum_{i=1}^n |f(x_i)-f(x_{i-1})|.\]</span> The <strong>total variation</strong> of <span class="math inline">\(f\)</span> on <span class="math inline">\([a, b]\)</span> is <span class="math display">\[\bigvee_a^b (f)=\sup\{v_\Delta: \text{$\Delta$ is an arbitrary partition of $[a, b]$}\}.\]</span> If <span class="math display">\[\bigvee_a^b (f)&lt;\infty,\]</span> then <span class="math inline">\(f\)</span> is a <strong>bounded variation function</strong> on <span class="math inline">\([a, b]\)</span>. The collection of all bounded variation functions on <span class="math inline">\([a, b]\)</span> is denoted <span class="math inline">\(\text{BV}([a, b])\)</span>.</p>
+<p><strong>Theorem 2.1</strong>    If <span class="math inline">\(f \in \text{BV}([a, b])\)</span>, then <span class="math inline">\(f\)</span> is bounded on <span class="math inline">\([a, b]\)</span>.</p>
+<strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(x \in [a, b]\)</span>, and take a partition <span class="math inline">\(\Delta: a=x_0&lt;x_1=x&lt;x_2=b\)</span>. We have <span class="math display">\[\begin{aligned}
+|f(x)| &amp;\leq |f(x)-f(a)|+|f(a)| 
+\\&amp;\leq |f(x)-f(a)|+|f(b)-f(x)|+|f(a)|
+\\&amp;=v_\Delta+|f(a)| 
+\\&amp;\leq \bigvee_a^b (f)+|f(a)|.
+\end{aligned}\]</span> Since <span class="math inline">\(f \in \text{BV}([a, b])\)</span>, then <span class="math display">\[\bigvee_a^b (f)+|f(a)|&lt;\infty,\]</span> i.e., <span class="math inline">\(f\)</span> is bounded on <span class="math inline">\([a, b]\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.2</strong>    <span class="math inline">\(\text{BV}([a, b])\)</span> is a linear space.</p>
+<strong><em>Proof.</em></strong> Take an arbitrary partition <span class="math inline">\(\Delta: a=x_0&lt;x_1&lt;\cdots&lt;x_n=b\)</span>. Suppose <span class="math inline">\(c \in \mathbb{R}\)</span>, <span class="math inline">\(f, g \in \text{BV}([a, b])\)</span>, <span class="math display">\[\sum_{i=1}^n |f(x_i)-f(x_{i-1})| \leq M_1,\]</span> and <span class="math display">\[\sum_{i=1}^n |g(x_i)-g(x_{i-1})| \leq M_2.\]</span> Hence, <span class="math display">\[\begin{aligned}
+\sum_{i=1}^n |(cf+g)(x_i)-(cf+g)(x_{i-1})|&amp;=\sum_{i=1}^n |(cf(x_i)+g(x_i))-(cf(x_{i-1})+g(x_{i-1}))|
+\\&amp;=\sum_{i=1}^n |c(f(x_i)-f(x_{i-1}))+(g(x_i)-g(x_{i-1}))|
+\\&amp;\leq |c|\sum_{i=1}^n |f(x_i)-f(x_{i-1})|+\sum_{i=1}^n |g(x_i)-g(x_{i-1})|
+\\&amp;\leq |c|M_1+M_2&lt;\infty,
+\end{aligned}\]</span> i.e., <span class="math inline">\(cf+g \in \text{BV}([a, b])\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.3</strong>    If <span class="math inline">\(f, g \in \text{BV}([a, b])\)</span>, then <span class="math inline">\(fg \in \text{BV}([a, b])\)</span>.</p>
+<p><strong><em>Proof.</em></strong> Take an arbitrary partition <span class="math inline">\(\Delta: a=x_0&lt;x_1&lt;\cdots&lt;x_n=b\)</span>. Since <span class="math inline">\(f, g \in \text{BV}([a, b])\)</span>, then there is an <span class="math inline">\(M\)</span> such that <span class="math inline">\(|f(x)| \leq M\)</span>, <span class="math inline">\(|g(x)| \leq M\)</span>, <span class="math inline">\(\displaystyle \sum_{i=1}^n |f(x_i)-f(x_{i-1})| \leq M\)</span>, and <span class="math inline">\(\displaystyle \sum_{i=1}^n |g(x_i)-g(x_{i-1})| \leq M\)</span>. Hence,</p>
+<span class="math display">\[\begin{aligned}
+\sum_{i=1}^n |(fg)(x_i)-(fg)(x_{i-1})|&amp;=\sum_{i=1}^n |f(x_i)g(x_i)-f(x_{i-1})g(x_{i-1})|
+\\&amp;=\sum_{i=1}^n |f(x_i)g(x_i)-f(x_i)g(x_{i-1})+f(x_i)g(x_{i-1})-f(x_{i-1})g(x_{i-1})|
+\\&amp;=\sum_{i=1}^n |f(x_i)(g(x_i)-g(x_{i-1}))+g(x_{i-1})(f(x_i)-f(x_{i-1}))|
+\\&amp;\leq \sum_{i=1}^n |f(x_i)| \cdot |g(x_i)-g(x_{i-1})|+\sum_{i=1}^n |g(x_{i-1})| \cdot |f(x_i)-f(x_{i-1})|
+\\&amp;\leq 2nM^2&lt;\infty,
+\end{aligned}\]</span> i.e., <span class="math inline">\(fg \in \text{BV}([a, b])\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.4</strong>    If <span class="math inline">\(f \in \text{BV}([a, b])\)</span> and <span class="math inline">\(a&lt;c&lt;b\)</span>, then <span class="math display">\[\bigvee_a^b (f)=\bigvee_a^c (f)+\bigvee_c^b (f).\]</span></p>
+<p><strong><em>Proof.</em></strong> Take an arbitrary partition <span class="math inline">\(\Delta: a=x_0&lt;x_1&lt;\cdots&lt;x_n=b\)</span>. If <span class="math inline">\(c=x_k\)</span> for some <span class="math inline">\(k\)</span>, then <span class="math display">\[\sum_{i=1}^n |f(x_i)-f(x_{i-1})|=\sum_{i=1}^k |f(x_i)-f(x_{i-1})|+\sum_{i=k+1}^n |f(x_i)-f(x_{i-1})| \leq \bigvee_a^c (f)+\bigvee_c^b (f).\]</span> If <span class="math inline">\(x_k&lt;c&lt;x_{k+1}\)</span> for some <span class="math inline">\(k\)</span>, then <span class="math display">\[\begin{aligned}
+\sum_{i=1}^n |f(x_i)-f(x_{i-1})|&amp;=\sum_{i=1}^k |f(x_i)-f(x_{i-1})|+|f(x_{k+1})-f(x_k)|+\sum_{i=k+2}^n |f(x_i)-f(x_{i-1})|
+\\&amp;\leq \sum_{i=1}^k |f(x_i)-f(x_{i-1})|+|f(c)-f(x_k)|
+\\&amp;\ \ \ \ +|f(x_{k+1})-f(c)|+\sum_{i=k+2}^n |f(x_i)-f(x_{i-1})|
+\\&amp;=\bigvee_a^c (f)+\bigvee_c^b (f).
+\end{aligned}\]</span> Hence, <span class="math display">\[\bigvee_a^b (f) \leq \bigvee_a^c (f)+\bigvee_c^b (f).\]</span></p>
+For all <span class="math inline">\(\varepsilon&gt;0\)</span>, we can find two partitions <span class="math display">\[\Delta_1: a=y_0&lt;y_1&lt;\cdots&lt;y_m=c\]</span> and <span class="math display">\[\Delta_2: c=z_0&lt;z_1&lt;\cdots&lt;z_n=b\]</span> such that <span class="math display">\[\bigvee_a^c (f)&lt;\sum_{i=1}^m |f(y_i)-f(y_{i-1})|+\frac{\varepsilon}{2}\]</span> and <span class="math display">\[\bigvee_c^b (f)&lt;\sum_{i=1}^n |f(z_i)-f(z_{i-1})|+\frac{\varepsilon}{2}.\]</span> Let <span class="math inline">\(\Delta&#39;=\Delta_1 \cup \Delta_2\)</span>, then <span class="math inline">\(\Delta&#39;\)</span> is a partition of <span class="math inline">\([a, b]\)</span> with <span class="math display">\[v_{\Delta&#39;}=\sum_{i=1}^m |f(y_i)-f(y_{i-1})|+\sum_{i=1}^n |f(z_i)-f(z_{i-1})|&gt;\bigvee_a^c (f)+\bigvee_c^b (f)-\varepsilon,\]</span> i.e., <span class="math display">\[\bigvee_a^b (f) \geq \bigvee_a^c (f)+\bigvee_c^b (f).\]</span> Therefore, <span class="math display">\[\bigvee_a^b (f)=\bigvee_a^c (f)+\bigvee_c^b (f).\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.5 (Jordan Decomposition Theorem)</strong>    <span class="math inline">\(f \in \text{BV}([a, b])\)</span> if and only if <span class="math inline">\(f=g-h\)</span>, where <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> are increasing on <span class="math inline">\([a, b]\)</span>.</p>
+<p><strong><em>Proof.</em></strong> (<span class="math inline">\(\Leftarrow\)</span>) For any increasing function <span class="math inline">\(\theta\)</span> on <span class="math inline">\([a, b]\)</span> with an arbitrary partition <span class="math inline">\(\Delta\)</span>, we have <span class="math inline">\(v_\Delta=|\theta(b)-\theta(a)|\)</span>, and thus <span class="math display">\[\bigvee_a^b (\theta)=|\theta(b)-\theta(a)|&lt;\infty,\]</span> i.e., <span class="math inline">\(\theta \in \text{BV}([a, b])\)</span>.</p>
+<p>Suppose <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> are increasing on <span class="math inline">\([a, b]\)</span>, then <span class="math inline">\(g, h \in \text{BV}([a, b])\)</span>, and thus <span class="math inline">\(f=g-h \in \text{BV}([a, b])\)</span>.</p>
+<p>(<span class="math inline">\(\Rightarrow\)</span>) Suppose <span class="math inline">\(f \in \text{BV}([a, b])\)</span>. Let <span class="math display">\[g(x)=\bigvee_a^x (f),\]</span> where <span class="math inline">\(g\)</span> is increasing.</p>
+Let <span class="math inline">\(h(x)=g(x)-f(x)\)</span>. Take arbitrary <span class="math inline">\(x_1&lt;x_2\)</span> such that <span class="math inline">\(a \leq x_1&lt;x_2 \leq b\)</span>. We have <span class="math display">\[\begin{aligned}
+h(x_2)-h(x_1)&amp;=\bigvee_a^{x_2} (f)-f(x_2)-\left(\bigvee_a^{x_1} (f)-f(x_1)\right)
+\\&amp;=\bigvee_{x_1}^{x_2} (f)-(f(x_2)-f(x_1))
+\\&amp;\geq |f(x_2)-f(x_1)|-(f(x_2)-f(x_1)) \geq 0.
+\end{aligned}\]</span> Hence, <span class="math inline">\(h\)</span> is increasing, and <span class="math inline">\(f=g-h\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note info">
+            <p>If <span class="math inline">\(f \in \text{BV}([a, b])\)</span>, then <span class="math inline">\(f=g-h\)</span>, where <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> are increasing on <span class="math inline">\([a, b]\)</span>. Take an arbitrary increasing function <span class="math inline">\(a\)</span>, we know <span class="math inline">\(g+a\)</span> and <span class="math inline">\(h+a\)</span> are increasing, and <span class="math inline">\(f=(g+a)-(h+a)\)</span>. Hence, the increasing decomposition functions <strong>are not</strong> unique.</p><p>We define <strong>positive variation function</strong> as <span class="math display">\[p(x)=\frac{1}{2}\left(\bigvee_a^x (f)+f(x)-f(a)\right),\]</span> and <strong>negative variation function</strong> as <span class="math display">\[n(x)=\frac{1}{2}\left(\bigvee_a^x (f)-f(x)+f(a)\right).\]</span> Hence, <span class="math inline">\(p\)</span> and <span class="math inline">\(n\)</span> are increasing, <span class="math inline">\(\displaystyle \bigvee_a^x (f)=p(x)+n(x)\)</span>, and <span class="math inline">\(f(x)-f(a)=p(x)-n(x)\)</span>, which is called <strong>normal decomposition</strong>.</p>
+          </div>
+<p><strong>Theorem 2.6</strong>    Suppose <span class="math inline">\(f \in \text{BV}([a, b])\)</span>. Then <span class="math inline">\(f\)</span> is differentiable almost everywhere on <span class="math inline">\([a, b]\)</span>, and <span class="math inline">\(f&#39; \in L([a, b])\)</span>.</p>
+<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(f \in \text{BV}([a, b])\)</span>, then <span class="math inline">\(f=g-h\)</span>, where <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> are increasing on <span class="math inline">\([a, b]\)</span>.</p>
+<p>By <a href="#thm1.5">Lebesgue's theorem</a>, <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> are differentiable almost everywhere on <span class="math inline">\([a, b]\)</span>; <span class="math inline">\(g\)</span> and <span class="math inline">\(h\)</span> are Lebesgue integrable on <span class="math inline">\([a, b]\)</span>.</p>
+Hence, <span class="math inline">\(f=g-h\)</span> is differentiable almost everywhere on <span class="math inline">\([a, b]\)</span>, and is Lebesgue integrable on <span class="math inline">\([a, b]\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note warning">
+            <p>The bounded variation function <strong>is not necessarily</strong> a continuous function. For example, <span class="math display">\[f(x)=\begin{cases}0, &amp;x \leq 0 \\1, &amp;x&gt;0\end{cases}.\]</span></p><p>The continuous function <strong>is not necessarily</strong> a bounded variation function. For example, <span class="math display">\[f(x)=\begin{cases}\displaystyle x\sin\frac{1}{x}, &amp;0&lt;x \leq 1 \\0, &amp;x=0\end{cases}.\]</span> Take a partition: <span class="math display">\[x_0=0, x_1=\frac{1}{(n-2)\pi+\pi/2}, x_2=\frac{1}{(n-3)\pi+\pi/2}, \cdots, x_{n-1}=\frac{1}{\pi+\pi/2}, x_n=1.\]</span> We have <span class="math display">\[\begin{aligned}\sum_{i=1}^n |f(x_i)-f(x_{i-1})|&amp;=\left|x_1\sin\frac{1}{x_1}-0\right|+\cdots+\left|1\sin1-x_{n-1}\sin\frac{1}{x_{n-1}}\right|\\&amp;\geq \frac{4}{\pi}\sum_{k=2}^n \frac{1}{2k-1}+\sin1.\end{aligned}\]</span> As <span class="math inline">\(n \to \infty\)</span>, <span class="math inline">\(\displaystyle \sum_{i=1}^n |f(x_i)-f(x_{i-1})=\infty\)</span>, and thus <span class="math inline">\(f \notin \text{BV}([a, b])\)</span>.</p>
+          </div>
+<p><span id="thm2.7"><strong>Theorem 2.7</strong></span>    If <span class="math inline">\(f \in \text{BV}([a, b])\)</span>, then <span class="math inline">\(f=g+h\)</span>, for some step function <span class="math inline">\(g\)</span> and continuous function <span class="math inline">\(h\)</span>.</p>
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(f\)</span> be an increasing function. Let <span class="math display">\[\theta_l(x)=\begin{cases}
+0, &amp;x&lt;0 \\
+1, &amp;x \geq 0
+\end{cases}\]</span> and <span class="math display">\[\theta_r(x)=\begin{cases}
+0, &amp;x \leq 0 \\
+1, &amp;x&gt;0
+\end{cases}.\]</span> Let <span class="math inline">\(d_n\)</span> be the discontinuous point of <span class="math inline">\(f\)</span>, and <span class="math display">\[g(x)=\sum_{n=1}^\infty \mu_n\theta_l(x)+\sum_{n=1}^\infty \lambda_n\theta_r(x),\]</span> where <span class="math inline">\(\mu_n=f(d_n)-f(d_n^-)\)</span> and <span class="math inline">\(\lambda_n=f(d_n^+)-f(d_n)\)</span>. Note that <span class="math inline">\(g\)</span> is a step function, with discontinuous points <span class="math inline">\(\{d_n\}\)</span>. Hence, <span class="math inline">\(f-g\)</span> is continuous, i.e., <span class="math display">\[\text{Increasing function}=\text{Step function}+\text{Continuous function}.\]</span> Since a bounded variation function is difference of two increasing functions, then <span class="math display">\[\text{Bounded variation function}=\text{Step function}+\text{Continuous function}.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="differentiation-of-indefinite-integral">Differentiation of Indefinite Integral</h1>
+<p><strong>Theorem 3.1*</strong>    Suppose <span class="math inline">\(f \in L([a, b])\)</span>, and <span class="math inline">\(f(x)=0\)</span> if <span class="math inline">\(x \notin [a, b]\)</span>. Then <span class="math display">\[\lim_{h \to 0} \int_\mathbb{R} |f(x+h)-f(x)|\text{d}x=0.\]</span></p>
+<p><strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, and let <span class="math inline">\(f=f_1+f_2\)</span>, where <span class="math inline">\(f_1\)</span> is a continuous function with compact support set on <span class="math inline">\(\mathbb{R}\)</span>, and <span class="math inline">\(f_2\)</span> satisfies <span class="math display">\[\int_\mathbb{R} |f_2(x)|\text{d}x&lt;\frac{\varepsilon}{4}.\]</span> Since <span class="math inline">\(f_1\)</span> has compact support set and is uniformly continuous, then there exists a <span class="math inline">\(\delta&gt;0\)</span> such that when <span class="math inline">\(|h|&lt;\delta\)</span>, <span class="math display">\[\int_\mathbb{R} |f_1(x+h)-f_1(x)|\text{d}x&lt;\frac{\varepsilon}{2}.\]</span></p>
+Hence, <span class="math display">\[\begin{aligned}
+\int_\mathbb{R} |f(x+h)-f(x)|\text{d}x &amp;\leq \int_\mathbb{R} |f_1(x+h)-f_1(x)|\text{d}x+\int_\mathbb{R} |f_2(x+h)-f_2(x)|\text{d}x
+\\&amp;&lt;\frac{\varepsilon}{2}+\int_\mathbb{R} |f_2(x+h)|\text{d}x+\int_\mathbb{R} |f_2(x)|\text{d}x
+\\&amp;=\frac{\varepsilon}{2}+2\int_\mathbb{R} |f_2(x)|\text{d}x&lt;\varepsilon.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 3.2</strong>    Suppose <span class="math inline">\(f \in L([a, b])\)</span>. Then <span class="math display">\[\frac{\text{d}}{\text{d}x}\left(\int_a^x f(t)\text{d}t\right)=f(x)\ \text{a.e.}\ x \in [a, b].\]</span></p>
+<div class="note ">
+            <p><strong>Lemma 3.2.1</strong>    Suppose <span class="math inline">\(f \in L([a, b])\)</span>. Then <span class="math display">\[\lim_{h \to 0}\frac{1}{h}\int_0^h |f(x+t)-f(x)|\text{d}t=0\ \text{a.e.}\ x \in [a, b].\]</span></p><p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(h&gt;0\)</span>, and assume <span class="math inline">\(f(x)=0\)</span> if <span class="math inline">\(x \notin [a, b]\)</span>. We have <span class="math display">\[\begin{aligned}\int_a^b \left(\lim_{h \to 0} \frac{1}{h}\int_0^h |f(x+t)-f(x)|\text{d}t\right)\text{d}x &amp;\leq \int_\mathbb{R} \left(\lim_{h \to 0} \frac{1}{h}\int_0^h |f(x+t)-f(x)|\text{d}t\right)\text{d}x\\&amp;\leq \varliminf_{h \to 0} \int_\mathbb{R} \left(\frac{1}{h}\int_0^h |f(x+t)-f(x)|\text{d}t\right)\text{d}x\\&amp;=\varliminf_{h \to 0} \int_0^h \frac{1}{h}\left(\int_\mathbb{R} |f(x+t)-f(x)|\text{d}x\right)\text{d}t.\end{aligned}\]</span> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists a <span class="math inline">\(\delta&gt;0\)</span> such that when <span class="math inline">\(|t|&lt;\delta\)</span>, <span class="math display">\[\int_\mathbb{R} |f(x+t)-f(x)|\text{d}x&lt;\varepsilon.\]</span> When <span class="math inline">\(h&lt;\delta\)</span>, we have <span class="math display">\[\int_0^h \frac{1}{h}\left(\int_\mathbb{R} |f(x+t)-f(x)|\text{d}x\right)\text{d}t&lt;\frac{\varepsilon}{h}\int_0^h \text{d}t=\varepsilon.\]</span> Therefore, <span class="math display">\[\lim_{h \to 0}\frac{1}{h}\int_0^h |f(x+t)-f(x)|\text{d}t=0\ \text{a.e.}\ x \in [a, b].\]</span> We define <span class="math inline">\(x\)</span> as a <strong>Lebesgue point</strong> if <span class="math inline">\(x\)</span> satisfies <span class="math display">\[\lim_{h \to 0}\frac{1}{h}\int_0^h |f(x+t)-f(x)|\text{d}t=0.\]</span></p>
+          </div>
+<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(h&gt;0\)</span>, and assume <span class="math inline">\(f(x)=0\)</span> if <span class="math inline">\(x \notin [a, b]\)</span>. We have <span class="math display">\[\begin{aligned}
+\int_a^b \left|\lim_{h \to 0} \frac{1}{h}\int_0^h (f(x+t)-f(x))\text{d}t\right|\text{d}x&amp;=\int_a^b \left(\lim_{h \to 0} \frac{1}{h}\left|\int_0^h (f(x+t)-f(x))\text{d}t\right|\right)\text{d}x
+\\&amp;\leq \int_a^b \left(\lim_{h \to 0} \frac{1}{h} \int_0^h |f(x+t)-f(x)|\text{d}t\right)\text{d}x
+\\&amp;=0.
+\end{aligned}\]</span> Hence, <span class="math display">\[\int_a^b \left|\lim_{h \to 0} \frac{1}{h}\int_0^h (f(x+t)-f(x))\text{d}t\right|\text{d}x=0,\]</span> i.e., <span class="math display">\[\lim_{h \to 0} \frac{1}{h}\int_0^h (f(x+t)-f(x))\text{d}t=0\ \text{a.e.}\ x \in [a, b].\]</span></p>
+<p>Similarly, if <span class="math inline">\(h&lt;0\)</span>, we have <span class="math display">\[\lim_{h \to 0} \frac{1}{h}\int_0^h (f(x+t)-f(x))\text{d}t=0\ \text{a.e.}\ x \in [a, b].\]</span></p>
+Therefore, <span class="math display">\[\lim_{h \to 0} \frac{1}{h}\int_0^h (f(x+t)-f(x))\text{d}t=\lim_{h \to 0} \frac{1}{h}\int_0^h f(x+t)\text{d}t-f(x)=0\ \text{a.e.}\ x \in [a, b].\]</span> Since <span class="math display">\[\int_0^h f(x+t)\text{d}t=\int_x^{x+h} f(t)\text{d}t=\int_a^{x+h} f(t)\text{d}t-\int_a^x f(t)\text{d}t,\]</span> then <span class="math display">\[\lim_{h \to 0}\frac{1}{h}\left(\int_a^{x+h} f(t)\text{d}t-\int_a^x f(t)\text{d}t\right)=f(x)\ \text{a.e.}\ x \in [a, b],\]</span> i.e., <span class="math display">\[\frac{\text{d}}{\text{d}x}\left(\int_a^x f(t)\text{d}t\right)=f(x)\ \text{a.e.}\ x \in [a, b].\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="fundamental-theorem-of-calculus">Fundamental Theorem of Calculus</h1>
+<p><span id="thm4.1"><strong>Theorem 4.1</strong></span>    Suppose <span class="math inline">\(f\)</span> is differentiable almost everywhere on <span class="math inline">\([a, b]\)</span> and <span class="math inline">\(f&#39;(x)=0\ \text{a.e.}\ x \in [a, b]\)</span>. If <span class="math inline">\(f\)</span> is not a constant function on <span class="math inline">\([a, b]\)</span>, then there exists an <span class="math inline">\(\varepsilon&gt;0\)</span> such that for all <span class="math inline">\(\delta&gt;0\)</span>, there exists a finite sequence of pairwise disjoint subintervals <span class="math inline">\((x_i, y_i)\)</span> of <span class="math inline">\([a, b]\)</span> with <span class="math inline">\(x_i&lt;y_i \in [a, b]\)</span> such that <span class="math display">\[\sum_{i=1}^n |y_i-x_i|&lt;\delta,\]</span> and <span class="math display">\[\sum_{i=1}^n |f(y_i)-f(x_i)|&gt;\varepsilon.\]</span> <span class="math inline">\(f\)</span> is defined as a <strong>singularity function</strong>.</p>
+<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(f\)</span> is not a constant function, then there exists a <span class="math inline">\(c \in [a, b]\)</span> such that <span class="math inline">\(f(a) \neq f(c)\)</span>. Since <span class="math inline">\(f&#39;(x)=0\ \text{a.e.}\ x \in [a, b]\)</span>, then there exists an <span class="math inline">\(E \subset [a, c]\)</span> such that <span class="math inline">\(m([a, c]-E)=0\)</span>, where <span class="math inline">\(f&#39;(x)=0\)</span> for <span class="math inline">\(x \in E\)</span>.</p>
+<p>Let <span class="math inline">\(2\varepsilon=|f(c)-f(a)|&gt;0\)</span> and <span class="math inline">\(\displaystyle r=\frac{\varepsilon}{c-a}\)</span>. There exits a <span class="math inline">\(\delta_1&gt;0\)</span> such that when <span class="math inline">\(0&lt;h&lt;\delta_1\)</span>, <span class="math display">\[|f(x+h)-f(x)|&lt;rh.\]</span> It is obvious that the collection of <span class="math inline">\([x, x+h]\)</span> is a Vitali cover of <span class="math inline">\(E\)</span>. By <a href="#thm1.2">Vitali covering theorem</a>, for all <span class="math inline">\(\delta&gt;0\)</span>, there exist finite disjoint intervals <span class="math inline">\([x_1, x_1+h_1], \cdots, [x_n, x_n+h_n]\)</span> such that <span class="math display">\[m\left(E-\bigcup_{i=1}^n [x_i, x_i+h_i]\right)&lt;\delta.\]</span> Assume <span class="math inline">\(x_1&lt;x_1+h_1&lt;\cdots&lt;x_n&lt;x_n+h_n\)</span>. Hence, <span class="math display">\[m\left((a, x_1) \cup \bigcup_{i=1}^n (x_i+h_i, x_{i+1}) \cup (x_n+h_n, c)\right)&lt;\delta.\]</span></p>
+Since <span class="math display">\[\sum_{i=1}^n |f(x_i+h_i)-f(x_i)|&lt;r\sum_{i=1}^n h_i&lt;r(c-a)=\varepsilon,\]</span> and <span class="math display">\[\begin{aligned}
+&amp;|f(x_1)-f(a)|+\sum_{i=1}^n |f(x_{i+1})-f(x_i+h_i)|+|f(c)-f(x_n+h_n)|+\sum_{i=1}^n |f(x_i+h_i)-f(x_i)|
+\\\geq &amp;\left|f(x_1)-f(a)+\sum_{i=1}^n (f(x_{i+1})-f(x_i+h_i))+f(c)-f(x_n+h_n)+\sum_{i=1}^n (f(x_i+h_i)-f(x_i))\right|
+\\=&amp;|f(c)-f(a)|=2\varepsilon,
+\end{aligned}\]</span> then <span class="math display">\[|f(x_1)-f(a)|+\sum_{i=1}^n |f(x_{i+1})-f(x_i+h_i)|+|f(c)-f(x_n+h_n)|&gt;\varepsilon.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Definition 4.1</strong> A function <span class="math inline">\(f\)</span> is <strong>absolutely continuous</strong> on <span class="math inline">\([a, b]\)</span> if for all <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists a <span class="math inline">\(\delta&gt;0\)</span> such that whenever a finite sequence of pairwise disjoint subintervals <span class="math inline">\((x_i, y_i)\)</span> of <span class="math inline">\([a, b]\)</span> with <span class="math inline">\(x_i&lt;y_i \in [a, b]\)</span> satisfies <span class="math display">\[\sum_{i=1}^n |y_i-x_i|&lt;\delta,\]</span> then <span class="math display">\[\sum_{i=1}^n |f(y_i)-f(x_i)|&lt;\varepsilon.\]</span> The collection of all absolutely continuous functions on <span class="math inline">\([a, b]\)</span> is denoted <span class="math inline">\(\text{AC}([a, b])\)</span>.</p>
+<p><strong>Example 4.1</strong>    If <span class="math inline">\(f\)</span> is Lipschitz continuous on <span class="math inline">\([a, b]\)</span>, i.e., <span class="math inline">\(|f(x)-f(y)| \leq M \cdot |x-y|\)</span>, then <span class="math inline">\(f \in \text{AC}([a, b])\)</span>.</p>
+<p><strong>Example 4.2</strong>    If <span class="math inline">\(f \in \text{AC}([a, b])\)</span>, then <span class="math inline">\(f\)</span> is continuous on <span class="math inline">\([a, b]\)</span>.</p>
+<p><strong>Example 4.3</strong>    If <span class="math inline">\(f\)</span> is a step function, then <span class="math inline">\(f\)</span> is a singularity function.</p>
+<p><strong>Theorem 4.2</strong>    Suppose <span class="math inline">\(f \in L([a, b])\)</span>. Then <span class="math inline">\(\displaystyle \int_a^x f(t)\text{d}t\)</span> is absolutely continuous on <span class="math inline">\([a, b]\)</span>.</p>
+<strong><em>Proof.</em></strong> Suppose <span class="math inline">\(f \in L([a, b])\)</span>. We have <span class="math display">\[\forall \varepsilon&gt;0, \exists \delta&gt;0\ \text{s.t.}\ m([a, b])&lt;\delta \Rightarrow \int_{[a, b]} |f(x)|\text{d}x&lt;\varepsilon.\]</span> Take an arbitrary finite sequence of pairwise disjoint subintervals <span class="math inline">\((x_i, y_i)\)</span> of <span class="math inline">\([a, b]\)</span> with <span class="math inline">\(x_i&lt;y_i \in [a, b]\)</span>, where <span class="math display">\[\sum_{i=1}^n |y_i-x_i|&lt;m([a, b])&lt;\delta.\]</span> We have <span class="math display">\[\begin{aligned}
+\sum_{i=1}^n \left|\int_a^{y_i} f(t)\text{d}t-\int_a^{x_i} f(t)\text{d}t\right|&amp;=\sum_{i=1}^n \left|\int_{x_i}^{y_i} f(t)\text{d}t\right|
+\\&amp;\leq \sum_{i=1}^n \int_{x_i}^{y_i} |f(t)|\text{d}t
+\\&amp;=\int_{\bigcup_{i=1}^n (x_i, y_i)} |f(t)|\text{d}t&lt;\varepsilon,
+\end{aligned}\]</span> i.e., <span class="math inline">\(\displaystyle \int_a^x f(t)\text{d}t\)</span> is absolutely continuous on <span class="math inline">\([a, b]\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 4.3</strong>    <span class="math inline">\(\text{AC}([a, b])\)</span> is a linear space.</p>
+<p><strong><em>Proof.</em></strong> Take an arbitrary finite sequence of pairwise disjoint subintervals <span class="math inline">\((x_i, y_i)\)</span> of <span class="math inline">\([a, b]\)</span> with <span class="math inline">\(x_i&lt;y_i \in [a, b]\)</span>, where <span class="math display">\[\sum_{i=1}^n |y_i-x_i|&lt;\delta.\]</span> Suppose <span class="math inline">\(c \in \mathbb{R}-\{0\}\)</span>, <span class="math inline">\(f, g \in \text{AC}([a, b])\)</span>, <span class="math display">\[\sum_{i=1}^n |f(y_i)-f(x_i)|&lt;\frac{\varepsilon}{2|c|},\]</span> and <span class="math display">\[\sum_{i=1}^n |g(y_i)-g(x_i)|&lt;\frac{\varepsilon}{2}.\]</span></p>
+We have <span class="math display">\[\begin{aligned}
+\sum_{i=1}^n |(cf+g)(y_i)-(cf+g)(x_i)|&amp;=\sum_{i=1}^n |(cf(y_i)+g(y_i))-(cf(x_i)+g(x_i))|
+\\&amp;=\sum_{i=1}^n |c(f(y_i)-f(x_i))+(g(y_i)-g(x_i))|
+\\&amp;\leq |c|\sum_{i=1}^n |f(y_i)-f(x_i)|+\sum_{i=1}^n |g(y_i)-g(x_i)|
+\\&amp;&lt;|c|\frac{\varepsilon}{2|c|}+\frac{\varepsilon}{2}=\varepsilon,
+\end{aligned}\]</span> i.e., <span class="math inline">\(cf+g \in \text{AC}([a, b])\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 4.4</strong>    If <span class="math inline">\(f \in \text{AC}([a, b])\)</span>, then <span class="math inline">\(f \in \text{BV}([a, b])\)</span>.</p>
+<strong><em>Proof.</em></strong> Take <span class="math inline">\(\varepsilon=1\)</span>, and an arbitrary finite sequence of pairwise disjoint subintervals <span class="math inline">\((x_i, y_i)\)</span> of <span class="math inline">\([a, b]\)</span> with <span class="math inline">\(x_i&lt;y_i \in [a, b]\)</span>, where <span class="math display">\[\sum_{i=1}^n |y_i-x_i|&lt;\delta.\]</span> We have <span class="math display">\[\sum_{i=1}^n |f(y_i)-f(x_i)|&lt;1.\]</span> Take a partition <span class="math inline">\(\Delta: a=c_0&lt;c_1&lt;\cdots&lt;c_n=b\)</span> such that <span class="math inline">\(c_{i+1}-c_i&lt;\delta\)</span>, then <span class="math display">\[\bigvee_{c_i}^{c_{i+1}} (f)&lt;1,\]</span> and thus <span class="math display">\[\bigvee_a^b (f)=\sum_{i=0}^n \bigvee_{c_i}^{c_{i+1}} (f)&lt;n&lt;\infty,\]</span> i.e., <span class="math inline">\(f \in \text{BV}([a, b])\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Corollary 4.5</strong>    If <span class="math inline">\(f \in \text{AC}([a, b])\)</span>, then <span class="math inline">\(f\)</span> is differentiable almost everywhere on <span class="math inline">\([a, b]\)</span>, and <span class="math inline">\(f&#39; \in L([a, b])\)</span>.</p>
+<p><strong>Theorem 4.6 (Fundamental Theorem of Calculus)</strong>    If <span class="math inline">\(f \in \text{AC}([a, b])\)</span>, then <span class="math display">\[f(x)-f(a)=\int_a^x f&#39;(t)\text{d}t.\]</span></p>
+<strong><em>Proof.</em></strong> We know <span class="math inline">\(\displaystyle \int_a^x f&#39;(t)\text{d}t \in \text{AC}([a, b])\)</span> and <span class="math inline">\(\displaystyle \frac{\text{d}}{\text{d}x}\left(\int_a^x f&#39;(t)\text{d}t\right)=f&#39;(x)\ \text{a.e.}\ x \in [a, b]\)</span>. Let <span class="math display">\[h(x)=f(x)-\int_a^x f&#39;(t)\text{d}t,\]</span> then <span class="math inline">\(h \in \text{AC}([a, b])\)</span>, and <span class="math inline">\(h&#39;(x)=f&#39;(x)-f&#39;(x)=0\ \text{a.e.}\ x \in [a, b]\)</span>. By <a href="#thm4.1">theorem 4.1</a>, <span class="math inline">\(h\)</span> is constant, where <span class="math display">\[h(a)=f(a)-\int_a^a f&#39;(t)\text{d}t=f(a)-0=f(a).\]</span> Hence, <span class="math display">\[f(x)-h(a)=f(x)-f(a)=\int_a^x f&#39;(t)\text{d}t.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 4.7 (Lebesgue Decomposition Theorem)</strong>    Suppose <span class="math inline">\(f \in \text{BV}([a, c])\)</span>. We can find a step function <span class="math inline">\(\varphi\)</span>, an absolutely continuous function <span class="math inline">\(f_1\)</span>, and a continuous singularity function <span class="math inline">\(f_2\)</span> such that <span class="math display">\[f=\varphi+f_1+f_2.\]</span></p>
+<strong><em>Proof.</em></strong> By <a href="#thm2.7">theorem 2.7</a>, if <span class="math inline">\(f \in \text{BV}([a, c])\)</span>, we can find a step function <span class="math inline">\(\varphi\)</span>, and a continuous function <span class="math inline">\(g\)</span> such that <span class="math inline">\(f=\varphi+g\)</span>. Let <span class="math display">\[f_1(x)=\int_a^x g&#39;(t)\text{d}t,\]</span> then <span class="math inline">\(f_1\)</span> is an absolutely continuous function. Let <span class="math inline">\(f_2=g-f_1\)</span>, then <span class="math inline">\(f_2\)</span> is a continuous singularity function.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Lebesgue-integral/" rel="tag"><i class="fa fa-tag"></i> Lebesgue integral</a>
+              <a href="/tags/Differentiation/" rel="tag"><i class="fa fa-tag"></i> Differentiation</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Mathematics/Real-analysis/Lebesgue_Integral" rel="prev" title="Lebesgue Integral">
+      <i class="fa fa-chevron-left"></i> Lebesgue Integral
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#differentiability-of-monotonic-function"><span class="nav-number">1.</span> <span class="nav-text">Differentiability of Monotonic Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bounded-variation-function"><span class="nav-number">2.</span> <span class="nav-text">Bounded Variation Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#differentiation-of-indefinite-integral"><span class="nav-number">3.</span> <span class="nav-text">Differentiation of Indefinite Integral</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fundamental-theorem-of-calculus"><span class="nav-number">4.</span> <span class="nav-text">Fundamental Theorem of Calculus</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tianyang Li"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Tianyang Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/litianyang0211" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;litianyang0211" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianyang.li@linacre.ox.ac.uk" title="Email → mailto:tianyang.li@linacre.ox.ac.uk" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/derekli0211" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;derekli0211" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tianyang Li</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
