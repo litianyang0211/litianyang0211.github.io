@@ -1,6 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Computation With Large Matrix</title>
+    <url>/Mathematics/Matrix-method/Computation_with_Large_Matrix.html</url>
+    <content><![CDATA[<h1 id="least-squares">Least Squares</h1>
+<ul>
+<li>Four ways to solve least squares:</li>
+</ul>
+<p>         1. The SVD of <span class="math inline">\(A\)</span> leads to its <strong>pseudo-inverse</strong> <span class="math inline">\(A^+\)</span>, then <span class="math inline">\(\mathbf{x}^+=A^+\mathbf{b}\)</span>.</p>
+<p>         2. When <span class="math inline">\(A\)</span> has independent columns, solving <span class="math inline">\(A^TA\widehat{\mathbf{x}}=A^T\mathbf{b}\)</span> to minimize <span class="math inline">\(\|A\mathbf{x}-\mathbf{b}\|^2\)</span>.</p>
+<p>         3. When <span class="math inline">\(A\)</span> has independent columns, Gram-Schmidt <span class="math inline">\(A=QR\)</span> leads to <span class="math inline">\(\widehat{\mathbf{x}}=R^{-1}Q^T\mathbf{b}\)</span>.</p>
+<p>         4. Minimize <span class="math inline">\(\|A\mathbf{x}-\mathbf{B}\|^2+\delta^2\|\mathbf{x}\|^2\)</span>, and the best <span class="math inline">\(\mathbf{x}\)</span> is the limit of <span class="math inline">\((A^TA+\delta I)^{-1}A^T\mathbf{b}\)</span> as <span class="math inline">\(\delta \to 0\)</span>.</p>
+<h2 id="pseudo-inverse-method">Pseudo-Inverse Method</h2>
+<ul>
+<li><p>If <span class="math inline">\(A\)</span> is invertible, then <span class="math inline">\(A^+=A^{-1}\)</span>.</p></li>
+<li><p>The pseudo-inverse of <span class="math inline">\(A=U\Sigma V^T\)</span> is <span class="math inline">\(A^+=V\Sigma^+U^T\)</span>.</p></li>
+<li><p>Sometimes we denote <span class="math inline">\(A^+\)</span> to be <span class="math inline">\(A^\dagger\)</span>.</p></li>
+</ul>
+<p><strong>Example 1.1</strong>    Consider <span class="math inline">\(\Sigma=\begin{bmatrix} \sigma_1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; \sigma_2 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 0 \end{bmatrix}\)</span>, then <span class="math inline">\(\Sigma^+=\begin{bmatrix} 1/\sigma_1 &amp; 0 &amp; 0 \\ 0 &amp; 1/\sigma_2 &amp; 0 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{bmatrix}\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\mathbf{x}^+=A^+\mathbf{b}\)</span> is the <strong>minimum norm least squares</strong> solution.</li>
+</ul>
+<p><strong>Example 1.2</strong>    Consider <span class="math inline">\(\begin{bmatrix} 3 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}=\begin{bmatrix} 6 \\ 8 \end{bmatrix}\)</span>, then <span class="math inline">\(x^+=A^+\mathbf{b}=\begin{bmatrix} 1/3 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\begin{bmatrix} 6 \\ 8 \end{bmatrix}=\begin{bmatrix} 2 \\ 0 \end{bmatrix}\)</span>.</p>
+<h2 id="normal-equation-method">Normal Equation Method</h2>
+<ul>
+<li><p>Suppose <span class="math inline">\(A\)</span> has independent columns, then <span class="math inline">\(\widehat{\mathbf{x}}=(A^TA)^{-1}A^T\mathbf{b}\)</span>.</p></li>
+<li><p><strong>Projection</strong> of <span class="math inline">\(\mathbf{b}\)</span> onto the column space of <span class="math inline">\(A\)</span> is <span class="math inline">\(\mathbf{p}=A\widehat{\mathbf{x}}=A(A^TA)^{-1}A^T\mathbf{b}\)</span>.</p></li>
+</ul>
+<h2 id="gram-schmidt-method">Gram-Schmidt Method</h2>
+<div class="note info">
+            <p>Suppose <span class="math inline">\(A\)</span> has independent columns <span class="math inline">\(\mathbf{a}_1, \cdots, \mathbf{a}_n\)</span>.</p><p>Let <span class="math inline">\(\displaystyle \mathbf{q}_1=\frac{\mathbf{a}_1}{\|\mathbf{a}_1\|}\)</span>, <span class="math inline">\(\displaystyle A_k=\mathbf{a}_k-\sum_{i=1}^{k-1} (\mathbf{a}_k^T\mathbf{q}_i)\mathbf{q}_i\)</span>, and <span class="math inline">\(\displaystyle \mathbf{q}_k=\frac{A_k}{\|A_k\|}\)</span>. Then each <span class="math inline">\(\mathbf{a}_k\)</span> is a combination of <span class="math inline">\(\mathbf{q}_1\)</span> to <span class="math inline">\(\mathbf{q}_k\)</span>: <span class="math inline">\(\mathbf{a}_1=\|\mathbf{a}_1\|\mathbf{q}_1\)</span> and <span class="math inline">\(\displaystyle \mathbf{a}_k=\sum_{i=1}^{k-1} (\mathbf{a}_k^T\mathbf{q}_i)\mathbf{q}_i+\|A_k\|\mathbf{q}_k\)</span>.</p><p>Hence, the matrix <span class="math inline">\(R=Q^TA\)</span> with <span class="math inline">\(r_{ij}=\mathbf{q}_i^T\mathbf{a}_j\)</span> is upper triangular, i.e., <span class="math display">\[\begin{bmatrix}&amp; \\ \mathbf{a}_1 &amp; \cdots &amp; \mathbf{a}_n \\ &amp; \end{bmatrix}=\begin{bmatrix}&amp; \\ \mathbf{q}_1 &amp; \cdots &amp; \mathbf{q}_n \\ &amp;\end{bmatrix}\begin{bmatrix}r_{11} &amp; \cdots &amp; r_{1n} \\ 0 &amp; \ddots &amp; \vdots \\0 &amp; 0 &amp; r_{nn}\end{bmatrix}\]</span> is <span class="math inline">\(A=QR\)</span>.</p><p>The MATLAB command is <code>[Q, R]=qr(A)</code>.</p>
+          </div>
+<ul>
+<li><p>Suppose <span class="math inline">\(A\)</span> has independent columns, then by Gram-Schmidt, we have <span class="math inline">\(A^TA=R^TQ^TQR=R^TR\)</span>, and thus <span class="math inline">\(\widehat{\mathbf{x}}=(R^TR)^{-1}R^TQ^T\mathbf{b}=R^{-1}Q^T\mathbf{b}\)</span>.</p></li>
+<li><p>We can modify Gram-Schmidt with <strong>column pivoting</strong>.</p></li>
+</ul>
+<h2 id="penalty-method">Penalty Method</h2>
+<p>Penalty method regularizes a singular problem.</p>
+<ul>
+<li><p>The new normal equation is <span class="math inline">\((A^*)^TA^*\widehat{\mathbf{x}}=(A^*)^T\mathbf{b}^*\)</span>, where <span class="math inline">\(A^*=\begin{bmatrix} A \\ \delta I \end{bmatrix}\)</span> and <span class="math inline">\(b^*=\begin{bmatrix} \mathbf{b} \\ \mathbf{0} \end{bmatrix}\)</span>, i.e., <span class="math display">\[(A^TA+\delta^2I)\widehat{\mathbf{x}}=A^T\mathbf{b}.\]</span></p></li>
+<li><p>For any <span class="math inline">\(A\)</span>, <span class="math inline">\((A^TA+\delta^2I)^{-1}A^T \to A^+\)</span> as <span class="math inline">\(\delta \to 0\)</span>.</p></li>
+</ul>
+<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(A=U\Sigma V^T\)</span>, then we have <span class="math display">\[A^TA+\delta^2I=V\Sigma^TU^TU\Sigma V^T+\delta^2I=V\Sigma^T\Sigma V^T+\sigma^2I=V(\Sigma^T\Sigma+\delta^2I)V^T\]</span> Therefore, <span class="math display">\[(A^TA+\delta^2I)^{-1}A^T=V(\Sigma^T\Sigma+\delta^2I)^{-1}V^TV\Sigma^TU^T=V[(\Sigma^T\Sigma+\delta^2I)^{-1}\Sigma^T]U^T.\]</span></p>
+Since <span class="math inline">\((\Sigma^T\Sigma+\delta^2I)^{-1}\Sigma^T\)</span> has positive diagonal entries <span class="math inline">\(\displaystyle \frac{\sigma_i}{\sigma_i^2+\delta^2}\)</span> and otherwise all zeros, then as <span class="math inline">\(\delta \to 0\)</span>, <span class="math inline">\((\Sigma^T\Sigma+\delta^2I)^{-1}\Sigma^T \to \Sigma^+\)</span>. Hence, as <span class="math inline">\(\delta \to 0\)</span>, <span class="math display">\[V[(\Sigma^T\Sigma+\delta^2I)^{-1}\Sigma^T]U^T \to V\Sigma^+U^T=A^+.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="numerical-linear-algebra">Numerical Linear Algebra</h1>
+<h2 id="krylov-subspace-and-arnoldi-iteration">Krylov Subspace and Arnoldi Iteration</h2>
+<ul>
+<li><p>Matrix-vector multiplication is fast, especially if <span class="math inline">\(A\)</span> is sparse. If we start with <span class="math inline">\(A\)</span> and <span class="math inline">\(\mathbf{b}\)</span>, we can quickly compute each of the vectors <span class="math inline">\(\mathbf{b}, A\mathbf{b}, A^2\mathbf{b}=A(A\mathbf{b}), \cdots, A^{j-1}\mathbf{b}\)</span>. The combinations of vectors above give <strong>Krylov subspace</strong> <span class="math inline">\(\mathcal{K}_j\)</span>. We want to find a closest approximation <span class="math inline">\(\mathbf{x}_j \in K_j\)</span> to the desired solution <span class="math inline">\(\mathbf{x}\)</span>.</p></li>
+<li><p><strong>(Arnoldi Iteration)</strong> An orthogonal basis is better than the original basis <span class="math inline">\(\mathbf{b}, A\mathbf{b}, \cdots, A^{j-1}\mathbf{b}\)</span>.</p>
+<ul>
+<li>Let <span class="math inline">\(\displaystyle \mathbf{q}_1=\frac{\mathbf{b}}{\|\mathbf{b}\|}\)</span>, and <span class="math inline">\(\mathbf{q}_2, \cdots, \mathbf{q}_k\)</span> are known;</li>
+<li>Let <span class="math inline">\(\mathbf{v}=A\mathbf{q}_k\)</span>;</li>
+<li>For <span class="math inline">\(j=1\)</span> to <span class="math inline">\(k\)</span>:
+<ul>
+<li><span class="math inline">\(h_{jk}=\mathbf{q}_j^T\mathbf{v}\)</span>;</li>
+<li><span class="math inline">\(\mathbf{v}=\mathbf{v}-h_{jk}\mathbf{q}_j\)</span>;</li>
+</ul></li>
+<li>Let <span class="math inline">\(h_{k+1, k}=\|\mathbf{v}\|\)</span>;</li>
+<li>Let <span class="math inline">\(\displaystyle \mathbf{q}_{k+1}=\frac{\mathbf{v}}{h_{k+1, k}}\)</span>.</li>
+</ul></li>
+</ul>
+<div class="note info">
+            <p>The Arnoldi iteration follows the Gram-Schmidt idea.</p><p>Assume we use the standard Gram-Schmidt to attain an orthogonal basis for <span class="math inline">\(\mathcal{K}_{j+1}\)</span>, then <span class="math display">\[\mathbf{y}_j=A^j\mathbf{b}-\sum_{i=1}^j (\mathbf{q}_i^TA^j\mathbf{b})\mathbf{q}_i\]</span> and <span class="math display">\[\mathbf{q}_{j+1}=\frac{\mathbf{y}_j}{\|\mathbf{y}_j\|}.\]</span> Hence, <span class="math inline">\(\mathbf{q}_1, \cdots, \mathbf{q}_{j+1}\)</span> is an orthogonal basis for <span class="math inline">\(\mathcal{K}_{j+1}\)</span>.</p><p>Since <span class="math inline">\(\displaystyle \mathbf{q}_1=\frac{\mathbf{b}}{\|\mathbf{b}\|}\)</span> and <span class="math inline">\(A\mathbf{q}_1=c_1\mathbf{q}_1+c_2\mathbf{q}_2\)</span>, then <span class="math display">\[\begin{aligned}\mathcal{K}_{j+1}&amp;=\text{span}\{\mathbf{b}, A\mathbf{b}, A^2\mathbf{b}, \cdots, A^j\mathbf{b}\}\\&amp;=\text{span}\{\mathbf{q}_1, A\mathbf{q}_1, A^2\mathbf{q}_1, \cdots, A^j\mathbf{q}_1\}\\&amp;=\text{span}\{\mathbf{q}_1, c_1\mathbf{q}_1+c_2\mathbf{q}_2, A(c_1\mathbf{q}_1+c_2\mathbf{q}_2), \cdots, A^{j-1}(c_1\mathbf{q}_1+c_2\mathbf{q}_2)\}\\&amp;=\text{span}\{\mathbf{q}_1, \mathbf{q}_2, A\mathbf{q}_2, \cdots, A^{j-1}\mathbf{q}_2\}\\&amp;\ \ \vdots\\&amp;=\text{span}\{\mathbf{q}_1, \mathbf{q}_2, \cdots, \mathbf{q}_j, A\mathbf{q}_j\}.\end{aligned}\]</span></p><p>Apply Gram-Schmidt again, we have <span class="math display">\[\mathbf{v}_j=A\mathbf{q}_j-\sum_{i=1}^j (\mathbf{q}_i^TA\mathbf{q}_j)\mathbf{q}_i\]</span> and replace <span class="math display">\[\mathbf{q}_{j+1}=\frac{\mathbf{v}_j}{\|\mathbf{v}_j\|}.\]</span></p><p>Since <span class="math display">\[\mathbf{q}_{j+1}^T\mathbf{v}_j=\mathbf{q}_{j+1}^TA\mathbf{q}_j-\sum_{i=1}^j (\mathbf{q}_i^TA\mathbf{q}_j)\mathbf{q}_{j+1}^T\mathbf{q}_i=\mathbf{q}_{j+1}^TA\mathbf{q}_j\]</span> and <span class="math display">\[\mathbf{q}_{j+1}^T\mathbf{v}_j=\frac{\mathbf{v}_j^T\mathbf{v}_j}{\|\mathbf{v}_j\|}=\|\mathbf{v}_j\|,\]</span> then <span class="math inline">\(\|\mathbf{v}_j\|=\mathbf{q}_{j+1}^TA\mathbf{q}_j\)</span>.</p><p>Therefore, <span class="math display">\[\begin{aligned}A\mathbf{q}_j&amp;=\mathbf{v}_j+\sum_{i=1}^j (\mathbf{q}_i^TA\mathbf{q}_j)\mathbf{q}_i\\&amp;=\|\mathbf{v}_j\|\mathbf{q}_{j+1}+\sum_{i=1}^j (\mathbf{q}_i^TA\mathbf{q}_j)\mathbf{q}_i\\&amp;=\mathbf{q}_{j+1}^TA\mathbf{q}_j\mathbf{q}_{j+1}+\sum_{i=1}^j (\mathbf{q}_i^TA\mathbf{q}_j)\mathbf{q}_i\\&amp;=\sum_{i=1}^{j+1} (\mathbf{q}_i^TA\mathbf{q}_j)\mathbf{q}_i\\&amp;=\sum_{i=1}^{j+1} h_{ij}\mathbf{q}_i\\&amp;=\begin{bmatrix}&amp; \\ \mathbf{q}_1 &amp; \cdots &amp; \mathbf{q}_j \\ &amp;\end{bmatrix}\begin{bmatrix}h_{11} \\ \vdots \\ h_{jj}\end{bmatrix}+\mathbf{q}_{j+1}h_{j+1, j}.\end{aligned}\]</span></p><p>Hence, <span class="math display">\[\begin{aligned}AQ_j&amp;=\begin{bmatrix}&amp; \\ A\mathbf{q}_1 &amp; A\mathbf{q}_2 &amp; \cdots &amp; A\mathbf{q}_{j-1} &amp; A\mathbf{q}_j \\ &amp;\end{bmatrix}\\&amp;=\begin{bmatrix}&amp; \\ \mathbf{q}_1 &amp; \mathbf{q}_2 &amp; \cdots &amp; \mathbf{q}_j &amp; \mathbf{q}_{j+1} \\ &amp;\end{bmatrix}\begin{bmatrix}h_{11} &amp; h_{12} &amp; h_{13} &amp; \cdots &amp; h_{1j} \\h_{21} &amp; h_{22} &amp; h_{23} &amp; \cdots &amp; h_{2j} \\ 0 &amp; h_{32} &amp; h_{33} &amp; \cdots &amp; h_{3j} \\ \vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; \vdots \\ 0 &amp; \cdots &amp; 0 &amp; h_{j, j-1} &amp; h_{jj} \\ 0 &amp; \cdots &amp; \cdots &amp; 0 &amp; h_{j+1, j}\end{bmatrix}\\&amp;=Q_{j+1}H_{j+1, j}\end{aligned}.\]</span></p><p>Besides, we have <span class="math display">\[Q^T_jAQ_j=Q_j^TQ_{j+1}H_{j+1, j}=\begin{bmatrix}&amp; \\ I_{j \times j} &amp; \mathbf{0}_{j \times 1} \\ &amp;\end{bmatrix}\begin{bmatrix}H_j \\ (k+1)^\text{th}\ \text{row} \end{bmatrix}=H_j,\]</span> where <span class="math inline">\(H_j\)</span> is the <strong>Hessenberg matrix</strong> (an upper triangular matrix with one nonzero sub-diagonal). In addition, <span class="math inline">\(H_j=Q_j^TAQ_j\)</span> is the projection of <span class="math inline">\(A\)</span> onto the Krylov space, using the basis of <span class="math inline">\(\mathbf{q}\)</span>'s.</p>
+          </div>
+<h2 id="computation-of-eigenvalue-and-singular-value">Computation of Eigenvalue and Singular Value</h2>
+<h3 id="qr-algorithm-for-eigenvalue"><span class="math inline">\(QR\)</span> Algorithm for Eigenvalue</h3>
+<ul>
+<li><span class="math inline">\(QR\)</span> algorithm with shifts:</li>
+</ul>
+<p>         Step 1: Reduce <span class="math inline">\(A\)</span> to a similar Hessenberg form <span class="math inline">\(A_0\)</span>;</p>
+<p>         Step 2: <span class="math inline">\(QR\)</span> with shift:</p>
+<p>             (1) Choose a shift <span class="math inline">\(s_k\)</span> at step <span class="math inline">\(k\)</span>, where <span class="math inline">\(k=0, \cdots\)</span>;</p>
+<p>             (2) Factor <span class="math inline">\(A_k-s_kI=Q_kR_k\)</span>;</p>
+<p>             (3) Reverse factors and shift back: <span class="math inline">\(A_{k+1}=R_kQ_k+s_kI\)</span>.</p>
+<ul>
+<li><p>Well-chosen shifts <span class="math inline">\(s_k\)</span> will greatly speed up the approach of the <span class="math inline">\(A\)</span>'s to a diagonal matrix <span class="math inline">\(\Lambda\)</span>.</p></li>
+<li><p>If the matrix <span class="math inline">\(S\)</span> is symmetric, then we can reduce <span class="math inline">\(S\)</span> to a symmetric Hessenberg matrix, i.e., <strong>tridiagonal matrix</strong>.</p></li>
+</ul>
+<h3 id="golub-kahan-algorithm-for-singular-value">Golub-Kahan Algorithm for Singular Value</h3>
+<ul>
+<li><p>Eigenvalues are the same for <span class="math inline">\(S\)</span> and <span class="math inline">\(Q^{-1}SQ=Q^TSQ\)</span>, so we have <em>limited freedom</em> to create zeros in <span class="math inline">\(Q^{-1}SQ\)</span>. The good <span class="math inline">\(Q^{-1}SQ\)</span> will be tridiagonal matrix.</p></li>
+<li><p>Singular values are the same for <span class="math inline">\(A\)</span> and <span class="math inline">\(Q_1AQ_2^T\)</span> even if <span class="math inline">\(Q_1\)</span> is different from <span class="math inline">\(Q_2\)</span>. We have <em>more freedom</em> to create zeros in <span class="math inline">\(Q_1AQ_2^T\)</span>. With the right <span class="math inline">\(Q\)</span>'s, the good <span class="math inline">\(Q_1AQ_2^T\)</span> will be <strong>bidiagonal matrix</strong>.</p></li>
+<li><p>Golub-Kahan algorithm:</p></li>
+</ul>
+<p>         Step 1: Find <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_2\)</span> so that <span class="math inline">\(Q_1AQ_2^T\)</span> is bidiagonal;</p>
+<p>         Step 2: Apply the shifted <span class="math inline">\(QR\)</span> algorithm to find the eigenvalues of <span class="math inline">\((Q_1AQ_2^T)^T(Q_1AQ_2^T)=Q_2A^TAQ_2^T\)</span>, which is tridiagonal.</p>
+<h1 id="randomized-matrix-multiplication">Randomized Matrix Multiplication</h1>
+<ul>
+<li><p>Let <span class="math inline">\(\displaystyle p_j=\frac{\|\mathbf{a}_j\|\|\mathbf{b}_j^T\|}{C}\)</span>, where <span class="math inline">\(\mathbf{a}_j\)</span> is the column <span class="math inline">\(j\)</span> of <span class="math inline">\(A\)</span>, <span class="math inline">\(\mathbf{b}_j^T\)</span> is the row <span class="math inline">\(j\)</span> of <span class="math inline">\(B\)</span>, and <span class="math inline">\(\displaystyle C=\sum_{j=1}^n \|\mathbf{a}_j\|\|\mathbf{b}_j^T\|\)</span>.</p></li>
+<li><p>Take <span class="math inline">\(\mathbf{a}_j\)</span> and <span class="math inline">\(\mathbf{b}_j^T\)</span> w.p. <span class="math inline">\(p_j\)</span>, and each of the <span class="math inline">\(s\)</span> trials produces a matrix <span class="math inline">\(\displaystyle X_j=\frac{\mathbf{a}_j\mathbf{b}_j^T}{sp_j}\)</span>. The mean of each trial is <span class="math display">\[\mathbb{E}[X]=\sum_{j=1}^n p_jX_j=\frac{1}{s}\sum_{j=1}^n \mathbf{a}_j\mathbf{b}_j^T=\frac{1}{s}AB.\]</span> The approximation of <span class="math inline">\(AB\)</span> is the sum of <span class="math inline">\(s\)</span> trials, and we have <span class="math inline">\(s\mathbb{E}[X]=AB\)</span>.</p></li>
+<li><p>The variance of each trial is <span class="math display">\[\begin{aligned}
+\text{Var}[X]&amp;=\mathbb{E}[X^2]-(\mathbb{E}[X])^2
+\\&amp;=\sum_{j=1}^n p_j\frac{\|\mathbf{a}_j\|^2\|\mathbf{b}_j^T\|^2}{s^2p_j^2}-\frac{1}{s^2}\|AB\|_F^2
+\\&amp;=\frac{1}{s^2}(C^2-\|AB\|_F^2).
+\end{aligned}\]</span> The variance of samples is <span class="math inline">\(\displaystyle s\text{Var}[X]=\frac{1}{s}(C^2-\|AB\|_F^2)\)</span>.</p></li>
+<li><p>Norm-squared sampling uses the optimal probabilities <span class="math inline">\(p_j\)</span> for minimum variance.</p></li>
+</ul>
+<p><strong><em>Proof.</em></strong> We want to solve <span class="math display">\[\min \sum_{j=1}^n \frac{\|\mathbf{a}_j\|^2\|\mathbf{b}_j^T\|^2}{sp_j}-\frac{1}{s}\|AB\|_F^2\ \ \text{s.t.}\ \ \sum_{j=1}^n p_j=1.\]</span> By Lagrange, <span class="math display">\[L(p_1, \cdots, p_n, \lambda)=\sum_{j=1}^n \frac{\|\mathbf{a}_j\|^2\|\mathbf{b}_j^T\|^2}{sp_j}+\lambda\left(\sum_{j=1}^n p_j-1\right).\]</span></p>
+<p>Take the partial derivatives w.r.t. <span class="math inline">\(p_j\)</span> and <span class="math inline">\(\lambda\)</span>, let <span class="math display">\[\frac{\partial L}{\partial p_j}=-\frac{\|\mathbf{a}_j\|^2\|\mathbf{b}_j^T\|^2}{sp_j^2}+\lambda=0\]</span> and <span class="math display">\[\frac{\partial L}{\partial \lambda}=\sum_{j=1}^n p_j-1=0,\]</span> then <span class="math inline">\(\displaystyle p_j=\frac{\|\mathbf{a}_j\|\|\mathbf{b}_j^T\|}{\sqrt{s\lambda}}\)</span> and <span class="math inline">\(\displaystyle \sum_{j=1}^n p_j=1\)</span>.</p>
+Therefore, <span class="math inline">\(\displaystyle \sum_{j=1}^n \frac{\|\mathbf{a}_j\|\|\mathbf{b}_j^T\|}{\sqrt{s\lambda}}=1\)</span> gives <span class="math inline">\(\sqrt{s\lambda}=C\)</span>. Hence, <span class="math inline">\(\displaystyle p_j=\frac{\|\mathbf{a}_j\|\|\mathbf{b}_j^T\|}{C}\)</span> solves the optimization problem, i.e., norm-squared sampling uses the optimal probabilities <span class="math inline">\(p_j\)</span> for minimum variance.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+]]></content>
+      <categories>
+        <category>Mathematics</category>
+        <category>Matrix method</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Differentiation and Indefinite Integral</title>
     <url>/Mathematics/Real-analysis/Differentiation_and_Indefinite_Integral.html</url>
     <content><![CDATA[<h1 id="differentiability-of-monotonic-function">Differentiability of Monotonic Function</h1>
@@ -325,12 +436,12 @@ We have <span class="math display">\[\begin{aligned}
 <li><p>Two <span class="math inline">\(n \times n\)</span> matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>similar</strong> if there exists an invertible <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(B=P^{-1}AP\)</span>. <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have same eigenvalues: <span class="math display">\[B\mathbf{y}=P^{-1}AP\mathbf{y}=\lambda\mathbf{y} \Rightarrow A(P\mathbf{y})=\lambda (P\mathbf{y}).\]</span></p></li>
 <li><p>Suppose <span class="math inline">\(A\)</span> has eigenvalues <span class="math inline">\(\lambda_1, \cdots, \lambda_n\)</span> with corresponding eigenvectors <span class="math inline">\(\mathbf{x}_1, \cdots, \mathbf{x}_n\)</span>. <span class="math inline">\(A=X\Lambda X^{-1}\)</span>, where eigenvalues of <span class="math inline">\(A\)</span> are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and eigenvectors of <span class="math inline">\(A\)</span> are in the columns of <span class="math inline">\(X\)</span>, i.e., <span class="math inline">\(A\)</span> is similar to <span class="math inline">\(\Lambda\)</span>.</p></li>
 </ul>
-<strong><em>Proof.</em></strong> Let <span class="math inline">\(X=\begin{bmatrix} \mathbf{x}_1 &amp; \cdots &amp; \mathbf{x}_n \end{bmatrix}\)</span>. We have <span class="math display">\[AX=\begin{bmatrix}
-A\mathbf{x}_1 &amp; \cdots &amp; A\mathbf{x}_n
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(X=\begin{bmatrix} &amp; \\ \mathbf{x}_1 &amp; \cdots &amp; \mathbf{x}_n \\ &amp; \end{bmatrix}\)</span>. We have <span class="math display">\[AX=\begin{bmatrix}
+&amp; \\ A\mathbf{x}_1 &amp; \cdots &amp; A\mathbf{x}_n \\ &amp;
 \end{bmatrix}=\begin{bmatrix}
-\lambda_1\mathbf{x}_1 &amp; \cdots &amp; \lambda_n\mathbf{x}_n
+&amp; \\ \lambda_1\mathbf{x}_1 &amp; \cdots &amp; \lambda_n\mathbf{x}_n \\ &amp;
 \end{bmatrix}\]</span> and <span class="math display">\[X\Lambda=\begin{bmatrix}
-\lambda_1\mathbf{x}_1 &amp; \cdots &amp; \lambda_n\mathbf{x}_n
+&amp; \\ \lambda_1\mathbf{x}_1 &amp; \cdots &amp; \lambda_n\mathbf{x}_n \\ &amp;
 \end{bmatrix},\]</span> i.e., <span class="math inline">\(AX=X\Lambda\)</span>, and thus <span class="math inline">\(A=X\Lambda X^{-1}\)</span>. Hence, <span class="math inline">\(X^{-1}AX=\Lambda\)</span>, i.e., <span class="math inline">\(A\)</span> is similar to <span class="math inline">\(\Lambda\)</span>.
 <p align="right">
 <span class="math inline">\(\square\)</span>
@@ -394,6 +505,295 @@ A\mathbf{x}_1 &amp; \cdots &amp; A\mathbf{x}_n
       </categories>
       <tags>
         <tag>Linear algebra</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Lebesgue Integral</title>
+    <url>/Mathematics/Real-analysis/Lebesgue_Integral.html</url>
+    <content><![CDATA[<h1 id="lebesgue-integral-of-non-negative-simple-function">Lebesgue Integral of Non-negative Simple Function</h1>
+<p><strong>Definition 1.1</strong>    Suppose <span class="math inline">\(E\)</span> is measurable, <span class="math inline">\(E_i\)</span> are disjoint measurable sets, and <span class="math display">\[f(x)=\sum_{i=1}^s c_i\chi_{E_i}(x), c_i \geq 0.\]</span> The <strong>Lebesgue integral</strong> of <span class="math inline">\(f\)</span> on <span class="math inline">\(E\)</span> is <span class="math display">\[\int_E f(x)\text{d}x=\sum_{i=1}^s c_i \cdot m(E_i).\]</span> Suppose <span class="math inline">\(A \subset E\)</span>, and <span class="math inline">\(f|_A(x)=c_i\)</span>, <span class="math inline">\(x \in A \cap E_i\)</span>, then <span class="math display">\[\int_A f(x)\text{d}x=\sum_{i=1}^s c_i \cdot m(A \cap E_i).\]</span></p>
+<p><strong>Theorem 1.1</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are disjoint measurable subsets of <span class="math inline">\(E\)</span>, then <span class="math display">\[\int_{A \cup B} f(x)\text{d}x=\int_A f(x)\text{d}x+\int_B f(x)\text{d}x.\]</span></p>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(A \cap B=\varnothing\)</span>, then <span class="math display">\[\begin{aligned}
+\int_{A \cup B} f(x)\text{d}x&amp;=\sum_{i=1}^s c_i \cdot m((A \cup B) \cap E_i)
+\\&amp;=\sum_{i=1}^s c_i \cdot m((A \cap E_i) \cup (B \cap E_i))
+\\&amp;=\sum_{i=1}^s c_i \cdot (m(A \cap E_i)+m(B \cap E_i))
+\\&amp;=\sum_{i=1}^s c_i \cdot m(A \cap E_i)+\sum_{i=1}^s c_i \cdot m(B \cap E_i)
+\\&amp;=\int_A f(x)\text{d}x+\int_B f(x)\text{d}x.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 1.2</strong>    Suppose <span class="math inline">\(\{A_n\}_{n=1}^\infty\)</span> is an increasing collection of measurable subsets of <span class="math inline">\(E\)</span>, and <span class="math display">\[E=\bigcup_{n=1}^\infty A_n=\lim_{n \to \infty} A_n.\]</span> Then <span class="math display">\[\int_E f(x)\text{d}x=\lim_{n \to \infty}\int_{A_n} f(x)\text{d}x.\]</span></p>
+<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
+\lim_{n \to \infty} \int_{A_n} f(x)\text{d}x&amp;=\lim_{n \to \infty} \sum_{i=1}^s c_i \cdot m(A_n \cap E_i)
+\\&amp;=\sum_{i=1}^s c_i \cdot \lim_{n \to \infty} m(A_n \cap E_i)
+\\&amp;=\sum_{i=1}^s c_i \cdot m(E \cap E_i)
+\\&amp;=\int_E f(x)\text{d}x.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 1.3</strong>    Suppose <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are non-negative real numbers. Then <span class="math display">\[\int_E (\alpha f(x)+\beta g(x))\text{d}x=\alpha\int_E f(x)\text{d}x+\beta\int_E g(x)\text{d}x.\]</span></p>
+<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(c \in \mathbb{R} \geq 0\)</span>, we have <span class="math inline">\(\displaystyle cf(x)=\sum_{i=1}^s cc_i \cdot \chi_{E_i}(x)\)</span>, where <span class="math inline">\(cc_i \geq 0\)</span>. Then <span class="math inline">\(cf\)</span> is a non-negative simple function. Therefore, <span class="math display">\[\begin{aligned}
+\int_E cf(x)\text{d}x&amp;=\sum_{i=1}^s cc_i \cdot m(E_i)
+\\&amp;=c\sum_{i=1}^s c_i \cdot m(E_i)
+\\&amp;=c\int_E f(x)\text{d}x.
+\end{aligned}\]</span></p>
+<p>Suppose <span class="math inline">\(\displaystyle f(x)=\sum_{i=1}^s c_i \cdot \chi_{E_i}(x)\)</span> and <span class="math inline">\(\displaystyle g(x)=\sum_{i=1}^p d_i \cdot \chi_{\widetilde{E}_i}(x)\)</span>.</p>
+<p>When <span class="math inline">\(x \in E_i \cap \widetilde{E}_j\)</span>, <span class="math inline">\(f(x)+g(x)=c_i+d_j \geq 0\)</span>. Hence, <span class="math display">\[f(x)+g(x)=\sum_{\substack{1 \leq i \leq s \\ 1 \leq j \leq p}} (c_i+d_j) \cdot \chi_{E_i \cap \widetilde{E}_j}(x),\]</span> and <span class="math inline">\(f+g\)</span> is a non-negative simple function. Therefore, <span class="math display">\[\begin{aligned}
+\int_E (f(x)+g(x))\text{d}x&amp;=\sum_{\substack{1 \leq i \leq s \\ 1 \leq j \leq p}} (c_i+d_j) \cdot m(E_i \cap \widetilde{E}_j)
+\\&amp;=\sum_{\substack{1 \leq i \leq s \\ 1 \leq j \leq p}} c_i \cdot m(E_i \cap \widetilde{E}_j)+\sum_{\substack{1 \leq i \leq s \\ 1 \leq j \leq p}} d_j \cdot m(E_i \cap \widetilde{E}_j)
+\\&amp;=\sum_{1 \leq i \leq s} c_i\sum_{1 \leq j \leq p} m(E_i \cap \widetilde{E}_j)+\sum_{1 \leq j \leq p} d_j\sum_{1 \leq i \leq s} m(E_i \cap \widetilde{E}_j)
+\\&amp;=\sum_{1 \leq i \leq s} c_i \cdot m(E_i)+\sum_{1 \leq j \leq p} d_j \cdot m(\widetilde{E}_j)
+\\&amp;=\int_E f(x)\text{d}x+\int_E g(x)\text{d}x.
+\end{aligned}\]</span></p>
+Hence, it is easy to show that <span class="math display">\[\int_E (\alpha f(x)+\beta g(x))\text{d}x=\alpha\int_E f(x)\text{d}x+\beta\int_E g(x)\text{d}x.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="lebesgue-integral-of-non-negative-measurable-function">Lebesgue Integral of Non-negative Measurable Function</h1>
+<h2 id="definition">Definition</h2>
+<p><strong>Definition 2.1</strong>    Suppose <span class="math inline">\(E\)</span> is measurable, and <span class="math inline">\(f\)</span> is a non-negative measurable function on <span class="math inline">\(E\)</span>. The <strong>Lebesgue integral</strong> of <span class="math inline">\(f\)</span> on <span class="math inline">\(E\)</span> is <span class="math display">\[\int_E f(x)\text{d}x=\sup\left\{\int_E \varphi(x)\text{d}x\right\},\]</span> where <span class="math inline">\(\varphi\)</span> is a non-negative simple function on <span class="math inline">\(E\)</span>, and <span class="math inline">\(\varphi(x) \leq f(x)\)</span>.</p>
+<p><strong>Theorem 2.1</strong>    Suppose <span class="math inline">\(\varphi\)</span> and <span class="math inline">\(\psi\)</span> are non-negative simple functions on <span class="math inline">\(E\)</span>. If <span class="math inline">\(\varphi(x) \leq \psi(x)\)</span>, then <span class="math display">\[\int_E \varphi(x)\text{d}x \leq \int_E \psi(x)\text{d}x.\]</span></p>
+<p><strong>Corollary 2.2</strong>    Suppose <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are non-negative measurable functions on <span class="math inline">\(E\)</span>. If <span class="math inline">\(f(x) \leq g(x)\)</span>, then <span class="math display">\[\int_E f(x)\text{d}x \leq \int_E g(x)\text{d}x.\]</span></p>
+<strong><em>Proof.</em></strong> For any <span class="math inline">\(0 \leq \varphi(x) \leq f(x)\)</span>, where <span class="math inline">\(\varphi\)</span> is a non-negative simple function, we have <span class="math inline">\(0 \leq \varphi(x) \leq g(x)\)</span>, <span class="math inline">\(x \in E\)</span>. Then <span class="math display">\[\int_E g(x)\text{d}x \geq \int_E \varphi(x)\text{d}x.\]</span> Therefore, <span class="math display">\[\int_E g(x)\text{d}x \geq \sup_{0 \leq \varphi(x) \leq f(x)}\left\{\int_E \varphi(x)\text{d}x\right\}=\int_E f(x)\text{d}x.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Definition 2.2</strong>    If <span class="math inline">\(\displaystyle \int_E f(x)\text{d}x&lt;\infty\)</span>, then <span class="math inline">\(f\)</span> is <strong>Lebesgue integrable</strong> on <span class="math inline">\(E\)</span>.</p>
+<p><strong>Theorem 2.3</strong>    If <span class="math inline">\(f\)</span> is Lebesgue integrable on <span class="math inline">\(E\)</span>, then <span class="math inline">\(f\)</span> is finite almost everywhere on <span class="math inline">\(E\)</span>, i.e., <span class="math display">\[m(E[f=\infty])=0.\]</span></p>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(f(x) \geq f(x) \cdot \chi_{E[f \geq n]}(x)\)</span>, then <span class="math display">\[\infty&gt;\int_E f(x)\text{d}x \geq \int_E f(x) \cdot \chi_{E[f \geq n]}(x)\text{d}x=\int_{E[f \geq n]} f(x)\text{d}x \geq \int_{E[f \geq n]} n\text{d}x=n \cdot m(E[f \geq n]).\]</span> Therefore, <span class="math display">\[m(E[f \geq n]) \leq \frac{1}{n}\int_E f(x)\text{d}x.\]</span> Since <span class="math inline">\(E[f \geq n] \supset E[f \geq n+1]\)</span> and <span class="math inline">\(\displaystyle E[f=\infty]=\bigcap_{n=1}^\infty E[f \geq n]\)</span>, then <span class="math display">\[m(E[f=\infty])=\lim_{n \to \infty} m(E[f \geq n])=0,\]</span> i.e., <span class="math inline">\(f\)</span> is finite almost everywhere on <span class="math inline">\(E\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.4</strong>    Suppose <span class="math inline">\(A\)</span> is a measurable subset of <span class="math inline">\(E\)</span>. Then <span class="math display">\[\int_A f(x)\text{d}x=\int_E f(x) \cdot \chi_A(x)\text{d}x.\]</span></p>
+<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
+\int_A f(x)\text{d}x&amp;=\sup_{\substack{\varphi(x) \leq f(x) \\ x \in A}}\left\{\int_A \varphi(x)\text{d}x\right\}
+\\&amp;=\sup_{\substack{\varphi(x)\chi_A(x) \leq f(x)\chi_A(x) \\ x \in E}}\left\{\int_A \varphi(x)\text{D}x\right\}
+\\&amp;=\int_E f(x)\varphi_A(x)\text{d}x.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.5</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are disjoint measurable subsets of <span class="math inline">\(E\)</span>, then <span class="math display">\[\int_{A \cup B} f(x)\text{d}x=\int_A f(x)\text{d}x+\int_B f(x)\text{d}x.\]</span></p>
+<p><strong><em>Proof.</em></strong> Take an arbitrary simple function <span class="math inline">\(\varphi\)</span> on <span class="math inline">\(A \cup B\)</span>, where <span class="math inline">\(0 \leq \varphi(x) \leq f(x)\)</span> for all <span class="math inline">\(x \in E\)</span>. We have <span class="math display">\[\int_{A \cup B} \varphi(x)\text{d}x=\int_A \varphi(x)\text{d}x+\int_B \varphi(x)\text{d}x \leq \int_A f(x)\text{d}x+\int_B f(x)\text{d}x.\]</span> Therefore, <span class="math display">\[\int_{A \cup B} f(x)\text{d}x \leq \int_{A \cup B} \varphi(x)\text{d}x \leq \int_A f(x)\text{d}x+\int_B f(x)\text{d}x.\]</span></p>
+Take an arbitrary simple function <span class="math inline">\(\varphi_1\)</span> on <span class="math inline">\(A\)</span>, where <span class="math inline">\(0 \leq \varphi_1(x) \leq f(x)\)</span> for all <span class="math inline">\(x \in A\)</span>, and an arbitrary simple function <span class="math inline">\(\varphi_2\)</span> on <span class="math inline">\(B\)</span>, where <span class="math inline">\(0 \leq \varphi_2(x) \leq f(x)\)</span> for all <span class="math inline">\(x \in B\)</span>. Then <span class="math display">\[\varphi(x)=\begin{cases}
+\varphi_1(x), &amp;x \in A \\
+\varphi_2(x), &amp;x \in B
+\end{cases}\]</span> is a simple function on <span class="math inline">\(A \cup B\)</span>, where <span class="math inline">\(0 \leq \varphi(x) \leq f(x)\)</span>. Hence, <span class="math display">\[\int_{A \cup B} f(x)\text{d}x \geq \int_{A \cup B} \varphi(x)\text{d}x=\int_A \varphi(x)\text{d}x+\int_B \varphi(x)\text{d}x=\int_A \varphi_1(x)\text{d}x+\int_B \varphi_2(x)\text{d}x.\]</span> Therefore, <span class="math display">\[\int_{A \cup B} f(x)\text{d}x \geq \int_A f(x)\text{d}x+\int_B f(x)\text{d}x.\]</span> As a consequence, <span class="math display">\[\int_{A \cup B} f(x)\text{d}x=\int_A f(x)\text{d}x+\int_B f(x)\text{d}x.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h2 id="limit-and-integral">Limit and Integral</h2>
+<p><strong>Theorem 2.6</strong>    Suppose <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are non-negative real numbers, then <span class="math display">\[\int_E (\alpha f(x)+\beta g(x))\text{d}x=\alpha\int_E f(x)\text{d}x+\beta\int_E g(x)\text{d}x.\]</span></p>
+<div class="note ">
+            <p><span id="thm2.6.1"><strong>Lemma 2.6.1 (Levi's Monotonicity Theorem)</strong></span>    Suppose <span class="math inline">\(\{f_n\}_{n=1}^\infty\)</span> is a sequence of non-negative measurable functions on <span class="math inline">\(E\)</span>. For <span class="math inline">\(x \in E\)</span>, and for all <span class="math inline">\(n\)</span>, we have <span class="math inline">\(f_n(x) \leq f_{n+1}(x)\)</span>. Then <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x=\int_E \lim_{n \to \infty} f_n(x)\text{d}x.\]</span></p><p><strong><em>Proof.</em></strong> Let <span class="math inline">\(\displaystyle f(x)=\lim_{n \to \infty} f_n(x)\)</span>. We know <span class="math inline">\(f\)</span> is a non-negative measurable function on <span class="math inline">\(E\)</span>, and <span class="math inline">\(f_n(x) \leq f(x)\)</span> for all <span class="math inline">\(n \in \mathbb{N}\)</span>. Hence, <span class="math display">\[\int_E f_n(x)\text{d}x \leq \int_E f(x)\text{d}x.\]</span> Since <span class="math display">\[\int_E f_n(x)\text{d}x \leq \int_E f_{n+1}(x)\text{d}x,\]</span> we have <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x \leq \int_E f(x)\text{d}x.\]</span></p><p>Take an arbitrary non-negative simple function <span class="math inline">\(\varphi\)</span> on <span class="math inline">\(E\)</span>, where <span class="math inline">\(0 \leq \varphi(x) \leq f(x)\)</span>. Take an arbitrary <span class="math inline">\(0&lt;c&lt;1\)</span>. Let <span class="math inline">\(E_n=E[f_n \geq c\varphi]\)</span>, which is a measurable subset of <span class="math inline">\(E\)</span>.</p><p>Since <span class="math inline">\(f_n(x) \leq f_{n+1}(x)\)</span>, then <span class="math display">\[f_n(x) \geq c\varphi(x) \Rightarrow f_{n+1}(x) \geq c\varphi(x),\]</span> i.e., <span class="math inline">\(E_n \subset E_{n+1}\)</span>.</p><p>Since <span class="math inline">\(\displaystyle \lim_{n \to \infty} f_n(x)=f(x)\)</span>, and <span class="math inline">\(c\varphi(x)&lt;f(x)\)</span>, then when <span class="math inline">\(n \gg 0\)</span>, <span class="math inline">\(c\varphi(x) \leq f_n(x)\)</span>. Hence, <span class="math display">\[\bigcup_{n=1}^\infty E_n=E.\]</span></p><p>Therefore, <span class="math display">\[\int_E \varphi(x)\text{d}x=\lim_{n \to \infty} \int_{E_n} \varphi(x)\text{d}x.\]</span> Since <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x \geq \lim_{n \to \infty} \int_{E_n} f_n(x)\text{d}x \geq \lim_{n \to \infty} \int_{E_n} c\varphi(x)\text{d}x=c\lim_{n \to \infty} \int_{E_n} \varphi(x)\text{d}x,\]</span> then <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x \geq c\int_E \varphi(x)\text{d}x.\]</span> Take <span class="math inline">\(c \to 1\)</span>, we have <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x \geq \int_E \varphi(x)\text{d}x.\]</span> Hence, <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x \geq \int_E f(x)\text{d}x.\]</span></p>Therefore, <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x=\int_E \lim_{n \to \infty} f_n(x)\text{d}x.\]</span><p align="right"><span class="math inline">\(\square\)</span></p>
+          </div>
+<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(c \in \mathbb{R} \geq 0\)</span>. When <span class="math inline">\(c&gt;0\)</span>, we have <span class="math display">\[\int_E cf(x)\text{d}x=\sup\left\{\int_E \varphi(x)\text{d}x\right\},\]</span> where <span class="math inline">\(0 \leq \varphi(x) \leq cf(x)\)</span>, and <span class="math inline">\(\varphi\)</span> is a simple function on <span class="math inline">\(E\)</span>. Let <span class="math inline">\(\displaystyle \psi(x)=\frac{1}{c}\varphi(x)\)</span>, which is a simple function on <span class="math inline">\(E\)</span>, then we have <span class="math display">\[\int_E cf(x)\text{d}x=\sup\left\{\int_E c\psi(x)\text{d}x\right\}=\sup\left\{c\int_E \psi(x)\text{d}x\right\}=c\sup\left\{\int_E \psi(x)\text{d}x\right\},\]</span> where <span class="math inline">\(0 \leq \psi(x) \leq f(x)\)</span>. Hence, <span class="math display">\[\int_E cf(x)\text{d}x=c\int_E f(x)\text{d}x.\]</span></p>
+<p>When <span class="math inline">\(c=0\)</span>, it is obvious that <span class="math display">\[\int_E cf(x)\text{d}x=c\int_E f(x)\text{d}x.\]</span></p>
+<p>There exist two sequences of non-negative simple function <span class="math inline">\(\{\varphi_n\}\)</span> and <span class="math inline">\(\{\psi_n\}\)</span> on <span class="math inline">\(E\)</span> such that <span class="math display">\[\lim_{n \to \infty} \varphi_n(x)=f(x), \lim_{n \to \infty} \psi_n(x)=g(x),\]</span> where for all <span class="math inline">\(x \in E\)</span>, <span class="math inline">\(\varphi_n(x) \leq \varphi_{n+1}(x) \leq f(x)\)</span>, and <span class="math inline">\(\psi_n(x) \leq \psi_{n+1}(x) \leq g(x)\)</span>. We know <span class="math inline">\(\varphi_n+\psi_n\)</span> is a non-negative simple function on <span class="math inline">\(E\)</span>, <span class="math inline">\(\varphi_n(x)+\psi_n(x) \leq \varphi_{n+1}(x)+\psi_{n+1}(x) \leq f(x)+g(x)\)</span>, and <span class="math display">\[\lim_{n \to \infty} (\varphi_n(x)+\psi_n(x))=f(x)+g(x).\]</span> By <a href="#thm2.6.1">Levi's monotonicity theorem</a>, we have <span class="math display">\[\begin{aligned}
+\int_E \lim_{n \to \infty} (\varphi_n(x)+\psi_n(x))\text{d}x&amp;=\int_E (f(x)+g(x))\text{d}x
+\\&amp;=\lim_{n \to \infty} \int_E (\varphi_n(x)+\psi_n(x))\text{d}x
+\\&amp;=\lim_{n \to \infty} \left(\int_E \varphi_n(x)\text{d}x+\int_E \psi_n(x)\text{d}x\right)
+\\&amp;=\lim_{n \to \infty} \int_E \varphi_n(x)\text{d}x+\lim_{n \to \infty} \int_E \psi_n(x)\text{d}x
+\\&amp;=\int_E \lim_{n \to \infty} \varphi_n(x)\text{d}x+\int_E \lim_{n \to \infty} \psi_n(x)\text{d}x
+\\&amp;=\int_E f(x)\text{d}x+\int_E g(x)\text{d}x.
+\end{aligned}\]</span></p>
+Hence, it is easy to show that <span class="math display">\[\int_E (\alpha f(x)+\beta g(x))\text{d}x=\alpha\int_E f(x)\text{d}x+\beta\int_E g(x)\text{d}x.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.7</strong>    Suppose <span class="math inline">\(\{f_n\}_{n=1}^\infty\)</span> is a sequence of non-negative measurable functions on <span class="math inline">\(E\)</span>. Then <span class="math display">\[\int_E \left(\sum_{n=1}^\infty f_n(x)\right)\text{d}x=\sum_{n=1}^\infty \int_E f_n(x)\text{d}x.\]</span></p>
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(\displaystyle g_n(x)=\sum_{k=1}^n f_k(x)\)</span>, which is a non-negative measurable function. Besides, <span class="math display">\[g_{n+1}(x)=g_n(x)+f_{n+1}(x) \geq g_n(x).\]</span> By <a href="#thm2.6.1">Levi's monotonicity theorem</a>, we have <span class="math display">\[\lim_{n \to \infty} \int_E g_n(x)\text{d}x=\int_E \lim_{n \to \infty} g_n(x)\text{d}x=\int_E \left(\sum_{n=1}^\infty f_n(x)\right)\text{d}x.\]</span> Since <span class="math display">\[\lim_{n \to \infty} \int_E g_n(x)\text{d}x=\lim_{n \to \infty} \sum_{k=1}^n \int_E f_k(x)\text{d}x=\sum_{n=1}^\infty \int_E f_n(x)\text{d}x,\]</span> then <span class="math display">\[\int_E \left(\sum_{n=1}^\infty f_n(x)\right)\text{d}x=\sum_{n=1}^\infty \int_E f_n(x)\text{d}x.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><span id="thm2.8"><strong>Theorem 2.8 (Fatou's Lemma)</strong></span>    Suppose <span class="math inline">\(\{f_n\}_{n=1}^\infty\)</span> is a sequence of non-negative measurable functions on <span class="math inline">\(E\)</span>. Then <span class="math display">\[\int_E \varliminf_{n \to \infty} f_n(x)\text{d}x \leq \varliminf_{n \to \infty} \int_E f_n(x)\text{d}x.\]</span></p>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(\displaystyle \left\{\inf_{k \geq n} f_k\right\}\)</span> is an increasing sequence of non-negative measurable functions on <span class="math inline">\(E\)</span>. By <a href="#thm2.6.1">Levi's monotonicity theorem</a>, we have <span class="math display">\[\int_E \varliminf_{n \to \infty} f_n(x)\text{d}x=\int_E \left(\lim_{n \to \infty} \inf_{k \geq n} f_k(x)\right)\text{d}x=\lim_{n \to \infty} \int_E \inf_{k \geq n} f_k(x)\text{d}x.\]</span> Since <span class="math display">\[\int_E \inf_{k \geq n} f_k(x)\text{d}x \leq \inf_{k \geq n} \int_E f_k(x)\text{d}x,\]</span> then <span class="math display">\[\lim_{n \to \infty} \int_E \inf_{k \geq n} f_k(x)\text{d}x \leq \lim_{n \to \infty} \inf_{k \geq n} \int_E f_k(x)\text{d}x=\varliminf_{n \to \infty} \int_E f_n(x)\text{d}x.\]</span> Hence, <span class="math display">\[\int_E \varliminf_{n \to \infty} f_n(x)\text{d}x \leq \varliminf_{n \to \infty} \int_E f_n(x)\text{d}x.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note warning">
+            <p>The equal sign in the <a href="#thm2.8">Fatou's lemma</a> does not always hold. For example, let <span class="math display">\[f_n(x)=\begin{cases}n, &amp;\displaystyle 0&lt;x&lt;\frac{1}{n} \\0, &amp;\displaystyle x \geq \frac{1}{n}\end{cases}.\]</span> For any <span class="math inline">\(x \in (0, \infty)\)</span>, <span class="math inline">\(\displaystyle \lim_{n \to \infty} f_n(x)=0\)</span>, and thus <span class="math display">\[\int_{(0, \infty)} \lim_{n \to \infty} f_n(x)\text{d}x=0.\]</span> However, <span class="math display">\[\int_{(0, \infty)} f_n(x)\text{d}x=\int_{\left(0, \frac{1}{n}\right)} f_n(x)\text{d}x+\int_{\left[\frac{1}{n}, \infty\right)} f_n(x)\text{d}x=1,\]</span> and thus <span class="math display">\[\lim_{n \to \infty} \int_{(0, \infty)} f_n(x)\text{d}x=1.\]</span></p>
+          </div>
+<h2 id="zero-measure-set-and-integral">Zero Measure Set and Integral</h2>
+<p><strong>Theorem 2.9</strong>    Suppose <span class="math inline">\(E\)</span> is a zero measure set. Then <span class="math display">\[\int_E f(x)\text{d}x=0.\]</span></p>
+<strong><em>Proof.</em></strong> By definition, <span class="math display">\[\int_E f(x)\text{d}x=\sup\left\{\int_E \varphi(x)\text{d}x\right\},\]</span> where <span class="math inline">\(\varphi\)</span> is a non-negative simple function on <span class="math inline">\(E\)</span>, and <span class="math inline">\(\varphi(x) \leq f(x)\)</span>. Since <span class="math display">\[\int_E \varphi(x)\text{d}x=0,\]</span> then <span class="math display">\[\int_E f(x)\text{d}x=0.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.10</strong>    If <span class="math inline">\(f(x) \leq g(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math display">\[\int_E f(x)\text{d}x \leq \int_E g(x)\text{d}x.\]</span></p>
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(E_1=E[f \leq g]\)</span> and <span class="math inline">\(E_2=E[f&gt;g]\)</span>, where <span class="math inline">\(m(E_2)=0\)</span>, then <span class="math inline">\(E=E_1 \cup E_2\)</span>, and <span class="math inline">\(E_1 \cap E_2=\varnothing\)</span>. Hence, <span class="math display">\[\begin{aligned}
+\int_E f(x)\text{d}x&amp;=\int_{E_1} f(x)\text{d}x+\int_{E_2} f(x)\text{d}x
+\\&amp; \leq \int_{E_1} g(x)\text{d}x+0
+\\&amp;=\int_{E_1} g(x)\text{d}x+\int_{E_2} g(x)\text{d}x
+\\&amp;=\int_E g(x)\text{d}x.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Corollary 2.11</strong>    If <span class="math inline">\(f(x)=g(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math display">\[\int_E f(x)\text{d}x=\int_E g(x)\text{d}x.\]</span> Moreover, if <span class="math inline">\(f(x)=0\ \text{a.e.}\ x \in E\)</span>, then <span class="math display">\[\int_E f(x)\text{d}x=0.\]</span></p>
+<p><strong>Theorem 2.12</strong>    If <span class="math display">\[\int_E f(x)\text{d}x=0,\]</span> then <span class="math inline">\(f(x)=0\ \text{a.e.}\ x \in E\)</span>.</p>
+<strong><em>Proof.</em></strong> Since <span class="math display">\[0=\int_E f(x)\text{d}x \geq \int_{E\left[f \geq \frac{1}{n}\right]} f(x)\text{d}x \geq \int_{E\left[f \geq \frac{1}{n}\right]} \frac{1}{n}\text{d}x=\frac{1}{n} \cdot m\left(E\left[f \geq \frac{1}{n}\right]\right),\]</span> then <span class="math inline">\(\displaystyle m\left(E\left[f \geq \frac{1}{n}\right]\right)=0\)</span>. Hence, <span class="math display">\[m(E[f \neq 0])=m\left(\bigcup_{n=1}^\infty E\left[f \geq \frac{1}{n}\right]\right) \leq \sum_{n=1}^\infty m\left(E\left[f \geq \frac{1}{n}\right]\right)=0.\]</span> Therefore, <span class="math inline">\(m(E[f \geq 0])=0\)</span>, i.e., <span class="math inline">\(f(x)=0\ \text{a.e.}\ x \in E\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="lebesgue-integral-of-measurable-function">Lebesgue Integral of Measurable Function</h1>
+<p><strong>Definition 3.1</strong>    Suppose <span class="math inline">\(E\)</span> is measurable, and <span class="math inline">\(f\)</span> is a measurable function on <span class="math inline">\(E\)</span>. When at least one of <span class="math inline">\(\displaystyle \int_E f^+(x)\text{d}x\)</span> and <span class="math inline">\(\displaystyle \int_E f^-(x)\text{d}x\)</span> is finite, the <strong>Lebesgue integral</strong> of <span class="math inline">\(f\)</span> on <span class="math inline">\(E\)</span> is <span class="math display">\[\int_E f(x)\text{d}x=\int_E f^+(x)\text{d}x-\int_E f^-(x)\text{d}x.\]</span> If <span class="math inline">\(\displaystyle \int_E f^+(x)\text{d}x\)</span> and <span class="math inline">\(\displaystyle \int_E f^-(x)\text{d}x\)</span> are finite, then <span class="math inline">\(f\)</span> is <strong>Lebesgue integrable</strong> on <span class="math inline">\(E\)</span>. The collection of all Lebesgue integrable functions on <span class="math inline">\(E\)</span> is denoted <span class="math inline">\(L(E)\)</span>.</p>
+<p><strong>Theorem 3.1</strong>    Suppose <span class="math inline">\(E \neq \varnothing\)</span> and <span class="math inline">\(m(E)=0\)</span>. Then any real function <span class="math inline">\(f\)</span> on <span class="math inline">\(E\)</span> is Lebesgue integrable, and <span class="math display">\[\int_E f(x)\text{d}x=0.\]</span></p>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(m(E)=0\)</span>, and <span class="math inline">\(f^+\)</span> and <span class="math inline">\(f^-\)</span> are non-negative measurable on <span class="math inline">\(E\)</span>, then <span class="math display">\[\int_E f^+(x)\text{d}x=\int_E f^-(x)\text{d}x=0.\]</span> Hence, <span class="math inline">\(f \in L(E)\)</span>, and <span class="math display">\[\int_E f(x)\text{d}x=\int_E f^+(x)\text{d}x-\int_E f^-(x)\text{d}x=0.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 3.2</strong>    Suppose <span class="math inline">\(\displaystyle E=\bigcup_{n=1}^\infty E_n\)</span>, and <span class="math inline">\(\{E_n\}\)</span> is a collection of disjoint measurable subsets. If the Lebesgue integral of <span class="math inline">\(f\)</span> on <span class="math inline">\(E\)</span> exists, then <span class="math display">\[\int_E f(x)\text{d}x=\sum_{n=1}^\infty \int_{E_n} f(x)\text{d}x.\]</span></p>
+<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(f\)</span> is a non-negative measurable function. We have <span class="math display">\[\int_{E_n} f(x)\text{d}x=\int_E f(x) \cdot \chi_{E_n}(x)\text{d}x\]</span> and thus <span class="math display">\[\sum_{n=1}^\infty \int_{E_n} f(x)\text{d}x=\sum_{n=1}^\infty \int_E f(x) \cdot \chi_{E_n}(x)\text{d}x=\int_E \sum_{n=1}^\infty f(x) \cdot \chi_{E_n}(x)\text{d}x=\int_E f(x)\text{d}x.\]</span></p>
+Suppose <span class="math inline">\(f\)</span> is a measurable function. We know at least one of <span class="math inline">\(\displaystyle \sum_{n=1}^\infty \int_{E_n} f^+(x)\text{d}x\)</span> and <span class="math inline">\(\displaystyle \sum_{n=1}^\infty \int_{E_n} f^-(x)\text{d}x\)</span> is convergent. Hence, <span class="math display">\[\begin{aligned}
+\int_E f(x)\text{d}x&amp;=\int_E f^+(x)\text{d}x-\int_E f^-(x)\text{d}x
+\\&amp;=\left(\sum_{n=1}^\infty \int_{E_n} f^+(x)\text{d}x\right)-\left(\sum_{n=1}^\infty \int_{E_n} f^-(x)\text{d}x\right)
+\\&amp;=\sum_{n=1}^\infty \left(\int_{E_n} f^+(x)\text{d}x-\int_{E_n} f^-(x)\text{d}x\right)
+\\&amp;=\sum_{n=1}^\infty \int_{E_n} f(x)\text{d}x.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 3.3</strong>    <span class="math inline">\(f \in L(E) \Leftrightarrow |f| \in L(E)\)</span>.</p>
+<p><strong><em>Proof.</em></strong> (<span class="math inline">\(\Leftarrow\)</span>) Suppose <span class="math inline">\(f \in L(E)\)</span>. Then <span class="math inline">\(\displaystyle \int_E f^+(x)\text{d}x&lt;\infty\)</span> and <span class="math inline">\(\displaystyle \int_E f^-(x)\text{d}x\)</span>, and thus <span class="math display">\[\int_E |f(x)|\text{d}x=\int_E (f^+(x)+f^-(x))\text{d}x=\int_E f^+(x)\text{d}x+\int_E f^-(x)\text{d}x&lt;\infty,\]</span> i.e., <span class="math inline">\(|f| \in L(E)\)</span>.</p>
+(<span class="math inline">\(\Rightarrow\)</span>) Suppose <span class="math inline">\(|f| \in L(E)\)</span>. Then <span class="math inline">\(f^+(x) \leq |f(x)|\)</span> and <span class="math inline">\(f^-(x) \leq |f(x)|\)</span>. Hence, <span class="math display">\[\int_E f^+(x)\text{d}x \leq \int_E |f(x)|\text{d}x&lt;\infty\]</span> and <span class="math display">\[\int_E f^-(x)\text{d}x \leq \int_E |f(x)|\text{d}x&lt;\infty.\]</span> Therefore, <span class="math inline">\(f \in L(E)\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 3.4</strong>    Suppose <span class="math inline">\(|f(x)| \leq g(x)\ \text{a.e.}\ x \in E\)</span>, and <span class="math inline">\(g\)</span> is a non-negative Lebesgue integrable function on <span class="math inline">\(E\)</span>. Then <span class="math inline">\(f \in L(E)\)</span>, and <span class="math display">\[\left|\int_E f(x)\text{d}x\right| \leq \int_E |f(x)|\text{d}x \leq \int_E g(x)\text{d}x.\]</span></p>
+<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(|f(x)| \leq g(x)\ \text{a.e.}\ x \in E\)</span>, <span class="math inline">\(|f|\)</span> and <span class="math inline">\(g\)</span> are non-negative measurable functions on <span class="math inline">\(E\)</span>, and <span class="math inline">\(g\)</span> is Lebesgue integrable, then <span class="math display">\[\int_E |f(x)|\text{d}x \leq \int_E g(x)\text{d}x&lt;\infty,\]</span> i.e., <span class="math inline">\(|f| \in L(E)\)</span>. Hence, <span class="math inline">\(f \in L(E)\)</span>.</p>
+In addition, <span class="math display">\[\begin{aligned}
+\left|\int_E f(x)\text{d}x\right|&amp;=\left|\int_E f^+(x)\text{d}x-\int_E f^-(x)\text{d}x\right|
+\\&amp;\leq \left|\int_E f^+(x)\text{d}x\right|+\left|\int_E f^-(x)\text{d}x\right|
+\\&amp;=\int_E f^+(x)\text{d}x+\int_E f^-(x)\text{d}x
+\\&amp;=\int_E (f^+(x)+f^-(x))\text{d}x
+\\&amp;=\int_E |f(x)|\text{d}x.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 3.5</strong>    Suppose <span class="math inline">\(f \in L(E)\)</span>, and <span class="math inline">\(A\)</span> is a measurable subset of <span class="math inline">\(E\)</span>, then <span class="math display">\[\forall \varepsilon&gt;0, \exists \delta&gt;0\ \text{s.t.}\ m(A)&lt;\delta \Rightarrow \left|\int_A f(x)\text{d}x\right| \leq \int_A |f(x)|\text{d}x&lt;\varepsilon.\]</span></p>
+<p><strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>. Suppose <span class="math inline">\(f\)</span> is a non-negative simple function. We know <span class="math inline">\(f(x) \leq M\)</span>, for all <span class="math inline">\(x \in A\)</span>. Take <span class="math inline">\(\displaystyle \delta=\frac{\varepsilon}{M+1}\)</span>, when <span class="math inline">\(m(A)&lt;\delta\)</span>, we have <span class="math display">\[\int_A f(x)\text{d}x \leq M \cdot m(A)&lt;\varepsilon.\]</span></p>
+<p>Suppose <span class="math inline">\(f\)</span> is a measurable function, then <span class="math inline">\(|f|\)</span> is a non-negative measurable function. There exists a non-negative simple function such that <span class="math inline">\(\varphi(x) \leq |f(x)|\)</span> and <span class="math display">\[\int_E \varphi(x)\text{d}x \leq \int_E |f(x)|\text{d}x \leq \int_E \varphi(x)+\frac{\varepsilon}{2}.\]</span></p>
+We take a <span class="math inline">\(\delta\)</span> such that when <span class="math inline">\(m(A)&lt;\delta\)</span>, <span class="math inline">\(\displaystyle \int_A \varphi(x)\text{d}x&lt;\frac{\varepsilon}{2}\)</span>. Hence, <span class="math display">\[\begin{aligned}
+\int_A |f(x)|\text{d}x&amp;=\int_A \varphi(x)\text{d}x+\int_A (|f(x)|-\varphi(x))\text{d}x
+\\&amp;\leq \int_A \varphi(x)\text{d}x+\int_E(|f(x)|-\varphi(x))\text{d}x
+\\&amp;=\int_A \varphi(x)\text{d}x+\int_E |f(x)|\text{d}x-\int_E \varphi(x)\text{d}x
+\\&amp;&lt;\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 3.6</strong>    Suppose <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are Lebesgue integrable functions, and <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are real numbers. Then <span class="math inline">\(\alpha f+\beta g \in L(E)\)</span>, and <span class="math display">\[\int_E (\alpha f(x)+\beta g(x))\text{d}x=\alpha\int_E f(x)\text{d}x+\beta\int_E g(x)\text{d}x.\]</span></p>
+<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(c \in \mathbb{R}\)</span>. When <span class="math inline">\(c=0\)</span>, it is obvious that <span class="math inline">\(cf \in L(E)\)</span>, and <span class="math display">\[\int_E cf(x)\text{d}x=c\int_E f(x)\text{d}x.\]</span></p>
+<p>When <span class="math inline">\(c&gt;0\)</span>, <span class="math inline">\((cf)^+=cf^+\)</span> and <span class="math inline">\((cf)^-=cf^-\)</span>.</p>
+<p>Since <span class="math inline">\(f \in L(E)\)</span>, then <span class="math inline">\(\displaystyle \int_E f^+(x)\text{d}x&lt;\infty\)</span> and <span class="math inline">\(\displaystyle \int_E f^-(x)\text{d}x&lt;\infty\)</span>, and thus <span class="math display">\[\int_E (cf)^+(x)\text{d}x=\int_E cf^+(x)\text{d}x=c\int_E f^+(x)\text{d}x&lt;\infty\]</span> and <span class="math display">\[\int_E (cf)^-(x)\text{d}x=\int_E cf^-(x)\text{d}x=c\int_E f^-(x)\text{d}x&lt;\infty.\]</span> Therefore, <span class="math inline">\(cf(x) \in L(E)\)</span>, and <span class="math display">\[\begin{aligned}
+\int_E cf(x)\text{d}x&amp;=\int_E (cf)^+(x)\text{d}x-\int_E (cf)^-(x)\text{d}x
+\\&amp;=c\int_E f^+(x)\text{d}x-c\int_E f^-(x)\text{d}x
+\\&amp;=c\left(\int_E f^+(x)\text{d}x-\int_E f^-(x)\text{d}x\right)
+\\&amp;=c\int_E f(x)\text{d}x.
+\end{aligned}\]</span></p>
+<p>When <span class="math inline">\(c&lt;0\)</span>, <span class="math inline">\((cf)^+=|c|f^-\)</span> and <span class="math inline">\((cf)^-=|c|f^+\)</span>. Similarly, we can show that <span class="math inline">\(cf \in L(E)\)</span>, and <span class="math display">\[\int_E cf(x)\text{d}x=c\int_E f(x)\text{d}x.\]</span></p>
+<p>In addition, we know <span class="math inline">\(|f|\)</span> and <span class="math inline">\(|g|\)</span> are Lebesgue integrable, and <span class="math display">\[\int_E(|f|+|g|)(x)\text{d}x=\int_E |f|(x)\text{d}x+\int_E |g|(x)\text{d}x&lt;\infty,\]</span> i.e., <span class="math inline">\(|f|+|g| \in L(E)\)</span>. Since <span class="math inline">\(|f+g| \leq |f|+|g|\)</span>, then <span class="math inline">\(|f+g| \in L(E)\)</span>.</p>
+<p>Since <span class="math inline">\(f+g=(f+g)^+-(f+g)^-=f^+-f^-+g^+-g^-\)</span>, then <span class="math display">\[(f+g)^++f^-+g^-=(f+g)^-+f^++g^+.\]</span> Hence, <span class="math display">\[\int_E ((f+g)^+(x)+f^-(x)+g^-(x))\text{d}x=\int_E ((f+g)^-(x)+f^+(x)+g^+(x))\text{d}x,\]</span> and thus <span class="math display">\[\int_E (f+g)^+(x)\text{d}x+\int_E f^-(x)\text{d}x+\int_E g^-(x)\text{d}x=\int_E (f+g)^-(x)\text{d}x+\int_E f^+(x)\text{d}x+\int_E g^+(x)\text{d}x.\]</span> Therefore, <span class="math display">\[\int_E (f+g)^+(x)\text{d}x-\int_E (f+g)^-(x)\text{d}x=\int_E f^+(x)\text{d}x-\int_E f^-(x)\text{d}x+\int_E g^+(x)\text{d}x-\int_E g^-(x)\text{d}x,\]</span> i.e., <span class="math display">\[\int_E (f(x)+g(x))\text{d}x=\int_E f(x)\text{d}x+\int_E g(x)\text{d}x.\]</span></p>
+Hence, it is easy to show that <span class="math inline">\(\alpha f+\beta g \in L(E)\)</span>, and <span class="math display">\[\int_E (\alpha f(x)+\beta g(x))\text{d}x=\alpha\int_E f(x)\text{d}x+\beta\int_E g(x)\text{d}x.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h2 id="lebesgues-dominated-convergence-theorem">Lebesgue's Dominated Convergence Theorem</h2>
+<p><span id="thm3.7"><strong>Theorem 3.7 (Lebesgue's Dominated Convergence Theorem, DCT)</strong></span>    Suppose <span class="math inline">\(\{f_n\}\)</span> is a sequence of measurable functions on <span class="math inline">\(E\)</span>, and <span class="math inline">\(\displaystyle \lim_{n \to \infty} f_n(x)=f(x)\ \text{a.e.}\ x \in E\)</span>. If there exists a non-negative Lebesgue integrable function <span class="math inline">\(F\)</span> on <span class="math inline">\(E\)</span> such that for all <span class="math inline">\(n \in \mathbb{N}\)</span>, <span class="math inline">\(|f_n(x)| \leq F(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x=\int_E f(x)\text{d}x.\]</span></p>
+<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(|f_n(x)| \leq F(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math inline">\(|f(x)| \leq F(x)\ \text{a.e.}\ x \in E\)</span>. Since <span class="math inline">\(F\)</span> is Lebesgue integrable, then <span class="math inline">\(f\)</span> and <span class="math inline">\(f_n\)</span> are Lebesgue integrable, and thus <span class="math inline">\(F\)</span>, <span class="math inline">\(f\)</span> and <span class="math inline">\(f_n\)</span> are finite almost everywhere.</p>
+<p>Assume without loss of generality that <span class="math inline">\(F\)</span>, <span class="math inline">\(f\)</span> and <span class="math inline">\(f_n\)</span> are finite. Let <span class="math inline">\(g_n(x)=|f_n(x)-f(x)| \geq 0\)</span>. We know <span class="math inline">\(g_n(x) \leq |f_n(x)|+|f(x)| \leq 2F(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math inline">\(2F-g_n\)</span> is a non-negative measurable function.</p>
+By <a href="#thm2.8">Fatou's lemma</a>, <span class="math display">\[\int_E \varliminf_{n \to \infty} (2F(x)-g_n(x))\text{d}x \leq \varliminf_{n \to \infty} \int_E (2F(x)-g_n(x))\text{d}x.\]</span> Hence, <span class="math display">\[\int_E 2F(x)\text{d}x-\int_E \varlimsup_{n \to \infty} g_n(x)\text{d}x \leq \int_E 2F(x)\text{d}x-\varlimsup_{n \to \infty} \int_E g_n(x)\text{d}x,\]</span> and thus <span class="math display">\[\varlimsup_{n \to \infty} \int_E g_n(x)\text{d}x \leq \int_E \varlimsup_{n \to \infty} g_n(x)\text{d}x.\]</span> Since <span class="math inline">\(\displaystyle \varlimsup_{n \to \infty} g_n(x)\text{d}x=0\ \text{a.e.}\ x \in E\)</span>, then <span class="math display">\[\varlimsup_{n \to \infty} \int_E g_n(x)\text{d}x=0,\]</span> and thus <span class="math display">\[\lim_{n \to \infty} \int_E g_n(x)\text{d}x=\lim_{n \to \infty} \int_E |f_n(x)-f(x)|\text{d}x=0.\]</span> Since <span class="math display">\[\left|\int_E (f_n(x)-f(x))\text{d}x\right| \leq \int_E |f_n(x)-f(x)|\text{d}x,\]</span> then <span class="math display">\[\lim_{n \to \infty} \int_E (f_n(x)-f(x))\text{d}x=0,\]</span> i.e., <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x=\int_E f(x)\text{d}x.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note info">
+            <p><a href="#thm2.6.1">Levi's monotonicity theorem</a>, <a href="#thm2.8">Fatou's lemma</a> and <a href="#thm3.7">Lebesgue's dominated convergence theorem</a> are equivalent to each other.</p>
+          </div>
+<p><strong>Theorem 3.8</strong>    Suppose <span class="math inline">\(\{f_n\}\)</span> is a sequence of measurable functions on <span class="math inline">\(E\)</span>, and <span class="math inline">\(f_n \Rightarrow f\)</span>. If there exists a non-negative Lebesgue integrable function <span class="math inline">\(F\)</span> on <span class="math inline">\(E\)</span> such that for all <span class="math inline">\(n \in \mathbb{N}\)</span>, <span class="math inline">\(|f_n(x)| \leq F(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x=\int_E f(x)\text{d}x.\]</span></p>
+<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(|f_n(x)| \leq F(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math inline">\(|f(x)| \leq F(x)\ \text{a.e.}\ x \in E\)</span>. Since <span class="math inline">\(F\)</span> is Lebesgue integrable, then <span class="math inline">\(f\)</span> and <span class="math inline">\(f_n\)</span> are Lebesgue integrable, and thus <span class="math inline">\(F\)</span>, <span class="math inline">\(f\)</span> and <span class="math inline">\(f_n\)</span> are finite almost everywhere.</p>
+<p>Assume without loss of generality that <span class="math inline">\(F\)</span>, <span class="math inline">\(f\)</span> and <span class="math inline">\(f_n\)</span> are finite. Suppose <span class="math display">\[\int_E |f_n(x)-f(x)|\text{d}x \not\to0,\]</span> then we can find a subsequence <span class="math inline">\(\{f_{n_k}\}_{k=1}^\infty\)</span> such that <span class="math inline">\(\displaystyle \lim_{k \to \infty} \int_E |f_{n_k}(x)-f(x)|\text{d}x=\alpha&gt;0\)</span>.</p>
+By Riesz's theorem, there exists a subsequence <span class="math inline">\(\{f_{n_{k_i}}\}_{i=1}^\infty\)</span> such that <span class="math inline">\(f_{n_{k_i}}(x) \to f(x)\ \text{a.e.}\ x \in E\)</span>, and thus <span class="math display">\[\lim_{i \to \infty} \int_E |f_{n_{k_i}}(x)-f(x)|\text{d}x=0,\]</span> which is a contradiction.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 3.9</strong>    Suppose <span class="math inline">\(\{f_n\}\)</span> is a sequence of Lebesgue integrable functions on <span class="math inline">\(E\)</span>. If <span class="math display">\[\sum_{n=1}^\infty \int_E |f_n(x)|\text{d}x&lt;\infty,\]</span> then <span class="math inline">\(\displaystyle \sum_{n=1}^\infty f_n(x)&lt;\infty\ \text{a.e.}\ x \in E\)</span>, <span class="math inline">\(\displaystyle \sum_{n=1}^\infty f_n\)</span> is Lebesgue integrable on <span class="math inline">\(E\)</span>, and <span class="math display">\[\int_E \left(\sum_{n=1}^\infty f_n(x)\right)\text{d}x=\sum_{n=1}^\infty \int_E f_n(x)\text{d}x.\]</span></p>
+<p><strong><em>Proof.</em></strong> Let <span class="math display">\[F(x)=\sum_{n=1}^\infty |f_n(x)|.\]</span> We have <span class="math display">\[\int_E F(x)\text{d}x=\sum_{n=1}^\infty \int_E |f_n(x)|\text{d}x&lt;\infty.\]</span> Hence, <span class="math inline">\(F\)</span> is a non-negative Lebesgue integrable function on <span class="math inline">\(E\)</span>, and thus <span class="math inline">\(F\)</span> is finite almost everywhere on <span class="math inline">\(E\)</span>, i.e., <span class="math inline">\(\displaystyle \sum_{n=1}^\infty |f_n(x)|&lt;\infty\ \text{a.e.}\ x \in E\)</span>. Therefore, <span class="math inline">\(\displaystyle \sum_{n=1}^\infty f_n(x)&lt;\infty\ \text{a.e.}\ x \in E\)</span>.</p>
+Let <span class="math inline">\(\displaystyle g_n(x)=\sum_{k=1}^n f_k(x)\)</span> and <span class="math inline">\(\displaystyle g(x)=\sum_{n=1}^\infty f_n(x)=\lim_{n \to \infty} g_n(x)\)</span>. We have <span class="math display">\[|g_n(x)|=\left|\sum_{k=1}^n f_k(x)\right| \leq \sum_{k=1}^n |f_k(x)| \leq F(x).\]</span> By <a href="#thm3.7">Lebesgue's dominated convergence theorem</a>, <span class="math inline">\(g \in L(E)\)</span>, and <span class="math display">\[\lim_{n \to \infty} \int_E g_n(x)\text{d}x=\int_E g(x)\text{d}x,\]</span> i.e., <span class="math inline">\(\displaystyle \sum_{n=1}^\infty f_n\)</span> is Lebesgue integrable on <span class="math inline">\(E\)</span>, and <span class="math display">\[\sum_{n=1}^\infty \int_E f_n(x)\text{d}x=\lim_{n \to \infty} \sum_{k=1}^n \int_E f_k(x)\text{d}x=\lim_{n \to \infty} \int_E \sum_{k=1}^n f_k(x)\text{d}x=\int_E \left(\sum_{n=1}^\infty f_n(x)\right)\text{d}x.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 3.10</strong>    Suppose <span class="math inline">\(f\)</span> is a real function on <span class="math inline">\(E \times (a, b)\)</span>. If for all <span class="math inline">\(t \in (a, b)\)</span>, <span class="math inline">\(f(x, t)\)</span> (as a function of <span class="math inline">\(x\)</span>) is Lebesgue integrable on <span class="math inline">\(E\)</span>, for <span class="math inline">\(\text{a.e.}\ x \in E\)</span>, <span class="math inline">\(f(x, t)\)</span> (as a function of <span class="math inline">\(t\)</span>) is differentiable on <span class="math inline">\((a, b)\)</span>, and there exists a non-negative Lebesgue integrable function <span class="math inline">\(F\)</span> on <span class="math inline">\(E\)</span> such that <span class="math display">\[\left|\frac{\partial}{\partial t}f(x, t)\right| \leq F(x),\]</span> then <span class="math inline">\(\displaystyle \frac{\partial}{\partial t}f(x, t)\)</span> is Lebesgue integrable on <span class="math inline">\(E\)</span>, <span class="math inline">\(\displaystyle \int_E f(x, t)\text{d}x\)</span> is differentiable on <span class="math inline">\((a, b)\)</span>, and <span class="math display">\[\frac{\text{d}}{\text{d}t}\int_E f(x, t)\text{d}x=\int_E \frac{\partial}{\partial t}f(x, t)\text{d}x.\]</span></p>
+<p><strong><em>Proof.</em></strong> Fix a <span class="math inline">\(t \in (a, b)\)</span> and take an arbitrary sequence <span class="math inline">\(\{h_n\}\)</span>, where <span class="math inline">\(h_n \to 0\)</span> and <span class="math inline">\(h_n \neq 0\)</span>. Let <span class="math display">\[g_n(x)=\frac{f(x, t+h_n)-f(x, t)}{h_n},\]</span> then <span class="math display">\[\lim_{n \to \infty} g_n(x)=\frac{\partial}{\partial t}f(x, t),\]</span> and <span class="math display">\[|g_n(x)|=\left|\frac{\partial}{\partial t}f(x, t+\theta_nh_n)\right| \leq F(x),\]</span> where <span class="math inline">\(0 \leq \theta_n \leq 1\)</span>.</p>
+Since <span class="math inline">\(\displaystyle \frac{\partial}{\partial t}f(x, t)\)</span> is Lebesgue integrable on <span class="math inline">\(E\)</span>, and by <a href="#thm3.7">Lebesgue's dominated convergence theorem</a>, <span class="math display">\[\lim_{n \to \infty} \frac{\displaystyle \int_E f(x, t+h_n)\text{d}x-\int_E f(x, t)\text{d}x}{h_n}=\lim_{n \to \infty} \int_E g_n(x)\text{d}x=\int_E \lim_{n \to \infty} g_n(x)\text{d}x=\int_E \frac{\partial}{\partial t}f(x, t)\text{d}x&lt;\infty.\]</span> Therefore, <span class="math inline">\(\displaystyle \int_E f(x, t)\text{d}t\)</span> is differentiable on <span class="math inline">\((a, b)\)</span>, and <span class="math display">\[\frac{\text{d}}{\text{d}t}\int_E f(x, t)\text{d}x=\int_E \frac{\partial}{\partial t}f(x, t)\text{d}x.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="riemann-integral-and-lebesgue-integral">Riemann Integral and Lebesgue Integral</h1>
+<div class="note info">
+            <p><strong>Recall 4.1</strong>    Suppose <span class="math inline">\(f\)</span> is bounded on <span class="math inline">\([a, b]\)</span>. A <strong>partition sequence</strong> of <span class="math inline">\([a, b]\)</span>, <span class="math inline">\(\{P^{(n)}\}\)</span> is a finite sequence of values <span class="math inline">\(x_i\)</span> such that <span class="math display">\[a=x_0^{(n)}&lt;x_1^{(n)}&lt;\cdots&lt;x_{k_n}^{(n)}=b.\]</span> Let <span class="math inline">\(M_i^{(n)}=\sup\{f(x): x_{i-1}^{(n)} \leq x \leq x_i^{(n)}\}\)</span> and <span class="math inline">\(m_i^{(n)}=\inf\{f(x): x_{i-1}^{(n)} \leq x \leq x_i^{(n)}\}\)</span>. The <strong>upper Darboux sum</strong> of <span class="math inline">\(f\)</span> with respect to <span class="math inline">\(P^{(n)}\)</span> is <span class="math display">\[S(f, P^{(n)})=\sum_{i=1}^{k_n} M_i^{(n)}(x_i^{(n)}-x_{i-1}^{(n)}).\]</span> The <strong>lower Darboux sum</strong> of <span class="math inline">\(f\)</span> with respect to <span class="math inline">\(P^{(n)}\)</span> is <span class="math display">\[s(f, P^{(n)})=\sum_{i=1}^{k_n} m_i^{(n)}(x_i^{(n)}-x_{i-1}^{(n)}).\]</span> The <strong>upper Darboux integral</strong> of <span class="math inline">\(f\)</span> is <span class="math display">\[\overline{\int_a^b} f(x)\text{d}x=\inf_{P^{(n)}} S(f, P^{(n)})=\lim_{n \to \infty} S(f, P^{(n)}).\]</span> The <strong>lower Darboux integral</strong> of <span class="math inline">\(f\)</span> is <span class="math display">\[\underline{\int_a^b} f(x)\text{d}x=\sup_{P^{(n)}} s(f, P^{(n)})=\lim_{n \to \infty} s(f, P^{(n)}).\]</span> <span class="math inline">\(f(x)\)</span> is <strong>Riemann integrable</strong> on <span class="math inline">\([a, b]\)</span> if and only if <span class="math display">\[\overline{\int_a^b} f(x)\text{d}x=\underline{\int_a^b} f(x)\text{d}x.\]</span></p><p><strong>Recall 4.2</strong>    The <strong>amplitude</strong> at <span class="math inline">\(x\)</span> is <span class="math display">\[\omega(x)=\lim_{\delta \to 0^+}\sup\{|f(y)-f(z)|: y, z \in (x-\delta, x+\delta) \cap [a, b]\}.\]</span></p>
+          </div>
+<p><strong>Theorem 4.1</strong>    A bounded function <span class="math inline">\(f\)</span> is Riemann integrable on <span class="math inline">\([a, b]\)</span> if and only if <span class="math inline">\(f\)</span> is continuous almost everywhere on <span class="math inline">\([a, b]\)</span>.</p>
+<p><strong><em>Proof.</em></strong> Let <span class="math display">\[h_n(x)=\begin{cases}
+M_i^{(n)}-m_i^{(n)}, &amp;x_{i-1}^{(n)}&lt;x&lt;x_i^{(n)} \\
+0, &amp;x=x_{i-1}^{(n)} \vee x=x_i^{(n)}
+\end{cases}.\]</span> We know <span class="math inline">\(h_n\)</span> is a non-negative measurable function. Suppose <span class="math inline">\(|f(x)| \leq M\)</span>, <span class="math inline">\(x \in [a, b]\)</span>, then <span class="math display">\[|h_n(x)| \leq M_i^{(n)}+m_i^{(n)} \leq 2M.\]</span> Since <span class="math inline">\(g(x)=2M\)</span> is Lebesgue integrable on <span class="math inline">\([a, b]\)</span>, then <span class="math display">\[\begin{align}
+\overline{\int_a^b} f(x)\text{d}x-\underline{\int_a^b} f(x)\text{d}x&amp;=\lim_{n \to \infty} (S(f, P^{(n)})-s(f, P^{(n)})) \nonumber
+\\&amp;=\lim_{n \to \infty} \sum_{i=1}^{k_n} (M_i^{(n)}-m_i^{(n)})(x_i^{(n)}-x_{i-1}^{(n)}) \nonumber
+\\&amp;=\lim_{n \to \infty} \int_{[a, b]} h_n(x)\text{d}x \nonumber
+\\&amp;=\int_{[a, b]} \lim_{n \to \infty} h_n(x)\text{d}x \tag{DCT}
+\\&amp;=\int_{[a, b]} \omega(x)\text{d}x=0. \nonumber
+\end{align}\]</span></p>
+Therefore, <span class="math inline">\(f\)</span> is Riemann integrable on <span class="math inline">\([a, b]\)</span> if and only if <span class="math display">\[\begin{aligned}
+&amp;\quad \quad \int_{[a, b]} \omega(x)\text{d}x=0
+\\&amp;\Leftrightarrow \omega(x)=0\ \text{a.e.}\ x \in [a, b]
+\\&amp;\Leftrightarrow \text{$f$ is continuous almost everywhere on $[a, b]$.}
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 4.2</strong>    If a bounded function <span class="math inline">\(f\)</span> is Riemann integrable on <span class="math inline">\([a, b]\)</span>, then <span class="math inline">\(f\)</span> is Lebesgue integrable on <span class="math inline">\([a, b]\)</span>, and <span class="math display">\[\int_{[a, b]} f(x)\text{d}x=\int_a^b f(x)\text{d}x.\]</span></p>
+<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(f\)</span> is Riemann integrable on <span class="math inline">\([a, b]\)</span>, then <span class="math inline">\(f\)</span> is continuous almost everywhere on <span class="math inline">\([a, b]\)</span>. Hence, <span class="math inline">\(f\)</span> is a bounded measurable function on <span class="math inline">\([a, b]\)</span>, and thus <span class="math inline">\(f \in L([a, b])\)</span>.</p>
+Let <span class="math display">\[g_n(x)=\begin{cases}
+M_i^{(n)}, &amp;x_{i-1}^{(n)}&lt;x&lt;x_i^{(n)} \\
+0, &amp;x=x_{i-1}^{(n)} \vee x=x_i^{(n)}
+\end{cases},\]</span> where <span class="math inline">\(\displaystyle \lim_{n \to \infty} g_n(x)=f(x)\ \text{a.e.}\ x \in [a, b]\)</span>, and <span class="math inline">\(g_n\)</span> is bounded. We have <span class="math display">\[\begin{aligned}
+\int_a^b f(x)\text{d}x&amp;=\lim_{n \to \infty} \sum_{i=1}^{k_n} M_i^{(n)}(x_i^{(n)}-x_{i-1}^{(n)})
+\\&amp;=\lim_{n \to \infty} \int_{[a, b]} g_n(x)\text{d}x
+\\&amp;=\int_{[a, b]} \lim_{n \to \infty} g_n(x)\text{d}x
+\\&amp;=\int_{[a, b]} f(x)\text{d}x.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 4.4</strong>    Suppose <span class="math inline">\(f\)</span> is a non-negative real function on <span class="math inline">\([a, b]\)</span>. If for all <span class="math inline">\(A&gt;a\)</span>, <span class="math inline">\(f\)</span> is Riemann integrable on <span class="math inline">\([a, A]\)</span>, and <span class="math inline">\(\displaystyle \int_a^{\infty} f(x)\text{d}x&lt;\infty\)</span>, then <span class="math inline">\(f\)</span> is Lebesgue integrable on <span class="math inline">\([a, \infty)\)</span>, and <span class="math display">\[\int_{[a, \infty)} f(x)\text{d}x=\int_a^\infty f(x)\text{d}x.\]</span></p>
+<p><strong><em>Proof.</em></strong> Take an arbitrary sequence <span class="math inline">\(\{A_n\}\)</span> such that <span class="math inline">\(A_n&gt;a\)</span> and <span class="math inline">\(\displaystyle \lim_{n \to \infty} A_n=\infty\)</span>. Hence, <span class="math display">\[\int_{[a, \infty)} f(x)\text{d}x=\lim_{n \to \infty} \int_{[a, A_n]} f(x)\text{d}x=\lim_{n \to \infty}\int_a^{A_n} f(x)\text{d}x=\int_a^\infty f(x)\text{d}x.\]</span></p>
+In addition, if <span class="math inline">\(\displaystyle \int_a^\infty f(x)\text{d}x\)</span> diverges, then <span class="math inline">\(\displaystyle \int_{[a, \infty)} f(x)\text{d}x=\infty\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note warning">
+            <p>If <span class="math inline">\(f\)</span> is not non-negative function, then Lebesgue integral <strong>is not</strong> a generalization of Riemann improper integral.</p>
+          </div>
+<h1 id="geometric-interpretation-of-lebesgue-integral">Geometric Interpretation of Lebesgue Integral</h1>
+<p><strong>Definition 5.1</strong>    Suppose <span class="math inline">\(f\)</span> is a non-negative function on <span class="math inline">\(E \subset \mathbb{R}^n\)</span>. We define <span class="math display">\[G(E, f)=\{(x, z): x \in E, 0 \leq z&lt;f(x)\} \subset \mathbb{R}^{n+1}.\]</span></p>
+<p><strong>Theorem 5.1</strong>    Suppose <span class="math inline">\(f\)</span> is a non-negative function on <span class="math inline">\(E \subset \mathbb{R}^n\)</span>, then</p>
+<p>    (1) <span class="math inline">\(f\)</span> is measurable on <span class="math inline">\(E\)</span> if and only if <span class="math inline">\(G(E, f)\)</span> is measurable;</p>
+<p>    (2) If <span class="math inline">\(f\)</span> is measurable on <span class="math inline">\(E\)</span>, then <span class="math display">\[\int_E f(x)\text{d}x=m(G(E, f)).\]</span></p>
+<h1 id="fubinis-theorem">Fubini's Theorem</h1>
+<p><span id="thm6.1"><strong>Theorem 6.1 (Fubini's Theorem)</strong></span>    Suppose <span class="math inline">\(A \subset \mathbb{R}^p\)</span> and <span class="math inline">\(B \subset \mathbb{R}^q\)</span> are measurable. If <span class="math inline">\(f\)</span> is a non-negative measurable function on <span class="math inline">\(A \times B\)</span>, then for <span class="math inline">\(\text{a.e.} x \in A\)</span>, <span class="math inline">\(f(x, y)\)</span> (as a function of <span class="math inline">\(y\)</span>) is measurable on <span class="math inline">\(B\)</span>, and <span class="math display">\[\int_{A \times B} f(x, y)\text{d}x\text{d}y=\int_A \left(\int_B f(x, y)\text{d}y\right)\text{d}x.\]</span> If <span class="math inline">\(f\)</span> is Lebesgue integrable on <span class="math inline">\(A \times B\)</span>, then for <span class="math inline">\(\text{a.e.} x \in A\)</span>, <span class="math inline">\(f(x, y)\)</span> (as a function of <span class="math inline">\(y\)</span>) is Lebesgue integrable on <span class="math inline">\(B\)</span>, <span class="math inline">\(\displaystyle \int_B f(x, y)\text{d}y\)</span> (as a function of <span class="math inline">\(x\)</span>) is Lebesgue integrable on <span class="math inline">\(A\)</span>, and <span class="math display">\[\int_{A \times B} f(x, y)\text{d}x\text{d}y=\int_A \left(\int_B f(x, y)\text{d}y\right)\text{d}x.\]</span></p>
+<p><strong>Example 6.1</strong>    Let <span class="math inline">\(\displaystyle f(x, y)=\frac{x^2-y^2}{(x^2+y^2)^2}\)</span> and <span class="math inline">\(E=(0, 1) \times (0, 1)\)</span>. We have <span class="math display">\[\int_{(0, 1)} \left(\int_{(0, 1)} f(x, y)\text{d}y\right)\text{d}x=\frac{\pi}{4}\]</span> and <span class="math display">\[\int_{(0, 1)} \left(\int_{(0, 1)} f(x, y)\text{d}x\right)\text{d}y=-\frac{\pi}{4}.\]</span> By <a href="#thm6.1">Fubini's theorem</a>, <span class="math inline">\(f\)</span> is not Lebesgue integrable.</p>
+]]></content>
+      <categories>
+        <category>Mathematics</category>
+        <category>Real analysis</category>
+      </categories>
+      <tags>
+        <tag>Lebesgue integral</tag>
+        <tag>Measurable</tag>
       </tags>
   </entry>
   <entry>
@@ -1053,295 +1453,6 @@ Suppose <span class="math inline">\(\alpha \in G\)</span>, then <span class="mat
       </categories>
       <tags>
         <tag>Set</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Lebesgue Integral</title>
-    <url>/Mathematics/Real-analysis/Lebesgue_Integral.html</url>
-    <content><![CDATA[<h1 id="lebesgue-integral-of-non-negative-simple-function">Lebesgue Integral of Non-negative Simple Function</h1>
-<p><strong>Definition 1.1</strong>    Suppose <span class="math inline">\(E\)</span> is measurable, <span class="math inline">\(E_i\)</span> are disjoint measurable sets, and <span class="math display">\[f(x)=\sum_{i=1}^s c_i\chi_{E_i}(x), c_i \geq 0.\]</span> The <strong>Lebesgue integral</strong> of <span class="math inline">\(f\)</span> on <span class="math inline">\(E\)</span> is <span class="math display">\[\int_E f(x)\text{d}x=\sum_{i=1}^s c_i \cdot m(E_i).\]</span> Suppose <span class="math inline">\(A \subset E\)</span>, and <span class="math inline">\(f|_A(x)=c_i\)</span>, <span class="math inline">\(x \in A \cap E_i\)</span>, then <span class="math display">\[\int_A f(x)\text{d}x=\sum_{i=1}^s c_i \cdot m(A \cap E_i).\]</span></p>
-<p><strong>Theorem 1.1</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are disjoint measurable subsets of <span class="math inline">\(E\)</span>, then <span class="math display">\[\int_{A \cup B} f(x)\text{d}x=\int_A f(x)\text{d}x+\int_B f(x)\text{d}x.\]</span></p>
-<strong><em>Proof.</em></strong> Since <span class="math inline">\(A \cap B=\varnothing\)</span>, then <span class="math display">\[\begin{aligned}
-\int_{A \cup B} f(x)\text{d}x&amp;=\sum_{i=1}^s c_i \cdot m((A \cup B) \cap E_i)
-\\&amp;=\sum_{i=1}^s c_i \cdot m((A \cap E_i) \cup (B \cap E_i))
-\\&amp;=\sum_{i=1}^s c_i \cdot (m(A \cap E_i)+m(B \cap E_i))
-\\&amp;=\sum_{i=1}^s c_i \cdot m(A \cap E_i)+\sum_{i=1}^s c_i \cdot m(B \cap E_i)
-\\&amp;=\int_A f(x)\text{d}x+\int_B f(x)\text{d}x.
-\end{aligned}\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 1.2</strong>    Suppose <span class="math inline">\(\{A_n\}_{n=1}^\infty\)</span> is an increasing collection of measurable subsets of <span class="math inline">\(E\)</span>, and <span class="math display">\[E=\bigcup_{n=1}^\infty A_n=\lim_{n \to \infty} A_n.\]</span> Then <span class="math display">\[\int_E f(x)\text{d}x=\lim_{n \to \infty}\int_{A_n} f(x)\text{d}x.\]</span></p>
-<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
-\lim_{n \to \infty} \int_{A_n} f(x)\text{d}x&amp;=\lim_{n \to \infty} \sum_{i=1}^s c_i \cdot m(A_n \cap E_i)
-\\&amp;=\sum_{i=1}^s c_i \cdot \lim_{n \to \infty} m(A_n \cap E_i)
-\\&amp;=\sum_{i=1}^s c_i \cdot m(E \cap E_i)
-\\&amp;=\int_E f(x)\text{d}x.
-\end{aligned}\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 1.3</strong>    Suppose <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are non-negative real numbers. Then <span class="math display">\[\int_E (\alpha f(x)+\beta g(x))\text{d}x=\alpha\int_E f(x)\text{d}x+\beta\int_E g(x)\text{d}x.\]</span></p>
-<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(c \in \mathbb{R} \geq 0\)</span>, we have <span class="math inline">\(\displaystyle cf(x)=\sum_{i=1}^s cc_i \cdot \chi_{E_i}(x)\)</span>, where <span class="math inline">\(cc_i \geq 0\)</span>. Then <span class="math inline">\(cf\)</span> is a non-negative simple function. Therefore, <span class="math display">\[\begin{aligned}
-\int_E cf(x)\text{d}x&amp;=\sum_{i=1}^s cc_i \cdot m(E_i)
-\\&amp;=c\sum_{i=1}^s c_i \cdot m(E_i)
-\\&amp;=c\int_E f(x)\text{d}x.
-\end{aligned}\]</span></p>
-<p>Suppose <span class="math inline">\(\displaystyle f(x)=\sum_{i=1}^s c_i \cdot \chi_{E_i}(x)\)</span> and <span class="math inline">\(\displaystyle g(x)=\sum_{i=1}^p d_i \cdot \chi_{\widetilde{E}_i}(x)\)</span>.</p>
-<p>When <span class="math inline">\(x \in E_i \cap \widetilde{E}_j\)</span>, <span class="math inline">\(f(x)+g(x)=c_i+d_j \geq 0\)</span>. Hence, <span class="math display">\[f(x)+g(x)=\sum_{\substack{1 \leq i \leq s \\ 1 \leq j \leq p}} (c_i+d_j) \cdot \chi_{E_i \cap \widetilde{E}_j}(x),\]</span> and <span class="math inline">\(f+g\)</span> is a non-negative simple function. Therefore, <span class="math display">\[\begin{aligned}
-\int_E (f(x)+g(x))\text{d}x&amp;=\sum_{\substack{1 \leq i \leq s \\ 1 \leq j \leq p}} (c_i+d_j) \cdot m(E_i \cap \widetilde{E}_j)
-\\&amp;=\sum_{\substack{1 \leq i \leq s \\ 1 \leq j \leq p}} c_i \cdot m(E_i \cap \widetilde{E}_j)+\sum_{\substack{1 \leq i \leq s \\ 1 \leq j \leq p}} d_j \cdot m(E_i \cap \widetilde{E}_j)
-\\&amp;=\sum_{1 \leq i \leq s} c_i\sum_{1 \leq j \leq p} m(E_i \cap \widetilde{E}_j)+\sum_{1 \leq j \leq p} d_j\sum_{1 \leq i \leq s} m(E_i \cap \widetilde{E}_j)
-\\&amp;=\sum_{1 \leq i \leq s} c_i \cdot m(E_i)+\sum_{1 \leq j \leq p} d_j \cdot m(\widetilde{E}_j)
-\\&amp;=\int_E f(x)\text{d}x+\int_E g(x)\text{d}x.
-\end{aligned}\]</span></p>
-Hence, it is easy to show that <span class="math display">\[\int_E (\alpha f(x)+\beta g(x))\text{d}x=\alpha\int_E f(x)\text{d}x+\beta\int_E g(x)\text{d}x.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="lebesgue-integral-of-non-negative-measurable-function">Lebesgue Integral of Non-negative Measurable Function</h1>
-<h2 id="definition">Definition</h2>
-<p><strong>Definition 2.1</strong>    Suppose <span class="math inline">\(E\)</span> is measurable, and <span class="math inline">\(f\)</span> is a non-negative measurable function on <span class="math inline">\(E\)</span>. The <strong>Lebesgue integral</strong> of <span class="math inline">\(f\)</span> on <span class="math inline">\(E\)</span> is <span class="math display">\[\int_E f(x)\text{d}x=\sup\left\{\int_E \varphi(x)\text{d}x\right\},\]</span> where <span class="math inline">\(\varphi\)</span> is a non-negative simple function on <span class="math inline">\(E\)</span>, and <span class="math inline">\(\varphi(x) \leq f(x)\)</span>.</p>
-<p><strong>Theorem 2.1</strong>    Suppose <span class="math inline">\(\varphi\)</span> and <span class="math inline">\(\psi\)</span> are non-negative simple functions on <span class="math inline">\(E\)</span>. If <span class="math inline">\(\varphi(x) \leq \psi(x)\)</span>, then <span class="math display">\[\int_E \varphi(x)\text{d}x \leq \int_E \psi(x)\text{d}x.\]</span></p>
-<p><strong>Corollary 2.2</strong>    Suppose <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are non-negative measurable functions on <span class="math inline">\(E\)</span>. If <span class="math inline">\(f(x) \leq g(x)\)</span>, then <span class="math display">\[\int_E f(x)\text{d}x \leq \int_E g(x)\text{d}x.\]</span></p>
-<strong><em>Proof.</em></strong> For any <span class="math inline">\(0 \leq \varphi(x) \leq f(x)\)</span>, where <span class="math inline">\(\varphi\)</span> is a non-negative simple function, we have <span class="math inline">\(0 \leq \varphi(x) \leq g(x)\)</span>, <span class="math inline">\(x \in E\)</span>. Then <span class="math display">\[\int_E g(x)\text{d}x \geq \int_E \varphi(x)\text{d}x.\]</span> Therefore, <span class="math display">\[\int_E g(x)\text{d}x \geq \sup_{0 \leq \varphi(x) \leq f(x)}\left\{\int_E \varphi(x)\text{d}x\right\}=\int_E f(x)\text{d}x.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Definition 2.2</strong>    If <span class="math inline">\(\displaystyle \int_E f(x)\text{d}x&lt;\infty\)</span>, then <span class="math inline">\(f\)</span> is <strong>Lebesgue integrable</strong> on <span class="math inline">\(E\)</span>.</p>
-<p><strong>Theorem 2.3</strong>    If <span class="math inline">\(f\)</span> is Lebesgue integrable on <span class="math inline">\(E\)</span>, then <span class="math inline">\(f\)</span> is finite almost everywhere on <span class="math inline">\(E\)</span>, i.e., <span class="math display">\[m(E[f=\infty])=0.\]</span></p>
-<strong><em>Proof.</em></strong> Since <span class="math inline">\(f(x) \geq f(x) \cdot \chi_{E[f \geq n]}(x)\)</span>, then <span class="math display">\[\infty&gt;\int_E f(x)\text{d}x \geq \int_E f(x) \cdot \chi_{E[f \geq n]}(x)\text{d}x=\int_{E[f \geq n]} f(x)\text{d}x \geq \int_{E[f \geq n]} n\text{d}x=n \cdot m(E[f \geq n]).\]</span> Therefore, <span class="math display">\[m(E[f \geq n]) \leq \frac{1}{n}\int_E f(x)\text{d}x.\]</span> Since <span class="math inline">\(E[f \geq n] \supset E[f \geq n+1]\)</span> and <span class="math inline">\(\displaystyle E[f=\infty]=\bigcap_{n=1}^\infty E[f \geq n]\)</span>, then <span class="math display">\[m(E[f=\infty])=\lim_{n \to \infty} m(E[f \geq n])=0,\]</span> i.e., <span class="math inline">\(f\)</span> is finite almost everywhere on <span class="math inline">\(E\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 2.4</strong>    Suppose <span class="math inline">\(A\)</span> is a measurable subset of <span class="math inline">\(E\)</span>. Then <span class="math display">\[\int_A f(x)\text{d}x=\int_E f(x) \cdot \chi_A(x)\text{d}x.\]</span></p>
-<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
-\int_A f(x)\text{d}x&amp;=\sup_{\substack{\varphi(x) \leq f(x) \\ x \in A}}\left\{\int_A \varphi(x)\text{d}x\right\}
-\\&amp;=\sup_{\substack{\varphi(x)\chi_A(x) \leq f(x)\chi_A(x) \\ x \in E}}\left\{\int_A \varphi(x)\text{D}x\right\}
-\\&amp;=\int_E f(x)\varphi_A(x)\text{d}x.
-\end{aligned}\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 2.5</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are disjoint measurable subsets of <span class="math inline">\(E\)</span>, then <span class="math display">\[\int_{A \cup B} f(x)\text{d}x=\int_A f(x)\text{d}x+\int_B f(x)\text{d}x.\]</span></p>
-<p><strong><em>Proof.</em></strong> Take an arbitrary simple function <span class="math inline">\(\varphi\)</span> on <span class="math inline">\(A \cup B\)</span>, where <span class="math inline">\(0 \leq \varphi(x) \leq f(x)\)</span> for all <span class="math inline">\(x \in E\)</span>. We have <span class="math display">\[\int_{A \cup B} \varphi(x)\text{d}x=\int_A \varphi(x)\text{d}x+\int_B \varphi(x)\text{d}x \leq \int_A f(x)\text{d}x+\int_B f(x)\text{d}x.\]</span> Therefore, <span class="math display">\[\int_{A \cup B} f(x)\text{d}x \leq \int_{A \cup B} \varphi(x)\text{d}x \leq \int_A f(x)\text{d}x+\int_B f(x)\text{d}x.\]</span></p>
-Take an arbitrary simple function <span class="math inline">\(\varphi_1\)</span> on <span class="math inline">\(A\)</span>, where <span class="math inline">\(0 \leq \varphi_1(x) \leq f(x)\)</span> for all <span class="math inline">\(x \in A\)</span>, and an arbitrary simple function <span class="math inline">\(\varphi_2\)</span> on <span class="math inline">\(B\)</span>, where <span class="math inline">\(0 \leq \varphi_2(x) \leq f(x)\)</span> for all <span class="math inline">\(x \in B\)</span>. Then <span class="math display">\[\varphi(x)=\begin{cases}
-\varphi_1(x), &amp;x \in A \\
-\varphi_2(x), &amp;x \in B
-\end{cases}\]</span> is a simple function on <span class="math inline">\(A \cup B\)</span>, where <span class="math inline">\(0 \leq \varphi(x) \leq f(x)\)</span>. Hence, <span class="math display">\[\int_{A \cup B} f(x)\text{d}x \geq \int_{A \cup B} \varphi(x)\text{d}x=\int_A \varphi(x)\text{d}x+\int_B \varphi(x)\text{d}x=\int_A \varphi_1(x)\text{d}x+\int_B \varphi_2(x)\text{d}x.\]</span> Therefore, <span class="math display">\[\int_{A \cup B} f(x)\text{d}x \geq \int_A f(x)\text{d}x+\int_B f(x)\text{d}x.\]</span> As a consequence, <span class="math display">\[\int_{A \cup B} f(x)\text{d}x=\int_A f(x)\text{d}x+\int_B f(x)\text{d}x.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h2 id="limit-and-integral">Limit and Integral</h2>
-<p><strong>Theorem 2.6</strong>    Suppose <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are non-negative real numbers, then <span class="math display">\[\int_E (\alpha f(x)+\beta g(x))\text{d}x=\alpha\int_E f(x)\text{d}x+\beta\int_E g(x)\text{d}x.\]</span></p>
-<div class="note ">
-            <p><span id="thm2.6.1"><strong>Lemma 2.6.1 (Levi's Monotonicity Theorem)</strong></span>    Suppose <span class="math inline">\(\{f_n\}_{n=1}^\infty\)</span> is a sequence of non-negative measurable functions on <span class="math inline">\(E\)</span>. For <span class="math inline">\(x \in E\)</span>, and for all <span class="math inline">\(n\)</span>, we have <span class="math inline">\(f_n(x) \leq f_{n+1}(x)\)</span>. Then <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x=\int_E \lim_{n \to \infty} f_n(x)\text{d}x.\]</span></p><p><strong><em>Proof.</em></strong> Let <span class="math inline">\(\displaystyle f(x)=\lim_{n \to \infty} f_n(x)\)</span>. We know <span class="math inline">\(f\)</span> is a non-negative measurable function on <span class="math inline">\(E\)</span>, and <span class="math inline">\(f_n(x) \leq f(x)\)</span> for all <span class="math inline">\(n \in \mathbb{N}\)</span>. Hence, <span class="math display">\[\int_E f_n(x)\text{d}x \leq \int_E f(x)\text{d}x.\]</span> Since <span class="math display">\[\int_E f_n(x)\text{d}x \leq \int_E f_{n+1}(x)\text{d}x,\]</span> we have <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x \leq \int_E f(x)\text{d}x.\]</span></p><p>Take an arbitrary non-negative simple function <span class="math inline">\(\varphi\)</span> on <span class="math inline">\(E\)</span>, where <span class="math inline">\(0 \leq \varphi(x) \leq f(x)\)</span>. Take an arbitrary <span class="math inline">\(0&lt;c&lt;1\)</span>. Let <span class="math inline">\(E_n=E[f_n \geq c\varphi]\)</span>, which is a measurable subset of <span class="math inline">\(E\)</span>.</p><p>Since <span class="math inline">\(f_n(x) \leq f_{n+1}(x)\)</span>, then <span class="math display">\[f_n(x) \geq c\varphi(x) \Rightarrow f_{n+1}(x) \geq c\varphi(x),\]</span> i.e., <span class="math inline">\(E_n \subset E_{n+1}\)</span>.</p><p>Since <span class="math inline">\(\displaystyle \lim_{n \to \infty} f_n(x)=f(x)\)</span>, and <span class="math inline">\(c\varphi(x)&lt;f(x)\)</span>, then when <span class="math inline">\(n \gg 0\)</span>, <span class="math inline">\(c\varphi(x) \leq f_n(x)\)</span>. Hence, <span class="math display">\[\bigcup_{n=1}^\infty E_n=E.\]</span></p><p>Therefore, <span class="math display">\[\int_E \varphi(x)\text{d}x=\lim_{n \to \infty} \int_{E_n} \varphi(x)\text{d}x.\]</span> Since <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x \geq \lim_{n \to \infty} \int_{E_n} f_n(x)\text{d}x \geq \lim_{n \to \infty} \int_{E_n} c\varphi(x)\text{d}x=c\lim_{n \to \infty} \int_{E_n} \varphi(x)\text{d}x,\]</span> then <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x \geq c\int_E \varphi(x)\text{d}x.\]</span> Take <span class="math inline">\(c \to 1\)</span>, we have <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x \geq \int_E \varphi(x)\text{d}x.\]</span> Hence, <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x \geq \int_E f(x)\text{d}x.\]</span></p>Therefore, <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x=\int_E \lim_{n \to \infty} f_n(x)\text{d}x.\]</span><p align="right"><span class="math inline">\(\square\)</span></p>
-          </div>
-<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(c \in \mathbb{R} \geq 0\)</span>. When <span class="math inline">\(c&gt;0\)</span>, we have <span class="math display">\[\int_E cf(x)\text{d}x=\sup\left\{\int_E \varphi(x)\text{d}x\right\},\]</span> where <span class="math inline">\(0 \leq \varphi(x) \leq cf(x)\)</span>, and <span class="math inline">\(\varphi\)</span> is a simple function on <span class="math inline">\(E\)</span>. Let <span class="math inline">\(\displaystyle \psi(x)=\frac{1}{c}\varphi(x)\)</span>, which is a simple function on <span class="math inline">\(E\)</span>, then we have <span class="math display">\[\int_E cf(x)\text{d}x=\sup\left\{\int_E c\psi(x)\text{d}x\right\}=\sup\left\{c\int_E \psi(x)\text{d}x\right\}=c\sup\left\{\int_E \psi(x)\text{d}x\right\},\]</span> where <span class="math inline">\(0 \leq \psi(x) \leq f(x)\)</span>. Hence, <span class="math display">\[\int_E cf(x)\text{d}x=c\int_E f(x)\text{d}x.\]</span></p>
-<p>When <span class="math inline">\(c=0\)</span>, it is obvious that <span class="math display">\[\int_E cf(x)\text{d}x=c\int_E f(x)\text{d}x.\]</span></p>
-<p>There exist two sequences of non-negative simple function <span class="math inline">\(\{\varphi_n\}\)</span> and <span class="math inline">\(\{\psi_n\}\)</span> on <span class="math inline">\(E\)</span> such that <span class="math display">\[\lim_{n \to \infty} \varphi_n(x)=f(x), \lim_{n \to \infty} \psi_n(x)=g(x),\]</span> where for all <span class="math inline">\(x \in E\)</span>, <span class="math inline">\(\varphi_n(x) \leq \varphi_{n+1}(x) \leq f(x)\)</span>, and <span class="math inline">\(\psi_n(x) \leq \psi_{n+1}(x) \leq g(x)\)</span>. We know <span class="math inline">\(\varphi_n+\psi_n\)</span> is a non-negative simple function on <span class="math inline">\(E\)</span>, <span class="math inline">\(\varphi_n(x)+\psi_n(x) \leq \varphi_{n+1}(x)+\psi_{n+1}(x) \leq f(x)+g(x)\)</span>, and <span class="math display">\[\lim_{n \to \infty} (\varphi_n(x)+\psi_n(x))=f(x)+g(x).\]</span> By <a href="#thm2.6.1">Levi's monotonicity theorem</a>, we have <span class="math display">\[\begin{aligned}
-\int_E \lim_{n \to \infty} (\varphi_n(x)+\psi_n(x))\text{d}x&amp;=\int_E (f(x)+g(x))\text{d}x
-\\&amp;=\lim_{n \to \infty} \int_E (\varphi_n(x)+\psi_n(x))\text{d}x
-\\&amp;=\lim_{n \to \infty} \left(\int_E \varphi_n(x)\text{d}x+\int_E \psi_n(x)\text{d}x\right)
-\\&amp;=\lim_{n \to \infty} \int_E \varphi_n(x)\text{d}x+\lim_{n \to \infty} \int_E \psi_n(x)\text{d}x
-\\&amp;=\int_E \lim_{n \to \infty} \varphi_n(x)\text{d}x+\int_E \lim_{n \to \infty} \psi_n(x)\text{d}x
-\\&amp;=\int_E f(x)\text{d}x+\int_E g(x)\text{d}x.
-\end{aligned}\]</span></p>
-Hence, it is easy to show that <span class="math display">\[\int_E (\alpha f(x)+\beta g(x))\text{d}x=\alpha\int_E f(x)\text{d}x+\beta\int_E g(x)\text{d}x.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 2.7</strong>    Suppose <span class="math inline">\(\{f_n\}_{n=1}^\infty\)</span> is a sequence of non-negative measurable functions on <span class="math inline">\(E\)</span>. Then <span class="math display">\[\int_E \left(\sum_{n=1}^\infty f_n(x)\right)\text{d}x=\sum_{n=1}^\infty \int_E f_n(x)\text{d}x.\]</span></p>
-<strong><em>Proof.</em></strong> Let <span class="math inline">\(\displaystyle g_n(x)=\sum_{k=1}^n f_k(x)\)</span>, which is a non-negative measurable function. Besides, <span class="math display">\[g_{n+1}(x)=g_n(x)+f_{n+1}(x) \geq g_n(x).\]</span> By <a href="#thm2.6.1">Levi's monotonicity theorem</a>, we have <span class="math display">\[\lim_{n \to \infty} \int_E g_n(x)\text{d}x=\int_E \lim_{n \to \infty} g_n(x)\text{d}x=\int_E \left(\sum_{n=1}^\infty f_n(x)\right)\text{d}x.\]</span> Since <span class="math display">\[\lim_{n \to \infty} \int_E g_n(x)\text{d}x=\lim_{n \to \infty} \sum_{k=1}^n \int_E f_k(x)\text{d}x=\sum_{n=1}^\infty \int_E f_n(x)\text{d}x,\]</span> then <span class="math display">\[\int_E \left(\sum_{n=1}^\infty f_n(x)\right)\text{d}x=\sum_{n=1}^\infty \int_E f_n(x)\text{d}x.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><span id="thm2.8"><strong>Theorem 2.8 (Fatou's Lemma)</strong></span>    Suppose <span class="math inline">\(\{f_n\}_{n=1}^\infty\)</span> is a sequence of non-negative measurable functions on <span class="math inline">\(E\)</span>. Then <span class="math display">\[\int_E \varliminf_{n \to \infty} f_n(x)\text{d}x \leq \varliminf_{n \to \infty} \int_E f_n(x)\text{d}x.\]</span></p>
-<strong><em>Proof.</em></strong> Since <span class="math inline">\(\displaystyle \left\{\inf_{k \geq n} f_k\right\}\)</span> is an increasing sequence of non-negative measurable functions on <span class="math inline">\(E\)</span>. By <a href="#thm2.6.1">Levi's monotonicity theorem</a>, we have <span class="math display">\[\int_E \varliminf_{n \to \infty} f_n(x)\text{d}x=\int_E \left(\lim_{n \to \infty} \inf_{k \geq n} f_k(x)\right)\text{d}x=\lim_{n \to \infty} \int_E \inf_{k \geq n} f_k(x)\text{d}x.\]</span> Since <span class="math display">\[\int_E \inf_{k \geq n} f_k(x)\text{d}x \leq \inf_{k \geq n} \int_E f_k(x)\text{d}x,\]</span> then <span class="math display">\[\lim_{n \to \infty} \int_E \inf_{k \geq n} f_k(x)\text{d}x \leq \lim_{n \to \infty} \inf_{k \geq n} \int_E f_k(x)\text{d}x=\varliminf_{n \to \infty} \int_E f_n(x)\text{d}x.\]</span> Hence, <span class="math display">\[\int_E \varliminf_{n \to \infty} f_n(x)\text{d}x \leq \varliminf_{n \to \infty} \int_E f_n(x)\text{d}x.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<div class="note warning">
-            <p>The equal sign in the <a href="#thm2.8">Fatou's lemma</a> does not always hold. For example, let <span class="math display">\[f_n(x)=\begin{cases}n, &amp;\displaystyle 0&lt;x&lt;\frac{1}{n} \\0, &amp;\displaystyle x \geq \frac{1}{n}\end{cases}.\]</span> For any <span class="math inline">\(x \in (0, \infty)\)</span>, <span class="math inline">\(\displaystyle \lim_{n \to \infty} f_n(x)=0\)</span>, and thus <span class="math display">\[\int_{(0, \infty)} \lim_{n \to \infty} f_n(x)\text{d}x=0.\]</span> However, <span class="math display">\[\int_{(0, \infty)} f_n(x)\text{d}x=\int_{\left(0, \frac{1}{n}\right)} f_n(x)\text{d}x+\int_{\left[\frac{1}{n}, \infty\right)} f_n(x)\text{d}x=1,\]</span> and thus <span class="math display">\[\lim_{n \to \infty} \int_{(0, \infty)} f_n(x)\text{d}x=1.\]</span></p>
-          </div>
-<h2 id="zero-measure-set-and-integral">Zero Measure Set and Integral</h2>
-<p><strong>Theorem 2.9</strong>    Suppose <span class="math inline">\(E\)</span> is a zero measure set. Then <span class="math display">\[\int_E f(x)\text{d}x=0.\]</span></p>
-<strong><em>Proof.</em></strong> By definition, <span class="math display">\[\int_E f(x)\text{d}x=\sup\left\{\int_E \varphi(x)\text{d}x\right\},\]</span> where <span class="math inline">\(\varphi\)</span> is a non-negative simple function on <span class="math inline">\(E\)</span>, and <span class="math inline">\(\varphi(x) \leq f(x)\)</span>. Since <span class="math display">\[\int_E \varphi(x)\text{d}x=0,\]</span> then <span class="math display">\[\int_E f(x)\text{d}x=0.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 2.10</strong>    If <span class="math inline">\(f(x) \leq g(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math display">\[\int_E f(x)\text{d}x \leq \int_E g(x)\text{d}x.\]</span></p>
-<strong><em>Proof.</em></strong> Let <span class="math inline">\(E_1=E[f \leq g]\)</span> and <span class="math inline">\(E_2=E[f&gt;g]\)</span>, where <span class="math inline">\(m(E_2)=0\)</span>, then <span class="math inline">\(E=E_1 \cup E_2\)</span>, and <span class="math inline">\(E_1 \cap E_2=\varnothing\)</span>. Hence, <span class="math display">\[\begin{aligned}
-\int_E f(x)\text{d}x&amp;=\int_{E_1} f(x)\text{d}x+\int_{E_2} f(x)\text{d}x
-\\&amp; \leq \int_{E_1} g(x)\text{d}x+0
-\\&amp;=\int_{E_1} g(x)\text{d}x+\int_{E_2} g(x)\text{d}x
-\\&amp;=\int_E g(x)\text{d}x.
-\end{aligned}\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Corollary 2.11</strong>    If <span class="math inline">\(f(x)=g(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math display">\[\int_E f(x)\text{d}x=\int_E g(x)\text{d}x.\]</span> Moreover, if <span class="math inline">\(f(x)=0\ \text{a.e.}\ x \in E\)</span>, then <span class="math display">\[\int_E f(x)\text{d}x=0.\]</span></p>
-<p><strong>Theorem 2.12</strong>    If <span class="math display">\[\int_E f(x)\text{d}x=0,\]</span> then <span class="math inline">\(f(x)=0\ \text{a.e.}\ x \in E\)</span>.</p>
-<strong><em>Proof.</em></strong> Since <span class="math display">\[0=\int_E f(x)\text{d}x \geq \int_{E\left[f \geq \frac{1}{n}\right]} f(x)\text{d}x \geq \int_{E\left[f \geq \frac{1}{n}\right]} \frac{1}{n}\text{d}x=\frac{1}{n} \cdot m\left(E\left[f \geq \frac{1}{n}\right]\right),\]</span> then <span class="math inline">\(\displaystyle m\left(E\left[f \geq \frac{1}{n}\right]\right)=0\)</span>. Hence, <span class="math display">\[m(E[f \neq 0])=m\left(\bigcup_{n=1}^\infty E\left[f \geq \frac{1}{n}\right]\right) \leq \sum_{n=1}^\infty m\left(E\left[f \geq \frac{1}{n}\right]\right)=0.\]</span> Therefore, <span class="math inline">\(m(E[f \geq 0])=0\)</span>, i.e., <span class="math inline">\(f(x)=0\ \text{a.e.}\ x \in E\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="lebesgue-integral-of-measurable-function">Lebesgue Integral of Measurable Function</h1>
-<p><strong>Definition 3.1</strong>    Suppose <span class="math inline">\(E\)</span> is measurable, and <span class="math inline">\(f\)</span> is a measurable function on <span class="math inline">\(E\)</span>. When at least one of <span class="math inline">\(\displaystyle \int_E f^+(x)\text{d}x\)</span> and <span class="math inline">\(\displaystyle \int_E f^-(x)\text{d}x\)</span> is finite, the <strong>Lebesgue integral</strong> of <span class="math inline">\(f\)</span> on <span class="math inline">\(E\)</span> is <span class="math display">\[\int_E f(x)\text{d}x=\int_E f^+(x)\text{d}x-\int_E f^-(x)\text{d}x.\]</span> If <span class="math inline">\(\displaystyle \int_E f^+(x)\text{d}x\)</span> and <span class="math inline">\(\displaystyle \int_E f^-(x)\text{d}x\)</span> are finite, then <span class="math inline">\(f\)</span> is <strong>Lebesgue integrable</strong> on <span class="math inline">\(E\)</span>. The collection of all Lebesgue integrable functions on <span class="math inline">\(E\)</span> is denoted <span class="math inline">\(L(E)\)</span>.</p>
-<p><strong>Theorem 3.1</strong>    Suppose <span class="math inline">\(E \neq \varnothing\)</span> and <span class="math inline">\(m(E)=0\)</span>. Then any real function <span class="math inline">\(f\)</span> on <span class="math inline">\(E\)</span> is Lebesgue integrable, and <span class="math display">\[\int_E f(x)\text{d}x=0.\]</span></p>
-<strong><em>Proof.</em></strong> Since <span class="math inline">\(m(E)=0\)</span>, and <span class="math inline">\(f^+\)</span> and <span class="math inline">\(f^-\)</span> are non-negative measurable on <span class="math inline">\(E\)</span>, then <span class="math display">\[\int_E f^+(x)\text{d}x=\int_E f^-(x)\text{d}x=0.\]</span> Hence, <span class="math inline">\(f \in L(E)\)</span>, and <span class="math display">\[\int_E f(x)\text{d}x=\int_E f^+(x)\text{d}x-\int_E f^-(x)\text{d}x=0.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 3.2</strong>    Suppose <span class="math inline">\(\displaystyle E=\bigcup_{n=1}^\infty E_n\)</span>, and <span class="math inline">\(\{E_n\}\)</span> is a collection of disjoint measurable subsets. If the Lebesgue integral of <span class="math inline">\(f\)</span> on <span class="math inline">\(E\)</span> exists, then <span class="math display">\[\int_E f(x)\text{d}x=\sum_{n=1}^\infty \int_{E_n} f(x)\text{d}x.\]</span></p>
-<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(f\)</span> is a non-negative measurable function. We have <span class="math display">\[\int_{E_n} f(x)\text{d}x=\int_E f(x) \cdot \chi_{E_n}(x)\text{d}x\]</span> and thus <span class="math display">\[\sum_{n=1}^\infty \int_{E_n} f(x)\text{d}x=\sum_{n=1}^\infty \int_E f(x) \cdot \chi_{E_n}(x)\text{d}x=\int_E \sum_{n=1}^\infty f(x) \cdot \chi_{E_n}(x)\text{d}x=\int_E f(x)\text{d}x.\]</span></p>
-Suppose <span class="math inline">\(f\)</span> is a measurable function. We know at least one of <span class="math inline">\(\displaystyle \sum_{n=1}^\infty \int_{E_n} f^+(x)\text{d}x\)</span> and <span class="math inline">\(\displaystyle \sum_{n=1}^\infty \int_{E_n} f^-(x)\text{d}x\)</span> is convergent. Hence, <span class="math display">\[\begin{aligned}
-\int_E f(x)\text{d}x&amp;=\int_E f^+(x)\text{d}x-\int_E f^-(x)\text{d}x
-\\&amp;=\left(\sum_{n=1}^\infty \int_{E_n} f^+(x)\text{d}x\right)-\left(\sum_{n=1}^\infty \int_{E_n} f^-(x)\text{d}x\right)
-\\&amp;=\sum_{n=1}^\infty \left(\int_{E_n} f^+(x)\text{d}x-\int_{E_n} f^-(x)\text{d}x\right)
-\\&amp;=\sum_{n=1}^\infty \int_{E_n} f(x)\text{d}x.
-\end{aligned}\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 3.3</strong>    <span class="math inline">\(f \in L(E) \Leftrightarrow |f| \in L(E)\)</span>.</p>
-<p><strong><em>Proof.</em></strong> (<span class="math inline">\(\Leftarrow\)</span>) Suppose <span class="math inline">\(f \in L(E)\)</span>. Then <span class="math inline">\(\displaystyle \int_E f^+(x)\text{d}x&lt;\infty\)</span> and <span class="math inline">\(\displaystyle \int_E f^-(x)\text{d}x\)</span>, and thus <span class="math display">\[\int_E |f(x)|\text{d}x=\int_E (f^+(x)+f^-(x))\text{d}x=\int_E f^+(x)\text{d}x+\int_E f^-(x)\text{d}x&lt;\infty,\]</span> i.e., <span class="math inline">\(|f| \in L(E)\)</span>.</p>
-(<span class="math inline">\(\Rightarrow\)</span>) Suppose <span class="math inline">\(|f| \in L(E)\)</span>. Then <span class="math inline">\(f^+(x) \leq |f(x)|\)</span> and <span class="math inline">\(f^-(x) \leq |f(x)|\)</span>. Hence, <span class="math display">\[\int_E f^+(x)\text{d}x \leq \int_E |f(x)|\text{d}x&lt;\infty\]</span> and <span class="math display">\[\int_E f^-(x)\text{d}x \leq \int_E |f(x)|\text{d}x&lt;\infty.\]</span> Therefore, <span class="math inline">\(f \in L(E)\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 3.4</strong>    Suppose <span class="math inline">\(|f(x)| \leq g(x)\ \text{a.e.}\ x \in E\)</span>, and <span class="math inline">\(g\)</span> is a non-negative Lebesgue integrable function on <span class="math inline">\(E\)</span>. Then <span class="math inline">\(f \in L(E)\)</span>, and <span class="math display">\[\left|\int_E f(x)\text{d}x\right| \leq \int_E |f(x)|\text{d}x \leq \int_E g(x)\text{d}x.\]</span></p>
-<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(|f(x)| \leq g(x)\ \text{a.e.}\ x \in E\)</span>, <span class="math inline">\(|f|\)</span> and <span class="math inline">\(g\)</span> are non-negative measurable functions on <span class="math inline">\(E\)</span>, and <span class="math inline">\(g\)</span> is Lebesgue integrable, then <span class="math display">\[\int_E |f(x)|\text{d}x \leq \int_E g(x)\text{d}x&lt;\infty,\]</span> i.e., <span class="math inline">\(|f| \in L(E)\)</span>. Hence, <span class="math inline">\(f \in L(E)\)</span>.</p>
-In addition, <span class="math display">\[\begin{aligned}
-\left|\int_E f(x)\text{d}x\right|&amp;=\left|\int_E f^+(x)\text{d}x-\int_E f^-(x)\text{d}x\right|
-\\&amp;\leq \left|\int_E f^+(x)\text{d}x\right|+\left|\int_E f^-(x)\text{d}x\right|
-\\&amp;=\int_E f^+(x)\text{d}x+\int_E f^-(x)\text{d}x
-\\&amp;=\int_E (f^+(x)+f^-(x))\text{d}x
-\\&amp;=\int_E |f(x)|\text{d}x.
-\end{aligned}\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 3.5</strong>    Suppose <span class="math inline">\(f \in L(E)\)</span>, and <span class="math inline">\(A\)</span> is a measurable subset of <span class="math inline">\(E\)</span>, then <span class="math display">\[\forall \varepsilon&gt;0, \exists \delta&gt;0\ \text{s.t.}\ m(A)&lt;\delta \Rightarrow \left|\int_A f(x)\text{d}x\right| \leq \int_A |f(x)|\text{d}x&lt;\varepsilon.\]</span></p>
-<p><strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>. Suppose <span class="math inline">\(f\)</span> is a non-negative simple function. We know <span class="math inline">\(f(x) \leq M\)</span>, for all <span class="math inline">\(x \in A\)</span>. Take <span class="math inline">\(\displaystyle \delta=\frac{\varepsilon}{M+1}\)</span>, when <span class="math inline">\(m(A)&lt;\delta\)</span>, we have <span class="math display">\[\int_A f(x)\text{d}x \leq M \cdot m(A)&lt;\varepsilon.\]</span></p>
-<p>Suppose <span class="math inline">\(f\)</span> is a measurable function, then <span class="math inline">\(|f|\)</span> is a non-negative measurable function. There exists a non-negative simple function such that <span class="math inline">\(\varphi(x) \leq |f(x)|\)</span> and <span class="math display">\[\int_E \varphi(x)\text{d}x \leq \int_E |f(x)|\text{d}x \leq \int_E \varphi(x)+\frac{\varepsilon}{2}.\]</span></p>
-We take a <span class="math inline">\(\delta\)</span> such that when <span class="math inline">\(m(A)&lt;\delta\)</span>, <span class="math inline">\(\displaystyle \int_A \varphi(x)\text{d}x&lt;\frac{\varepsilon}{2}\)</span>. Hence, <span class="math display">\[\begin{aligned}
-\int_A |f(x)|\text{d}x&amp;=\int_A \varphi(x)\text{d}x+\int_A (|f(x)|-\varphi(x))\text{d}x
-\\&amp;\leq \int_A \varphi(x)\text{d}x+\int_E(|f(x)|-\varphi(x))\text{d}x
-\\&amp;=\int_A \varphi(x)\text{d}x+\int_E |f(x)|\text{d}x-\int_E \varphi(x)\text{d}x
-\\&amp;&lt;\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon.
-\end{aligned}\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 3.6</strong>    Suppose <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are Lebesgue integrable functions, and <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are real numbers. Then <span class="math inline">\(\alpha f+\beta g \in L(E)\)</span>, and <span class="math display">\[\int_E (\alpha f(x)+\beta g(x))\text{d}x=\alpha\int_E f(x)\text{d}x+\beta\int_E g(x)\text{d}x.\]</span></p>
-<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(c \in \mathbb{R}\)</span>. When <span class="math inline">\(c=0\)</span>, it is obvious that <span class="math inline">\(cf \in L(E)\)</span>, and <span class="math display">\[\int_E cf(x)\text{d}x=c\int_E f(x)\text{d}x.\]</span></p>
-<p>When <span class="math inline">\(c&gt;0\)</span>, <span class="math inline">\((cf)^+=cf^+\)</span> and <span class="math inline">\((cf)^-=cf^-\)</span>.</p>
-<p>Since <span class="math inline">\(f \in L(E)\)</span>, then <span class="math inline">\(\displaystyle \int_E f^+(x)\text{d}x&lt;\infty\)</span> and <span class="math inline">\(\displaystyle \int_E f^-(x)\text{d}x&lt;\infty\)</span>, and thus <span class="math display">\[\int_E (cf)^+(x)\text{d}x=\int_E cf^+(x)\text{d}x=c\int_E f^+(x)\text{d}x&lt;\infty\]</span> and <span class="math display">\[\int_E (cf)^-(x)\text{d}x=\int_E cf^-(x)\text{d}x=c\int_E f^-(x)\text{d}x&lt;\infty.\]</span> Therefore, <span class="math inline">\(cf(x) \in L(E)\)</span>, and <span class="math display">\[\begin{aligned}
-\int_E cf(x)\text{d}x&amp;=\int_E (cf)^+(x)\text{d}x-\int_E (cf)^-(x)\text{d}x
-\\&amp;=c\int_E f^+(x)\text{d}x-c\int_E f^-(x)\text{d}x
-\\&amp;=c\left(\int_E f^+(x)\text{d}x-\int_E f^-(x)\text{d}x\right)
-\\&amp;=c\int_E f(x)\text{d}x.
-\end{aligned}\]</span></p>
-<p>When <span class="math inline">\(c&lt;0\)</span>, <span class="math inline">\((cf)^+=|c|f^-\)</span> and <span class="math inline">\((cf)^-=|c|f^+\)</span>. Similarly, we can show that <span class="math inline">\(cf \in L(E)\)</span>, and <span class="math display">\[\int_E cf(x)\text{d}x=c\int_E f(x)\text{d}x.\]</span></p>
-<p>In addition, we know <span class="math inline">\(|f|\)</span> and <span class="math inline">\(|g|\)</span> are Lebesgue integrable, and <span class="math display">\[\int_E(|f|+|g|)(x)\text{d}x=\int_E |f|(x)\text{d}x+\int_E |g|(x)\text{d}x&lt;\infty,\]</span> i.e., <span class="math inline">\(|f|+|g| \in L(E)\)</span>. Since <span class="math inline">\(|f+g| \leq |f|+|g|\)</span>, then <span class="math inline">\(|f+g| \in L(E)\)</span>.</p>
-<p>Since <span class="math inline">\(f+g=(f+g)^+-(f+g)^-=f^+-f^-+g^+-g^-\)</span>, then <span class="math display">\[(f+g)^++f^-+g^-=(f+g)^-+f^++g^+.\]</span> Hence, <span class="math display">\[\int_E ((f+g)^+(x)+f^-(x)+g^-(x))\text{d}x=\int_E ((f+g)^-(x)+f^+(x)+g^+(x))\text{d}x,\]</span> and thus <span class="math display">\[\int_E (f+g)^+(x)\text{d}x+\int_E f^-(x)\text{d}x+\int_E g^-(x)\text{d}x=\int_E (f+g)^-(x)\text{d}x+\int_E f^+(x)\text{d}x+\int_E g^+(x)\text{d}x.\]</span> Therefore, <span class="math display">\[\int_E (f+g)^+(x)\text{d}x-\int_E (f+g)^-(x)\text{d}x=\int_E f^+(x)\text{d}x-\int_E f^-(x)\text{d}x+\int_E g^+(x)\text{d}x-\int_E g^-(x)\text{d}x,\]</span> i.e., <span class="math display">\[\int_E (f(x)+g(x))\text{d}x=\int_E f(x)\text{d}x+\int_E g(x)\text{d}x.\]</span></p>
-Hence, it is easy to show that <span class="math inline">\(\alpha f+\beta g \in L(E)\)</span>, and <span class="math display">\[\int_E (\alpha f(x)+\beta g(x))\text{d}x=\alpha\int_E f(x)\text{d}x+\beta\int_E g(x)\text{d}x.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h2 id="lebesgues-dominated-convergence-theorem">Lebesgue's Dominated Convergence Theorem</h2>
-<p><span id="thm3.7"><strong>Theorem 3.7 (Lebesgue's Dominated Convergence Theorem, DCT)</strong></span>    Suppose <span class="math inline">\(\{f_n\}\)</span> is a sequence of measurable functions on <span class="math inline">\(E\)</span>, and <span class="math inline">\(\displaystyle \lim_{n \to \infty} f_n(x)=f(x)\ \text{a.e.}\ x \in E\)</span>. If there exists a non-negative Lebesgue integrable function <span class="math inline">\(F\)</span> on <span class="math inline">\(E\)</span> such that for all <span class="math inline">\(n \in \mathbb{N}\)</span>, <span class="math inline">\(|f_n(x)| \leq F(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x=\int_E f(x)\text{d}x.\]</span></p>
-<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(|f_n(x)| \leq F(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math inline">\(|f(x)| \leq F(x)\ \text{a.e.}\ x \in E\)</span>. Since <span class="math inline">\(F\)</span> is Lebesgue integrable, then <span class="math inline">\(f\)</span> and <span class="math inline">\(f_n\)</span> are Lebesgue integrable, and thus <span class="math inline">\(F\)</span>, <span class="math inline">\(f\)</span> and <span class="math inline">\(f_n\)</span> are finite almost everywhere.</p>
-<p>Assume without loss of generality that <span class="math inline">\(F\)</span>, <span class="math inline">\(f\)</span> and <span class="math inline">\(f_n\)</span> are finite. Let <span class="math inline">\(g_n(x)=|f_n(x)-f(x)| \geq 0\)</span>. We know <span class="math inline">\(g_n(x) \leq |f_n(x)|+|f(x)| \leq 2F(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math inline">\(2F-g_n\)</span> is a non-negative measurable function.</p>
-By <a href="#thm2.8">Fatou's lemma</a>, <span class="math display">\[\int_E \varliminf_{n \to \infty} (2F(x)-g_n(x))\text{d}x \leq \varliminf_{n \to \infty} \int_E (2F(x)-g_n(x))\text{d}x.\]</span> Hence, <span class="math display">\[\int_E 2F(x)\text{d}x-\int_E \varlimsup_{n \to \infty} g_n(x)\text{d}x \leq \int_E 2F(x)\text{d}x-\varlimsup_{n \to \infty} \int_E g_n(x)\text{d}x,\]</span> and thus <span class="math display">\[\varlimsup_{n \to \infty} \int_E g_n(x)\text{d}x \leq \int_E \varlimsup_{n \to \infty} g_n(x)\text{d}x.\]</span> Since <span class="math inline">\(\displaystyle \varlimsup_{n \to \infty} g_n(x)\text{d}x=0\ \text{a.e.}\ x \in E\)</span>, then <span class="math display">\[\varlimsup_{n \to \infty} \int_E g_n(x)\text{d}x=0,\]</span> and thus <span class="math display">\[\lim_{n \to \infty} \int_E g_n(x)\text{d}x=\lim_{n \to \infty} \int_E |f_n(x)-f(x)|\text{d}x=0.\]</span> Since <span class="math display">\[\left|\int_E (f_n(x)-f(x))\text{d}x\right| \leq \int_E |f_n(x)-f(x)|\text{d}x,\]</span> then <span class="math display">\[\lim_{n \to \infty} \int_E (f_n(x)-f(x))\text{d}x=0,\]</span> i.e., <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x=\int_E f(x)\text{d}x.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<div class="note info">
-            <p><a href="#thm2.6.1">Levi's monotonicity theorem</a>, <a href="#thm2.8">Fatou's lemma</a> and <a href="#thm3.7">Lebesgue's dominated convergence theorem</a> are equivalent to each other.</p>
-          </div>
-<p><strong>Theorem 3.8</strong>    Suppose <span class="math inline">\(\{f_n\}\)</span> is a sequence of measurable functions on <span class="math inline">\(E\)</span>, and <span class="math inline">\(f_n \Rightarrow f\)</span>. If there exists a non-negative Lebesgue integrable function <span class="math inline">\(F\)</span> on <span class="math inline">\(E\)</span> such that for all <span class="math inline">\(n \in \mathbb{N}\)</span>, <span class="math inline">\(|f_n(x)| \leq F(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math display">\[\lim_{n \to \infty} \int_E f_n(x)\text{d}x=\int_E f(x)\text{d}x.\]</span></p>
-<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(|f_n(x)| \leq F(x)\ \text{a.e.}\ x \in E\)</span>, then <span class="math inline">\(|f(x)| \leq F(x)\ \text{a.e.}\ x \in E\)</span>. Since <span class="math inline">\(F\)</span> is Lebesgue integrable, then <span class="math inline">\(f\)</span> and <span class="math inline">\(f_n\)</span> are Lebesgue integrable, and thus <span class="math inline">\(F\)</span>, <span class="math inline">\(f\)</span> and <span class="math inline">\(f_n\)</span> are finite almost everywhere.</p>
-<p>Assume without loss of generality that <span class="math inline">\(F\)</span>, <span class="math inline">\(f\)</span> and <span class="math inline">\(f_n\)</span> are finite. Suppose <span class="math display">\[\int_E |f_n(x)-f(x)|\text{d}x \not\to0,\]</span> then we can find a subsequence <span class="math inline">\(\{f_{n_k}\}_{k=1}^\infty\)</span> such that <span class="math inline">\(\displaystyle \lim_{k \to \infty} \int_E |f_{n_k}(x)-f(x)|\text{d}x=\alpha&gt;0\)</span>.</p>
-By Riesz's theorem, there exists a subsequence <span class="math inline">\(\{f_{n_{k_i}}\}_{i=1}^\infty\)</span> such that <span class="math inline">\(f_{n_{k_i}}(x) \to f(x)\ \text{a.e.}\ x \in E\)</span>, and thus <span class="math display">\[\lim_{i \to \infty} \int_E |f_{n_{k_i}}(x)-f(x)|\text{d}x=0,\]</span> which is a contradiction.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 3.9</strong>    Suppose <span class="math inline">\(\{f_n\}\)</span> is a sequence of Lebesgue integrable functions on <span class="math inline">\(E\)</span>. If <span class="math display">\[\sum_{n=1}^\infty \int_E |f_n(x)|\text{d}x&lt;\infty,\]</span> then <span class="math inline">\(\displaystyle \sum_{n=1}^\infty f_n(x)&lt;\infty\ \text{a.e.}\ x \in E\)</span>, <span class="math inline">\(\displaystyle \sum_{n=1}^\infty f_n\)</span> is Lebesgue integrable on <span class="math inline">\(E\)</span>, and <span class="math display">\[\int_E \left(\sum_{n=1}^\infty f_n(x)\right)\text{d}x=\sum_{n=1}^\infty \int_E f_n(x)\text{d}x.\]</span></p>
-<p><strong><em>Proof.</em></strong> Let <span class="math display">\[F(x)=\sum_{n=1}^\infty |f_n(x)|.\]</span> We have <span class="math display">\[\int_E F(x)\text{d}x=\sum_{n=1}^\infty \int_E |f_n(x)|\text{d}x&lt;\infty.\]</span> Hence, <span class="math inline">\(F\)</span> is a non-negative Lebesgue integrable function on <span class="math inline">\(E\)</span>, and thus <span class="math inline">\(F\)</span> is finite almost everywhere on <span class="math inline">\(E\)</span>, i.e., <span class="math inline">\(\displaystyle \sum_{n=1}^\infty |f_n(x)|&lt;\infty\ \text{a.e.}\ x \in E\)</span>. Therefore, <span class="math inline">\(\displaystyle \sum_{n=1}^\infty f_n(x)&lt;\infty\ \text{a.e.}\ x \in E\)</span>.</p>
-Let <span class="math inline">\(\displaystyle g_n(x)=\sum_{k=1}^n f_k(x)\)</span> and <span class="math inline">\(\displaystyle g(x)=\sum_{n=1}^\infty f_n(x)=\lim_{n \to \infty} g_n(x)\)</span>. We have <span class="math display">\[|g_n(x)|=\left|\sum_{k=1}^n f_k(x)\right| \leq \sum_{k=1}^n |f_k(x)| \leq F(x).\]</span> By <a href="#thm3.7">Lebesgue's dominated convergence theorem</a>, <span class="math inline">\(g \in L(E)\)</span>, and <span class="math display">\[\lim_{n \to \infty} \int_E g_n(x)\text{d}x=\int_E g(x)\text{d}x,\]</span> i.e., <span class="math inline">\(\displaystyle \sum_{n=1}^\infty f_n\)</span> is Lebesgue integrable on <span class="math inline">\(E\)</span>, and <span class="math display">\[\sum_{n=1}^\infty \int_E f_n(x)\text{d}x=\lim_{n \to \infty} \sum_{k=1}^n \int_E f_k(x)\text{d}x=\lim_{n \to \infty} \int_E \sum_{k=1}^n f_k(x)\text{d}x=\int_E \left(\sum_{n=1}^\infty f_n(x)\right)\text{d}x.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 3.10</strong>    Suppose <span class="math inline">\(f\)</span> is a real function on <span class="math inline">\(E \times (a, b)\)</span>. If for all <span class="math inline">\(t \in (a, b)\)</span>, <span class="math inline">\(f(x, t)\)</span> (as a function of <span class="math inline">\(x\)</span>) is Lebesgue integrable on <span class="math inline">\(E\)</span>, for <span class="math inline">\(\text{a.e.}\ x \in E\)</span>, <span class="math inline">\(f(x, t)\)</span> (as a function of <span class="math inline">\(t\)</span>) is differentiable on <span class="math inline">\((a, b)\)</span>, and there exists a non-negative Lebesgue integrable function <span class="math inline">\(F\)</span> on <span class="math inline">\(E\)</span> such that <span class="math display">\[\left|\frac{\partial}{\partial t}f(x, t)\right| \leq F(x),\]</span> then <span class="math inline">\(\displaystyle \frac{\partial}{\partial t}f(x, t)\)</span> is Lebesgue integrable on <span class="math inline">\(E\)</span>, <span class="math inline">\(\displaystyle \int_E f(x, t)\text{d}x\)</span> is differentiable on <span class="math inline">\((a, b)\)</span>, and <span class="math display">\[\frac{\text{d}}{\text{d}t}\int_E f(x, t)\text{d}x=\int_E \frac{\partial}{\partial t}f(x, t)\text{d}x.\]</span></p>
-<p><strong><em>Proof.</em></strong> Fix a <span class="math inline">\(t \in (a, b)\)</span> and take an arbitrary sequence <span class="math inline">\(\{h_n\}\)</span>, where <span class="math inline">\(h_n \to 0\)</span> and <span class="math inline">\(h_n \neq 0\)</span>. Let <span class="math display">\[g_n(x)=\frac{f(x, t+h_n)-f(x, t)}{h_n},\]</span> then <span class="math display">\[\lim_{n \to \infty} g_n(x)=\frac{\partial}{\partial t}f(x, t),\]</span> and <span class="math display">\[|g_n(x)|=\left|\frac{\partial}{\partial t}f(x, t+\theta_nh_n)\right| \leq F(x),\]</span> where <span class="math inline">\(0 \leq \theta_n \leq 1\)</span>.</p>
-Since <span class="math inline">\(\displaystyle \frac{\partial}{\partial t}f(x, t)\)</span> is Lebesgue integrable on <span class="math inline">\(E\)</span>, and by <a href="#thm3.7">Lebesgue's dominated convergence theorem</a>, <span class="math display">\[\lim_{n \to \infty} \frac{\displaystyle \int_E f(x, t+h_n)\text{d}x-\int_E f(x, t)\text{d}x}{h_n}=\lim_{n \to \infty} \int_E g_n(x)\text{d}x=\int_E \lim_{n \to \infty} g_n(x)\text{d}x=\int_E \frac{\partial}{\partial t}f(x, t)\text{d}x&lt;\infty.\]</span> Therefore, <span class="math inline">\(\displaystyle \int_E f(x, t)\text{d}t\)</span> is differentiable on <span class="math inline">\((a, b)\)</span>, and <span class="math display">\[\frac{\text{d}}{\text{d}t}\int_E f(x, t)\text{d}x=\int_E \frac{\partial}{\partial t}f(x, t)\text{d}x.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="riemann-integral-and-lebesgue-integral">Riemann Integral and Lebesgue Integral</h1>
-<div class="note info">
-            <p><strong>Recall 4.1</strong>    Suppose <span class="math inline">\(f\)</span> is bounded on <span class="math inline">\([a, b]\)</span>. A <strong>partition sequence</strong> of <span class="math inline">\([a, b]\)</span>, <span class="math inline">\(\{P^{(n)}\}\)</span> is a finite sequence of values <span class="math inline">\(x_i\)</span> such that <span class="math display">\[a=x_0^{(n)}&lt;x_1^{(n)}&lt;\cdots&lt;x_{k_n}^{(n)}=b.\]</span> Let <span class="math inline">\(M_i^{(n)}=\sup\{f(x): x_{i-1}^{(n)} \leq x \leq x_i^{(n)}\}\)</span> and <span class="math inline">\(m_i^{(n)}=\inf\{f(x): x_{i-1}^{(n)} \leq x \leq x_i^{(n)}\}\)</span>. The <strong>upper Darboux sum</strong> of <span class="math inline">\(f\)</span> with respect to <span class="math inline">\(P^{(n)}\)</span> is <span class="math display">\[S(f, P^{(n)})=\sum_{i=1}^{k_n} M_i^{(n)}(x_i^{(n)}-x_{i-1}^{(n)}).\]</span> The <strong>lower Darboux sum</strong> of <span class="math inline">\(f\)</span> with respect to <span class="math inline">\(P^{(n)}\)</span> is <span class="math display">\[s(f, P^{(n)})=\sum_{i=1}^{k_n} m_i^{(n)}(x_i^{(n)}-x_{i-1}^{(n)}).\]</span> The <strong>upper Darboux integral</strong> of <span class="math inline">\(f\)</span> is <span class="math display">\[\overline{\int_a^b} f(x)\text{d}x=\inf_{P^{(n)}} S(f, P^{(n)})=\lim_{n \to \infty} S(f, P^{(n)}).\]</span> The <strong>lower Darboux integral</strong> of <span class="math inline">\(f\)</span> is <span class="math display">\[\underline{\int_a^b} f(x)\text{d}x=\sup_{P^{(n)}} s(f, P^{(n)})=\lim_{n \to \infty} s(f, P^{(n)}).\]</span> <span class="math inline">\(f(x)\)</span> is <strong>Riemann integrable</strong> on <span class="math inline">\([a, b]\)</span> if and only if <span class="math display">\[\overline{\int_a^b} f(x)\text{d}x=\underline{\int_a^b} f(x)\text{d}x.\]</span></p><p><strong>Recall 4.2</strong>    The <strong>amplitude</strong> at <span class="math inline">\(x\)</span> is <span class="math display">\[\omega(x)=\lim_{\delta \to 0^+}\sup\{|f(y)-f(z)|: y, z \in (x-\delta, x+\delta) \cap [a, b]\}.\]</span></p>
-          </div>
-<p><strong>Theorem 4.1</strong>    A bounded function <span class="math inline">\(f\)</span> is Riemann integrable on <span class="math inline">\([a, b]\)</span> if and only if <span class="math inline">\(f\)</span> is continuous almost everywhere on <span class="math inline">\([a, b]\)</span>.</p>
-<p><strong><em>Proof.</em></strong> Let <span class="math display">\[h_n(x)=\begin{cases}
-M_i^{(n)}-m_i^{(n)}, &amp;x_{i-1}^{(n)}&lt;x&lt;x_i^{(n)} \\
-0, &amp;x=x_{i-1}^{(n)} \vee x=x_i^{(n)}
-\end{cases}.\]</span> We know <span class="math inline">\(h_n\)</span> is a non-negative measurable function. Suppose <span class="math inline">\(|f(x)| \leq M\)</span>, <span class="math inline">\(x \in [a, b]\)</span>, then <span class="math display">\[|h_n(x)| \leq M_i^{(n)}+m_i^{(n)} \leq 2M.\]</span> Since <span class="math inline">\(g(x)=2M\)</span> is Lebesgue integrable on <span class="math inline">\([a, b]\)</span>, then <span class="math display">\[\begin{align}
-\overline{\int_a^b} f(x)\text{d}x-\underline{\int_a^b} f(x)\text{d}x&amp;=\lim_{n \to \infty} (S(f, P^{(n)})-s(f, P^{(n)})) \nonumber
-\\&amp;=\lim_{n \to \infty} \sum_{i=1}^{k_n} (M_i^{(n)}-m_i^{(n)})(x_i^{(n)}-x_{i-1}^{(n)}) \nonumber
-\\&amp;=\lim_{n \to \infty} \int_{[a, b]} h_n(x)\text{d}x \nonumber
-\\&amp;=\int_{[a, b]} \lim_{n \to \infty} h_n(x)\text{d}x \tag{DCT}
-\\&amp;=\int_{[a, b]} \omega(x)\text{d}x=0. \nonumber
-\end{align}\]</span></p>
-Therefore, <span class="math inline">\(f\)</span> is Riemann integrable on <span class="math inline">\([a, b]\)</span> if and only if <span class="math display">\[\begin{aligned}
-&amp;\quad \quad \int_{[a, b]} \omega(x)\text{d}x=0
-\\&amp;\Leftrightarrow \omega(x)=0\ \text{a.e.}\ x \in [a, b]
-\\&amp;\Leftrightarrow \text{$f$ is continuous almost everywhere on $[a, b]$.}
-\end{aligned}\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 4.2</strong>    If a bounded function <span class="math inline">\(f\)</span> is Riemann integrable on <span class="math inline">\([a, b]\)</span>, then <span class="math inline">\(f\)</span> is Lebesgue integrable on <span class="math inline">\([a, b]\)</span>, and <span class="math display">\[\int_{[a, b]} f(x)\text{d}x=\int_a^b f(x)\text{d}x.\]</span></p>
-<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(f\)</span> is Riemann integrable on <span class="math inline">\([a, b]\)</span>, then <span class="math inline">\(f\)</span> is continuous almost everywhere on <span class="math inline">\([a, b]\)</span>. Hence, <span class="math inline">\(f\)</span> is a bounded measurable function on <span class="math inline">\([a, b]\)</span>, and thus <span class="math inline">\(f \in L([a, b])\)</span>.</p>
-Let <span class="math display">\[g_n(x)=\begin{cases}
-M_i^{(n)}, &amp;x_{i-1}^{(n)}&lt;x&lt;x_i^{(n)} \\
-0, &amp;x=x_{i-1}^{(n)} \vee x=x_i^{(n)}
-\end{cases},\]</span> where <span class="math inline">\(\displaystyle \lim_{n \to \infty} g_n(x)=f(x)\ \text{a.e.}\ x \in [a, b]\)</span>, and <span class="math inline">\(g_n\)</span> is bounded. We have <span class="math display">\[\begin{aligned}
-\int_a^b f(x)\text{d}x&amp;=\lim_{n \to \infty} \sum_{i=1}^{k_n} M_i^{(n)}(x_i^{(n)}-x_{i-1}^{(n)})
-\\&amp;=\lim_{n \to \infty} \int_{[a, b]} g_n(x)\text{d}x
-\\&amp;=\int_{[a, b]} \lim_{n \to \infty} g_n(x)\text{d}x
-\\&amp;=\int_{[a, b]} f(x)\text{d}x.
-\end{aligned}\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 4.4</strong>    Suppose <span class="math inline">\(f\)</span> is a non-negative real function on <span class="math inline">\([a, b]\)</span>. If for all <span class="math inline">\(A&gt;a\)</span>, <span class="math inline">\(f\)</span> is Riemann integrable on <span class="math inline">\([a, A]\)</span>, and <span class="math inline">\(\displaystyle \int_a^{\infty} f(x)\text{d}x&lt;\infty\)</span>, then <span class="math inline">\(f\)</span> is Lebesgue integrable on <span class="math inline">\([a, \infty)\)</span>, and <span class="math display">\[\int_{[a, \infty)} f(x)\text{d}x=\int_a^\infty f(x)\text{d}x.\]</span></p>
-<p><strong><em>Proof.</em></strong> Take an arbitrary sequence <span class="math inline">\(\{A_n\}\)</span> such that <span class="math inline">\(A_n&gt;a\)</span> and <span class="math inline">\(\displaystyle \lim_{n \to \infty} A_n=\infty\)</span>. Hence, <span class="math display">\[\int_{[a, \infty)} f(x)\text{d}x=\lim_{n \to \infty} \int_{[a, A_n]} f(x)\text{d}x=\lim_{n \to \infty}\int_a^{A_n} f(x)\text{d}x=\int_a^\infty f(x)\text{d}x.\]</span></p>
-In addition, if <span class="math inline">\(\displaystyle \int_a^\infty f(x)\text{d}x\)</span> diverges, then <span class="math inline">\(\displaystyle \int_{[a, \infty)} f(x)\text{d}x=\infty\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<div class="note warning">
-            <p>If <span class="math inline">\(f\)</span> is not non-negative function, then Lebesgue integral <strong>is not</strong> a generalization of Riemann improper integral.</p>
-          </div>
-<h1 id="geometric-interpretation-of-lebesgue-integral">Geometric Interpretation of Lebesgue Integral</h1>
-<p><strong>Definition 5.1</strong>    Suppose <span class="math inline">\(f\)</span> is a non-negative function on <span class="math inline">\(E \subset \mathbb{R}^n\)</span>. We define <span class="math display">\[G(E, f)=\{(x, z): x \in E, 0 \leq z&lt;f(x)\} \subset \mathbb{R}^{n+1}.\]</span></p>
-<p><strong>Theorem 5.1</strong>    Suppose <span class="math inline">\(f\)</span> is a non-negative function on <span class="math inline">\(E \subset \mathbb{R}^n\)</span>, then</p>
-<p>    (1) <span class="math inline">\(f\)</span> is measurable on <span class="math inline">\(E\)</span> if and only if <span class="math inline">\(G(E, f)\)</span> is measurable;</p>
-<p>    (2) If <span class="math inline">\(f\)</span> is measurable on <span class="math inline">\(E\)</span>, then <span class="math display">\[\int_E f(x)\text{d}x=m(G(E, f)).\]</span></p>
-<h1 id="fubinis-theorem">Fubini's Theorem</h1>
-<p><span id="thm6.1"><strong>Theorem 6.1 (Fubini's Theorem)</strong></span>    Suppose <span class="math inline">\(A \subset \mathbb{R}^p\)</span> and <span class="math inline">\(B \subset \mathbb{R}^q\)</span> are measurable. If <span class="math inline">\(f\)</span> is a non-negative measurable function on <span class="math inline">\(A \times B\)</span>, then for <span class="math inline">\(\text{a.e.} x \in A\)</span>, <span class="math inline">\(f(x, y)\)</span> (as a function of <span class="math inline">\(y\)</span>) is measurable on <span class="math inline">\(B\)</span>, and <span class="math display">\[\int_{A \times B} f(x, y)\text{d}x\text{d}y=\int_A \left(\int_B f(x, y)\text{d}y\right)\text{d}x.\]</span> If <span class="math inline">\(f\)</span> is Lebesgue integrable on <span class="math inline">\(A \times B\)</span>, then for <span class="math inline">\(\text{a.e.} x \in A\)</span>, <span class="math inline">\(f(x, y)\)</span> (as a function of <span class="math inline">\(y\)</span>) is Lebesgue integrable on <span class="math inline">\(B\)</span>, <span class="math inline">\(\displaystyle \int_B f(x, y)\text{d}y\)</span> (as a function of <span class="math inline">\(x\)</span>) is Lebesgue integrable on <span class="math inline">\(A\)</span>, and <span class="math display">\[\int_{A \times B} f(x, y)\text{d}x\text{d}y=\int_A \left(\int_B f(x, y)\text{d}y\right)\text{d}x.\]</span></p>
-<p><strong>Example 6.1</strong>    Let <span class="math inline">\(\displaystyle f(x, y)=\frac{x^2-y^2}{(x^2+y^2)^2}\)</span> and <span class="math inline">\(E=(0, 1) \times (0, 1)\)</span>. We have <span class="math display">\[\int_{(0, 1)} \left(\int_{(0, 1)} f(x, y)\text{d}y\right)\text{d}x=\frac{\pi}{4}\]</span> and <span class="math display">\[\int_{(0, 1)} \left(\int_{(0, 1)} f(x, y)\text{d}x\right)\text{d}y=-\frac{\pi}{4}.\]</span> By <a href="#thm6.1">Fubini's theorem</a>, <span class="math inline">\(f\)</span> is not Lebesgue integrable.</p>
-]]></content>
-      <categories>
-        <category>Mathematics</category>
-        <category>Real analysis</category>
-      </categories>
-      <tags>
-        <tag>Lebesgue integral</tag>
-        <tag>Measurable</tag>
       </tags>
   </entry>
 </search>
