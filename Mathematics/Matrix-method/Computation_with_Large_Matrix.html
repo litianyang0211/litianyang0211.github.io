@@ -28,8 +28,12 @@
 <meta property="og:description" content="We first discuss the four ways to solve least squares problem, which comes in to play in the many applications that rely on data fitting. Next, we explore some topics in numerical linear algebra (Kryl">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-09-27T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-02T17:44:55.292Z">
+<meta property="article:modified_time" content="2021-10-02T20:11:42.803Z">
 <meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Least squares">
+<meta property="article:tag" content="Arnoldi iteration">
+<meta property="article:tag" content="Shifted $QR$ algorithm">
+<meta property="article:tag" content="Random matrix multiplication">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://litianyang0211.github.io/Mathematics/Matrix-method/Computation_with_Large_Matrix.html">
@@ -228,7 +232,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-02 18:44:55" itemprop="dateModified" datetime="2021-10-02T18:44:55+01:00">2021-10-02</time>
+                <time title="Modified: 2021-10-02 21:11:42" itemprop="dateModified" datetime="2021-10-02T21:11:42+01:00">2021-10-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -341,7 +345,7 @@ Since <span class="math inline">\((\Sigma^T\Sigma+\delta^2I)^{-1}\Sigma^T\)</spa
 </ul>
 <p>         Step 1: Find <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_2\)</span> so that <span class="math inline">\(Q_1AQ_2^T\)</span> is bidiagonal;</p>
 <p>         Step 2: Apply the shifted <span class="math inline">\(QR\)</span> algorithm to find the eigenvalues of <span class="math inline">\((Q_1AQ_2^T)^T(Q_1AQ_2^T)=Q_2A^TAQ_2^T\)</span>, which is tridiagonal.</p>
-<h1 id="randomized-matrix-multiplication">Randomized Matrix Multiplication</h1>
+<h1 id="random-matrix-multiplication">Random Matrix Multiplication</h1>
 <ul>
 <li><p>Let <span class="math inline">\(\displaystyle p_j=\frac{\|\mathbf{a}_j\|\|\mathbf{b}_j^T\|}{C}\)</span>, where <span class="math inline">\(\mathbf{a}_j\)</span> is the column <span class="math inline">\(j\)</span> of <span class="math inline">\(A\)</span>, <span class="math inline">\(\mathbf{b}_j^T\)</span> is the row <span class="math inline">\(j\)</span> of <span class="math inline">\(B\)</span>, and <span class="math inline">\(\displaystyle C=\sum_{j=1}^n \|\mathbf{a}_j\|\|\mathbf{b}_j^T\|\)</span>.</p></li>
 <li><p>Take <span class="math inline">\(\mathbf{a}_j\)</span> and <span class="math inline">\(\mathbf{b}_j^T\)</span> w.p. <span class="math inline">\(p_j\)</span>, and each of the <span class="math inline">\(s\)</span> trials produces a matrix <span class="math inline">\(\displaystyle X_j=\frac{\mathbf{a}_j\mathbf{b}_j^T}{sp_j}\)</span>. The mean of each trial is <span class="math display">\[\mathbb{E}[X]=\sum_{j=1}^n p_jX_j=\frac{1}{s}\sum_{j=1}^n \mathbf{a}_j\mathbf{b}_j^T=\frac{1}{s}AB.\]</span> The approximation of <span class="math inline">\(AB\)</span> is the sum of <span class="math inline">\(s\)</span> trials, and we have <span class="math inline">\(s\mathbb{E}[X]=AB\)</span>.</p></li>
@@ -366,6 +370,13 @@ Therefore, <span class="math inline">\(\displaystyle \sum_{j=1}^n \frac{\|\mathb
     
 
       <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Least-squares/" rel="tag"><i class="fa fa-tag"></i> Least squares</a>
+              <a href="/tags/Arnoldi-iteration/" rel="tag"><i class="fa fa-tag"></i> Arnoldi iteration</a>
+              <a href="/tags/Shifted-QR-algorithm/" rel="tag"><i class="fa fa-tag"></i> Shifted $QR$ algorithm</a>
+              <a href="/tags/Random-matrix-multiplication/" rel="tag"><i class="fa fa-tag"></i> Random matrix multiplication</a>
+          </div>
 
         
 
@@ -435,7 +446,7 @@ Therefore, <span class="math inline">\(\displaystyle \sum_{j=1}^n \frac{\|\mathb
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#least-squares"><span class="nav-number">1.</span> <span class="nav-text">Least Squares</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pseudo-inverse-method"><span class="nav-number">1.1.</span> <span class="nav-text">Pseudo-Inverse Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#normal-equation-method"><span class="nav-number">1.2.</span> <span class="nav-text">Normal Equation Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gram-schmidt-method"><span class="nav-number">1.3.</span> <span class="nav-text">Gram-Schmidt Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#penalty-method"><span class="nav-number">1.4.</span> <span class="nav-text">Penalty Method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#numerical-linear-algebra"><span class="nav-number">2.</span> <span class="nav-text">Numerical Linear Algebra</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#krylov-subspace-and-arnoldi-iteration"><span class="nav-number">2.1.</span> <span class="nav-text">Krylov Subspace and Arnoldi Iteration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#computation-of-eigenvalue-and-singular-value"><span class="nav-number">2.2.</span> <span class="nav-text">Computation of Eigenvalue and Singular Value</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#qr-algorithm-for-eigenvalue"><span class="nav-number">2.2.1.</span> <span class="nav-text">\(QR\) Algorithm for Eigenvalue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#golub-kahan-algorithm-for-singular-value"><span class="nav-number">2.2.2.</span> <span class="nav-text">Golub-Kahan Algorithm for Singular Value</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#randomized-matrix-multiplication"><span class="nav-number">3.</span> <span class="nav-text">Randomized Matrix Multiplication</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#least-squares"><span class="nav-number">1.</span> <span class="nav-text">Least Squares</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pseudo-inverse-method"><span class="nav-number">1.1.</span> <span class="nav-text">Pseudo-Inverse Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#normal-equation-method"><span class="nav-number">1.2.</span> <span class="nav-text">Normal Equation Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gram-schmidt-method"><span class="nav-number">1.3.</span> <span class="nav-text">Gram-Schmidt Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#penalty-method"><span class="nav-number">1.4.</span> <span class="nav-text">Penalty Method</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#numerical-linear-algebra"><span class="nav-number">2.</span> <span class="nav-text">Numerical Linear Algebra</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#krylov-subspace-and-arnoldi-iteration"><span class="nav-number">2.1.</span> <span class="nav-text">Krylov Subspace and Arnoldi Iteration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#computation-of-eigenvalue-and-singular-value"><span class="nav-number">2.2.</span> <span class="nav-text">Computation of Eigenvalue and Singular Value</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#qr-algorithm-for-eigenvalue"><span class="nav-number">2.2.1.</span> <span class="nav-text">\(QR\) Algorithm for Eigenvalue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#golub-kahan-algorithm-for-singular-value"><span class="nav-number">2.2.2.</span> <span class="nav-text">Golub-Kahan Algorithm for Singular Value</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#random-matrix-multiplication"><span class="nav-number">3.</span> <span class="nav-text">Random Matrix Multiplication</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
