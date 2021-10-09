@@ -115,6 +115,114 @@ Therefore, <span class="math inline">\(\displaystyle \sum_{j=1}^n \frac{\|\mathb
       </tags>
   </entry>
   <entry>
+    <title>Conditional Independence</title>
+    <url>/Statistics/Graphical-model/Conditional_Independence.html</url>
+    <content><![CDATA[<h1 id="definition">Definition</h1>
+<p><strong>Definition 1.1</strong>    Let <span class="math inline">\(X, Y\)</span> be r.v.s. defined on <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>. We denote the joint density <span class="math inline">\(p(x, y)\)</span>, and call <span class="math display">\[p(y)=\int_\mathcal{X} p(x, y)\text{d}x\]</span> the <strong>marginal density</strong> of <span class="math inline">\(Y\)</span>. The <strong>conditional density</strong> of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> is defined as any function <span class="math inline">\(p(x \mid y)\)</span> s.t. <span class="math display">\[p(x, y)=p(y)p(x \mid y).\]</span></p>
+<div class="note warning">
+            <p>If <span class="math inline">\(p(y)&gt;0\)</span> then the solution is unique and given by the familiar expression <span class="math display">\[p(x \mid y)=\frac{p(x, y)}{p(y)}.\]</span></p>
+          </div>
+<p><strong>Definition 1.2</strong>    Let <span class="math inline">\(X, Y\)</span> be r.v.s. defined on <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>. <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>marginally independent</strong> if <span class="math display">\[p(x \mid y)=p(x), \quad \forall x \in \mathcal{X}, y \in \mathcal{Y}, p(y)&gt;0,\]</span> which is equivalent to <span class="math display">\[p(x, y)=p(x)p(y).\]</span></p>
+<p><strong>Definition 1.3</strong>    Let <span class="math inline">\(X, Y, Z\)</span> be r.v.s. defined on a Cartesian product space and the joint density be <span class="math inline">\(p(x, y, z)\)</span>. We say that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>conditionally independent</strong> given <span class="math inline">\(Z\)</span> if <span class="math display">\[p(x \mid y, z)=p(x \mid z), \quad \forall x \in \mathcal{X}, y \in \mathcal{Y}, z \in \mathcal{Z}\ \text{s.t.}\ p(y, z)&gt;0,\]</span> denoted <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>.</p>
+<div class="note info">
+            <p>If <span class="math inline">\(Z\)</span> is degenerate, i.e., there is some <span class="math inline">\(z\)</span> s.t. <span class="math inline">\(P(Z=z)=1\)</span>, then the definition above is the same as saying that <span class="math inline">\(X \perp\!\!\!\!\perp Y\)</span>.</p>
+          </div>
+<p><strong>Example 1.1</strong>    Let <span class="math inline">\(X_1, \cdots, X_k\)</span> be a Markov chain. Then <span class="math inline">\(X_k\)</span> is independent of <span class="math inline">\(X_1, \cdots, X_{k-2}\)</span> conditional upon <span class="math inline">\(X_{k-1}\)</span>: <span class="math display">\[P(X_k=x_k \mid X_{k-1}=x_{k-1}, \cdots, X_1=x_1)=P(X_k=x_k \mid X_{k-1}=x_{k-1})\]</span> for all <span class="math inline">\(x_k, x_{k-1}, \cdots, x_1\)</span>, i.e., <span class="math inline">\(X_k \perp\!\!\!\!\perp X_1, \cdots, X_{k-2} \mid X_{k-1}\)</span>, a.k.a. <strong>Markov property</strong>, or <strong>memoryless property</strong>.</p>
+<p><span id="eg1.2"><strong>Example 1.2</strong></span>    Suppose <span class="math inline">\(\mathbf{X}_V=(X_1, \cdots, X_p)^T\)</span> is a multivariate Gaussian distribution, i.e., <span class="math display">\[f(\mathbf{x}_V; \mu, \Sigma)=\frac{1}{(2\pi)^{p/2}|\Sigma|^{p/2}}\exp\left[-\frac{1}{2}(\mathbf{x}_V-\mu)^T\Sigma^{-1}(\mathbf{x}_V-\mu)\right].\]</span> Then <span class="math display">\[X_p \mid X_1=x_1, \cdots, X_{p-1}=x_{p-1} \sim \mathcal{N}(\mu_p+\Sigma_{p, -p}\Sigma_{-p, -p}^{-1}(\mathbf{x}_{-p}-\mu_{-p}), \sigma_{pp \cdot 1 \cdots p-1}),\]</span> where <span class="math inline">\(\sigma_{aa \cdot B}=\sigma_{aa}-\Sigma_{aB}\Sigma_{BB}^{-1}\Sigma_{Ba}\)</span>, is called the <strong>Schur complement</strong> of entry <span class="math inline">\((a, a)\)</span> in <span class="math inline">\(\Sigma\)</span>.</p>
+<p><strong>Theorem 1.1</strong>    Let <span class="math inline">\(X, Y, Z\)</span> be r.v.s. defined on a Cartesian product space. The following are equivalent:</p>
+<p>    (1) <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(y, z)&gt;0\)</span>;</p>
+<p>    (2) <span class="math inline">\(p(x, y \mid z)=p(x \mid z)p(y \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>;</p>
+<p>    (3) <span class="math inline">\(p(x, y, z)=p(y, z)p(x \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>;</p>
+<p>    (4) <span class="math inline">\(p(z)p(x, y, z)=p(x, z)p(y, z)\)</span> for all <span class="math inline">\(x, y, z\)</span>;</p>
+<p>    (5) <span class="math inline">\(p(x, y, z)=f(x, z)g(y, z)\)</span> for some functions <span class="math inline">\(f, g\)</span> and all <span class="math inline">\(x, y, z\)</span>.</p>
+<p><strong><em>Proof.</em></strong> We need to show (1) <span class="math inline">\(\Rightarrow\)</span> (2) <span class="math inline">\(\Rightarrow\)</span> (3) <span class="math inline">\(\Rightarrow\)</span> (1), (3) <span class="math inline">\(\Leftrightarrow\)</span> (4), and (3) <span class="math inline">\(\Leftrightarrow\)</span> (5).</p>
+<p>(i) Since <span class="math inline">\(p(y, z)&gt;0\)</span>, then <span class="math inline">\(p(z)&gt;0\)</span>. Since <span class="math inline">\(p(x \mid y, z)p(y \mid z)=p(x, y \mid z)\)</span>, then <span class="math display">\[p(x, y \mid z)=p(x \mid z)p(y \mid z),\]</span> i.e., (1) <span class="math inline">\(\Rightarrow\)</span> (2).</p>
+<p>(ii) We have <span class="math display">\[p(x, y, z)=p(x, y \mid z)p(z)=p(x \mid z)p(y \mid z)p(z)=p(y, z)p(x \mid z)\]</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>, i.e., (2) <span class="math inline">\(\Rightarrow\)</span> (3).</p>
+<p>(iii) It is obvious to show that (3) <span class="math inline">\(\Rightarrow\)</span> (1), (3) <span class="math inline">\(\Leftrightarrow\)</span> (4), and (3) <span class="math inline">\(\Rightarrow\)</span> (5).</p>
+<p>(iv) Suppose <span class="math inline">\(p(x, y, z)=f(x, z)g(y, z)\)</span> for some functions <span class="math inline">\(f, g\)</span> and all <span class="math inline">\(x, y, z\)</span>. We have <span class="math display">\[p(y, z)=\int_\mathcal{X} p(x, y, z)\text{d}x=g(y, z)\int_\mathcal{X} f(x, z)\text{d}x:=g(y, z)\widetilde{f}(z).\]</span> Then <span class="math display">\[p(x, y, z)=\frac{f(x, z)p(y, z)}{\widetilde{f}(z)}.\]</span></p>
+Since <span class="math display">\[p(x \mid y, z)=\frac{p(x, y, z)}{p(y, z)}=\frac{f(x, z)}{\widetilde{f}(z)}=p(x \mid z),\]</span> then we have (5) <span class="math inline">\(\Rightarrow\)</span> (1) <span class="math inline">\(\Rightarrow\)</span> (3).
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="graphoid-axioms">Graphoid Axioms</h1>
+<p><strong>Theorem 2.1 (Graphoid Axioms)</strong>    Conditional independence satisfies the following properties:</p>
+<p>    (1) Symmetry: <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z \Rightarrow Y \perp\!\!\!\!\perp X \mid Z\)</span>;</p>
+<p>    (2) Decomposition: <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z \Rightarrow X \perp\!\!\!\!\perp Y \mid Z\)</span>;</p>
+<p>    (3) Weak union: <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z \Rightarrow X \perp\!\!\!\!\perp W \mid Y, Z\)</span>;</p>
+<p>    (4) Contraction: <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z \Rightarrow X \perp\!\!\!\!\perp Y, W \mid Z\)</span>;</p>
+<p>    (5) Intersection: if <span class="math inline">\(p(x, y, z, w)&gt;0\)</span>, then <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid W, Z \Rightarrow X \perp\!\!\!\!\perp Y, W \mid Z\)</span>.</p>
+<p><strong><em>Proof.</em></strong></p>
+<p>(i) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>, then <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span>, and thus <span class="math inline">\(p(x, y, z)=p(x, z)p(y \mid z)\)</span>. Hence, <span class="math display">\[p(y \mid x, z)=\frac{p(x, y, z)}{p(x, z)}=\frac{p(x, z)p(y \mid z)}{p(x, z)}=p(y \mid z),\]</span> i.e., <span class="math inline">\(Y \perp\!\!\!\!\perp X \mid Z\)</span>.</p>
+<p>(ii) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z\)</span>, then <span class="math inline">\(p(x \mid y, w, z)=p(x \mid z)\)</span>, and thus <span class="math inline">\(p(x, y, w \mid z)=p(x \mid z)p(y, w \mid z)\)</span>. Hence, <span class="math display">\[p(x, y \mid z)=\int_\mathcal{W} p(x, y, w \mid z)=p(x \mid z)\int_\mathcal{W} p(y, w \mid z)=p(x \mid z)p(y \mid z),\]</span> i.e., <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>.</p>
+<p>(iii) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z\)</span>, then <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span> and thus <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span>. Besides, <span class="math inline">\(p(x \mid y, w, z)=p(x \mid z)\)</span>. Hence, <span class="math inline">\(p(x \mid y, w, z)=p(x \mid y, z)\)</span>, i.e., <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span>.</p>
+<p>(iv) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span>, then <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span> and <span class="math inline">\(p(x \mid w, y, z)=p(x \mid y, z)\)</span>. Hence, <span class="math inline">\(p(x \mid w, y, z)=p(x \mid z)\)</span>, i.e., <span class="math inline">\(X \perp\!\!\!\!\perp W, Y \mid Z\)</span>.</p>
+(v) Since <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid W, Z\)</span>, then <span class="math inline">\(p(x, w, y, z)=f(x, y, z)g(w, y, z)\)</span> for some functions <span class="math inline">\(f, g\)</span>, and <span class="math inline">\(p(x, y, w, z)=\widetilde{f}(x, w, z)\widetilde{g}(y, w, z)\)</span> for some functions <span class="math inline">\(\widetilde{f}, \widetilde{g}\)</span>. Because of positivity, we have <span class="math display">\[f(x, y, z)=\frac{\widetilde{f}(x, w, z)\widetilde{g}(y, w, z)}{g(w, y, z)}=\frac{\widetilde{f}(x, w_0, z)\widetilde{g}(y, w_0, z)}{g(w_0, y, z)}\]</span> for any <span class="math inline">\(w_0\)</span> since <span class="math inline">\(f(x, y, z)\)</span> does not depend on <span class="math inline">\(w\)</span>. Then <span class="math inline">\(f(x, y, z)=a(x, z)b(y, z)\)</span>, and thus <span class="math display">\[p(x, w, y, z)=a(x, z)b(y, z)g(w, y, z)=\widetilde{a}(x, z)\widetilde{b}(y, w, z).\]</span> Therefore, <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note info">
+            <ul><li><p><strong>Symmetry</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span> then <span class="math inline">\(X\)</span> is irrelevant to <span class="math inline">\(Y\)</span>.</p></li><li><p><strong>Decomposition</strong> means that if some information is irrelevant to <span class="math inline">\(X\)</span> then part of it is also irrelevant to <span class="math inline">\(X\)</span>.</p></li><li><p><strong>Weak union</strong> means that if <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> together are irrelevant to <span class="math inline">\(X\)</span> then learning one of them does not make the other one relevant.</p></li><li><p><strong>Contraction</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span>, and if learning <span class="math inline">\(Y\)</span> does not make <span class="math inline">\(W\)</span> relevant to <span class="math inline">\(X\)</span>, then both <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> are irrelevant to <span class="math inline">\(X\)</span>.</p></li></ul>
+          </div>
+<h1 id="functional-conditional-independence">Functional Conditional Independence</h1>
+<p><strong>Remark 3.1</strong>    Since the events <span class="math inline">\(\{Y=y\}\)</span> and <span class="math inline">\(\{Y=y, h(Y)=h(y)\}\)</span> are equal for any measurable function <span class="math inline">\(h\)</span>, it follows that <span class="math display">\[p(x \mid y, z)=p(x \mid y, h(y), z).\]</span></p>
+<p><strong>Example 3.1</strong>    Suppose <span class="math inline">\(X \sim f_\theta\)</span> for some parameter <span class="math inline">\(\theta \in \Theta\)</span>. We say that <span class="math inline">\(T=t(X)\)</span> is a <strong>sufficient statistic</strong> for <span class="math inline">\(\theta\)</span> if the likelihood can be written as <span class="math inline">\(L(\theta \mid X=x)=f_\theta(x)=g(t(x), \theta)h(x)\)</span>. Under a Bayesian interpretation of <span class="math inline">\(\theta\)</span>, this is equivalent to saying <span class="math inline">\(X \perp\!\!\!\!\perp \theta \mid T\)</span>.</p>
+<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
+p(\theta \mid x)&amp;=\frac{p(x \mid \theta)p(\theta)}{\int_\Theta p(x \mid \phi)p(\phi)\text{d}\phi}
+\\&amp;=\frac{g(t(x), \theta)h(x)p(\theta)}{\int_\Theta g(t(x), \phi)h(x)p(\phi)\text{d}\phi}
+\\&amp;=\frac{g(t(x), \theta)p(\theta)}{\int_\Theta g(t(x), \phi)p(\phi)\text{d}\phi}
+\\&amp;=p(\theta \mid t(x)).
+\end{aligned}\]</span> Since <span class="math inline">\(p(\theta \mid x)=p(\theta \mid x, t(x))\)</span>, then <span class="math inline">\(\theta \perp\!\!\!\!\perp X \mid T\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="关于多元高斯分布的补充">关于多元高斯分布的补充</h1>
+<p>由<a href="#eg1.2">例1.2</a>，我们对多元高斯分布进行补充.</p>
+<h2 id="条件高斯分布">条件高斯分布</h2>
+<p>假设<span class="math inline">\(\mathbf{x} \in \mathbb{R}^p\)</span>服从<span class="math inline">\(\mathcal{N}(\mu, \Sigma)\)</span>. 将<span class="math inline">\(\mathbf{x}\)</span>和对应的均值<span class="math inline">\(\mu\)</span>做如下划分：<span class="math inline">\(\mathbf{x}=\begin{bmatrix} \mathbf{x}_a \\ \mathbf{x}_b \end{bmatrix}\)</span>和<span class="math inline">\(\mu=\begin{bmatrix} \mu_a \\ \mu_b \end{bmatrix}\)</span>，其中<span class="math inline">\(\mathbf{x}_a, \mu_a \in \mathbb{R}^k\)</span>，<span class="math inline">\(\mathbf{x}_b, \mu_b \in \mathbb{R}^{p-k}\)</span>. 将协方差矩阵<span class="math inline">\(\Sigma\)</span>划分为<span class="math inline">\(\Sigma=\begin{bmatrix} \Sigma_{aa} &amp; \Sigma_{ab} \\ \Sigma_{ba} &amp; \Sigma_{bb} \end{bmatrix}\)</span>. 由<span class="math inline">\(\Sigma\)</span>的对称性易知<span class="math inline">\(\Sigma_{aa}\)</span>和<span class="math inline">\(\Sigma_{bb}\)</span>对称，且<span class="math inline">\(\Sigma_{ba}=\Sigma_{ab}^T\)</span>.</p>
+<p>定义<strong>精度矩阵</strong><span class="math inline">\(\Lambda=\Sigma^{-1}\)</span>，并将其划分为<span class="math inline">\(\begin{bmatrix} \Lambda_{aa} &amp; \Lambda_{ab} \\ \Lambda_{ba} &amp; \Lambda_{bb} \end{bmatrix}\)</span>. 由于对称矩阵的逆仍然对称，故<span class="math inline">\(\Lambda_{aa}\)</span>和<span class="math inline">\(\Lambda_{bb}\)</span>对称，且<span class="math inline">\(\Lambda_{ba}=\Lambda_{ab}^T\)</span>.</p>
+<p>注意，对于一个一般的高斯分布，其指数项可以写成<span class="math display">\[(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)=\mathbf{x}^T\Lambda\mathbf{x}-2\mathbf{x}^T\Lambda\mu+C.\]</span></p>
+<p>下面考虑条件分布<span class="math inline">\(p(\mathbf{x}_a \mid \mathbf{x}_b)\)</span>，只考虑指数项：<span class="math display">\[(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)=(\mathbf{x}_a-\mu_a)^T\Lambda_{aa}(\mathbf{x}_a-\mu_a)+2(\mathbf{x}_a-\mu_a)^T\Lambda_{ab}(\mathbf{x}_b-\mu_b)+(\mathbf{x}_b-\mu_b)^T\Lambda_{bb}(\mathbf{x}_b-\mu_b).\]</span> 由于<span class="math inline">\(\mathbf{x}_b\)</span>固定，我们可以将上式视为关于<span class="math inline">\(\mathbf{x}_a\)</span>的函数，不难看出上式仍是一个二次型，故对应的条件分布<span class="math inline">\(p(\mathbf{x}_a \mid \mathbf{x}_b)\)</span>仍是一个高斯分布. 改写可得<span class="math display">\[\begin{aligned}
+(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}\mu_a+2\mathbf{x}_a^T\Lambda_{ab}\mathbf{x}_b-2\mathbf{x}_a^T\Lambda_{ab}\mu_b+C
+\\&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a-\Lambda_{ab}(\mathbf{x}_b-\mu_b))+C
+\\&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}(\mu_a-\Lambda_{aa}^{-1}\Lambda_{ab}(\mathbf{x}_b-\mu_b))+C.
+\end{aligned}\]</span></p>
+<p>因此<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a \mid \mathbf{x}_b]=\mu_a-\Lambda_{aa}^{-1}\Lambda_{ab}(\mathbf{x}_b-\mu_b)}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a \mid \mathbf{x}_b]=\Lambda_{aa}^{-1}}\)</span>.</p>
+<p>利用分块矩阵的恒等式<span class="math display">\[\begin{bmatrix}
+A &amp; B \\ C &amp; D
+\end{bmatrix}^{-1}=\begin{bmatrix}
+M &amp; -MBD^{-1} \\
+-D^{-1}CM &amp; D^{-1}+D^{-1}CMBD^{-1}
+\end{bmatrix}\]</span>其中<span class="math display">\[M=(A-BD^{-1}C)^{-1}.\]</span> 因为<span class="math inline">\(\begin{bmatrix} \Sigma_{aa} &amp; \Sigma_{ab} \\ \Sigma_{ba} &amp; \Sigma_{bb} \end{bmatrix}^{-1}=\begin{bmatrix} \Lambda_{aa} &amp; \Lambda_{ab} \\ \Lambda_{ba} &amp; \Lambda_{bb} \end{bmatrix}\)</span>，所以<span class="math display">\[\Lambda_{aa}=(\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba})^{-1}\]</span>以及<span class="math display">\[\Lambda_{ab}=-(\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba})^{-1}\Sigma_{ab}\Sigma_{bb}^{-1}.\]</span></p>
+<p>因此<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a \mid \mathbf{x}_b]=\mu_a+\Sigma_{ab}\Sigma_{bb}^{-1}(\mathbf{x}_b-\mu_b)}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a \mid \mathbf{x}_b]=\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba}}\)</span>.</p>
+<h2 id="边缘高斯分布">边缘高斯分布</h2>
+<p>设<span class="math inline">\(p(\mathbf{x}_a, \mathbf{x}_b)\)</span>为联合高斯分布，则其边缘概率分布为<span class="math display">\[p(\mathbf{x}_a)=\int p(\mathbf{x}_a, \mathbf{x}_b)\text{d}\mathbf{x}_b\]</span>也是一个高斯分布.</p>
+<p>由于上式涉及到关于<span class="math inline">\(\mathbf{x}_b\)</span>的积分，因此<span class="math display">\[\begin{aligned}
+(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T\Lambda_{bb}\mu_b+2\mathbf{x}_b^T\Lambda_{ba}\mathbf{x}_a-2\mathbf{x}_b^T\Lambda_{ba}\mu_a+C
+\\&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))+C
+\\&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T\mathbf{m}+C
+\\&amp;=(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})^T\Lambda_{bb}(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+C.
+\end{aligned}\]</span></p>
+<p>所以，关于<span class="math inline">\(\mathbf{x}_b\)</span>的积分为<span class="math display">\[\begin{aligned}
+\int p(\mathbf{x}_a, \mathbf{x}_b)\text{d}\mathbf{x}_b &amp;\propto \int \exp\left[(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{b})^T\Lambda_{bb}(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}\right]\text{d}\mathbf{x}_b
+\\&amp;\propto \exp\left[-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}\right].
+\end{aligned}\]</span></p>
+<p>于是，边缘高斯分布中关于<span class="math inline">\(\mathbf{x}_a\)</span>的指数项为<span class="math display">\[\begin{aligned}
+&amp;\ \ \ \ \ -\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}\mu_a-2\mathbf{x}_a^T\Lambda_{ab}\mu_b
+\\&amp;=-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a+\Lambda_{ab}\mu_b)
+\\&amp;=-(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))^T\Lambda_{bb}^{-1}(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a+\Lambda_{ab}\mu_b)
+\\&amp;=\mathbf{x}_a^T(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})\mu_a+C.
+\end{aligned}\]</span></p>
+<p>因此，<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a]=\mu_a}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a]=(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})^{-1}=\Sigma_{aa}}\)</span>.</p>
+]]></content>
+      <categories>
+        <category>Statistics</category>
+        <category>Graphical model</category>
+      </categories>
+      <tags>
+        <tag>Conditional independence</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Differentiation and Indefinite Integral</title>
     <url>/Mathematics/Real-analysis/Differentiation_and_Indefinite_Integral.html</url>
     <content><![CDATA[<h1 id="differentiability-of-monotonic-function">Differentiability of Monotonic Function</h1>
@@ -362,114 +470,6 @@ We have <span class="math display">\[\begin{aligned}
       <tags>
         <tag>Differential</tag>
         <tag>Integral</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Conditional Independence</title>
-    <url>/Statistics/Graphical-model/Conditional_Independence.html</url>
-    <content><![CDATA[<h1 id="definition">Definition</h1>
-<p><strong>Definition 1.1</strong>    Let <span class="math inline">\(X, Y\)</span> be r.v.s. defined on <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>. We denote the joint density <span class="math inline">\(p(x, y)\)</span>, and call <span class="math display">\[p(y)=\int_\mathcal{X} p(x, y)\text{d}x\]</span> the <strong>marginal density</strong> of <span class="math inline">\(Y\)</span>. The <strong>conditional density</strong> of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> is defined as any function <span class="math inline">\(p(x \mid y)\)</span> s.t. <span class="math display">\[p(x, y)=p(y)p(x \mid y).\]</span></p>
-<div class="note warning">
-            <p>If <span class="math inline">\(p(y)&gt;0\)</span> then the solution is unique and given by the familiar expression <span class="math display">\[p(x \mid y)=\frac{p(x, y)}{p(y)}.\]</span></p>
-          </div>
-<p><strong>Definition 1.2</strong>    Let <span class="math inline">\(X, Y\)</span> be r.v.s. defined on <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>. <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>marginally independent</strong> if <span class="math display">\[p(x \mid y)=p(x), \quad \forall x \in \mathcal{X}, y \in \mathcal{Y}, p(y)&gt;0,\]</span> which is equivalent to <span class="math display">\[p(x, y)=p(x)p(y).\]</span></p>
-<p><strong>Definition 1.3</strong>    Let <span class="math inline">\(X, Y, Z\)</span> be r.v.s. defined on a Cartesian product space and the joint density be <span class="math inline">\(p(x, y, z)\)</span>. We say that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>conditionally independent</strong> given <span class="math inline">\(Z\)</span> if <span class="math display">\[p(x \mid y, z)=p(x \mid z), \quad \forall x \in \mathcal{X}, y \in \mathcal{Y}, z \in \mathcal{Z}\ \text{s.t.}\ p(y, z)&gt;0,\]</span> denoted <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>.</p>
-<div class="note info">
-            <p>If <span class="math inline">\(Z\)</span> is degenerate, i.e., there is some <span class="math inline">\(z\)</span> s.t. <span class="math inline">\(P(Z=z)=1\)</span>, then the definition above is the same as saying that <span class="math inline">\(X \perp\!\!\!\!\perp Y\)</span>.</p>
-          </div>
-<p><strong>Example 1.1</strong>    Let <span class="math inline">\(X_1, \cdots, X_k\)</span> be a Markov chain. Then <span class="math inline">\(X_k\)</span> is independent of <span class="math inline">\(X_1, \cdots, X_{k-2}\)</span> conditional upon <span class="math inline">\(X_{k-1}\)</span>: <span class="math display">\[P(X_k=x_k \mid X_{k-1}=x_{k-1}, \cdots, X_1=x_1)=P(X_k=x_k \mid X_{k-1}=x_{k-1})\]</span> for all <span class="math inline">\(x_k, x_{k-1}, \cdots, x_1\)</span>, i.e., <span class="math inline">\(X_k \perp\!\!\!\!\perp X_1, \cdots, X_{k-2} \mid X_{k-1}\)</span>, a.k.a. <strong>Markov property</strong>, or <strong>memoryless property</strong>.</p>
-<p><span id="eg1.2"><strong>Example 1.2</strong></span>    Suppose <span class="math inline">\(\mathbf{X}_V=(X_1, \cdots, X_p)^T\)</span> is a multivariate Gaussian distribution, i.e., <span class="math display">\[f(\mathbf{x}_V; \mu, \Sigma)=\frac{1}{(2\pi)^{p/2}|\Sigma|^{p/2}}\exp\left[-\frac{1}{2}(\mathbf{x}_V-\mu)^T\Sigma^{-1}(\mathbf{x}_V-\mu)\right].\]</span> Then <span class="math display">\[X_p \mid X_1=x_1, \cdots, X_{p-1}=x_{p-1} \sim \mathcal{N}(\mu_p+\Sigma_{p, -p}\Sigma_{-p, -p}^{-1}(\mathbf{x}_{-p}-\mu_{-p}), \sigma_{pp \cdot 1 \cdots p-1}),\]</span> where <span class="math inline">\(\sigma_{aa \cdot B}=\sigma_{aa}-\Sigma_{aB}\Sigma_{BB}^{-1}\Sigma_{Ba}\)</span>, is called the <strong>Schur complement</strong> of entry <span class="math inline">\((a, a)\)</span> in <span class="math inline">\(\Sigma\)</span>.</p>
-<p><strong>Theorem 1.1</strong>    Let <span class="math inline">\(X, Y, Z\)</span> be r.v.s. defined on a Cartesian product space. The following are equivalent:</p>
-<p>    (1) <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(y, z)&gt;0\)</span>;</p>
-<p>    (2) <span class="math inline">\(p(x, y \mid z)=p(x \mid z)p(y \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>;</p>
-<p>    (3) <span class="math inline">\(p(x, y, z)=p(y, z)p(x \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>;</p>
-<p>    (4) <span class="math inline">\(p(z)p(x, y, z)=p(x, z)p(y, z)\)</span> for all <span class="math inline">\(x, y, z\)</span>;</p>
-<p>    (5) <span class="math inline">\(p(x, y, z)=f(x, z)g(y, z)\)</span> for some functions <span class="math inline">\(f, g\)</span> and all <span class="math inline">\(x, y, z\)</span>.</p>
-<p><strong><em>Proof.</em></strong> We need to show (1) <span class="math inline">\(\Rightarrow\)</span> (2) <span class="math inline">\(\Rightarrow\)</span> (3) <span class="math inline">\(\Rightarrow\)</span> (1), (3) <span class="math inline">\(\Leftrightarrow\)</span> (4), and (3) <span class="math inline">\(\Leftrightarrow\)</span> (5).</p>
-<p>(i) Since <span class="math inline">\(p(y, z)&gt;0\)</span>, then <span class="math inline">\(p(z)&gt;0\)</span>. Since <span class="math inline">\(p(x \mid y, z)p(y \mid z)=p(x, y \mid z)\)</span>, then <span class="math display">\[p(x, y \mid z)=p(x \mid z)p(y \mid z),\]</span> i.e., (1) <span class="math inline">\(\Rightarrow\)</span> (2).</p>
-<p>(ii) We have <span class="math display">\[p(x, y, z)=p(x, y \mid z)p(z)=p(x \mid z)p(y \mid z)p(z)=p(y, z)p(x \mid z)\]</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>, i.e., (2) <span class="math inline">\(\Rightarrow\)</span> (3).</p>
-<p>(iii) It is obvious to show that (3) <span class="math inline">\(\Rightarrow\)</span> (1), (3) <span class="math inline">\(\Leftrightarrow\)</span> (4), and (3) <span class="math inline">\(\Rightarrow\)</span> (5).</p>
-<p>(iv) Suppose <span class="math inline">\(p(x, y, z)=f(x, z)g(y, z)\)</span> for some functions <span class="math inline">\(f, g\)</span> and all <span class="math inline">\(x, y, z\)</span>. We have <span class="math display">\[p(y, z)=\int_\mathcal{X} p(x, y, z)\text{d}x=g(y, z)\int_\mathcal{X} f(x, z)\text{d}x:=g(y, z)\widetilde{f}(z).\]</span> Then <span class="math display">\[p(x, y, z)=\frac{f(x, z)p(y, z)}{\widetilde{f}(z)}.\]</span></p>
-Since <span class="math display">\[p(x \mid y, z)=\frac{p(x, y, z)}{p(y, z)}=\frac{f(x, z)}{\widetilde{f}(z)}=p(x \mid z),\]</span> then we have (5) <span class="math inline">\(\Rightarrow\)</span> (1) <span class="math inline">\(\Rightarrow\)</span> (3).
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="graphoid-axioms">Graphoid Axioms</h1>
-<p><strong>Theorem 2.1 (Graphoid Axioms)</strong>    Conditional independence satisfies the following properties:</p>
-<p>    (1) Symmetry: <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z \Rightarrow Y \perp\!\!\!\!\perp X \mid Z\)</span>;</p>
-<p>    (2) Decomposition: <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z \Rightarrow X \perp\!\!\!\!\perp Y \mid Z\)</span>;</p>
-<p>    (3) Weak union: <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z \Rightarrow X \perp\!\!\!\!\perp W \mid Y, Z\)</span>;</p>
-<p>    (4) Contraction: <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z \Rightarrow X \perp\!\!\!\!\perp Y, W \mid Z\)</span>;</p>
-<p>    (5) Intersection: if <span class="math inline">\(p(x, y, z, w)&gt;0\)</span>, then <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid W, Z \Rightarrow X \perp\!\!\!\!\perp Y, W \mid Z\)</span>.</p>
-<p><strong><em>Proof.</em></strong></p>
-<p>(i) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>, then <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span>, and thus <span class="math inline">\(p(x, y, z)=p(x, z)p(y \mid z)\)</span>. Hence, <span class="math display">\[p(y \mid x, z)=\frac{p(x, y, z)}{p(x, z)}=\frac{p(x, z)p(y \mid z)}{p(x, z)}=p(y \mid z),\]</span> i.e., <span class="math inline">\(Y \perp\!\!\!\!\perp X \mid Z\)</span>.</p>
-<p>(ii) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z\)</span>, then <span class="math inline">\(p(x \mid y, w, z)=p(x \mid z)\)</span>, and thus <span class="math inline">\(p(x, y, w \mid z)=p(x \mid z)p(y, w \mid z)\)</span>. Hence, <span class="math display">\[p(x, y \mid z)=\int_\mathcal{W} p(x, y, w \mid z)=p(x \mid z)\int_\mathcal{W} p(y, w \mid z)=p(x \mid z)p(y \mid z),\]</span> i.e., <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>.</p>
-<p>(iii) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z\)</span>, then <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span> and thus <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span>. Besides, <span class="math inline">\(p(x \mid y, w, z)=p(x \mid z)\)</span>. Hence, <span class="math inline">\(p(x \mid y, w, z)=p(x \mid y, z)\)</span>, i.e., <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span>.</p>
-<p>(iv) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span>, then <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span> and <span class="math inline">\(p(x \mid w, y, z)=p(x \mid y, z)\)</span>. Hence, <span class="math inline">\(p(x \mid w, y, z)=p(x \mid z)\)</span>, i.e., <span class="math inline">\(X \perp\!\!\!\!\perp W, Y \mid Z\)</span>.</p>
-(v) Since <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid W, Z\)</span>, then <span class="math inline">\(p(x, w, y, z)=f(x, y, z)g(w, y, z)\)</span> for some functions <span class="math inline">\(f, g\)</span>, and <span class="math inline">\(p(x, y, w, z)=\widetilde{f}(x, w, z)\widetilde{g}(y, w, z)\)</span> for some functions <span class="math inline">\(\widetilde{f}, \widetilde{g}\)</span>. Because of positivity, we have <span class="math display">\[f(x, y, z)=\frac{\widetilde{f}(x, w, z)\widetilde{g}(y, w, z)}{g(w, y, z)}=\frac{\widetilde{f}(x, w_0, z)\widetilde{g}(y, w_0, z)}{g(w_0, y, z)}\]</span> for any <span class="math inline">\(w_0\)</span> since <span class="math inline">\(f(x, y, z)\)</span> does not depend on <span class="math inline">\(w\)</span>. Then <span class="math inline">\(f(x, y, z)=a(x, z)b(y, z)\)</span>, and thus <span class="math display">\[p(x, w, y, z)=a(x, z)b(y, z)g(w, y, z)=\widetilde{a}(x, z)\widetilde{b}(y, w, z).\]</span> Therefore, <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<div class="note info">
-            <ul><li><p><strong>Symmetry</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span> then <span class="math inline">\(X\)</span> is irrelevant to <span class="math inline">\(Y\)</span>.</p></li><li><p><strong>Decomposition</strong> means that if some information is irrelevant to <span class="math inline">\(X\)</span> then part of it is also irrelevant to <span class="math inline">\(X\)</span>.</p></li><li><p><strong>Weak union</strong> means that if <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> together are irrelevant to <span class="math inline">\(X\)</span> then learning one of them does not make the other one relevant.</p></li><li><p><strong>Contraction</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span>, and if learning <span class="math inline">\(Y\)</span> does not make <span class="math inline">\(W\)</span> relevant to <span class="math inline">\(X\)</span>, then both <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> are irrelevant to <span class="math inline">\(X\)</span>.</p></li></ul>
-          </div>
-<h1 id="functional-conditional-independence">Functional Conditional Independence</h1>
-<p><strong>Remark 3.1</strong>    Since the events <span class="math inline">\(\{Y=y\}\)</span> and <span class="math inline">\(\{Y=y, h(Y)=h(y)\}\)</span> are equal for any measurable function <span class="math inline">\(h\)</span>, it follows that <span class="math display">\[p(x \mid y, z)=p(x \mid y, h(y), z).\]</span></p>
-<p><strong>Example 3.1</strong>    Suppose <span class="math inline">\(X \sim f_\theta\)</span> for some parameter <span class="math inline">\(\theta \in \Theta\)</span>. We say that <span class="math inline">\(T=t(X)\)</span> is a <strong>sufficient statistic</strong> for <span class="math inline">\(\theta\)</span> if the likelihood can be written as <span class="math inline">\(L(\theta \mid X=x)=f_\theta(x)=g(t(x), \theta)h(x)\)</span>. Under a Bayesian interpretation of <span class="math inline">\(\theta\)</span>, this is equivalent to saying <span class="math inline">\(X \perp\!\!\!\!\perp \theta \mid T\)</span>.</p>
-<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
-p(\theta \mid x)&amp;=\frac{p(x \mid \theta)p(\theta)}{\int_\Theta p(x \mid \phi)p(\phi)\text{d}\phi}
-\\&amp;=\frac{g(t(x), \theta)h(x)p(\theta)}{\int_\Theta g(t(x), \phi)h(x)p(\phi)\text{d}\phi}
-\\&amp;=\frac{g(t(x), \theta)p(\theta)}{\int_\Theta g(t(x), \phi)p(\phi)\text{d}\phi}
-\\&amp;=p(\theta \mid t(x)).
-\end{aligned}\]</span> Since <span class="math inline">\(p(\theta \mid x)=p(\theta \mid x, t(x))\)</span>, then <span class="math inline">\(\theta \perp\!\!\!\!\perp X \mid T\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="关于多元高斯分布的补充">关于多元高斯分布的补充</h1>
-<p>由<a href="#eg1.2">例1.2</a>，我们对多元高斯分布进行补充.</p>
-<h2 id="条件高斯分布">条件高斯分布</h2>
-<p>假设<span class="math inline">\(\mathbf{x} \in \mathbb{R}^p\)</span>服从<span class="math inline">\(\mathcal{N}(\mu, \Sigma)\)</span>. 将<span class="math inline">\(\mathbf{x}\)</span>和对应的均值<span class="math inline">\(\mu\)</span>做如下划分：<span class="math inline">\(\mathbf{x}=\begin{bmatrix} \mathbf{x}_a \\ \mathbf{x}_b \end{bmatrix}\)</span>和<span class="math inline">\(\mu=\begin{bmatrix} \mu_a \\ \mu_b \end{bmatrix}\)</span>，其中<span class="math inline">\(\mathbf{x}_a, \mu_a \in \mathbb{R}^k\)</span>，<span class="math inline">\(\mathbf{x}_b, \mu_b \in \mathbb{R}^{p-k}\)</span>. 将协方差矩阵<span class="math inline">\(\Sigma\)</span>划分为<span class="math inline">\(\Sigma=\begin{bmatrix} \Sigma_{aa} &amp; \Sigma_{ab} \\ \Sigma_{ba} &amp; \Sigma_{bb} \end{bmatrix}\)</span>. 由<span class="math inline">\(\Sigma\)</span>的对称性易知<span class="math inline">\(\Sigma_{aa}\)</span>和<span class="math inline">\(\Sigma_{bb}\)</span>对称，且<span class="math inline">\(\Sigma_{ba}=\Sigma_{ab}^T\)</span>.</p>
-<p>定义<strong>精度矩阵</strong><span class="math inline">\(\Lambda=\Sigma^{-1}\)</span>，并将其划分为<span class="math inline">\(\begin{bmatrix} \Lambda_{aa} &amp; \Lambda_{ab} \\ \Lambda_{ba} &amp; \Lambda_{bb} \end{bmatrix}\)</span>. 由于对称矩阵的逆仍然对称，故<span class="math inline">\(\Lambda_{aa}\)</span>和<span class="math inline">\(\Lambda_{bb}\)</span>对称，且<span class="math inline">\(\Lambda_{ba}=\Lambda_{ab}^T\)</span>.</p>
-<p>注意，对于一个一般的高斯分布，其指数项可以写成<span class="math display">\[(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)=\mathbf{x}^T\Lambda\mathbf{x}-2\mathbf{x}^T\Lambda\mu+C.\]</span></p>
-<p>下面考虑条件分布<span class="math inline">\(p(\mathbf{x}_a \mid \mathbf{x}_b)\)</span>，只考虑指数项：<span class="math display">\[(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)=(\mathbf{x}_a-\mu_a)^T\Lambda_{aa}(\mathbf{x}_a-\mu_a)+2(\mathbf{x}_a-\mu_a)^T\Lambda_{ab}(\mathbf{x}_b-\mu_b)+(\mathbf{x}_b-\mu_b)^T\Lambda_{bb}(\mathbf{x}_b-\mu_b).\]</span> 由于<span class="math inline">\(\mathbf{x}_b\)</span>固定，我们可以将上式视为关于<span class="math inline">\(\mathbf{x}_a\)</span>的函数，不难看出上式仍是一个二次型，故对应的条件分布<span class="math inline">\(p(\mathbf{x}_a \mid \mathbf{x}_b)\)</span>仍是一个高斯分布. 改写可得<span class="math display">\[\begin{aligned}
-(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}\mu_a+2\mathbf{x}_a^T\Lambda_{ab}\mathbf{x}_b-2\mathbf{x}_a^T\Lambda_{ab}\mu_b+C
-\\&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a-\Lambda_{ab}(\mathbf{x}_b-\mu_b))+C
-\\&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}(\mu_a-\Lambda_{aa}^{-1}\Lambda_{ab}(\mathbf{x}_b-\mu_b))+C.
-\end{aligned}\]</span></p>
-<p>因此<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a \mid \mathbf{x}_b]=\mu_a-\Lambda_{aa}^{-1}\Lambda_{ab}(\mathbf{x}_b-\mu_b)}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a \mid \mathbf{x}_b]=\Lambda_{aa}^{-1}}\)</span>.</p>
-<p>利用分块矩阵的恒等式<span class="math display">\[\begin{bmatrix}
-A &amp; B \\ C &amp; D
-\end{bmatrix}^{-1}=\begin{bmatrix}
-M &amp; -MBD^{-1} \\
--D^{-1}CM &amp; D^{-1}+D^{-1}CMBD^{-1}
-\end{bmatrix}\]</span>其中<span class="math display">\[M=(A-BD^{-1}C)^{-1}.\]</span> 因为<span class="math inline">\(\begin{bmatrix} \Sigma_{aa} &amp; \Sigma_{ab} \\ \Sigma_{ba} &amp; \Sigma_{bb} \end{bmatrix}^{-1}=\begin{bmatrix} \Lambda_{aa} &amp; \Lambda_{ab} \\ \Lambda_{ba} &amp; \Lambda_{bb} \end{bmatrix}\)</span>，所以<span class="math display">\[\Lambda_{aa}=(\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba})^{-1}\]</span>以及<span class="math display">\[\Lambda_{ab}=-(\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba})^{-1}\Sigma_{ab}\Sigma_{bb}^{-1}.\]</span></p>
-<p>因此<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a \mid \mathbf{x}_b]=\mu_a+\Sigma_{ab}\Sigma_{bb}^{-1}(\mathbf{x}_b-\mu_b)}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a \mid \mathbf{x}_b]=\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba}}\)</span>.</p>
-<h2 id="边缘高斯分布">边缘高斯分布</h2>
-<p>设<span class="math inline">\(p(\mathbf{x}_a, \mathbf{x}_b)\)</span>为联合高斯分布，则其边缘概率分布为<span class="math display">\[p(\mathbf{x}_a)=\int p(\mathbf{x}_a, \mathbf{x}_b)\text{d}\mathbf{x}_b\]</span>也是一个高斯分布.</p>
-<p>由于上式涉及到关于<span class="math inline">\(\mathbf{x}_b\)</span>的积分，因此<span class="math display">\[\begin{aligned}
-(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T\Lambda_{bb}\mu_b+2\mathbf{x}_b^T\Lambda_{ba}\mathbf{x}_a-2\mathbf{x}_b^T\Lambda_{ba}\mu_a+C
-\\&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))+C
-\\&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T\mathbf{m}+C
-\\&amp;=(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})^T\Lambda_{bb}(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+C.
-\end{aligned}\]</span></p>
-<p>所以，关于<span class="math inline">\(\mathbf{x}_b\)</span>的积分为<span class="math display">\[\begin{aligned}
-\int p(\mathbf{x}_a, \mathbf{x}_b)\text{d}\mathbf{x}_b &amp;\propto \int \exp\left[(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{b})^T\Lambda_{bb}(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}\right]\text{d}\mathbf{x}_b
-\\&amp;\propto \exp\left[-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}\right].
-\end{aligned}\]</span></p>
-<p>于是，边缘高斯分布中关于<span class="math inline">\(\mathbf{x}_a\)</span>的指数项为<span class="math display">\[\begin{aligned}
-&amp;\ \ \ \ \ -\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}\mu_a-2\mathbf{x}_a^T\Lambda_{ab}\mu_b
-\\&amp;=-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a+\Lambda_{ab}\mu_b)
-\\&amp;=-(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))^T\Lambda_{bb}^{-1}(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a+\Lambda_{ab}\mu_b)
-\\&amp;=\mathbf{x}_a^T(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})\mu_a+C.
-\end{aligned}\]</span></p>
-<p>因此，<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a]=\mu_a}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a]=(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})^{-1}=\Sigma_{aa}}\)</span>.</p>
-]]></content>
-      <categories>
-        <category>Statistics</category>
-        <category>Graphical model</category>
-      </categories>
-      <tags>
-        <tag>Conditional independence</tag>
       </tags>
   </entry>
   <entry>
@@ -861,6 +861,7 @@ In addition, if <span class="math inline">\(\displaystyle \int_a^\infty f(x)\tex
 <div class="note info">
             <p>The <span class="math inline">\(k\)</span>th pivot is the ratio <span class="math inline">\(\displaystyle \frac{D_k}{D_{k-1}}\)</span> of the leading determinants (sizes <span class="math inline">\(k\)</span> and <span class="math inline">\(k-1\)</span>).</p>
           </div>
+<p><span id="7"></span></p>
 <h1 id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h1>
 <ul>
 <li>The <strong>singular value decomposition</strong> of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=U\Sigma V^T\)</span>, where <span class="math inline">\(U\)</span> contains orthonormal eigenvectors of <span class="math inline">\(AA^T\)</span>, <span class="math inline">\(\Sigma\)</span> contains singular values <span class="math inline">\(\sigma_1, \cdots, \sigma_r\)</span>, and <span class="math inline">\(V\)</span> contains orthonormal eigenvectors of <span class="math inline">\(A^TA\)</span>. Note that <span class="math inline">\(\sigma_1^2 \geq \cdots \geq \sigma_r^2\)</span> are the nonzero eigenvalues of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> for <span class="math inline">\(r\)</span> is the rank of <span class="math inline">\(A\)</span>.</li>
@@ -905,6 +906,7 @@ In addition, if <span class="math inline">\(\displaystyle \int_a^\infty f(x)\tex
       </categories>
       <tags>
         <tag>Linear algebra</tag>
+        <tag>SVD</tag>
       </tags>
   </entry>
   <entry>
@@ -1240,237 +1242,6 @@ Finally, we consider measurable function. Since <span class="math inline">\(m(\{
       </tags>
   </entry>
   <entry>
-    <title>Measure Theory</title>
-    <url>/Mathematics/Real-analysis/Measure_Theory.html</url>
-    <content><![CDATA[<h1 id="outer-measure">Outer Measure</h1>
-<h2 id="definition-and-example">Definition and Example</h2>
-<p><span id="def1.1"><strong>Definition 1.1</strong></span>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span>. The <strong>outer measure</strong> of <span class="math inline">\(E\)</span> is <span class="math display">\[m^*(E):=\inf\left\{\sum_{i=1}^\infty |I_i|: \bigcup_{i=1}^\infty I_i \supset E \right\},\]</span> where <span class="math inline">\(I_i\)</span> is open, and <span class="math inline">\(|I_i|\)</span> is the volume of <span class="math inline">\(I_i\)</span>.</p>
-<div class="note warning">
-            <p>In <a href="#def1.1">definition 1.1</a>, we need <strong>at most countable</strong> <span class="math inline">\(\{I_i\}\)</span>. For example, if <span class="math inline">\([0, 1] \cap \mathbb{Q}\)</span> is covered by finite intervals, then those finite intervals and endpoints cover <span class="math inline">\([0, 1]\)</span>. Therefore, <span class="math inline">\(m^*([0, 1] \cap \mathbb{Q}) \geq 1\)</span>. Similarly, <span class="math inline">\(m^*([0, 1] \cap \mathbb{Q}^c) \geq 1\)</span>, and thus <span class="math inline">\(m^*([0, 1]) \geq 2\)</span>. In other cases, <span class="math inline">\(I_i\)</span> can be an empty set and thus <span class="math inline">\(\{I_i\}\)</span> can be finite.</p>
-          </div>
-<p><strong>Example 1.1</strong>    <span class="math inline">\(m^*(\varnothing)=0\)</span>.</p>
-<p><strong>Example 1.2</strong>    If <span class="math inline">\(p \in \mathbb{R}\)</span>, then <span class="math inline">\(m^*(\{p\})=0\)</span>.</p>
-<strong><em>Proof.</em></strong> <span class="math inline">\(\forall \varepsilon&gt;0\)</span>, define <span class="math inline">\(\displaystyle I=\left(x-\frac{\varepsilon}{2}, x+\frac{\varepsilon}{2}\right)\)</span>. We have <span class="math inline">\(|I|=\varepsilon\)</span> and <span class="math inline">\(\{p\} \subset I\)</span>. Therefore, <span class="math inline">\(m^*(\{p\}) \leq \varepsilon\)</span>, i.e., <span class="math inline">\(m^*(\{p\})=0\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Example 1.3</strong>    If <span class="math inline">\(p_1, \cdots, p_k \in \mathbb{R}\)</span>, then <span class="math inline">\(m^*(\{p_1, \cdots, p_k\})=0\)</span>.</p>
-<strong><em>Proof.</em></strong> <span class="math inline">\(\forall \varepsilon&gt;0\)</span>, define <span class="math inline">\(\displaystyle I_i=\left(p_i-\frac{\varepsilon}{2k}, p_i+\frac{\varepsilon}{2k}\right)\)</span>, we have <span class="math inline">\(\displaystyle |I_i|=\frac{\varepsilon}{k}\)</span>. Hence, <span class="math inline">\(\displaystyle \{p_1, \cdots, p_k\} \subset \bigcup_{i=1}^k I_i\)</span> and <span class="math inline">\(\displaystyle \sum_{i=1}^n |I_i|=\varepsilon\)</span>. Therefore, <span class="math inline">\(m^*(\{p_1, \cdots, p_n\}) \leq \varepsilon\)</span>, i.e., <span class="math inline">\(m^*(\{p_1, \cdots, p_n\})=0\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Example 1.4</strong>    If <span class="math inline">\(p_1, \cdots, p_n, \cdots \in \mathbb{R}\)</span>, then <span class="math inline">\(m^*(\{p_1, \cdots, p_n, \cdots\})=0\)</span>.</p>
-<strong><em>Hint of proof.</em></strong> Take <span class="math inline">\(\displaystyle I_i=\left(x_i-\frac{\varepsilon}{2^{i+1}}, x_i+\frac{\varepsilon}{2^{i+1}}\right)\)</span>, then <span class="math inline">\(\displaystyle |I_i|=\frac{\varepsilon}{2^i}\)</span>, and <span class="math inline">\(\displaystyle \sum_{i=1}^\infty \frac{\varepsilon}{2^i}=\varepsilon\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Example 1.5</strong>    <span class="math inline">\(m^*([0, 1] \cap \mathbb{Q})=0\)</span>.</p>
-<h2 id="basic-property">Basic Property</h2>
-<p><strong>Property 1.1 (Nonnegativity)</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span>, <span class="math inline">\(m^*(E) \geq 0\)</span>. Besides, <span class="math inline">\(m^*(\varnothing)=0\)</span>.</p>
-<p><strong>Property 1.2 (Countable Subadditivity)</strong>    Suppose <span class="math inline">\(A_i \subset \mathbb{R}^n\)</span>. <span class="math inline">\(\displaystyle m^*\left(\bigcup_{i=1}^\infty A_i\right) \leq \sum_{i=1}^\infty m^*(A_i)\)</span>.</p>
-<strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists an open cover of <span class="math inline">\(A_i\)</span>, <span class="math inline">\(\displaystyle \bigcup_{m=1}^\infty I_{i, m}\)</span> such that <span class="math display">\[m^*(A_i) \geq \sum_{m=1}^\infty |I_{i, m}|-\frac{\varepsilon}{2^i}, \bigcup_{i=1}^\infty A_i \subset \bigcup_{i, m=1}^\infty I_{i, m}.\]</span> Therefore, <span class="math display">\[\begin{aligned}
-m^*\left(\bigcup_{i=1}^\infty A_i\right) &amp;\leq \sum_{i, m=1}^\infty |I_{i, m}| \\
-&amp;\leq \sum_{i=1}^\infty m^*(A_i)+\sum_{i=1}^\infty \frac{\varepsilon}{2^i} \\
-&amp;=\sum_{i=1}^\infty m^*(A_i)+\varepsilon.
-\end{aligned}\]</span> Hence, <span class="math inline">\(\displaystyle m^*\left(\bigcup_{i=1}^\infty A_i\right) \leq \sum_{i=1}^\infty m^*(A_i).\)</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Property 1.3 (Monotonicity)</strong>    Suppose <span class="math inline">\(A \subset B\)</span>, then <span class="math inline">\(m^*(A) \leq m^*(B)\)</span>.</p>
-<strong><em>Proof.</em></strong> Take an arbitrary open cover of <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(\{I_i\}_{i=1}^\infty\)</span>. Since <span class="math inline">\(A \subset B\)</span>, then <span class="math inline">\(\{I_i\}_{i=1}^\infty\)</span> is an open cover of <span class="math inline">\(A\)</span>, and thus <span class="math inline">\(\displaystyle m^*(A) \leq \sum_{i=1}^\infty |I_i|\)</span>. By the definition of outer measure and infimum, we have <span class="math inline">\(m^*(B) \geq m^*(A)\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 1.4</strong>    Suppose <span class="math inline">\(I\)</span> is an interval, then <span class="math inline">\(m^*(I)=|I|\)</span>.</p>
-<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(I\)</span> is a closed interval. Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, we can find an open interval <span class="math inline">\(I&#39; \supset I\)</span> such that <span class="math inline">\(|I&#39;| \leq |I|+\varepsilon\)</span>. Hence, <span class="math inline">\(m^*(I) \leq |I&#39;| \leq |I|+\varepsilon\)</span>, i.e., <span class="math inline">\(m^*(I) \leq |I|\)</span>.</p>
-<p>Besides, we can find an open cover of <span class="math inline">\(I\)</span>, denoted <span class="math inline">\(\{I_i\}_{i=1}^\infty\)</span>, such that <span class="math inline">\(\displaystyle m^*(I) \geq \sum_{i=1}^\infty |I_i|-\varepsilon\)</span>. Since <span class="math inline">\(I\)</span> is bounded and closed, then there exists a finite open cover of <span class="math inline">\(I\)</span>, denoted <span class="math inline">\(\{I_i\}_{i=1}^m\)</span>, such that <span class="math inline">\(\displaystyle m^*(I) \geq \sum_{i=1}^m |I_i|-\varepsilon\)</span>. Since <span class="math inline">\(\displaystyle \sum_{i=1}^m |I_i| \geq |I|\)</span>, then <span class="math inline">\(m^*(I) \geq |I|-\varepsilon\)</span>, i.e., <span class="math inline">\(m^*(I) \geq |I|\)</span>.</p>
-<p>Therefore, <span class="math inline">\(m^*(I)=|I|\)</span>.</p>
-We now suppose <span class="math inline">\(I\)</span> is an arbitrary interval. We have <span class="math inline">\(\forall \varepsilon&gt;0, \exists I_1, I_2\)</span> s.t. <span class="math inline">\(I_1 \subset I \subset I_2\)</span>, where <span class="math inline">\(I_1, I_2\)</span> are closed, <span class="math inline">\(|I_1|+\varepsilon&gt;|I|\)</span>, and <span class="math inline">\(|I_2|-\varepsilon&lt;|I|\)</span>. Therefore, <span class="math display">\[|I|-\varepsilon&lt;m^*(I_1) \leq m^*(I) \leq m^*(I_2)&lt;|I|+\varepsilon.\]</span> As a consequence, <span class="math inline">\(m^*(I)=|I|\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="measurable-set">Measurable Set</h1>
-<h2 id="definition">Definition</h2>
-<p><strong>Definition 2.1</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is bounded, and <span class="math inline">\(I \supset E\)</span> is open. The <strong>inner measure</strong> of <span class="math inline">\(E\)</span> is <span class="math display">\[m_*(E)=|I|-m^*(I-E).\]</span></p>
-<div class="note info">
-            <p><font face="Noto Serif SC" font color="#696969" font size=2>显然，若<span class="math inline">\(E\)</span>有界，且<span class="math inline">\(m^*(E)=m_*(E)\)</span>，我们能得到<strong>可测</strong>的定义. 然而，我们希望能对任何一个<span class="math inline">\(E\)</span>定义可测，而上述的定义则有所限制. 此外，这一定义需要同时使用内外测度的定义. 因此，Carathéodory提出了一个更简洁地等价定义.</font></p>
-          </div>
-<p><strong>Definition 2.2</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is a set. If for any set <span class="math inline">\(T \subset \mathbb{R}^n\)</span>, we have <span class="math display">\[m^*(T)=m^*(T \cap E)+m^*(T \cap E^c),\]</span> then <span class="math inline">\(E\)</span> is <strong>L-measurable</strong> or <strong>measurable</strong>. The <strong>L-measure</strong>, denoted <span class="math inline">\(m(E)\)</span>, equals to <span class="math inline">\(m^*(E)\)</span>. The collection of all measurable sets is called family of measurable sets, denoted as <span class="math inline">\(\mathscr{M}\)</span>.</p>
-<p><span id="thm2.1"><strong>Theorem 2.1</strong></span>    <span class="math inline">\(E\)</span> is measurable if and only if for any <span class="math inline">\(A \subset E\)</span> and <span class="math inline">\(B \subset E^c\)</span>, we have <span class="math display">\[m^*(A \cup B)=m^*(A)+m^*(B).\]</span></p>
-<p><strong><em>Proof.</em></strong> <span class="math inline">\((\Rightarrow)\)</span> Take <span class="math inline">\(T=A \cup B\)</span> for any <span class="math inline">\(A \subset E\)</span> and <span class="math inline">\(B \subset E^c\)</span>. Then <span class="math display">\[m^*(A \cup B)+m^*((A \cup B) \cap E)+m^*((A \cup B) \cap E^c)=m^*(A)+m^*(B).\]</span></p>
-<span class="math inline">\((\Leftarrow)\)</span> Take <span class="math inline">\(A=T \cap E\)</span> and <span class="math inline">\(B=T \cap E^c\)</span> for any <span class="math inline">\(T\)</span>. Then <span class="math display">\[m^*(T \cap E)+m^*(T \cap E^c)=m^*(A)+m^*(B)=m^*(A \cup B)=m^*(T).\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h2 id="operation">Operation</h2>
-<p><strong>Theorem 2.2</strong>    <span class="math inline">\(S\)</span> is measurable if and only if <span class="math inline">\(S^c\)</span> is measurable.</p>
-<strong><em>Proof.</em></strong> If <span class="math inline">\(S\)</span> is measurable, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[m^*(T)=m^*(T \cap S)+m^*(T \cap S^c)=m^*(T \cap (S^c)^c)+m^*(T \cap S^c),\]</span> which is equivalent to say that <span class="math inline">\(S^c\)</span> is measurable.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 2.3</strong>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, then <span class="math inline">\(S_1 \cup S_2\)</span> is measurable.</p>
-<strong><em>Proof.</em></strong> Since <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[\begin{aligned}
-m^*(T)&amp;=m^*(T \cap S_1)+m^*(T \cap S_1^c) \\
-&amp;=m^*((T \cap (S_1 \cup S_2)) \cap S_1)+[m^*((T \cap S_1^c) \cap S_2)+m^*((T \cap S_1^c) \cap S_2^c))] \\
-&amp;=m^*((T \cap (S_1 \cup S_2)) \cap S_1)+[m^*((T \cap (S_1 \cup S_2)) \cap S_1^c)+m^*(T \cap (S_1 \cup S_2)^c)] \\
-&amp;=m^*(T \cap (S_1 \cup S_2))+m^*(T \cap (S_1 \cup S_2)^c).
-\end{aligned}\]</span> Therefore, <span class="math inline">\(S_1 \cup S_2\)</span> is measurable.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<div class="note info">
-            <p><font face="Noto Serif SC" font color="#696969" font size=2>对于不熟悉集合运算的读者，我们建议利用韦恩图逆推.</font></p>
-          </div>
-<p><strong>Theorem 2.4</strong>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, and <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[m^*(T \cap (S_1 \cup S_2))=m^*(T \cap S_1)+m^*(T \cap S_2).\]</span></p>
-<strong><em>Proof.</em></strong> Since <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then for any set <span class="math inline">\(T\)</span>, we have <span class="math inline">\(T \cap S_1 \subset S_1\)</span> and <span class="math inline">\(T \cap S^2 \subset S_1^c\)</span>. Since <span class="math inline">\(S_1\)</span> is measurable, then by <a href="#thm2.1">theorem 2.1</a>, <span class="math display">\[m^*(T \cap (S_1 \cup S_2))=m^*((T \cap S_1) \cup (T \cap S_2))=m^*(T \cap S_1)+m^*(T \cap S_2).\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><span id="thm2.5"><strong>Corollary 2.5</strong></span>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, and <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then <span class="math display">\[m(S_1 \cup S_2)=m(S_1)+m(S_2).\]</span></p>
-<p><strong>Corollary 2.6</strong>    If <span class="math inline">\(S_1, \cdots, S_k\)</span> are measurable, then <span class="math inline">\(\displaystyle \bigcup_{i=1}^k S_i\)</span> and <span class="math inline">\(\displaystyle \bigcap_{i=1}^k S_i\)</span> are measurable. Moreover, if <span class="math display">\[S_1 \cap \cdots \cap S_k=\varnothing,\]</span> then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[m^*(T \cap (S_1 \cup \cdots \cup S_k))=m^*(T \cap S_1)+\cdots+m^*(T \cap S_k).\]</span> Specifically, <span class="math display">\[m(S_1 \cup \cdots \cup S_k)=m(S_1)+\cdots+m(S_k),\]</span> which is <strong>finite additivity</strong>.</p>
-<p><strong>Corollary 2.7</strong>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, then <span class="math inline">\(S_1-S_2\)</span> is measurable.</p>
-<p><strong>Theorem 2.8</strong>    If <span class="math inline">\(S_1 \supset S_2\)</span> and <span class="math inline">\(m(S_2)&lt;\infty\)</span>, then <span class="math display">\[m(S_1-S_2)=m(S_1)-m(S_2).\]</span></p>
-<strong><em>Proof.</em></strong> We know <span class="math inline">\(S_1=(S_1-S_2) \cup S_2\)</span> and <span class="math inline">\((S_1-S_2) \cap S_2=\varnothing\)</span>. Then by <a href="#thm2.5">corollary 2.5</a>, <span class="math display">\[m(S_1)=m(S_1-S_2)+m(S_2).\]</span> Since <span class="math inline">\(m(S_2)&lt;\infty\)</span>, then <span class="math inline">\(m(S_1-S_2)=m(S_1)-m(S_2)\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 2.9</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of mutually disjoint measurable sets, then <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable. Besides, <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right)=\sum_{i=1}^\infty m(S_i)\)</span>, which is <strong>countable additivity</strong>.</p>
-<p><strong><em>Proof.</em></strong> We know <span class="math display">\[\begin{align}
-m^*(T)&amp;=m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)^c\right) \nonumber \\
-&amp;\geq m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \tag{Monotonicity} \\
-&amp;=\sum_{i=1}^k m^*(T \cap S_i)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right). \nonumber \\
-\end{align}\]</span> Take <span class="math inline">\(k \to \infty\)</span>, then <span class="math display">\[\begin{align}
-m^*(T)&amp;\geq \sum_{i=1}^\infty m^*(T \cap S_i)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \nonumber \\
-&amp;\geq m^*\left(\bigcup_{i=1}^\infty (T \cap S_i)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \tag{Countable Subadditivity} \\
-&amp;=m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right). \nonumber
-\end{align}\]</span> Because of countable subadditivity, we know <span class="math display">\[m^*(T) \leq m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right),\]</span> and thus <span class="math display">\[m^*(T)=m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right),\]</span> i.e., <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable.</p>
-Let <span class="math inline">\(\displaystyle T=\bigcup_{i=1}^\infty S_i\)</span>, then <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right) \geq \sum_{i=1}^\infty m(S_i)\)</span>. Because of countable subadditivity, we have <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right) \leq \sum_{i=1}^\infty m(S_i)\)</span>. Hence, <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right)=\sum_{i=1}^\infty m(S_i)\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 2.10</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of measurable sets, then <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable.</p>
-<strong><em>Proof.</em></strong> Let <span class="math inline">\(S_0=\varnothing\)</span>, and <span class="math inline">\(\displaystyle \widetilde{S}_i=S_i-\bigcup_{k=0}^{i-1} S_k\)</span>, where <span class="math inline">\(i \geq 1\)</span>. Then <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i=\bigcup_{i=1}^\infty \widetilde{S}_i\)</span>, and <span class="math inline">\(\{\widetilde{S}_i\}_{i=1}^\infty\)</span> is a collection of mutually disjoint measurable sets. Hence, <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty \widetilde{S}_i\)</span> is measurable, i.e., <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Corollary 2.11</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of measurable sets, then <span class="math inline">\(\displaystyle \bigcap_{i=1}^\infty S_i\)</span> is measurable.</p>
-<p><strong>Theorem 2.12</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of increasing measurable sets, then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i\)</span> is measurable, and <span class="math inline">\(\displaystyle m\left(\lim_{i \to \infty} S_i\right)=\lim_{i \to \infty} m(S_i)\)</span>.</p>
-<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i=\bigcup_{i=1}^\infty S_i\)</span>, then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i\)</span> is measurable.</p>
-Let <span class="math inline">\(S_0=\varnothing\)</span>, and <span class="math inline">\(\widetilde{S}_i=S_i-S_{i-1}\)</span>, where <span class="math inline">\(i \geq 1\)</span>. Then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i=\bigcup_{i=1}^\infty S_i=\bigcup_{i=1}^\infty \widetilde{S}_i\)</span>, and <span class="math inline">\(\{\widetilde{S}_i\}_{i=1}^\infty\)</span> is a collection of mutually disjoint measurable sets. Hence, <span class="math display">\[\begin{aligned}
-m\left(\lim_{i \to \infty} S_i\right)&amp;=\sum_{i=1}^\infty m(\widetilde{S}_i) \\
-&amp;=\sum_{i=1}^\infty m(S_i-S_{i-1}) \\
-&amp;=\lim_{k \to \infty}\sum_{i=1}^k m(S_i-S_{i-1}) \\
-&amp;=\lim_{k \to \infty}m\left(\bigcup_{i=1}^k (S_i-S_{i-1})\right) \\
-&amp;=\lim_{k \to \infty}m(S_k)=\lim_{i \to \infty}m(S_i).
-\end{aligned}\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 2.13</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of decreasing measurable sets, then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i\)</span> is measurable. Moreover, when <span class="math inline">\(m(S_1)&lt;\infty\)</span>, <span class="math inline">\(\displaystyle m\left(\lim_{i \to \infty} S_i\right)=\lim_{i \to \infty} m(S_i)\)</span>.</p>
-<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i=\bigcap_{i=1}^\infty S_i\)</span>, then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i\)</span> is measurable.</p>
-Let <span class="math inline">\(\widetilde{S}_i=S_1-S_i\)</span>, then <span class="math inline">\(\{\widetilde{S}_i=S_1-S_i\}_{i=1}^\infty\)</span> is a collection of increasing sets. Therefore, <span class="math display">\[m\left(\lim_{i \to \infty} (S_1-S_i)\right)=\lim_{i \to \infty} m(S_1-S_i).\]</span> Since <span class="math inline">\(m(S_1)&lt;\infty\)</span>, then <span class="math inline">\(m(S_i)&lt;\infty\)</span> and <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i&lt;\infty\)</span>. Hence, <span class="math display">\[m\left(\lim_{i \to \infty} (S_1-S_i)\right)=m\left(S_1-\lim_{i \to \infty} S_i\right)=m(S_1)-m\left(\lim_{i \to \infty} S_i\right),\]</span> and <span class="math display">\[\lim_{i \to \infty} m(S_1-S_i)=\lim_{i \to \infty} (m(S_1)-m(S_i))=m(S_1)-\lim_{i \to \infty} m(S_i).\]</span> Therefore, <span class="math inline">\(\displaystyle m\left(\lim_{i \to \infty} S_i\right)=\lim_{i \to \infty} m(S_i)\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<div class="note warning">
-            <p>The condition <span class="math inline">\(m(S_1)&lt;\infty\)</span> is important. For example, <span class="math inline">\(S_n=(n, \infty)\)</span>. It is obvious that <span class="math inline">\(\{S_n\}\)</span> is decreasing. Therefore, <span class="math inline">\(\displaystyle \lim_{n \to \infty} S_n=\bigcap_{n=1}^\infty S_n=\varnothing\)</span>, and <span class="math inline">\(\displaystyle m\left(\lim_{n \to \infty} S_n\right)=0\)</span>. However, <span class="math inline">\(m(S_n)=\infty\)</span>, and <span class="math inline">\(\displaystyle \lim_{n \to \infty} m(S_n)=\infty\)</span>.</p>
-          </div>
-<p><strong>Theorem 2.14</strong>    Suppose <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of measurable sets. If the upper limit and lower limit of <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> and measure exist, then <span class="math inline">\(\displaystyle m\left(\varliminf_{i \to \infty} S_i \right) \leq \varliminf_{i \to \infty} m(S_i) \leq \varlimsup_{i \to \infty} m(S_i) \leq m\left(\varlimsup_{i \to \infty} S_i\right)\)</span>. Note that we need <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right)&lt;\infty\)</span> to prove <span class="math inline">\(\displaystyle \varlimsup_{i \to \infty} m(S_i) \leq m\left(\varlimsup_{i \to \infty} S_i\right)\)</span>.</p>
-<h1 id="sigma-algebra"><span class="math inline">\(\sigma\)</span>-Algebra</h1>
-<p><strong>Definition 3.1</strong>    Suppose <span class="math inline">\(\{F_i\}_{i=1}^\infty\)</span> is a collection of closed sets, and <span class="math inline">\(\{G_i\}_{i=1}^\infty\)</span> is a collection of open sets. If <span class="math inline">\(\displaystyle F=\bigcup_{i=1}^\infty F_i\)</span>, then <span class="math inline">\(F\)</span> is an <strong><span class="math inline">\(F_\sigma\)</span> set</strong>. If <span class="math inline">\(\displaystyle G=\bigcap_{i=1}^\infty G_i\)</span>, then <span class="math inline">\(G\)</span> is a <strong><span class="math inline">\(G_\delta\)</span> set</strong>.</p>
-<div class="note info">
-            <p><font face="Noto Serif SC" font color="#696969" font size=2><span class="math inline">\(F\)</span><strong>可能</strong>来自于法语中的fermé，意为闭. <span class="math inline">\(\sigma\)</span><strong>可能</strong>来自于德语中的Summe，意为总和. 因此<span class="math inline">\(F_\sigma\)</span>型集表示闭集的可数并. <span class="math inline">\(G\)</span><strong>可能</strong>来自于德语中的Gebiet，意为区域，可以理解为连通的开集. <span class="math inline">\(\delta\)</span><strong>可能</strong>来自于德语中的Durchschnitt，意为横断. 因此<span class="math inline">\(G_\delta\)</span>型集表示开集的可数交.</font></p>
-          </div>
-<p><strong>Definition 3.2</strong>    Suppose <span class="math inline">\(\Omega\)</span> is the family of sets including some subsets of <span class="math inline">\(X\)</span>. <span class="math inline">\(\Omega\)</span> is called a <strong><span class="math inline">\(\sigma\)</span>-algebra</strong> if it has the following properties:</p>
-<p>    (1) <span class="math inline">\(X \in \Omega\)</span>;</p>
-<p>    (2) <span class="math inline">\(\Omega\)</span> is closed under countable union;</p>
-<p>    (3) <span class="math inline">\(\Omega\)</span> is closed under complement.</p>
-<div class="note info">
-            <p><font face="Noto Serif SC" font color="#696969" font size=2>显然，可测集类<span class="math inline">\(\mathscr{M}\)</span>是<span class="math inline">\(\mathbb{R}^n\)</span>上的<span class="math inline">\(\sigma\)</span>-代数.</font></p>
-          </div>
-<p><strong>Definition 3.3</strong>    Suppose <span class="math inline">\(\Sigma\)</span> is the family of sets including some subsets of <span class="math inline">\(X\)</span>. <strong><span class="math inline">\(\sigma\)</span>-algebra generated by <span class="math inline">\(\Sigma\)</span></strong> is the intersection of all <span class="math inline">\(\sigma\)</span>-algebras containing <span class="math inline">\(\Sigma\)</span> on <span class="math inline">\(X\)</span>.</p>
-<p><strong>Definition 3.4</strong>    <strong>Borel <span class="math inline">\(\sigma\)</span>-algebra</strong> is a <span class="math inline">\(\sigma\)</span>-algebra generated by all open sets on <span class="math inline">\(\mathbb{R}^n\)</span>, denoted as <span class="math inline">\(\mathscr{B}\)</span>. The element in <span class="math inline">\(\mathscr{B}\)</span> is called <strong>Borel set</strong>.</p>
-<div class="note info">
-            <p>A <strong>Borel set</strong> is any set that can be formed from open sets through the operations of countable union, countable intersection, and complement.</p>
-          </div>
-<p><strong>Example 3.1</strong>    Intervals, open sets, closed sets, <span class="math inline">\(F_\sigma\)</span> sets, and <span class="math inline">\(G_\delta\)</span> sets are Borel sets.</p>
-<p><strong>Theorem 3.1</strong>    Suppose <span class="math inline">\(f: E \subset \mathbb{R} \to \mathbb{R}\)</span> is a function, and <span class="math inline">\(E \in \Sigma\)</span>, where <span class="math inline">\(\Sigma\)</span> is a <span class="math inline">\(\sigma\)</span>-algebra on <span class="math inline">\(\mathbb{R}\)</span>. Let <span class="math display">\[\mathscr{A}=\{X \subset \mathbb{R}: f^{-1}(X) \in \Sigma\},\]</span> then <span class="math inline">\(\mathscr{A}\)</span> is a <span class="math inline">\(\sigma\)</span>-algebra.</p>
-<p><strong><em>Proof.</em></strong> We check three properties of <span class="math inline">\(\sigma\)</span>-algebra:</p>
-<p>(1) Since <span class="math inline">\(f^{-1}(\mathbb{R})=E \in \Sigma\)</span>, then <span class="math inline">\(\mathbb{R} \in \mathscr{A}\)</span>.</p>
-<p>(2) Since <span class="math inline">\(\displaystyle f^{-1}\left(\bigcup_{i=1}^\infty X_i\right)=\bigcup_{i=1}^\infty f^{-1}(X_i)\)</span>, then if <span class="math inline">\(X_i \in \mathscr{A}\)</span>, we have <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty X_i \in \mathscr{A}\)</span>.</p>
-<p>(3) Since <span class="math inline">\(f^{-1}(X^c)=(f^{-1}(X))^c\)</span>, then if <span class="math inline">\(X \in \mathscr{A}\)</span>, we have <span class="math inline">\(X^c \in \mathscr{A}\)</span>.</p>
-Therefore, <span class="math inline">\(\mathscr{A}\)</span> is a <span class="math inline">\(\sigma\)</span>-algebra.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 3.2</strong>    Suppose <span class="math inline">\(f: \mathbb{R} \to \mathbb{R}\)</span> is continuous, then the preimage of a Borel set is a Borel set.</p>
-<strong><em>Proof.</em></strong> Suppose <span class="math inline">\(\mathscr{B}\)</span> is the Borel <span class="math inline">\(\sigma\)</span>-algebra on <span class="math inline">\(\mathbb{R}\)</span>, and <span class="math inline">\(\mathscr{A}=\{X \subset \mathbb{R}: f^{-1}(X) \in \mathscr{B}\}\)</span>. We know <span class="math inline">\(\mathscr{A}\)</span> is a <span class="math inline">\(\sigma\)</span>-algebra. Since the preimage of an open set is open, then all open sets belong to <span class="math inline">\(\mathscr{A}\)</span>. Since <span class="math inline">\(\mathscr{B}\)</span> is generated by all open sets, then <span class="math inline">\(\mathscr{B} \subset \mathscr{A}\)</span>. Therefore, the preimage of a Borel set is a Borel set.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="family-of-measurable-sets">Family of Measurable Sets</h1>
-<p><strong>Theorem 4.1</strong>    Any interval <span class="math inline">\(I\)</span> in <span class="math inline">\(\mathbb{R}^n\)</span> is measurable.</p>
-<p><strong>Theorem 4.2</strong>    Any Borel set is measurable.</p>
-<p><strong>Theorem 4.3</strong>    Any zero measure set <span class="math inline">\(A\)</span> is measurable.</p>
-<p><strong><em>Proof.</em></strong> For any set <span class="math inline">\(T\)</span>, we have <span class="math inline">\(0 \leq m^*(T \cap A) \leq m^*(A)=0\)</span>, and thus <span class="math inline">\(m^*(T \cap A)=0\)</span>. Besides, <span class="math inline">\(m^*(T \cap A^c) \leq m^*(T)\)</span>. Therefore, <span class="math inline">\(m^*(T) \geq m^*(T \cap A)+m^*(T \cap A^c)\)</span>.</p>
-Because of countable subadditivity, we have <span class="math inline">\(m^*(T)=m^*(T \cap A)+m^*(T \cap A^c)\)</span>, i.e., <span class="math inline">\(A\)</span> is measurable.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Corollary 4.4</strong>    Suppose <span class="math inline">\(A\)</span> has measure zero. Any subset of <span class="math inline">\(A\)</span> has measure zero.</p>
-<strong><em>Proof.</em></strong> Take an arbitrary subset <span class="math inline">\(A&#39;\)</span> of <span class="math inline">\(A\)</span>, then <span class="math inline">\(A&#39; \subset A\)</span>. Hence, <span class="math inline">\(0 \leq m^*(A&#39;) \leq m^*(A)=0\)</span>, i.e., <span class="math inline">\(m^*(A&#39;)=0\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Corollary 4.5</strong>     The at most countable union of zero measure sets has measure zero.</p>
-<strong><em>Proof.</em></strong> Suppose <span class="math inline">\(\{A_i\}_{i=1}^\infty\)</span> is a collection of zero measure sets. Because of countable subadditivity, we have <span class="math display">\[0 \leq m^*\left(\bigcup_{i=1}^\infty A_i\right) \leq \sum_{i=1}^\infty m^*(A_i)=0,\]</span> i.e., <span class="math inline">\(\displaystyle m^*\left(\bigcup_{i=1}^\infty A_i\right)=0.\)</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><strong>Theorem 4.6</strong>    If <span class="math inline">\(E\)</span> is measurable, <span class="math inline">\(G\)</span> is open, and <span class="math inline">\(K\)</span> is compact, then <span class="math display">\[m(E)=\inf\{m(G): E \subset G\}=\sup\{m(K): E \supset K\}.\]</span> We define <span class="math inline">\(\inf\{m(G): E \subset G\}\)</span> as <strong>external regularity</strong>, and <span class="math inline">\(\sup\{m(K): E \supset K\}\)</span> as <strong>inner regularity</strong>. On the contrary, if <span class="math inline">\(E\)</span> is bounded, and <span class="math inline">\(\inf\{m(G): E \subset G\}=\sup\{m(K): E \supset K\}\)</span>, where <span class="math inline">\(G\)</span> is open and <span class="math inline">\(K\)</span> is compact, then <span class="math inline">\(E\)</span> is measurable.</p>
-<div class="note ">
-            <p><span id="thm4.6.1"><strong>Lemma 4.6.1</strong></span>    Suppose <span class="math inline">\(E\)</span> is measurable. <span class="math inline">\(\forall \varepsilon&gt;0\)</span>, <span class="math inline">\(\exists G \supset E\)</span>, s.t. <span class="math inline">\(m(G-E)&lt;\varepsilon\)</span>, where <span class="math inline">\(G\)</span> is open.</p><p><strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists an open cover of <span class="math inline">\(E\)</span>, <span class="math inline">\(\{I_i\}_{i=1}^\infty\)</span>, such that <span class="math display">\[\sum_{i=1}^\infty |I_i|&lt;m(E)+\varepsilon.\]</span> Let <span class="math inline">\(\displaystyle G=\bigcup_{i=1}^\infty I_i\)</span>, where <span class="math inline">\(G\)</span> is open, and <span class="math inline">\(\displaystyle m(G) \leq \sum_{i=1}^\infty m(I_i)&lt;m(E)+\varepsilon\)</span>, i.e., <span class="math inline">\(m(G)-m(E)&lt;\varepsilon\)</span>.</p><p>When <span class="math inline">\(m(E)&lt;\infty\)</span>, <span class="math inline">\(m(G)-m(E)=m(G-E)&lt;\varepsilon\)</span>.</p>When <span class="math inline">\(m(E)=\infty\)</span>, let <span class="math inline">\(E_n=E \cap B_n(0)\)</span>, then <span class="math inline">\(\displaystyle E=\bigcup_{i=1}^\infty E_n\)</span>, and <span class="math inline">\(m(E_n)&lt;\infty\)</span>. Hence, <span class="math inline">\(\forall \varepsilon&gt;0\)</span>, <span class="math inline">\(\exists G_n \supset E_n\)</span> s.t. <span class="math display">\[m(G_n-E_n)&lt;\sum_{i=1}^\infty \frac{\varepsilon}{2^n},\]</span> where <span class="math inline">\(G_n\)</span> is open. We also know <span class="math inline">\(\displaystyle G=\bigcup_{n=1}^\infty G_n\)</span> is open, and <span class="math inline">\(G \supset E\)</span>. Since <span class="math display">\[G-E=\bigcup_{n=1}^\infty G_n-\bigcup_{n=1}^\infty E_n \subset \bigcup_{n=1}^\infty (G_n-E_n),\]</span> then <span class="math display">\[m(G-E) \leq \sum_{n=1}^\infty m(G_n-E_n)&lt;\sum_{n=1}^\infty \frac{\varepsilon}{2^n}=\varepsilon.\]</span><p align="right"><span class="math inline">\(\square\)</span></p><p><strong>Lemma 4.6.2</strong>    Suppose <span class="math inline">\(E\)</span> is measurable. Then <span class="math display">\[\forall \varepsilon&gt;0, \exists F \subset E\ \text{s.t.}\ m(E-F)&lt;\varepsilon,\]</span> where <span class="math inline">\(F\)</span> is closed.</p><strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists an open set <span class="math inline">\(G \supset E^c\)</span> such that <span class="math inline">\(m(G-E^c)&lt;\varepsilon\)</span>. Let <span class="math inline">\(F=G^c \subset E\)</span>, where <span class="math inline">\(F\)</span> is closed. Therefore, <span class="math inline">\(m(G-E^c)=m(E-F)&lt;\varepsilon\)</span>.<p align="right"><span class="math inline">\(\square\)</span></p>
-          </div>
-<p><strong><em>Proof.</em></strong> <strong>External Regularity.</strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists an open set <span class="math inline">\(G \supset E\)</span> such that <span class="math inline">\(m(G-E)&lt;\varepsilon\)</span>. When <span class="math inline">\(m(E)&lt;\infty\)</span>, <span class="math inline">\(m(G)=m(E)+m(G-E)&lt;m(E)+\varepsilon\)</span>, i.e., <span class="math inline">\(m(E)&gt;m(G)-\varepsilon\)</span>. Since <span class="math inline">\(G \supset E\)</span>, then <span class="math inline">\(m(E) \leq m(G)\)</span>. Hence, <span class="math inline">\(m(E)=\inf\{m(G): E \subset G\}\)</span>.</p>
-<p>When <span class="math inline">\(m(E)=\infty\)</span>, it is obvious that <span class="math inline">\(m(G)=\infty\)</span>, and thus <span class="math inline">\(m(E)=\inf\{m(G): E \subset G\}\)</span>.</p>
-<p><strong>Inner Regularity.</strong> When <span class="math inline">\(E\)</span> is bounded, take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists a closed set <span class="math inline">\(K \subset E\)</span> such that <span class="math inline">\(m(E-K)&lt;\varepsilon\)</span>. Since <span class="math inline">\(E\)</span> is bounded, then <span class="math inline">\(K\)</span> is bounded and closed, i.e., <span class="math inline">\(K\)</span> is compact. Besides, we have <span class="math inline">\(m(E)&lt;\infty\)</span>, and therefore <span class="math inline">\(m(E)=m(K)+m(E-K)&lt;m(K)+\varepsilon\)</span>. Since <span class="math inline">\(K \subset E\)</span>, then <span class="math inline">\(m(K) \leq m(E)\)</span>. Hence, <span class="math inline">\(m(E)=\sup\{m(K): E \supset K\}\)</span>.</p>
-<p>When <span class="math inline">\(E\)</span> is an arbitrary set, let <span class="math inline">\(E_n=E \cap B_n(0)\)</span>, then <span class="math inline">\(E_n\)</span> is bounded, and <span class="math inline">\(\displaystyle E=\bigcup_{n=1}^\infty E_n\)</span>. Since <span class="math inline">\(\{E_n\}_{n=1}^\infty\)</span> is a collection of increasing measurable sets, then <span class="math inline">\(\displaystyle m(E)=\lim_{n \to \infty} m(E_n)\)</span>. We can take a compact set <span class="math inline">\(K_n \subset E_n\)</span> such that <span class="math inline">\(\displaystyle m(K_n) \geq m(E_n)-\frac{1}{n}\)</span> and <span class="math inline">\(m(K_n) \leq m(E_n)\)</span>. Hence, <span class="math inline">\(\displaystyle \lim_{n \to \infty} m(K_n)=\lim_{n \to \infty} m(E_n)=m(E)\)</span>, and thus <span class="math inline">\(m(E)=\sup\{m(K): E \supset K\}\)</span>.</p>
-<strong>Measurability.</strong> Let <span class="math inline">\(\alpha=\inf\{m(G): E \subset G\}=\sup\{m(K): E \supset K\}\)</span>. Take an arbitrary <span class="math inline">\(n \in \mathbb{N}\)</span>, there exists a open set <span class="math inline">\(G_n \supset E\)</span> and compact set <span class="math inline">\(K_n \subset E\)</span> such that <span class="math inline">\(\displaystyle m(G_n)&lt;\alpha+\frac{1}{2n}\)</span> and <span class="math inline">\(\displaystyle m(K_n)&gt;\alpha-\frac{1}{2n}\)</span>. Hence, <span class="math display">\[0 \leq m(G_n)-m(K_n)&lt;\frac{1}{n}.\]</span> Take <span class="math inline">\(\displaystyle A=\bigcap_{n=1}^\infty G_n\)</span> and <span class="math inline">\(\displaystyle B=\bigcup_{n=1}^\infty K_n\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are measurable. Since <span class="math inline">\(m(A) \leq m(G_n)\)</span>, <span class="math inline">\(m(B) \geq m(K_n)\)</span>, and <span class="math inline">\(m(A) \geq m(B)\)</span>, then <span class="math display">\[0 \leq m(A)-m(B) \leq m(G_n)-m(K_n)&lt;\frac{1}{n},\]</span> i.e., <span class="math inline">\(m(A)=m(B)\)</span>. Since <span class="math inline">\(E \supset B\)</span> is bounded, then <span class="math inline">\(m(B)&lt;\infty\)</span>, and <span class="math inline">\(m(A-B)=m(A)-m(B)=0\)</span>. Since <span class="math inline">\(E-B \subset A-B\)</span>, then <span class="math inline">\(m(E-B)=0\)</span>. Therefore, <span class="math inline">\(E=B \cup (E-B)\)</span> is measurable.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><span id="thm4.7"><strong>Theorem 4.7</strong></span>    If <span class="math inline">\(E\)</span> is measurable, then there exists a <span class="math inline">\(G_\delta\)</span> set <span class="math inline">\(G\)</span> such that <span class="math inline">\(G \supset E\)</span> and <span class="math inline">\(m(G-E)=0\)</span>.</p>
-<strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(n \in \mathbb{N}\)</span>. By <a href="#thm4.6.1">lemma 4.6.1</a>, there exists an open set <span class="math inline">\(G \supset E\)</span> such that <span class="math inline">\(\displaystyle m(G-E)&lt;\frac{1}{n}\)</span>. Take <span class="math inline">\(\displaystyle G=\bigcap_{n=1}^\infty G_n\)</span>, which is a <span class="math inline">\(G_\delta\)</span> set. Since <span class="math inline">\(G-E \subset G_n-E\)</span>, then <span class="math display">\[m(G-E) \leq m(G_n-E)&lt;\frac{1}{n},\]</span> i.e., <span class="math inline">\(m(G-E)=0\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<p><span id="thm4.8"><strong>Corollary 4.8</strong>    If <span class="math inline">\(E\)</span> is measurable, then there exists an <span class="math inline">\(F_\sigma\)</span> set <span class="math inline">\(F\)</span> such that <span class="math inline">\(F \subset E\)</span> and <span class="math inline">\(m(E-F)=0\)</span>.</p>
-<div class="note info">
-            <p><font face="Noto Serif SC" font color="#696969" font size=2>根据<a href="#thm4.7">定理4.7</a>与其<a href="#thm4.8">推论</a>，如果我们有了所有的<span class="math inline">\(G_\delta\)</span>型集（或<span class="math inline">\(F_\sigma\)</span>型集）与零测集，那么我们就知道了所有的可测集. 可测集一定可以表示为<span class="math display">\[E=G_\delta-M_0=F_\sigma \cup M_0.\]</span></font></p>
-          </div>
-<h1 id="non-measurable-set-in-mathbbr">Non-Measurable Set in <span class="math inline">\(\mathbb{R}\)</span></h1>
-<div class="note default">
-            <p><font face="Noto Serif SC" font color="#696969" font size=2>此前，我们一直在回答什么是可测集，并发现可测集是存在的——我们构造集合通常都是从区间出发，经过一系列并、交、差等运算来获得，而这样的集合都是Borel集，总是可测的. 我们还需要回答不可测集是否存在的问题——我们可以利用Lebesgue测度的平移不变性，构造一个不可测集. 当然，在一般的数学实践中，遇到不可测集的机会是极少的，它通常只是被用来构成各种特例.</font></p>
-          </div>
-<p><strong>Property 5.1 (Translation Invariance)</strong>    Suppose <span class="math inline">\(E\)</span> is measurable and <span class="math inline">\(\tau_\alpha E=\{x+\alpha: x \in E\}\)</span>, then <span class="math inline">\(\tau_\alpha E\)</span> is measurable and <span class="math inline">\(m^*(E)=m^*(\tau_\alpha E)\)</span>.</p>
-<p><strong>Property 5.2 (Reflection Invariance)</strong>    Suppose <span class="math inline">\(E\)</span> is measurable and <span class="math inline">\(\tau E=\{-x: x \in E\}\)</span>, then <span class="math inline">\(\tau E\)</span> is measurable and <span class="math inline">\(m^*(E)=m^*(\tau E)\)</span>.</p>
-<p><strong>Example 5.1</strong>    We define a relation on <span class="math inline">\([0, 1]\)</span>: <span class="math inline">\(x \sim y \Leftrightarrow x-y \in \mathbb{Q}\)</span>, which is an equivalence relation. From this equivalence relation, we can find equivalence classes. We take a representative element from each equivalence class (<strong>Axiom of choice</strong>). Let <span class="math inline">\(Z=\{\text{All representative elements}\}\)</span>. Take an arbitrary <span class="math inline">\(\xi \in Z\)</span>. All elements in the class including <span class="math inline">\(\xi\)</span> have the form of <span class="math inline">\(\xi+r \in [0, 1]\)</span>, where <span class="math inline">\(r \in \mathbb{Q} \cap [-\xi, 1-\xi]\)</span>.</p>
-<p>Therefore, <span class="math inline">\(\displaystyle \bigcup_{r \in \mathbb{Q} \cap [-\xi, 1-\xi]} \{\tau_r \xi\}\)</span> represents all elements in the class including <span class="math inline">\(\xi\)</span>, and <span class="math inline">\(\displaystyle \bigcup_{r \in \mathbb{Q} \cap [-1, 1]} \tau_r Z \supset [0, 1]\)</span>.</p>
-<p>If <span class="math inline">\(\xi \in \tau_{r_1} Z \cap \tau_{r_2} Z\)</span>, where <span class="math inline">\(r_1 \neq r_2\)</span>, then <span class="math inline">\(\xi-r_1, \xi-r_2 \in Z\)</span>. Since <span class="math inline">\(\xi-r_1 \sim \xi-r_2\)</span>, then we have two representative elements for one equivalence class, which is a contradiction. Therefore, <span class="math inline">\(\tau_{r_1} Z \cap \tau_{r_2} Z=\varnothing\)</span>.</p>
-<p>We know order <span class="math inline">\(\mathbb{Q} \cap [-1, 1]\)</span>, denoted <span class="math inline">\(r_1, r_2, \cdots\)</span>. Let <span class="math inline">\(Z_n=\tau_{r_n} Z\)</span>. We know <span class="math inline">\(Z_n \subset [-1, 2]\)</span>, is bounded and mutually disjoint from <span class="math inline">\(Z_{n&#39;}\)</span>, where <span class="math inline">\(n \neq n&#39;\)</span>. Hence, <span class="math inline">\(\displaystyle [0, 1] \subset \bigcup_{n=1}^\infty Z_n\)</span>. If <span class="math inline">\(Z\)</span> is measurable, then <span class="math inline">\(Z_n\)</span> is measurable, and <span class="math display">\[m^*\left(\bigcup_{n=1}^\infty Z_n\right)=\sum_{n=1}^\infty m^*(Z_n)=\sum_{n=1}^\infty m^*(Z)&lt;\infty.\]</span> Therefore, <span class="math display">\[m^*(Z)=0=m^*\left(\bigcup_{n=1}^\infty Z_n\right),\]</span> which is a contradiction. As a consequence, <span class="math inline">\(Z\)</span> is a non-measurable set, a.k.a. <strong>Vitali set</strong>.</p>
-<div class="note info">
-            <p>There will be non-measurable subsets in any set with measure greater than zero, and we can also construct non-measurable sets in <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
-          </div>
-]]></content>
-      <categories>
-        <category>Mathematics</category>
-        <category>Real analysis</category>
-      </categories>
-      <tags>
-        <tag>Measure</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Linear Algebra</title>
     <url>/Mathematics/Numerical-linear-algebra/NLA_Linear_Algebra.html</url>
     <content><![CDATA[<h1 id="structured-matrix">Structured Matrix</h1>
@@ -1491,7 +1262,7 @@ Because of countable subadditivity, we have <span class="math inline">\(m^*(T)=m
 <ul>
 <li><p><strong>Hessenberg</strong>: <span class="math inline">\(A_{ij}=0\)</span> if <span class="math inline">\(i&gt;j+1\)</span>.</p></li>
 <li><p><strong>Matrix with orthonormal columns</strong>: <span class="math inline">\(A^*A=I_n\)</span>. Note that <span class="math inline">\(AA^* \neq I_m\)</span> if <span class="math inline">\(m&gt;n\)</span>.</p></li>
-<li><p><strong>Sparse</strong>: most elements are zero.</p></li>
+<li><p><strong>Sparse</strong>: Most elements are zero.</p></li>
 </ul>
 <h1 id="vector-norm">Vector Norm</h1>
 <p>For vectors <span class="math inline">\(\mathbf{x}=[x_1, \cdots, x_n]^T \in \mathbb{C}^n\)</span>:</p>
@@ -1836,6 +1607,315 @@ Suppose <span class="math inline">\(\displaystyle x \in \varliminf_{k \to \infty
       </categories>
       <tags>
         <tag>Set</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Measure Theory</title>
+    <url>/Mathematics/Real-analysis/Measure_Theory.html</url>
+    <content><![CDATA[<h1 id="outer-measure">Outer Measure</h1>
+<h2 id="definition-and-example">Definition and Example</h2>
+<p><span id="def1.1"><strong>Definition 1.1</strong></span>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span>. The <strong>outer measure</strong> of <span class="math inline">\(E\)</span> is <span class="math display">\[m^*(E):=\inf\left\{\sum_{i=1}^\infty |I_i|: \bigcup_{i=1}^\infty I_i \supset E \right\},\]</span> where <span class="math inline">\(I_i\)</span> is open, and <span class="math inline">\(|I_i|\)</span> is the volume of <span class="math inline">\(I_i\)</span>.</p>
+<div class="note warning">
+            <p>In <a href="#def1.1">definition 1.1</a>, we need <strong>at most countable</strong> <span class="math inline">\(\{I_i\}\)</span>. For example, if <span class="math inline">\([0, 1] \cap \mathbb{Q}\)</span> is covered by finite intervals, then those finite intervals and endpoints cover <span class="math inline">\([0, 1]\)</span>. Therefore, <span class="math inline">\(m^*([0, 1] \cap \mathbb{Q}) \geq 1\)</span>. Similarly, <span class="math inline">\(m^*([0, 1] \cap \mathbb{Q}^c) \geq 1\)</span>, and thus <span class="math inline">\(m^*([0, 1]) \geq 2\)</span>. In other cases, <span class="math inline">\(I_i\)</span> can be an empty set and thus <span class="math inline">\(\{I_i\}\)</span> can be finite.</p>
+          </div>
+<p><strong>Example 1.1</strong>    <span class="math inline">\(m^*(\varnothing)=0\)</span>.</p>
+<p><strong>Example 1.2</strong>    If <span class="math inline">\(p \in \mathbb{R}\)</span>, then <span class="math inline">\(m^*(\{p\})=0\)</span>.</p>
+<strong><em>Proof.</em></strong> <span class="math inline">\(\forall \varepsilon&gt;0\)</span>, define <span class="math inline">\(\displaystyle I=\left(x-\frac{\varepsilon}{2}, x+\frac{\varepsilon}{2}\right)\)</span>. We have <span class="math inline">\(|I|=\varepsilon\)</span> and <span class="math inline">\(\{p\} \subset I\)</span>. Therefore, <span class="math inline">\(m^*(\{p\}) \leq \varepsilon\)</span>, i.e., <span class="math inline">\(m^*(\{p\})=0\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Example 1.3</strong>    If <span class="math inline">\(p_1, \cdots, p_k \in \mathbb{R}\)</span>, then <span class="math inline">\(m^*(\{p_1, \cdots, p_k\})=0\)</span>.</p>
+<strong><em>Proof.</em></strong> <span class="math inline">\(\forall \varepsilon&gt;0\)</span>, define <span class="math inline">\(\displaystyle I_i=\left(p_i-\frac{\varepsilon}{2k}, p_i+\frac{\varepsilon}{2k}\right)\)</span>, we have <span class="math inline">\(\displaystyle |I_i|=\frac{\varepsilon}{k}\)</span>. Hence, <span class="math inline">\(\displaystyle \{p_1, \cdots, p_k\} \subset \bigcup_{i=1}^k I_i\)</span> and <span class="math inline">\(\displaystyle \sum_{i=1}^n |I_i|=\varepsilon\)</span>. Therefore, <span class="math inline">\(m^*(\{p_1, \cdots, p_n\}) \leq \varepsilon\)</span>, i.e., <span class="math inline">\(m^*(\{p_1, \cdots, p_n\})=0\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Example 1.4</strong>    If <span class="math inline">\(p_1, \cdots, p_n, \cdots \in \mathbb{R}\)</span>, then <span class="math inline">\(m^*(\{p_1, \cdots, p_n, \cdots\})=0\)</span>.</p>
+<strong><em>Hint of proof.</em></strong> Take <span class="math inline">\(\displaystyle I_i=\left(x_i-\frac{\varepsilon}{2^{i+1}}, x_i+\frac{\varepsilon}{2^{i+1}}\right)\)</span>, then <span class="math inline">\(\displaystyle |I_i|=\frac{\varepsilon}{2^i}\)</span>, and <span class="math inline">\(\displaystyle \sum_{i=1}^\infty \frac{\varepsilon}{2^i}=\varepsilon\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Example 1.5</strong>    <span class="math inline">\(m^*([0, 1] \cap \mathbb{Q})=0\)</span>.</p>
+<h2 id="basic-property">Basic Property</h2>
+<p><strong>Property 1.1 (Nonnegativity)</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span>, <span class="math inline">\(m^*(E) \geq 0\)</span>. Besides, <span class="math inline">\(m^*(\varnothing)=0\)</span>.</p>
+<p><strong>Property 1.2 (Countable Subadditivity)</strong>    Suppose <span class="math inline">\(A_i \subset \mathbb{R}^n\)</span>. <span class="math inline">\(\displaystyle m^*\left(\bigcup_{i=1}^\infty A_i\right) \leq \sum_{i=1}^\infty m^*(A_i)\)</span>.</p>
+<strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists an open cover of <span class="math inline">\(A_i\)</span>, <span class="math inline">\(\displaystyle \bigcup_{m=1}^\infty I_{i, m}\)</span> such that <span class="math display">\[m^*(A_i) \geq \sum_{m=1}^\infty |I_{i, m}|-\frac{\varepsilon}{2^i}, \bigcup_{i=1}^\infty A_i \subset \bigcup_{i, m=1}^\infty I_{i, m}.\]</span> Therefore, <span class="math display">\[\begin{aligned}
+m^*\left(\bigcup_{i=1}^\infty A_i\right) &amp;\leq \sum_{i, m=1}^\infty |I_{i, m}| \\
+&amp;\leq \sum_{i=1}^\infty m^*(A_i)+\sum_{i=1}^\infty \frac{\varepsilon}{2^i} \\
+&amp;=\sum_{i=1}^\infty m^*(A_i)+\varepsilon.
+\end{aligned}\]</span> Hence, <span class="math inline">\(\displaystyle m^*\left(\bigcup_{i=1}^\infty A_i\right) \leq \sum_{i=1}^\infty m^*(A_i).\)</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Property 1.3 (Monotonicity)</strong>    Suppose <span class="math inline">\(A \subset B\)</span>, then <span class="math inline">\(m^*(A) \leq m^*(B)\)</span>.</p>
+<strong><em>Proof.</em></strong> Take an arbitrary open cover of <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(\{I_i\}_{i=1}^\infty\)</span>. Since <span class="math inline">\(A \subset B\)</span>, then <span class="math inline">\(\{I_i\}_{i=1}^\infty\)</span> is an open cover of <span class="math inline">\(A\)</span>, and thus <span class="math inline">\(\displaystyle m^*(A) \leq \sum_{i=1}^\infty |I_i|\)</span>. By the definition of outer measure and infimum, we have <span class="math inline">\(m^*(B) \geq m^*(A)\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 1.4</strong>    Suppose <span class="math inline">\(I\)</span> is an interval, then <span class="math inline">\(m^*(I)=|I|\)</span>.</p>
+<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(I\)</span> is a closed interval. Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, we can find an open interval <span class="math inline">\(I&#39; \supset I\)</span> such that <span class="math inline">\(|I&#39;| \leq |I|+\varepsilon\)</span>. Hence, <span class="math inline">\(m^*(I) \leq |I&#39;| \leq |I|+\varepsilon\)</span>, i.e., <span class="math inline">\(m^*(I) \leq |I|\)</span>.</p>
+<p>Besides, we can find an open cover of <span class="math inline">\(I\)</span>, denoted <span class="math inline">\(\{I_i\}_{i=1}^\infty\)</span>, such that <span class="math inline">\(\displaystyle m^*(I) \geq \sum_{i=1}^\infty |I_i|-\varepsilon\)</span>. Since <span class="math inline">\(I\)</span> is bounded and closed, then there exists a finite open cover of <span class="math inline">\(I\)</span>, denoted <span class="math inline">\(\{I_i\}_{i=1}^m\)</span>, such that <span class="math inline">\(\displaystyle m^*(I) \geq \sum_{i=1}^m |I_i|-\varepsilon\)</span>. Since <span class="math inline">\(\displaystyle \sum_{i=1}^m |I_i| \geq |I|\)</span>, then <span class="math inline">\(m^*(I) \geq |I|-\varepsilon\)</span>, i.e., <span class="math inline">\(m^*(I) \geq |I|\)</span>.</p>
+<p>Therefore, <span class="math inline">\(m^*(I)=|I|\)</span>.</p>
+We now suppose <span class="math inline">\(I\)</span> is an arbitrary interval. We have <span class="math inline">\(\forall \varepsilon&gt;0, \exists I_1, I_2\)</span> s.t. <span class="math inline">\(I_1 \subset I \subset I_2\)</span>, where <span class="math inline">\(I_1, I_2\)</span> are closed, <span class="math inline">\(|I_1|+\varepsilon&gt;|I|\)</span>, and <span class="math inline">\(|I_2|-\varepsilon&lt;|I|\)</span>. Therefore, <span class="math display">\[|I|-\varepsilon&lt;m^*(I_1) \leq m^*(I) \leq m^*(I_2)&lt;|I|+\varepsilon.\]</span> As a consequence, <span class="math inline">\(m^*(I)=|I|\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="measurable-set">Measurable Set</h1>
+<h2 id="definition">Definition</h2>
+<p><strong>Definition 2.1</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is bounded, and <span class="math inline">\(I \supset E\)</span> is open. The <strong>inner measure</strong> of <span class="math inline">\(E\)</span> is <span class="math display">\[m_*(E)=|I|-m^*(I-E).\]</span></p>
+<div class="note info">
+            <p><font face="Noto Serif SC" font color="#696969" font size=2>显然，若<span class="math inline">\(E\)</span>有界，且<span class="math inline">\(m^*(E)=m_*(E)\)</span>，我们能得到<strong>可测</strong>的定义. 然而，我们希望能对任何一个<span class="math inline">\(E\)</span>定义可测，而上述的定义则有所限制. 此外，这一定义需要同时使用内外测度的定义. 因此，Carathéodory提出了一个更简洁地等价定义.</font></p>
+          </div>
+<p><strong>Definition 2.2</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is a set. If for any set <span class="math inline">\(T \subset \mathbb{R}^n\)</span>, we have <span class="math display">\[m^*(T)=m^*(T \cap E)+m^*(T \cap E^c),\]</span> then <span class="math inline">\(E\)</span> is <strong>L-measurable</strong> or <strong>measurable</strong>. The <strong>L-measure</strong>, denoted <span class="math inline">\(m(E)\)</span>, equals to <span class="math inline">\(m^*(E)\)</span>. The collection of all measurable sets is called family of measurable sets, denoted as <span class="math inline">\(\mathscr{M}\)</span>.</p>
+<p><span id="thm2.1"><strong>Theorem 2.1</strong></span>    <span class="math inline">\(E\)</span> is measurable if and only if for any <span class="math inline">\(A \subset E\)</span> and <span class="math inline">\(B \subset E^c\)</span>, we have <span class="math display">\[m^*(A \cup B)=m^*(A)+m^*(B).\]</span></p>
+<p><strong><em>Proof.</em></strong> <span class="math inline">\((\Rightarrow)\)</span> Take <span class="math inline">\(T=A \cup B\)</span> for any <span class="math inline">\(A \subset E\)</span> and <span class="math inline">\(B \subset E^c\)</span>. Then <span class="math display">\[m^*(A \cup B)+m^*((A \cup B) \cap E)+m^*((A \cup B) \cap E^c)=m^*(A)+m^*(B).\]</span></p>
+<span class="math inline">\((\Leftarrow)\)</span> Take <span class="math inline">\(A=T \cap E\)</span> and <span class="math inline">\(B=T \cap E^c\)</span> for any <span class="math inline">\(T\)</span>. Then <span class="math display">\[m^*(T \cap E)+m^*(T \cap E^c)=m^*(A)+m^*(B)=m^*(A \cup B)=m^*(T).\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h2 id="operation">Operation</h2>
+<p><strong>Theorem 2.2</strong>    <span class="math inline">\(S\)</span> is measurable if and only if <span class="math inline">\(S^c\)</span> is measurable.</p>
+<strong><em>Proof.</em></strong> If <span class="math inline">\(S\)</span> is measurable, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[m^*(T)=m^*(T \cap S)+m^*(T \cap S^c)=m^*(T \cap (S^c)^c)+m^*(T \cap S^c),\]</span> which is equivalent to say that <span class="math inline">\(S^c\)</span> is measurable.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.3</strong>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, then <span class="math inline">\(S_1 \cup S_2\)</span> is measurable.</p>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[\begin{aligned}
+m^*(T)&amp;=m^*(T \cap S_1)+m^*(T \cap S_1^c) \\
+&amp;=m^*((T \cap (S_1 \cup S_2)) \cap S_1)+[m^*((T \cap S_1^c) \cap S_2)+m^*((T \cap S_1^c) \cap S_2^c))] \\
+&amp;=m^*((T \cap (S_1 \cup S_2)) \cap S_1)+[m^*((T \cap (S_1 \cup S_2)) \cap S_1^c)+m^*(T \cap (S_1 \cup S_2)^c)] \\
+&amp;=m^*(T \cap (S_1 \cup S_2))+m^*(T \cap (S_1 \cup S_2)^c).
+\end{aligned}\]</span> Therefore, <span class="math inline">\(S_1 \cup S_2\)</span> is measurable.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note info">
+            <p><font face="Noto Serif SC" font color="#696969" font size=2>对于不熟悉集合运算的读者，我们建议利用韦恩图逆推.</font></p>
+          </div>
+<p><strong>Theorem 2.4</strong>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, and <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[m^*(T \cap (S_1 \cup S_2))=m^*(T \cap S_1)+m^*(T \cap S_2).\]</span></p>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then for any set <span class="math inline">\(T\)</span>, we have <span class="math inline">\(T \cap S_1 \subset S_1\)</span> and <span class="math inline">\(T \cap S^2 \subset S_1^c\)</span>. Since <span class="math inline">\(S_1\)</span> is measurable, then by <a href="#thm2.1">theorem 2.1</a>, <span class="math display">\[m^*(T \cap (S_1 \cup S_2))=m^*((T \cap S_1) \cup (T \cap S_2))=m^*(T \cap S_1)+m^*(T \cap S_2).\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><span id="thm2.5"><strong>Corollary 2.5</strong></span>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, and <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then <span class="math display">\[m(S_1 \cup S_2)=m(S_1)+m(S_2).\]</span></p>
+<p><strong>Corollary 2.6</strong>    If <span class="math inline">\(S_1, \cdots, S_k\)</span> are measurable, then <span class="math inline">\(\displaystyle \bigcup_{i=1}^k S_i\)</span> and <span class="math inline">\(\displaystyle \bigcap_{i=1}^k S_i\)</span> are measurable. Moreover, if <span class="math display">\[S_1 \cap \cdots \cap S_k=\varnothing,\]</span> then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[m^*(T \cap (S_1 \cup \cdots \cup S_k))=m^*(T \cap S_1)+\cdots+m^*(T \cap S_k).\]</span> Specifically, <span class="math display">\[m(S_1 \cup \cdots \cup S_k)=m(S_1)+\cdots+m(S_k),\]</span> which is <strong>finite additivity</strong>.</p>
+<p><strong>Corollary 2.7</strong>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, then <span class="math inline">\(S_1-S_2\)</span> is measurable.</p>
+<p><strong>Theorem 2.8</strong>    If <span class="math inline">\(S_1 \supset S_2\)</span> and <span class="math inline">\(m(S_2)&lt;\infty\)</span>, then <span class="math display">\[m(S_1-S_2)=m(S_1)-m(S_2).\]</span></p>
+<strong><em>Proof.</em></strong> We know <span class="math inline">\(S_1=(S_1-S_2) \cup S_2\)</span> and <span class="math inline">\((S_1-S_2) \cap S_2=\varnothing\)</span>. Then by <a href="#thm2.5">corollary 2.5</a>, <span class="math display">\[m(S_1)=m(S_1-S_2)+m(S_2).\]</span> Since <span class="math inline">\(m(S_2)&lt;\infty\)</span>, then <span class="math inline">\(m(S_1-S_2)=m(S_1)-m(S_2)\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.9</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of mutually disjoint measurable sets, then <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable. Besides, <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right)=\sum_{i=1}^\infty m(S_i)\)</span>, which is <strong>countable additivity</strong>.</p>
+<p><strong><em>Proof.</em></strong> We know <span class="math display">\[\begin{align}
+m^*(T)&amp;=m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)^c\right) \nonumber \\
+&amp;\geq m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \tag{Monotonicity} \\
+&amp;=\sum_{i=1}^k m^*(T \cap S_i)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right). \nonumber \\
+\end{align}\]</span> Take <span class="math inline">\(k \to \infty\)</span>, then <span class="math display">\[\begin{align}
+m^*(T)&amp;\geq \sum_{i=1}^\infty m^*(T \cap S_i)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \nonumber \\
+&amp;\geq m^*\left(\bigcup_{i=1}^\infty (T \cap S_i)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \tag{Countable Subadditivity} \\
+&amp;=m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right). \nonumber
+\end{align}\]</span> Because of countable subadditivity, we know <span class="math display">\[m^*(T) \leq m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right),\]</span> and thus <span class="math display">\[m^*(T)=m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right),\]</span> i.e., <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable.</p>
+Let <span class="math inline">\(\displaystyle T=\bigcup_{i=1}^\infty S_i\)</span>, then <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right) \geq \sum_{i=1}^\infty m(S_i)\)</span>. Because of countable subadditivity, we have <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right) \leq \sum_{i=1}^\infty m(S_i)\)</span>. Hence, <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right)=\sum_{i=1}^\infty m(S_i)\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.10</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of measurable sets, then <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable.</p>
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(S_0=\varnothing\)</span>, and <span class="math inline">\(\displaystyle \widetilde{S}_i=S_i-\bigcup_{k=0}^{i-1} S_k\)</span>, where <span class="math inline">\(i \geq 1\)</span>. Then <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i=\bigcup_{i=1}^\infty \widetilde{S}_i\)</span>, and <span class="math inline">\(\{\widetilde{S}_i\}_{i=1}^\infty\)</span> is a collection of mutually disjoint measurable sets. Hence, <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty \widetilde{S}_i\)</span> is measurable, i.e., <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Corollary 2.11</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of measurable sets, then <span class="math inline">\(\displaystyle \bigcap_{i=1}^\infty S_i\)</span> is measurable.</p>
+<p><strong>Theorem 2.12</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of increasing measurable sets, then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i\)</span> is measurable, and <span class="math inline">\(\displaystyle m\left(\lim_{i \to \infty} S_i\right)=\lim_{i \to \infty} m(S_i)\)</span>.</p>
+<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i=\bigcup_{i=1}^\infty S_i\)</span>, then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i\)</span> is measurable.</p>
+Let <span class="math inline">\(S_0=\varnothing\)</span>, and <span class="math inline">\(\widetilde{S}_i=S_i-S_{i-1}\)</span>, where <span class="math inline">\(i \geq 1\)</span>. Then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i=\bigcup_{i=1}^\infty S_i=\bigcup_{i=1}^\infty \widetilde{S}_i\)</span>, and <span class="math inline">\(\{\widetilde{S}_i\}_{i=1}^\infty\)</span> is a collection of mutually disjoint measurable sets. Hence, <span class="math display">\[\begin{aligned}
+m\left(\lim_{i \to \infty} S_i\right)&amp;=\sum_{i=1}^\infty m(\widetilde{S}_i) \\
+&amp;=\sum_{i=1}^\infty m(S_i-S_{i-1}) \\
+&amp;=\lim_{k \to \infty}\sum_{i=1}^k m(S_i-S_{i-1}) \\
+&amp;=\lim_{k \to \infty}m\left(\bigcup_{i=1}^k (S_i-S_{i-1})\right) \\
+&amp;=\lim_{k \to \infty}m(S_k)=\lim_{i \to \infty}m(S_i).
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.13</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of decreasing measurable sets, then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i\)</span> is measurable. Moreover, when <span class="math inline">\(m(S_1)&lt;\infty\)</span>, <span class="math inline">\(\displaystyle m\left(\lim_{i \to \infty} S_i\right)=\lim_{i \to \infty} m(S_i)\)</span>.</p>
+<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i=\bigcap_{i=1}^\infty S_i\)</span>, then <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i\)</span> is measurable.</p>
+Let <span class="math inline">\(\widetilde{S}_i=S_1-S_i\)</span>, then <span class="math inline">\(\{\widetilde{S}_i=S_1-S_i\}_{i=1}^\infty\)</span> is a collection of increasing sets. Therefore, <span class="math display">\[m\left(\lim_{i \to \infty} (S_1-S_i)\right)=\lim_{i \to \infty} m(S_1-S_i).\]</span> Since <span class="math inline">\(m(S_1)&lt;\infty\)</span>, then <span class="math inline">\(m(S_i)&lt;\infty\)</span> and <span class="math inline">\(\displaystyle \lim_{i \to \infty} S_i&lt;\infty\)</span>. Hence, <span class="math display">\[m\left(\lim_{i \to \infty} (S_1-S_i)\right)=m\left(S_1-\lim_{i \to \infty} S_i\right)=m(S_1)-m\left(\lim_{i \to \infty} S_i\right),\]</span> and <span class="math display">\[\lim_{i \to \infty} m(S_1-S_i)=\lim_{i \to \infty} (m(S_1)-m(S_i))=m(S_1)-\lim_{i \to \infty} m(S_i).\]</span> Therefore, <span class="math inline">\(\displaystyle m\left(\lim_{i \to \infty} S_i\right)=\lim_{i \to \infty} m(S_i)\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note warning">
+            <p>The condition <span class="math inline">\(m(S_1)&lt;\infty\)</span> is important. For example, <span class="math inline">\(S_n=(n, \infty)\)</span>. It is obvious that <span class="math inline">\(\{S_n\}\)</span> is decreasing. Therefore, <span class="math inline">\(\displaystyle \lim_{n \to \infty} S_n=\bigcap_{n=1}^\infty S_n=\varnothing\)</span>, and <span class="math inline">\(\displaystyle m\left(\lim_{n \to \infty} S_n\right)=0\)</span>. However, <span class="math inline">\(m(S_n)=\infty\)</span>, and <span class="math inline">\(\displaystyle \lim_{n \to \infty} m(S_n)=\infty\)</span>.</p>
+          </div>
+<p><strong>Theorem 2.14</strong>    Suppose <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of measurable sets. If the upper limit and lower limit of <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> and measure exist, then <span class="math inline">\(\displaystyle m\left(\varliminf_{i \to \infty} S_i \right) \leq \varliminf_{i \to \infty} m(S_i) \leq \varlimsup_{i \to \infty} m(S_i) \leq m\left(\varlimsup_{i \to \infty} S_i\right)\)</span>. Note that we need <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right)&lt;\infty\)</span> to prove <span class="math inline">\(\displaystyle \varlimsup_{i \to \infty} m(S_i) \leq m\left(\varlimsup_{i \to \infty} S_i\right)\)</span>.</p>
+<h1 id="sigma-algebra"><span class="math inline">\(\sigma\)</span>-Algebra</h1>
+<p><strong>Definition 3.1</strong>    Suppose <span class="math inline">\(\{F_i\}_{i=1}^\infty\)</span> is a collection of closed sets, and <span class="math inline">\(\{G_i\}_{i=1}^\infty\)</span> is a collection of open sets. If <span class="math inline">\(\displaystyle F=\bigcup_{i=1}^\infty F_i\)</span>, then <span class="math inline">\(F\)</span> is an <strong><span class="math inline">\(F_\sigma\)</span> set</strong>. If <span class="math inline">\(\displaystyle G=\bigcap_{i=1}^\infty G_i\)</span>, then <span class="math inline">\(G\)</span> is a <strong><span class="math inline">\(G_\delta\)</span> set</strong>.</p>
+<div class="note info">
+            <p><font face="Noto Serif SC" font color="#696969" font size=2><span class="math inline">\(F\)</span><strong>可能</strong>来自于法语中的fermé，意为闭. <span class="math inline">\(\sigma\)</span><strong>可能</strong>来自于德语中的Summe，意为总和. 因此<span class="math inline">\(F_\sigma\)</span>型集表示闭集的可数并. <span class="math inline">\(G\)</span><strong>可能</strong>来自于德语中的Gebiet，意为区域，可以理解为连通的开集. <span class="math inline">\(\delta\)</span><strong>可能</strong>来自于德语中的Durchschnitt，意为横断. 因此<span class="math inline">\(G_\delta\)</span>型集表示开集的可数交.</font></p>
+          </div>
+<p><strong>Definition 3.2</strong>    Suppose <span class="math inline">\(\Omega\)</span> is the family of sets including some subsets of <span class="math inline">\(X\)</span>. <span class="math inline">\(\Omega\)</span> is called a <strong><span class="math inline">\(\sigma\)</span>-algebra</strong> if it has the following properties:</p>
+<p>    (1) <span class="math inline">\(X \in \Omega\)</span>;</p>
+<p>    (2) <span class="math inline">\(\Omega\)</span> is closed under countable union;</p>
+<p>    (3) <span class="math inline">\(\Omega\)</span> is closed under complement.</p>
+<div class="note info">
+            <p><font face="Noto Serif SC" font color="#696969" font size=2>显然，可测集类<span class="math inline">\(\mathscr{M}\)</span>是<span class="math inline">\(\mathbb{R}^n\)</span>上的<span class="math inline">\(\sigma\)</span>-代数.</font></p>
+          </div>
+<p><strong>Definition 3.3</strong>    Suppose <span class="math inline">\(\Sigma\)</span> is the family of sets including some subsets of <span class="math inline">\(X\)</span>. <strong><span class="math inline">\(\sigma\)</span>-algebra generated by <span class="math inline">\(\Sigma\)</span></strong> is the intersection of all <span class="math inline">\(\sigma\)</span>-algebras containing <span class="math inline">\(\Sigma\)</span> on <span class="math inline">\(X\)</span>.</p>
+<p><strong>Definition 3.4</strong>    <strong>Borel <span class="math inline">\(\sigma\)</span>-algebra</strong> is a <span class="math inline">\(\sigma\)</span>-algebra generated by all open sets on <span class="math inline">\(\mathbb{R}^n\)</span>, denoted as <span class="math inline">\(\mathscr{B}\)</span>. The element in <span class="math inline">\(\mathscr{B}\)</span> is called <strong>Borel set</strong>.</p>
+<div class="note info">
+            <p>A <strong>Borel set</strong> is any set that can be formed from open sets through the operations of countable union, countable intersection, and complement.</p>
+          </div>
+<p><strong>Example 3.1</strong>    Intervals, open sets, closed sets, <span class="math inline">\(F_\sigma\)</span> sets, and <span class="math inline">\(G_\delta\)</span> sets are Borel sets.</p>
+<p><strong>Theorem 3.1</strong>    Suppose <span class="math inline">\(f: E \subset \mathbb{R} \to \mathbb{R}\)</span> is a function, and <span class="math inline">\(E \in \Sigma\)</span>, where <span class="math inline">\(\Sigma\)</span> is a <span class="math inline">\(\sigma\)</span>-algebra on <span class="math inline">\(\mathbb{R}\)</span>. Let <span class="math display">\[\mathscr{A}=\{X \subset \mathbb{R}: f^{-1}(X) \in \Sigma\},\]</span> then <span class="math inline">\(\mathscr{A}\)</span> is a <span class="math inline">\(\sigma\)</span>-algebra.</p>
+<p><strong><em>Proof.</em></strong> We check three properties of <span class="math inline">\(\sigma\)</span>-algebra:</p>
+<p>(1) Since <span class="math inline">\(f^{-1}(\mathbb{R})=E \in \Sigma\)</span>, then <span class="math inline">\(\mathbb{R} \in \mathscr{A}\)</span>.</p>
+<p>(2) Since <span class="math inline">\(\displaystyle f^{-1}\left(\bigcup_{i=1}^\infty X_i\right)=\bigcup_{i=1}^\infty f^{-1}(X_i)\)</span>, then if <span class="math inline">\(X_i \in \mathscr{A}\)</span>, we have <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty X_i \in \mathscr{A}\)</span>.</p>
+<p>(3) Since <span class="math inline">\(f^{-1}(X^c)=(f^{-1}(X))^c\)</span>, then if <span class="math inline">\(X \in \mathscr{A}\)</span>, we have <span class="math inline">\(X^c \in \mathscr{A}\)</span>.</p>
+Therefore, <span class="math inline">\(\mathscr{A}\)</span> is a <span class="math inline">\(\sigma\)</span>-algebra.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 3.2</strong>    Suppose <span class="math inline">\(f: \mathbb{R} \to \mathbb{R}\)</span> is continuous, then the preimage of a Borel set is a Borel set.</p>
+<strong><em>Proof.</em></strong> Suppose <span class="math inline">\(\mathscr{B}\)</span> is the Borel <span class="math inline">\(\sigma\)</span>-algebra on <span class="math inline">\(\mathbb{R}\)</span>, and <span class="math inline">\(\mathscr{A}=\{X \subset \mathbb{R}: f^{-1}(X) \in \mathscr{B}\}\)</span>. We know <span class="math inline">\(\mathscr{A}\)</span> is a <span class="math inline">\(\sigma\)</span>-algebra. Since the preimage of an open set is open, then all open sets belong to <span class="math inline">\(\mathscr{A}\)</span>. Since <span class="math inline">\(\mathscr{B}\)</span> is generated by all open sets, then <span class="math inline">\(\mathscr{B} \subset \mathscr{A}\)</span>. Therefore, the preimage of a Borel set is a Borel set.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="family-of-measurable-sets">Family of Measurable Sets</h1>
+<p><strong>Theorem 4.1</strong>    Any interval <span class="math inline">\(I\)</span> in <span class="math inline">\(\mathbb{R}^n\)</span> is measurable.</p>
+<p><strong>Theorem 4.2</strong>    Any Borel set is measurable.</p>
+<p><strong>Theorem 4.3</strong>    Any zero measure set <span class="math inline">\(A\)</span> is measurable.</p>
+<p><strong><em>Proof.</em></strong> For any set <span class="math inline">\(T\)</span>, we have <span class="math inline">\(0 \leq m^*(T \cap A) \leq m^*(A)=0\)</span>, and thus <span class="math inline">\(m^*(T \cap A)=0\)</span>. Besides, <span class="math inline">\(m^*(T \cap A^c) \leq m^*(T)\)</span>. Therefore, <span class="math inline">\(m^*(T) \geq m^*(T \cap A)+m^*(T \cap A^c)\)</span>.</p>
+Because of countable subadditivity, we have <span class="math inline">\(m^*(T)=m^*(T \cap A)+m^*(T \cap A^c)\)</span>, i.e., <span class="math inline">\(A\)</span> is measurable.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Corollary 4.4</strong>    Suppose <span class="math inline">\(A\)</span> has measure zero. Any subset of <span class="math inline">\(A\)</span> has measure zero.</p>
+<strong><em>Proof.</em></strong> Take an arbitrary subset <span class="math inline">\(A&#39;\)</span> of <span class="math inline">\(A\)</span>, then <span class="math inline">\(A&#39; \subset A\)</span>. Hence, <span class="math inline">\(0 \leq m^*(A&#39;) \leq m^*(A)=0\)</span>, i.e., <span class="math inline">\(m^*(A&#39;)=0\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Corollary 4.5</strong>     The at most countable union of zero measure sets has measure zero.</p>
+<strong><em>Proof.</em></strong> Suppose <span class="math inline">\(\{A_i\}_{i=1}^\infty\)</span> is a collection of zero measure sets. Because of countable subadditivity, we have <span class="math display">\[0 \leq m^*\left(\bigcup_{i=1}^\infty A_i\right) \leq \sum_{i=1}^\infty m^*(A_i)=0,\]</span> i.e., <span class="math inline">\(\displaystyle m^*\left(\bigcup_{i=1}^\infty A_i\right)=0.\)</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 4.6</strong>    If <span class="math inline">\(E\)</span> is measurable, <span class="math inline">\(G\)</span> is open, and <span class="math inline">\(K\)</span> is compact, then <span class="math display">\[m(E)=\inf\{m(G): E \subset G\}=\sup\{m(K): E \supset K\}.\]</span> We define <span class="math inline">\(\inf\{m(G): E \subset G\}\)</span> as <strong>external regularity</strong>, and <span class="math inline">\(\sup\{m(K): E \supset K\}\)</span> as <strong>inner regularity</strong>. On the contrary, if <span class="math inline">\(E\)</span> is bounded, and <span class="math inline">\(\inf\{m(G): E \subset G\}=\sup\{m(K): E \supset K\}\)</span>, where <span class="math inline">\(G\)</span> is open and <span class="math inline">\(K\)</span> is compact, then <span class="math inline">\(E\)</span> is measurable.</p>
+<div class="note ">
+            <p><span id="thm4.6.1"><strong>Lemma 4.6.1</strong></span>    Suppose <span class="math inline">\(E\)</span> is measurable. <span class="math inline">\(\forall \varepsilon&gt;0\)</span>, <span class="math inline">\(\exists G \supset E\)</span>, s.t. <span class="math inline">\(m(G-E)&lt;\varepsilon\)</span>, where <span class="math inline">\(G\)</span> is open.</p><p><strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists an open cover of <span class="math inline">\(E\)</span>, <span class="math inline">\(\{I_i\}_{i=1}^\infty\)</span>, such that <span class="math display">\[\sum_{i=1}^\infty |I_i|&lt;m(E)+\varepsilon.\]</span> Let <span class="math inline">\(\displaystyle G=\bigcup_{i=1}^\infty I_i\)</span>, where <span class="math inline">\(G\)</span> is open, and <span class="math inline">\(\displaystyle m(G) \leq \sum_{i=1}^\infty m(I_i)&lt;m(E)+\varepsilon\)</span>, i.e., <span class="math inline">\(m(G)-m(E)&lt;\varepsilon\)</span>.</p><p>When <span class="math inline">\(m(E)&lt;\infty\)</span>, <span class="math inline">\(m(G)-m(E)=m(G-E)&lt;\varepsilon\)</span>.</p>When <span class="math inline">\(m(E)=\infty\)</span>, let <span class="math inline">\(E_n=E \cap B_n(0)\)</span>, then <span class="math inline">\(\displaystyle E=\bigcup_{i=1}^\infty E_n\)</span>, and <span class="math inline">\(m(E_n)&lt;\infty\)</span>. Hence, <span class="math inline">\(\forall \varepsilon&gt;0\)</span>, <span class="math inline">\(\exists G_n \supset E_n\)</span> s.t. <span class="math display">\[m(G_n-E_n)&lt;\sum_{i=1}^\infty \frac{\varepsilon}{2^n},\]</span> where <span class="math inline">\(G_n\)</span> is open. We also know <span class="math inline">\(\displaystyle G=\bigcup_{n=1}^\infty G_n\)</span> is open, and <span class="math inline">\(G \supset E\)</span>. Since <span class="math display">\[G-E=\bigcup_{n=1}^\infty G_n-\bigcup_{n=1}^\infty E_n \subset \bigcup_{n=1}^\infty (G_n-E_n),\]</span> then <span class="math display">\[m(G-E) \leq \sum_{n=1}^\infty m(G_n-E_n)&lt;\sum_{n=1}^\infty \frac{\varepsilon}{2^n}=\varepsilon.\]</span><p align="right"><span class="math inline">\(\square\)</span></p><p><strong>Lemma 4.6.2</strong>    Suppose <span class="math inline">\(E\)</span> is measurable. Then <span class="math display">\[\forall \varepsilon&gt;0, \exists F \subset E\ \text{s.t.}\ m(E-F)&lt;\varepsilon,\]</span> where <span class="math inline">\(F\)</span> is closed.</p><strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists an open set <span class="math inline">\(G \supset E^c\)</span> such that <span class="math inline">\(m(G-E^c)&lt;\varepsilon\)</span>. Let <span class="math inline">\(F=G^c \subset E\)</span>, where <span class="math inline">\(F\)</span> is closed. Therefore, <span class="math inline">\(m(G-E^c)=m(E-F)&lt;\varepsilon\)</span>.<p align="right"><span class="math inline">\(\square\)</span></p>
+          </div>
+<p><strong><em>Proof.</em></strong> <strong>External Regularity.</strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists an open set <span class="math inline">\(G \supset E\)</span> such that <span class="math inline">\(m(G-E)&lt;\varepsilon\)</span>. When <span class="math inline">\(m(E)&lt;\infty\)</span>, <span class="math inline">\(m(G)=m(E)+m(G-E)&lt;m(E)+\varepsilon\)</span>, i.e., <span class="math inline">\(m(E)&gt;m(G)-\varepsilon\)</span>. Since <span class="math inline">\(G \supset E\)</span>, then <span class="math inline">\(m(E) \leq m(G)\)</span>. Hence, <span class="math inline">\(m(E)=\inf\{m(G): E \subset G\}\)</span>.</p>
+<p>When <span class="math inline">\(m(E)=\infty\)</span>, it is obvious that <span class="math inline">\(m(G)=\infty\)</span>, and thus <span class="math inline">\(m(E)=\inf\{m(G): E \subset G\}\)</span>.</p>
+<p><strong>Inner Regularity.</strong> When <span class="math inline">\(E\)</span> is bounded, take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists a closed set <span class="math inline">\(K \subset E\)</span> such that <span class="math inline">\(m(E-K)&lt;\varepsilon\)</span>. Since <span class="math inline">\(E\)</span> is bounded, then <span class="math inline">\(K\)</span> is bounded and closed, i.e., <span class="math inline">\(K\)</span> is compact. Besides, we have <span class="math inline">\(m(E)&lt;\infty\)</span>, and therefore <span class="math inline">\(m(E)=m(K)+m(E-K)&lt;m(K)+\varepsilon\)</span>. Since <span class="math inline">\(K \subset E\)</span>, then <span class="math inline">\(m(K) \leq m(E)\)</span>. Hence, <span class="math inline">\(m(E)=\sup\{m(K): E \supset K\}\)</span>.</p>
+<p>When <span class="math inline">\(E\)</span> is an arbitrary set, let <span class="math inline">\(E_n=E \cap B_n(0)\)</span>, then <span class="math inline">\(E_n\)</span> is bounded, and <span class="math inline">\(\displaystyle E=\bigcup_{n=1}^\infty E_n\)</span>. Since <span class="math inline">\(\{E_n\}_{n=1}^\infty\)</span> is a collection of increasing measurable sets, then <span class="math inline">\(\displaystyle m(E)=\lim_{n \to \infty} m(E_n)\)</span>. We can take a compact set <span class="math inline">\(K_n \subset E_n\)</span> such that <span class="math inline">\(\displaystyle m(K_n) \geq m(E_n)-\frac{1}{n}\)</span> and <span class="math inline">\(m(K_n) \leq m(E_n)\)</span>. Hence, <span class="math inline">\(\displaystyle \lim_{n \to \infty} m(K_n)=\lim_{n \to \infty} m(E_n)=m(E)\)</span>, and thus <span class="math inline">\(m(E)=\sup\{m(K): E \supset K\}\)</span>.</p>
+<strong>Measurability.</strong> Let <span class="math inline">\(\alpha=\inf\{m(G): E \subset G\}=\sup\{m(K): E \supset K\}\)</span>. Take an arbitrary <span class="math inline">\(n \in \mathbb{N}\)</span>, there exists a open set <span class="math inline">\(G_n \supset E\)</span> and compact set <span class="math inline">\(K_n \subset E\)</span> such that <span class="math inline">\(\displaystyle m(G_n)&lt;\alpha+\frac{1}{2n}\)</span> and <span class="math inline">\(\displaystyle m(K_n)&gt;\alpha-\frac{1}{2n}\)</span>. Hence, <span class="math display">\[0 \leq m(G_n)-m(K_n)&lt;\frac{1}{n}.\]</span> Take <span class="math inline">\(\displaystyle A=\bigcap_{n=1}^\infty G_n\)</span> and <span class="math inline">\(\displaystyle B=\bigcup_{n=1}^\infty K_n\)</span>, then <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are measurable. Since <span class="math inline">\(m(A) \leq m(G_n)\)</span>, <span class="math inline">\(m(B) \geq m(K_n)\)</span>, and <span class="math inline">\(m(A) \geq m(B)\)</span>, then <span class="math display">\[0 \leq m(A)-m(B) \leq m(G_n)-m(K_n)&lt;\frac{1}{n},\]</span> i.e., <span class="math inline">\(m(A)=m(B)\)</span>. Since <span class="math inline">\(E \supset B\)</span> is bounded, then <span class="math inline">\(m(B)&lt;\infty\)</span>, and <span class="math inline">\(m(A-B)=m(A)-m(B)=0\)</span>. Since <span class="math inline">\(E-B \subset A-B\)</span>, then <span class="math inline">\(m(E-B)=0\)</span>. Therefore, <span class="math inline">\(E=B \cup (E-B)\)</span> is measurable.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><span id="thm4.7"><strong>Theorem 4.7</strong></span>    If <span class="math inline">\(E\)</span> is measurable, then there exists a <span class="math inline">\(G_\delta\)</span> set <span class="math inline">\(G\)</span> such that <span class="math inline">\(G \supset E\)</span> and <span class="math inline">\(m(G-E)=0\)</span>.</p>
+<strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(n \in \mathbb{N}\)</span>. By <a href="#thm4.6.1">lemma 4.6.1</a>, there exists an open set <span class="math inline">\(G \supset E\)</span> such that <span class="math inline">\(\displaystyle m(G-E)&lt;\frac{1}{n}\)</span>. Take <span class="math inline">\(\displaystyle G=\bigcap_{n=1}^\infty G_n\)</span>, which is a <span class="math inline">\(G_\delta\)</span> set. Since <span class="math inline">\(G-E \subset G_n-E\)</span>, then <span class="math display">\[m(G-E) \leq m(G_n-E)&lt;\frac{1}{n},\]</span> i.e., <span class="math inline">\(m(G-E)=0\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><span id="thm4.8"><strong>Corollary 4.8</strong>    If <span class="math inline">\(E\)</span> is measurable, then there exists an <span class="math inline">\(F_\sigma\)</span> set <span class="math inline">\(F\)</span> such that <span class="math inline">\(F \subset E\)</span> and <span class="math inline">\(m(E-F)=0\)</span>.</p>
+<div class="note info">
+            <p><font face="Noto Serif SC" font color="#696969" font size=2>根据<a href="#thm4.7">定理4.7</a>与其<a href="#thm4.8">推论</a>，如果我们有了所有的<span class="math inline">\(G_\delta\)</span>型集（或<span class="math inline">\(F_\sigma\)</span>型集）与零测集，那么我们就知道了所有的可测集. 可测集一定可以表示为<span class="math display">\[E=G_\delta-M_0=F_\sigma \cup M_0.\]</span></font></p>
+          </div>
+<h1 id="non-measurable-set-in-mathbbr">Non-Measurable Set in <span class="math inline">\(\mathbb{R}\)</span></h1>
+<div class="note default">
+            <p><font face="Noto Serif SC" font color="#696969" font size=2>此前，我们一直在回答什么是可测集，并发现可测集是存在的——我们构造集合通常都是从区间出发，经过一系列并、交、差等运算来获得，而这样的集合都是Borel集，总是可测的. 我们还需要回答不可测集是否存在的问题——我们可以利用Lebesgue测度的平移不变性，构造一个不可测集. 当然，在一般的数学实践中，遇到不可测集的机会是极少的，它通常只是被用来构成各种特例.</font></p>
+          </div>
+<p><strong>Property 5.1 (Translation Invariance)</strong>    Suppose <span class="math inline">\(E\)</span> is measurable and <span class="math inline">\(\tau_\alpha E=\{x+\alpha: x \in E\}\)</span>, then <span class="math inline">\(\tau_\alpha E\)</span> is measurable and <span class="math inline">\(m^*(E)=m^*(\tau_\alpha E)\)</span>.</p>
+<p><strong>Property 5.2 (Reflection Invariance)</strong>    Suppose <span class="math inline">\(E\)</span> is measurable and <span class="math inline">\(\tau E=\{-x: x \in E\}\)</span>, then <span class="math inline">\(\tau E\)</span> is measurable and <span class="math inline">\(m^*(E)=m^*(\tau E)\)</span>.</p>
+<p><strong>Example 5.1</strong>    We define a relation on <span class="math inline">\([0, 1]\)</span>: <span class="math inline">\(x \sim y \Leftrightarrow x-y \in \mathbb{Q}\)</span>, which is an equivalence relation. From this equivalence relation, we can find equivalence classes. We take a representative element from each equivalence class (<strong>Axiom of choice</strong>). Let <span class="math inline">\(Z=\{\text{All representative elements}\}\)</span>. Take an arbitrary <span class="math inline">\(\xi \in Z\)</span>. All elements in the class including <span class="math inline">\(\xi\)</span> have the form of <span class="math inline">\(\xi+r \in [0, 1]\)</span>, where <span class="math inline">\(r \in \mathbb{Q} \cap [-\xi, 1-\xi]\)</span>.</p>
+<p>Therefore, <span class="math inline">\(\displaystyle \bigcup_{r \in \mathbb{Q} \cap [-\xi, 1-\xi]} \{\tau_r \xi\}\)</span> represents all elements in the class including <span class="math inline">\(\xi\)</span>, and <span class="math inline">\(\displaystyle \bigcup_{r \in \mathbb{Q} \cap [-1, 1]} \tau_r Z \supset [0, 1]\)</span>.</p>
+<p>If <span class="math inline">\(\xi \in \tau_{r_1} Z \cap \tau_{r_2} Z\)</span>, where <span class="math inline">\(r_1 \neq r_2\)</span>, then <span class="math inline">\(\xi-r_1, \xi-r_2 \in Z\)</span>. Since <span class="math inline">\(\xi-r_1 \sim \xi-r_2\)</span>, then we have two representative elements for one equivalence class, which is a contradiction. Therefore, <span class="math inline">\(\tau_{r_1} Z \cap \tau_{r_2} Z=\varnothing\)</span>.</p>
+<p>We know order <span class="math inline">\(\mathbb{Q} \cap [-1, 1]\)</span>, denoted <span class="math inline">\(r_1, r_2, \cdots\)</span>. Let <span class="math inline">\(Z_n=\tau_{r_n} Z\)</span>. We know <span class="math inline">\(Z_n \subset [-1, 2]\)</span>, is bounded and mutually disjoint from <span class="math inline">\(Z_{n&#39;}\)</span>, where <span class="math inline">\(n \neq n&#39;\)</span>. Hence, <span class="math inline">\(\displaystyle [0, 1] \subset \bigcup_{n=1}^\infty Z_n\)</span>. If <span class="math inline">\(Z\)</span> is measurable, then <span class="math inline">\(Z_n\)</span> is measurable, and <span class="math display">\[m^*\left(\bigcup_{n=1}^\infty Z_n\right)=\sum_{n=1}^\infty m^*(Z_n)=\sum_{n=1}^\infty m^*(Z)&lt;\infty.\]</span> Therefore, <span class="math display">\[m^*(Z)=0=m^*\left(\bigcup_{n=1}^\infty Z_n\right),\]</span> which is a contradiction. As a consequence, <span class="math inline">\(Z\)</span> is a non-measurable set, a.k.a. <strong>Vitali set</strong>.</p>
+<div class="note info">
+            <p>There will be non-measurable subsets in any set with measure greater than zero, and we can also construct non-measurable sets in <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
+          </div>
+]]></content>
+      <categories>
+        <category>Mathematics</category>
+        <category>Real analysis</category>
+      </categories>
+      <tags>
+        <tag>Measure</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Singular Value Decomposition</title>
+    <url>/Mathematics/Numerical-linear-algebra/Singular_Value_Decomposition.html</url>
+    <content><![CDATA[<h1 id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h1>
+<ul>
+<li><p><strong>Symmetric eigenvalue decomposition</strong>: <span class="math inline">\(S=V\Lambda V^T\)</span> for symmetric <span class="math inline">\(A \in \mathbb{R}^{n \times n}\)</span>, where <span class="math inline">\(V^TV=I_n\)</span> (i.e., <span class="math inline">\(V\)</span> is an orthogonal matrix), and <span class="math inline">\(\Lambda=\text{diag}(\lambda_1, \cdots, \lambda_n)\)</span>, <span class="math inline">\(\lambda_i \in \mathbb{R}\)</span>.</p></li>
+<li><p><strong>Singular value decomposition (SVD)</strong>: <span class="math inline">\(A=U\Sigma V^T\)</span> for any <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> assuming <span class="math inline">\(m \geq n\)</span> for definiteness, where <span class="math inline">\(U^TU=V^TV=I_n\)</span>, and <span class="math inline">\(\Sigma=\text{diag}(\sigma_1, \cdots, \sigma_n)\)</span>, <span class="math inline">\(\sigma_1 \geq \cdots \geq \sigma_n \geq 0\)</span>. <span class="math inline">\(\sigma_i\)</span> is called the <strong>singular value</strong> of <span class="math inline">\(A\)</span>, the column of <span class="math inline">\(U\)</span> is called the <strong>left singular vector</strong>, and the column of <span class="math inline">\(V\)</span> is called the <strong>right singular vector</strong>.</p></li>
+</ul>
+<div class="note warning">
+            <p><span class="math inline">\(UU^T \neq I_m\)</span> if <span class="math inline">\(m&gt;n\)</span>. But <span class="math inline">\(VV^T=I_n\)</span> since <span class="math inline">\(V\)</span> is square.</p>
+          </div>
+<strong><em>Proof.</em></strong> Take <strong>Gram matrix</strong> <span class="math inline">\(A^TA\)</span>, which is symmetric, then its eigndecomposition is <span class="math inline">\(A^TA=V\Lambda V^T\)</span>, where <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_n \geq 0\)</span>. Define <span class="math inline">\(B=AV\)</span>, then <span class="math display">\[B^TB=V^TA^TAV=V^TV\Lambda V^TV=\Lambda.\]</span> Since <span class="math inline">\((B^TB)_{ii}=\mathbf{b}_i^T\mathbf{b}_i=\|\mathbf{b}_i\|_2^2 \geq 0\)</span>, where <span class="math inline">\(\mathbf{b}_i\)</span> is the <span class="math inline">\(i\)</span>th column of <span class="math inline">\(B\)</span>, then <span class="math inline">\(B^TB=\Lambda \succeq 0\)</span>. Then <span class="math display">\[\begin{aligned}
+B&amp;=\begin{bmatrix}
+&amp; \\ \mathbf{u}_1 &amp; \cdots &amp; \mathbf{u}_r &amp; \mathbf{0} &amp; \cdots &amp; \mathbf{0} \\ &amp;
+\end{bmatrix}\begin{bmatrix}
+\sigma_1 \\
+ &amp; \ddots \\
+ &amp; &amp; \sigma_r \\
+ &amp; &amp; &amp; 0 \\
+ &amp; &amp; &amp; &amp; \ddots \\
+ &amp; &amp; &amp; &amp; &amp; 0
+\end{bmatrix}
+\\&amp;=\begin{bmatrix}
+&amp; \\ \mathbf{u}_1 &amp; \cdots &amp; \mathbf{u}_r &amp; \mathbf{u}_{r+1} &amp; \cdots &amp; \mathbf{u}_n \\ &amp;
+\end{bmatrix}\begin{bmatrix}
+\sigma_1 \\
+ &amp; \ddots \\
+ &amp; &amp; \sigma_r \\
+ &amp; &amp; &amp; 0 \\
+ &amp; &amp; &amp; &amp; \ddots \\
+ &amp; &amp; &amp; &amp; &amp; 0
+\end{bmatrix}
+\\&amp;=U\Sigma,
+\end{aligned}\]</span> where U contains orthonormal vectors, and <span class="math inline">\(\sigma_i=\sqrt{\lambda_i}\)</span>. Since <span class="math inline">\(B=AV\)</span>, then <span class="math inline">\(A=BV^T=U\Sigma V^T\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li><p><strong>Full SVD</strong>: <span class="math inline">\(A=U\begin{bmatrix} \Sigma \\ 0 \end{bmatrix}V^T\)</span>, where <span class="math inline">\(U \in \mathbb{R}^{m \times m}\)</span> is orthogonal. See <a href=/Mathematics/Matrix-method/Linear_Algebra#7 target="_blank"><strong><em>MORE</em></strong></a>.</p></li>
+<li><p>If <span class="math inline">\(A \in \mathbb{C}^{m \times n}\)</span>, then the SVD of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=U\Sigma V^*\)</span>, where <span class="math inline">\(U^*U=V^*V=I_n=VV^*\)</span>.</p></li>
+</ul>
+<h1 id="application">Application</h1>
+<p>From the SVD, we know:</p>
+<ul>
+<li><p>Rank <span class="math inline">\(r\)</span> of <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span>: Number of nonzero singular values <span class="math inline">\(\sigma_i(A)\)</span>.</p></li>
+<li><p>Column space (linear subspace spanned by vectors <span class="math inline">\(A\mathbf{x}\)</span>): Span of <span class="math inline">\(U=[\mathbf{u}_1, \cdots, \mathbf{u}_r]\)</span>, i.e., <span class="math display">\[\text{Span}(\text{col}(A))=\text{Span}(\mathbf{u}_1, \cdots, \mathbf{u}_r).\]</span></p></li>
+<li><p>Row space: Row span of <span class="math inline">\(\mathbf{v}_1^T, \cdots, \mathbf{v}_r^T\)</span>.</p></li>
+<li><p>Null space: Span of <span class="math inline">\(\mathbf{v}_{r+1}, \cdots, \mathbf{v}_n\)</span>.</p></li>
+</ul>
+<h1 id="svd-and-eigenvalue-decomposition">SVD and Eigenvalue Decomposition</h1>
+<ul>
+<li><p><span class="math inline">\(V\)</span> contains eigenvectors of <span class="math inline">\(A^TA\)</span>.</p></li>
+<li><p><span class="math inline">\(U\)</span> contains eigenvectors (for nonzero eigenvalues) of <span class="math inline">\(AA^T\)</span> (up to sign).</p></li>
+<li><p><span class="math inline">\(\sigma_i=\sqrt{\lambda_i(A^TA)}\)</span>.</p></li>
+<li><p><strong>Jordan-Wieldant matrix</strong> <span class="math inline">\(M=\begin{bmatrix} 0 &amp; A \\ A^T &amp; 0 \end{bmatrix}\)</span>: <span class="math inline">\(M\)</span> has eigenvalues <span class="math inline">\(\pm\sigma_i(A)\)</span>, and <span class="math inline">\(m-n\)</span> copies of eigenvalues at <span class="math inline">\(0\)</span>. Its eigenvector matrix is <span class="math inline">\(\begin{bmatrix} U &amp; U &amp; U_0 \\ V &amp; -V &amp; 0 \end{bmatrix}\)</span>, where <span class="math inline">\(A^TU_0=0\)</span>, <span class="math inline">\(U_0\)</span> is empty when <span class="math inline">\(m=n\)</span>.</p>
+<ul>
+<li><span class="math inline">\(M\)</span> along with the Gram matrix <span class="math inline">\(A^TA\)</span>, is a useful tool when we try to extend a result on symmetric eigenvalues to an analogue in terms of the SVD (or vice versa).</li>
+</ul></li>
+</ul>
+<h1 id="uniqueness">Uniqueness</h1>
+<ul>
+<li><p>The singular vectors are not uniquely determined.</p>
+<ul>
+<li><p>The singular vectors can be flipped in signs. For example, <span class="math display">\[A=U\Sigma V^T=(US_1)\Sigma(S_1V^T),\]</span> where <span class="math inline">\(S_1=\begin{bmatrix}  \pm1 \\  &amp; \ddots \\  &amp; &amp; \pm 1  \end{bmatrix}\)</span>, is a valid SVD.</p></li>
+<li><p>If singular values are distinct, then the sign is the only degree of freedom.</p></li>
+<li><p>If singular values are not distinct (i.e., <span class="math inline">\(\sigma_i=\sigma_{i+1}\)</span> for some <span class="math inline">\(i\)</span>), then there is a higher degree of freedom in the SVD.</p></li>
+<li><p>The singular values are <strong>always unique</strong>, as they are the eigenvalues of the Gram matrix.</p></li>
+</ul></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Mathematics</category>
+        <category>Numerical linear algebra</category>
+      </categories>
+      <tags>
+        <tag>SVD</tag>
       </tags>
   </entry>
 </search>

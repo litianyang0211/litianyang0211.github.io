@@ -20,28 +20,33 @@
     var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Tianyang Li">
-<meta property="og:url" content="https://litianyang0211.github.io/index.html">
+  <meta name="description" content="We introduce the singular value decomposition (SVD) and give a proof. Next, we talk about the application of SVD and the connection between SVD and eigenvalue decomposition. Finally, we explore the un">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Singular Value Decomposition">
+<meta property="og:url" content="https://litianyang0211.github.io/Mathematics/Numerical-linear-algebra/Singular_Value_Decomposition">
 <meta property="og:site_name" content="Tianyang Li">
+<meta property="og:description" content="We introduce the singular value decomposition (SVD) and give a proof. Next, we talk about the application of SVD and the connection between SVD and eigenvalue decomposition. Finally, we explore the un">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-09T23:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-09T23:15:37.822Z">
 <meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="SVD">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://litianyang0211.github.io/">
+<link rel="canonical" href="https://litianyang0211.github.io/Mathematics/Numerical-linear-algebra/Singular_Value_Decomposition.html">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Tianyang Li</title>
+  <title>Singular Value Decomposition | Tianyang Li</title>
   
 
 
@@ -187,10 +192,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-  	
-    	  
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -206,10 +211,9 @@
       <meta itemprop="name" content="Tianyang Li">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Mathematics/Numerical-linear-algebra/Singular_Value_Decomposition" class="post-title-link" itemprop="url">Singular Value Decomposition</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Singular Value Decomposition
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -236,6 +240,7 @@
             </span>
 
           
+            <div class="post-description">We introduce the singular value decomposition (SVD) and give a proof. Next, we talk about the application of SVD and the connection between SVD and eigenvalue decomposition. Finally, we explore the uniqueness of SVD.</div>
 
         </div>
       </header>
@@ -246,128 +251,101 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>We introduce the singular value decomposition (SVD) and give a proof. Next, we talk about the application of SVD and the connection between SVD and eigenvalue decomposition. Finally, we explore the uniqueness of SVD.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Mathematics/Numerical-linear-algebra/Singular_Value_Decomposition">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+        <h1 id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h1>
+<ul>
+<li><p><strong>Symmetric eigenvalue decomposition</strong>: <span class="math inline">\(S=V\Lambda V^T\)</span> for symmetric <span class="math inline">\(A \in \mathbb{R}^{n \times n}\)</span>, where <span class="math inline">\(V^TV=I_n\)</span> (i.e., <span class="math inline">\(V\)</span> is an orthogonal matrix), and <span class="math inline">\(\Lambda=\text{diag}(\lambda_1, \cdots, \lambda_n)\)</span>, <span class="math inline">\(\lambda_i \in \mathbb{R}\)</span>.</p></li>
+<li><p><strong>Singular value decomposition (SVD)</strong>: <span class="math inline">\(A=U\Sigma V^T\)</span> for any <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> assuming <span class="math inline">\(m \geq n\)</span> for definiteness, where <span class="math inline">\(U^TU=V^TV=I_n\)</span>, and <span class="math inline">\(\Sigma=\text{diag}(\sigma_1, \cdots, \sigma_n)\)</span>, <span class="math inline">\(\sigma_1 \geq \cdots \geq \sigma_n \geq 0\)</span>. <span class="math inline">\(\sigma_i\)</span> is called the <strong>singular value</strong> of <span class="math inline">\(A\)</span>, the column of <span class="math inline">\(U\)</span> is called the <strong>left singular vector</strong>, and the column of <span class="math inline">\(V\)</span> is called the <strong>right singular vector</strong>.</p></li>
+</ul>
+<div class="note warning">
+            <p><span class="math inline">\(UU^T \neq I_m\)</span> if <span class="math inline">\(m&gt;n\)</span>. But <span class="math inline">\(VV^T=I_n\)</span> since <span class="math inline">\(V\)</span> is square.</p>
+          </div>
+<strong><em>Proof.</em></strong> Take <strong>Gram matrix</strong> <span class="math inline">\(A^TA\)</span>, which is symmetric, then its eigndecomposition is <span class="math inline">\(A^TA=V\Lambda V^T\)</span>, where <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_n \geq 0\)</span>. Define <span class="math inline">\(B=AV\)</span>, then <span class="math display">\[B^TB=V^TA^TAV=V^TV\Lambda V^TV=\Lambda.\]</span> Since <span class="math inline">\((B^TB)_{ii}=\mathbf{b}_i^T\mathbf{b}_i=\|\mathbf{b}_i\|_2^2 \geq 0\)</span>, where <span class="math inline">\(\mathbf{b}_i\)</span> is the <span class="math inline">\(i\)</span>th column of <span class="math inline">\(B\)</span>, then <span class="math inline">\(B^TB=\Lambda \succeq 0\)</span>. Then <span class="math display">\[\begin{aligned}
+B&amp;=\begin{bmatrix}
+&amp; \\ \mathbf{u}_1 &amp; \cdots &amp; \mathbf{u}_r &amp; \mathbf{0} &amp; \cdots &amp; \mathbf{0} \\ &amp;
+\end{bmatrix}\begin{bmatrix}
+\sigma_1 \\
+ &amp; \ddots \\
+ &amp; &amp; \sigma_r \\
+ &amp; &amp; &amp; 0 \\
+ &amp; &amp; &amp; &amp; \ddots \\
+ &amp; &amp; &amp; &amp; &amp; 0
+\end{bmatrix}
+\\&amp;=\begin{bmatrix}
+&amp; \\ \mathbf{u}_1 &amp; \cdots &amp; \mathbf{u}_r &amp; \mathbf{u}_{r+1} &amp; \cdots &amp; \mathbf{u}_n \\ &amp;
+\end{bmatrix}\begin{bmatrix}
+\sigma_1 \\
+ &amp; \ddots \\
+ &amp; &amp; \sigma_r \\
+ &amp; &amp; &amp; 0 \\
+ &amp; &amp; &amp; &amp; \ddots \\
+ &amp; &amp; &amp; &amp; &amp; 0
+\end{bmatrix}
+\\&amp;=U\Sigma,
+\end{aligned}\]</span> where U contains orthonormal vectors, and <span class="math inline">\(\sigma_i=\sqrt{\lambda_i}\)</span>. Since <span class="math inline">\(B=AV\)</span>, then <span class="math inline">\(A=BV^T=U\Sigma V^T\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li><p><strong>Full SVD</strong>: <span class="math inline">\(A=U\begin{bmatrix} \Sigma \\ 0 \end{bmatrix}V^T\)</span>, where <span class="math inline">\(U \in \mathbb{R}^{m \times m}\)</span> is orthogonal. See <a href=/Mathematics/Matrix-method/Linear_Algebra#7 target="_blank"><strong><em>MORE</em></strong></a>.</p></li>
+<li><p>If <span class="math inline">\(A \in \mathbb{C}^{m \times n}\)</span>, then the SVD of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=U\Sigma V^*\)</span>, where <span class="math inline">\(U^*U=V^*V=I_n=VV^*\)</span>.</p></li>
+</ul>
+<h1 id="application">Application</h1>
+<p>From the SVD, we know:</p>
+<ul>
+<li><p>Rank <span class="math inline">\(r\)</span> of <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span>: Number of nonzero singular values <span class="math inline">\(\sigma_i(A)\)</span>.</p></li>
+<li><p>Column space (linear subspace spanned by vectors <span class="math inline">\(A\mathbf{x}\)</span>): Span of <span class="math inline">\(U=[\mathbf{u}_1, \cdots, \mathbf{u}_r]\)</span>, i.e., <span class="math display">\[\text{Span}(\text{col}(A))=\text{Span}(\mathbf{u}_1, \cdots, \mathbf{u}_r).\]</span></p></li>
+<li><p>Row space: Row span of <span class="math inline">\(\mathbf{v}_1^T, \cdots, \mathbf{v}_r^T\)</span>.</p></li>
+<li><p>Null space: Span of <span class="math inline">\(\mathbf{v}_{r+1}, \cdots, \mathbf{v}_n\)</span>.</p></li>
+</ul>
+<h1 id="svd-and-eigenvalue-decomposition">SVD and Eigenvalue Decomposition</h1>
+<ul>
+<li><p><span class="math inline">\(V\)</span> contains eigenvectors of <span class="math inline">\(A^TA\)</span>.</p></li>
+<li><p><span class="math inline">\(U\)</span> contains eigenvectors (for nonzero eigenvalues) of <span class="math inline">\(AA^T\)</span> (up to sign).</p></li>
+<li><p><span class="math inline">\(\sigma_i=\sqrt{\lambda_i(A^TA)}\)</span>.</p></li>
+<li><p><strong>Jordan-Wieldant matrix</strong> <span class="math inline">\(M=\begin{bmatrix} 0 &amp; A \\ A^T &amp; 0 \end{bmatrix}\)</span>: <span class="math inline">\(M\)</span> has eigenvalues <span class="math inline">\(\pm\sigma_i(A)\)</span>, and <span class="math inline">\(m-n\)</span> copies of eigenvalues at <span class="math inline">\(0\)</span>. Its eigenvector matrix is <span class="math inline">\(\begin{bmatrix} U &amp; U &amp; U_0 \\ V &amp; -V &amp; 0 \end{bmatrix}\)</span>, where <span class="math inline">\(A^TU_0=0\)</span>, <span class="math inline">\(U_0\)</span> is empty when <span class="math inline">\(m=n\)</span>.</p>
+<ul>
+<li><span class="math inline">\(M\)</span> along with the Gram matrix <span class="math inline">\(A^TA\)</span>, is a useful tool when we try to extend a result on symmetric eigenvalues to an analogue in terms of the SVD (or vice versa).</li>
+</ul></li>
+</ul>
+<h1 id="uniqueness">Uniqueness</h1>
+<ul>
+<li><p>The singular vectors are not uniquely determined.</p>
+<ul>
+<li><p>The singular vectors can be flipped in signs. For example, <span class="math display">\[A=U\Sigma V^T=(US_1)\Sigma(S_1V^T),\]</span> where <span class="math inline">\(S_1=\begin{bmatrix}  \pm1 \\  &amp; \ddots \\  &amp; &amp; \pm 1  \end{bmatrix}\)</span>, is a valid SVD.</p></li>
+<li><p>If singular values are distinct, then the sign is the only degree of freedom.</p></li>
+<li><p>If singular values are not distinct (i.e., <span class="math inline">\(\sigma_i=\sigma_{i+1}\)</span> for some <span class="math inline">\(i\)</span>), then there is a higher degree of freedom in the SVD.</p></li>
+<li><p>The singular values are <strong>always unique</strong>, as they are the eigenvalues of the Gram matrix.</p></li>
+</ul></li>
+</ul>
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-  	
-  	
-    	  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Statistics/Graphical-model/Conditional_Independence">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Tianyang Li">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianyang Li">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
           
-            <a href="/Statistics/Graphical-model/Conditional_Independence" class="post-title-link" itemprop="url">Conditional Independence</a>
-        </h2>
+          <div class="post-tags">
+              <a href="/tags/SVD/" rel="tag"><i class="fa fa-tag"></i> SVD</a>
+          </div>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-lightbulb"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-10-04 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-04T00:00:00+01:00">2021-10-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-edit"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-07 10:27:59" itemprop="dateModified" datetime="2021-10-07T10:27:59+01:00">2021-10-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a class=n href="/categories/Statistics/" itemprop="url" rel="index"><span itemprop="name">Statistics</span></a>
-                </span>
-                  /
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a class=n href="/categories/Statistics/Graphical-model/" itemprop="url" rel="index"><span itemprop="name">Graphical model</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>A quick review of conditional independence.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Statistics/Graphical-model/Conditional_Independence">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Mathematics/Numerical-linear-algebra/NLA_Linear_Algebra" rel="prev" title="Linear Algebra">
+      <i class="fa fa-chevron-left"></i> Linear Algebra
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
       </footer>
+    
   </article>
   
   
-  
-
-    
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-
   
 
 
@@ -420,6 +398,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#singular-value-decomposition-svd"><span class="nav-number">1.</span> <span class="nav-text">Singular Value Decomposition (SVD)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#application"><span class="nav-number">2.</span> <span class="nav-text">Application</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#svd-and-eigenvalue-decomposition"><span class="nav-number">3.</span> <span class="nav-text">SVD and Eigenvalue Decomposition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#uniqueness"><span class="nav-number">4.</span> <span class="nav-text">Uniqueness</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -600,16 +579,6 @@ document.querySelectorAll('.pdfobject-container').forEach(element => {
     
 
   
-  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
-  <script>
-      window.addEventListener('load', () => {
-      quicklink({
-        timeout : 3000,
-        priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'https://litianyang0211.github.io/',]
-      });
-      });
-  </script>
 
 </body>
 </html>
