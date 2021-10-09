@@ -28,7 +28,7 @@
 <meta property="og:description" content="We first discuss the four ways to solve least squares problem, which comes in to play in the many applications that rely on data fitting. Next, we explore some topics in numerical linear algebra (Kryl">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-09-27T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-03T09:50:15.433Z">
+<meta property="article:modified_time" content="2021-10-09T17:38:07.743Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Matrix">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-03 10:50:15" itemprop="dateModified" datetime="2021-10-03T10:50:15+01:00">2021-10-03</time>
+                <time title="Modified: 2021-10-09 18:38:07" itemprop="dateModified" datetime="2021-10-09T18:38:07+01:00">2021-10-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -341,7 +341,7 @@ Since <span class="math inline">\((\Sigma^T\Sigma+\delta^2I)^{-1}\Sigma^T\)</spa
 <li><p>Golub-Kahan algorithm:</p></li>
 </ul>
 <p>         Step 1: Find <span class="math inline">\(Q_1\)</span> and <span class="math inline">\(Q_2\)</span> so that <span class="math inline">\(Q_1AQ_2^T\)</span> is bidiagonal;</p>
-<p>         Step 2: Apply the shifted <span class="math inline">\(QR\)</span> algorithm to find the eigenvalues of <span class="math inline">\((Q_1AQ_2^T)^T(Q_1AQ_2^T)=Q_2A^TAQ_2^T\)</span>, which is tridiagonal.</p>
+<p>         Step 2: Apply the shifted <span class="math inline">\(QR\)</span> algorithm to find the eigenvalues of <span class="math display">\[(Q_1AQ_2^T)^T(Q_1AQ_2^T)=Q_2A^TAQ_2^T,\]</span> which is tridiagonal.</p>
 <h1 id="random-matrix-multiplication">Random Matrix Multiplication</h1>
 <ul>
 <li><p>Let <span class="math inline">\(\displaystyle p_j=\frac{\|\mathbf{a}_j\|\|\mathbf{b}_j^T\|}{C}\)</span>, where <span class="math inline">\(\mathbf{a}_j\)</span> is the column <span class="math inline">\(j\)</span> of <span class="math inline">\(A\)</span>, <span class="math inline">\(\mathbf{b}_j^T\)</span> is the row <span class="math inline">\(j\)</span> of <span class="math inline">\(B\)</span>, and <span class="math inline">\(\displaystyle C=\sum_{j=1}^n \|\mathbf{a}_j\|\|\mathbf{b}_j^T\|\)</span>.</p></li>

@@ -28,7 +28,7 @@
 <meta property="og:description" content="A quick review of conditional independence.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-03T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-05T21:20:54.432Z">
+<meta property="article:modified_time" content="2021-10-07T09:27:59.270Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Conditional independence">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-05 22:20:54" itemprop="dateModified" datetime="2021-10-05T22:20:54+01:00">2021-10-05</time>
+                <time title="Modified: 2021-10-07 10:27:59" itemprop="dateModified" datetime="2021-10-07T10:27:59+01:00">2021-10-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,11 +263,12 @@
             <p>If <span class="math inline">\(p(y)&gt;0\)</span> then the solution is unique and given by the familiar expression <span class="math display">\[p(x \mid y)=\frac{p(x, y)}{p(y)}.\]</span></p>
           </div>
 <p><strong>Definition 1.2</strong>    Let <span class="math inline">\(X, Y\)</span> be r.v.s. defined on <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>. <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>marginally independent</strong> if <span class="math display">\[p(x \mid y)=p(x), \quad \forall x \in \mathcal{X}, y \in \mathcal{Y}, p(y)&gt;0,\]</span> which is equivalent to <span class="math display">\[p(x, y)=p(x)p(y).\]</span></p>
-<p><strong>Definition 1.3</strong>    Let <span class="math inline">\(X, Y, Z\)</span> be r.v.s. defined on a Cartesian product space, and the joint density be <span class="math inline">\(p(x, y, z)\)</span>. We say that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>conditionally independent</strong> given <span class="math inline">\(Z\)</span> if <span class="math display">\[p(x \mid y, z)=p(x \mid z), \quad \forall x \in \mathcal{X}, y \in \mathcal{Y}, z \in \mathcal{Z}\ \text{s.t.}\ p(y, z)&gt;0,\]</span> denoted <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>.</p>
+<p><strong>Definition 1.3</strong>    Let <span class="math inline">\(X, Y, Z\)</span> be r.v.s. defined on a Cartesian product space and the joint density be <span class="math inline">\(p(x, y, z)\)</span>. We say that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>conditionally independent</strong> given <span class="math inline">\(Z\)</span> if <span class="math display">\[p(x \mid y, z)=p(x \mid z), \quad \forall x \in \mathcal{X}, y \in \mathcal{Y}, z \in \mathcal{Z}\ \text{s.t.}\ p(y, z)&gt;0,\]</span> denoted <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>.</p>
 <div class="note info">
             <p>If <span class="math inline">\(Z\)</span> is degenerate, i.e., there is some <span class="math inline">\(z\)</span> s.t. <span class="math inline">\(P(Z=z)=1\)</span>, then the definition above is the same as saying that <span class="math inline">\(X \perp\!\!\!\!\perp Y\)</span>.</p>
           </div>
 <p><strong>Example 1.1</strong>    Let <span class="math inline">\(X_1, \cdots, X_k\)</span> be a Markov chain. Then <span class="math inline">\(X_k\)</span> is independent of <span class="math inline">\(X_1, \cdots, X_{k-2}\)</span> conditional upon <span class="math inline">\(X_{k-1}\)</span>: <span class="math display">\[P(X_k=x_k \mid X_{k-1}=x_{k-1}, \cdots, X_1=x_1)=P(X_k=x_k \mid X_{k-1}=x_{k-1})\]</span> for all <span class="math inline">\(x_k, x_{k-1}, \cdots, x_1\)</span>, i.e., <span class="math inline">\(X_k \perp\!\!\!\!\perp X_1, \cdots, X_{k-2} \mid X_{k-1}\)</span>, a.k.a. <strong>Markov property</strong>, or <strong>memoryless property</strong>.</p>
+<p><span id="eg1.2"><strong>Example 1.2</strong></span>    Suppose <span class="math inline">\(\mathbf{X}_V=(X_1, \cdots, X_p)^T\)</span> is a multivariate Gaussian distribution, i.e., <span class="math display">\[f(\mathbf{x}_V; \mu, \Sigma)=\frac{1}{(2\pi)^{p/2}|\Sigma|^{p/2}}\exp\left[-\frac{1}{2}(\mathbf{x}_V-\mu)^T\Sigma^{-1}(\mathbf{x}_V-\mu)\right].\]</span> Then <span class="math display">\[X_p \mid X_1=x_1, \cdots, X_{p-1}=x_{p-1} \sim \mathcal{N}(\mu_p+\Sigma_{p, -p}\Sigma_{-p, -p}^{-1}(\mathbf{x}_{-p}-\mu_{-p}), \sigma_{pp \cdot 1 \cdots p-1}),\]</span> where <span class="math inline">\(\sigma_{aa \cdot B}=\sigma_{aa}-\Sigma_{aB}\Sigma_{BB}^{-1}\Sigma_{Ba}\)</span>, is called the <strong>Schur complement</strong> of entry <span class="math inline">\((a, a)\)</span> in <span class="math inline">\(\Sigma\)</span>.</p>
 <p><strong>Theorem 1.1</strong>    Let <span class="math inline">\(X, Y, Z\)</span> be r.v.s. defined on a Cartesian product space. The following are equivalent:</p>
 <p>    (1) <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(y, z)&gt;0\)</span>;</p>
 <p>    (2) <span class="math inline">\(p(x, y \mid z)=p(x \mid z)p(y \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>;</p>
@@ -300,7 +301,7 @@ Since <span class="math display">\[p(x \mid y, z)=\frac{p(x, y, z)}{p(y, z)}=\fr
 <span class="math inline">\(\square\)</span>
 </p>
 <div class="note info">
-            <ul><li><p><strong>Symmetry</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span> then <span class="math inline">\(X\)</span> is irrelevant to <span class="math inline">\(Y\)</span>.</p></li><li><p><strong>Decomposition</strong> means that if some information is irrelevant to <span class="math inline">\(X\)</span> then part of it is also irrelevant to <span class="math inline">\(X\)</span>.</p></li><li><p><strong>Weak union</strong> means that if <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> together are irrelevant to <span class="math inline">\(X\)</span> then learning one of them does not make the other one relevant.</p></li><li><p><strong>Contraction</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span>, and if learning <span class="math inline">\(Y\)</span> does not make <span class="math inline">\(W\)</span> relevant to <span class="math inline">\(X\)</span>, then <span class="math inline">\(W\)</span> is irrelevant to <span class="math inline">\(X\)</span>.</p></li></ul>
+            <ul><li><p><strong>Symmetry</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span> then <span class="math inline">\(X\)</span> is irrelevant to <span class="math inline">\(Y\)</span>.</p></li><li><p><strong>Decomposition</strong> means that if some information is irrelevant to <span class="math inline">\(X\)</span> then part of it is also irrelevant to <span class="math inline">\(X\)</span>.</p></li><li><p><strong>Weak union</strong> means that if <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> together are irrelevant to <span class="math inline">\(X\)</span> then learning one of them does not make the other one relevant.</p></li><li><p><strong>Contraction</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span>, and if learning <span class="math inline">\(Y\)</span> does not make <span class="math inline">\(W\)</span> relevant to <span class="math inline">\(X\)</span>, then both <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> are irrelevant to <span class="math inline">\(X\)</span>.</p></li></ul>
           </div>
 <h1 id="functional-conditional-independence">Functional Conditional Independence</h1>
 <p><strong>Remark 3.1</strong>    Since the events <span class="math inline">\(\{Y=y\}\)</span> and <span class="math inline">\(\{Y=y, h(Y)=h(y)\}\)</span> are equal for any measurable function <span class="math inline">\(h\)</span>, it follows that <span class="math display">\[p(x \mid y, z)=p(x \mid y, h(y), z).\]</span></p>
@@ -314,6 +315,44 @@ p(\theta \mid x)&amp;=\frac{p(x \mid \theta)p(\theta)}{\int_\Theta p(x \mid \phi
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
+<h1 id="关于多元高斯分布的补充">关于多元高斯分布的补充</h1>
+<p>由<a href="#eg1.2">例1.2</a>，我们对多元高斯分布进行补充.</p>
+<h2 id="条件高斯分布">条件高斯分布</h2>
+<p>假设<span class="math inline">\(\mathbf{x} \in \mathbb{R}^p\)</span>服从<span class="math inline">\(\mathcal{N}(\mu, \Sigma)\)</span>. 将<span class="math inline">\(\mathbf{x}\)</span>和对应的均值<span class="math inline">\(\mu\)</span>做如下划分：<span class="math inline">\(\mathbf{x}=\begin{bmatrix} \mathbf{x}_a \\ \mathbf{x}_b \end{bmatrix}\)</span>和<span class="math inline">\(\mu=\begin{bmatrix} \mu_a \\ \mu_b \end{bmatrix}\)</span>，其中<span class="math inline">\(\mathbf{x}_a, \mu_a \in \mathbb{R}^k\)</span>，<span class="math inline">\(\mathbf{x}_b, \mu_b \in \mathbb{R}^{p-k}\)</span>. 将协方差矩阵<span class="math inline">\(\Sigma\)</span>划分为<span class="math inline">\(\Sigma=\begin{bmatrix} \Sigma_{aa} &amp; \Sigma_{ab} \\ \Sigma_{ba} &amp; \Sigma_{bb} \end{bmatrix}\)</span>. 由<span class="math inline">\(\Sigma\)</span>的对称性易知<span class="math inline">\(\Sigma_{aa}\)</span>和<span class="math inline">\(\Sigma_{bb}\)</span>对称，且<span class="math inline">\(\Sigma_{ba}=\Sigma_{ab}^T\)</span>.</p>
+<p>定义<strong>精度矩阵</strong><span class="math inline">\(\Lambda=\Sigma^{-1}\)</span>，并将其划分为<span class="math inline">\(\begin{bmatrix} \Lambda_{aa} &amp; \Lambda_{ab} \\ \Lambda_{ba} &amp; \Lambda_{bb} \end{bmatrix}\)</span>. 由于对称矩阵的逆仍然对称，故<span class="math inline">\(\Lambda_{aa}\)</span>和<span class="math inline">\(\Lambda_{bb}\)</span>对称，且<span class="math inline">\(\Lambda_{ba}=\Lambda_{ab}^T\)</span>.</p>
+<p>注意，对于一个一般的高斯分布，其指数项可以写成<span class="math display">\[(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)=\mathbf{x}^T\Lambda\mathbf{x}-2\mathbf{x}^T\Lambda\mu+C.\]</span></p>
+<p>下面考虑条件分布<span class="math inline">\(p(\mathbf{x}_a \mid \mathbf{x}_b)\)</span>，只考虑指数项：<span class="math display">\[(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)=(\mathbf{x}_a-\mu_a)^T\Lambda_{aa}(\mathbf{x}_a-\mu_a)+2(\mathbf{x}_a-\mu_a)^T\Lambda_{ab}(\mathbf{x}_b-\mu_b)+(\mathbf{x}_b-\mu_b)^T\Lambda_{bb}(\mathbf{x}_b-\mu_b).\]</span> 由于<span class="math inline">\(\mathbf{x}_b\)</span>固定，我们可以将上式视为关于<span class="math inline">\(\mathbf{x}_a\)</span>的函数，不难看出上式仍是一个二次型，故对应的条件分布<span class="math inline">\(p(\mathbf{x}_a \mid \mathbf{x}_b)\)</span>仍是一个高斯分布. 改写可得<span class="math display">\[\begin{aligned}
+(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}\mu_a+2\mathbf{x}_a^T\Lambda_{ab}\mathbf{x}_b-2\mathbf{x}_a^T\Lambda_{ab}\mu_b+C
+\\&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a-\Lambda_{ab}(\mathbf{x}_b-\mu_b))+C
+\\&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}(\mu_a-\Lambda_{aa}^{-1}\Lambda_{ab}(\mathbf{x}_b-\mu_b))+C.
+\end{aligned}\]</span></p>
+<p>因此<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a \mid \mathbf{x}_b]=\mu_a-\Lambda_{aa}^{-1}\Lambda_{ab}(\mathbf{x}_b-\mu_b)}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a \mid \mathbf{x}_b]=\Lambda_{aa}^{-1}}\)</span>.</p>
+<p>利用分块矩阵的恒等式<span class="math display">\[\begin{bmatrix}
+A &amp; B \\ C &amp; D
+\end{bmatrix}^{-1}=\begin{bmatrix}
+M &amp; -MBD^{-1} \\
+-D^{-1}CM &amp; D^{-1}+D^{-1}CMBD^{-1}
+\end{bmatrix}\]</span>其中<span class="math display">\[M=(A-BD^{-1}C)^{-1}.\]</span> 因为<span class="math inline">\(\begin{bmatrix} \Sigma_{aa} &amp; \Sigma_{ab} \\ \Sigma_{ba} &amp; \Sigma_{bb} \end{bmatrix}^{-1}=\begin{bmatrix} \Lambda_{aa} &amp; \Lambda_{ab} \\ \Lambda_{ba} &amp; \Lambda_{bb} \end{bmatrix}\)</span>，所以<span class="math display">\[\Lambda_{aa}=(\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba})^{-1}\]</span>以及<span class="math display">\[\Lambda_{ab}=-(\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba})^{-1}\Sigma_{ab}\Sigma_{bb}^{-1}.\]</span></p>
+<p>因此<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a \mid \mathbf{x}_b]=\mu_a+\Sigma_{ab}\Sigma_{bb}^{-1}(\mathbf{x}_b-\mu_b)}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a \mid \mathbf{x}_b]=\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba}}\)</span>.</p>
+<h2 id="边缘高斯分布">边缘高斯分布</h2>
+<p>设<span class="math inline">\(p(\mathbf{x}_a, \mathbf{x}_b)\)</span>为联合高斯分布，则其边缘概率分布为<span class="math display">\[p(\mathbf{x}_a)=\int p(\mathbf{x}_a, \mathbf{x}_b)\text{d}\mathbf{x}_b\]</span>也是一个高斯分布.</p>
+<p>由于上式涉及到关于<span class="math inline">\(\mathbf{x}_b\)</span>的积分，因此<span class="math display">\[\begin{aligned}
+(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T\Lambda_{bb}\mu_b+2\mathbf{x}_b^T\Lambda_{ba}\mathbf{x}_a-2\mathbf{x}_b^T\Lambda_{ba}\mu_a+C
+\\&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))+C
+\\&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T\mathbf{m}+C
+\\&amp;=(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})^T\Lambda_{bb}(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+C.
+\end{aligned}\]</span></p>
+<p>所以，关于<span class="math inline">\(\mathbf{x}_b\)</span>的积分为<span class="math display">\[\begin{aligned}
+\int p(\mathbf{x}_a, \mathbf{x}_b)\text{d}\mathbf{x}_b &amp;\propto \int \exp\left[(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{b})^T\Lambda_{bb}(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}\right]\text{d}\mathbf{x}_b
+\\&amp;\propto \exp\left[-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}\right].
+\end{aligned}\]</span></p>
+<p>于是，边缘高斯分布中关于<span class="math inline">\(\mathbf{x}_a\)</span>的指数项为<span class="math display">\[\begin{aligned}
+&amp;\ \ \ \ \ -\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}\mu_a-2\mathbf{x}_a^T\Lambda_{ab}\mu_b
+\\&amp;=-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a+\Lambda_{ab}\mu_b)
+\\&amp;=-(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))^T\Lambda_{bb}^{-1}(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a+\Lambda_{ab}\mu_b)
+\\&amp;=\mathbf{x}_a^T(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})\mu_a+C.
+\end{aligned}\]</span></p>
+<p>因此，<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a]=\mu_a}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a]=(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})^{-1}=\Sigma_{aa}}\)</span>.</p>
 
     </div>
 
@@ -336,7 +375,10 @@ p(\theta \mid x)&amp;=\frac{p(x \mid \theta)p(\theta)}{\int_\Theta p(x \mid \phi
     <a href="/Mathematics/Matrix-method/Low_Rank_and_Compressed_Sensing" rel="prev" title="Low Rank and Compressed Sensing">
       <i class="fa fa-chevron-left"></i> Low Rank and Compressed Sensing
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/Mathematics/Numerical-linear-algebra/NLA_Linear_Algebra" rel="next" title="Linear Algebra">
+      Linear Algebra <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -395,7 +437,7 @@ p(\theta \mid x)&amp;=\frac{p(x \mid \theta)p(\theta)}{\int_\Theta p(x \mid \phi
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#definition"><span class="nav-number">1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#graphoid-axioms"><span class="nav-number">2.</span> <span class="nav-text">Graphoid Axioms</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#functional-conditional-independence"><span class="nav-number">3.</span> <span class="nav-text">Functional Conditional Independence</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#definition"><span class="nav-number">1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#graphoid-axioms"><span class="nav-number">2.</span> <span class="nav-text">Graphoid Axioms</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#functional-conditional-independence"><span class="nav-number">3.</span> <span class="nav-text">Functional Conditional Independence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%A4%9A%E5%85%83%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E7%9A%84%E8%A1%A5%E5%85%85"><span class="nav-number">4.</span> <span class="nav-text">关于多元高斯分布的补充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="nav-number">4.1.</span> <span class="nav-text">条件高斯分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%B9%E7%BC%98%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="nav-number">4.2.</span> <span class="nav-text">边缘高斯分布</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
