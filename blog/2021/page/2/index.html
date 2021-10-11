@@ -205,6 +205,46 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
+              datetime="2021-08-17T00:00:00+01:00"
+              content="2021-08-17">
+          08-17
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/Mathematics/Real-analysis/Lebesgue_Integral" itemprop="url">
+            <span itemprop="name">Lebesgue Integral</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-06-21T00:00:00+01:00"
+              content="2021-06-21">
+          06-21
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/Mathematics/Real-analysis/Measurable_Function" itemprop="url">
+            <span itemprop="name">Measurable Function</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
               datetime="2021-06-02T00:00:00+01:00"
               content="2021-06-02">
           06-02
@@ -399,28 +439,21 @@
 
 
 
+
+
 <script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  let url = element.dataset.target;
-  let pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  let fullURL = `/lib/pdf/web/viewer?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'default',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
 </script>
-
-
 
 
   

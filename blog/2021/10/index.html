@@ -205,7 +205,47 @@
 
       <div class="post-meta">
         <time itemprop="dateCreated"
-              datetime="2021-10-10T12:00:00+01:00"
+              datetime="2021-10-11T08:00:00+01:00"
+              content="2021-10-11">
+          10-11
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/Statistics/Network-analysis/Introduction_to_Network" itemprop="url">
+            <span itemprop="name">Introduction to Network</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-11T00:00:00+01:00"
+              content="2021-10-11">
+          10-11
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/Mathematics/Numerical-linear-algebra/Courant%E2%80%93Fisher_Minmax_Theorem" itemprop="url">
+            <span itemprop="name">Courant–Fisher Minmax Theorem</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2021-10-10T00:00:00+01:00"
               content="2021-10-10">
           10-10
         </time>
@@ -456,28 +496,21 @@
 
 
 
+
+
 <script>
-document.querySelectorAll('.pdfobject-container').forEach(element => {
-  let url = element.dataset.target;
-  let pdfOpenParams = {
-    navpanes : 0,
-    toolbar  : 0,
-    statusbar: 0,
-    pagemode : 'thumbs',
-    view     : 'FitH'
-  };
-  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
-  let fullURL = `/lib/pdf/web/viewer?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
-
-  if (NexT.utils.supportsPDFs()) {
-    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
-  } else {
-    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
-  }
-});
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'default',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
 </script>
-
-
 
 
   
