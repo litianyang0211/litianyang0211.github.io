@@ -28,7 +28,7 @@
 <meta property="og:description" content="A quick review of linear algebra.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-08T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-10T10:56:48.943Z">
+<meta property="article:modified_time" content="2021-10-12T20:15:40.424Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Linear algebra">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-10 11:56:48" itemprop="dateModified" datetime="2021-10-10T11:56:48+01:00">2021-10-10</time>
+                <time title="Modified: 2021-10-12 21:15:40" itemprop="dateModified" datetime="2021-10-12T21:15:40+01:00">2021-10-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -313,6 +313,13 @@ Besides <span class="math display">\[\|\mathbf{x}\|_2=\sqrt{|x_1|^2+\cdots+|x_n|
 <li><span class="math inline">\(\displaystyle \frac{1}{n}\|\mathbf{x}\|_1 \leq \|\mathbf{x}\|_\infty \leq \|\mathbf{x}\|_1\)</span>.</li>
 </ul>
 <strong><em>Proof.</em></strong> Suppose <span class="math inline">\(\displaystyle \max_i |x_i|=|x_k|\)</span>. We have <span class="math display">\[\frac{1}{n}\|\mathbf{x}\|_1=\frac{|x_1|+\cdots+|x_n|}{n} \leq \frac{n|x_k|}{n}=|x_k|=\|\mathbf{x}\|_\infty \leq |x_1|+\cdots+|x_k|+\cdots+|x_n|=\|\mathbf{x}\|_1.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li><strong>(Cauchy-Schwarz Inequality)</strong> <span class="math inline">\(|\mathbf{x}^T\mathbf{y}| \leq \|\mathbf{x}\|_2\|\mathbf{y}\|_2\)</span>.</li>
+</ul>
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(M=\begin{bmatrix} \mathbf{x}^T \\ \mathbf{y}^T \end{bmatrix}\begin{bmatrix} &amp; \\ \mathbf{x} &amp; \mathbf{y} \\ &amp; \end{bmatrix}\)</span>, we know <span class="math inline">\(M\)</span> is symmetric and positive semidefinite, i.e., <span class="math inline">\(\left|\begin{matrix} \mathbf{x}^T\mathbf{x} &amp; \mathbf{x}^T\mathbf{y} \\ \mathbf{y}^T\mathbf{x} &amp; \mathbf{y}^T\mathbf{y} \end{matrix}\right| \geq 0\)</span>. Then <span class="math inline">\(\mathbf{x}^T\mathbf{x}\mathbf{y}^T\mathbf{y}-\mathbf{x}^T\mathbf{y}\mathbf{y}^T\mathbf{x} \geq 0\)</span>, i.e., <span class="math inline">\(\|\mathbf{x}\|_2^2\|\mathbf{y}\|_2^2 \geq (\mathbf{x}^T\mathbf{y})^2\)</span>, and thus <span class="math inline">\(\|\mathbf{x}\|_2\|\mathbf{y}\|_2 \geq |\mathbf{x}^T\mathbf{y}|\)</span>.
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
@@ -401,6 +408,20 @@ Recall that the SVD of <span class="math inline">\(A\)</span> is <span class="ma
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
+<h1 id="matrix-decomposition">Matrix Decomposition</h1>
+<ul>
+<li><p><strong>Singular value decomposition (SVD)</strong>: <span class="math inline">\(A=U\Sigma V^T\)</span>.</p></li>
+<li><p><strong>Eigenvalue decomposition</strong>: <span class="math inline">\(A=X\Lambda X^{-1}\)</span>, where <span class="math inline">\(A\)</span> is square. Note that the decomposition <em>usually</em> exists.</p>
+<ul>
+<li>For normal matrix: <span class="math inline">\(X\)</span> is unitary.</li>
+<li>For symmetric matrix: <span class="math inline">\(X\)</span> is unitary and <span class="math inline">\(\Lambda\)</span> is real.</li>
+</ul></li>
+<li><p><strong>Jordan decomposition</strong>: <span class="math inline">\(A=XJX^{-1}\)</span>, where <span class="math inline">\(A\)</span> is square and <span class="math inline">\(J=\text{diag}\left(\begin{bmatrix} \lambda_i &amp; 1 \\  &amp; \lambda_i &amp; \ddots \\  &amp; &amp; \ddots &amp; 1 \\  &amp; &amp; &amp; \lambda_i \end{bmatrix}\right)\)</span></p></li>
+<li><p><strong>Schur decomposition</strong>: <span class="math inline">\(A=QTQ^*\)</span>, where <span class="math inline">\(Q\)</span> is orthogonal and <span class="math inline">\(T\)</span> is upper triangular. The eigenvalues of <span class="math inline">\(A\)</span> is <span class="math inline">\(\text{diag}(T)\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(QR\)</span> decomposition</strong>: <span class="math inline">\(A=QR\)</span>, where <span class="math inline">\(Q\)</span> is orthonormal and <span class="math inline">\(R\)</span> is upper triangular.</p></li>
+<li><p><strong><span class="math inline">\(LU\)</span> decomposition</strong>: <span class="math inline">\(A=LU\)</span>, where <span class="math inline">\(L\)</span> is lower triangular and <span class="math inline">\(U\)</span> is upper triangular.</p></li>
+<li><p><span class="math inline">\(SVD\)</span>, Schur decomposition and <span class="math inline">\(QR\)</span> decomposition are orthogonal decompositions, than stable computation is available.</p></li>
+</ul>
 
     </div>
 
@@ -485,7 +506,7 @@ Recall that the SVD of <span class="math inline">\(A\)</span> is <span class="ma
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#structured-matrix"><span class="nav-number">1.</span> <span class="nav-text">Structured Matrix</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vector-norm"><span class="nav-number">2.</span> <span class="nav-text">Vector Norm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#norm-axioms"><span class="nav-number">2.1.</span> <span class="nav-text">Norm Axioms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inequality"><span class="nav-number">2.2.</span> <span class="nav-text">Inequality</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unitarily-invariant"><span class="nav-number">2.3.</span> <span class="nav-text">Unitarily Invariant</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#matrix-norm"><span class="nav-number">3.</span> <span class="nav-text">Matrix Norm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#norm-axioms-1"><span class="nav-number">3.1.</span> <span class="nav-text">Norm Axioms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inequality-1"><span class="nav-number">3.2.</span> <span class="nav-text">Inequality</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unitarily-invariant-1"><span class="nav-number">3.3.</span> <span class="nav-text">Unitarily Invariant</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#structured-matrix"><span class="nav-number">1.</span> <span class="nav-text">Structured Matrix</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vector-norm"><span class="nav-number">2.</span> <span class="nav-text">Vector Norm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#norm-axioms"><span class="nav-number">2.1.</span> <span class="nav-text">Norm Axioms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inequality"><span class="nav-number">2.2.</span> <span class="nav-text">Inequality</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unitarily-invariant"><span class="nav-number">2.3.</span> <span class="nav-text">Unitarily Invariant</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#matrix-norm"><span class="nav-number">3.</span> <span class="nav-text">Matrix Norm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#norm-axioms-1"><span class="nav-number">3.1.</span> <span class="nav-text">Norm Axioms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inequality-1"><span class="nav-number">3.2.</span> <span class="nav-text">Inequality</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unitarily-invariant-1"><span class="nav-number">3.3.</span> <span class="nav-text">Unitarily Invariant</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#matrix-decomposition"><span class="nav-number">4.</span> <span class="nav-text">Matrix Decomposition</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

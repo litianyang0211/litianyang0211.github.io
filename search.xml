@@ -227,6 +227,43 @@ M &amp; -MBD^{-1} \\
     <url>/Mathematics/Numerical-linear-algebra/Courant%E2%80%93Fisher_Minmax_Theorem.html</url>
     <content><![CDATA[<h1 id="courantfisher-minmax-theorem">Courant–Fisher Minmax Theorem</h1>
 <p><strong>Theorem 1.1 (Courant–Fisher Minmax Theorem)</strong>    Suppose <span class="math inline">\(\mathbf{x} \neq \mathbf{0}\)</span>. The <span class="math inline">\(i\)</span>th largest eigenvalue <span class="math inline">\(\lambda_i\)</span> of a symmetric matrix <span class="math inline">\(A \in \mathbb{R}^{n \times n}\)</span> is <span class="math display">\[\lambda_i(A)=\max_{\dim \mathcal{S}=i} \min_{\mathbf{x} \in \mathcal{S}} \frac{\mathbf{x}^TA\mathbf{x}}{\mathbf{x}^T\mathbf{x}}=\min_{\dim \mathcal{S}=n-i+1} \max_{\mathbf{x} \in \mathcal{S}} \frac{\mathbf{x}^TA\mathbf{x}}{\mathbf{x}^T\mathbf{x}}.\]</span> Analogously, for any <span class="math inline">\(A \in \mathbb{C}^{m \times n}\)</span>, where <span class="math inline">\(m \geq n\)</span>, we have <span class="math display">\[\sigma_i(A)=\max_{\dim \mathcal{S}=i} \min_{\mathbf{x} \in \mathcal{S}} \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}=\min_{\dim \mathcal{S}=n-i+1} \max_{\mathbf{x} \in \mathcal{S}} \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}.\]</span></p>
+<p><strong><em>Proof.</em></strong> We show the case of <span class="math inline">\(\sigma_i(A)\)</span>. Fix an orthonormal <span class="math inline">\(n \times i\)</span> matrix <span class="math inline">\(S\)</span> and let <span class="math inline">\(V_i=\begin{bmatrix} \mathbf{v}_i &amp; \cdots &amp; \mathbf{v}_n \end{bmatrix}\)</span>, where <span class="math inline">\(\mathbf{v}_i\)</span> is the right singular vector of <span class="math inline">\(A\)</span>. We have <span class="math inline">\(\dim(\mathcal{S})+\dim(\text{Span}(V_i))=i+(n-i+1)=n+1\)</span>. Therefore, there exists an intersection <span class="math inline">\(\mathbf{w} \in S \cap V_i\)</span> s.t. <span class="math inline">\(\|\mathbf{w}\|_2=1\)</span>.</p>
+<p>For this <span class="math inline">\(\mathbf{w}\)</span>, we have <span class="math display">\[A\mathbf{w}=U\Sigma V^T\mathbf{w}=U\Sigma\begin{bmatrix}
+0 \\ \vdots \\ 0 \\ c_i \\ \vdots \\ c_n
+\end{bmatrix}\]</span> and thus <span class="math display">\[\|A\mathbf{w}\|_2=\|U\Sigma V^T\mathbf{w}\|_2=\|\Sigma V^T\mathbf{w}\|_2=\|\text{diag}(\sigma_i, \cdots, \sigma_n)V_i^T\mathbf{w}\|_2 \leq \sigma_i.\]</span> Hence, <span class="math display">\[\sigma_i(A) \geq \min_{\mathbf{x} \in \mathcal{S}}\frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}.\]</span></p>
+Taks <span class="math inline">\(S=\begin{bmatrix} \mathbf{v}_1 &amp; \cdots &amp; \mathbf{v}_i \end{bmatrix}\)</span>, where <span class="math inline">\(\mathbf{w}=\mathbf{v}_i\)</span>, then for <span class="math inline">\(\mathbf{x} \in \mathcal{S}\)</span> and <span class="math inline">\(\|\mathbf{x}\|_2=1\)</span>, <span class="math display">\[A\mathbf{x}=AS\mathbf{y}=U\Sigma V^TS\mathbf{y}=\widetilde{U}\text{diag}(\sigma_1, \cdots, \sigma_i)\widetilde{\mathbf{y}},\]</span> where <span class="math inline">\(\|\mathbf{y}\|_2=\|\widetilde{\mathbf{y}}\|_2=1\)</span>. Hence, for any <span class="math inline">\(x \in S\)</span> with <span class="math inline">\(\|\mathbf{x}\|_2=1\)</span>, <span class="math inline">\(\|A\mathbf{x}\|_2=\|\Sigma_i\widetilde{y}\|_2 \geq \sigma_i(A)\)</span>, i.e., <span class="math display">\[\min_{\mathbf{x} \in \mathcal{S}} \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2} \geq \sigma_i(A).\]</span> Therefore, <span class="math display">\[\min_{\mathbf{x} \in \mathcal{S}} \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}=\sigma_i(A).\]</span> Since we fix an arbitrary subspace <span class="math inline">\(S\)</span> with <span class="math inline">\(\dim \mathcal{S}=i\)</span>, then we have <span class="math display">\[\sigma_i(A)=\max_{\dim \mathcal{S}=i} \min_{\mathbf{x} \in \mathcal{S}} \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="weyls-inequality">Weyl's Inequality</h1>
+<p><strong>Theorem 2.1 (Weyl's Inequality)</strong>    For singular values of any matrix <span class="math inline">\(A\)</span>, <span class="math display">\[\sigma_i(A+E) \in \sigma_i(A)+[-\|E\|_2, \|E\|_2], \forall i=1, \cdots, n,\]</span> and <span class="math display">\[\|A\|_2-\|E\|_2 \leq \|A+E\|_2 \leq \|A\|_2+\|E\|_2.\]</span> For eigenvalues of symmetric matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(E\)</span>, <span class="math display">\[\lambda_i(A+E) \in \lambda_i(A)+[-\|E\|_2, \|E\|_2].\]</span></p>
+<p><strong><em>Proof.</em></strong> For all <span class="math inline">\(i=1, \cdots, n\)</span>, <span class="math display">\[\begin{aligned}
+\sigma_i(A+E)&amp;=\max_{\dim \mathcal{S}=i} \min_{\substack{\mathbf{x} \in \mathcal{S} \\ \|\mathbf{x}\|_2=1}} \|(A+E)\mathbf{x}\|_2
+\\&amp;=\max_{\dim \mathcal{S}=i} \min_{\substack{\mathbf{x} \in \mathcal{S} \\ \|\mathbf{x}\|_2=1}} \|A\mathbf{x}+E\mathbf{x}\|_2
+\\&amp;\leq \max_{\dim \mathcal{S}=i} \min_{\substack{\mathbf{x} \in \mathcal{S} \\ \|\mathbf{x}\|_2=1}} (\|A\mathbf{x}\|_2+\|E\mathbf{x}\|_2)
+\\&amp;\leq \max_{\dim \mathcal{S}=i} \min_{\substack{\mathbf{x} \in \mathcal{S} \\ \|\mathbf{x}\|_2=1}} \|A\mathbf{x}\|_2+\|E\|_2
+\\&amp;=\sigma_i(A)+\|E\|_2.
+\end{aligned}\]</span> Besides, we have <span class="math inline">\(\sigma_i(A)=\sigma_i(A+E+(-E)) \leq \sigma_i(A+E)+\|-E\|_2,\)</span> then <span class="math inline">\(\sigma_i(A+E) \geq \sigma_i(A)-\|E\|_2\)</span>. Therefore, <span class="math inline">\(\sigma_i(A+E) \in \sigma_i(A)+[-\|E\|_2, \|E\|_2]\)</span>.</p>
+Let <span class="math inline">\(i=1\)</span>, then it is obvious that <span class="math inline">\(\|A\|_2-\|E\|_2 \leq \|A+E\|_2 \leq \|A\|_2+\|E\|_2\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note info">
+            <p>Singular values and symmetric eigenvalues are insensitive to perturbation (i.e., <strong>well-conditioned</strong>). Non-symmetric eigenvalues are different.</p>
+          </div>
+<h2 id="eigenvalues-of-non-symmetric-matrix">Eigenvalues of Non-symmetric Matrix</h2>
+<p><strong>Example 2.1</strong>    Consider eigenvalues of a Jordan block and its perturbation <span class="math display">\[J=\begin{bmatrix}
+1 &amp; 1 \\
+ &amp; 1 &amp; \ddots \\
+ &amp; &amp; \ddots &amp; 1 \\
+ &amp; &amp; &amp; 1
+\end{bmatrix} \in \mathbb{R}^{n \times n}\]</span> and <span class="math display">\[J+E=\begin{bmatrix}
+1 &amp; 1 \\
+ &amp; 1 &amp; \ddots \\
+ &amp; &amp; \ddots &amp; 1 \\
+ \varepsilon &amp; &amp; &amp; 1
+\end{bmatrix}.\]</span></p>
+<p><span class="math inline">\(\lambda(J)=1\)</span>, but <span class="math inline">\(|\lambda(J+E)-1| \approx \varepsilon^{1/n}\)</span>. Hence, the eigenvalues are <strong>ill-conditioned</strong>.</p>
 ]]></content>
       <categories>
         <category>Mathematics</category>
@@ -616,6 +653,186 @@ d(i), &amp;i=j \\
       </tags>
   </entry>
   <entry>
+    <title>Linear Algebra</title>
+    <url>/Mathematics/Matrix-method/Linear_Algebra.html</url>
+    <content><![CDATA[<h1 id="column-space">Column Space</h1>
+<ul>
+<li><span class="math inline">\(A\mathbf{x}\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, and the combinations of the columns fill out the <strong>column space</strong> of <span class="math inline">\(A\)</span>.</li>
+</ul>
+<p><strong>Example 1.1</strong>    Consider <span class="math inline">\(\begin{bmatrix} 2 &amp; 3 \\ 2 &amp; 4 \\ 3 &amp; 7 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}=x_1\begin{bmatrix} 2 \\ 2 \\ 3 \end{bmatrix}+x_2\begin{bmatrix} 3 \\ 4 \\ 7 \end{bmatrix}\)</span>. The column space is a plane.</p>
+<ul>
+<li><p>A <strong>basis</strong> for a subspace is a full set of independent vectors, and all vectors in the space are combinations of the basis vectors.</p></li>
+<li><p>The <strong>rank</strong> of a matrix <span class="math inline">\(r\)</span> is the dimension of its column space.</p></li>
+</ul>
+<p><strong>Example 1.2</strong>    If <span class="math inline">\(A=\begin{bmatrix} 1 &amp; 3 &amp; 8 \\ 1 &amp; 2 &amp; 6 \\ 0 &amp; 1 &amp; 2 \end{bmatrix}\)</span>, then the <em>matrix of all independent columns</em> is <span class="math inline">\(C=\begin{bmatrix} 1 &amp; 3 \\ 1 &amp; 2 \\ 0 &amp; 1 \end{bmatrix}\)</span>.</p>
+<ul>
+<li>Suppose <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span>, one of the <em>factorization</em>s of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=CR\)</span>, whose shape is <span class="math display">\[(m \times n)=(m \times r)(r \times n).\]</span> <span class="math inline">\(R\)</span> is the <strong>row-reduced echelon form</strong> of <span class="math inline">\(A\)</span> (without zero rows), denoted <span class="math inline">\(\text{rref}(A)\)</span>.</li>
+</ul>
+<p><strong>Example 1.3</strong>    <span class="math inline">\(A=\begin{bmatrix} 1 &amp; 3 &amp; 8 \\ 1 &amp; 2 &amp; 6 \\ 0 &amp; 1 &amp; 2 \end{bmatrix}=\begin{bmatrix} 1 &amp; 3 \\ 1 &amp; 2 \\ 0 &amp; 1 \end{bmatrix}\begin{bmatrix} 1 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \end{bmatrix}=CR\)</span>.</p>
+<ul>
+<li>The number of independent columns equals the number of independent rows. The column space and row space of <span class="math inline">\(A\)</span> both have dimension <span class="math inline">\(r\)</span>, with <span class="math inline">\(r\)</span> basis vectors - columns of <span class="math inline">\(C\)</span> and rows of <span class="math inline">\(R\)</span>.</li>
+</ul>
+<h1 id="factorization-of-matrix">Factorization of Matrix</h1>
+<ul>
+<li><p><span class="math inline">\(A=LU\)</span> comes from <strong>elimination</strong>, where <span class="math inline">\(L\)</span> is lower triangular, and <span class="math inline">\(U\)</span> is upper triangular.</p></li>
+<li><p><span class="math inline">\(A=QR\)</span> comes from <strong>orthogonalizing</strong> the columns <span class="math inline">\(\mathbf{a}_1\)</span> to <span class="math inline">\(\mathbf{a}_n\)</span> as in <strong>Gram-Schmidt</strong>, where <span class="math inline">\(Q\)</span> has orthonormal columns (i.e., <span class="math inline">\(Q^TQ=I\)</span>), and <span class="math inline">\(R\)</span> is upper triangular.</p></li>
+<li><p><span class="math inline">\(S=Q \Lambda Q^T\)</span> comes from the <strong>eigenvalues</strong> <span class="math inline">\(\lambda_1, \cdots, \lambda_n\)</span> of a symmetric matrix, where eigenvalues are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and orthonormal eigenvectors are in the columns of <span class="math inline">\(Q\)</span>.</p></li>
+<li><p><span class="math inline">\(A=X \Lambda X^{-1}\)</span> is <strong>diagonalization</strong> when <span class="math inline">\(A\)</span> is <span class="math inline">\(n \times n\)</span> with <span class="math inline">\(n\)</span> independent eigenvectors, where eigenvalues of <span class="math inline">\(A\)</span> are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and eigenvectors of <span class="math inline">\(A\)</span> are in the columns of <span class="math inline">\(X\)</span>.</p></li>
+<li><p><span class="math inline">\(A=U \Sigma V^T\)</span> is the <strong>singular value decomposition (SVD)</strong> of any matrix <span class="math inline">\(A\)</span>, where singular values <span class="math inline">\(\sigma_1, \cdots, \sigma_r\)</span> are in <span class="math inline">\(\Sigma\)</span>, and orthonormal singular vectors are in <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>.</p></li>
+</ul>
+<h1 id="fundamental-subspace">Fundamental Subspace</h1>
+<p>Suppose <span class="math inline">\(A\)</span> is an <span class="math inline">\(m \times n\)</span> matrix with rank <span class="math inline">\(r\)</span>.</p>
+<ul>
+<li><p>The <strong>column space</strong> <span class="math inline">\(C(A)\)</span> contains all combinations of the columns of <span class="math inline">\(A\)</span>.</p></li>
+<li><p>The <strong>row space</strong> <span class="math inline">\(C(A^T)\)</span> contains all combinations of the columns of <span class="math inline">\(A^T\)</span>.</p></li>
+<li><p>The <strong>null space</strong> <span class="math inline">\(N(A)\)</span> contains all solutions <span class="math inline">\(\mathbf{x}\)</span> to <span class="math inline">\(A\mathbf{x}=\mathbf{0}\)</span>.</p></li>
+<li><p>The <strong>left null space</strong> <span class="math inline">\(N(A^T)\)</span> contains all solutions <span class="math inline">\(\mathbf{y}\)</span> to <span class="math inline">\(A^T\mathbf{y}=\mathbf{0}\)</span>.</p></li>
+</ul>
+<h1 id="orthonormal-matrix">Orthonormal Matrix</h1>
+<ul>
+<li><p>If <span class="math inline">\(Q\)</span> is a matrix with <strong>orthonormal columns</strong>, then <span class="math inline">\(Q^TQ=I\)</span>.</p></li>
+<li><p><strong>Orthogonal matrix</strong> is square with orthonormal columns: <span class="math inline">\(Q^T=Q^{-1}\)</span>, and <span class="math inline">\(Q^TQ=QQ^T=I\)</span>.</p></li>
+</ul>
+<p><strong>Example 4.1</strong>    Rotation through an angle <span class="math inline">\(\theta\)</span>: <span class="math inline">\(Q=\begin{bmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{bmatrix}\)</span>.</p>
+<p><strong>Example 4.2</strong>    Reflection across the <span class="math inline">\(\displaystyle \frac{\theta}{2}\)</span> line: <span class="math inline">\(Q=\begin{bmatrix} \cos\theta &amp; \sin\theta \\ \sin\theta &amp; -\cos\theta \end{bmatrix}\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\|Q\mathbf{x}\|^2=\|\mathbf{x}\|^2\)</span>.</li>
+</ul>
+<strong><em>Proof.</em></strong> We have <span class="math display">\[(Q\mathbf{x})^T(Q\mathbf{x})=\mathbf{x}^TQ^TQ\mathbf{x}=\mathbf{x}^TI\mathbf{x}=\mathbf{x}^T\mathbf{x}.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h2 id="householder-reflection">Householder Reflection</h2>
+<ul>
+<li><p>Householder matrix: <span class="math inline">\(H=I-2\mathbf{u}\mathbf{u}^T\)</span>, where <span class="math inline">\(\mathbf{u}^T\mathbf{u}=1\)</span>.</p></li>
+<li><p><span class="math inline">\(H\)</span> is orthogonal matrix.</p></li>
+</ul>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(H\)</span> is symmetric, then <span class="math display">\[H^TH=H^2=(I-2\mathbf{u}\mathbf{u}^T)(I-2\mathbf{u}\mathbf{u}^T)=I-4\mathbf{u}\mathbf{u}^T+4\mathbf{u}\mathbf{u}^T\mathbf{u}\mathbf{u}^T=I.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="eigenvalue-and-eigenvector">Eigenvalue and Eigenvector</h1>
+<ul>
+<li>The <strong>eigenvector</strong> <span class="math inline">\(\mathbf{x}\)</span> of <span class="math inline">\(A\)</span> does not change direction when multiplying <span class="math inline">\(\mathbf{x}\)</span> by <span class="math inline">\(A\)</span>, i.e., <span class="math inline">\(A\mathbf{x}=\lambda\mathbf{x}\)</span>.</li>
+</ul>
+<div class="note warning">
+            <p><span class="math inline">\(\lambda(A+B) \not\equiv \lambda(A)+\lambda(B)\)</span> and <span class="math inline">\(\lambda(AB) \not\equiv \lambda(A)\lambda(B)\)</span>.</p>
+          </div>
+<ul>
+<li><p>The sum of eigenvalues of a square <span class="math inline">\(A\)</span> equals the <strong>trace</strong> (the diagonal sum) of <span class="math inline">\(A\)</span>.</p></li>
+<li><p>The product of eigenvalues of a square <span class="math inline">\(A\)</span> equals the determinant of <span class="math inline">\(A\)</span>.</p></li>
+</ul>
+<h2 id="similar-matrix">Similar Matrix</h2>
+<ul>
+<li><p>Two <span class="math inline">\(n \times n\)</span> matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>similar</strong> if there exists an invertible <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(B=P^{-1}AP\)</span>. <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have same eigenvalues: <span class="math display">\[B\mathbf{y}=P^{-1}AP\mathbf{y}=\lambda\mathbf{y} \Rightarrow A(P\mathbf{y})=\lambda (P\mathbf{y}).\]</span></p></li>
+<li><p>Suppose <span class="math inline">\(A\)</span> has eigenvalues <span class="math inline">\(\lambda_1, \cdots, \lambda_n\)</span> with corresponding eigenvectors <span class="math inline">\(\mathbf{x}_1, \cdots, \mathbf{x}_n\)</span>. <span class="math inline">\(A=X\Lambda X^{-1}\)</span>, where eigenvalues of <span class="math inline">\(A\)</span> are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and eigenvectors of <span class="math inline">\(A\)</span> are in the columns of <span class="math inline">\(X\)</span>, i.e., <span class="math inline">\(A\)</span> is similar to <span class="math inline">\(\Lambda\)</span>.</p></li>
+</ul>
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(X=\begin{bmatrix} &amp; \\ \mathbf{x}_1 &amp; \cdots &amp; \mathbf{x}_n \\ &amp; \end{bmatrix}\)</span>. We have <span class="math display">\[AX=\begin{bmatrix}
+&amp; \\ A\mathbf{x}_1 &amp; \cdots &amp; A\mathbf{x}_n \\ &amp;
+\end{bmatrix}=\begin{bmatrix}
+&amp; \\ \lambda_1\mathbf{x}_1 &amp; \cdots &amp; \lambda_n\mathbf{x}_n \\ &amp;
+\end{bmatrix}\]</span> and <span class="math display">\[X\Lambda=\begin{bmatrix}
+&amp; \\ \lambda_1\mathbf{x}_1 &amp; \cdots &amp; \lambda_n\mathbf{x}_n \\ &amp;
+\end{bmatrix},\]</span> i.e., <span class="math inline">\(AX=X\Lambda\)</span>, and thus <span class="math inline">\(A=X\Lambda X^{-1}\)</span>. Hence, <span class="math inline">\(X^{-1}AX=\Lambda\)</span>, i.e., <span class="math inline">\(A\)</span> is similar to <span class="math inline">\(\Lambda\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="symmetric-postive-definite-matrix">Symmetric Postive Definite Matrix</h1>
+<ul>
+<li><p>All eigenvalues of a symmetric matrix <span class="math inline">\(S\)</span> are real numbers.</p></li>
+<li><p>The eigenvectors of <span class="math inline">\(S\)</span> can be chosen orthogonal.</p></li>
+<li><p><strong>(Spectral Theorem)</strong> Every real symmetric matrix has the form <span class="math inline">\(S=Q\Lambda Q^T\)</span>, where eigenvalues are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and orthonormal eigenvectors are in the columns of <span class="math inline">\(Q\)</span>.</p></li>
+<li><p>Suppose <span class="math inline">\(S\)</span> is a real symmetric matrix. <span class="math inline">\(S\)</span> is a positive definite matrix if and only if one of the following statements holds:</p></li>
+</ul>
+<p>         1. All eigenvalues of <span class="math inline">\(S\)</span> are positive;</p>
+<p>         2. The <strong>energy</strong> <span class="math inline">\(\mathbf{x}^TS\mathbf{x}\)</span> is positive for all <span class="math inline">\(\mathbf{x} \neq \mathbf{0}\)</span>;</p>
+<p>         3. <span class="math inline">\(S=A^TA\)</span> for a matrix <span class="math inline">\(A\)</span> with independent columns;</p>
+<p>         4. All the leading determinants of <span class="math inline">\(S\)</span> are positive;</p>
+<p>         5. All the pivots of <span class="math inline">\(S\)</span> are positive.</p>
+<div class="note info">
+            <p>The <span class="math inline">\(k\)</span>th pivot is the ratio <span class="math inline">\(\displaystyle \frac{D_k}{D_{k-1}}\)</span> of the leading determinants (sizes <span class="math inline">\(k\)</span> and <span class="math inline">\(k-1\)</span>).</p>
+          </div>
+<p><span id="7"></span></p>
+<h1 id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h1>
+<ul>
+<li>The <strong>singular value decomposition</strong> of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=U\Sigma V^T\)</span>, where <span class="math inline">\(U\)</span> contains orthonormal eigenvectors of <span class="math inline">\(AA^T\)</span>, <span class="math inline">\(\Sigma\)</span> contains singular values <span class="math inline">\(\sigma_1, \cdots, \sigma_r\)</span>, and <span class="math inline">\(V\)</span> contains orthonormal eigenvectors of <span class="math inline">\(A^TA\)</span>. Note that <span class="math inline">\(\sigma_1^2 \geq \cdots \geq \sigma_r^2\)</span> are the nonzero eigenvalues of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> for <span class="math inline">\(r\)</span> is the rank of <span class="math inline">\(A\)</span>.</li>
+</ul>
+<p><strong>Example 7.1</strong>    Find an SVD of <span class="math inline">\(A=\begin{bmatrix} 3 &amp; 0 \\ 4 &amp; 5 \end{bmatrix}\)</span>.</p>
+<p><strong><em>Solution.</em></strong> We have <span class="math inline">\(AA^T=\begin{bmatrix} 9 &amp; 12 \\ 12 &amp; 41 \end{bmatrix}\)</span> and <span class="math inline">\(A^TA=\begin{bmatrix} 25 &amp; 20 \\ 20 &amp; 25 \end{bmatrix}\)</span>. The nonzero eigenvalues of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> are <span class="math inline">\(\lambda_1=45\)</span> and <span class="math inline">\(\lambda_2=5\)</span>. The eigenvectors of <span class="math inline">\(AA^T\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 3 \end{bmatrix}\)</span> and <span class="math inline">\(\begin{bmatrix} -3 \\ 1 \end{bmatrix}\)</span>. The eigenvectors of <span class="math inline">\(A^TA\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span> and <span class="math inline">\(\begin{bmatrix} -1 \\ 1 \end{bmatrix}\)</span>. Therefore, <span class="math inline">\(\displaystyle U=\frac{1}{\sqrt{10}}\begin{bmatrix} 1 &amp; -3 \\ 3 &amp; 1 \end{bmatrix}\)</span> and <span class="math inline">\(\displaystyle V=\frac{1}{\sqrt{2}}\begin{bmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{bmatrix}\)</span>, and <span class="math inline">\(\Sigma=\begin{bmatrix} \sqrt{45} &amp; 0 \\ 0 &amp; \sqrt{5} \end{bmatrix}\)</span>.</p>
+<p><strong>Example 7.2</strong>    Find an SVD of <span class="math inline">\(A=\begin{bmatrix} 1 &amp; 1 \\ 1 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}\)</span>.</p>
+<p><strong><em>Solution.</em></strong> We have <span class="math inline">\(AA^T=\begin{bmatrix} 2 &amp; 2 &amp; 0 \\ 2 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{bmatrix}\)</span> and <span class="math inline">\(A^TA=\begin{bmatrix} 2 &amp; 2 \\ 2 &amp; 2 \end{bmatrix}\)</span>. The nonzero eigenvalue of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> is <span class="math inline">\(\lambda_1=4\)</span>. The eigenvectors of <span class="math inline">\(AA^T\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}\)</span>, <span class="math inline">\(\begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}\)</span>, and <span class="math inline">\(\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}\)</span>. The eigenvectors of <span class="math inline">\(A^TA\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span> and <span class="math inline">\(\begin{bmatrix} -1 \\ 1 \end{bmatrix}\)</span>. Therefore, <span class="math inline">\(U=\begin{bmatrix} 1/\sqrt{2} &amp; -1/\sqrt{2} &amp; 0 \\ 1/\sqrt{2} &amp; 1/\sqrt{2} &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}\)</span> and <span class="math inline">\(V=\displaystyle \frac{1}{\sqrt{2}}\begin{bmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{bmatrix}\)</span>, and <span class="math inline">\(\Sigma=\begin{bmatrix} 2 &amp; 0 \\ 0 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span>.</p>
+<ul>
+<li>The pieces of the SVD: <span class="math inline">\(A=U\Sigma V^T=\sigma_1\mathbf{u}_1\mathbf{v}_1^T+\cdots+\sigma_r\mathbf{u}_r\mathbf{v}_r^T\)</span>.</li>
+</ul>
+<h1 id="norm-of-vector-and-matrix">Norm of Vector and Matrix</h1>
+<h2 id="vector-norm">Vector Norm</h2>
+<p>Suppose <span class="math inline">\(\mathbf{v} \in \mathbb{C}^n\)</span>.</p>
+<ul>
+<li><p><strong><span class="math inline">\(\mathscr{l}^2\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_2=\sqrt{|v_1|^2+\cdots+|v_n|^2}\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(\mathscr{l}^1\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_1=|v_1|+\cdots+|v_n|\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(\mathscr{l}^\infty\)</span> norm</strong>: <span class="math inline">\(\max |v_i|\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(\mathscr{l}^p\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_p=(|v_1|^p+\cdots+|v_n|^p)^{1/p}\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(S\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_S=\sqrt{\mathbf{v}^TS\mathbf{v}}\)</span> for any symmetric positive definite matrix <span class="math inline">\(S\)</span>.</p></li>
+</ul>
+<h2 id="matrix-norm">Matrix Norm</h2>
+<ul>
+<li><p><strong><span class="math inline">\(\mathscr{l}^2\)</span> norm</strong> or <strong>Spectral norm</strong>: <span class="math display">\[\begin{aligned}
+\|A\|_2&amp;=\max \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}=\max\frac{\sqrt{\mathbf{x}^T(A^TA)\mathbf{x}}}{\sqrt{\mathbf{x}^T\mathbf{x}}}=\max\sqrt{\frac{\lambda_1c_1^2+\cdots+\lambda_rc_r^2}{c_1^2+\cdots+c_r^2}}
+\\&amp;=\sqrt{\lambda_1}=\sigma_1,
+\end{aligned}\]</span> where <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_r\)</span>, i.e., the largest singular value of <span class="math inline">\(A\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(\mathscr{l}^1\)</span> norm</strong>: <span class="math inline">\(\|A\|_1\)</span> is the largest <span class="math inline">\(\mathscr{l}^1\)</span> norm of the columns of <span class="math inline">\(A\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(\mathscr{l}^\infty\)</span> norm</strong>: <span class="math inline">\(\|A\|_1\)</span> is the largest <span class="math inline">\(\mathscr{l}^1\)</span> norm of the rows of <span class="math inline">\(A\)</span>.</p></li>
+<li><p><strong>Frobenius norm</strong>: <span class="math inline">\(\|A\|_F=\sqrt{|a_{11}|^2+\cdots+|a_{1n}|^2+\cdots+|a_{mn}|^2}=\sqrt{\sigma_1^2+\cdots+\sigma_r^2}\)</span>.</p></li>
+<li><p><strong>Nuclear norm</strong>: <span class="math inline">\(\|A\|_N=\sigma_1+\cdots+\sigma_r\)</span>.</p></li>
+<li><p>For any orthogonal matrix <span class="math inline">\(Q\)</span>, we have <span class="math inline">\(\|Q\|_2=1\)</span>, <span class="math inline">\(\|Q\|_F=\sqrt{n}\)</span>, and <span class="math inline">\(\|Q\|_N=n\)</span>. The spectral, Frobenius and nuclear norms of any matrix stay the same when <span class="math inline">\(A\)</span> is multiplies (on either side) by an orthogonal matrix.</p></li>
+</ul>
+<h1 id="principal-component-analysis-pca">Principal Component Analysis (PCA)</h1>
+<ul>
+<li><strong>(Eckart-Young Theorem)</strong> If <span class="math inline">\(B\)</span> has rank <span class="math inline">\(k\)</span>, then <span class="math display">\[\|A-B\| \geq \|A-A_k\|,\]</span> where <span class="math inline">\(A_k=U_k\Sigma_kV_k^T=\sigma_1\mathbf{u}_1\mathbf{v}_1^T+\cdots+\sigma_k\mathbf{u}_k\mathbf{v}_k^T\)</span> with <span class="math inline">\(\text{rank}(A_k)=k\)</span>.</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Mathematics</category>
+        <category>Matrix method</category>
+      </categories>
+      <tags>
+        <tag>SVD</tag>
+        <tag>Linear algebra</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Low-Rank Approximation via Truncated SVD</title>
+    <url>/Mathematics/Numerical-linear-algebra/Low-Rank_Approximation_via_Truncated_SVD.html</url>
+    <content><![CDATA[<h1 id="low-rank-approximation">Low-Rank Approximation</h1>
+<p>Given <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span>, we want to find <span class="math inline">\(A_r\)</span> s.t. <span class="math display">\[A \approx A_r=U_r\Sigma_rV_r^T.\]</span></p>
+<ul>
+<li><p>Low-rank approximation is beneficial in terms of the <strong>storage cost</strong> when <span class="math inline">\(r \ll \min(m, n)\)</span>. Instead of storing <span class="math inline">\(mn\)</span> entries for <span class="math inline">\(A\)</span>, we can store <span class="math inline">\((m+n+1)r\)</span> entries to keep the low-rank factorization without losing information.</p></li>
+<li><p>Low-rank approximation can bring <strong>computational</strong> benefits. In order to compute <span class="math inline">\(A\mathbf{x}\)</span>, by noting that <span class="math inline">\(A_r\mathbf{x}=U_r(\Sigma_r(V_r^T\mathbf{x}))\)</span>, we need only <span class="math inline">\(O((m+n)r)\)</span> operations instead of <span class="math inline">\(O(mn)\)</span>.</p></li>
+</ul>
+<h1 id="optimal-low-rank-approximation-by-svd">Optimal Low-Rank Approximation by SVD</h1>
+<p><strong>Theorem 2.1</strong>    For any <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> with singular values <span class="math inline">\(\sigma_1(A) \geq \cdots \geq \sigma_n(A) \geq 0\)</span>, and any non-negatvie integer <span class="math inline">\(r&lt;\min(m, n)\)</span>, <span class="math display">\[\|A-A_r\|_2=\sigma_{r+1}(A)=\min_{\text{rank}(B) \leq r} \|A-B\|_2,\]</span> where <span class="math inline">\(A_r=U_r\Sigma_rV_r^T\)</span> and <span class="math inline">\(\Sigma_r=\text{diag}(\sigma_1, \cdots, \sigma_r)\)</span>.</p>
+<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(\text{rank}(B) \leq r\)</span>, we can write <span class="math inline">\(B=B_1B_2^T\)</span> where <span class="math inline">\(B_1\)</span> and <span class="math inline">\(B_2\)</span> have <span class="math inline">\(r\)</span> columns. It follows that <span class="math inline">\(B_2^T\)</span> has a null space of dimension at least <span class="math inline">\(n-r\)</span>, and we can find an orthonormal matrix <span class="math inline">\(W \in \mathbb{C}^{n \times (n-r)}\)</span> s.t. <span class="math inline">\(B_2^TW=0\)</span>, i.e., <span class="math inline">\(BW=0\)</span>. Then <span class="math display">\[\|A-B\|_2=\|A-B\|_2\|W\|_2 \geq \|(A-B)W\|_2=\|AW\|_2=\|U\Sigma(V^*W)\|_2.\]</span></p>
+<p>Now since <span class="math inline">\(W\)</span> is <span class="math inline">\(n-r\)</span> dimensional, there is an intersection between <span class="math inline">\(W\)</span> and <span class="math inline">\(\begin{bmatrix} \mathbf{v} &amp; \cdots &amp; \mathbf{v}_{r+1} \end{bmatrix}\)</span>.</p>
+<center>
+<strong><em>Not done. To be continued...</em></strong>
+</center>
+<div class="note info">
+            <ul><li><p>Good approximation <span class="math inline">\(A \approx A_r\)</span> is obtained iff <span class="math inline">\(\sigma_{r+1} \ll \sigma_1\)</span>.</p></li><li><p>Optimality holds for any unitarily invariant norm.</p></li><li><p>A prominent application of low-rank approximation is <strong>principle component analysis (PCA)</strong> in data science.</p></li><li><p>Many matrices have explicit or hidden low-rank structure.</p></li></ul>
+          </div>
+<h1 id="application-image-compression">Application: Image Compression</h1>
+<p>A classical and visually pleasing illustration of low-rank approximation by the truncated SVD is image compression. (Note that this is slightly <em>outdated</em>). The idea is that greyscale images can be represented by a matrix where each entry indicates the intensity of a pixel. The matrix can be compressed by finding a low-rank approximation, resulting in image compression.</p>
+<p>We give a code example and <a href="https://github.com/litianyang0211/OxfordNotes/blob/main/Numerical%20Linear%20Algebra/Image%20Compression%20with%20SVD.ipynb"><strong><em>HERE</em></strong></a> is the full demo.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Packages.</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load an image, and convert it to black and white.</span></span><br><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&quot;Oxford.png&quot;</span>)</span><br><span class="line">imggray = img.convert(<span class="string">&quot;LA&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Convert the image data into a numpy matrix.</span></span><br><span class="line">imgmat = np.array(<span class="built_in">list</span>(imggray.getdata(band=<span class="number">0</span>)), <span class="built_in">float</span>)</span><br><span class="line">imgmat.shape = (imggray.size[<span class="number">1</span>], imggray.size[<span class="number">0</span>])</span><br><span class="line">imgmat = np.matrix(imgmat)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute the SVD.</span></span><br><span class="line">U, sigma, V = np.linalg.svd(imgmat)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Truncated SVD.</span></span><br><span class="line">trun_img_r50 = np.matrix(U[:, :<span class="number">50</span>]) * np.diag(sigma[:<span class="number">50</span>]) * np.matrix(V[:<span class="number">50</span>, :])</span><br><span class="line">plt.imshow(trun_img_r50, cmap=<span class="string">&quot;gray&quot;</span>)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Mathematics</category>
+        <category>Numerical linear algebra</category>
+      </categories>
+      <tags>
+        <tag>SVD</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Lebesgue Integral</title>
     <url>/Mathematics/Real-analysis/Lebesgue_Integral.html</url>
     <content><![CDATA[<h1 id="lebesgue-integral-of-non-negative-simple-function">Lebesgue Integral of Non-negative Simple Function</h1>
@@ -902,186 +1119,6 @@ In addition, if <span class="math inline">\(\displaystyle \int_a^\infty f(x)\tex
       <tags>
         <tag>Integral</tag>
         <tag>Measure</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linear Algebra</title>
-    <url>/Mathematics/Matrix-method/Linear_Algebra.html</url>
-    <content><![CDATA[<h1 id="column-space">Column Space</h1>
-<ul>
-<li><span class="math inline">\(A\mathbf{x}\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, and the combinations of the columns fill out the <strong>column space</strong> of <span class="math inline">\(A\)</span>.</li>
-</ul>
-<p><strong>Example 1.1</strong>    Consider <span class="math inline">\(\begin{bmatrix} 2 &amp; 3 \\ 2 &amp; 4 \\ 3 &amp; 7 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}=x_1\begin{bmatrix} 2 \\ 2 \\ 3 \end{bmatrix}+x_2\begin{bmatrix} 3 \\ 4 \\ 7 \end{bmatrix}\)</span>. The column space is a plane.</p>
-<ul>
-<li><p>A <strong>basis</strong> for a subspace is a full set of independent vectors, and all vectors in the space are combinations of the basis vectors.</p></li>
-<li><p>The <strong>rank</strong> of a matrix <span class="math inline">\(r\)</span> is the dimension of its column space.</p></li>
-</ul>
-<p><strong>Example 1.2</strong>    If <span class="math inline">\(A=\begin{bmatrix} 1 &amp; 3 &amp; 8 \\ 1 &amp; 2 &amp; 6 \\ 0 &amp; 1 &amp; 2 \end{bmatrix}\)</span>, then the <em>matrix of all independent columns</em> is <span class="math inline">\(C=\begin{bmatrix} 1 &amp; 3 \\ 1 &amp; 2 \\ 0 &amp; 1 \end{bmatrix}\)</span>.</p>
-<ul>
-<li>Suppose <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span>, one of the <em>factorization</em>s of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=CR\)</span>, whose shape is <span class="math display">\[(m \times n)=(m \times r)(r \times n).\]</span> <span class="math inline">\(R\)</span> is the <strong>row-reduced echelon form</strong> of <span class="math inline">\(A\)</span> (without zero rows), denoted <span class="math inline">\(\text{rref}(A)\)</span>.</li>
-</ul>
-<p><strong>Example 1.3</strong>    <span class="math inline">\(A=\begin{bmatrix} 1 &amp; 3 &amp; 8 \\ 1 &amp; 2 &amp; 6 \\ 0 &amp; 1 &amp; 2 \end{bmatrix}=\begin{bmatrix} 1 &amp; 3 \\ 1 &amp; 2 \\ 0 &amp; 1 \end{bmatrix}\begin{bmatrix} 1 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \end{bmatrix}=CR\)</span>.</p>
-<ul>
-<li>The number of independent columns equals the number of independent rows. The column space and row space of <span class="math inline">\(A\)</span> both have dimension <span class="math inline">\(r\)</span>, with <span class="math inline">\(r\)</span> basis vectors - columns of <span class="math inline">\(C\)</span> and rows of <span class="math inline">\(R\)</span>.</li>
-</ul>
-<h1 id="factorization-of-matrix">Factorization of Matrix</h1>
-<ul>
-<li><p><span class="math inline">\(A=LU\)</span> comes from <strong>elimination</strong>, where <span class="math inline">\(L\)</span> is lower triangular, and <span class="math inline">\(U\)</span> is upper triangular.</p></li>
-<li><p><span class="math inline">\(A=QR\)</span> comes from <strong>orthogonalizing</strong> the columns <span class="math inline">\(\mathbf{a}_1\)</span> to <span class="math inline">\(\mathbf{a}_n\)</span> as in <strong>Gram-Schmidt</strong>, where <span class="math inline">\(Q\)</span> has orthonormal columns (i.e., <span class="math inline">\(Q^TQ=I\)</span>), and <span class="math inline">\(R\)</span> is upper triangular.</p></li>
-<li><p><span class="math inline">\(S=Q \Lambda Q^T\)</span> comes from the <strong>eigenvalues</strong> <span class="math inline">\(\lambda_1, \cdots, \lambda_n\)</span> of a symmetric matrix, where eigenvalues are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and orthonormal eigenvectors are in the columns of <span class="math inline">\(Q\)</span>.</p></li>
-<li><p><span class="math inline">\(A=X \Lambda X^{-1}\)</span> is <strong>diagonalization</strong> when <span class="math inline">\(A\)</span> is <span class="math inline">\(n \times n\)</span> with <span class="math inline">\(n\)</span> independent eigenvectors, where eigenvalues of <span class="math inline">\(A\)</span> are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and eigenvectors of <span class="math inline">\(A\)</span> are in the columns of <span class="math inline">\(X\)</span>.</p></li>
-<li><p><span class="math inline">\(A=U \Sigma V^T\)</span> is the <strong>singular value decomposition (SVD)</strong> of any matrix <span class="math inline">\(A\)</span>, where singular values <span class="math inline">\(\sigma_1, \cdots, \sigma_r\)</span> are in <span class="math inline">\(\Sigma\)</span>, and orthonormal singular vectors are in <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>.</p></li>
-</ul>
-<h1 id="fundamental-subspace">Fundamental Subspace</h1>
-<p>Suppose <span class="math inline">\(A\)</span> is an <span class="math inline">\(m \times n\)</span> matrix with rank <span class="math inline">\(r\)</span>.</p>
-<ul>
-<li><p>The <strong>column space</strong> <span class="math inline">\(C(A)\)</span> contains all combinations of the columns of <span class="math inline">\(A\)</span>.</p></li>
-<li><p>The <strong>row space</strong> <span class="math inline">\(C(A^T)\)</span> contains all combinations of the columns of <span class="math inline">\(A^T\)</span>.</p></li>
-<li><p>The <strong>null space</strong> <span class="math inline">\(N(A)\)</span> contains all solutions <span class="math inline">\(\mathbf{x}\)</span> to <span class="math inline">\(A\mathbf{x}=\mathbf{0}\)</span>.</p></li>
-<li><p>The <strong>left null space</strong> <span class="math inline">\(N(A^T)\)</span> contains all solutions <span class="math inline">\(\mathbf{y}\)</span> to <span class="math inline">\(A^T\mathbf{y}=\mathbf{0}\)</span>.</p></li>
-</ul>
-<h1 id="orthonormal-matrix">Orthonormal Matrix</h1>
-<ul>
-<li><p>If <span class="math inline">\(Q\)</span> is a matrix with <strong>orthonormal columns</strong>, then <span class="math inline">\(Q^TQ=I\)</span>.</p></li>
-<li><p><strong>Orthogonal matrix</strong> is square with orthonormal columns: <span class="math inline">\(Q^T=Q^{-1}\)</span>, and <span class="math inline">\(Q^TQ=QQ^T=I\)</span>.</p></li>
-</ul>
-<p><strong>Example 4.1</strong>    Rotation through an angle <span class="math inline">\(\theta\)</span>: <span class="math inline">\(Q=\begin{bmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{bmatrix}\)</span>.</p>
-<p><strong>Example 4.2</strong>    Reflection across the <span class="math inline">\(\displaystyle \frac{\theta}{2}\)</span> line: <span class="math inline">\(Q=\begin{bmatrix} \cos\theta &amp; \sin\theta \\ \sin\theta &amp; -\cos\theta \end{bmatrix}\)</span>.</p>
-<ul>
-<li><span class="math inline">\(\|Q\mathbf{x}\|^2=\|\mathbf{x}\|^2\)</span>.</li>
-</ul>
-<strong><em>Proof.</em></strong> We have <span class="math display">\[(Q\mathbf{x})^T(Q\mathbf{x})=\mathbf{x}^TQ^TQ\mathbf{x}=\mathbf{x}^TI\mathbf{x}=\mathbf{x}^T\mathbf{x}.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h2 id="householder-reflection">Householder Reflection</h2>
-<ul>
-<li><p>Householder matrix: <span class="math inline">\(H=I-2\mathbf{u}\mathbf{u}^T\)</span>, where <span class="math inline">\(\mathbf{u}^T\mathbf{u}=1\)</span>.</p></li>
-<li><p><span class="math inline">\(H\)</span> is orthogonal matrix.</p></li>
-</ul>
-<strong><em>Proof.</em></strong> Since <span class="math inline">\(H\)</span> is symmetric, then <span class="math display">\[H^TH=H^2=(I-2\mathbf{u}\mathbf{u}^T)(I-2\mathbf{u}\mathbf{u}^T)=I-4\mathbf{u}\mathbf{u}^T+4\mathbf{u}\mathbf{u}^T\mathbf{u}\mathbf{u}^T=I.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="eigenvalue-and-eigenvector">Eigenvalue and Eigenvector</h1>
-<ul>
-<li>The <strong>eigenvector</strong> <span class="math inline">\(\mathbf{x}\)</span> of <span class="math inline">\(A\)</span> does not change direction when multiplying <span class="math inline">\(\mathbf{x}\)</span> by <span class="math inline">\(A\)</span>, i.e., <span class="math inline">\(A\mathbf{x}=\lambda\mathbf{x}\)</span>.</li>
-</ul>
-<div class="note warning">
-            <p><span class="math inline">\(\lambda(A+B) \not\equiv \lambda(A)+\lambda(B)\)</span> and <span class="math inline">\(\lambda(AB) \not\equiv \lambda(A)\lambda(B)\)</span>.</p>
-          </div>
-<ul>
-<li><p>The sum of eigenvalues of a square <span class="math inline">\(A\)</span> equals the <strong>trace</strong> (the diagonal sum) of <span class="math inline">\(A\)</span>.</p></li>
-<li><p>The product of eigenvalues of a square <span class="math inline">\(A\)</span> equals the determinant of <span class="math inline">\(A\)</span>.</p></li>
-</ul>
-<h2 id="similar-matrix">Similar Matrix</h2>
-<ul>
-<li><p>Two <span class="math inline">\(n \times n\)</span> matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>similar</strong> if there exists an invertible <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(B=P^{-1}AP\)</span>. <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have same eigenvalues: <span class="math display">\[B\mathbf{y}=P^{-1}AP\mathbf{y}=\lambda\mathbf{y} \Rightarrow A(P\mathbf{y})=\lambda (P\mathbf{y}).\]</span></p></li>
-<li><p>Suppose <span class="math inline">\(A\)</span> has eigenvalues <span class="math inline">\(\lambda_1, \cdots, \lambda_n\)</span> with corresponding eigenvectors <span class="math inline">\(\mathbf{x}_1, \cdots, \mathbf{x}_n\)</span>. <span class="math inline">\(A=X\Lambda X^{-1}\)</span>, where eigenvalues of <span class="math inline">\(A\)</span> are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and eigenvectors of <span class="math inline">\(A\)</span> are in the columns of <span class="math inline">\(X\)</span>, i.e., <span class="math inline">\(A\)</span> is similar to <span class="math inline">\(\Lambda\)</span>.</p></li>
-</ul>
-<strong><em>Proof.</em></strong> Let <span class="math inline">\(X=\begin{bmatrix} &amp; \\ \mathbf{x}_1 &amp; \cdots &amp; \mathbf{x}_n \\ &amp; \end{bmatrix}\)</span>. We have <span class="math display">\[AX=\begin{bmatrix}
-&amp; \\ A\mathbf{x}_1 &amp; \cdots &amp; A\mathbf{x}_n \\ &amp;
-\end{bmatrix}=\begin{bmatrix}
-&amp; \\ \lambda_1\mathbf{x}_1 &amp; \cdots &amp; \lambda_n\mathbf{x}_n \\ &amp;
-\end{bmatrix}\]</span> and <span class="math display">\[X\Lambda=\begin{bmatrix}
-&amp; \\ \lambda_1\mathbf{x}_1 &amp; \cdots &amp; \lambda_n\mathbf{x}_n \\ &amp;
-\end{bmatrix},\]</span> i.e., <span class="math inline">\(AX=X\Lambda\)</span>, and thus <span class="math inline">\(A=X\Lambda X^{-1}\)</span>. Hence, <span class="math inline">\(X^{-1}AX=\Lambda\)</span>, i.e., <span class="math inline">\(A\)</span> is similar to <span class="math inline">\(\Lambda\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="symmetric-postive-definite-matrix">Symmetric Postive Definite Matrix</h1>
-<ul>
-<li><p>All eigenvalues of a symmetric matrix <span class="math inline">\(S\)</span> are real numbers.</p></li>
-<li><p>The eigenvectors of <span class="math inline">\(S\)</span> can be chosen orthogonal.</p></li>
-<li><p><strong>(Spectral Theorem)</strong> Every real symmetric matrix has the form <span class="math inline">\(S=Q\Lambda Q^T\)</span>, where eigenvalues are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and orthonormal eigenvectors are in the columns of <span class="math inline">\(Q\)</span>.</p></li>
-<li><p>Suppose <span class="math inline">\(S\)</span> is a real symmetric matrix. <span class="math inline">\(S\)</span> is a positive definite matrix if and only if one of the following statements holds:</p></li>
-</ul>
-<p>         1. All eigenvalues of <span class="math inline">\(S\)</span> are positive;</p>
-<p>         2. The <strong>energy</strong> <span class="math inline">\(\mathbf{x}^TS\mathbf{x}\)</span> is positive for all <span class="math inline">\(\mathbf{x} \neq \mathbf{0}\)</span>;</p>
-<p>         3. <span class="math inline">\(S=A^TA\)</span> for a matrix <span class="math inline">\(A\)</span> with independent columns;</p>
-<p>         4. All the leading determinants of <span class="math inline">\(S\)</span> are positive;</p>
-<p>         5. All the pivots of <span class="math inline">\(S\)</span> are positive.</p>
-<div class="note info">
-            <p>The <span class="math inline">\(k\)</span>th pivot is the ratio <span class="math inline">\(\displaystyle \frac{D_k}{D_{k-1}}\)</span> of the leading determinants (sizes <span class="math inline">\(k\)</span> and <span class="math inline">\(k-1\)</span>).</p>
-          </div>
-<p><span id="7"></span></p>
-<h1 id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h1>
-<ul>
-<li>The <strong>singular value decomposition</strong> of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=U\Sigma V^T\)</span>, where <span class="math inline">\(U\)</span> contains orthonormal eigenvectors of <span class="math inline">\(AA^T\)</span>, <span class="math inline">\(\Sigma\)</span> contains singular values <span class="math inline">\(\sigma_1, \cdots, \sigma_r\)</span>, and <span class="math inline">\(V\)</span> contains orthonormal eigenvectors of <span class="math inline">\(A^TA\)</span>. Note that <span class="math inline">\(\sigma_1^2 \geq \cdots \geq \sigma_r^2\)</span> are the nonzero eigenvalues of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> for <span class="math inline">\(r\)</span> is the rank of <span class="math inline">\(A\)</span>.</li>
-</ul>
-<p><strong>Example 7.1</strong>    Find an SVD of <span class="math inline">\(A=\begin{bmatrix} 3 &amp; 0 \\ 4 &amp; 5 \end{bmatrix}\)</span>.</p>
-<p><strong><em>Solution.</em></strong> We have <span class="math inline">\(AA^T=\begin{bmatrix} 9 &amp; 12 \\ 12 &amp; 41 \end{bmatrix}\)</span> and <span class="math inline">\(A^TA=\begin{bmatrix} 25 &amp; 20 \\ 20 &amp; 25 \end{bmatrix}\)</span>. The nonzero eigenvalues of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> are <span class="math inline">\(\lambda_1=45\)</span> and <span class="math inline">\(\lambda_2=5\)</span>. The eigenvectors of <span class="math inline">\(AA^T\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 3 \end{bmatrix}\)</span> and <span class="math inline">\(\begin{bmatrix} -3 \\ 1 \end{bmatrix}\)</span>. The eigenvectors of <span class="math inline">\(A^TA\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span> and <span class="math inline">\(\begin{bmatrix} -1 \\ 1 \end{bmatrix}\)</span>. Therefore, <span class="math inline">\(\displaystyle U=\frac{1}{\sqrt{10}}\begin{bmatrix} 1 &amp; -3 \\ 3 &amp; 1 \end{bmatrix}\)</span> and <span class="math inline">\(\displaystyle V=\frac{1}{\sqrt{2}}\begin{bmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{bmatrix}\)</span>, and <span class="math inline">\(\Sigma=\begin{bmatrix} \sqrt{45} &amp; 0 \\ 0 &amp; \sqrt{5} \end{bmatrix}\)</span>.</p>
-<p><strong>Example 7.2</strong>    Find an SVD of <span class="math inline">\(A=\begin{bmatrix} 1 &amp; 1 \\ 1 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}\)</span>.</p>
-<p><strong><em>Solution.</em></strong> We have <span class="math inline">\(AA^T=\begin{bmatrix} 2 &amp; 2 &amp; 0 \\ 2 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{bmatrix}\)</span> and <span class="math inline">\(A^TA=\begin{bmatrix} 2 &amp; 2 \\ 2 &amp; 2 \end{bmatrix}\)</span>. The nonzero eigenvalue of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> is <span class="math inline">\(\lambda_1=4\)</span>. The eigenvectors of <span class="math inline">\(AA^T\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}\)</span>, <span class="math inline">\(\begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}\)</span>, and <span class="math inline">\(\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}\)</span>. The eigenvectors of <span class="math inline">\(A^TA\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span> and <span class="math inline">\(\begin{bmatrix} -1 \\ 1 \end{bmatrix}\)</span>. Therefore, <span class="math inline">\(U=\begin{bmatrix} 1/\sqrt{2} &amp; -1/\sqrt{2} &amp; 0 \\ 1/\sqrt{2} &amp; 1/\sqrt{2} &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}\)</span> and <span class="math inline">\(V=\displaystyle \frac{1}{\sqrt{2}}\begin{bmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{bmatrix}\)</span>, and <span class="math inline">\(\Sigma=\begin{bmatrix} 2 &amp; 0 \\ 0 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span>.</p>
-<ul>
-<li>The pieces of the SVD: <span class="math inline">\(A=U\Sigma V^T=\sigma_1\mathbf{u}_1\mathbf{v}_1^T+\cdots+\sigma_r\mathbf{u}_r\mathbf{v}_r^T\)</span>.</li>
-</ul>
-<h1 id="norm-of-vector-and-matrix">Norm of Vector and Matrix</h1>
-<h2 id="vector-norm">Vector Norm</h2>
-<p>Suppose <span class="math inline">\(\mathbf{v} \in \mathbb{C}^n\)</span>.</p>
-<ul>
-<li><p><strong><span class="math inline">\(\mathscr{l}^2\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_2=\sqrt{|v_1|^2+\cdots+|v_n|^2}\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(\mathscr{l}^1\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_1=|v_1|+\cdots+|v_n|\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(\mathscr{l}^\infty\)</span> norm</strong>: <span class="math inline">\(\max |v_i|\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(\mathscr{l}^p\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_p=(|v_1|^p+\cdots+|v_n|^p)^{1/p}\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(S\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_S=\sqrt{\mathbf{v}^TS\mathbf{v}}\)</span> for any symmetric positive definite matrix <span class="math inline">\(S\)</span>.</p></li>
-</ul>
-<h2 id="matrix-norm">Matrix Norm</h2>
-<ul>
-<li><p><strong><span class="math inline">\(\mathscr{l}^2\)</span> norm</strong> or <strong>Spectral norm</strong>: <span class="math display">\[\begin{aligned}
-\|A\|_2&amp;=\max \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}=\max\frac{\sqrt{\mathbf{x}^T(A^TA)\mathbf{x}}}{\sqrt{\mathbf{x}^T\mathbf{x}}}=\max\sqrt{\frac{\lambda_1c_1^2+\cdots+\lambda_rc_r^2}{c_1^2+\cdots+c_r^2}}
-\\&amp;=\sqrt{\lambda_1}=\sigma_1,
-\end{aligned}\]</span> where <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_r\)</span>, i.e., the largest singular value of <span class="math inline">\(A\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(\mathscr{l}^1\)</span> norm</strong>: <span class="math inline">\(\|A\|_1\)</span> is the largest <span class="math inline">\(\mathscr{l}^1\)</span> norm of the columns of <span class="math inline">\(A\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(\mathscr{l}^\infty\)</span> norm</strong>: <span class="math inline">\(\|A\|_1\)</span> is the largest <span class="math inline">\(\mathscr{l}^1\)</span> norm of the rows of <span class="math inline">\(A\)</span>.</p></li>
-<li><p><strong>Frobenius norm</strong>: <span class="math inline">\(\|A\|_F=\sqrt{|a_{11}|^2+\cdots+|a_{1n}|^2+\cdots+|a_{mn}|^2}=\sqrt{\sigma_1^2+\cdots+\sigma_r^2}\)</span>.</p></li>
-<li><p><strong>Nuclear norm</strong>: <span class="math inline">\(\|A\|_N=\sigma_1+\cdots+\sigma_r\)</span>.</p></li>
-<li><p>For any orthogonal matrix <span class="math inline">\(Q\)</span>, we have <span class="math inline">\(\|Q\|_2=1\)</span>, <span class="math inline">\(\|Q\|_F=\sqrt{n}\)</span>, and <span class="math inline">\(\|Q\|_N=n\)</span>. The spectral, Frobenius and nuclear norms of any matrix stay the same when <span class="math inline">\(A\)</span> is multiplies (on either side) by an orthogonal matrix.</p></li>
-</ul>
-<h1 id="principal-component-analysis-pca">Principal Component Analysis (PCA)</h1>
-<ul>
-<li><strong>(Eckart-Young Theorem)</strong> If <span class="math inline">\(B\)</span> has rank <span class="math inline">\(k\)</span>, then <span class="math display">\[\|A-B\| \geq \|A-A_k\|,\]</span> where <span class="math inline">\(A_k=U_k\Sigma_kV_k^T=\sigma_1\mathbf{u}_1\mathbf{v}_1^T+\cdots+\sigma_k\mathbf{u}_k\mathbf{v}_k^T\)</span> with <span class="math inline">\(\text{rank}(A_k)=k\)</span>.</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Mathematics</category>
-        <category>Matrix method</category>
-      </categories>
-      <tags>
-        <tag>SVD</tag>
-        <tag>Linear algebra</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Low-Rank Approximation via Truncated SVD</title>
-    <url>/Mathematics/Numerical-linear-algebra/Low-Rank_Approximation_via_Truncated_SVD.html</url>
-    <content><![CDATA[<h1 id="low-rank-approximation">Low-Rank Approximation</h1>
-<p>Given <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span>, we want to find <span class="math inline">\(A_r\)</span> s.t. <span class="math display">\[A \approx A_r=U_r\Sigma_rV_r^T.\]</span></p>
-<ul>
-<li><p>Low-rank approximation is beneficial in terms of the <strong>storage cost</strong> when <span class="math inline">\(r \ll \min(m, n)\)</span>. Instead of storing <span class="math inline">\(mn\)</span> entries for <span class="math inline">\(A\)</span>, we can store <span class="math inline">\((m+n+1)r\)</span> entries to keep the low-rank factorization without losing information.</p></li>
-<li><p>Low-rank approximation can bring <strong>computational</strong> benefits. In order to compute <span class="math inline">\(A\mathbf{x}\)</span>, by noting that <span class="math inline">\(A_r\mathbf{x}=U_r(\Sigma_r(V_r^T\mathbf{x}))\)</span>, we need only <span class="math inline">\(O((m+n)r)\)</span> operations instead of <span class="math inline">\(O(mn)\)</span>.</p></li>
-</ul>
-<h1 id="optimal-low-rank-approximation-by-svd">Optimal Low-Rank Approximation by SVD</h1>
-<p><strong>Theorem 2.1</strong>    For any <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> with singular values <span class="math inline">\(\sigma_1(A) \geq \cdots \geq \sigma_n(A) \geq 0\)</span>, and any non-negatvie integer <span class="math inline">\(r&lt;\min(m, n)\)</span>, <span class="math display">\[\|A-A_r\|_2=\sigma_{r+1}(A)=\min_{\text{rank}(B) \leq r} \|A-B\|_2,\]</span> where <span class="math inline">\(A_r=U_r\Sigma_rV_r^T\)</span> and <span class="math inline">\(\Sigma_r=\text{diag}(\sigma_1, \cdots, \sigma_r)\)</span>.</p>
-<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(\text{rank}(B) \leq r\)</span>, we can write <span class="math inline">\(B=B_1B_2^T\)</span> where <span class="math inline">\(B_1\)</span> and <span class="math inline">\(B_2\)</span> have <span class="math inline">\(r\)</span> columns. It follows that <span class="math inline">\(B_2^T\)</span> has a null space of dimension at least <span class="math inline">\(n-r\)</span>, and we can find an orthonormal matrix <span class="math inline">\(W \in \mathbb{C}^{n \times (n-r)}\)</span> s.t. <span class="math inline">\(B_2^TW=0\)</span>, i.e., <span class="math inline">\(BW=0\)</span>. Then <span class="math display">\[\|A-B\|_2=\|A-B\|_2\|W\|_2 \geq \|(A-B)W\|_2=\|AW\|_2=\|U\Sigma(V^*W)\|_2.\]</span></p>
-<p>Now since <span class="math inline">\(W\)</span> is <span class="math inline">\(n-r\)</span> dimensional, there is an intersection between <span class="math inline">\(W\)</span> and <span class="math inline">\([\mathbf{v}, \cdots, \mathbf{v}_{r+1}]\)</span></p>
-<center>
-<strong><em>Not done. To be continued...</em></strong>
-</center>
-<div class="note info">
-            <ul><li><p>Good approximation <span class="math inline">\(A \approx A_r\)</span> is obtained iff <span class="math inline">\(\sigma_{r+1} \ll \sigma_1\)</span>.</p></li><li><p>Optimality holds for any unitarily invariant norm.</p></li><li><p>A prominent application of low-rank approximation is <strong>principle component analysis (PCA)</strong> in data science.</p></li><li><p>Many matrices have explicit or hidden low-rank structure.</p></li></ul>
-          </div>
-<h1 id="application-image-compression">Application: Image Compression</h1>
-<p>A classical and visually pleasing illustration of low-rank approximation by the truncated SVD is image compression. (Note that this is slightly <em>outdated</em>). The idea is that greyscale images can be represented by a matrix where each entry indicates the intensity of a pixel. The matrix can be compressed by finding a low-rank approximation, resulting in image compression.</p>
-<p>We give a code example and <a href="https://github.com/litianyang0211/OxfordNotes/blob/main/Numerical%20Linear%20Algebra/Image%20Compression%20with%20SVD.ipynb"><strong><em>HERE</em></strong></a> is the full demo.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Packages.</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load an image, and convert it to black and white.</span></span><br><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&quot;Oxford.png&quot;</span>)</span><br><span class="line">imggray = img.convert(<span class="string">&quot;LA&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Convert the image data into a numpy matrix.</span></span><br><span class="line">imgmat = np.array(<span class="built_in">list</span>(imggray.getdata(band=<span class="number">0</span>)), <span class="built_in">float</span>)</span><br><span class="line">imgmat.shape = (imggray.size[<span class="number">1</span>], imggray.size[<span class="number">0</span>])</span><br><span class="line">imgmat = np.matrix(imgmat)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute the SVD.</span></span><br><span class="line">U, sigma, V = np.linalg.svd(imgmat)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Truncated SVD.</span></span><br><span class="line">trun_img_r50 = np.matrix(U[:, :<span class="number">50</span>]) * np.diag(sigma[:<span class="number">50</span>]) * np.matrix(V[:<span class="number">50</span>, :])</span><br><span class="line">plt.imshow(trun_img_r50, cmap=<span class="string">&quot;gray&quot;</span>)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Mathematics</category>
-        <category>Numerical linear algebra</category>
-      </categories>
-      <tags>
-        <tag>SVD</tag>
       </tags>
   </entry>
   <entry>
@@ -1709,6 +1746,13 @@ Besides <span class="math display">\[\|\mathbf{x}\|_2=\sqrt{|x_1|^2+\cdots+|x_n|
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
+<ul>
+<li><strong>(Cauchy-Schwarz Inequality)</strong> <span class="math inline">\(|\mathbf{x}^T\mathbf{y}| \leq \|\mathbf{x}\|_2\|\mathbf{y}\|_2\)</span>.</li>
+</ul>
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(M=\begin{bmatrix} \mathbf{x}^T \\ \mathbf{y}^T \end{bmatrix}\begin{bmatrix} &amp; \\ \mathbf{x} &amp; \mathbf{y} \\ &amp; \end{bmatrix}\)</span>, we know <span class="math inline">\(M\)</span> is symmetric and positive semidefinite, i.e., <span class="math inline">\(\left|\begin{matrix} \mathbf{x}^T\mathbf{x} &amp; \mathbf{x}^T\mathbf{y} \\ \mathbf{y}^T\mathbf{x} &amp; \mathbf{y}^T\mathbf{y} \end{matrix}\right| \geq 0\)</span>. Then <span class="math inline">\(\mathbf{x}^T\mathbf{x}\mathbf{y}^T\mathbf{y}-\mathbf{x}^T\mathbf{y}\mathbf{y}^T\mathbf{x} \geq 0\)</span>, i.e., <span class="math inline">\(\|\mathbf{x}\|_2^2\|\mathbf{y}\|_2^2 \geq (\mathbf{x}^T\mathbf{y})^2\)</span>, and thus <span class="math inline">\(\|\mathbf{x}\|_2\|\mathbf{y}\|_2 \geq |\mathbf{x}^T\mathbf{y}|\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
 <h2 id="unitarily-invariant">Unitarily Invariant</h2>
 <ul>
 <li><span class="math inline">\(\|\cdot\|_2\)</span> is <strong>unitarily invariant</strong> as <span class="math inline">\(\|U\mathbf{x}\|_2=\|\mathbf{x}\|_2\)</span> for any unitary <span class="math inline">\(U\)</span> and an <span class="math inline">\(\mathbf{x} \in \mathbb{C}^n\)</span>.</li>
@@ -1794,6 +1838,20 @@ Recall that the SVD of <span class="math inline">\(A\)</span> is <span class="ma
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
+<h1 id="matrix-decomposition">Matrix Decomposition</h1>
+<ul>
+<li><p><strong>Singular value decomposition (SVD)</strong>: <span class="math inline">\(A=U\Sigma V^T\)</span>.</p></li>
+<li><p><strong>Eigenvalue decomposition</strong>: <span class="math inline">\(A=X\Lambda X^{-1}\)</span>, where <span class="math inline">\(A\)</span> is square. Note that the decomposition <em>usually</em> exists.</p>
+<ul>
+<li>For normal matrix: <span class="math inline">\(X\)</span> is unitary.</li>
+<li>For symmetric matrix: <span class="math inline">\(X\)</span> is unitary and <span class="math inline">\(\Lambda\)</span> is real.</li>
+</ul></li>
+<li><p><strong>Jordan decomposition</strong>: <span class="math inline">\(A=XJX^{-1}\)</span>, where <span class="math inline">\(A\)</span> is square and <span class="math inline">\(J=\text{diag}\left(\begin{bmatrix} \lambda_i &amp; 1 \\  &amp; \lambda_i &amp; \ddots \\  &amp; &amp; \ddots &amp; 1 \\  &amp; &amp; &amp; \lambda_i \end{bmatrix}\right)\)</span></p></li>
+<li><p><strong>Schur decomposition</strong>: <span class="math inline">\(A=QTQ^*\)</span>, where <span class="math inline">\(Q\)</span> is orthogonal and <span class="math inline">\(T\)</span> is upper triangular. The eigenvalues of <span class="math inline">\(A\)</span> is <span class="math inline">\(\text{diag}(T)\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(QR\)</span> decomposition</strong>: <span class="math inline">\(A=QR\)</span>, where <span class="math inline">\(Q\)</span> is orthonormal and <span class="math inline">\(R\)</span> is upper triangular.</p></li>
+<li><p><strong><span class="math inline">\(LU\)</span> decomposition</strong>: <span class="math inline">\(A=LU\)</span>, where <span class="math inline">\(L\)</span> is lower triangular and <span class="math inline">\(U\)</span> is upper triangular.</p></li>
+<li><p><span class="math inline">\(SVD\)</span>, Schur decomposition and <span class="math inline">\(QR\)</span> decomposition are orthogonal decompositions, than stable computation is available.</p></li>
+</ul>
 ]]></content>
       <categories>
         <category>Mathematics</category>
