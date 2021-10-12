@@ -1,6 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Conditional Independence</title>
+    <url>/Statistics/Graphical-model/Conditional_Independence.html</url>
+    <content><![CDATA[<h1 id="definition">Definition</h1>
+<p><strong>Definition 1.1</strong>    Let <span class="math inline">\(X, Y\)</span> be r.v.s. defined on <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>. We denote the joint density <span class="math inline">\(p(x, y)\)</span>, and call <span class="math display">\[p(y)=\int_\mathcal{X} p(x, y)\text{d}x\]</span> the <strong>marginal density</strong> of <span class="math inline">\(Y\)</span>. The <strong>conditional density</strong> of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> is defined as any function <span class="math inline">\(p(x \mid y)\)</span> s.t. <span class="math display">\[p(x, y)=p(y)p(x \mid y).\]</span></p>
+<div class="note warning">
+            <p>If <span class="math inline">\(p(y)&gt;0\)</span> then the solution is unique and given by the familiar expression <span class="math display">\[p(x \mid y)=\frac{p(x, y)}{p(y)}.\]</span></p>
+          </div>
+<p><strong>Definition 1.2</strong>    Let <span class="math inline">\(X, Y\)</span> be r.v.s. defined on <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>. <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>marginally independent</strong> if <span class="math display">\[p(x \mid y)=p(x), \quad \forall x \in \mathcal{X}, y \in \mathcal{Y}, p(y)&gt;0,\]</span> which is equivalent to <span class="math display">\[p(x, y)=p(x)p(y).\]</span></p>
+<p><strong>Definition 1.3</strong>    Let <span class="math inline">\(X, Y, Z\)</span> be r.v.s. defined on a Cartesian product space and the joint density be <span class="math inline">\(p(x, y, z)\)</span>. We say that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>conditionally independent</strong> given <span class="math inline">\(Z\)</span> if <span class="math display">\[p(x \mid y, z)=p(x \mid z), \quad \forall x \in \mathcal{X}, y \in \mathcal{Y}, z \in \mathcal{Z}\ \text{s.t.}\ p(y, z)&gt;0,\]</span> denoted <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>.</p>
+<div class="note info">
+            <p>If <span class="math inline">\(Z\)</span> is degenerate, i.e., there is some <span class="math inline">\(z\)</span> s.t. <span class="math inline">\(P(Z=z)=1\)</span>, then the definition above is the same as saying that <span class="math inline">\(X \perp\!\!\!\!\perp Y\)</span>.</p>
+          </div>
+<p><strong>Example 1.1</strong>    Let <span class="math inline">\(X_1, \cdots, X_k\)</span> be a Markov chain. Then <span class="math inline">\(X_k\)</span> is independent of <span class="math inline">\(X_1, \cdots, X_{k-2}\)</span> conditional upon <span class="math inline">\(X_{k-1}\)</span>: <span class="math display">\[P(X_k=x_k \mid X_{k-1}=x_{k-1}, \cdots, X_1=x_1)=P(X_k=x_k \mid X_{k-1}=x_{k-1})\]</span> for all <span class="math inline">\(x_k, x_{k-1}, \cdots, x_1\)</span>, i.e., <span class="math inline">\(X_k \perp\!\!\!\!\perp X_1, \cdots, X_{k-2} \mid X_{k-1}\)</span>, a.k.a. <strong>Markov property</strong>, or <strong>memoryless property</strong>.</p>
+<p><span id="eg1.2"><strong>Example 1.2</strong></span>    Suppose <span class="math inline">\(\mathbf{X}_V=(X_1, \cdots, X_p)^T\)</span> is a multivariate Gaussian distribution, i.e., <span class="math display">\[f(\mathbf{x}_V; \mu, \Sigma)=\frac{1}{(2\pi)^{p/2}|\Sigma|^{p/2}}\exp\left[-\frac{1}{2}(\mathbf{x}_V-\mu)^T\Sigma^{-1}(\mathbf{x}_V-\mu)\right].\]</span> Then <span class="math display">\[X_p \mid X_1=x_1, \cdots, X_{p-1}=x_{p-1} \sim \mathcal{N}(\mu_p+\Sigma_{p, -p}\Sigma_{-p, -p}^{-1}(\mathbf{x}_{-p}-\mu_{-p}), \sigma_{pp \cdot 1 \cdots p-1}),\]</span> where <span class="math inline">\(\sigma_{aa \cdot B}=\sigma_{aa}-\Sigma_{aB}\Sigma_{BB}^{-1}\Sigma_{Ba}\)</span>, is called the <strong>Schur complement</strong> of entry <span class="math inline">\((a, a)\)</span> in <span class="math inline">\(\Sigma\)</span>.</p>
+<p><strong>Theorem 1.1</strong>    Let <span class="math inline">\(X, Y, Z\)</span> be r.v.s. defined on a Cartesian product space. The following are equivalent:</p>
+<p>    (1) <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(y, z)&gt;0\)</span>;</p>
+<p>    (2) <span class="math inline">\(p(x, y \mid z)=p(x \mid z)p(y \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>;</p>
+<p>    (3) <span class="math inline">\(p(x, y, z)=p(y, z)p(x \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>;</p>
+<p>    (4) <span class="math inline">\(p(z)p(x, y, z)=p(x, z)p(y, z)\)</span> for all <span class="math inline">\(x, y, z\)</span>;</p>
+<p>    (5) <span class="math inline">\(p(x, y, z)=f(x, z)g(y, z)\)</span> for some functions <span class="math inline">\(f, g\)</span> and all <span class="math inline">\(x, y, z\)</span>.</p>
+<p><strong><em>Proof.</em></strong> We need to show (1) <span class="math inline">\(\Rightarrow\)</span> (2) <span class="math inline">\(\Rightarrow\)</span> (3) <span class="math inline">\(\Rightarrow\)</span> (1), (3) <span class="math inline">\(\Leftrightarrow\)</span> (4), and (3) <span class="math inline">\(\Leftrightarrow\)</span> (5).</p>
+<p>(i) Since <span class="math inline">\(p(y, z)&gt;0\)</span>, then <span class="math inline">\(p(z)&gt;0\)</span>. Since <span class="math inline">\(p(x \mid y, z)p(y \mid z)=p(x, y \mid z)\)</span>, then <span class="math display">\[p(x, y \mid z)=p(x \mid z)p(y \mid z),\]</span> i.e., (1) <span class="math inline">\(\Rightarrow\)</span> (2).</p>
+<p>(ii) We have <span class="math display">\[p(x, y, z)=p(x, y \mid z)p(z)=p(x \mid z)p(y \mid z)p(z)=p(y, z)p(x \mid z)\]</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>, i.e., (2) <span class="math inline">\(\Rightarrow\)</span> (3).</p>
+<p>(iii) It is obvious to show that (3) <span class="math inline">\(\Rightarrow\)</span> (1), (3) <span class="math inline">\(\Leftrightarrow\)</span> (4), and (3) <span class="math inline">\(\Rightarrow\)</span> (5).</p>
+<p>(iv) Suppose <span class="math inline">\(p(x, y, z)=f(x, z)g(y, z)\)</span> for some functions <span class="math inline">\(f, g\)</span> and all <span class="math inline">\(x, y, z\)</span>. We have <span class="math display">\[p(y, z)=\int_\mathcal{X} p(x, y, z)\text{d}x=g(y, z)\int_\mathcal{X} f(x, z)\text{d}x:=g(y, z)\widetilde{f}(z).\]</span> Then <span class="math display">\[p(x, y, z)=\frac{f(x, z)p(y, z)}{\widetilde{f}(z)}.\]</span></p>
+Since <span class="math display">\[p(x \mid y, z)=\frac{p(x, y, z)}{p(y, z)}=\frac{f(x, z)}{\widetilde{f}(z)}=p(x \mid z),\]</span> then we have (5) <span class="math inline">\(\Rightarrow\)</span> (1) <span class="math inline">\(\Rightarrow\)</span> (3).
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="graphoid-axioms">Graphoid Axioms</h1>
+<p><strong>Theorem 2.1 (Graphoid Axioms)</strong>    Conditional independence satisfies the following properties:</p>
+<p>    (1) Symmetry: <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z \Rightarrow Y \perp\!\!\!\!\perp X \mid Z\)</span>;</p>
+<p>    (2) Decomposition: <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z \Rightarrow X \perp\!\!\!\!\perp Y \mid Z\)</span>;</p>
+<p>    (3) Weak union: <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z \Rightarrow X \perp\!\!\!\!\perp W \mid Y, Z\)</span>;</p>
+<p>    (4) Contraction: <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z \Rightarrow X \perp\!\!\!\!\perp Y, W \mid Z\)</span>;</p>
+<p>    (5) Intersection: if <span class="math inline">\(p(x, y, z, w)&gt;0\)</span>, then <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid W, Z \Rightarrow X \perp\!\!\!\!\perp Y, W \mid Z\)</span>.</p>
+<p><strong><em>Proof.</em></strong></p>
+<p>(i) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>, then <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span>, and thus <span class="math inline">\(p(x, y, z)=p(x, z)p(y \mid z)\)</span>. Hence, <span class="math display">\[p(y \mid x, z)=\frac{p(x, y, z)}{p(x, z)}=\frac{p(x, z)p(y \mid z)}{p(x, z)}=p(y \mid z),\]</span> i.e., <span class="math inline">\(Y \perp\!\!\!\!\perp X \mid Z\)</span>.</p>
+<p>(ii) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z\)</span>, then <span class="math inline">\(p(x \mid y, w, z)=p(x \mid z)\)</span>, and thus <span class="math inline">\(p(x, y, w \mid z)=p(x \mid z)p(y, w \mid z)\)</span>. Hence, <span class="math display">\[p(x, y \mid z)=\int_\mathcal{W} p(x, y, w \mid z)=p(x \mid z)\int_\mathcal{W} p(y, w \mid z)=p(x \mid z)p(y \mid z),\]</span> i.e., <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>.</p>
+<p>(iii) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z\)</span>, then <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span> and thus <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span>. Besides, <span class="math inline">\(p(x \mid y, w, z)=p(x \mid z)\)</span>. Hence, <span class="math inline">\(p(x \mid y, w, z)=p(x \mid y, z)\)</span>, i.e., <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span>.</p>
+<p>(iv) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span>, then <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span> and <span class="math inline">\(p(x \mid w, y, z)=p(x \mid y, z)\)</span>. Hence, <span class="math inline">\(p(x \mid w, y, z)=p(x \mid z)\)</span>, i.e., <span class="math inline">\(X \perp\!\!\!\!\perp W, Y \mid Z\)</span>.</p>
+(v) Since <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid W, Z\)</span>, then <span class="math inline">\(p(x, w, y, z)=f(x, y, z)g(w, y, z)\)</span> for some functions <span class="math inline">\(f, g\)</span>, and <span class="math inline">\(p(x, y, w, z)=\widetilde{f}(x, w, z)\widetilde{g}(y, w, z)\)</span> for some functions <span class="math inline">\(\widetilde{f}, \widetilde{g}\)</span>. Because of positivity, we have <span class="math display">\[f(x, y, z)=\frac{\widetilde{f}(x, w, z)\widetilde{g}(y, w, z)}{g(w, y, z)}=\frac{\widetilde{f}(x, w_0, z)\widetilde{g}(y, w_0, z)}{g(w_0, y, z)}\]</span> for any <span class="math inline">\(w_0\)</span> since <span class="math inline">\(f(x, y, z)\)</span> does not depend on <span class="math inline">\(w\)</span>. Then <span class="math inline">\(f(x, y, z)=a(x, z)b(y, z)\)</span>, and thus <span class="math display">\[p(x, w, y, z)=a(x, z)b(y, z)g(w, y, z)=\widetilde{a}(x, z)\widetilde{b}(y, w, z).\]</span> Therefore, <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note info">
+            <ul><li><p><strong>Symmetry</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span> then <span class="math inline">\(X\)</span> is irrelevant to <span class="math inline">\(Y\)</span>.</p></li><li><p><strong>Decomposition</strong> means that if some information is irrelevant to <span class="math inline">\(X\)</span> then part of it is also irrelevant to <span class="math inline">\(X\)</span>.</p></li><li><p><strong>Weak union</strong> means that if <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> together are irrelevant to <span class="math inline">\(X\)</span> then learning one of them does not make the other one relevant.</p></li><li><p><strong>Contraction</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span>, and if learning <span class="math inline">\(Y\)</span> does not make <span class="math inline">\(W\)</span> relevant to <span class="math inline">\(X\)</span>, then both <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> are irrelevant to <span class="math inline">\(X\)</span>.</p></li></ul>
+          </div>
+<h1 id="functional-conditional-independence">Functional Conditional Independence</h1>
+<p><strong>Remark 3.1</strong>    Since the events <span class="math inline">\(\{Y=y\}\)</span> and <span class="math inline">\(\{Y=y, h(Y)=h(y)\}\)</span> are equal for any measurable function <span class="math inline">\(h\)</span>, it follows that <span class="math display">\[p(x \mid y, z)=p(x \mid y, h(y), z).\]</span></p>
+<p><strong>Example 3.1</strong>    Suppose <span class="math inline">\(X \sim f_\theta\)</span> for some parameter <span class="math inline">\(\theta \in \Theta\)</span>. We say that <span class="math inline">\(T=t(X)\)</span> is a <strong>sufficient statistic</strong> for <span class="math inline">\(\theta\)</span> if the likelihood can be written as <span class="math inline">\(L(\theta \mid X=x)=f_\theta(x)=g(t(x), \theta)h(x)\)</span>. Under a Bayesian interpretation of <span class="math inline">\(\theta\)</span>, this is equivalent to saying <span class="math inline">\(X \perp\!\!\!\!\perp \theta \mid T\)</span>.</p>
+<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
+p(\theta \mid x)&amp;=\frac{p(x \mid \theta)p(\theta)}{\int_\Theta p(x \mid \phi)p(\phi)\text{d}\phi}
+\\&amp;=\frac{g(t(x), \theta)h(x)p(\theta)}{\int_\Theta g(t(x), \phi)h(x)p(\phi)\text{d}\phi}
+\\&amp;=\frac{g(t(x), \theta)p(\theta)}{\int_\Theta g(t(x), \phi)p(\phi)\text{d}\phi}
+\\&amp;=p(\theta \mid t(x)).
+\end{aligned}\]</span> Since <span class="math inline">\(p(\theta \mid x)=p(\theta \mid x, t(x))\)</span>, then <span class="math inline">\(\theta \perp\!\!\!\!\perp X \mid T\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="关于多元高斯分布的补充">关于多元高斯分布的补充</h1>
+<p>由<a href="#eg1.2">例1.2</a>，我们对多元高斯分布进行补充.</p>
+<h2 id="条件高斯分布">条件高斯分布</h2>
+<p>假设<span class="math inline">\(\mathbf{x} \in \mathbb{R}^p\)</span>服从<span class="math inline">\(\mathcal{N}(\mu, \Sigma)\)</span>. 将<span class="math inline">\(\mathbf{x}\)</span>和对应的均值<span class="math inline">\(\mu\)</span>做如下划分：<span class="math inline">\(\mathbf{x}=\begin{bmatrix} \mathbf{x}_a \\ \mathbf{x}_b \end{bmatrix}\)</span>和<span class="math inline">\(\mu=\begin{bmatrix} \mu_a \\ \mu_b \end{bmatrix}\)</span>，其中<span class="math inline">\(\mathbf{x}_a, \mu_a \in \mathbb{R}^k\)</span>，<span class="math inline">\(\mathbf{x}_b, \mu_b \in \mathbb{R}^{p-k}\)</span>. 将协方差矩阵<span class="math inline">\(\Sigma\)</span>划分为<span class="math inline">\(\Sigma=\begin{bmatrix} \Sigma_{aa} &amp; \Sigma_{ab} \\ \Sigma_{ba} &amp; \Sigma_{bb} \end{bmatrix}\)</span>. 由<span class="math inline">\(\Sigma\)</span>的对称性易知<span class="math inline">\(\Sigma_{aa}\)</span>和<span class="math inline">\(\Sigma_{bb}\)</span>对称，且<span class="math inline">\(\Sigma_{ba}=\Sigma_{ab}^T\)</span>.</p>
+<p>定义<strong>精度矩阵</strong><span class="math inline">\(\Lambda=\Sigma^{-1}\)</span>，并将其划分为<span class="math inline">\(\begin{bmatrix} \Lambda_{aa} &amp; \Lambda_{ab} \\ \Lambda_{ba} &amp; \Lambda_{bb} \end{bmatrix}\)</span>. 由于对称矩阵的逆仍然对称，故<span class="math inline">\(\Lambda_{aa}\)</span>和<span class="math inline">\(\Lambda_{bb}\)</span>对称，且<span class="math inline">\(\Lambda_{ba}=\Lambda_{ab}^T\)</span>.</p>
+<p>注意，对于一个一般的高斯分布，其指数项可以写成<span class="math display">\[(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)=\mathbf{x}^T\Lambda\mathbf{x}-2\mathbf{x}^T\Lambda\mu+C.\]</span></p>
+<p>下面考虑条件分布<span class="math inline">\(p(\mathbf{x}_a \mid \mathbf{x}_b)\)</span>，只考虑指数项：<span class="math display">\[(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)=(\mathbf{x}_a-\mu_a)^T\Lambda_{aa}(\mathbf{x}_a-\mu_a)+2(\mathbf{x}_a-\mu_a)^T\Lambda_{ab}(\mathbf{x}_b-\mu_b)+(\mathbf{x}_b-\mu_b)^T\Lambda_{bb}(\mathbf{x}_b-\mu_b).\]</span> 由于<span class="math inline">\(\mathbf{x}_b\)</span>固定，我们可以将上式视为关于<span class="math inline">\(\mathbf{x}_a\)</span>的函数，不难看出上式仍是一个二次型，故对应的条件分布<span class="math inline">\(p(\mathbf{x}_a \mid \mathbf{x}_b)\)</span>仍是一个高斯分布. 改写可得<span class="math display">\[\begin{aligned}
+(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}\mu_a+2\mathbf{x}_a^T\Lambda_{ab}\mathbf{x}_b-2\mathbf{x}_a^T\Lambda_{ab}\mu_b+C
+\\&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a-\Lambda_{ab}(\mathbf{x}_b-\mu_b))+C
+\\&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}(\mu_a-\Lambda_{aa}^{-1}\Lambda_{ab}(\mathbf{x}_b-\mu_b))+C.
+\end{aligned}\]</span></p>
+<p>因此<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a \mid \mathbf{x}_b]=\mu_a-\Lambda_{aa}^{-1}\Lambda_{ab}(\mathbf{x}_b-\mu_b)}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a \mid \mathbf{x}_b]=\Lambda_{aa}^{-1}}\)</span>.</p>
+<p>利用分块矩阵的恒等式<span class="math display">\[\begin{bmatrix}
+A &amp; B \\ C &amp; D
+\end{bmatrix}^{-1}=\begin{bmatrix}
+M &amp; -MBD^{-1} \\
+-D^{-1}CM &amp; D^{-1}+D^{-1}CMBD^{-1}
+\end{bmatrix}\]</span>其中<span class="math display">\[M=(A-BD^{-1}C)^{-1}.\]</span> 因为<span class="math inline">\(\begin{bmatrix} \Sigma_{aa} &amp; \Sigma_{ab} \\ \Sigma_{ba} &amp; \Sigma_{bb} \end{bmatrix}^{-1}=\begin{bmatrix} \Lambda_{aa} &amp; \Lambda_{ab} \\ \Lambda_{ba} &amp; \Lambda_{bb} \end{bmatrix}\)</span>，所以<span class="math display">\[\Lambda_{aa}=(\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba})^{-1}\]</span>以及<span class="math display">\[\Lambda_{ab}=-(\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba})^{-1}\Sigma_{ab}\Sigma_{bb}^{-1}.\]</span></p>
+<p>因此<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a \mid \mathbf{x}_b]=\mu_a+\Sigma_{ab}\Sigma_{bb}^{-1}(\mathbf{x}_b-\mu_b)}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a \mid \mathbf{x}_b]=\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba}}\)</span>.</p>
+<h2 id="边缘高斯分布">边缘高斯分布</h2>
+<p>设<span class="math inline">\(p(\mathbf{x}_a, \mathbf{x}_b)\)</span>为联合高斯分布，则其边缘概率分布为<span class="math display">\[p(\mathbf{x}_a)=\int p(\mathbf{x}_a, \mathbf{x}_b)\text{d}\mathbf{x}_b\]</span>也是一个高斯分布.</p>
+<p>由于上式涉及到关于<span class="math inline">\(\mathbf{x}_b\)</span>的积分，因此<span class="math display">\[\begin{aligned}
+(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T\Lambda_{bb}\mu_b+2\mathbf{x}_b^T\Lambda_{ba}\mathbf{x}_a-2\mathbf{x}_b^T\Lambda_{ba}\mu_a+C
+\\&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))+C
+\\&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T\mathbf{m}+C
+\\&amp;=(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})^T\Lambda_{bb}(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+C.
+\end{aligned}\]</span></p>
+<p>所以，关于<span class="math inline">\(\mathbf{x}_b\)</span>的积分为<span class="math display">\[\begin{aligned}
+\int p(\mathbf{x}_a, \mathbf{x}_b)\text{d}\mathbf{x}_b &amp;\propto \int \exp\left[(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{b})^T\Lambda_{bb}(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}\right]\text{d}\mathbf{x}_b
+\\&amp;\propto \exp\left[-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}\right].
+\end{aligned}\]</span></p>
+<p>于是，边缘高斯分布中关于<span class="math inline">\(\mathbf{x}_a\)</span>的指数项为<span class="math display">\[\begin{aligned}
+&amp;\ \ \ \ \ -\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}\mu_a-2\mathbf{x}_a^T\Lambda_{ab}\mu_b
+\\&amp;=-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a+\Lambda_{ab}\mu_b)
+\\&amp;=-(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))^T\Lambda_{bb}^{-1}(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a+\Lambda_{ab}\mu_b)
+\\&amp;=\mathbf{x}_a^T(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})\mu_a+C.
+\end{aligned}\]</span></p>
+<p>因此，<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a]=\mu_a}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a]=(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})^{-1}=\Sigma_{aa}}\)</span>.</p>
+]]></content>
+      <categories>
+        <category>Statistics</category>
+        <category>Graphical model</category>
+      </categories>
+      <tags>
+        <tag>Conditional independence</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Computation With Large Matrix</title>
     <url>/Mathematics/Matrix-method/Computation_with_Large_Matrix.html</url>
     <content><![CDATA[<h1 id="least-squares">Least Squares</h1>
@@ -115,114 +223,6 @@ Therefore, <span class="math inline">\(\displaystyle \sum_{j=1}^n \frac{\|\mathb
       </tags>
   </entry>
   <entry>
-    <title>Conditional Independence</title>
-    <url>/Statistics/Graphical-model/Conditional_Independence.html</url>
-    <content><![CDATA[<h1 id="definition">Definition</h1>
-<p><strong>Definition 1.1</strong>    Let <span class="math inline">\(X, Y\)</span> be r.v.s. defined on <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>. We denote the joint density <span class="math inline">\(p(x, y)\)</span>, and call <span class="math display">\[p(y)=\int_\mathcal{X} p(x, y)\text{d}x\]</span> the <strong>marginal density</strong> of <span class="math inline">\(Y\)</span>. The <strong>conditional density</strong> of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> is defined as any function <span class="math inline">\(p(x \mid y)\)</span> s.t. <span class="math display">\[p(x, y)=p(y)p(x \mid y).\]</span></p>
-<div class="note warning">
-            <p>If <span class="math inline">\(p(y)&gt;0\)</span> then the solution is unique and given by the familiar expression <span class="math display">\[p(x \mid y)=\frac{p(x, y)}{p(y)}.\]</span></p>
-          </div>
-<p><strong>Definition 1.2</strong>    Let <span class="math inline">\(X, Y\)</span> be r.v.s. defined on <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>. <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>marginally independent</strong> if <span class="math display">\[p(x \mid y)=p(x), \quad \forall x \in \mathcal{X}, y \in \mathcal{Y}, p(y)&gt;0,\]</span> which is equivalent to <span class="math display">\[p(x, y)=p(x)p(y).\]</span></p>
-<p><strong>Definition 1.3</strong>    Let <span class="math inline">\(X, Y, Z\)</span> be r.v.s. defined on a Cartesian product space and the joint density be <span class="math inline">\(p(x, y, z)\)</span>. We say that <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are <strong>conditionally independent</strong> given <span class="math inline">\(Z\)</span> if <span class="math display">\[p(x \mid y, z)=p(x \mid z), \quad \forall x \in \mathcal{X}, y \in \mathcal{Y}, z \in \mathcal{Z}\ \text{s.t.}\ p(y, z)&gt;0,\]</span> denoted <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>.</p>
-<div class="note info">
-            <p>If <span class="math inline">\(Z\)</span> is degenerate, i.e., there is some <span class="math inline">\(z\)</span> s.t. <span class="math inline">\(P(Z=z)=1\)</span>, then the definition above is the same as saying that <span class="math inline">\(X \perp\!\!\!\!\perp Y\)</span>.</p>
-          </div>
-<p><strong>Example 1.1</strong>    Let <span class="math inline">\(X_1, \cdots, X_k\)</span> be a Markov chain. Then <span class="math inline">\(X_k\)</span> is independent of <span class="math inline">\(X_1, \cdots, X_{k-2}\)</span> conditional upon <span class="math inline">\(X_{k-1}\)</span>: <span class="math display">\[P(X_k=x_k \mid X_{k-1}=x_{k-1}, \cdots, X_1=x_1)=P(X_k=x_k \mid X_{k-1}=x_{k-1})\]</span> for all <span class="math inline">\(x_k, x_{k-1}, \cdots, x_1\)</span>, i.e., <span class="math inline">\(X_k \perp\!\!\!\!\perp X_1, \cdots, X_{k-2} \mid X_{k-1}\)</span>, a.k.a. <strong>Markov property</strong>, or <strong>memoryless property</strong>.</p>
-<p><span id="eg1.2"><strong>Example 1.2</strong></span>    Suppose <span class="math inline">\(\mathbf{X}_V=(X_1, \cdots, X_p)^T\)</span> is a multivariate Gaussian distribution, i.e., <span class="math display">\[f(\mathbf{x}_V; \mu, \Sigma)=\frac{1}{(2\pi)^{p/2}|\Sigma|^{p/2}}\exp\left[-\frac{1}{2}(\mathbf{x}_V-\mu)^T\Sigma^{-1}(\mathbf{x}_V-\mu)\right].\]</span> Then <span class="math display">\[X_p \mid X_1=x_1, \cdots, X_{p-1}=x_{p-1} \sim \mathcal{N}(\mu_p+\Sigma_{p, -p}\Sigma_{-p, -p}^{-1}(\mathbf{x}_{-p}-\mu_{-p}), \sigma_{pp \cdot 1 \cdots p-1}),\]</span> where <span class="math inline">\(\sigma_{aa \cdot B}=\sigma_{aa}-\Sigma_{aB}\Sigma_{BB}^{-1}\Sigma_{Ba}\)</span>, is called the <strong>Schur complement</strong> of entry <span class="math inline">\((a, a)\)</span> in <span class="math inline">\(\Sigma\)</span>.</p>
-<p><strong>Theorem 1.1</strong>    Let <span class="math inline">\(X, Y, Z\)</span> be r.v.s. defined on a Cartesian product space. The following are equivalent:</p>
-<p>    (1) <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(y, z)&gt;0\)</span>;</p>
-<p>    (2) <span class="math inline">\(p(x, y \mid z)=p(x \mid z)p(y \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>;</p>
-<p>    (3) <span class="math inline">\(p(x, y, z)=p(y, z)p(x \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>;</p>
-<p>    (4) <span class="math inline">\(p(z)p(x, y, z)=p(x, z)p(y, z)\)</span> for all <span class="math inline">\(x, y, z\)</span>;</p>
-<p>    (5) <span class="math inline">\(p(x, y, z)=f(x, z)g(y, z)\)</span> for some functions <span class="math inline">\(f, g\)</span> and all <span class="math inline">\(x, y, z\)</span>.</p>
-<p><strong><em>Proof.</em></strong> We need to show (1) <span class="math inline">\(\Rightarrow\)</span> (2) <span class="math inline">\(\Rightarrow\)</span> (3) <span class="math inline">\(\Rightarrow\)</span> (1), (3) <span class="math inline">\(\Leftrightarrow\)</span> (4), and (3) <span class="math inline">\(\Leftrightarrow\)</span> (5).</p>
-<p>(i) Since <span class="math inline">\(p(y, z)&gt;0\)</span>, then <span class="math inline">\(p(z)&gt;0\)</span>. Since <span class="math inline">\(p(x \mid y, z)p(y \mid z)=p(x, y \mid z)\)</span>, then <span class="math display">\[p(x, y \mid z)=p(x \mid z)p(y \mid z),\]</span> i.e., (1) <span class="math inline">\(\Rightarrow\)</span> (2).</p>
-<p>(ii) We have <span class="math display">\[p(x, y, z)=p(x, y \mid z)p(z)=p(x \mid z)p(y \mid z)p(z)=p(y, z)p(x \mid z)\]</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>, i.e., (2) <span class="math inline">\(\Rightarrow\)</span> (3).</p>
-<p>(iii) It is obvious to show that (3) <span class="math inline">\(\Rightarrow\)</span> (1), (3) <span class="math inline">\(\Leftrightarrow\)</span> (4), and (3) <span class="math inline">\(\Rightarrow\)</span> (5).</p>
-<p>(iv) Suppose <span class="math inline">\(p(x, y, z)=f(x, z)g(y, z)\)</span> for some functions <span class="math inline">\(f, g\)</span> and all <span class="math inline">\(x, y, z\)</span>. We have <span class="math display">\[p(y, z)=\int_\mathcal{X} p(x, y, z)\text{d}x=g(y, z)\int_\mathcal{X} f(x, z)\text{d}x:=g(y, z)\widetilde{f}(z).\]</span> Then <span class="math display">\[p(x, y, z)=\frac{f(x, z)p(y, z)}{\widetilde{f}(z)}.\]</span></p>
-Since <span class="math display">\[p(x \mid y, z)=\frac{p(x, y, z)}{p(y, z)}=\frac{f(x, z)}{\widetilde{f}(z)}=p(x \mid z),\]</span> then we have (5) <span class="math inline">\(\Rightarrow\)</span> (1) <span class="math inline">\(\Rightarrow\)</span> (3).
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="graphoid-axioms">Graphoid Axioms</h1>
-<p><strong>Theorem 2.1 (Graphoid Axioms)</strong>    Conditional independence satisfies the following properties:</p>
-<p>    (1) Symmetry: <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z \Rightarrow Y \perp\!\!\!\!\perp X \mid Z\)</span>;</p>
-<p>    (2) Decomposition: <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z \Rightarrow X \perp\!\!\!\!\perp Y \mid Z\)</span>;</p>
-<p>    (3) Weak union: <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z \Rightarrow X \perp\!\!\!\!\perp W \mid Y, Z\)</span>;</p>
-<p>    (4) Contraction: <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z \Rightarrow X \perp\!\!\!\!\perp Y, W \mid Z\)</span>;</p>
-<p>    (5) Intersection: if <span class="math inline">\(p(x, y, z, w)&gt;0\)</span>, then <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid W, Z \Rightarrow X \perp\!\!\!\!\perp Y, W \mid Z\)</span>.</p>
-<p><strong><em>Proof.</em></strong></p>
-<p>(i) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>, then <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span>, and thus <span class="math inline">\(p(x, y, z)=p(x, z)p(y \mid z)\)</span>. Hence, <span class="math display">\[p(y \mid x, z)=\frac{p(x, y, z)}{p(x, z)}=\frac{p(x, z)p(y \mid z)}{p(x, z)}=p(y \mid z),\]</span> i.e., <span class="math inline">\(Y \perp\!\!\!\!\perp X \mid Z\)</span>.</p>
-<p>(ii) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z\)</span>, then <span class="math inline">\(p(x \mid y, w, z)=p(x \mid z)\)</span>, and thus <span class="math inline">\(p(x, y, w \mid z)=p(x \mid z)p(y, w \mid z)\)</span>. Hence, <span class="math display">\[p(x, y \mid z)=\int_\mathcal{W} p(x, y, w \mid z)=p(x \mid z)\int_\mathcal{W} p(y, w \mid z)=p(x \mid z)p(y \mid z),\]</span> i.e., <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span>.</p>
-<p>(iii) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z\)</span>, then <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span> and thus <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span>. Besides, <span class="math inline">\(p(x \mid y, w, z)=p(x \mid z)\)</span>. Hence, <span class="math inline">\(p(x \mid y, w, z)=p(x \mid y, z)\)</span>, i.e., <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span>.</p>
-<p>(iv) Since <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span>, then <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span> and <span class="math inline">\(p(x \mid w, y, z)=p(x \mid y, z)\)</span>. Hence, <span class="math inline">\(p(x \mid w, y, z)=p(x \mid z)\)</span>, i.e., <span class="math inline">\(X \perp\!\!\!\!\perp W, Y \mid Z\)</span>.</p>
-(v) Since <span class="math inline">\(X \perp\!\!\!\!\perp W \mid Y, Z\)</span> and <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid W, Z\)</span>, then <span class="math inline">\(p(x, w, y, z)=f(x, y, z)g(w, y, z)\)</span> for some functions <span class="math inline">\(f, g\)</span>, and <span class="math inline">\(p(x, y, w, z)=\widetilde{f}(x, w, z)\widetilde{g}(y, w, z)\)</span> for some functions <span class="math inline">\(\widetilde{f}, \widetilde{g}\)</span>. Because of positivity, we have <span class="math display">\[f(x, y, z)=\frac{\widetilde{f}(x, w, z)\widetilde{g}(y, w, z)}{g(w, y, z)}=\frac{\widetilde{f}(x, w_0, z)\widetilde{g}(y, w_0, z)}{g(w_0, y, z)}\]</span> for any <span class="math inline">\(w_0\)</span> since <span class="math inline">\(f(x, y, z)\)</span> does not depend on <span class="math inline">\(w\)</span>. Then <span class="math inline">\(f(x, y, z)=a(x, z)b(y, z)\)</span>, and thus <span class="math display">\[p(x, w, y, z)=a(x, z)b(y, z)g(w, y, z)=\widetilde{a}(x, z)\widetilde{b}(y, w, z).\]</span> Therefore, <span class="math inline">\(X \perp\!\!\!\!\perp Y, W \mid Z\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<div class="note info">
-            <ul><li><p><strong>Symmetry</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span> then <span class="math inline">\(X\)</span> is irrelevant to <span class="math inline">\(Y\)</span>.</p></li><li><p><strong>Decomposition</strong> means that if some information is irrelevant to <span class="math inline">\(X\)</span> then part of it is also irrelevant to <span class="math inline">\(X\)</span>.</p></li><li><p><strong>Weak union</strong> means that if <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> together are irrelevant to <span class="math inline">\(X\)</span> then learning one of them does not make the other one relevant.</p></li><li><p><strong>Contraction</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span>, and if learning <span class="math inline">\(Y\)</span> does not make <span class="math inline">\(W\)</span> relevant to <span class="math inline">\(X\)</span>, then both <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> are irrelevant to <span class="math inline">\(X\)</span>.</p></li></ul>
-          </div>
-<h1 id="functional-conditional-independence">Functional Conditional Independence</h1>
-<p><strong>Remark 3.1</strong>    Since the events <span class="math inline">\(\{Y=y\}\)</span> and <span class="math inline">\(\{Y=y, h(Y)=h(y)\}\)</span> are equal for any measurable function <span class="math inline">\(h\)</span>, it follows that <span class="math display">\[p(x \mid y, z)=p(x \mid y, h(y), z).\]</span></p>
-<p><strong>Example 3.1</strong>    Suppose <span class="math inline">\(X \sim f_\theta\)</span> for some parameter <span class="math inline">\(\theta \in \Theta\)</span>. We say that <span class="math inline">\(T=t(X)\)</span> is a <strong>sufficient statistic</strong> for <span class="math inline">\(\theta\)</span> if the likelihood can be written as <span class="math inline">\(L(\theta \mid X=x)=f_\theta(x)=g(t(x), \theta)h(x)\)</span>. Under a Bayesian interpretation of <span class="math inline">\(\theta\)</span>, this is equivalent to saying <span class="math inline">\(X \perp\!\!\!\!\perp \theta \mid T\)</span>.</p>
-<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
-p(\theta \mid x)&amp;=\frac{p(x \mid \theta)p(\theta)}{\int_\Theta p(x \mid \phi)p(\phi)\text{d}\phi}
-\\&amp;=\frac{g(t(x), \theta)h(x)p(\theta)}{\int_\Theta g(t(x), \phi)h(x)p(\phi)\text{d}\phi}
-\\&amp;=\frac{g(t(x), \theta)p(\theta)}{\int_\Theta g(t(x), \phi)p(\phi)\text{d}\phi}
-\\&amp;=p(\theta \mid t(x)).
-\end{aligned}\]</span> Since <span class="math inline">\(p(\theta \mid x)=p(\theta \mid x, t(x))\)</span>, then <span class="math inline">\(\theta \perp\!\!\!\!\perp X \mid T\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="关于多元高斯分布的补充">关于多元高斯分布的补充</h1>
-<p>由<a href="#eg1.2">例1.2</a>，我们对多元高斯分布进行补充.</p>
-<h2 id="条件高斯分布">条件高斯分布</h2>
-<p>假设<span class="math inline">\(\mathbf{x} \in \mathbb{R}^p\)</span>服从<span class="math inline">\(\mathcal{N}(\mu, \Sigma)\)</span>. 将<span class="math inline">\(\mathbf{x}\)</span>和对应的均值<span class="math inline">\(\mu\)</span>做如下划分：<span class="math inline">\(\mathbf{x}=\begin{bmatrix} \mathbf{x}_a \\ \mathbf{x}_b \end{bmatrix}\)</span>和<span class="math inline">\(\mu=\begin{bmatrix} \mu_a \\ \mu_b \end{bmatrix}\)</span>，其中<span class="math inline">\(\mathbf{x}_a, \mu_a \in \mathbb{R}^k\)</span>，<span class="math inline">\(\mathbf{x}_b, \mu_b \in \mathbb{R}^{p-k}\)</span>. 将协方差矩阵<span class="math inline">\(\Sigma\)</span>划分为<span class="math inline">\(\Sigma=\begin{bmatrix} \Sigma_{aa} &amp; \Sigma_{ab} \\ \Sigma_{ba} &amp; \Sigma_{bb} \end{bmatrix}\)</span>. 由<span class="math inline">\(\Sigma\)</span>的对称性易知<span class="math inline">\(\Sigma_{aa}\)</span>和<span class="math inline">\(\Sigma_{bb}\)</span>对称，且<span class="math inline">\(\Sigma_{ba}=\Sigma_{ab}^T\)</span>.</p>
-<p>定义<strong>精度矩阵</strong><span class="math inline">\(\Lambda=\Sigma^{-1}\)</span>，并将其划分为<span class="math inline">\(\begin{bmatrix} \Lambda_{aa} &amp; \Lambda_{ab} \\ \Lambda_{ba} &amp; \Lambda_{bb} \end{bmatrix}\)</span>. 由于对称矩阵的逆仍然对称，故<span class="math inline">\(\Lambda_{aa}\)</span>和<span class="math inline">\(\Lambda_{bb}\)</span>对称，且<span class="math inline">\(\Lambda_{ba}=\Lambda_{ab}^T\)</span>.</p>
-<p>注意，对于一个一般的高斯分布，其指数项可以写成<span class="math display">\[(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)=\mathbf{x}^T\Lambda\mathbf{x}-2\mathbf{x}^T\Lambda\mu+C.\]</span></p>
-<p>下面考虑条件分布<span class="math inline">\(p(\mathbf{x}_a \mid \mathbf{x}_b)\)</span>，只考虑指数项：<span class="math display">\[(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)=(\mathbf{x}_a-\mu_a)^T\Lambda_{aa}(\mathbf{x}_a-\mu_a)+2(\mathbf{x}_a-\mu_a)^T\Lambda_{ab}(\mathbf{x}_b-\mu_b)+(\mathbf{x}_b-\mu_b)^T\Lambda_{bb}(\mathbf{x}_b-\mu_b).\]</span> 由于<span class="math inline">\(\mathbf{x}_b\)</span>固定，我们可以将上式视为关于<span class="math inline">\(\mathbf{x}_a\)</span>的函数，不难看出上式仍是一个二次型，故对应的条件分布<span class="math inline">\(p(\mathbf{x}_a \mid \mathbf{x}_b)\)</span>仍是一个高斯分布. 改写可得<span class="math display">\[\begin{aligned}
-(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}\mu_a+2\mathbf{x}_a^T\Lambda_{ab}\mathbf{x}_b-2\mathbf{x}_a^T\Lambda_{ab}\mu_b+C
-\\&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a-\Lambda_{ab}(\mathbf{x}_b-\mu_b))+C
-\\&amp;=\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}(\mu_a-\Lambda_{aa}^{-1}\Lambda_{ab}(\mathbf{x}_b-\mu_b))+C.
-\end{aligned}\]</span></p>
-<p>因此<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a \mid \mathbf{x}_b]=\mu_a-\Lambda_{aa}^{-1}\Lambda_{ab}(\mathbf{x}_b-\mu_b)}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a \mid \mathbf{x}_b]=\Lambda_{aa}^{-1}}\)</span>.</p>
-<p>利用分块矩阵的恒等式<span class="math display">\[\begin{bmatrix}
-A &amp; B \\ C &amp; D
-\end{bmatrix}^{-1}=\begin{bmatrix}
-M &amp; -MBD^{-1} \\
--D^{-1}CM &amp; D^{-1}+D^{-1}CMBD^{-1}
-\end{bmatrix}\]</span>其中<span class="math display">\[M=(A-BD^{-1}C)^{-1}.\]</span> 因为<span class="math inline">\(\begin{bmatrix} \Sigma_{aa} &amp; \Sigma_{ab} \\ \Sigma_{ba} &amp; \Sigma_{bb} \end{bmatrix}^{-1}=\begin{bmatrix} \Lambda_{aa} &amp; \Lambda_{ab} \\ \Lambda_{ba} &amp; \Lambda_{bb} \end{bmatrix}\)</span>，所以<span class="math display">\[\Lambda_{aa}=(\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba})^{-1}\]</span>以及<span class="math display">\[\Lambda_{ab}=-(\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba})^{-1}\Sigma_{ab}\Sigma_{bb}^{-1}.\]</span></p>
-<p>因此<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a \mid \mathbf{x}_b]=\mu_a+\Sigma_{ab}\Sigma_{bb}^{-1}(\mathbf{x}_b-\mu_b)}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a \mid \mathbf{x}_b]=\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba}}\)</span>.</p>
-<h2 id="边缘高斯分布">边缘高斯分布</h2>
-<p>设<span class="math inline">\(p(\mathbf{x}_a, \mathbf{x}_b)\)</span>为联合高斯分布，则其边缘概率分布为<span class="math display">\[p(\mathbf{x}_a)=\int p(\mathbf{x}_a, \mathbf{x}_b)\text{d}\mathbf{x}_b\]</span>也是一个高斯分布.</p>
-<p>由于上式涉及到关于<span class="math inline">\(\mathbf{x}_b\)</span>的积分，因此<span class="math display">\[\begin{aligned}
-(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T\Lambda_{bb}\mu_b+2\mathbf{x}_b^T\Lambda_{ba}\mathbf{x}_a-2\mathbf{x}_b^T\Lambda_{ba}\mu_a+C
-\\&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))+C
-\\&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T\mathbf{m}+C
-\\&amp;=(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})^T\Lambda_{bb}(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+C.
-\end{aligned}\]</span></p>
-<p>所以，关于<span class="math inline">\(\mathbf{x}_b\)</span>的积分为<span class="math display">\[\begin{aligned}
-\int p(\mathbf{x}_a, \mathbf{x}_b)\text{d}\mathbf{x}_b &amp;\propto \int \exp\left[(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{b})^T\Lambda_{bb}(\mathbf{x}_b-\Lambda_{bb}^{-1}\mathbf{m})-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}\right]\text{d}\mathbf{x}_b
-\\&amp;\propto \exp\left[-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}\right].
-\end{aligned}\]</span></p>
-<p>于是，边缘高斯分布中关于<span class="math inline">\(\mathbf{x}_a\)</span>的指数项为<span class="math display">\[\begin{aligned}
-&amp;\ \ \ \ \ -\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T\Lambda_{aa}\mu_a-2\mathbf{x}_a^T\Lambda_{ab}\mu_b
-\\&amp;=-\mathbf{m}^T\Lambda_{bb}^{-1}\mathbf{m}+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a+\Lambda_{ab}\mu_b)
-\\&amp;=-(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))^T\Lambda_{bb}^{-1}(\Lambda_{bb}\mu_b-\Lambda_{ba}(\mathbf{x}_a-\mu_a))+\mathbf{x}_a^T\Lambda_{aa}\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}\mu_a+\Lambda_{ab}\mu_b)
-\\&amp;=\mathbf{x}_a^T(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})\mathbf{x}_a-2\mathbf{x}_a^T(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})\mu_a+C.
-\end{aligned}\]</span></p>
-<p>因此，<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a]=\mu_a}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a]=(\Lambda_{aa}-\Lambda_{ab}\Lambda_{bb}^{-1}\Lambda_{ba})^{-1}=\Sigma_{aa}}\)</span>.</p>
-]]></content>
-      <categories>
-        <category>Statistics</category>
-        <category>Graphical model</category>
-      </categories>
-      <tags>
-        <tag>Conditional independence</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Courant–Fisher Minmax Theorem</title>
     <url>/Mathematics/Numerical-linear-algebra/Courant%E2%80%93Fisher_Minmax_Theorem.html</url>
     <content><![CDATA[<h1 id="courantfisher-minmax-theorem">Courant–Fisher Minmax Theorem</h1>
@@ -269,9 +269,6 @@ Let <span class="math inline">\(i=1\)</span>, then it is obvious that <span clas
         <category>Mathematics</category>
         <category>Numerical linear algebra</category>
       </categories>
-      <tags>
-        <tag>SVD</tag>
-      </tags>
   </entry>
   <entry>
     <title>Differentiation and Indefinite Integral</title>
@@ -521,315 +518,6 @@ We have <span class="math display">\[\begin{aligned}
       <tags>
         <tag>Differential</tag>
         <tag>Integral</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Introduction to Network</title>
-    <url>/Statistics/Network-analysis/Introduction_to_Network.html</url>
-    <content><![CDATA[<h1 id="definition">Definition</h1>
-<p><strong>Definition 1.1</strong>    We abbreviate a <strong>graph</strong> <span class="math inline">\(\mathcal{G}\)</span> as <span class="math inline">\(\mathcal{G}=(\mathcal{V}, \mathcal{E})\)</span>, where <span class="math inline">\(\mathcal{V}\)</span> is the set of <strong>vertices (nodes)</strong> and <span class="math inline">\(\mathcal{E}\)</span> is the set of <strong>edges (links)</strong>. Let <span class="math inline">\(|\mathcal{V}|\)</span> be the number of vertices, and <span class="math inline">\(|\mathcal{E}|\)</span> be the number of edges in the graph <span class="math inline">\(\mathcal{G}\)</span>. If <span class="math inline">\(u\)</span> and <span class="math inline">\(b\)</span> are two vertices and there is an edge from <span class="math inline">\(u\)</span> to <span class="math inline">\(v\)</span>, then we say <span class="math inline">\(v\)</span> is a <strong>neighbor</strong> of <span class="math inline">\(u\)</span>, denoted <span class="math inline">\((u, v) \in \mathcal{E}\)</span>.</p>
-<p><strong>Definition 1.2</strong>    A <strong>directed graph</strong> or <strong>digraph</strong> is a graph where <em>all</em> edges are directed. The <strong>underlying</strong> graph of a digraph is the graph that results from turning all directed edges into <strong>undirected</strong> edges.</p>
-<p><strong>Definition 1.3</strong>    If both endpoints of an edge are the same, then the edge is a <strong>loop</strong>.</p>
-<p><strong>Example 1.1</strong>    The graph below is a loop.</p>
-<pre class="mermaid" style="text-align: center;">
-            graph LR
-            1((1)) --- 1
-          </pre>
-<p><strong>Definition 1.4</strong>    Two vertices are called <strong>adjacent</strong> if they are joined by an edge. A graph can be described by its <span class="math inline">\(|\mathcal{V}| \times |\mathcal{V}|\)</span> <strong>adjacency matrix</strong> <span class="math inline">\(A=(a_{u, v})\)</span>, where <span class="math inline">\(a_{u, v}=1\)</span> iff <span class="math inline">\((u, v) \in \mathcal{E}\)</span>.</p>
-<div class="note info">
-            <p>If there are no self-loops, all elements on the diagonal of the adjacency matrix are <span class="math inline">\(0\)</span>. If the edges of the graph are undirected, then the adjacency matrix will be symmetric.</p><p>The adjacency matrix entries tell us for every vertex <span class="math inline">\(v\)</span> which vertices are within (graph) distance <span class="math inline">\(1\)</span> of <span class="math inline">\(v\)</span>.</p><p>If we take the matrix product <span class="math inline">\(A^2=AA\)</span>, the entry for <span class="math inline">\((u, v)\)</span> with <span class="math inline">\(u \neq v\)</span> would be <span class="math display">\[a^{(2)}(u, v)=\sum_{w \in \mathcal{V}} a_{u, w}a_{w, v}.\]</span> If <span class="math inline">\(a^{(2)}(u, v) \neq 0\)</span>, then <span class="math inline">\(u\)</span> can be reached from <span class="math inline">\(v\)</span> within two steps, i.e., <span class="math inline">\(u\)</span> is within distance <span class="math inline">\(2\)</span> of <span class="math inline">\(v\)</span>. Higher powers can be interpreted similarly.</p>
-          </div>
-<p><strong>Definition 1.5</strong>    A <strong>complete</strong> graph is a graph, without self-loops, s.t. every pair of vertices is joined by an edge. The adjacency matrix has entry <span class="math inline">\(0\)</span> on the diagonal, and <span class="math inline">\(1\)</span> everywhere else.</p>
-<p><strong>Example 1.2</strong>    The graph below is complete.</p>
-<pre class="mermaid" style="text-align: center;">
-            graph LR
-            1((1)) --- 2((2)) --- 3((3))
-1 --- 3
-          </pre>
-<p><strong>Definition 1.6</strong>    A <strong>bipartite</strong> graph is a graph where the vertex set <span class="math inline">\(\mathcal{V}\)</span> is decomposed into two disjoint subsets, <span class="math inline">\(\mathcal{U}\)</span> and <span class="math inline">\(\mathcal{W}\)</span>, s.t. there are no edges between any two vertices in <span class="math inline">\(\mathcal{U}\)</span>, and there are no edges between any two vertices in <span class="math inline">\(\mathcal{W}\)</span>; all edges have one endpoint in <span class="math inline">\(\mathcal{U}\)</span> and the other endpoint in <span class="math inline">\(\mathcal{W}\)</span>. The adjacency matrix <span class="math inline">\(A\)</span> can then be arranged s.t. <span class="math display">\[A=\begin{bmatrix}
-0 &amp; A_1 \\
-A_2 &amp; 0
-\end{bmatrix}.\]</span></p>
-<p><strong>Example 1.3</strong>    The graph below is bipartite.</p>
-<pre class="mermaid" style="text-align: center;">
-            graph LR
-            1((1)) --- 3((3)) & 4((4))
-2((2)) --- 3((3)) & 4((4))
-subgraph U
-1((1))
-2((2))
-end
-subgraph W
-3((3))
-4((4))
-end
-          </pre>
-<h1 id="network-summary">Network Summary</h1>
-<h2 id="density-degree-and-degree-distribution">Density, Degree and Degree Distribution</h2>
-<p><strong>Definition 2.1</strong>    The <strong>density</strong> of a network with <span class="math inline">\(e\)</span>edges and <span class="math inline">\(n\)</span> vertices is <span class="math display">\[\frac{e}{\displaystyle \binom{n}{2}}=\frac{2e}{n(n-1)}\]</span> where <span class="math inline">\(\displaystyle \binom{n}{2}\)</span> is the potential number of edges.</p>
-<p><strong>Definition 2.2</strong>    The <strong>degree</strong> <span class="math inline">\(d(v)\)</span> of a vertex <span class="math inline">\(v\)</span> is the number of edges which involve <span class="math inline">\(v\)</span> as an endpoint. The degree can be calculated from the adjacency matrix <span class="math inline">\(A\)</span> <span class="math display">\[d(v)=\sum_{u \in \mathcal{V}} a_{u, v}.\]</span></p>
-<p><strong>Definition 2.3</strong>    The <strong>average degree</strong> of a graph is the average of its vertex degrees <span class="math display">\[\overline{d}=\frac{1}{n}\sum_{v \in \mathcal{V}} d(v).\]</span></p>
-<p><strong>Definition 2.4</strong>    The <strong>degree sequence</strong> of a given network on a vertex set <span class="math inline">\(\mathcal{V}\)</span> with <span class="math inline">\(n\)</span> elements is the unordered <span class="math inline">\(n\)</span>-element set of degrees <span class="math inline">\(\{d(v), v \in \mathcal{V}\}\)</span>.</p>
-<p><strong>Definition 2.5</strong>    The <strong>degree distribution</strong> <span class="math inline">\((d_0, d_1, \cdots)\)</span> of a graph on <span class="math inline">\(n\)</span> vertices is the vector of fraction of vertices with given degree <span class="math display">\[d_k=\frac{1}{n} \times \text{Number of vertices of degree}\ k.\]</span></p>
-<div class="note info">
-            <p>For directed graphs, we define the <strong>in-degree</strong> as the number of edges directed at the vertex, and the <strong>out-degree</strong> as the number of edges taht go out from that vertex.</p>
-          </div>
-<h2 id="local-clustering-coefficient">Local Clustering Coefficient</h2>
-<p><strong>Definition 2.6</strong>    The <strong>local clustering coefficient</strong> of a vertex <span class="math inline">\(v\)</span> is the proportion of neighbors of <span class="math inline">\(v\)</span> which are neighbors themselves. In adjacency matrix notation <span class="math display">\[C(v)=\frac{\displaystyle \sum_{u, w \in \mathcal{V}} a_{u, v}a_{w, v}a_{u,w}}{\displaystyle \sum_{u \neq w \in \mathcal{V}} a_{u, v}a_{w, v}},\]</span> where <span class="math inline">\(\displaystyle \frac{0}{0}:=0\)</span>.</p>
-<div class="note info">
-            <p>To compute <span class="math inline">\(C(v)\)</span> more efficiently, we should note that <span class="math inline">\(\displaystyle \frac{1}{2}\sum_{\substack{u \neq v \in \mathcal{V} \\ w \neq u, v \in \mathcal{V}}} a_{u, v}a_{w, v}a_{u, w}\)</span> is the number of <strong>triangles</strong> involving <span class="math inline">\(v\)</span> in the graph, and <span class="math inline">\(\displaystyle \frac{1}{2}\sum_{u \neq w \in \mathcal{V}} a_{u, v}a_{w, v}\)</span> is the number of <strong><span class="math inline">\(2\)</span>-stars</strong> centered around <span class="math inline">\(v\)</span> in the graph.</p>
-          </div>
-<p><strong>Definition 2.7</strong>    The <strong>average clustering coefficient</strong> is defined as <span class="math display">\[\overline{C}=\frac{1}{|\mathcal{V}|}\sum_{v \in \mathcal{V}} C(v).\]</span></p>
-<div class="note info">
-            <p>The local clustering coefficient describes how <em>locally dense</em> a graph is.</p>
-          </div>
-<h2 id="global-clustering-coefficient">Global Clustering Coefficient</h2>
-<p><strong>Definition 2.8</strong>    The <strong>global clustering coefficient</strong> or <strong>transitivity</strong> is defined as <span class="math display">\[C=\frac{3 \times \text{Number of triangles}}{\text{Number of connected triples}}=\frac{6 \times \text{Number of triangles}}{\text{Number of paths of length two}}\]</span></p>
-<div class="note warning">
-            <p><span class="math inline">\(\overline{C} \neq C\)</span> in general. Indeed <span class="math inline">\(\overline{C}\)</span> tends to be dominated by vertices with low degree, since they tend to have small denominators in the local clustering coefficient.</p>
-          </div>
-<h2 id="expected-clustering-coefficient">Expected Clustering Coefficient</h2>
-<p><strong>Definition 2.9</strong>    For models of random networks, we consider <strong>expected clustering coefficient</strong> <span class="math display">\[E(C)=\frac{3\mathbb{E}[\text{Number of triangles}]}{\mathbb{E}[\text{Number of connected triples}]}\]</span></p>
-<h2 id="average-shortest-path">Average Shortest Path</h2>
-<p><strong>Definition 2.10</strong>    In a graph, a <strong>path</strong> from vertex <span class="math inline">\(v_0\)</span> to vertex <span class="math inline">\(v_n\)</span> is an alternating sequence of vertices and edges <span class="math inline">\((v_0, e_1, v_1, e_2, \cdots, v_{n-1}, e_n, v_n)\)</span> s.t. the endpoints of <span class="math inline">\(e_i\)</span> are <span class="math inline">\(v_{i-1}\)</span> and <span class="math inline">\(v_i\)</span> for <span class="math inline">\(i=1, \cdots, n\)</span>. The <strong>distance</strong> <span class="math inline">\(\mathscr{l}(u, v)\)</span> between two vertices <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> is the length of a <strong>shortest</strong> path (not necessarily unique) joining them.</p>
-<div class="note info">
-            <p>We can calculate <span class="math inline">\(\mathscr{l}(u, v)\)</span> from the adjacency matrix <span class="math inline">\(A\)</span> as the smallest power <span class="math inline">\(p\)</span> of <span class="math inline">\(A\)</span> s.t. <span class="math inline">\(A^{(p)}(u, v) \neq 0\)</span>.</p>
-          </div>
-<p><strong>Definition 2.11</strong>    A graph is called <strong>connected</strong> if there is a path between any pair of vertices in the graph, otherwise it is <strong>disconnected</strong>. In a connected graph, the <strong>average shortest path length</strong> is defined as <span class="math display">\[\mathscr{l}=\frac{1}{|\mathcal{V}|(|\mathcal{V}|-1)}\sum_{u \neq v \in \mathcal{V}} \mathscr{l}(u, v),\]</span> where <span class="math inline">\(|\mathcal{V}|(|\mathcal{V}|-1)\)</span> means the possible number of shortest path length.</p>
-<div class="note info">
-            <p>The average shortest path length describes how <em>globally connected</em> a graph is.</p>
-          </div>
-<p><strong>Example 2.1</strong>    Consider a graph.</p>
-<pre class="mermaid" style="text-align: center;">
-            graph LR
-            1((1)) --- 5((5)) --- 3((3)) --- 2((2))
-5((5)) --- 2((2))
-5((5)) --- 4((4)) --- 2((2))
-          </pre>
-<p>We know <span class="math inline">\(\mathcal{V}=\{1, 2, 3, 4, 5\}\)</span>, <span class="math inline">\(\mathcal{E}=\{(1, 5), (2, 3), (2, 4), (2, 5), (3, 5), (4, 5)\}\)</span>, <span class="math inline">\(|\mathcal{V}|=5\)</span>, and <span class="math inline">\(|\mathcal{E}|=6\)</span>.</p>
-<p>The adjacency matrix is <span class="math display">\[\begin{bmatrix}
-0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
-0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
-0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
-0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
-1 &amp; 1 &amp; 1 &amp; 1 &amp; 0
-\end{bmatrix}.\]</span></p>
-<p>The density is <span class="math inline">\(\displaystyle \frac{2e}{n(n-1)}=0.6\)</span>.</p>
-<p>The degrees of vertices are <span class="math inline">\(d(1)=1\)</span>, <span class="math inline">\(d(2)=3\)</span>, <span class="math inline">\(d(3)=2\)</span>, <span class="math inline">\(d(4)=2\)</span> and <span class="math inline">\(d(5)=4\)</span>. The average degree is <span class="math inline">\(\overline{d}=2.4\)</span>. The degree sequence is <span class="math inline">\(\{1, 3, 2, 2, 4\}\)</span>. The degree distribution is <span class="math inline">\(d_0=0\)</span>, <span class="math inline">\(d_1=0.2\)</span>, <span class="math inline">\(d_2=0.4\)</span>, <span class="math inline">\(d_3=0.2\)</span> and <span class="math inline">\(d_4=0.2\)</span>.</p>
-<p>The local clustering coefficients of vertices are <span class="math inline">\(C(1)=0\)</span>, <span class="math inline">\(\displaystyle C(2)=\frac{2}{3}\)</span>, <span class="math inline">\(C(3)=1\)</span>, <span class="math inline">\(C(4)=1\)</span> and <span class="math inline">\(\displaystyle C(5)=\frac{1}{3}\)</span>. The average clustering coefficient is <span class="math inline">\(\overline{C}=0.6\)</span>.</p>
-<p>The global clustering coefficient is <span class="math inline">\(\displaystyle C=\frac{6}{11}\)</span>.</p>
-<p>The distance matrix is <span class="math display">\[\begin{bmatrix}
-0 &amp; 2 &amp; 2 &amp; 2 &amp; 1 \\
-2 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
-2 &amp; 1 &amp; 0 &amp; 2 &amp; 1 \\
-2 &amp; 1 &amp; 2 &amp; 0 &amp; 1 \\
-1 &amp; 1 &amp; 1 &amp; 1 &amp; 0
-\end{bmatrix}.\]</span> The graph is connected, and the average shortest path length is <span class="math inline">\(\mathscr{l}=1.4\)</span>.</p>
-<h2 id="small-graph-and-motif">Small Graph and Motif</h2>
-<p><strong>Definition 2.12</strong>    <strong>Small subgraph</strong> can be viewed as building-block pattern of networks. By small we mean graph on a small number (three to five) of vertices. Often a small graph is called a <strong>motif</strong> when it is <strong>over-represented</strong> in the network, where over-representation is judged using a probabilistic model for the network.</p>
-<div class="note info">
-            <p>We think of a motif as a small graph with a fixed number of vertices and with a given topology, and we use the term interchangeably with small graph.</p>
-          </div>
-<h2 id="spectral-summary">Spectral Summary</h2>
-<p><strong>Definition 2.13</strong>    We call a graph <strong>simple</strong> if it has no self-loops or multiple edges.</p>
-<p><strong>Definition 2.14</strong>     The <strong>eigenvector centrality</strong> <strong><em>(Not done. To be continued...)</em></strong></p>
-<p><strong>Definition 2.15</strong>     Let <span class="math inline">\(D\)</span> be the diagonal matrix with diagonal entries <span class="math inline">\(D_{ii}\)</span>, the degree of vertex <span class="math inline">\(i\)</span>. The <strong>graph Laplacian</strong> is <span class="math inline">\(L=D-A\)</span>, where <span class="math display">\[L(i, j)=\begin{cases}
-d(i), &amp;i=j \\
--1, &amp;i \neq j\ \text{and}\ (i, j) \in \mathcal{E} \\
-0, &amp;\text{otherwise}
-\end{cases}.\]</span> The second smallest (smallest non-zero) eigenvalue of <span class="math inline">\(L\)</span> is called <strong>algebraic connectivity</strong> or <strong>Fiedler value</strong> or <strong>spectral gap</strong> of <span class="math inline">\(\mathcal{G}\)</span>.</p>
-<div class="note info">
-            <p><span class="math inline">\(L\)</span> is symmetric, with real eigenvalues <span class="math inline">\(\lambda_0 \leq \cdots \leq \lambda_{n-1}\)</span> and eigenvectors <span class="math inline">\(\phi_1, \cdots, \phi_{n-1}\)</span>.</p><p>Since every row sum and column sum of <span class="math inline">\(L\)</span> is zero, then <span class="math inline">\(L\mathbf{1}=0\mathbf{1}\)</span>, and thus <span class="math inline">\(\lambda_0=0\)</span> and <span class="math inline">\(\phi_0=\mathbf{1}\)</span>.</p>
-          </div>
-<h2 id="other-summary">Other Summary</h2>
-<p>Specific network may require specific summary. For example, when there is a spatial structure in the network, then geometrical consideration may enter.</p>
-]]></content>
-      <categories>
-        <category>Statistics</category>
-        <category>Network analysis</category>
-      </categories>
-      <tags>
-        <tag>Network</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Linear Algebra</title>
-    <url>/Mathematics/Matrix-method/Linear_Algebra.html</url>
-    <content><![CDATA[<h1 id="column-space">Column Space</h1>
-<ul>
-<li><span class="math inline">\(A\mathbf{x}\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, and the combinations of the columns fill out the <strong>column space</strong> of <span class="math inline">\(A\)</span>.</li>
-</ul>
-<p><strong>Example 1.1</strong>    Consider <span class="math inline">\(\begin{bmatrix} 2 &amp; 3 \\ 2 &amp; 4 \\ 3 &amp; 7 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}=x_1\begin{bmatrix} 2 \\ 2 \\ 3 \end{bmatrix}+x_2\begin{bmatrix} 3 \\ 4 \\ 7 \end{bmatrix}\)</span>. The column space is a plane.</p>
-<ul>
-<li><p>A <strong>basis</strong> for a subspace is a full set of independent vectors, and all vectors in the space are combinations of the basis vectors.</p></li>
-<li><p>The <strong>rank</strong> of a matrix <span class="math inline">\(r\)</span> is the dimension of its column space.</p></li>
-</ul>
-<p><strong>Example 1.2</strong>    If <span class="math inline">\(A=\begin{bmatrix} 1 &amp; 3 &amp; 8 \\ 1 &amp; 2 &amp; 6 \\ 0 &amp; 1 &amp; 2 \end{bmatrix}\)</span>, then the <em>matrix of all independent columns</em> is <span class="math inline">\(C=\begin{bmatrix} 1 &amp; 3 \\ 1 &amp; 2 \\ 0 &amp; 1 \end{bmatrix}\)</span>.</p>
-<ul>
-<li>Suppose <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span>, one of the <em>factorization</em>s of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=CR\)</span>, whose shape is <span class="math display">\[(m \times n)=(m \times r)(r \times n).\]</span> <span class="math inline">\(R\)</span> is the <strong>row-reduced echelon form</strong> of <span class="math inline">\(A\)</span> (without zero rows), denoted <span class="math inline">\(\text{rref}(A)\)</span>.</li>
-</ul>
-<p><strong>Example 1.3</strong>    <span class="math inline">\(A=\begin{bmatrix} 1 &amp; 3 &amp; 8 \\ 1 &amp; 2 &amp; 6 \\ 0 &amp; 1 &amp; 2 \end{bmatrix}=\begin{bmatrix} 1 &amp; 3 \\ 1 &amp; 2 \\ 0 &amp; 1 \end{bmatrix}\begin{bmatrix} 1 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \end{bmatrix}=CR\)</span>.</p>
-<ul>
-<li>The number of independent columns equals the number of independent rows. The column space and row space of <span class="math inline">\(A\)</span> both have dimension <span class="math inline">\(r\)</span>, with <span class="math inline">\(r\)</span> basis vectors - columns of <span class="math inline">\(C\)</span> and rows of <span class="math inline">\(R\)</span>.</li>
-</ul>
-<h1 id="factorization-of-matrix">Factorization of Matrix</h1>
-<ul>
-<li><p><span class="math inline">\(A=LU\)</span> comes from <strong>elimination</strong>, where <span class="math inline">\(L\)</span> is lower triangular, and <span class="math inline">\(U\)</span> is upper triangular.</p></li>
-<li><p><span class="math inline">\(A=QR\)</span> comes from <strong>orthogonalizing</strong> the columns <span class="math inline">\(\mathbf{a}_1\)</span> to <span class="math inline">\(\mathbf{a}_n\)</span> as in <strong>Gram-Schmidt</strong>, where <span class="math inline">\(Q\)</span> has orthonormal columns (i.e., <span class="math inline">\(Q^TQ=I\)</span>), and <span class="math inline">\(R\)</span> is upper triangular.</p></li>
-<li><p><span class="math inline">\(S=Q \Lambda Q^T\)</span> comes from the <strong>eigenvalues</strong> <span class="math inline">\(\lambda_1, \cdots, \lambda_n\)</span> of a symmetric matrix, where eigenvalues are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and orthonormal eigenvectors are in the columns of <span class="math inline">\(Q\)</span>.</p></li>
-<li><p><span class="math inline">\(A=X \Lambda X^{-1}\)</span> is <strong>diagonalization</strong> when <span class="math inline">\(A\)</span> is <span class="math inline">\(n \times n\)</span> with <span class="math inline">\(n\)</span> independent eigenvectors, where eigenvalues of <span class="math inline">\(A\)</span> are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and eigenvectors of <span class="math inline">\(A\)</span> are in the columns of <span class="math inline">\(X\)</span>.</p></li>
-<li><p><span class="math inline">\(A=U \Sigma V^T\)</span> is the <strong>singular value decomposition (SVD)</strong> of any matrix <span class="math inline">\(A\)</span>, where singular values <span class="math inline">\(\sigma_1, \cdots, \sigma_r\)</span> are in <span class="math inline">\(\Sigma\)</span>, and orthonormal singular vectors are in <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>.</p></li>
-</ul>
-<h1 id="fundamental-subspace">Fundamental Subspace</h1>
-<p>Suppose <span class="math inline">\(A\)</span> is an <span class="math inline">\(m \times n\)</span> matrix with rank <span class="math inline">\(r\)</span>.</p>
-<ul>
-<li><p>The <strong>column space</strong> <span class="math inline">\(C(A)\)</span> contains all combinations of the columns of <span class="math inline">\(A\)</span>.</p></li>
-<li><p>The <strong>row space</strong> <span class="math inline">\(C(A^T)\)</span> contains all combinations of the columns of <span class="math inline">\(A^T\)</span>.</p></li>
-<li><p>The <strong>null space</strong> <span class="math inline">\(N(A)\)</span> contains all solutions <span class="math inline">\(\mathbf{x}\)</span> to <span class="math inline">\(A\mathbf{x}=\mathbf{0}\)</span>.</p></li>
-<li><p>The <strong>left null space</strong> <span class="math inline">\(N(A^T)\)</span> contains all solutions <span class="math inline">\(\mathbf{y}\)</span> to <span class="math inline">\(A^T\mathbf{y}=\mathbf{0}\)</span>.</p></li>
-</ul>
-<h1 id="orthonormal-matrix">Orthonormal Matrix</h1>
-<ul>
-<li><p>If <span class="math inline">\(Q\)</span> is a matrix with <strong>orthonormal columns</strong>, then <span class="math inline">\(Q^TQ=I\)</span>.</p></li>
-<li><p><strong>Orthogonal matrix</strong> is square with orthonormal columns: <span class="math inline">\(Q^T=Q^{-1}\)</span>, and <span class="math inline">\(Q^TQ=QQ^T=I\)</span>.</p></li>
-</ul>
-<p><strong>Example 4.1</strong>    Rotation through an angle <span class="math inline">\(\theta\)</span>: <span class="math inline">\(Q=\begin{bmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{bmatrix}\)</span>.</p>
-<p><strong>Example 4.2</strong>    Reflection across the <span class="math inline">\(\displaystyle \frac{\theta}{2}\)</span> line: <span class="math inline">\(Q=\begin{bmatrix} \cos\theta &amp; \sin\theta \\ \sin\theta &amp; -\cos\theta \end{bmatrix}\)</span>.</p>
-<ul>
-<li><span class="math inline">\(\|Q\mathbf{x}\|^2=\|\mathbf{x}\|^2\)</span>.</li>
-</ul>
-<strong><em>Proof.</em></strong> We have <span class="math display">\[(Q\mathbf{x})^T(Q\mathbf{x})=\mathbf{x}^TQ^TQ\mathbf{x}=\mathbf{x}^TI\mathbf{x}=\mathbf{x}^T\mathbf{x}.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h2 id="householder-reflection">Householder Reflection</h2>
-<ul>
-<li><p>Householder matrix: <span class="math inline">\(H=I-2\mathbf{u}\mathbf{u}^T\)</span>, where <span class="math inline">\(\mathbf{u}^T\mathbf{u}=1\)</span>.</p></li>
-<li><p><span class="math inline">\(H\)</span> is orthogonal matrix.</p></li>
-</ul>
-<strong><em>Proof.</em></strong> Since <span class="math inline">\(H\)</span> is symmetric, then <span class="math display">\[H^TH=H^2=(I-2\mathbf{u}\mathbf{u}^T)(I-2\mathbf{u}\mathbf{u}^T)=I-4\mathbf{u}\mathbf{u}^T+4\mathbf{u}\mathbf{u}^T\mathbf{u}\mathbf{u}^T=I.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="eigenvalue-and-eigenvector">Eigenvalue and Eigenvector</h1>
-<ul>
-<li>The <strong>eigenvector</strong> <span class="math inline">\(\mathbf{x}\)</span> of <span class="math inline">\(A\)</span> does not change direction when multiplying <span class="math inline">\(\mathbf{x}\)</span> by <span class="math inline">\(A\)</span>, i.e., <span class="math inline">\(A\mathbf{x}=\lambda\mathbf{x}\)</span>.</li>
-</ul>
-<div class="note warning">
-            <p><span class="math inline">\(\lambda(A+B) \not\equiv \lambda(A)+\lambda(B)\)</span> and <span class="math inline">\(\lambda(AB) \not\equiv \lambda(A)\lambda(B)\)</span>.</p>
-          </div>
-<ul>
-<li><p>The sum of eigenvalues of a square <span class="math inline">\(A\)</span> equals the <strong>trace</strong> (the diagonal sum) of <span class="math inline">\(A\)</span>.</p></li>
-<li><p>The product of eigenvalues of a square <span class="math inline">\(A\)</span> equals the determinant of <span class="math inline">\(A\)</span>.</p></li>
-</ul>
-<h2 id="similar-matrix">Similar Matrix</h2>
-<ul>
-<li><p>Two <span class="math inline">\(n \times n\)</span> matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>similar</strong> if there exists an invertible <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(B=P^{-1}AP\)</span>. <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have same eigenvalues: <span class="math display">\[B\mathbf{y}=P^{-1}AP\mathbf{y}=\lambda\mathbf{y} \Rightarrow A(P\mathbf{y})=\lambda (P\mathbf{y}).\]</span></p></li>
-<li><p>Suppose <span class="math inline">\(A\)</span> has eigenvalues <span class="math inline">\(\lambda_1, \cdots, \lambda_n\)</span> with corresponding eigenvectors <span class="math inline">\(\mathbf{x}_1, \cdots, \mathbf{x}_n\)</span>. <span class="math inline">\(A=X\Lambda X^{-1}\)</span>, where eigenvalues of <span class="math inline">\(A\)</span> are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and eigenvectors of <span class="math inline">\(A\)</span> are in the columns of <span class="math inline">\(X\)</span>, i.e., <span class="math inline">\(A\)</span> is similar to <span class="math inline">\(\Lambda\)</span>.</p></li>
-</ul>
-<strong><em>Proof.</em></strong> Let <span class="math inline">\(X=\begin{bmatrix} &amp; \\ \mathbf{x}_1 &amp; \cdots &amp; \mathbf{x}_n \\ &amp; \end{bmatrix}\)</span>. We have <span class="math display">\[AX=\begin{bmatrix}
-&amp; \\ A\mathbf{x}_1 &amp; \cdots &amp; A\mathbf{x}_n \\ &amp;
-\end{bmatrix}=\begin{bmatrix}
-&amp; \\ \lambda_1\mathbf{x}_1 &amp; \cdots &amp; \lambda_n\mathbf{x}_n \\ &amp;
-\end{bmatrix}\]</span> and <span class="math display">\[X\Lambda=\begin{bmatrix}
-&amp; \\ \lambda_1\mathbf{x}_1 &amp; \cdots &amp; \lambda_n\mathbf{x}_n \\ &amp;
-\end{bmatrix},\]</span> i.e., <span class="math inline">\(AX=X\Lambda\)</span>, and thus <span class="math inline">\(A=X\Lambda X^{-1}\)</span>. Hence, <span class="math inline">\(X^{-1}AX=\Lambda\)</span>, i.e., <span class="math inline">\(A\)</span> is similar to <span class="math inline">\(\Lambda\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="symmetric-postive-definite-matrix">Symmetric Postive Definite Matrix</h1>
-<ul>
-<li><p>All eigenvalues of a symmetric matrix <span class="math inline">\(S\)</span> are real numbers.</p></li>
-<li><p>The eigenvectors of <span class="math inline">\(S\)</span> can be chosen orthogonal.</p></li>
-<li><p><strong>(Spectral Theorem)</strong> Every real symmetric matrix has the form <span class="math inline">\(S=Q\Lambda Q^T\)</span>, where eigenvalues are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and orthonormal eigenvectors are in the columns of <span class="math inline">\(Q\)</span>.</p></li>
-<li><p>Suppose <span class="math inline">\(S\)</span> is a real symmetric matrix. <span class="math inline">\(S\)</span> is a positive definite matrix if and only if one of the following statements holds:</p></li>
-</ul>
-<p>         1. All eigenvalues of <span class="math inline">\(S\)</span> are positive;</p>
-<p>         2. The <strong>energy</strong> <span class="math inline">\(\mathbf{x}^TS\mathbf{x}\)</span> is positive for all <span class="math inline">\(\mathbf{x} \neq \mathbf{0}\)</span>;</p>
-<p>         3. <span class="math inline">\(S=A^TA\)</span> for a matrix <span class="math inline">\(A\)</span> with independent columns;</p>
-<p>         4. All the leading determinants of <span class="math inline">\(S\)</span> are positive;</p>
-<p>         5. All the pivots of <span class="math inline">\(S\)</span> are positive.</p>
-<div class="note info">
-            <p>The <span class="math inline">\(k\)</span>th pivot is the ratio <span class="math inline">\(\displaystyle \frac{D_k}{D_{k-1}}\)</span> of the leading determinants (sizes <span class="math inline">\(k\)</span> and <span class="math inline">\(k-1\)</span>).</p>
-          </div>
-<p><span id="7"></span></p>
-<h1 id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h1>
-<ul>
-<li>The <strong>singular value decomposition</strong> of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=U\Sigma V^T\)</span>, where <span class="math inline">\(U\)</span> contains orthonormal eigenvectors of <span class="math inline">\(AA^T\)</span>, <span class="math inline">\(\Sigma\)</span> contains singular values <span class="math inline">\(\sigma_1, \cdots, \sigma_r\)</span>, and <span class="math inline">\(V\)</span> contains orthonormal eigenvectors of <span class="math inline">\(A^TA\)</span>. Note that <span class="math inline">\(\sigma_1^2 \geq \cdots \geq \sigma_r^2\)</span> are the nonzero eigenvalues of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> for <span class="math inline">\(r\)</span> is the rank of <span class="math inline">\(A\)</span>.</li>
-</ul>
-<p><strong>Example 7.1</strong>    Find an SVD of <span class="math inline">\(A=\begin{bmatrix} 3 &amp; 0 \\ 4 &amp; 5 \end{bmatrix}\)</span>.</p>
-<p><strong><em>Solution.</em></strong> We have <span class="math inline">\(AA^T=\begin{bmatrix} 9 &amp; 12 \\ 12 &amp; 41 \end{bmatrix}\)</span> and <span class="math inline">\(A^TA=\begin{bmatrix} 25 &amp; 20 \\ 20 &amp; 25 \end{bmatrix}\)</span>. The nonzero eigenvalues of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> are <span class="math inline">\(\lambda_1=45\)</span> and <span class="math inline">\(\lambda_2=5\)</span>. The eigenvectors of <span class="math inline">\(AA^T\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 3 \end{bmatrix}\)</span> and <span class="math inline">\(\begin{bmatrix} -3 \\ 1 \end{bmatrix}\)</span>. The eigenvectors of <span class="math inline">\(A^TA\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span> and <span class="math inline">\(\begin{bmatrix} -1 \\ 1 \end{bmatrix}\)</span>. Therefore, <span class="math inline">\(\displaystyle U=\frac{1}{\sqrt{10}}\begin{bmatrix} 1 &amp; -3 \\ 3 &amp; 1 \end{bmatrix}\)</span> and <span class="math inline">\(\displaystyle V=\frac{1}{\sqrt{2}}\begin{bmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{bmatrix}\)</span>, and <span class="math inline">\(\Sigma=\begin{bmatrix} \sqrt{45} &amp; 0 \\ 0 &amp; \sqrt{5} \end{bmatrix}\)</span>.</p>
-<p><strong>Example 7.2</strong>    Find an SVD of <span class="math inline">\(A=\begin{bmatrix} 1 &amp; 1 \\ 1 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}\)</span>.</p>
-<p><strong><em>Solution.</em></strong> We have <span class="math inline">\(AA^T=\begin{bmatrix} 2 &amp; 2 &amp; 0 \\ 2 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{bmatrix}\)</span> and <span class="math inline">\(A^TA=\begin{bmatrix} 2 &amp; 2 \\ 2 &amp; 2 \end{bmatrix}\)</span>. The nonzero eigenvalue of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> is <span class="math inline">\(\lambda_1=4\)</span>. The eigenvectors of <span class="math inline">\(AA^T\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}\)</span>, <span class="math inline">\(\begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}\)</span>, and <span class="math inline">\(\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}\)</span>. The eigenvectors of <span class="math inline">\(A^TA\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span> and <span class="math inline">\(\begin{bmatrix} -1 \\ 1 \end{bmatrix}\)</span>. Therefore, <span class="math inline">\(U=\begin{bmatrix} 1/\sqrt{2} &amp; -1/\sqrt{2} &amp; 0 \\ 1/\sqrt{2} &amp; 1/\sqrt{2} &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}\)</span> and <span class="math inline">\(V=\displaystyle \frac{1}{\sqrt{2}}\begin{bmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{bmatrix}\)</span>, and <span class="math inline">\(\Sigma=\begin{bmatrix} 2 &amp; 0 \\ 0 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span>.</p>
-<ul>
-<li>The pieces of the SVD: <span class="math inline">\(A=U\Sigma V^T=\sigma_1\mathbf{u}_1\mathbf{v}_1^T+\cdots+\sigma_r\mathbf{u}_r\mathbf{v}_r^T\)</span>.</li>
-</ul>
-<h1 id="norm-of-vector-and-matrix">Norm of Vector and Matrix</h1>
-<h2 id="vector-norm">Vector Norm</h2>
-<p>Suppose <span class="math inline">\(\mathbf{v} \in \mathbb{C}^n\)</span>.</p>
-<ul>
-<li><p><strong><span class="math inline">\(\mathscr{l}^2\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_2=\sqrt{|v_1|^2+\cdots+|v_n|^2}\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(\mathscr{l}^1\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_1=|v_1|+\cdots+|v_n|\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(\mathscr{l}^\infty\)</span> norm</strong>: <span class="math inline">\(\max |v_i|\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(\mathscr{l}^p\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_p=(|v_1|^p+\cdots+|v_n|^p)^{1/p}\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(S\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_S=\sqrt{\mathbf{v}^TS\mathbf{v}}\)</span> for any symmetric positive definite matrix <span class="math inline">\(S\)</span>.</p></li>
-</ul>
-<h2 id="matrix-norm">Matrix Norm</h2>
-<ul>
-<li><p><strong><span class="math inline">\(\mathscr{l}^2\)</span> norm</strong> or <strong>Spectral norm</strong>: <span class="math display">\[\begin{aligned}
-\|A\|_2&amp;=\max \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}=\max\frac{\sqrt{\mathbf{x}^T(A^TA)\mathbf{x}}}{\sqrt{\mathbf{x}^T\mathbf{x}}}=\max\sqrt{\frac{\lambda_1c_1^2+\cdots+\lambda_rc_r^2}{c_1^2+\cdots+c_r^2}}
-\\&amp;=\sqrt{\lambda_1}=\sigma_1,
-\end{aligned}\]</span> where <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_r\)</span>, i.e., the largest singular value of <span class="math inline">\(A\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(\mathscr{l}^1\)</span> norm</strong>: <span class="math inline">\(\|A\|_1\)</span> is the largest <span class="math inline">\(\mathscr{l}^1\)</span> norm of the columns of <span class="math inline">\(A\)</span>.</p></li>
-<li><p><strong><span class="math inline">\(\mathscr{l}^\infty\)</span> norm</strong>: <span class="math inline">\(\|A\|_1\)</span> is the largest <span class="math inline">\(\mathscr{l}^1\)</span> norm of the rows of <span class="math inline">\(A\)</span>.</p></li>
-<li><p><strong>Frobenius norm</strong>: <span class="math inline">\(\|A\|_F=\sqrt{|a_{11}|^2+\cdots+|a_{1n}|^2+\cdots+|a_{mn}|^2}=\sqrt{\sigma_1^2+\cdots+\sigma_r^2}\)</span>.</p></li>
-<li><p><strong>Nuclear norm</strong>: <span class="math inline">\(\|A\|_N=\sigma_1+\cdots+\sigma_r\)</span>.</p></li>
-<li><p>For any orthogonal matrix <span class="math inline">\(Q\)</span>, we have <span class="math inline">\(\|Q\|_2=1\)</span>, <span class="math inline">\(\|Q\|_F=\sqrt{n}\)</span>, and <span class="math inline">\(\|Q\|_N=n\)</span>. The spectral, Frobenius and nuclear norms of any matrix stay the same when <span class="math inline">\(A\)</span> is multiplies (on either side) by an orthogonal matrix.</p></li>
-</ul>
-<h1 id="principal-component-analysis-pca">Principal Component Analysis (PCA)</h1>
-<ul>
-<li><strong>(Eckart-Young Theorem)</strong> If <span class="math inline">\(B\)</span> has rank <span class="math inline">\(k\)</span>, then <span class="math display">\[\|A-B\| \geq \|A-A_k\|,\]</span> where <span class="math inline">\(A_k=U_k\Sigma_kV_k^T=\sigma_1\mathbf{u}_1\mathbf{v}_1^T+\cdots+\sigma_k\mathbf{u}_k\mathbf{v}_k^T\)</span> with <span class="math inline">\(\text{rank}(A_k)=k\)</span>.</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Mathematics</category>
-        <category>Matrix method</category>
-      </categories>
-      <tags>
-        <tag>SVD</tag>
-        <tag>Linear algebra</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Low-Rank Approximation via Truncated SVD</title>
-    <url>/Mathematics/Numerical-linear-algebra/Low-Rank_Approximation_via_Truncated_SVD.html</url>
-    <content><![CDATA[<h1 id="low-rank-approximation">Low-Rank Approximation</h1>
-<p>Given <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span>, we want to find <span class="math inline">\(A_r\)</span> s.t. <span class="math display">\[A \approx A_r=U_r\Sigma_rV_r^T.\]</span></p>
-<ul>
-<li><p>Low-rank approximation is beneficial in terms of the <strong>storage cost</strong> when <span class="math inline">\(r \ll \min(m, n)\)</span>. Instead of storing <span class="math inline">\(mn\)</span> entries for <span class="math inline">\(A\)</span>, we can store <span class="math inline">\((m+n+1)r\)</span> entries to keep the low-rank factorization without losing information.</p></li>
-<li><p>Low-rank approximation can bring <strong>computational</strong> benefits. In order to compute <span class="math inline">\(A\mathbf{x}\)</span>, by noting that <span class="math inline">\(A_r\mathbf{x}=U_r(\Sigma_r(V_r^T\mathbf{x}))\)</span>, we need only <span class="math inline">\(O((m+n)r)\)</span> operations instead of <span class="math inline">\(O(mn)\)</span>.</p></li>
-</ul>
-<h1 id="optimal-low-rank-approximation-by-svd">Optimal Low-Rank Approximation by SVD</h1>
-<p><strong>Theorem 2.1</strong>    For any <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> with singular values <span class="math inline">\(\sigma_1(A) \geq \cdots \geq \sigma_n(A) \geq 0\)</span>, and any non-negatvie integer <span class="math inline">\(r&lt;\min(m, n)\)</span>, <span class="math display">\[\|A-A_r\|_2=\sigma_{r+1}(A)=\min_{\text{rank}(B) \leq r} \|A-B\|_2,\]</span> where <span class="math inline">\(A_r=U_r\Sigma_rV_r^T\)</span> and <span class="math inline">\(\Sigma_r=\text{diag}(\sigma_1, \cdots, \sigma_r)\)</span>.</p>
-<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(\text{rank}(B) \leq r\)</span>, we can write <span class="math inline">\(B=B_1B_2^T\)</span> where <span class="math inline">\(B_1\)</span> and <span class="math inline">\(B_2\)</span> have <span class="math inline">\(r\)</span> columns. It follows that <span class="math inline">\(B_2^T\)</span> has a null space of dimension at least <span class="math inline">\(n-r\)</span>, and we can find an orthonormal matrix <span class="math inline">\(W \in \mathbb{C}^{n \times (n-r)}\)</span> s.t. <span class="math inline">\(B_2^TW=0\)</span>, i.e., <span class="math inline">\(BW=0\)</span>. Then <span class="math display">\[\|A-B\|_2=\|A-B\|_2\|W\|_2 \geq \|(A-B)W\|_2=\|AW\|_2=\|U\Sigma(V^*W)\|_2.\]</span></p>
-<p>Now since <span class="math inline">\(W\)</span> is <span class="math inline">\(n-r\)</span> dimensional, there is an intersection between <span class="math inline">\(W\)</span> and <span class="math inline">\(\begin{bmatrix} \mathbf{v} &amp; \cdots &amp; \mathbf{v}_{r+1} \end{bmatrix}\)</span>.</p>
-<center>
-<strong><em>Not done. To be continued...</em></strong>
-</center>
-<div class="note info">
-            <ul><li><p>Good approximation <span class="math inline">\(A \approx A_r\)</span> is obtained iff <span class="math inline">\(\sigma_{r+1} \ll \sigma_1\)</span>.</p></li><li><p>Optimality holds for any unitarily invariant norm.</p></li><li><p>A prominent application of low-rank approximation is <strong>principle component analysis (PCA)</strong> in data science.</p></li><li><p>Many matrices have explicit or hidden low-rank structure.</p></li></ul>
-          </div>
-<h1 id="application-image-compression">Application: Image Compression</h1>
-<p>A classical and visually pleasing illustration of low-rank approximation by the truncated SVD is image compression. (Note that this is slightly <em>outdated</em>). The idea is that greyscale images can be represented by a matrix where each entry indicates the intensity of a pixel. The matrix can be compressed by finding a low-rank approximation, resulting in image compression.</p>
-<p>We give a code example and <a href="https://github.com/litianyang0211/OxfordNotes/blob/main/Numerical%20Linear%20Algebra/Image%20Compression%20with%20SVD.ipynb"><strong><em>HERE</em></strong></a> is the full demo.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Packages.</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load an image, and convert it to black and white.</span></span><br><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&quot;Oxford.png&quot;</span>)</span><br><span class="line">imggray = img.convert(<span class="string">&quot;LA&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Convert the image data into a numpy matrix.</span></span><br><span class="line">imgmat = np.array(<span class="built_in">list</span>(imggray.getdata(band=<span class="number">0</span>)), <span class="built_in">float</span>)</span><br><span class="line">imgmat.shape = (imggray.size[<span class="number">1</span>], imggray.size[<span class="number">0</span>])</span><br><span class="line">imgmat = np.matrix(imgmat)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute the SVD.</span></span><br><span class="line">U, sigma, V = np.linalg.svd(imgmat)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Truncated SVD.</span></span><br><span class="line">trun_img_r50 = np.matrix(U[:, :<span class="number">50</span>]) * np.diag(sigma[:<span class="number">50</span>]) * np.matrix(V[:<span class="number">50</span>, :])</span><br><span class="line">plt.imshow(trun_img_r50, cmap=<span class="string">&quot;gray&quot;</span>)</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>Mathematics</category>
-        <category>Numerical linear algebra</category>
-      </categories>
-      <tags>
-        <tag>SVD</tag>
       </tags>
   </entry>
   <entry>
@@ -1122,110 +810,142 @@ In addition, if <span class="math inline">\(\displaystyle \int_a^\infty f(x)\tex
       </tags>
   </entry>
   <entry>
-    <title>Low Rank and Compressed Sensing</title>
-    <url>/Mathematics/Matrix-method/Low_Rank_and_Compressed_Sensing.html</url>
-    <content><![CDATA[<h1 id="sherman-morrison-woodbury-formula">Sherman-Morrison-Woodbury Formula</h1>
+    <title>Linear Algebra</title>
+    <url>/Mathematics/Matrix-method/Linear_Algebra.html</url>
+    <content><![CDATA[<h1 id="column-space">Column Space</h1>
 <ul>
-<li><span class="math inline">\(\displaystyle (I-\mathbf{u}\mathbf{v}^T)^{-1}=I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\)</span>.</li>
+<li><span class="math inline">\(A\mathbf{x}\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, and the combinations of the columns fill out the <strong>column space</strong> of <span class="math inline">\(A\)</span>.</li>
 </ul>
-<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
-(I-\mathbf{u}\mathbf{v}^T)(I-\mathbf{u}\mathbf{v}^T)^{-1}&amp;=(I-\mathbf{u}\mathbf{v}^T)\left(I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\right)
-\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{(I-\mathbf{u}\mathbf{v}^T)\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
-\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{\mathbf{u}\mathbf{v}^T-\mathbf{u}(\mathbf{v}^T\mathbf{u})\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
-\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{(1-\mathbf{v}^T\mathbf{u})\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
-\\&amp;=I
-\end{aligned}\]</span> and <span class="math display">\[\begin{aligned}
-(I-\mathbf{u}\mathbf{v}^T)^{-1}(I-\mathbf{u}\mathbf{v}^T)&amp;=\left(I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\right)(I-\mathbf{u}\mathbf{v}^T)
-\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{\mathbf{u}\mathbf{v}^T(I-\mathbf{u}\mathbf{v}^T)}{1-\mathbf{v}^T\mathbf{u}}
-\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{\mathbf{u}\mathbf{v}^T-\mathbf{u}(\mathbf{v}^T\mathbf{u})\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
-\\&amp;=I.
-\end{aligned}\]</span>
+<p><strong>Example 1.1</strong>    Consider <span class="math inline">\(\begin{bmatrix} 2 &amp; 3 \\ 2 &amp; 4 \\ 3 &amp; 7 \end{bmatrix}\begin{bmatrix} x_1 \\ x_2 \end{bmatrix}=x_1\begin{bmatrix} 2 \\ 2 \\ 3 \end{bmatrix}+x_2\begin{bmatrix} 3 \\ 4 \\ 7 \end{bmatrix}\)</span>. The column space is a plane.</p>
+<ul>
+<li><p>A <strong>basis</strong> for a subspace is a full set of independent vectors, and all vectors in the space are combinations of the basis vectors.</p></li>
+<li><p>The <strong>rank</strong> of a matrix <span class="math inline">\(r\)</span> is the dimension of its column space.</p></li>
+</ul>
+<p><strong>Example 1.2</strong>    If <span class="math inline">\(A=\begin{bmatrix} 1 &amp; 3 &amp; 8 \\ 1 &amp; 2 &amp; 6 \\ 0 &amp; 1 &amp; 2 \end{bmatrix}\)</span>, then the <em>matrix of all independent columns</em> is <span class="math inline">\(C=\begin{bmatrix} 1 &amp; 3 \\ 1 &amp; 2 \\ 0 &amp; 1 \end{bmatrix}\)</span>.</p>
+<ul>
+<li>Suppose <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span>, one of the <em>factorization</em>s of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=CR\)</span>, whose shape is <span class="math display">\[(m \times n)=(m \times r)(r \times n).\]</span> <span class="math inline">\(R\)</span> is the <strong>row-reduced echelon form</strong> of <span class="math inline">\(A\)</span> (without zero rows), denoted <span class="math inline">\(\text{rref}(A)\)</span>.</li>
+</ul>
+<p><strong>Example 1.3</strong>    <span class="math inline">\(A=\begin{bmatrix} 1 &amp; 3 &amp; 8 \\ 1 &amp; 2 &amp; 6 \\ 0 &amp; 1 &amp; 2 \end{bmatrix}=\begin{bmatrix} 1 &amp; 3 \\ 1 &amp; 2 \\ 0 &amp; 1 \end{bmatrix}\begin{bmatrix} 1 &amp; 0 &amp; 2 \\ 0 &amp; 1 &amp; 2 \end{bmatrix}=CR\)</span>.</p>
+<ul>
+<li>The number of independent columns equals the number of independent rows. The column space and row space of <span class="math inline">\(A\)</span> both have dimension <span class="math inline">\(r\)</span>, with <span class="math inline">\(r\)</span> basis vectors - columns of <span class="math inline">\(C\)</span> and rows of <span class="math inline">\(R\)</span>.</li>
+</ul>
+<h1 id="factorization-of-matrix">Factorization of Matrix</h1>
+<ul>
+<li><p><span class="math inline">\(A=LU\)</span> comes from <strong>elimination</strong>, where <span class="math inline">\(L\)</span> is lower triangular, and <span class="math inline">\(U\)</span> is upper triangular.</p></li>
+<li><p><span class="math inline">\(A=QR\)</span> comes from <strong>orthogonalizing</strong> the columns <span class="math inline">\(\mathbf{a}_1\)</span> to <span class="math inline">\(\mathbf{a}_n\)</span> as in <strong>Gram-Schmidt</strong>, where <span class="math inline">\(Q\)</span> has orthonormal columns (i.e., <span class="math inline">\(Q^TQ=I\)</span>), and <span class="math inline">\(R\)</span> is upper triangular.</p></li>
+<li><p><span class="math inline">\(S=Q \Lambda Q^T\)</span> comes from the <strong>eigenvalues</strong> <span class="math inline">\(\lambda_1, \cdots, \lambda_n\)</span> of a symmetric matrix, where eigenvalues are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and orthonormal eigenvectors are in the columns of <span class="math inline">\(Q\)</span>.</p></li>
+<li><p><span class="math inline">\(A=X \Lambda X^{-1}\)</span> is <strong>diagonalization</strong> when <span class="math inline">\(A\)</span> is <span class="math inline">\(n \times n\)</span> with <span class="math inline">\(n\)</span> independent eigenvectors, where eigenvalues of <span class="math inline">\(A\)</span> are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and eigenvectors of <span class="math inline">\(A\)</span> are in the columns of <span class="math inline">\(X\)</span>.</p></li>
+<li><p><span class="math inline">\(A=U \Sigma V^T\)</span> is the <strong>singular value decomposition (SVD)</strong> of any matrix <span class="math inline">\(A\)</span>, where singular values <span class="math inline">\(\sigma_1, \cdots, \sigma_r\)</span> are in <span class="math inline">\(\Sigma\)</span>, and orthonormal singular vectors are in <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>.</p></li>
+</ul>
+<h1 id="fundamental-subspace">Fundamental Subspace</h1>
+<p>Suppose <span class="math inline">\(A\)</span> is an <span class="math inline">\(m \times n\)</span> matrix with rank <span class="math inline">\(r\)</span>.</p>
+<ul>
+<li><p>The <strong>column space</strong> <span class="math inline">\(C(A)\)</span> contains all combinations of the columns of <span class="math inline">\(A\)</span>.</p></li>
+<li><p>The <strong>row space</strong> <span class="math inline">\(C(A^T)\)</span> contains all combinations of the columns of <span class="math inline">\(A^T\)</span>.</p></li>
+<li><p>The <strong>null space</strong> <span class="math inline">\(N(A)\)</span> contains all solutions <span class="math inline">\(\mathbf{x}\)</span> to <span class="math inline">\(A\mathbf{x}=\mathbf{0}\)</span>.</p></li>
+<li><p>The <strong>left null space</strong> <span class="math inline">\(N(A^T)\)</span> contains all solutions <span class="math inline">\(\mathbf{y}\)</span> to <span class="math inline">\(A^T\mathbf{y}=\mathbf{0}\)</span>.</p></li>
+</ul>
+<h1 id="orthonormal-matrix">Orthonormal Matrix</h1>
+<ul>
+<li><p>If <span class="math inline">\(Q\)</span> is a matrix with <strong>orthonormal columns</strong>, then <span class="math inline">\(Q^TQ=I\)</span>.</p></li>
+<li><p><strong>Orthogonal matrix</strong> is square with orthonormal columns: <span class="math inline">\(Q^T=Q^{-1}\)</span>, and <span class="math inline">\(Q^TQ=QQ^T=I\)</span>.</p></li>
+</ul>
+<p><strong>Example 4.1</strong>    Rotation through an angle <span class="math inline">\(\theta\)</span>: <span class="math inline">\(Q=\begin{bmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{bmatrix}\)</span>.</p>
+<p><strong>Example 4.2</strong>    Reflection across the <span class="math inline">\(\displaystyle \frac{\theta}{2}\)</span> line: <span class="math inline">\(Q=\begin{bmatrix} \cos\theta &amp; \sin\theta \\ \sin\theta &amp; -\cos\theta \end{bmatrix}\)</span>.</p>
+<ul>
+<li><span class="math inline">\(\|Q\mathbf{x}\|^2=\|\mathbf{x}\|^2\)</span>.</li>
+</ul>
+<strong><em>Proof.</em></strong> We have <span class="math display">\[(Q\mathbf{x})^T(Q\mathbf{x})=\mathbf{x}^TQ^TQ\mathbf{x}=\mathbf{x}^TI\mathbf{x}=\mathbf{x}^T\mathbf{x}.\]</span>
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
+<h2 id="householder-reflection">Householder Reflection</h2>
 <ul>
-<li><span class="math inline">\((I_n-UV^T)^{-1}=I_n+U(I_k-V^TU)^{-1}V^T\)</span>, where <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are <span class="math inline">\(n \times k\)</span> matrices.</li>
+<li><p>Householder matrix: <span class="math inline">\(H=I-2\mathbf{u}\mathbf{u}^T\)</span>, where <span class="math inline">\(\mathbf{u}^T\mathbf{u}=1\)</span>.</p></li>
+<li><p><span class="math inline">\(H\)</span> is orthogonal matrix.</p></li>
 </ul>
-<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
-(I_n-UV^T)(I_n-UV^T)^{-1}&amp;=I_n-UV^T+(I_n-UV^T)U(I_k-V^TU)^{-1}V^T
-\\&amp;=I_n-UV^T+(U-UV^TU)(I_k-V^TU)^{-1}V^T
-\\&amp;=I_n-UV^T+U(I_k-V^TU)(I_k-V^TU)^{-1}V^T
-\\&amp;=I_n-UV^T+UV^T
-\\&amp;=I_n
-\end{aligned}\]</span> and <span class="math display">\[\begin{aligned}
-(I_n-UV^T)^{-1}(I_n-UV^T)&amp;=I_n+U(I_k-V^TU)^{-1}V^T-(I_n+U(I_k-V^TU)^{-1}V^T)UV^T
-\\&amp;=I_n+U(I_k-V^TU)^{-1}V^T-UV^T-U(I_k-V^TU)^{-1}V^TUV^T
-\\&amp;=I_n-UV^T+U(I_k-V^TU)^{-1}V^T(I_n-UV^T)
-\\&amp;=I_n-UV^T+U(I_k-V^TU)^{-1}(V^T-V^TUV^T)
-\\&amp;=I_n-UV^T+U(I_k-V^TU)^{-1}(I_k-V^TU)V^T
-\\&amp;=I_n-UV^T+UV^T
-\\&amp;=I_n.
-\end{aligned}\]</span>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(H\)</span> is symmetric, then <span class="math display">\[H^TH=H^2=(I-2\mathbf{u}\mathbf{u}^T)(I-2\mathbf{u}\mathbf{u}^T)=I-4\mathbf{u}\mathbf{u}^T+4\mathbf{u}\mathbf{u}^T\mathbf{u}\mathbf{u}^T=I.\]</span>
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
+<h1 id="eigenvalue-and-eigenvector">Eigenvalue and Eigenvector</h1>
 <ul>
-<li><span class="math inline">\((A-UV^T)^{-1}=A^{-1}+A^{-1}U(I-V^TA^{-1}U)^{-1}V^TA^{-1}\)</span>.</li>
+<li>The <strong>eigenvector</strong> <span class="math inline">\(\mathbf{x}\)</span> of <span class="math inline">\(A\)</span> does not change direction when multiplying <span class="math inline">\(\mathbf{x}\)</span> by <span class="math inline">\(A\)</span>, i.e., <span class="math inline">\(A\mathbf{x}=\lambda\mathbf{x}\)</span>.</li>
 </ul>
-<h2 id="application-solving-a-perturbation-problem">Application: Solving a Perturbation Problem</h2>
+<div class="note warning">
+            <p><span class="math inline">\(\lambda(A+B) \not\equiv \lambda(A)+\lambda(B)\)</span> and <span class="math inline">\(\lambda(AB) \not\equiv \lambda(A)\lambda(B)\)</span>.</p>
+          </div>
 <ul>
-<li>Suppose <span class="math inline">\(A\mathbf{w}=\mathbf{b}\)</span> is solved for <span class="math inline">\(\mathbf{w}\)</span>, and we want to solve <span class="math inline">\((A-\mathbf{u}\mathbf{v}^T)\mathbf{x}=\mathbf{b}\)</span>. We first solve <span class="math inline">\(A\mathbf{z}=\mathbf{u}\)</span>, then <span class="math display">\[\mathbf{x}=\mathbf{w}+\frac{\mathbf{v}^T\mathbf{w}\mathbf{z}}{1-\mathbf{v}^T\mathbf{z}}.\]</span></li>
+<li><p>The sum of eigenvalues of a square <span class="math inline">\(A\)</span> equals the <strong>trace</strong> (the diagonal sum) of <span class="math inline">\(A\)</span>.</p></li>
+<li><p>The product of eigenvalues of a square <span class="math inline">\(A\)</span> equals the determinant of <span class="math inline">\(A\)</span>.</p></li>
 </ul>
-<h2 id="application-recursive-least-squares">Application: Recursive Least Squares</h2>
+<h2 id="similar-matrix">Similar Matrix</h2>
 <ul>
-<li>Suppose there is a new measurement in least squares: <span class="math inline">\(\begin{bmatrix} A \\ \mathbf{v} \end{bmatrix}\mathbf{x}=\begin{bmatrix} \mathbf{b} \\ b_\text{new} \end{bmatrix}\)</span>. The new normal equation is <span class="math display">\[\begin{bmatrix}
-A^T &amp; \mathbf{v}^T
-\end{bmatrix}\begin{bmatrix}
-A \\ \mathbf{v}
-\end{bmatrix}\widehat{\mathbf{x}}_\text{new}=\begin{bmatrix}
-A^T &amp; \mathbf{v}^T
-\end{bmatrix}\begin{bmatrix}
-\mathbf{b} \\ b_\text{new}
-\end{bmatrix},\]</span> i.e., <span class="math inline">\((A^TA+\mathbf{v}^T\mathbf{v})\widehat{\mathbf{x}}_\text{new}=A^T\mathbf{b}+\mathbf{v}^Tb_\text{new}\)</span>. The update formula is <span class="math display">\[(A^TA+\mathbf{v}^T\mathbf{v})^{-1}=(A^TA)^{-1}-c(A^TA)^{-1}\mathbf{v}^T\mathbf{v}(A^TA)^{-1}\]</span> with <span class="math inline">\(\displaystyle c=\frac{1}{1+\mathbf{v}(A^TA)^{-1}\mathbf{v}^T}\)</span>. To find <span class="math inline">\(c\)</span>, we only need to solve the old equation <span class="math inline">\((A^TA)\mathbf{y}=\mathbf{v}^T\)</span>. The same idea applies when <span class="math inline">\(A\)</span> has more new rows.</li>
+<li><p>Two <span class="math inline">\(n \times n\)</span> matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>similar</strong> if there exists an invertible <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(B=P^{-1}AP\)</span>. <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have same eigenvalues: <span class="math display">\[B\mathbf{y}=P^{-1}AP\mathbf{y}=\lambda\mathbf{y} \Rightarrow A(P\mathbf{y})=\lambda (P\mathbf{y}).\]</span></p></li>
+<li><p>Suppose <span class="math inline">\(A\)</span> has eigenvalues <span class="math inline">\(\lambda_1, \cdots, \lambda_n\)</span> with corresponding eigenvectors <span class="math inline">\(\mathbf{x}_1, \cdots, \mathbf{x}_n\)</span>. <span class="math inline">\(A=X\Lambda X^{-1}\)</span>, where eigenvalues of <span class="math inline">\(A\)</span> are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and eigenvectors of <span class="math inline">\(A\)</span> are in the columns of <span class="math inline">\(X\)</span>, i.e., <span class="math inline">\(A\)</span> is similar to <span class="math inline">\(\Lambda\)</span>.</p></li>
 </ul>
-<h2 id="application-kalman-filter">Application: Kalman Filter</h2>
-<ul>
-<li>The update ideal also applies to <strong>dynamic least squares</strong>.</li>
-</ul>
-<h1 id="derivative-of-a-1">Derivative of <span class="math inline">\(A^{-1}\)</span></h1>
-<ul>
-<li>Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are invertible. <span class="math inline">\(B^{-1}-A^{-1}=B^{-1}(A-B)A^{-1}\)</span>.</li>
-</ul>
-<strong><em>Proof.</em></strong> Since <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are invertible, then <span class="math inline">\(B^{-1}(A-B)A^{-1}=B^{-1}AA^{-1}-B^{-1}BA^{-1}=B^{-1}-A^{-1}\)</span>.
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(X=\begin{bmatrix} &amp; \\ \mathbf{x}_1 &amp; \cdots &amp; \mathbf{x}_n \\ &amp; \end{bmatrix}\)</span>. We have <span class="math display">\[AX=\begin{bmatrix}
+&amp; \\ A\mathbf{x}_1 &amp; \cdots &amp; A\mathbf{x}_n \\ &amp;
+\end{bmatrix}=\begin{bmatrix}
+&amp; \\ \lambda_1\mathbf{x}_1 &amp; \cdots &amp; \lambda_n\mathbf{x}_n \\ &amp;
+\end{bmatrix}\]</span> and <span class="math display">\[X\Lambda=\begin{bmatrix}
+&amp; \\ \lambda_1\mathbf{x}_1 &amp; \cdots &amp; \lambda_n\mathbf{x}_n \\ &amp;
+\end{bmatrix},\]</span> i.e., <span class="math inline">\(AX=X\Lambda\)</span>, and thus <span class="math inline">\(A=X\Lambda X^{-1}\)</span>. Hence, <span class="math inline">\(X^{-1}AX=\Lambda\)</span>, i.e., <span class="math inline">\(A\)</span> is similar to <span class="math inline">\(\Lambda\)</span>.
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
+<h1 id="symmetric-postive-definite-matrix">Symmetric Postive Definite Matrix</h1>
 <ul>
-<li>Let <span class="math inline">\(\Delta A=B-A\)</span>, then <span class="math inline">\(\displaystyle \frac{\Delta A^{-1}}{\Delta t}=(A+\Delta A)^{-1}\left(-\frac{\Delta A}{\Delta t}\right)A^{-1}\)</span>. Therefore, as <span class="math inline">\(\Delta t \to 0\)</span>, <span class="math display">\[\frac{\text{d}A^{-1}}{\text{d}t}=-A^{-1}\frac{\text{d}A}{\text{d}t}A^{-1}.\]</span></li>
+<li><p>All eigenvalues of a symmetric matrix <span class="math inline">\(S\)</span> are real numbers.</p></li>
+<li><p>The eigenvectors of <span class="math inline">\(S\)</span> can be chosen orthogonal.</p></li>
+<li><p><strong>(Spectral Theorem)</strong> Every real symmetric matrix has the form <span class="math inline">\(S=Q\Lambda Q^T\)</span>, where eigenvalues are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and orthonormal eigenvectors are in the columns of <span class="math inline">\(Q\)</span>.</p></li>
+<li><p>Suppose <span class="math inline">\(S\)</span> is a real symmetric matrix. <span class="math inline">\(S\)</span> is a positive definite matrix if and only if one of the following statements holds:</p></li>
 </ul>
-<h1 id="change-in-eigenvalues-and-singular-values">Change in Eigenvalues and Singular Values</h1>
+<p>         1. All eigenvalues of <span class="math inline">\(S\)</span> are positive;</p>
+<p>         2. The <strong>energy</strong> <span class="math inline">\(\mathbf{x}^TS\mathbf{x}\)</span> is positive for all <span class="math inline">\(\mathbf{x} \neq \mathbf{0}\)</span>;</p>
+<p>         3. <span class="math inline">\(S=A^TA\)</span> for a matrix <span class="math inline">\(A\)</span> with independent columns;</p>
+<p>         4. All the leading determinants of <span class="math inline">\(S\)</span> are positive;</p>
+<p>         5. All the pivots of <span class="math inline">\(S\)</span> are positive.</p>
+<div class="note info">
+            <p>The <span class="math inline">\(k\)</span>th pivot is the ratio <span class="math inline">\(\displaystyle \frac{D_k}{D_{k-1}}\)</span> of the leading determinants (sizes <span class="math inline">\(k\)</span> and <span class="math inline">\(k-1\)</span>).</p>
+          </div>
+<p><span id="7"></span></p>
+<h1 id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h1>
 <ul>
-<li><p><span class="math inline">\(A(t)\mathbf{x}(t)=\lambda(t)\mathbf{x}(t)\)</span>, <span class="math inline">\(\mathbf{y}^T(t)A(t)=\lambda(t)\mathbf{y}^T(t)\)</span>, and <span class="math inline">\(\mathbf{y}^T(t)\mathbf{x}(t)=1\)</span>. In matrix notation, <span class="math inline">\(AX=X\Lambda\)</span>, <span class="math inline">\(Y^TA=\Lambda Y^T\)</span>, and <span class="math inline">\(Y^TX=I\)</span>.</p></li>
-<li><p><span class="math inline">\(\lambda(t)=\mathbf{y}^T(t)A(t)\mathbf{x}(t)\)</span>.</p></li>
+<li>The <strong>singular value decomposition</strong> of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=U\Sigma V^T\)</span>, where <span class="math inline">\(U\)</span> contains orthonormal eigenvectors of <span class="math inline">\(AA^T\)</span>, <span class="math inline">\(\Sigma\)</span> contains singular values <span class="math inline">\(\sigma_1, \cdots, \sigma_r\)</span>, and <span class="math inline">\(V\)</span> contains orthonormal eigenvectors of <span class="math inline">\(A^TA\)</span>. Note that <span class="math inline">\(\sigma_1^2 \geq \cdots \geq \sigma_r^2\)</span> are the nonzero eigenvalues of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> for <span class="math inline">\(r\)</span> is the rank of <span class="math inline">\(A\)</span>.</li>
 </ul>
-<strong><em>Proof.</em></strong> <span class="math inline">\(\mathbf{y}^T(t)A(t)\mathbf{x}(t)=\lambda(t)\mathbf{y}^T(t)\mathbf{x}(t)=\lambda(t)\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
+<p><strong>Example 7.1</strong>    Find an SVD of <span class="math inline">\(A=\begin{bmatrix} 3 &amp; 0 \\ 4 &amp; 5 \end{bmatrix}\)</span>.</p>
+<p><strong><em>Solution.</em></strong> We have <span class="math inline">\(AA^T=\begin{bmatrix} 9 &amp; 12 \\ 12 &amp; 41 \end{bmatrix}\)</span> and <span class="math inline">\(A^TA=\begin{bmatrix} 25 &amp; 20 \\ 20 &amp; 25 \end{bmatrix}\)</span>. The nonzero eigenvalues of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> are <span class="math inline">\(\lambda_1=45\)</span> and <span class="math inline">\(\lambda_2=5\)</span>. The eigenvectors of <span class="math inline">\(AA^T\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 3 \end{bmatrix}\)</span> and <span class="math inline">\(\begin{bmatrix} -3 \\ 1 \end{bmatrix}\)</span>. The eigenvectors of <span class="math inline">\(A^TA\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span> and <span class="math inline">\(\begin{bmatrix} -1 \\ 1 \end{bmatrix}\)</span>. Therefore, <span class="math inline">\(\displaystyle U=\frac{1}{\sqrt{10}}\begin{bmatrix} 1 &amp; -3 \\ 3 &amp; 1 \end{bmatrix}\)</span> and <span class="math inline">\(\displaystyle V=\frac{1}{\sqrt{2}}\begin{bmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{bmatrix}\)</span>, and <span class="math inline">\(\Sigma=\begin{bmatrix} \sqrt{45} &amp; 0 \\ 0 &amp; \sqrt{5} \end{bmatrix}\)</span>.</p>
+<p><strong>Example 7.2</strong>    Find an SVD of <span class="math inline">\(A=\begin{bmatrix} 1 &amp; 1 \\ 1 &amp; 1 \\ 0 &amp; 0 \end{bmatrix}\)</span>.</p>
+<p><strong><em>Solution.</em></strong> We have <span class="math inline">\(AA^T=\begin{bmatrix} 2 &amp; 2 &amp; 0 \\ 2 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{bmatrix}\)</span> and <span class="math inline">\(A^TA=\begin{bmatrix} 2 &amp; 2 \\ 2 &amp; 2 \end{bmatrix}\)</span>. The nonzero eigenvalue of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> is <span class="math inline">\(\lambda_1=4\)</span>. The eigenvectors of <span class="math inline">\(AA^T\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}\)</span>, <span class="math inline">\(\begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}\)</span>, and <span class="math inline">\(\begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}\)</span>. The eigenvectors of <span class="math inline">\(A^TA\)</span> is <span class="math inline">\(\begin{bmatrix} 1 \\ 1 \end{bmatrix}\)</span> and <span class="math inline">\(\begin{bmatrix} -1 \\ 1 \end{bmatrix}\)</span>. Therefore, <span class="math inline">\(U=\begin{bmatrix} 1/\sqrt{2} &amp; -1/\sqrt{2} &amp; 0 \\ 1/\sqrt{2} &amp; 1/\sqrt{2} &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}\)</span> and <span class="math inline">\(V=\displaystyle \frac{1}{\sqrt{2}}\begin{bmatrix} 1 &amp; -1 \\ 1 &amp; 1 \end{bmatrix}\)</span>, and <span class="math inline">\(\Sigma=\begin{bmatrix} 2 &amp; 0 \\ 0 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span>.</p>
 <ul>
-<li><span class="math inline">\(\displaystyle \frac{\text{d}\lambda}{\text{d}t}=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)\)</span>.</li>
+<li>The pieces of the SVD: <span class="math inline">\(A=U\Sigma V^T=\sigma_1\mathbf{u}_1\mathbf{v}_1^T+\cdots+\sigma_r\mathbf{u}_r\mathbf{v}_r^T\)</span>.</li>
 </ul>
-<strong><em>Proof.</em></strong> Since <span class="math inline">\(\lambda(t)=\mathbf{y}^T(t)A(t)\mathbf{x}(t)\)</span>, then <span class="math display">\[\begin{aligned}
-\frac{\text{d}\lambda}{\text{d}t}&amp;=\frac{\text{d}\mathbf{y}^T}{\text{d}t}A(t)\mathbf{x}(t)+\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\mathbf{y}^T(t)A(x)\frac{\text{d}\mathbf{x}}{\text{d}t}
-\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\left(\frac{\text{d}\mathbf{y}^T}{\text{d}t}\mathbf{x}(t)+\mathbf{y}^T(t)\frac{\text{d}\mathbf{x}}{\text{d}t}\right)
-\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\frac{\text{d}(\mathbf{y}^T\mathbf{x})}{\text{d}t}
-\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\frac{\text{d}(1)}{\text{d}t}
-\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t).
-\end{aligned}\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
+<h1 id="norm-of-vector-and-matrix">Norm of Vector and Matrix</h1>
+<h2 id="vector-norm">Vector Norm</h2>
+<p>Suppose <span class="math inline">\(\mathbf{v} \in \mathbb{C}^n\)</span>.</p>
 <ul>
-<li><span class="math inline">\(\displaystyle \frac{\text{d}\sigma}{\text{d}t}=\mathbf{u}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{v}(t)\)</span>.</li>
+<li><p><strong><span class="math inline">\(\mathscr{l}^2\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_2=\sqrt{|v_1|^2+\cdots+|v_n|^2}\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(\mathscr{l}^1\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_1=|v_1|+\cdots+|v_n|\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(\mathscr{l}^\infty\)</span> norm</strong>: <span class="math inline">\(\max |v_i|\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(\mathscr{l}^p\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_p=(|v_1|^p+\cdots+|v_n|^p)^{1/p}\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(S\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_S=\sqrt{\mathbf{v}^TS\mathbf{v}}\)</span> for any symmetric positive definite matrix <span class="math inline">\(S\)</span>.</p></li>
 </ul>
-<h1 id="interlacing">Interlacing</h1>
+<h2 id="matrix-norm">Matrix Norm</h2>
 <ul>
-<li>Suppose the eigenvalues of a symmetric matrix <span class="math inline">\(S\)</span> is <span class="math inline">\(\mu_1 \geq \cdots \geq \mu_n\)</span>, and the eigenvalues of <span class="math inline">\(S+\mathbf{u}\mathbf{u}^T\)</span> is <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_n\)</span>, then <span class="math inline">\(\lambda_1 \geq \mu_1 \geq \lambda_2 \geq \mu_2 \geq \cdots \geq \lambda_n \geq \mu_n\)</span>.</li>
+<li><p><strong><span class="math inline">\(\mathscr{l}^2\)</span> norm</strong> or <strong>Spectral norm</strong>: <span class="math display">\[\begin{aligned}
+\|A\|_2&amp;=\max \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}=\max\frac{\sqrt{\mathbf{x}^T(A^TA)\mathbf{x}}}{\sqrt{\mathbf{x}^T\mathbf{x}}}=\max\sqrt{\frac{\lambda_1c_1^2+\cdots+\lambda_rc_r^2}{c_1^2+\cdots+c_r^2}}
+\\&amp;=\sqrt{\lambda_1}=\sigma_1,
+\end{aligned}\]</span> where <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_r\)</span>, i.e., the largest singular value of <span class="math inline">\(A\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(\mathscr{l}^1\)</span> norm</strong>: <span class="math inline">\(\|A\|_1\)</span> is the largest <span class="math inline">\(\mathscr{l}^1\)</span> norm of the columns of <span class="math inline">\(A\)</span>.</p></li>
+<li><p><strong><span class="math inline">\(\mathscr{l}^\infty\)</span> norm</strong>: <span class="math inline">\(\|A\|_1\)</span> is the largest <span class="math inline">\(\mathscr{l}^1\)</span> norm of the rows of <span class="math inline">\(A\)</span>.</p></li>
+<li><p><strong>Frobenius norm</strong>: <span class="math inline">\(\|A\|_F=\sqrt{|a_{11}|^2+\cdots+|a_{1n}|^2+\cdots+|a_{mn}|^2}=\sqrt{\sigma_1^2+\cdots+\sigma_r^2}\)</span>.</p></li>
+<li><p><strong>Nuclear norm</strong>: <span class="math inline">\(\|A\|_N=\sigma_1+\cdots+\sigma_r\)</span>.</p></li>
+<li><p>For any orthogonal matrix <span class="math inline">\(Q\)</span>, we have <span class="math inline">\(\|Q\|_2=1\)</span>, <span class="math inline">\(\|Q\|_F=\sqrt{n}\)</span>, and <span class="math inline">\(\|Q\|_N=n\)</span>. The spectral, Frobenius and nuclear norms of any matrix stay the same when <span class="math inline">\(A\)</span> is multiplies (on either side) by an orthogonal matrix.</p></li>
+</ul>
+<h1 id="principal-component-analysis-pca">Principal Component Analysis (PCA)</h1>
+<ul>
+<li><strong>(Eckart-Young Theorem)</strong> If <span class="math inline">\(B\)</span> has rank <span class="math inline">\(k\)</span>, then <span class="math display">\[\|A-B\| \geq \|A-A_k\|,\]</span> where <span class="math inline">\(A_k=U_k\Sigma_kV_k^T=\sigma_1\mathbf{u}_1\mathbf{v}_1^T+\cdots+\sigma_k\mathbf{u}_k\mathbf{v}_k^T\)</span> with <span class="math inline">\(\text{rank}(A_k)=k\)</span>.</li>
 </ul>
 ]]></content>
       <categories>
@@ -1233,7 +953,40 @@ A^T &amp; \mathbf{v}^T
         <category>Matrix method</category>
       </categories>
       <tags>
-        <tag>Matrix</tag>
+        <tag>Linear algebra</tag>
+        <tag>SVD</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Low-Rank Approximation via Truncated SVD</title>
+    <url>/Mathematics/Numerical-linear-algebra/Low-Rank_Approximation_via_Truncated_SVD.html</url>
+    <content><![CDATA[<h1 id="low-rank-approximation">Low-Rank Approximation</h1>
+<p>Given <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span>, we want to find <span class="math inline">\(A_r\)</span> s.t. <span class="math display">\[A \approx A_r=U_r\Sigma_rV_r^T.\]</span></p>
+<ul>
+<li><p>Low-rank approximation is beneficial in terms of the <strong>storage cost</strong> when <span class="math inline">\(r \ll \min(m, n)\)</span>. Instead of storing <span class="math inline">\(mn\)</span> entries for <span class="math inline">\(A\)</span>, we can store <span class="math inline">\((m+n+1)r\)</span> entries to keep the low-rank factorization without losing information.</p></li>
+<li><p>Low-rank approximation can bring <strong>computational</strong> benefits. In order to compute <span class="math inline">\(A\mathbf{x}\)</span>, by noting that <span class="math inline">\(A_r\mathbf{x}=U_r(\Sigma_r(V_r^T\mathbf{x}))\)</span>, we need only <span class="math inline">\(O((m+n)r)\)</span> operations instead of <span class="math inline">\(O(mn)\)</span>.</p></li>
+</ul>
+<h1 id="optimal-low-rank-approximation-by-svd">Optimal Low-Rank Approximation by SVD</h1>
+<p><strong>Theorem 2.1</strong>    For any <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> with singular values <span class="math inline">\(\sigma_1(A) \geq \cdots \geq \sigma_n(A) \geq 0\)</span>, and any non-negatvie integer <span class="math inline">\(r&lt;\min(m, n)\)</span>, <span class="math display">\[\|A-A_r\|_2=\sigma_{r+1}(A)=\min_{\text{rank}(B) \leq r} \|A-B\|_2,\]</span> where <span class="math inline">\(A_r=U_r\Sigma_rV_r^T\)</span> and <span class="math inline">\(\Sigma_r=\text{diag}(\sigma_1, \cdots, \sigma_r)\)</span>.</p>
+<p><strong><em>Proof.</em></strong> Since <span class="math inline">\(\text{rank}(B) \leq r\)</span>, we can write <span class="math inline">\(B=B_1B_2^T\)</span> where <span class="math inline">\(B_1\)</span> and <span class="math inline">\(B_2\)</span> have <span class="math inline">\(r\)</span> columns. It follows that <span class="math inline">\(B_2^T\)</span> has a null space of dimension at least <span class="math inline">\(n-r\)</span>, and we can find an orthonormal matrix <span class="math inline">\(W \in \mathbb{C}^{n \times (n-r)}\)</span> s.t. <span class="math inline">\(B_2^TW=0\)</span>, i.e., <span class="math inline">\(BW=0\)</span>. Then <span class="math display">\[\|A-B\|_2=\|A-B\|_2\|W\|_2 \geq \|(A-B)W\|_2=\|AW\|_2=\|U\Sigma(V^*W)\|_2.\]</span></p>
+<p>Now since <span class="math inline">\(W\)</span> is <span class="math inline">\(n-r\)</span> dimensional, there is an intersection between <span class="math inline">\(W\)</span> and <span class="math inline">\(\begin{bmatrix} \mathbf{v} &amp; \cdots &amp; \mathbf{v}_{r+1} \end{bmatrix}\)</span>.</p>
+<center>
+<strong><em>Not done. To be continued...</em></strong>
+</center>
+<div class="note info">
+            <ul><li><p>Good approximation <span class="math inline">\(A \approx A_r\)</span> is obtained iff <span class="math inline">\(\sigma_{r+1} \ll \sigma_1\)</span>.</p></li><li><p>Optimality holds for any unitarily invariant norm.</p></li><li><p>A prominent application of low-rank approximation is <strong>principle component analysis (PCA)</strong> in data science.</p></li><li><p>Many matrices have explicit or hidden low-rank structure.</p></li></ul>
+          </div>
+<h1 id="application-image-compression">Application: Image Compression</h1>
+<p>A classical and visually pleasing illustration of low-rank approximation by the truncated SVD is image compression. (Note that this is slightly <em>outdated</em>). The idea is that greyscale images can be represented by a matrix where each entry indicates the intensity of a pixel. The matrix can be compressed by finding a low-rank approximation, resulting in image compression.</p>
+<p>We give a code example and <a href="https://github.com/litianyang0211/OxfordNotes/blob/main/Numerical%20Linear%20Algebra/Image%20Compression%20with%20SVD.ipynb"><strong><em>HERE</em></strong></a> is the full demo.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Packages.</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load an image, and convert it to black and white.</span></span><br><span class="line">img = Image.<span class="built_in">open</span>(<span class="string">&quot;Oxford.png&quot;</span>)</span><br><span class="line">imggray = img.convert(<span class="string">&quot;LA&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Convert the image data into a numpy matrix.</span></span><br><span class="line">imgmat = np.array(<span class="built_in">list</span>(imggray.getdata(band=<span class="number">0</span>)), <span class="built_in">float</span>)</span><br><span class="line">imgmat.shape = (imggray.size[<span class="number">1</span>], imggray.size[<span class="number">0</span>])</span><br><span class="line">imgmat = np.matrix(imgmat)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Compute the SVD.</span></span><br><span class="line">U, sigma, V = np.linalg.svd(imgmat)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Truncated SVD.</span></span><br><span class="line">trun_img_r50 = np.matrix(U[:, :<span class="number">50</span>]) * np.diag(sigma[:<span class="number">50</span>]) * np.matrix(V[:<span class="number">50</span>, :])</span><br><span class="line">plt.imshow(trun_img_r50, cmap=<span class="string">&quot;gray&quot;</span>)</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Mathematics</category>
+        <category>Numerical linear algebra</category>
+      </categories>
+      <tags>
+        <tag>SVD</tag>
       </tags>
   </entry>
   <entry>
@@ -1451,6 +1204,250 @@ Finally, we consider measurable function. Since <span class="math inline">\(m(\{
       <tags>
         <tag>Measure</tag>
         <tag>Function</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Low Rank and Compressed Sensing</title>
+    <url>/Mathematics/Matrix-method/Low_Rank_and_Compressed_Sensing.html</url>
+    <content><![CDATA[<h1 id="sherman-morrison-woodbury-formula">Sherman-Morrison-Woodbury Formula</h1>
+<ul>
+<li><span class="math inline">\(\displaystyle (I-\mathbf{u}\mathbf{v}^T)^{-1}=I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\)</span>.</li>
+</ul>
+<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
+(I-\mathbf{u}\mathbf{v}^T)(I-\mathbf{u}\mathbf{v}^T)^{-1}&amp;=(I-\mathbf{u}\mathbf{v}^T)\left(I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\right)
+\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{(I-\mathbf{u}\mathbf{v}^T)\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
+\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{\mathbf{u}\mathbf{v}^T-\mathbf{u}(\mathbf{v}^T\mathbf{u})\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
+\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{(1-\mathbf{v}^T\mathbf{u})\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
+\\&amp;=I
+\end{aligned}\]</span> and <span class="math display">\[\begin{aligned}
+(I-\mathbf{u}\mathbf{v}^T)^{-1}(I-\mathbf{u}\mathbf{v}^T)&amp;=\left(I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\right)(I-\mathbf{u}\mathbf{v}^T)
+\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{\mathbf{u}\mathbf{v}^T(I-\mathbf{u}\mathbf{v}^T)}{1-\mathbf{v}^T\mathbf{u}}
+\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{\mathbf{u}\mathbf{v}^T-\mathbf{u}(\mathbf{v}^T\mathbf{u})\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
+\\&amp;=I.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li><span class="math inline">\((I_n-UV^T)^{-1}=I_n+U(I_k-V^TU)^{-1}V^T\)</span>, where <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are <span class="math inline">\(n \times k\)</span> matrices.</li>
+</ul>
+<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
+(I_n-UV^T)(I_n-UV^T)^{-1}&amp;=I_n-UV^T+(I_n-UV^T)U(I_k-V^TU)^{-1}V^T
+\\&amp;=I_n-UV^T+(U-UV^TU)(I_k-V^TU)^{-1}V^T
+\\&amp;=I_n-UV^T+U(I_k-V^TU)(I_k-V^TU)^{-1}V^T
+\\&amp;=I_n-UV^T+UV^T
+\\&amp;=I_n
+\end{aligned}\]</span> and <span class="math display">\[\begin{aligned}
+(I_n-UV^T)^{-1}(I_n-UV^T)&amp;=I_n+U(I_k-V^TU)^{-1}V^T-(I_n+U(I_k-V^TU)^{-1}V^T)UV^T
+\\&amp;=I_n+U(I_k-V^TU)^{-1}V^T-UV^T-U(I_k-V^TU)^{-1}V^TUV^T
+\\&amp;=I_n-UV^T+U(I_k-V^TU)^{-1}V^T(I_n-UV^T)
+\\&amp;=I_n-UV^T+U(I_k-V^TU)^{-1}(V^T-V^TUV^T)
+\\&amp;=I_n-UV^T+U(I_k-V^TU)^{-1}(I_k-V^TU)V^T
+\\&amp;=I_n-UV^T+UV^T
+\\&amp;=I_n.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li><span class="math inline">\((A-UV^T)^{-1}=A^{-1}+A^{-1}U(I-V^TA^{-1}U)^{-1}V^TA^{-1}\)</span>.</li>
+</ul>
+<h2 id="application-solving-a-perturbation-problem">Application: Solving a Perturbation Problem</h2>
+<ul>
+<li>Suppose <span class="math inline">\(A\mathbf{w}=\mathbf{b}\)</span> is solved for <span class="math inline">\(\mathbf{w}\)</span>, and we want to solve <span class="math inline">\((A-\mathbf{u}\mathbf{v}^T)\mathbf{x}=\mathbf{b}\)</span>. We first solve <span class="math inline">\(A\mathbf{z}=\mathbf{u}\)</span>, then <span class="math display">\[\mathbf{x}=\mathbf{w}+\frac{\mathbf{v}^T\mathbf{w}\mathbf{z}}{1-\mathbf{v}^T\mathbf{z}}.\]</span></li>
+</ul>
+<h2 id="application-recursive-least-squares">Application: Recursive Least Squares</h2>
+<ul>
+<li>Suppose there is a new measurement in least squares: <span class="math inline">\(\begin{bmatrix} A \\ \mathbf{v} \end{bmatrix}\mathbf{x}=\begin{bmatrix} \mathbf{b} \\ b_\text{new} \end{bmatrix}\)</span>. The new normal equation is <span class="math display">\[\begin{bmatrix}
+A^T &amp; \mathbf{v}^T
+\end{bmatrix}\begin{bmatrix}
+A \\ \mathbf{v}
+\end{bmatrix}\widehat{\mathbf{x}}_\text{new}=\begin{bmatrix}
+A^T &amp; \mathbf{v}^T
+\end{bmatrix}\begin{bmatrix}
+\mathbf{b} \\ b_\text{new}
+\end{bmatrix},\]</span> i.e., <span class="math inline">\((A^TA+\mathbf{v}^T\mathbf{v})\widehat{\mathbf{x}}_\text{new}=A^T\mathbf{b}+\mathbf{v}^Tb_\text{new}\)</span>. The update formula is <span class="math display">\[(A^TA+\mathbf{v}^T\mathbf{v})^{-1}=(A^TA)^{-1}-c(A^TA)^{-1}\mathbf{v}^T\mathbf{v}(A^TA)^{-1}\]</span> with <span class="math inline">\(\displaystyle c=\frac{1}{1+\mathbf{v}(A^TA)^{-1}\mathbf{v}^T}\)</span>. To find <span class="math inline">\(c\)</span>, we only need to solve the old equation <span class="math inline">\((A^TA)\mathbf{y}=\mathbf{v}^T\)</span>. The same idea applies when <span class="math inline">\(A\)</span> has more new rows.</li>
+</ul>
+<h2 id="application-kalman-filter">Application: Kalman Filter</h2>
+<ul>
+<li>The update ideal also applies to <strong>dynamic least squares</strong>.</li>
+</ul>
+<h1 id="derivative-of-a-1">Derivative of <span class="math inline">\(A^{-1}\)</span></h1>
+<ul>
+<li>Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are invertible. <span class="math inline">\(B^{-1}-A^{-1}=B^{-1}(A-B)A^{-1}\)</span>.</li>
+</ul>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are invertible, then <span class="math inline">\(B^{-1}(A-B)A^{-1}=B^{-1}AA^{-1}-B^{-1}BA^{-1}=B^{-1}-A^{-1}\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li>Let <span class="math inline">\(\Delta A=B-A\)</span>, then <span class="math inline">\(\displaystyle \frac{\Delta A^{-1}}{\Delta t}=(A+\Delta A)^{-1}\left(-\frac{\Delta A}{\Delta t}\right)A^{-1}\)</span>. Therefore, as <span class="math inline">\(\Delta t \to 0\)</span>, <span class="math display">\[\frac{\text{d}A^{-1}}{\text{d}t}=-A^{-1}\frac{\text{d}A}{\text{d}t}A^{-1}.\]</span></li>
+</ul>
+<h1 id="change-in-eigenvalues-and-singular-values">Change in Eigenvalues and Singular Values</h1>
+<ul>
+<li><p><span class="math inline">\(A(t)\mathbf{x}(t)=\lambda(t)\mathbf{x}(t)\)</span>, <span class="math inline">\(\mathbf{y}^T(t)A(t)=\lambda(t)\mathbf{y}^T(t)\)</span>, and <span class="math inline">\(\mathbf{y}^T(t)\mathbf{x}(t)=1\)</span>. In matrix notation, <span class="math inline">\(AX=X\Lambda\)</span>, <span class="math inline">\(Y^TA=\Lambda Y^T\)</span>, and <span class="math inline">\(Y^TX=I\)</span>.</p></li>
+<li><p><span class="math inline">\(\lambda(t)=\mathbf{y}^T(t)A(t)\mathbf{x}(t)\)</span>.</p></li>
+</ul>
+<strong><em>Proof.</em></strong> <span class="math inline">\(\mathbf{y}^T(t)A(t)\mathbf{x}(t)=\lambda(t)\mathbf{y}^T(t)\mathbf{x}(t)=\lambda(t)\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li><span class="math inline">\(\displaystyle \frac{\text{d}\lambda}{\text{d}t}=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)\)</span>.</li>
+</ul>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(\lambda(t)=\mathbf{y}^T(t)A(t)\mathbf{x}(t)\)</span>, then <span class="math display">\[\begin{aligned}
+\frac{\text{d}\lambda}{\text{d}t}&amp;=\frac{\text{d}\mathbf{y}^T}{\text{d}t}A(t)\mathbf{x}(t)+\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\mathbf{y}^T(t)A(x)\frac{\text{d}\mathbf{x}}{\text{d}t}
+\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\left(\frac{\text{d}\mathbf{y}^T}{\text{d}t}\mathbf{x}(t)+\mathbf{y}^T(t)\frac{\text{d}\mathbf{x}}{\text{d}t}\right)
+\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\frac{\text{d}(\mathbf{y}^T\mathbf{x})}{\text{d}t}
+\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\frac{\text{d}(1)}{\text{d}t}
+\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t).
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li><span class="math inline">\(\displaystyle \frac{\text{d}\sigma}{\text{d}t}=\mathbf{u}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{v}(t)\)</span>.</li>
+</ul>
+<h1 id="interlacing">Interlacing</h1>
+<ul>
+<li>Suppose the eigenvalues of a symmetric matrix <span class="math inline">\(S\)</span> is <span class="math inline">\(\mu_1 \geq \cdots \geq \mu_n\)</span>, and the eigenvalues of <span class="math inline">\(S+\mathbf{u}\mathbf{u}^T\)</span> is <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_n\)</span>, then <span class="math inline">\(\lambda_1 \geq \mu_1 \geq \lambda_2 \geq \mu_2 \geq \cdots \geq \lambda_n \geq \mu_n\)</span>.</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Mathematics</category>
+        <category>Matrix method</category>
+      </categories>
+      <tags>
+        <tag>Matrix</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Introduction to Network</title>
+    <url>/Statistics/Network-analysis/Introduction_to_Network.html</url>
+    <content><![CDATA[<h1 id="definition">Definition</h1>
+<p><strong>Definition 1.1</strong>    We abbreviate a <strong>graph</strong> <span class="math inline">\(\mathcal{G}\)</span> as <span class="math inline">\(\mathcal{G}=(\mathcal{V}, \mathcal{E})\)</span>, where <span class="math inline">\(\mathcal{V}\)</span> is the set of <strong>vertices (nodes)</strong> and <span class="math inline">\(\mathcal{E}\)</span> is the set of <strong>edges (links)</strong>. Let <span class="math inline">\(|\mathcal{V}|\)</span> be the number of vertices, and <span class="math inline">\(|\mathcal{E}|\)</span> be the number of edges in the graph <span class="math inline">\(\mathcal{G}\)</span>. If <span class="math inline">\(u\)</span> and <span class="math inline">\(b\)</span> are two vertices and there is an edge from <span class="math inline">\(u\)</span> to <span class="math inline">\(v\)</span>, then we say <span class="math inline">\(v\)</span> is a <strong>neighbor</strong> of <span class="math inline">\(u\)</span>, denoted <span class="math inline">\((u, v) \in \mathcal{E}\)</span>.</p>
+<p><strong>Definition 1.2</strong>    A <strong>directed graph</strong> or <strong>digraph</strong> is a graph where <em>all</em> edges are directed. The <strong>underlying</strong> graph of a digraph is the graph that results from turning all directed edges into <strong>undirected</strong> edges.</p>
+<p><strong>Definition 1.3</strong>    If both endpoints of an edge are the same, then the edge is a <strong>loop</strong>.</p>
+<p><strong>Example 1.1</strong>    The graph below is a loop.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 1
+          </pre>
+<p><strong>Definition 1.4</strong>    Two vertices are called <strong>adjacent</strong> if they are joined by an edge. A graph can be described by its <span class="math inline">\(|\mathcal{V}| \times |\mathcal{V}|\)</span> <strong>adjacency matrix</strong> <span class="math inline">\(A=(a_{u, v})\)</span>, where <span class="math inline">\(a_{u, v}=1\)</span> iff <span class="math inline">\((u, v) \in \mathcal{E}\)</span>.</p>
+<div class="note info">
+            <p>If there are no self-loops, all elements on the diagonal of the adjacency matrix are <span class="math inline">\(0\)</span>. If the edges of the graph are undirected, then the adjacency matrix will be symmetric.</p><p>The adjacency matrix entries tell us for every vertex <span class="math inline">\(v\)</span> which vertices are within (graph) distance <span class="math inline">\(1\)</span> of <span class="math inline">\(v\)</span>.</p><p>If we take the matrix product <span class="math inline">\(A^2=AA\)</span>, the entry for <span class="math inline">\((u, v)\)</span> with <span class="math inline">\(u \neq v\)</span> would be <span class="math display">\[a^{(2)}(u, v)=\sum_{w \in \mathcal{V}} a_{u, w}a_{w, v}.\]</span> If <span class="math inline">\(a^{(2)}(u, v) \neq 0\)</span>, then <span class="math inline">\(u\)</span> can be reached from <span class="math inline">\(v\)</span> within two steps, i.e., <span class="math inline">\(u\)</span> is within distance <span class="math inline">\(2\)</span> of <span class="math inline">\(v\)</span>. Higher powers can be interpreted similarly.</p>
+          </div>
+<p><strong>Definition 1.5</strong>    A <strong>complete</strong> graph is a graph, without self-loops, s.t. every pair of vertices is joined by an edge. The adjacency matrix has entry <span class="math inline">\(0\)</span> on the diagonal, and <span class="math inline">\(1\)</span> everywhere else.</p>
+<p><strong>Example 1.2</strong>    The graph below is complete.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 2((2)) --- 3((3))
+1 --- 3
+          </pre>
+<p><strong>Definition 1.6</strong>    A <strong>bipartite</strong> graph is a graph where the vertex set <span class="math inline">\(\mathcal{V}\)</span> is decomposed into two disjoint subsets, <span class="math inline">\(\mathcal{U}\)</span> and <span class="math inline">\(\mathcal{W}\)</span>, s.t. there are no edges between any two vertices in <span class="math inline">\(\mathcal{U}\)</span>, and there are no edges between any two vertices in <span class="math inline">\(\mathcal{W}\)</span>; all edges have one endpoint in <span class="math inline">\(\mathcal{U}\)</span> and the other endpoint in <span class="math inline">\(\mathcal{W}\)</span>. The adjacency matrix <span class="math inline">\(A\)</span> can then be arranged s.t. <span class="math display">\[A=\begin{bmatrix}
+0 &amp; A_1 \\
+A_2 &amp; 0
+\end{bmatrix}.\]</span></p>
+<p><strong>Example 1.3</strong>    The graph below is bipartite.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 3((3)) & 4((4))
+2((2)) --- 3((3)) & 4((4))
+subgraph U
+1((1))
+2((2))
+end
+subgraph W
+3((3))
+4((4))
+end
+          </pre>
+<h1 id="network-summary">Network Summary</h1>
+<h2 id="density-degree-and-degree-distribution">Density, Degree and Degree Distribution</h2>
+<p><strong>Definition 2.1</strong>    The <strong>density</strong> of a network with <span class="math inline">\(e\)</span>edges and <span class="math inline">\(n\)</span> vertices is <span class="math display">\[\frac{e}{\displaystyle \binom{n}{2}}=\frac{2e}{n(n-1)}\]</span> where <span class="math inline">\(\displaystyle \binom{n}{2}\)</span> is the potential number of edges.</p>
+<p><strong>Definition 2.2</strong>    The <strong>degree</strong> <span class="math inline">\(d(v)\)</span> of a vertex <span class="math inline">\(v\)</span> is the number of edges which involve <span class="math inline">\(v\)</span> as an endpoint. The degree can be calculated from the adjacency matrix <span class="math inline">\(A\)</span> <span class="math display">\[d(v)=\sum_{u \in \mathcal{V}} a_{u, v}.\]</span></p>
+<p><strong>Definition 2.3</strong>    The <strong>average degree</strong> of a graph is the average of its vertex degrees <span class="math display">\[\overline{d}=\frac{1}{n}\sum_{v \in \mathcal{V}} d(v).\]</span></p>
+<p><strong>Definition 2.4</strong>    The <strong>degree sequence</strong> of a given network on a vertex set <span class="math inline">\(\mathcal{V}\)</span> with <span class="math inline">\(n\)</span> elements is the unordered <span class="math inline">\(n\)</span>-element set of degrees <span class="math inline">\(\{d(v), v \in \mathcal{V}\}\)</span>.</p>
+<p><strong>Definition 2.5</strong>    The <strong>degree distribution</strong> <span class="math inline">\((d_0, d_1, \cdots)\)</span> of a graph on <span class="math inline">\(n\)</span> vertices is the vector of fraction of vertices with given degree <span class="math display">\[d_k=\frac{1}{n} \times \text{Number of vertices of degree}\ k.\]</span></p>
+<div class="note info">
+            <p>For directed graphs, we define the <strong>in-degree</strong> as the number of edges directed at the vertex, and the <strong>out-degree</strong> as the number of edges taht go out from that vertex.</p>
+          </div>
+<h2 id="local-clustering-coefficient">Local Clustering Coefficient</h2>
+<p><strong>Definition 2.6</strong>    The <strong>local clustering coefficient</strong> of a vertex <span class="math inline">\(v\)</span> is the proportion of neighbors of <span class="math inline">\(v\)</span> which are neighbors themselves. In adjacency matrix notation <span class="math display">\[C(v)=\frac{\displaystyle \sum_{u, w \in \mathcal{V}} a_{u, v}a_{w, v}a_{u,w}}{\displaystyle \sum_{u \neq w \in \mathcal{V}} a_{u, v}a_{w, v}},\]</span> where <span class="math inline">\(\displaystyle \frac{0}{0}:=0\)</span>.</p>
+<div class="note info">
+            <p>To compute <span class="math inline">\(C(v)\)</span> more efficiently, we should note that <span class="math inline">\(\displaystyle \frac{1}{2}\sum_{\substack{u \neq v \in \mathcal{V} \\ w \neq u, v \in \mathcal{V}}} a_{u, v}a_{w, v}a_{u, w}\)</span> is the number of <strong>triangles</strong> involving <span class="math inline">\(v\)</span> in the graph, and <span class="math inline">\(\displaystyle \frac{1}{2}\sum_{u \neq w \in \mathcal{V}} a_{u, v}a_{w, v}\)</span> is the number of <strong><span class="math inline">\(2\)</span>-stars</strong> centered around <span class="math inline">\(v\)</span> in the graph.</p>
+          </div>
+<p><strong>Definition 2.7</strong>    The <strong>average clustering coefficient</strong> is defined as <span class="math display">\[\overline{C}=\frac{1}{|\mathcal{V}|}\sum_{v \in \mathcal{V}} C(v).\]</span></p>
+<div class="note info">
+            <p>The local clustering coefficient describes how <em>locally dense</em> a graph is.</p>
+          </div>
+<h2 id="global-clustering-coefficient">Global Clustering Coefficient</h2>
+<p><strong>Definition 2.8</strong>    The <strong>global clustering coefficient</strong> or <strong>transitivity</strong> is defined as <span class="math display">\[C=\frac{3 \times \text{Number of triangles}}{\text{Number of connected triples}}=\frac{6 \times \text{Number of triangles}}{\text{Number of paths of length two}}\]</span></p>
+<div class="note warning">
+            <p><span class="math inline">\(\overline{C} \neq C\)</span> in general. Indeed <span class="math inline">\(\overline{C}\)</span> tends to be dominated by vertices with low degree, since they tend to have small denominators in the local clustering coefficient.</p>
+          </div>
+<h2 id="expected-clustering-coefficient">Expected Clustering Coefficient</h2>
+<p><strong>Definition 2.9</strong>    For models of random networks, we consider <strong>expected clustering coefficient</strong> <span class="math display">\[E(C)=\frac{3\mathbb{E}[\text{Number of triangles}]}{\mathbb{E}[\text{Number of connected triples}]}\]</span></p>
+<h2 id="average-shortest-path">Average Shortest Path</h2>
+<p><strong>Definition 2.10</strong>    In a graph, a <strong>path</strong> from vertex <span class="math inline">\(v_0\)</span> to vertex <span class="math inline">\(v_n\)</span> is an alternating sequence of vertices and edges <span class="math inline">\((v_0, e_1, v_1, e_2, \cdots, v_{n-1}, e_n, v_n)\)</span> s.t. the endpoints of <span class="math inline">\(e_i\)</span> are <span class="math inline">\(v_{i-1}\)</span> and <span class="math inline">\(v_i\)</span> for <span class="math inline">\(i=1, \cdots, n\)</span>. The <strong>distance</strong> <span class="math inline">\(\mathscr{l}(u, v)\)</span> between two vertices <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> is the length of a <strong>shortest</strong> path (not necessarily unique) joining them.</p>
+<div class="note info">
+            <p>We can calculate <span class="math inline">\(\mathscr{l}(u, v)\)</span> from the adjacency matrix <span class="math inline">\(A\)</span> as the smallest power <span class="math inline">\(p\)</span> of <span class="math inline">\(A\)</span> s.t. <span class="math inline">\(A^{(p)}(u, v) \neq 0\)</span>.</p>
+          </div>
+<p><strong>Definition 2.11</strong>    A graph is called <strong>connected</strong> if there is a path between any pair of vertices in the graph, otherwise it is <strong>disconnected</strong>. In a connected graph, the <strong>average shortest path length</strong> is defined as <span class="math display">\[\mathscr{l}=\frac{1}{|\mathcal{V}|(|\mathcal{V}|-1)}\sum_{u \neq v \in \mathcal{V}} \mathscr{l}(u, v),\]</span> where <span class="math inline">\(|\mathcal{V}|(|\mathcal{V}|-1)\)</span> means the possible number of shortest path length.</p>
+<div class="note info">
+            <p>The average shortest path length describes how <em>globally connected</em> a graph is.</p>
+          </div>
+<p><strong>Example 2.1</strong>    Consider a graph.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 5((5)) --- 3((3)) --- 2((2))
+5((5)) --- 2((2))
+5((5)) --- 4((4)) --- 2((2))
+          </pre>
+<p>We know <span class="math inline">\(\mathcal{V}=\{1, 2, 3, 4, 5\}\)</span>, <span class="math inline">\(\mathcal{E}=\{(1, 5), (2, 3), (2, 4), (2, 5), (3, 5), (4, 5)\}\)</span>, <span class="math inline">\(|\mathcal{V}|=5\)</span>, and <span class="math inline">\(|\mathcal{E}|=6\)</span>.</p>
+<p>The adjacency matrix is <span class="math display">\[\begin{bmatrix}
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 0
+\end{bmatrix}.\]</span></p>
+<p>The density is <span class="math inline">\(\displaystyle \frac{2e}{n(n-1)}=0.6\)</span>.</p>
+<p>The degrees of vertices are <span class="math inline">\(d(1)=1\)</span>, <span class="math inline">\(d(2)=3\)</span>, <span class="math inline">\(d(3)=2\)</span>, <span class="math inline">\(d(4)=2\)</span> and <span class="math inline">\(d(5)=4\)</span>. The average degree is <span class="math inline">\(\overline{d}=2.4\)</span>. The degree sequence is <span class="math inline">\(\{1, 3, 2, 2, 4\}\)</span>. The degree distribution is <span class="math inline">\(d_0=0\)</span>, <span class="math inline">\(d_1=0.2\)</span>, <span class="math inline">\(d_2=0.4\)</span>, <span class="math inline">\(d_3=0.2\)</span> and <span class="math inline">\(d_4=0.2\)</span>.</p>
+<p>The local clustering coefficients of vertices are <span class="math inline">\(C(1)=0\)</span>, <span class="math inline">\(\displaystyle C(2)=\frac{2}{3}\)</span>, <span class="math inline">\(C(3)=1\)</span>, <span class="math inline">\(C(4)=1\)</span> and <span class="math inline">\(\displaystyle C(5)=\frac{1}{3}\)</span>. The average clustering coefficient is <span class="math inline">\(\overline{C}=0.6\)</span>.</p>
+<p>The global clustering coefficient is <span class="math inline">\(\displaystyle C=\frac{6}{11}\)</span>.</p>
+<p>The distance matrix is <span class="math display">\[\begin{bmatrix}
+0 &amp; 2 &amp; 2 &amp; 2 &amp; 1 \\
+2 &amp; 0 &amp; 1 &amp; 1 &amp; 1 \\
+2 &amp; 1 &amp; 0 &amp; 2 &amp; 1 \\
+2 &amp; 1 &amp; 2 &amp; 0 &amp; 1 \\
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 0
+\end{bmatrix}.\]</span> The graph is connected, and the average shortest path length is <span class="math inline">\(\mathscr{l}=1.4\)</span>.</p>
+<h2 id="small-graph-and-motif">Small Graph and Motif</h2>
+<p><strong>Definition 2.12</strong>    <strong>Small subgraph</strong> can be viewed as building-block pattern of networks. By small we mean graph on a small number (three to five) of vertices. Often a small graph is called a <strong>motif</strong> when it is <strong>over-represented</strong> in the network, where over-representation is judged using a probabilistic model for the network.</p>
+<div class="note info">
+            <p>We think of a motif as a small graph with a fixed number of vertices and with a given topology, and we use the term interchangeably with small graph.</p>
+          </div>
+<h2 id="spectral-summary">Spectral Summary</h2>
+<p><strong>Definition 2.13</strong>    We call a graph <strong>simple</strong> if it has no self-loops or multiple edges.</p>
+<p><strong>Definition 2.14</strong>     The <strong>eigenvector centrality</strong> <strong><em>(Not done. To be continued...)</em></strong></p>
+<p><strong>Definition 2.15</strong>     Let <span class="math inline">\(D\)</span> be the diagonal matrix with diagonal entries <span class="math inline">\(D_{ii}\)</span>, the degree of vertex <span class="math inline">\(i\)</span>. The <strong>graph Laplacian</strong> is <span class="math inline">\(L=D-A\)</span>, where <span class="math display">\[L(i, j)=\begin{cases}
+d(i), &amp;i=j \\
+-1, &amp;i \neq j\ \text{and}\ (i, j) \in \mathcal{E} \\
+0, &amp;\text{otherwise}
+\end{cases}.\]</span> The second smallest (smallest non-zero) eigenvalue of <span class="math inline">\(L\)</span> is called <strong>algebraic connectivity</strong> or <strong>Fiedler value</strong> or <strong>spectral gap</strong> of <span class="math inline">\(\mathcal{G}\)</span>.</p>
+<div class="note info">
+            <p><span class="math inline">\(L\)</span> is symmetric, with real eigenvalues <span class="math inline">\(\lambda_0 \leq \cdots \leq \lambda_{n-1}\)</span> and eigenvectors <span class="math inline">\(\phi_1, \cdots, \phi_{n-1}\)</span>.</p><p>Since every row sum and column sum of <span class="math inline">\(L\)</span> is zero, then <span class="math inline">\(L\mathbf{1}=0\mathbf{1}\)</span>, and thus <span class="math inline">\(\lambda_0=0\)</span> and <span class="math inline">\(\phi_0=\mathbf{1}\)</span>.</p>
+          </div>
+<h2 id="other-summary">Other Summary</h2>
+<p>Specific network may require specific summary. For example, when there is a spatial structure in the network, then geometrical consideration may enter.</p>
+]]></content>
+      <categories>
+        <category>Statistics</category>
+        <category>Network analysis</category>
+      </categories>
+      <tags>
+        <tag>Network</tag>
       </tags>
   </entry>
   <entry>
