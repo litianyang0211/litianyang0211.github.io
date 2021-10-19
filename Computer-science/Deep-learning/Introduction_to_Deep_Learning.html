@@ -20,15 +20,20 @@
     var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Tianyang Li">
-<meta property="og:url" content="https://litianyang0211.github.io/tags/Network/index.html">
+  <meta name="description" content="N&#x2F;A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Introduction to Deep Learning">
+<meta property="og:url" content="https://litianyang0211.github.io/Computer-science/Deep-learning/Introduction_to_Deep_Learning">
 <meta property="og:site_name" content="Tianyang Li">
+<meta property="og:description" content="N&#x2F;A">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-16T23:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-17T16:40:40.432Z">
 <meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Deep learning">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://litianyang0211.github.io/tags/Network/">
+<link rel="canonical" href="https://litianyang0211.github.io/Computer-science/Deep-learning/Introduction_to_Deep_Learning.html">
 
 
 <script id="page-configurations">
@@ -36,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Tag: Network | Tianyang Li</title>
+  <title>Introduction to Deep Learning | Tianyang Li</title>
   
 
 
@@ -187,52 +192,103 @@
         <div class="content-wrap">
           
 
-          <div class="content tag">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Network
-          <small>Tag</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Computer-science/Deep-learning/Introduction_to_Deep_Learning">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Tianyang Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianyang Li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Introduction to Deep Learning
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-lightbulb"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-10-17 00:00:00 / Modified: 17:40:40" itemprop="dateCreated datePublished" datetime="2021-10-17T00:00:00+01:00">2021-10-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Computer-science/" itemprop="url" rel="index"><span itemprop="name">Computer science</span></a>
+                </span>
+                  /
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Computer-science/Deep-learning/" itemprop="url" rel="index"><span itemprop="name">Deep learning</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">N/A</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
+        <h1 id="three-ingredients-to-deep-larning">Three Ingredients to Deep Larning</h1>
+<ul>
+<li><p><strong>Architecture</strong>: There are a number of network architectures, with the most classical being <strong>fully connected</strong> and <strong>convolutional</strong> networks which are composed of <strong>layers</strong> with <strong>non-linear activations</strong> of <strong>affine transformations</strong>. There are exponential gains in <strong>expressivity</strong> with increased numbers of layers, depth.</p></li>
+<li><p><strong>Data</strong>: Sufficient amount of data to learn the isometries contained within the data.</p></li>
+<li><p><strong>Training algorithm</strong>: Networks need to be trained, to learn many parameters; this requires proper initialisation, effective optimisation algorithms, and computational hardware.</p></li>
+</ul>
+<h2 id="architecture">Architecture</h2>
+<p><strong>Example 1.1 (Fully Connected DNN)</strong>    Repeated affine transformation followed by a nonlinear action: <span class="math display">\[h_{i+1}=\sigma_i(W^{(i)}h_i+b^{(i)})\]</span> for <span class="math inline">\(i=1, \cdots, N-1\)</span>, where <span class="math inline">\(W^{(i)} \in \mathbb{R}^{n_{i+1} \times n_i}\)</span>, <span class="math inline">\(b^{(i)} \in \mathbb{R}^{n_{i+1}}\)</span>, and <span class="math inline">\(\sigma(\cdot)\)</span> is a nonlinear activation such as <strong>ReLU</strong>, <span class="math inline">\(\sigma(z):=\max(0, z)=z_+\)</span>. The <strong>input</strong> is <span class="math inline">\(h_1\)</span>, the <strong>output</strong> is <span class="math inline">\(h_N\)</span>, and <span class="math inline">\(h_i\)</span> for intermediate <span class="math inline">\(i=2, \cdots, N-1\)</span> are referred to as <strong>hidden layers</strong>. The number of layers <span class="math inline">\(N\)</span> is the <strong>depth</strong>, and <span class="math inline">\(N \gg 1\)</span> is called <strong>deep</strong>.</p>
+<p><strong>Example 1.2 (Convolutional Neural Network, CNN)</strong>    </p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-10-11T00:00:00+01:00"
-              content="2021-10-11">
-          10-11
-        </time>
-      </div>
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Deep-learning/" rel="tag"><i class="fa fa-tag"></i> Deep learning</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/Statistics/Network-analysis/Introduction_to_Network" itemprop="url">
-            <span itemprop="name">Introduction to Network</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Statistics/Graphical-model/Exponential_Family_and_Contingency_Table" rel="prev" title="Exponential Family and Contingency Table">
+      <i class="fa fa-chevron-left"></i> Exponential Family and Contingency Table
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-      
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -285,6 +341,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#three-ingredients-to-deep-larning"><span class="nav-number">1.</span> <span class="nav-text">Three Ingredients to Deep Larning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#architecture"><span class="nav-number">1.1.</span> <span class="nav-text">Architecture</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

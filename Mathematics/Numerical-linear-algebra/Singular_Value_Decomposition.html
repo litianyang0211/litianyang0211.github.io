@@ -28,7 +28,7 @@
 <meta property="og:description" content="We introduce the singular value decomposition (SVD) and give a proof. Next, we talk about the application of SVD and the connection between SVD and eigenvalue decomposition. Finally, we explore the un">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-09T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-10T15:05:01.763Z">
+<meta property="article:modified_time" content="2021-10-15T16:06:50.076Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="SVD">
 <meta name="twitter:card" content="summary">
@@ -221,10 +221,16 @@
                 <i class="far fa-lightbulb"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-10-10 00:00:00 / Modified: 16:05:01" itemprop="dateCreated datePublished" datetime="2021-10-10T00:00:00+01:00">2021-10-10</time>
+              <time title="Created: 2021-10-10 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-10T00:00:00+01:00">2021-10-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-edit"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-15 17:06:50" itemprop="dateModified" datetime="2021-10-15T17:06:50+01:00">2021-10-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -254,12 +260,12 @@
         <h1 id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h1>
 <ul>
 <li><p><strong>Symmetric eigenvalue decomposition</strong>: <span class="math inline">\(S=V\Lambda V^T\)</span> for symmetric <span class="math inline">\(A \in \mathbb{R}^{n \times n}\)</span>, where <span class="math inline">\(V^TV=I_n\)</span> (i.e., <span class="math inline">\(V\)</span> is an orthogonal matrix), and <span class="math inline">\(\Lambda=\text{diag}(\lambda_1, \cdots, \lambda_n)\)</span>, <span class="math inline">\(\lambda_i \in \mathbb{R}\)</span>.</p></li>
-<li><p><strong>Singular value decomposition (SVD)</strong>: <span class="math inline">\(A=U\Sigma V^T\)</span> for any <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> assuming <span class="math inline">\(m \geq n\)</span> for definiteness, where <span class="math inline">\(U^TU=V^TV=I_n\)</span>, and <span class="math inline">\(\Sigma=\text{diag}(\sigma_1, \cdots, \sigma_n)\)</span>, <span class="math inline">\(\sigma_1 \geq \cdots \geq \sigma_n \geq 0\)</span>. <span class="math inline">\(\sigma_i\)</span> is called the <strong>singular value</strong> of <span class="math inline">\(A\)</span>, the column of <span class="math inline">\(U\)</span> is called the <strong>left singular vector</strong>, and the column of <span class="math inline">\(V\)</span> is called the <strong>right singular vector</strong>.</p></li>
+<li><p><strong>Singular value decomposition (SVD)</strong>: <span class="math inline">\(A=U\Sigma V^T\)</span> for any <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> assuming <span class="math inline">\(m \geq n\)</span> for definiteness, where <span class="math inline">\(U^TU=V^TV=I_n\)</span>, and <span class="math inline">\(\Sigma=\text{diag}(\sigma_1, \cdots, \sigma_n)\)</span>, <span class="math inline">\(\sigma_1 \geq \cdots \geq \sigma_n \geq 0\)</span>. <span class="math inline">\(\sigma_i\)</span> is called the <strong>singular value</strong> of <span class="math inline">\(A\)</span>, the column of <span class="math inline">\(U\)</span> is called the <strong>left singular vector</strong>, and the column of <span class="math inline">\(V\)</span> is called the <strong>right singular vector</strong>. See <a href=/Mathematics/Matrix-method/Linear_Algebra#7 target="_blank"><strong><em>MORE</em></strong></a>.</p></li>
 </ul>
 <div class="note warning">
             <p><span class="math inline">\(UU^T \neq I_m\)</span> if <span class="math inline">\(m&gt;n\)</span>. But <span class="math inline">\(VV^T=I_n\)</span> since <span class="math inline">\(V\)</span> is square.</p>
           </div>
-<strong><em>Proof.</em></strong> Take <strong>Gram matrix</strong> <span class="math inline">\(A^TA\)</span>, which is symmetric, then its eigndecomposition is <span class="math inline">\(A^TA=V\Lambda V^T\)</span>, where <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_n \geq 0\)</span>. Define <span class="math inline">\(B=AV\)</span>, then <span class="math display">\[B^TB=V^TA^TAV=V^TV\Lambda V^TV=\Lambda.\]</span> Since <span class="math inline">\((B^TB)_{ii}=\mathbf{b}_i^T\mathbf{b}_i=\|\mathbf{b}_i\|_2^2 \geq 0\)</span>, where <span class="math inline">\(\mathbf{b}_i\)</span> is the <span class="math inline">\(i\)</span>th column of <span class="math inline">\(B\)</span>, then <span class="math inline">\(B^TB=\Lambda \succeq 0\)</span>. Then <span class="math display">\[\begin{aligned}
+<strong><em>Proof.</em></strong> Take <strong>Gram matrix</strong> <span class="math inline">\(A^TA\)</span>, which is symmetric, then its eigendecomposition is <span class="math inline">\(A^TA=V\Lambda V^T\)</span>, where <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_n \geq 0\)</span>. Define <span class="math inline">\(B=AV\)</span>, then <span class="math display">\[B^TB=V^TA^TAV=V^TV\Lambda V^TV=\Lambda.\]</span> Since <span class="math inline">\((B^TB)_{ii}=\mathbf{b}_i^T\mathbf{b}_i=\|\mathbf{b}_i\|_2^2 \geq 0\)</span>, where <span class="math inline">\(\mathbf{b}_i\)</span> is the <span class="math inline">\(i\)</span>th column of <span class="math inline">\(B\)</span>, then <span class="math inline">\(B^TB=\Lambda \succeq 0\)</span>. Then <span class="math display">\[\begin{aligned}
 B&amp;=\begin{bmatrix}
 &amp; \\ \mathbf{u}_1 &amp; \cdots &amp; \mathbf{u}_r &amp; \mathbf{0} &amp; \cdots &amp; \mathbf{0} \\ &amp;
 \end{bmatrix}\begin{bmatrix}
@@ -286,23 +292,55 @@ B&amp;=\begin{bmatrix}
 <span class="math inline">\(\square\)</span>
 </p>
 <ul>
-<li><p><strong>Full SVD</strong>: <span class="math inline">\(A=U\begin{bmatrix} \Sigma \\ 0 \end{bmatrix}V^T\)</span>, where <span class="math inline">\(U \in \mathbb{R}^{m \times m}\)</span> is orthogonal. See <a href=/Mathematics/Matrix-method/Linear_Algebra#7 target="_blank"><strong><em>MORE</em></strong></a>.</p></li>
+<li><p>If <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> where <span class="math inline">\(m&lt;n\)</span>, then <span class="math inline">\(A^T \in \mathbb{R}^{n \times m}\)</span>. Suppose the SVD of <span class="math inline">\(A^T\)</span> is <span class="math inline">\(U \Sigma V^T\)</span>, then <span class="math inline">\(A=V\Sigma^T U^T=V\Sigma U^T\)</span> is a valid SVD.</p></li>
 <li><p>If <span class="math inline">\(A \in \mathbb{C}^{m \times n}\)</span>, then the SVD of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=U\Sigma V^*\)</span>, where <span class="math inline">\(U^*U=V^*V=I_n=VV^*\)</span>.</p></li>
+<li><p><strong>Full SVD</strong>: <span class="math inline">\(A=U\begin{bmatrix} \Sigma \\ O \end{bmatrix}V^T\)</span>, where <span class="math inline">\(U \in \mathbb{R}^{m \times m}\)</span> is orthogonal.</p></li>
 </ul>
 <h1 id="application">Application</h1>
 <p>From the SVD, we know:</p>
 <ul>
 <li><p>Rank <span class="math inline">\(r\)</span> of <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span>: Number of nonzero singular values <span class="math inline">\(\sigma_i(A)\)</span>.</p></li>
 <li><p>Column space (linear subspace spanned by vectors <span class="math inline">\(A\mathbf{x}\)</span>): Span of <span class="math inline">\(U=[\mathbf{u}_1, \cdots, \mathbf{u}_r]\)</span>, i.e., <span class="math display">\[\text{Span}(\text{col}(A))=\text{Span}(\mathbf{u}_1, \cdots, \mathbf{u}_r).\]</span></p></li>
+</ul>
+<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
+A\mathbf{x}&amp;=U\Sigma V^T\mathbf{x}
+\\&amp;=\begin{bmatrix}
+&amp; \\ \mathbf{u}_1 &amp; \cdots &amp; \mathbf{u}_r &amp; \mathbf{u}_{r+1} &amp; \cdots &amp; \mathbf{u}_n \\ &amp;
+\end{bmatrix}\begin{bmatrix}
+\Sigma_r \\
+ &amp; O
+\end{bmatrix}\mathbf{y}
+\\&amp;=\begin{bmatrix}
+&amp; \\ \mathbf{u}_1 &amp; \cdots \mathbf{u}_r \\ &amp;
+\end{bmatrix}\begin{bmatrix}
+\mathbf{z}_r \\ \mathbf{0}
+\end{bmatrix}
+\\&amp;=\sum_{i=1}^r z_{ri}\mathbf{u}_i.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
 <li><p>Row space: Row span of <span class="math inline">\(\mathbf{v}_1^T, \cdots, \mathbf{v}_r^T\)</span>.</p></li>
 <li><p>Null space: Span of <span class="math inline">\(\mathbf{v}_{r+1}, \cdots, \mathbf{v}_n\)</span>.</p></li>
 </ul>
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(A\mathbf{w}=\mathbf{0}\)</span>, i.e., <span class="math inline">\(U\Sigma V^T\mathbf{w}=\mathbf{0}\)</span>. Similarly, we have <span class="math display">\[\begin{bmatrix}
+&amp; \\ \mathbf{u}_1 &amp; \cdots &amp; \mathbf{u}_r &amp; \mathbf{u}_{r+1} &amp; \cdots &amp; \mathbf{u}_n \\ &amp;
+\end{bmatrix}\begin{bmatrix}
+\Sigma_r \\
+ &amp; O
+\end{bmatrix}\begin{bmatrix}
+\mathbf{y}_r \\ \mathbf{y}_{n-r}
+\end{bmatrix}=\mathbf{0}.\]</span> Hence, <span class="math inline">\(\begin{bmatrix} &amp; \\ \mathbf{u}_1 &amp; \cdots &amp; \mathbf{u}_r \\ &amp; \end{bmatrix}\mathbf{z}_r=0\)</span> iff <span class="math inline">\(\mathbf{z}_r=\mathbf{y}_r=\mathbf{0}\)</span>. Therefore, <span class="math inline">\(V^T\mathbf{w}=\begin{bmatrix} \mathbf{0} \\ \mathbf{y}_{n-r} \end{bmatrix}\)</span>, i.e., <span class="math inline">\(\displaystyle \mathbf{w}=\sum_{i=r+1}^n c_i \mathbf{v}_i\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
 <h1 id="svd-and-eigenvalue-decomposition">SVD and Eigenvalue Decomposition</h1>
 <ul>
 <li><p><span class="math inline">\(V\)</span> contains eigenvectors of <span class="math inline">\(A^TA\)</span>.</p></li>
 <li><p><span class="math inline">\(U\)</span> contains eigenvectors (for nonzero eigenvalues) of <span class="math inline">\(AA^T\)</span> (up to sign).</p></li>
 <li><p><span class="math inline">\(\sigma_i=\sqrt{\lambda_i(A^TA)}\)</span>.</p></li>
-<li><p><strong>Jordan-Wieldant matrix</strong> <span class="math inline">\(M=\begin{bmatrix} 0 &amp; A \\ A^T &amp; 0 \end{bmatrix}\)</span>: <span class="math inline">\(M\)</span> has eigenvalues <span class="math inline">\(\pm\sigma_i(A)\)</span>, and <span class="math inline">\(m-n\)</span> copies of eigenvalues at <span class="math inline">\(0\)</span>. Its eigenvector matrix is <span class="math inline">\(\begin{bmatrix} U &amp; U &amp; U_0 \\ V &amp; -V &amp; 0 \end{bmatrix}\)</span>, where <span class="math inline">\(A^TU_0=0\)</span>, <span class="math inline">\(U_0\)</span> is empty when <span class="math inline">\(m=n\)</span>.</p>
+<li><p><strong>Jordan-Wieldant matrix</strong> <span class="math inline">\(M=\begin{bmatrix} O_{m \times m} &amp; A \\ A^T &amp; O_{n \times n} \end{bmatrix}\)</span>: <span class="math inline">\(M\)</span> has eigenvalues <span class="math inline">\(\pm\sigma_i(A)\)</span>, and <span class="math inline">\(m-n\)</span> copies of eigenvalues at <span class="math inline">\(0\)</span>. Its eigenvector matrix is <span class="math inline">\(\begin{bmatrix} U &amp; U &amp; U_\perp \\ V &amp; -V &amp; 0 \end{bmatrix}\)</span>, where <span class="math inline">\(A^TU_\perp=O\)</span>, and <span class="math inline">\(U_\perp\)</span> is empty when <span class="math inline">\(m=n\)</span>.</p>
 <ul>
 <li><span class="math inline">\(M\)</span> along with the Gram matrix <span class="math inline">\(A^TA\)</span>, is a useful tool when we try to extend a result on symmetric eigenvalues to an analogue in terms of the SVD (or vice versa).</li>
 </ul></li>
@@ -336,7 +374,7 @@ B&amp;=\begin{bmatrix}
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/Mathematics/Numerical-linear-algebra/NLA_Linear_Algebra" rel="prev" title="Linear Algebra">
+    <a href="/Mathematics/Numerical-linear-algebra/Linear_Algebra" rel="prev" title="Linear Algebra">
       <i class="fa fa-chevron-left"></i> Linear Algebra
     </a></div>
       <div class="post-nav-item">

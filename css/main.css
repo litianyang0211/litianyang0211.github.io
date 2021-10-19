@@ -8,8 +8,8 @@
   --link-hover-color: #222;
   --brand-color: #fff;
   --brand-hover-color: #fff;
-  --table-row-odd-bg-color: #f9f9f9;
-  --table-row-hover-bg-color: #f5f5f5;
+  --table-row-odd-bg-color: #fff;
+  --table-row-hover-bg-color: $ffffff;
   --menu-item-bg-color: #f5f5f5;
   --btn-default-bg: #222;
   --btn-default-color: #fff;
@@ -282,7 +282,7 @@ kbd {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  font-size: 0.875em;
+  font-size: 1em;
   margin: 0 0 20px 0;
   width: 100%;
 }
@@ -301,8 +301,8 @@ td {
 }
 th,
 td {
-  border: 1px solid #ddd;
-  border-bottom: 3px solid #ddd;
+  border: 1px solid #000;
+  border-bottom: 3px solid $black;
 }
 th {
   font-weight: 700;
@@ -447,7 +447,7 @@ code {
   background: #eff2f3;
   color: #4d4d4c;
   display: flex;
-  font-size: 0.875em;
+  font-size: 1em;
   justify-content: space-between;
   line-height: 1.2;
   padding: 0.5em;
@@ -489,7 +489,7 @@ pre {
 pre code {
   background: none;
   color: #4d4d4c;
-  font-size: 0.875em;
+  font-size: 1em;
   padding: 0;
   text-shadow: none;
 }
@@ -695,17 +695,17 @@ pre .javascript .function {
 .post-body .tabs ul.nav-tabs li.tab.active,
 .tabs-comment ul.nav-tabs li.tab.active {
   border-bottom: 1px solid transparent;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
   border-top: 3px solid #fc6423;
 }
 @media (max-width: 413px) {
   .post-body .tabs ul.nav-tabs li.tab.active,
   .tabs-comment ul.nav-tabs li.tab.active {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #000;
     border-left: 3px solid #fc6423;
-    border-right: 1px solid #ddd;
-    border-top: 1px solid #ddd;
+    border-right: 1px solid #000;
+    border-top: 1px solid #000;
   }
 }
 .post-body .tabs ul.nav-tabs li.tab.active a,
@@ -715,7 +715,7 @@ pre .javascript .function {
 }
 .post-body .tabs .tab-content .tab-pane,
 .tabs-comment .tab-content .tab-pane {
-  border: 1px solid #ddd;
+  border: 1px solid #000;
   border-top: 0;
   padding: 20px 20px 0 20px;
   border-radius: 0;
@@ -1232,7 +1232,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ffc;
+  background: #ff614b;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
