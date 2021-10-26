@@ -28,7 +28,7 @@
 <meta property="og:description" content="We say it is measurable when the inner measure is equal to the outer measure. However, we want to define measurable by using only the outer measure. Then, we need to explore whether the measure of a m">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-06-01T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-17T16:25:06.203Z">
+<meta property="article:modified_time" content="2021-10-23T12:35:19.587Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Measure">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-17 17:25:06" itemprop="dateModified" datetime="2021-10-17T17:25:06+01:00">2021-10-17</time>
+                <time title="Modified: 2021-10-23 13:35:19" itemprop="dateModified" datetime="2021-10-23T13:35:19+01:00">2021-10-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -350,15 +350,15 @@ m^*(T)&amp;=m^*(T \cap S_1)+m^*(T \cap S_1^c) \\
 <span class="math inline">\(\square\)</span>
 </p>
 <p><strong>Theorem 2.9</strong>    If <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of mutually disjoint measurable sets, then <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable. Besides, <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right)=\sum_{i=1}^\infty m(S_i)\)</span>, which is <strong>countable additivity</strong>.</p>
-<p><strong><em>Proof.</em></strong> We know <span class="math display">\[\begin{align}
-m^*(T)&amp;=m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)^c\right) \nonumber \\
-&amp;\geq m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \tag{Monotonicity} \\
-&amp;=\sum_{i=1}^k m^*(T \cap S_i)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right). \nonumber \\
-\end{align}\]</span> Take <span class="math inline">\(k \to \infty\)</span>, then <span class="math display">\[\begin{align}
-m^*(T)&amp;\geq \sum_{i=1}^\infty m^*(T \cap S_i)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \nonumber \\
-&amp;\geq m^*\left(\bigcup_{i=1}^\infty (T \cap S_i)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \tag{Countable Subadditivity} \\
-&amp;=m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right). \nonumber
-\end{align}\]</span> Because of countable subadditivity, we know <span class="math display">\[m^*(T) \leq m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right),\]</span> and thus <span class="math display">\[m^*(T)=m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right),\]</span> i.e., <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable.</p>
+<p><strong><em>Proof.</em></strong> We know <span class="math display">\[\begin{aligned}
+m^*(T)&amp;=m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)^c\right) \\
+&amp;\geq m^*\left(T \cap \left(\bigcup_{i=1}^k S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) &amp; \text{(Monotonicity)} \\
+&amp;=\sum_{i=1}^k m^*(T \cap S_i)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right).
+\end{aligned}\]</span> Take <span class="math inline">\(k \to \infty\)</span>, then <span class="math display">\[\begin{aligned}
+m^*(T)&amp;\geq \sum_{i=1}^\infty m^*(T \cap S_i)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) \\
+&amp;\geq m^*\left(\bigcup_{i=1}^\infty (T \cap S_i)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right) &amp; \text{(Countable Subadditivity)} \\
+&amp;=m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right).
+\end{aligned}\]</span> Because of countable subadditivity, we know <span class="math display">\[m^*(T) \leq m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right),\]</span> and thus <span class="math display">\[m^*(T)=m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)\right)+m^*\left(T \cap \left(\bigcup_{i=1}^\infty S_i\right)^c\right),\]</span> i.e., <span class="math inline">\(\displaystyle \bigcup_{i=1}^\infty S_i\)</span> is measurable.</p>
 Let <span class="math inline">\(\displaystyle T=\bigcup_{i=1}^\infty S_i\)</span>, then <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right) \geq \sum_{i=1}^\infty m(S_i)\)</span>. Because of countable subadditivity, we have <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right) \leq \sum_{i=1}^\infty m(S_i)\)</span>. Hence, <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right)=\sum_{i=1}^\infty m(S_i)\)</span>.
 <p align="right">
 <span class="math inline">\(\square\)</span>

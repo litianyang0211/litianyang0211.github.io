@@ -20,19 +20,21 @@
     var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="We explore Courant–Fisher minmax theorem and Weyl&#39;s inequality.">
+  <meta name="description" content="We introduce the LU decomposition, pivoting, and how to solve linear system via Lu decomposition. We also explore Cholesky Factorization for symmetric (semi)positive definite matrix.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Courant–Fisher Minmax Theorem">
-<meta property="og:url" content="https://litianyang0211.github.io/Mathematics/Numerical-linear-algebra/Courant%E2%80%93Fisher_Minmax_Theorem">
+<meta property="og:title" content="Linear System">
+<meta property="og:url" content="https://litianyang0211.github.io/Mathematics/Numerical-linear-algebra/Linear_System">
 <meta property="og:site_name" content="Tianyang Li">
-<meta property="og:description" content="We explore Courant–Fisher minmax theorem and Weyl&#39;s inequality.">
+<meta property="og:description" content="We introduce the LU decomposition, pivoting, and how to solve linear system via Lu decomposition. We also explore Cholesky Factorization for symmetric (semi)positive definite matrix.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-10-11T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-22T19:10:25.220Z">
+<meta property="article:published_time" content="2021-10-25T23:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-26T22:48:10.726Z">
 <meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Linear system">
+<meta property="article:tag" content="LU decomposition">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://litianyang0211.github.io/Mathematics/Numerical-linear-algebra/Courant%E2%80%93Fisher_Minmax_Theorem.html">
+<link rel="canonical" href="https://litianyang0211.github.io/Mathematics/Numerical-linear-algebra/Linear_System.html">
 
 
 <script id="page-configurations">
@@ -45,7 +47,7 @@
   };
 </script>
 
-  <title>Courant–Fisher Minmax Theorem | Tianyang Li</title>
+  <title>Linear System | Tianyang Li</title>
   
 
 
@@ -198,7 +200,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Mathematics/Numerical-linear-algebra/Courant%E2%80%93Fisher_Minmax_Theorem">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Mathematics/Numerical-linear-algebra/Linear_System">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -211,7 +213,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Courant–Fisher Minmax Theorem
+          Linear System
         </h1>
 
         <div class="post-meta">
@@ -220,16 +222,10 @@
                 <i class="far fa-lightbulb"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2021-10-12 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-12T00:00:00+01:00">2021-10-12</time>
+              <time title="Created: 2021-10-26 00:00:00 / Modified: 23:48:10" itemprop="dateCreated datePublished" datetime="2021-10-26T00:00:00+01:00">2021-10-26</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-edit"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-22 20:10:25" itemprop="dateModified" datetime="2021-10-22T20:10:25+01:00">2021-10-22</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -245,7 +241,7 @@
             </span>
 
           
-            <div class="post-description">We explore Courant–Fisher minmax theorem and Weyl's inequality.</div>
+            <div class="post-description">We introduce the LU decomposition, pivoting, and how to solve linear system via Lu decomposition. We also explore Cholesky Factorization for symmetric (semi)positive definite matrix.</div>
 
         </div>
       </header>
@@ -256,45 +252,139 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="courantfisher-minmax-theorem">Courant–Fisher Minmax Theorem</h1>
-<p><strong>Theorem 1.1 (Courant–Fisher Minmax Theorem)</strong>    Suppose <span class="math inline">\(\mathbf{x} \neq \mathbf{0}\)</span>. The <span class="math inline">\(i\)</span>th largest eigenvalue <span class="math inline">\(\lambda_i\)</span> of a symmetric matrix <span class="math inline">\(A \in \mathbb{R}^{n \times n}\)</span> is <span class="math display">\[\lambda_i(A)=\max_{\dim \mathcal{S}=i} \min_{\mathbf{x} \in \mathcal{S}} \frac{\mathbf{x}^TA\mathbf{x}}{\mathbf{x}^T\mathbf{x}}=\min_{\dim \mathcal{S}=n-i+1} \max_{\mathbf{x} \in \mathcal{S}} \frac{\mathbf{x}^TA\mathbf{x}}{\mathbf{x}^T\mathbf{x}}.\]</span> Analogously, for any <span class="math inline">\(A \in \mathbb{C}^{m \times n}\)</span>, where <span class="math inline">\(m \geq n\)</span>, we have <span class="math display">\[\sigma_i(A)=\max_{\dim \mathcal{S}=i} \min_{\mathbf{x} \in \mathcal{S}} \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}=\min_{\dim \mathcal{S}=n-i+1} \max_{\mathbf{x} \in \mathcal{S}} \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}.\]</span></p>
-<p><strong><em>Proof.</em></strong> We show the case of <span class="math inline">\(\sigma_i(A)\)</span>. Fix an orthonormal <span class="math inline">\(n \times i\)</span> matrix <span class="math inline">\(S\)</span> and let <span class="math inline">\(V_i=\begin{bmatrix} \mathbf{v}_i &amp; \cdots &amp; \mathbf{v}_n \end{bmatrix}\)</span>, where <span class="math inline">\(\mathbf{v}_i\)</span> is the right singular vector of <span class="math inline">\(A\)</span>. We have <span class="math inline">\(\dim(\mathcal{S})+\dim(\text{Span}(V_i))=i+(n-i+1)=n+1\)</span>. Therefore, there exists an intersection <span class="math inline">\(\mathbf{w} \in S \cap V_i\)</span> s.t. <span class="math inline">\(\|\mathbf{w}\|_2=1\)</span>.</p>
-<p>For this <span class="math inline">\(\mathbf{w}\)</span>, we have <span class="math display">\[A\mathbf{w}=U\Sigma V^T\mathbf{w}=U\Sigma\begin{bmatrix}
-0 \\ \vdots \\ 0 \\ c_i \\ \vdots \\ c_n
-\end{bmatrix}\]</span> and thus <span class="math display">\[\|A\mathbf{w}\|_2=\|U\Sigma V^T\mathbf{w}\|_2=\|\Sigma V^T\mathbf{w}\|_2=\|\text{diag}(\sigma_i, \cdots, \sigma_n)V_i^T\mathbf{w}\|_2 \leq \sigma_i.\]</span> Hence, <span class="math display">\[\sigma_i(A) \geq \min_{\mathbf{x} \in \mathcal{S}}\frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}.\]</span></p>
-Taks <span class="math inline">\(S=\begin{bmatrix} \mathbf{v}_1 &amp; \cdots &amp; \mathbf{v}_i \end{bmatrix}\)</span>, where <span class="math inline">\(\mathbf{w}=\mathbf{v}_i\)</span>, then for <span class="math inline">\(\mathbf{x} \in \mathcal{S}\)</span> and <span class="math inline">\(\|\mathbf{x}\|_2=1\)</span>, <span class="math display">\[A\mathbf{x}=AS\mathbf{y}=U\Sigma V^TS\mathbf{y}=\widetilde{U}\text{diag}(\sigma_1, \cdots, \sigma_i)\widetilde{\mathbf{y}},\]</span> where <span class="math inline">\(\|\mathbf{y}\|_2=\|\widetilde{\mathbf{y}}\|_2=1\)</span>. Hence, for any <span class="math inline">\(x \in S\)</span> with <span class="math inline">\(\|\mathbf{x}\|_2=1\)</span>, <span class="math inline">\(\|A\mathbf{x}\|_2=\|\Sigma_i\widetilde{y}\|_2 \geq \sigma_i(A)\)</span>, i.e., <span class="math display">\[\min_{\mathbf{x} \in \mathcal{S}} \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2} \geq \sigma_i(A).\]</span> Therefore, <span class="math display">\[\min_{\mathbf{x} \in \mathcal{S}} \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}=\sigma_i(A).\]</span> Since we fix an arbitrary subspace <span class="math inline">\(S\)</span> with <span class="math inline">\(\dim \mathcal{S}=i\)</span>, then we have <span class="math display">\[\sigma_i(A)=\max_{\dim \mathcal{S}=i} \min_{\mathbf{x} \in \mathcal{S}} \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}.\]</span>
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
-<h1 id="weyls-inequality">Weyl's Inequality</h1>
-<p><strong>Theorem 2.1 (Weyl's Inequality)</strong>    For singular values of any matrix <span class="math inline">\(A\)</span>, <span class="math display">\[\sigma_i(A+E) \in \sigma_i(A)+[-\|E\|_2, \|E\|_2], \forall i=1, \cdots, n,\]</span> and <span class="math display">\[\|A\|_2-\|E\|_2 \leq \|A+E\|_2 \leq \|A\|_2+\|E\|_2.\]</span> For eigenvalues of symmetric matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(E\)</span>, <span class="math display">\[\lambda_i(A+E) \in \lambda_i(A)+[-\|E\|_2, \|E\|_2].\]</span></p>
-<p><strong><em>Proof.</em></strong> For all <span class="math inline">\(i=1, \cdots, n\)</span>, <span class="math display">\[\begin{aligned}
-\sigma_i(A+E)&amp;=\max_{\dim \mathcal{S}=i} \min_{\substack{\mathbf{x} \in \mathcal{S} \\ \|\mathbf{x}\|_2=1}} \|(A+E)\mathbf{x}\|_2
-\\&amp;=\max_{\dim \mathcal{S}=i} \min_{\substack{\mathbf{x} \in \mathcal{S} \\ \|\mathbf{x}\|_2=1}} \|A\mathbf{x}+E\mathbf{x}\|_2
-\\&amp;\leq \max_{\dim \mathcal{S}=i} \min_{\substack{\mathbf{x} \in \mathcal{S} \\ \|\mathbf{x}\|_2=1}} (\|A\mathbf{x}\|_2+\|E\mathbf{x}\|_2)
-\\&amp;\leq \max_{\dim \mathcal{S}=i} \min_{\substack{\mathbf{x} \in \mathcal{S} \\ \|\mathbf{x}\|_2=1}} \|A\mathbf{x}\|_2+\|E\|_2
-\\&amp;=\sigma_i(A)+\|E\|_2.
-\end{aligned}\]</span> Besides, we have <span class="math display">\[\sigma_i(A)=\sigma_i(A+E+(-E)) \leq \sigma_i(A+E)+\|-E\|_2,\]</span> then <span class="math inline">\(\sigma_i(A+E) \geq \sigma_i(A)-\|E\|_2\)</span>. Therefore, <span class="math inline">\(\sigma_i(A+E) \in \sigma_i(A)+[-\|E\|_2, \|E\|_2]\)</span>.</p>
-Let <span class="math inline">\(i=1\)</span>, then it is obvious that <span class="math inline">\(\|A\|_2-\|E\|_2 \leq \|A+E\|_2 \leq \|A\|_2+\|E\|_2\)</span>.
-<p align="right">
-<span class="math inline">\(\square\)</span>
-</p>
+        <h1 id="lu-decomposition">LU Decomposition</h1>
+<p>Let <span class="math inline">\(A \in \mathbb{R}^{n \times n}\)</span>. Suppose we can decompose or factorize <span class="math display">\[A=\begin{bmatrix}
+* &amp; * &amp; * &amp; * &amp; * \\
+* &amp; * &amp; * &amp; * &amp; * \\
+* &amp; * &amp; * &amp; * &amp; * \\
+* &amp; * &amp; * &amp; * &amp; * \\
+* &amp; * &amp; * &amp; * &amp; *
+\end{bmatrix}=\begin{bmatrix}
+* \\
+* &amp; * \\
+* &amp; * &amp; * \\
+* &amp; * &amp; * &amp; * \\
+* &amp; * &amp; * &amp; * &amp; *
+\end{bmatrix}\begin{bmatrix}
+* &amp; * &amp; * &amp; * &amp; * \\
+* &amp; * &amp; * &amp; * \\
+* &amp; * &amp; * \\
+* &amp; * \\
+*
+\end{bmatrix}=LU,\]</span> where <span class="math inline">\(L\)</span> is the lower triangular and <span class="math inline">\(U\)</span> is the upper triangular.</p>
+<p>Consider rewriting <span class="math inline">\(A\)</span> as <span class="math display">\[\begin{aligned}
+A&amp;=\begin{bmatrix}
+* \\ * \\ * \\ * \\ *
+\end{bmatrix}\begin{bmatrix}
+* &amp; * &amp; * &amp; * &amp; *
+\end{bmatrix}+\begin{bmatrix}
+ \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; *
+\end{bmatrix}
+\\&amp;=\underbrace{\begin{bmatrix}
+* \\ * \\ * \\ * \\ *
+\end{bmatrix}\begin{bmatrix}
+* &amp; * &amp; * &amp; * &amp; *
+\end{bmatrix}}_{L_1U_1}+\underbrace{\begin{bmatrix}
+0 \\ * \\ * \\ * \\ *
+\end{bmatrix}\begin{bmatrix}
+0 &amp; * &amp; * &amp; * &amp; *
+\end{bmatrix}}_{L_2U_2}+\begin{bmatrix}
+ \\
+ \\
+ &amp; &amp; * &amp; * &amp; * \\
+ &amp; &amp; * &amp; * &amp; * \\
+ &amp; &amp; * &amp; * &amp; *
+\end{bmatrix}=\cdots
+\end{aligned}\]</span></p>
+<p>Specifying the elements, the first step of the algorithm can be described as (<span class="math inline">\(a=A_{11}\)</span>) <span class="math display">\[\begin{aligned}
+\begin{bmatrix}
+A_{11} &amp; A_{12} &amp; A_{13} &amp; A_{14} &amp; A_{15} \\
+A_{21} \\
+A_{31} \\
+A_{41} \\
+A_{51}
+\end{bmatrix}&amp;=\begin{bmatrix}
+L_{11} &amp;  &amp;  &amp;  &amp;  \\
+L_{21} \\
+L_{31} \\
+L_{41} \\
+L_{51}
+\end{bmatrix}\begin{bmatrix}
+U_{11} &amp; U_{12} &amp; U_{13} &amp; U_{14} &amp; U_{15} \\
+\\
+\\
+\\
+\\
+\end{bmatrix}+\begin{bmatrix}
+ \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; *
+\end{bmatrix}
+\\&amp;=\underbrace{\begin{bmatrix}
+1 &amp;  &amp;  &amp;  &amp;  \\
+A_{21}/a \\
+A_{31}/a \\
+A_{41}/a \\
+A_{51}/a
+\end{bmatrix}\begin{bmatrix}
+A_{11} &amp; A_{12} &amp; A_{13} &amp; A_{14} &amp; A_{15} \\
+\\
+\\
+\\
+\\
+\end{bmatrix}}_{=L_1U_1}+\begin{bmatrix}
+ \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; *
+\end{bmatrix}
+\end{aligned}\]</span></p>
+<p>Assume <span class="math inline">\(a \neq 0\)</span>, repeating the process gives <span class="math display">\[\begin{aligned}
+A&amp;=\begin{bmatrix}
+* \\ * \\ * \\ * \\ *
+\end{bmatrix}\begin{bmatrix}
+* &amp; * &amp; * &amp; * &amp; *
+\end{bmatrix}+\begin{bmatrix}
+0 \\ * \\ * \\ * \\ *
+\end{bmatrix}\begin{bmatrix}
+0 &amp; * &amp; * &amp; * &amp; *
+\end{bmatrix}+\cdots
+\\&amp;=L_1U_1+L_2U_2+\cdots
+\\&amp;=\begin{bmatrix}
+L_1 &amp; L_2 &amp; \cdots
+\end{bmatrix}\begin{bmatrix}
+U_1 \\ U_2 \\ \vdots
+\end{bmatrix}=LU.
+\end{aligned}\]</span></p>
+<h1 id="solving-amathbfxmathbfb-via-lu">Solving <span class="math inline">\(A\mathbf{x}=\mathbf{b}\)</span> via LU</h1>
+<p>Suppose <span class="math inline">\(A=LU\)</span>, we can efficiently solve an <span class="math inline">\(n \times n\)</span> linear system <span class="math inline">\(A\mathbf{x}=\mathbf{b}\)</span>: First we solve <span class="math inline">\(L\mathbf{y}=\mathbf{b}\)</span>, then <span class="math inline">\(U\mathbf{x}=\mathbf{y}\)</span>, where <span class="math inline">\(\mathbf{y}=U\mathbf{x}\)</span>. Note that triangular solve is always backward stable.</p>
+<p>The computational cost for LU is <span class="math inline">\(\displaystyle \frac{2}{3}n^2\)</span> flops (<strong>floating-point operations</strong>), and for the triangular solve is <span class="math inline">\(\displaystyle \sum_{k=1}^n (2k-1)=\mathcal{O}(n^2)\)</span>.</p>
+<p>Once we have an LU factorization, we can solve another linear system w.r.t. the same matrix with only <span class="math inline">\(\mathcal{O}(n^2)\)</span> additional operations.</p>
+<h1 id="pivoting">Pivoting</h1>
+<p>If <span class="math inline">\(A_{11}=0\)</span>, we need to <strong>pivot</strong>, i.e., to permute rows s.t. the largest entry of first (active) column is at the top: <span class="math inline">\(PA=LU\)</span>, where <span class="math inline">\(P\)</span> is a <strong>permutation matrix</strong>. Note that <span class="math inline">\(P\)</span> is an orthogonal matrix with only <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span> entries.</p>
+<p>Then <span class="math display">\[A\mathbf{x}=\mathbf{b} \Leftrightarrow PA\mathbf{x}=P\mathbf{b} \Leftrightarrow LU\mathbf{x}=P\mathbf{b}.\]</span> The cost is still <span class="math inline">\(\displaystyle \frac{2}{3}n^3+\mathcal{O}(n^2)\)</span>.</p>
+<h1 id="cholesky-factorization-for-a-succ-0">Cholesky Factorization for <span class="math inline">\(A \succ 0\)</span></h1>
+<p>If <span class="math inline">\(A \succ 0\)</span> (<strong>symmetric positive definite</strong> or <strong>(S)PD</strong>), we can take <span class="math inline">\(U_i=L_i^T=:R_i\)</span> by symmetry, and we do not need to pivot: <span class="math display">\[A=\underbrace{\begin{bmatrix}
+* \\ * \\ * \\ * \\ *
+\end{bmatrix}\begin{bmatrix}
+* &amp; * &amp; * &amp; * &amp; *
+\end{bmatrix}}_{R_1^TR_1}+\underbrace{\begin{bmatrix}
+ \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; *
+\end{bmatrix}}_{\text{PSD}}=R^TR.\]</span></p>
 <div class="note info">
-            <p>Singular values and symmetric eigenvalues are insensitive to perturbation (i.e., <strong>well-conditioned</strong>). Non-symmetric eigenvalues are different.</p>
+            <ul><li><p>The cost for LU is <span class="math inline">\(\displaystyle \frac{1}{3}n^3\)</span> flops.</p></li><li><p><span class="math inline">\(A\)</span> can be written as <span class="math inline">\(A=R^TR\)</span> for some <span class="math inline">\(R \in \mathbb{R}^{n \times n}\)</span> iff <span class="math inline">\(A \succeq 0\)</span>.</p></li><li><p>When <span class="math inline">\(A=A^*\)</span> but <span class="math inline">\(A\)</span> is not PSD (i.e., negative eigenvalues are present), then <span class="math inline">\(A=LDL^*\)</span> (<strong>LDLT factorization</strong>), where <span class="math inline">\(D\)</span> is diagonal (when <span class="math inline">\(A \in \mathbb{R}^{n \times n}\)</span>, <span class="math inline">\(D\)</span> can have <span class="math inline">\(2 \times 2\)</span> diagonal blocks), and <span class="math inline">\(L\)</span> has <span class="math inline">\(1\)</span>'s on diagonal.</p></li></ul>
           </div>
-<h2 id="eigenvalues-of-non-symmetric-matrix">Eigenvalues of Non-symmetric Matrix</h2>
-<p><strong>Example 2.1</strong>    Consider eigenvalues of a Jordan block and its perturbation <span class="math display">\[J=\begin{bmatrix}
-1 &amp; 1 \\
- &amp; 1 &amp; \ddots \\
- &amp; &amp; \ddots &amp; 1 \\
- &amp; &amp; &amp; 1
-\end{bmatrix} \in \mathbb{R}^{n \times n}\]</span> and <span class="math display">\[J+E=\begin{bmatrix}
-1 &amp; 1 \\
- &amp; 1 &amp; \ddots \\
- &amp; &amp; \ddots &amp; 1 \\
- \varepsilon &amp; &amp; &amp; 1
-\end{bmatrix}.\]</span></p>
-<p><span class="math inline">\(\lambda(J)=1\)</span>, but <span class="math inline">\(|\lambda(J+E)-1| \approx \varepsilon^{1/n}\)</span>. Hence, the eigenvalues are <strong>ill-conditioned</strong>.</p>
 
     </div>
 
@@ -303,6 +393,11 @@ Let <span class="math inline">\(i=1\)</span>, then it is obvious that <span clas
     
 
       <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Linear-system/" rel="tag"><i class="fa fa-tag"></i> Linear system</a>
+              <a href="/tags/LU-decomposition/" rel="tag"><i class="fa fa-tag"></i> LU decomposition</a>
+          </div>
 
         
 
@@ -310,13 +405,10 @@ Let <span class="math inline">\(i=1\)</span>, then it is obvious that <span clas
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/Mathematics/Network-science/Introduction_to_Network" rel="prev" title="Introduction to Network">
-      <i class="fa fa-chevron-left"></i> Introduction to Network
+    <a href="/Computer-science/Deep-learning/Exponential_Expressivity_with_Depth" rel="prev" title="Exponential Expressivity With Depth">
+      <i class="fa fa-chevron-left"></i> Exponential Expressivity With Depth
     </a></div>
-      <div class="post-nav-item">
-    <a href="/Statistics/Graphical-model/Exponential_Family_and_Contingency_Table" rel="next" title="Exponential Family and Contingency Table">
-      Exponential Family and Contingency Table <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -375,7 +467,7 @@ Let <span class="math inline">\(i=1\)</span>, then it is obvious that <span clas
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#courantfisher-minmax-theorem"><span class="nav-number">1.</span> <span class="nav-text">Courant–Fisher Minmax Theorem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#weyls-inequality"><span class="nav-number">2.</span> <span class="nav-text">Weyl&#39;s Inequality</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#eigenvalues-of-non-symmetric-matrix"><span class="nav-number">2.1.</span> <span class="nav-text">Eigenvalues of Non-symmetric Matrix</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#lu-decomposition"><span class="nav-number">1.</span> <span class="nav-text">LU Decomposition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#solving-amathbfxmathbfb-via-lu"><span class="nav-number">2.</span> <span class="nav-text">Solving \(A\mathbf{x}&#x3D;\mathbf{b}\) via LU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pivoting"><span class="nav-number">3.</span> <span class="nav-text">Pivoting</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cholesky-factorization-for-a-succ-0"><span class="nav-number">4.</span> <span class="nav-text">Cholesky Factorization for \(A \succ 0\)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

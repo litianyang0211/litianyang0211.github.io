@@ -28,7 +28,7 @@
 <meta property="og:description" content="A quick review of point set.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-03-01T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-17T16:24:31.200Z">
+<meta property="article:modified_time" content="2021-10-26T22:47:40.470Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Set">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-17 17:24:31" itemprop="dateModified" datetime="2021-10-17T17:24:31+01:00">2021-10-17</time>
+                <time title="Modified: 2021-10-26 23:47:40" itemprop="dateModified" datetime="2021-10-26T23:47:40+01:00">2021-10-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -306,7 +306,7 @@
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<p><strong>Theorem 2.4 (Bolzano–Weierstrass Theorem)</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is a bounded and infinite set, then <span class="math inline">\(E\)</span> includes at least one cluster point.</p>
+<p><strong>Theorem 2.4 (Bolzano-Weierstrass Theorem)</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is a bounded and infinite set, then <span class="math inline">\(E\)</span> includes at least one cluster point.</p>
 <h1 id="open-set-and-closed-set">Open Set and Closed Set</h1>
 <p><strong>Definition 3.1</strong>    If <span class="math inline">\(\forall x \in E\)</span>, <span class="math inline">\(x\)</span> are interior point, then <span class="math inline">\(E\)</span> is an <strong>open set</strong>. If <span class="math inline">\(\forall x \in E&#39;: x \in E\)</span>, then <span class="math inline">\(E\)</span> is a <strong>closed set</strong>.</p>
 <p><strong>Theorem 3.1</strong>    <span class="math inline">\(E\)</span> is an open set if and only if <span class="math inline">\(E=E^\circ\)</span>.</p>
@@ -335,7 +335,7 @@ As a consequence, <span class="math display">\[\left(\bigcup_{\lambda \in \Lambd
             <p><strong>Lemma 4.1.1</strong>    The closed subset of a compact set is compact.</p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(M\)</span> is compact, and <span class="math inline">\(F \subset M\)</span>, where <span class="math inline">\(F\)</span> is closed. Take any open cover of <span class="math inline">\(F\)</span>, denoted <span class="math inline">\(\{U_\lambda\}_{\lambda \in \Lambda}\)</span>. We know <span class="math inline">\(\{U_\lambda\}_{\lambda \in \Lambda} \cup F^c\)</span> is an open cover of <span class="math inline">\(M\)</span>, then there exists a finite sub-cover: <span class="math inline">\(U_1, \cdots, U_n, F^c\)</span>. Hence, <span class="math inline">\(\{U_i\}_{i=1}^n\)</span> is the finite sub-cover of <span class="math inline">\(F\)</span>, and thus <span class="math inline">\(F\)</span> is compact.<p align="right"><span class="math inline">\(\square\)</span></p>
           </div>
 <p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(F\)</span> is bounded and closed. Since <span class="math inline">\(F \subset \mathbb{R}^n\)</span> is bounded, then <span class="math inline">\(\exists T_0=[-a, a]^n\)</span> s.t. <span class="math inline">\(F \subset T_0\)</span>. Suppose <span class="math inline">\(T_0\)</span> is not compact, then there exists an open cover of <span class="math inline">\(T_0\)</span> such that it does not have finite sub-cover. We divide <span class="math inline">\(T_0\)</span> equally into a closed sets with edge length <span class="math inline">\(a\)</span>, and at least one set does not have finite sub-cover, denoted as <span class="math inline">\(T_1\)</span>. We divide <span class="math inline">\(T_1\)</span> equally into a closed sets with edge length <span class="math inline">\(\displaystyle \frac{a}{2}\)</span>, and at least one set does not have finite sub-cover, denoted as <span class="math inline">\(T_2\)</span>. We repeat this process, and get <span class="math display">\[T_1 \supset T_2 \supset \cdots \supset T_n \supset \cdots,\]</span> where <span class="math inline">\(T_n\)</span> has edge length <span class="math inline">\(\displaystyle \frac{a}{2^{n-1}}\)</span>.</p>
-<p>Take an arbitrary <span class="math inline">\(x_n \in T_{n-1}-T_n\)</span>, then <span class="math inline">\(\{x_n\}\)</span> is bounded and infinite. Because of Bolzano–Weierstrass theorem, <span class="math inline">\(\{x_n\}\)</span> includes at least one cluster point, denoted as <span class="math inline">\(x\)</span>, i.e., <span class="math inline">\(\exists \{x_{k_s}\}\)</span> s.t. <span class="math inline">\(x_{k_s} \to x \in T_j\)</span> for some <span class="math inline">\(j\)</span>. Hence, there exists an open set <span class="math inline">\(G\)</span> in the sub-cover such that <span class="math inline">\(x \in G\)</span>, i.e., <span class="math inline">\(\exists \delta&gt;0\)</span> s.t. <span class="math inline">\(B_\delta(x) \subset G\)</span>.</p>
+<p>Take an arbitrary <span class="math inline">\(x_n \in T_{n-1}-T_n\)</span>, then <span class="math inline">\(\{x_n\}\)</span> is bounded and infinite. Because of Bolzano-Weierstrass theorem, <span class="math inline">\(\{x_n\}\)</span> includes at least one cluster point, denoted as <span class="math inline">\(x\)</span>, i.e., <span class="math inline">\(\exists \{x_{k_s}\}\)</span> s.t. <span class="math inline">\(x_{k_s} \to x \in T_j\)</span> for some <span class="math inline">\(j\)</span>. Hence, there exists an open set <span class="math inline">\(G\)</span> in the sub-cover such that <span class="math inline">\(x \in G\)</span>, i.e., <span class="math inline">\(\exists \delta&gt;0\)</span> s.t. <span class="math inline">\(B_\delta(x) \subset G\)</span>.</p>
 Take <span class="math inline">\(s \to \infty\)</span> such that the edge length of <span class="math inline">\(T_{k_s}\)</span> is less than <span class="math inline">\(\displaystyle \frac{\delta}{2}\)</span> and <span class="math inline">\(\displaystyle d(x_{k_s}, x)&lt;\frac{\delta}{2}\)</span>, and thus <span class="math inline">\(T_{k_s} \subset B_\delta(x) \subset G\)</span>, which is a contradiction. As a consequence, <span class="math inline">\(T_0\)</span> is compact and <span class="math inline">\(F \subset T_0\)</span> is compact.
 <p align="right">
 <span class="math inline">\(\square\)</span>
