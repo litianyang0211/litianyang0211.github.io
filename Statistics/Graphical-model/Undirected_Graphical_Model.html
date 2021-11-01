@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="We introduce the undirected graph and associated Markov property. Then we talk about decomposability and the benefits of decomposability. Finally, we explore the non-decomposable model.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Undirected Graphical Model">
+<meta property="og:url" content="https://litianyang0211.github.io/Statistics/Graphical-model/Undirected_Graphical_Model">
+<meta property="og:site_name" content="Tianyang Li">
+<meta property="og:description" content="We introduce the undirected graph and associated Markov property. Then we talk about decomposability and the benefits of decomposability. Finally, we explore the non-decomposable model.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-26T23:00:00.000Z">
+<meta property="article:modified_time" content="2021-10-31T23:15:43.180Z">
+<meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Undirected graphical model">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://litianyang0211.github.io/Statistics/Graphical-model/Undirected_Graphical_Model.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Undirected Graphical Model | Tianyang Li</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tianyang Li</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-blog">
+
+    <a href="/blog/" rel="section"><i class="fa fa-blog fa-fw"></i>Blog</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-projects">
+
+    <a href="/projects/" rel="section"><i class="fa fa-code fa-fw"></i>Projects</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Statistics/Graphical-model/Undirected_Graphical_Model">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Tianyang Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianyang Li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Undirected Graphical Model
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-lightbulb"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-27 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-27T00:00:00+01:00">2021-10-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-edit"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-10-31 23:15:43" itemprop="dateModified" datetime="2021-10-31T23:15:43+00:00">2021-10-31</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Statistics/" itemprop="url" rel="index"><span itemprop="name">Statistics</span></a>
+                </span>
+                  /
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Statistics/Graphical-model/" itemprop="url" rel="index"><span itemprop="name">Graphical model</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">We introduce the undirected graph and associated Markov property. Then we talk about decomposability and the benefits of decomposability. Finally, we explore the non-decomposable model.</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="undirected-graph">Undirected Graph</h1>
+<p><strong>Definition 1.1</strong>    Let <span class="math inline">\(V\)</span> be a finite set. An <strong>undirected graph</strong> is a pair <span class="math inline">\(\mathcal{G}=(V, E)\)</span> where <span class="math inline">\(V\)</span> is a finite set of vertices, and <span class="math inline">\(E \subseteq \{\{i, j\}: i, j \in V, i \neq j\}\)</span> is a set of unordered distinct pairs of <span class="math inline">\(V\)</span>, called <strong>edges</strong>. If <span class="math inline">\(\{i, j\} \in E\)</span>, we say <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are <strong>adjacent</strong>, and we write <span class="math inline">\(i \sim j\)</span>. The vertices adjacent to <span class="math inline">\(i\)</span> are called the <strong>neighbors</strong> of <span class="math inline">\(i\)</span>, and the set of neighbors is called the <strong>boundary</strong> of <span class="math inline">\(i\)</span>, denoted <span class="math inline">\(\text{bd}_\mathcal{G}(i)\)</span>.</p>
+<p><strong>Example 1.1</strong>    The graph has <span class="math inline">\(V=\{1, 2, 3, 4\}\)</span>, and <span class="math inline">\(E=\{\{1, 2\}, \{2, 3\}, \{3, 4\}\}\)</span>.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 2((2)) --- 3((3)) --- 4((4))
+          </pre>
+<h1 id="markov-property">Markov Property</h1>
+<p>We associate a collection of probability distributions with a graph via a <strong>Markov property</strong>. Vertices correspond to random variables, and the absence of an edge corresponds to some kind of independence.</p>
+<p><span id="def2.1"><strong>Definition 2.1</strong></span>    Let <span class="math inline">\(\mathcal{G}=(V, E)\)</span> be an undirected graph, and <span class="math inline">\(p(x_V)\)</span> be a probability distribution over r.v.s. <span class="math inline">\(X_V \in \mathcal{X}_V=\times_{v \in V} \mathcal{X}_v\)</span>. We say that <span class="math inline">\(p\)</span> obeys the <strong>pairwise Markov property</strong> w.r.t. <span class="math inline">\(\mathcal{G}\)</span> if whenever <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are not adjacent, <span class="math display">\[X_i \perp\!\!\!\!\perp X_j \mid X_{V-\{i, j\}}\ [p].\]</span></p>
+<p><strong>Example 2.1</strong>    A distribution is pairwise Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span> iff <span class="math inline">\(X_1 \perp\!\!\!\!\perp X_4 \mid X_2, X_3\)</span> and <span class="math inline">\(X_2 \perp\!\!\!\!\perp X_4 \mid X_1, X_3\)</span>.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 3((3)) --- 4((4))
+1 --- 2((2)) --- 3
+          </pre>
+<p>If <span class="math inline">\(p&gt;0\)</span>, then <span class="math inline">\(X_1, X_2 \perp\!\!\!\!\perp X_4 \mid X_3\)</span>.</p>
+<p><strong>Definition 2.2</strong>    A set of vertices <span class="math inline">\(C \subseteq V\)</span> is <strong>complete</strong> if every <span class="math inline">\(i, j \in C\)</span> are adjacent. We say <span class="math inline">\(C\)</span> is a <strong>clique</strong> if it is an inclusion maximal complete set.</p>
+<p><strong>Example 2.2</strong>    <span class="math inline">\(\mathcal{C}(\mathcal{G})=\{\{1, 2\}, \{2, 3\}, \{3, 4\}, \{1, 4\}\}\)</span>.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 2((2))
+1 --- 4((4)) --- 3((3))
+2 --- 3
+          </pre>
+<p><strong>Example 2.3</strong>    <span class="math inline">\(\mathcal{C}(\mathcal{G})=\{\{1, 2, 3\}, \{3, 4\}\}\)</span>.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 3((3)) --- 4((4))
+1 --- 2((2)) --- 3
+          </pre>
+<p><strong>Definition 2.3</strong>    We say a distribution satisfying the conditions of <a href="#def2.1">definition 2.1</a> <strong>factorizes</strong> according to <span class="math inline">\(\mathcal{G}\)</span> if we can write <span class="math display">\[p(x_V)=\prod_{C \in \mathcal{C}(\mathcal{G})} \psi_C(x_C), \psi_C \geq 0.\]</span></p>
+<p><strong>Example 2.4</strong>    We say the distribution factorizes according to the graph if <span class="math inline">\(p(x_{1234})=\psi_{123}(x_{123})\psi_{34}(x_{34})\)</span>, which implies <span class="math inline">\(X_1, X_2 \perp\!\!\!\!\perp X_4 \mid X_3\)</span>.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 3((3)) --- 4((4))
+1 --- 2((2)) --- 3
+          </pre>
+<p><strong>Definition 2.4</strong>    A <strong>path</strong> is a sequence of adjacent vertices without repetition.</p>
+<p><strong>Definition 2.5</strong>    Let <span class="math inline">\(A, B, S \subseteq V\)</span>, we say <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>separated</strong> by <span class="math inline">\(S\)</span> if every path from any <span class="math inline">\(a \in A\)</span> to <span class="math inline">\(b \in B\)</span> includes some vertex in <span class="math inline">\(S\)</span>. If <span class="math inline">\(S=\varnothing\)</span>, then <span class="math inline">\(A \perp_s B\)</span> iff they are in disconnected components of <span class="math inline">\(\mathcal{G}\)</span>.</p>
+<p><strong>Example 2.5</strong>    <span class="math inline">\(\{1, 2\} \perp_s \{4\} \mid \{3\}\)</span>.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 3((3)) --- 4((4))
+1 --- 2((2)) --- 3
+          </pre>
+<p><strong>Definition 2.6</strong>    Let <span class="math inline">\(W \subseteq V\)</span>, the <strong>induced subgraph</strong> over <span class="math inline">\(W\)</span>, denoted <span class="math inline">\(\mathcal{G}_W\)</span>, has vertices consisting of <span class="math inline">\(W\)</span>, and edges <span class="math inline">\(E_W=\{\{i, j\} \in E, i, j \in W\}\)</span>.</p>
+<p><strong>Example 2.6</strong>   <br />
+</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 3((3)) --- 4((4))
+1 --- 2((2)) --- 3
+          </pre>
+<p><span class="math inline">\(\mathcal{G}_{\{1, 4\}}\)</span> is</p>
+<pre class="mermaid" style="text-align: center;">
+            graph TB
+            1((1))
+4((4))
+          </pre>
+<p><span class="math inline">\(\mathcal{G}_{\{1, 2, 3\}}\)</span> is</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 2((2)) --- 3((3)) --- 1
+          </pre>
+<div class="note info">
+            <p><span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are separated by <span class="math inline">\(S\)</span> (where <span class="math inline">\(S \cap A=S \cap B=\varnothing\)</span>) iff <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are separated by <span class="math inline">\(\varnothing\)</span> in <span class="math inline">\(\mathcal{G}_{V-S}\)</span>.</p>
+          </div>
+<p><strong>Definition 2.7</strong>    We say that <span class="math inline">\(p(x_V)\)</span> obeying all the conditions of <a href="#def2.1">definition 2.1</a> is <strong>globally Markov</strong> w.r.t. <span class="math inline">\(\mathcal{G}\)</span> if whenever <span class="math display">\[A \perp_s B \mid S\ [\mathcal{G}] \Rightarrow X_A \perp\!\!\!\!\perp X_B \mid X_S\ [p].\]</span></p>
+<p><strong>Theorem 2.1</strong>    The global Markov property implies the pairwise Markov property.</p>
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(i \not\sim j\)</span> in <span class="math inline">\(\mathcal{G}\)</span>. Since any path from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span> must pass through some <span class="math inline">\(k \in V-\{i, j\}\)</span>, then <span class="math display">\[i \perp_s j \mid V-\{i, j\}\ [\mathcal{G}] \Rightarrow X_i \perp\!\!\!\!\perp X_j \mid X_{V-\{i, j\}}\ [p].\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.2</strong>    If <span class="math inline">\(p(x_V)\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span>, then <span class="math inline">\(p(x_V)\)</span> is globally Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>.</p>
+<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(A \perp_s B \mid S\)</span>. Let <span class="math inline">\(\widetilde{A}=\{v \in V: \{v\} \not\perp_s A \mid S\}\)</span> (i.e., any vertex in <span class="math inline">\(\widetilde{A}\)</span> reaches vertex in <span class="math inline">\(A\)</span> without going through <span class="math inline">\(S\)</span>). Let <span class="math inline">\(\widetilde{B}=V-(\widetilde{A} \cup S)\)</span> so that <span class="math inline">\(\widetilde{A} \perp_s \widetilde{B} \mid S\)</span>, <span class="math inline">\(V=\widetilde{A} \dot\cup \widetilde{B} \dot\cup S\)</span>, <span class="math inline">\(A \subseteq \widetilde{A}\)</span>, and <span class="math inline">\(B \subseteq \widetilde{B}\)</span>. Furthermore, every clique is a subset of either <span class="math inline">\(\widetilde{A} \cup S\)</span> or <span class="math inline">\(\widetilde{B} \cup S\)</span>, since there are no edges between <span class="math inline">\(\widetilde{A}\)</span> and <span class="math inline">\(\widetilde{B}\)</span>.</p>
+Let <span class="math inline">\(\mathcal{C}_A(\mathcal{G})=\{C \in \mathcal{C}(\mathcal{G}): C \subseteq \widetilde{A} \cup S\}\)</span> and <span class="math inline">\(\mathcal{C}_B(\mathcal{G})=\mathcal{C}(\mathcal{G})-\mathcal{C}_A(\mathcal{G})\)</span>, then <span class="math display">\[p(x_V)=\prod_{C \in \mathcal{C}(\mathcal{G})} \psi_C(x_C)=\prod_{C \in \mathcal{C}_A(\mathcal{G})} \psi_C(x_C) \cdot \prod_{D \in \mathcal{C}_B(\mathcal{G})} \psi_D(x_D)=f(x_{\widetilde{A}}, x_S)g(x_{\widetilde{B}}, x_S).\]</span> Hence, <span class="math inline">\(X_{\widetilde{A}} \perp\!\!\!\!\perp X_{\widetilde{B}} \mid X_S\)</span>. Since <span class="math inline">\(A \subseteq \widetilde{A}\)</span>, and <span class="math inline">\(B \subseteq \widetilde{B}\)</span>, then by Graphoid axioms, <span class="math inline">\(X_A \perp\!\!\!\!\perp X_B \mid X_S\ [p]\)</span>. Hence <span class="math inline">\(p\)</span> is globally Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 2.3 (Hammersley-Clifford Theorem)</strong>    If <span class="math inline">\(p(x_V)&gt;0\)</span> has the pairwise Markov property w.r.t. <span class="math inline">\(\mathcal{G}\)</span>, then <span class="math inline">\(p\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span>.</p>
+<div class="note info">
+            <p><span class="math inline">\(p \in M_p(\mathcal{G}) \Leftarrow p \in M_g(\mathcal{G}) \Leftarrow p \in M_f(\mathcal{G})\)</span>. If <span class="math inline">\(p&gt;0\)</span>, then <span class="math inline">\(p \in M_f(\mathcal{G}) \Leftarrow p \in M_p(\mathcal{G})\)</span>.</p>
+          </div>
+<h1 id="decomposability">Decomposability</h1>
+<p><strong>Definition 3.1</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> be an undirected graph, with vertices <span class="math inline">\(V=A \dot\cup B \dot\cup S\)</span>. We say <span class="math inline">\((A, S, B)\)</span> is a <strong>decomposition</strong> of <span class="math inline">\(\mathcal{G}\)</span> if <span class="math inline">\(\mathcal{G}_S\)</span> is complete, and <span class="math inline">\(A \perp_s B \mid S\ [\mathcal{G}]\)</span>. We say the decomposition is <strong>proper</strong> if <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are non-empty.</p>
+<p><strong>Example 3.1</strong>    For <span class="math inline">\(A=\{1, 2\}\)</span>, <span class="math inline">\(B=\{4\}\)</span> and <span class="math inline">\(S=\{3\}\)</span>, <span class="math inline">\((A, S, B)\)</span> is a proper decomposition. For <span class="math inline">\(A=\{1\}\)</span>, <span class="math inline">\(B=\{4\}\)</span> and <span class="math inline">\(S=\{2, 3\}\)</span>, <span class="math inline">\((A, S, B)\)</span> is a proper decomposition.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 3((3)) --- 4((4))
+1 --- 2((2)) --- 3
+          </pre>
+<p><strong>Example 3.2</strong>    The graph below has no proper decomposition.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 2((2))
+1 --- 4((4)) --- 3((3))
+2 --- 3
+          </pre>
+<p><strong>Definition 3.2</strong>    We say that <span class="math inline">\(\mathcal{G}\)</span> is <strong>decomposable</strong> if it is either complete, or there is a proper decomposition <span class="math inline">\((A, S, B)\)</span>, and <span class="math inline">\(\mathcal{G}_{A \cup S}\)</span> and <span class="math inline">\(\mathcal{G}_{B \cup S}\)</span> are decomposable.</p>
+<p><strong>Example 3.3</strong>    For <span class="math inline">\(A=\{1, 2\}\)</span>, <span class="math inline">\(B=\{4\}\)</span> and <span class="math inline">\(S=\{3\}\)</span>, <span class="math inline">\((A, S, B)\)</span> is a proper decomposition. Both <span class="math inline">\(\mathcal{G}_{A \cup S}\)</span> and <span class="math inline">\(\mathcal{G}_{B \cup S}\)</span> are complete, then <span class="math inline">\(\mathcal{G}\)</span> is decomposable.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 3((3)) --- 4((4))
+1 --- 2((2)) --- 3
+          </pre>
+<p><strong>Example 3.4</strong>    For <span class="math inline">\(A=\{1, 2\}\)</span>, <span class="math inline">\(B=\{5, 6\}\)</span> and <span class="math inline">\(S=\{3, 4\}\)</span>, <span class="math inline">\((A, S, B)\)</span> is a proper decomposition. Since <span class="math inline">\(\mathcal{G}_{A \cup S}\)</span> and <span class="math inline">\(\mathcal{G}_{B \cup S}\)</span> are decomposable, then <span class="math inline">\(\mathcal{G}\)</span> is decomposable.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) --- 2((2))
+2 --- 3((3)) --- 6((6))
+2 --- 4((4)) --- 6((6))
+3 --- 4
+4 --- 5((5))
+          </pre>
+<p><strong>Definition 3.3</strong>    Let <span class="math inline">\(\mathcal{C}\)</span> be a collection of subsets of <span class="math inline">\(V\)</span>. We say that <span class="math inline">\(\mathcal{C}\)</span> has the <strong>running intersection property</strong> if we can order the elements <span class="math inline">\(C_1, \cdots, C_k\)</span> s.t. for all <span class="math inline">\(j \geq 2\)</span>, <span class="math display">\[C_j \cap \left(\bigcup_{i&lt;j} C_i\right)=C_j \cap C_{\sigma(j)},\]</span> where <span class="math inline">\(\sigma(j)&lt;j\)</span>.</p>
+<p><strong>Example 3.5</strong>    <span class="math inline">\(\{1, 2\}\)</span>, <span class="math inline">\(\{2, 3, 4\}\)</span>, <span class="math inline">\(\{3, 4, 6\}\)</span> and <span class="math inline">\(\{4, 5\}\)</span> satisfy the running intersection property.</p>
+<table style="table-layout:fixed">
+<tbody>
+<tr>
+<td>
+<center>
+<span class="math inline">\(C\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{1, 2\}\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{2, 3, 4\}\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{3, 4, 6\}\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{4, 5\}\)</span>
+</center>
+</td>
+</tr>
+<tr>
+<td>
+<center>
+Separator set <span class="math inline">\(S\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(-\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{2\}\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{3, 4\}\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{4\}\)</span>
+</center>
+</td>
+</tr>
+<tr>
+<td>
+<center>
+<span class="math inline">\(\sigma(j)\)</span>
+</center>
+</td>
+<td>
+<center>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(1\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(2\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(2\)</span> or <span class="math inline">\(3\)</span>
+</center>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example 3.6</strong>    <span class="math inline">\(\{1, 2\}\)</span>, <span class="math inline">\(\{2, 3\}\)</span>, <span class="math inline">\(\{3, 4\}\)</span> and <span class="math inline">\(\{1, 4\}\)</span> do not satisfy the running intersection property.</p>
+<table style="table-layout:fixed">
+<tbody>
+<tr>
+<td>
+<center>
+<span class="math inline">\(C\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{1, 2\}\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{2, 3\}\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{3, 4\}\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{1, 4\}\)</span>
+</center>
+</td>
+</tr>
+<tr>
+<td>
+<center>
+Separator set <span class="math inline">\(S\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(-\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{2\}\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{3\}\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(\{1, 4\}\)</span>
+</center>
+</td>
+</tr>
+<tr>
+<td>
+<center>
+<span class="math inline">\(\sigma(j)\)</span>
+</center>
+</td>
+<td>
+<center>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(1\)</span>
+</center>
+</td>
+<td>
+<center>
+<span class="math inline">\(2\)</span>
+</center>
+</td>
+<td>
+<center>
+N/A
+</center>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Definition 3.4</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> be an undirected graph. A <strong>cycle</strong> is a sequence of vertices <span class="math inline">\(\{v_1, v_2, \cdots, v_k\}\)</span> for <span class="math inline">\(k \geq 3\)</span> s.t. <span class="math inline">\(v_1-\cdots-v_k\)</span> and <span class="math inline">\(v_1 \sim v_k\)</span>. A <strong>chord</strong> on a cycle is an edge between two vertices that are not adjacent on the cycle. A graph is <strong>triangulated</strong> if it does not contain any <strong>chordless</strong> cycles of length at least <span class="math inline">\(4\)</span>.</p>
+<p><strong>Theorem 3.1</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> be an undirected graph. The following are equivalent:</p>
+<p>    (1) <span class="math inline">\(\mathcal{G}\)</span> is decomposable;</p>
+<p>    (2) <span class="math inline">\(\mathcal{G}\)</span> is triangulated;</p>
+<p>    (3) every minimal <span class="math inline">\((a, b)\)</span>-separator is complete in <span class="math inline">\(\mathcal{G}\)</span> (i.e., <span class="math inline">\(a \perp_s b \mid S \Rightarrow a \not\perp_s b \mid T \subset S\)</span>);</p>
+<p>    (4) <span class="math inline">\(\mathcal{C}(\mathcal{G})\)</span> satisfies the running intersection property.</p>
+<p><strong><em>Proof.</em></strong> We need to show (1) <span class="math inline">\(\Rightarrow\)</span> (2) <span class="math inline">\(\Rightarrow\)</span> (3) <span class="math inline">\(\Rightarrow\)</span> (4) <span class="math inline">\(\Rightarrow\)</span> (1).</p>
+<p>(i) Suppose <span class="math inline">\(\mathcal{G}\)</span> is decomposable. Let <span class="math inline">\(p=|V|\)</span>. If <span class="math inline">\(\mathcal{G}\)</span> is complete, then it is clearly triangulated, so the result holds for <span class="math inline">\(p=1\)</span>. If <span class="math inline">\(\mathcal{G}\)</span> is not complete, then by definition, there exists a proper decomposition <span class="math inline">\((A, S, B)\)</span> so that <span class="math inline">\(\mathcal{G}_{A \cup S}\)</span> and <span class="math inline">\(\mathcal{G}_{B \cup S}\)</span> have strictly fewer vertices than <span class="math inline">\(\mathcal{G}\)</span> and are decomposable. By induction hypothesis, <span class="math inline">\(\mathcal{G}_{A \cup S}\)</span> and <span class="math inline">\(\mathcal{G}_{B \cup S}\)</span> are triangulated. Suppose there is a cycle containing <span class="math inline">\(a \in A\)</span> and <span class="math inline">\(b \in B\)</span>, then the cycle passes twice through <span class="math inline">\(S\)</span>, which is complete, then there is a chord on the cycle. Hence, <span class="math inline">\(\mathcal{G}\)</span> is triangulated.</p>
+<p>(ii) Suppose <span class="math inline">\(\mathcal{G}\)</span> is triangulated and <span class="math inline">\(S\)</span> separates <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> minimally. If <span class="math inline">\(S\)</span> is not complete, then there exist <span class="math inline">\(s_1, s_2 \in S\)</span> s.t. <span class="math inline">\(s_1 \not\sim s_2\)</span>. Let <span class="math inline">\(\pi_1\)</span> be the path from <span class="math inline">\(a\)</span> to <span class="math inline">\(b\)</span> via <span class="math inline">\(s_1 \in S\)</span>, and <span class="math inline">\(\pi_2\)</span> be the path from <span class="math inline">\(a\)</span> to <span class="math inline">\(b\)</span> via <span class="math inline">\(s_2 \in S\)</span>, and neither these paths intersects any other element of <span class="math inline">\(S\)</span>. Let <span class="math inline">\(a&#39;\)</span> be the vertex on <span class="math inline">\(\pi_1\)</span>, which is closest to <span class="math inline">\(s_1\)</span> on the same side as <span class="math inline">\(a\)</span>, and is also on <span class="math inline">\(\pi_2\)</span>. We reduce <span class="math inline">\(\pi_1\)</span> to start at <span class="math inline">\(a&#39;\)</span>, and the same for <span class="math inline">\(\pi_2\)</span>. We repeat it on the side of <span class="math inline">\(b\)</span>. Hence, we have a chordless cycle of length at least <span class="math inline">\(4\)</span>, which is a contradiction.</p>
+<p>(iii) If the graph is complete, there is nothing to proof since <span class="math inline">\(\mathcal{C}(\mathcal{G})=V\)</span>. Pick <span class="math inline">\(a \not\sim b\)</span> with a minimal separator <span class="math inline">\(S\)</span>. Let <span class="math inline">\(\widetilde{A}=\{v \in V: v \not\perp_s a \mid S\}\)</span>, and <span class="math inline">\(\widetilde{B}=V-(\widetilde{A} \cup S)\)</span>.</p>
+<p>(iv) Suppose <span class="math inline">\(C_1, \cdots, C_k\)</span> satisfy the running intersection property. If <span class="math inline">\(k=1\)</span>, there is nothing to prove. Otherwise, let <span class="math display">\[H_k=\bigcup_{i&lt;k} C_i \quad \text{and} \quad S_k=C_k \cap H_k.\]</span> Claim that this is a proper decomposition <span class="math inline">\((C_k-S_k, S_k, H_k-S_k)\)</span>.</p>
+<center>
+<strong><em>To be completed...</em></strong>
+</center>
+<p><span id="thm3.2"><strong>Corollary 3.2</strong></span>    If <span class="math inline">\((A, S, B)\)</span> is a decomposition, and <span class="math inline">\(\mathcal{G}\)</span> is decomposable, then <span class="math inline">\(\mathcal{G}_{A \cup S}\)</span> and <span class="math inline">\(\mathcal{G}_{B \cup S}\)</span> are also decomposable.</p>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(\mathcal{G}\)</span> is decomposable, then <span class="math inline">\(\mathcal{G}\)</span> is triangulated. Therefore, <span class="math inline">\(\mathcal{G}_{A \cup S}\)</span> and <span class="math inline">\(\mathcal{G}_{B \cup S}\)</span> are triangulated, which implies <span class="math inline">\(\mathcal{G}_{A \cup S}\)</span> and <span class="math inline">\(\mathcal{G}_{B \cup S}\)</span> are decomposable.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note info">
+            <p><a href="#thm3.2">Corollary 3.2</a> reassures us that if we want to check a graph is decomposable, we can just go ahead and start decomposing, and we will never have to back track.</p>
+          </div>
+<p><strong>Definition 3.5</strong>    Let <span class="math inline">\(C_1, \cdots, C_k\)</span> be the cliques of <span class="math inline">\(\mathcal{G}\)</span> ordered according to running intersection. The <span class="math inline">\(i\)</span>th <strong>separator set</strong> is <span class="math display">\[S_i=C_i \cap \bigcup_{j&lt;i} C_j,\]</span> where by convention, <span class="math inline">\(S_1=\varnothing\)</span>.</p>
+<p><span id="thm3.3"><strong>Lemma 3.3</strong></span>    Let <span class="math inline">\(\mathcal{G}\)</span> be a graph with a decomposition <span class="math inline">\((A, S, B)\)</span>, and <span class="math inline">\(p\)</span> be a distribution. Then <span class="math inline">\(p\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span> iff its margins <span class="math inline">\(p(x_A, x_S)\)</span> and <span class="math inline">\(p(x_B, x_S)\)</span> factorize according to <span class="math inline">\(\mathcal{G}_{A \cup S}\)</span> and <span class="math inline">\(\mathcal{G}_{B \cup S}\)</span>, and <span class="math display">\[p(x_V)p(x_S)=p(x_A, x_S)p(x_B, x_S).\]</span></p>
+<p><strong><em>Proof.</em></strong> <span class="math inline">\((\Leftarrow)\)</span> Suppose <span class="math inline">\(p(x_V)p(x_S)=p(x_A, x_S)p(x_B, x_S)\)</span>. Since every clique in <span class="math inline">\(\mathcal{G}_{A \cup S}\)</span> or <span class="math inline">\(\mathcal{G}_{B \cup S}\)</span> is a clique in <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(S\)</span> is complete, then we have <span class="math display">\[\begin{aligned}
+p(x_V)&amp;=p(x_A, x_S)p(x_B, x_S)\frac{1}{p(x_S)}
+\\&amp;=\prod_{C \in \mathcal{C}(\mathcal{G}_{A \cup S})} \psi_C(x_C) \prod_{C&#39; \in \mathcal{C}(\mathcal{G}_{B \cup S})} \psi_{C&#39;}(x_{C&#39;})\frac{1}{p(x_S)}
+\\&amp;=\prod_{C \in \mathcal{C}(\mathcal{G})} \widetilde{\psi}_C(x_C).
+\end{aligned}\]</span> Hence, <span class="math inline">\(p\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span>.</p>
+<span class="math inline">\((\Rightarrow)\)</span> Suppose <span class="math inline">\(p \in M_f(\mathcal{G})\)</span>, then <span class="math inline">\(p \in M_g(\mathcal{G})\)</span>. Hence, <span class="math display">\[p(x_V)p(x_S)=p(x_A, x_S)p(x_B, x_S).\]</span> Besides, <span class="math display">\[\begin{aligned}
+p(x_V)&amp;=\prod_{C \in \mathcal{C}(\mathcal{G})} \psi_C(x_C)
+\\&amp;=\prod_{C \in \mathcal{C}_A(\mathcal{G})} \psi_C(x_C) \prod_{C&#39; \in \mathcal{C}_B(\mathcal{G})} \psi_{C&#39;}(x_{C&#39;}),
+\end{aligned}\]</span> where <span class="math inline">\(C_A(\mathcal{G})\)</span> is the cliques contained in <span class="math inline">\(A \cup S\)</span>, and <span class="math inline">\(C_B(\mathcal{G})\)</span> is the rest. Then <span class="math display">\[\begin{aligned}
+p(x_B, x_S)&amp;=\prod_{C&#39; \in \mathcal{C}_B(\mathcal{G})} \psi_{C&#39;}(x_{C&#39;}) \int \prod_{C \in \mathcal{C}_A(\mathcal{G})} \psi_C(x_C)\text{d}x_A
+\\&amp;=\prod_{C&#39; \in \mathcal{C}(\mathcal{G}_{B \cup S})} \widetilde{\psi}_{C&#39;}(x_{C&#39;}) \cdot f(x_S)
+\\&amp;=\prod_{C \in \mathcal{C}(\mathcal{G}_{B \cup S})} \widehat{\psi}_C(x_C).
+\end{aligned}\]</span> Therefore, <span class="math inline">\(p(x_B, x_S)\)</span> factorizes according to <span class="math inline">\(\mathcal{G}_{B \cup S}\)</span>. Similarly, <span class="math inline">\(p(x_A, x_S)\)</span> factorizes according to <span class="math inline">\(\mathcal{G}_{A \cup S}\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><span id="thm3.4"><strong>Theorem 3.4</strong><span>    Let <span class="math inline">\(\mathcal{G}\)</span> be a decomposable graph with cliques <span class="math inline">\(C_1, \cdots, C_k\)</span>. Then <span class="math inline">\(p(x_V)\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span> iff for all <span class="math inline">\(x_V\)</span>, <span class="math display">\[p(x_V)=\prod_{i=1}^k p(x_{C_i-S_i} \mid x_{S_i})=\prod_{i=1}^k \frac{p(x_{C_i})}{p(x_{S_i})}.\]</span> Furthermore, the quantities <span class="math inline">\(p(x_{C_i-S_i} \mid x_{S_i})\)</span> are variation independent (i.e., they may jointly take any set of values that would be valid individually), so inference for <span class="math inline">\(p(x_V)\)</span> can be based on separate inferences for each <span class="math inline">\(p(x_{C_i})\)</span>.</p>
+<p><strong><em>Proof.</em></strong> <span class="math inline">\((\Leftarrow)\)</span> Since <span class="math display">\[p(x_V)=\prod_{i=1}^k \frac{p(x_{C_i})}{p(x_{S_i})}:=\prod_{C \in \mathcal{C}(\mathcal{G})} \psi_C(x_C),\]</span> then <span class="math inline">\(p\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span>.</p>
+<p><span class="math inline">\((\Rightarrow)\)</span> If <span class="math inline">\(k=1\)</span>, then <span class="math inline">\(C_1=V\)</span>, i.e., <span class="math inline">\(p(x_V)=p(x_{C_1})\)</span>. Let <span class="math display">\[H_k=\left(\bigcup_{i&lt;k} C_i\right)-S_k,\]</span> we have proven that <span class="math inline">\(C_k-S_k \perp_s H_k \mid S_k\)</span>, and <span class="math inline">\((H_k, S_k, C_k-S_k)\)</span> is a proper decomposition.</p>
+The graph <span class="math inline">\(\mathcal{G}_{H_k \cup S_k}\)</span> has <span class="math inline">\(k-1\)</span> cliques, and by <a href="#thm3.3">lemma 3.3</a>, <span class="math inline">\(p(x_{H_k}, x_{S_k})\)</span> factorizes according to <span class="math inline">\(\mathcal{G}_{H_k \cup S_k}\)</span>. Then by induction hypothesis <span class="math display">\[p(x_{H_k}, x_{S_k})=\prod_{i=1}^{k-1} p(x_{C_i-S_i} \mid x_{S_i}).\]</span> By <a href="#thm3.3">lemma 3.3</a>, <span class="math inline">\(p(x_V)p(x_{S_k})=p(x_{H_k}, x_{S_k})p(x_{C_K})\)</span>, then <span class="math display">\[p(x_V)=\prod_{i=1}^{k-1} p(x_{C_i-S_i} \mid x_{S_i})p(x_{C_k-S_k} \mid x_{S_k}).\]</span> The variation independence follows from the fact that <span class="math inline">\(p(x_{C_k-S_k} \mid x_{S_k})\)</span> can take the form of any valid probability distribution.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="multinomial-model">Multinomial Model</h1>
+<div class="note info">
+            <p><a href="#thm3.4">Theorem 3.4</a> is useful for statistical inference, since we only need to consider the margins of variables corresponding to cliques. Suppose we have a contingency table with counts <span class="math inline">\(n(x_V)\)</span>, the log likelihood for a decomposable graph is <span class="math display">\[\begin{aligned}l(p; n)&amp;=\sum_{x_V \in \mathcal{X}_V} n(x_V) \ln p(x_V)\\&amp;=\sum_{x_V \in \mathcal{X}_V} n(x_V)\sum_{i=1}^k \ln p(x_{C_i-S_i} \mid x_{S_i})\\&amp;=\sum_{i=1}^k \sum_{x_{C_i} \in \mathcal{X}_{C_i}} n(x_{C_i})\ln p(x_{C_i-S_i} \mid x_{S_i}).\end{aligned}\]</span> Using Lagrange multiplier, we can see that the likelihood is maximized by choosing <span class="math display">\[\widehat{p}(x_{C_i-S_i} \mid x_{S_i})=\frac{n(x_{C_i})}{n(x_{S_i})} \Rightarrow \widehat{p}(x_{C_i})=\frac{n(x_{C_i})}{n}.\]</span></p>
+          </div>
+<p><strong>Theorem 4.1</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> be an undirected graph with counts <span class="math inline">\(n(x_V)\)</span>. Then the MLE under <span class="math inline">\(\mathcal{G}\)</span> is the unique distribution for which <span class="math display">\[n\widehat{p}(x_C)=n(x_C)\]</span> for all cliques <span class="math inline">\(C \in \mathcal{C}(\mathcal{G})\)</span>.</p>
+<h2 id="iterative-proportional-fitting-ipf-algorithm">Iterative Proportional Fitting (IPF) Algorithm</h2>
+The <strong>iterative proportional fitting (IPF) algorithm</strong>, a.k.a. the <strong>iterative proportional scaling (IPS) algorithm</strong>, starts with a discrete distribution that satisfies the Markov property for the graph <span class="math inline">\(\mathcal{G}\)</span> (usually we pick the uniform distribution so that everything is independent), and then iteratively fixes each margin <span class="math inline">\(p(x_C)\)</span> to match the required distribution (or match moment) using the update step: <span class="math display">\[p^{(t+1)}(x_V)=p^{(t)}(x_V)\frac{p(x_C)}{p^{(t)}(x_C)}=p^{(t)}(x_{V-C} \mid x_C)p(x_C).\]</span>
+<table frame="hsides" style="line-height:20px;">
+<tbody>
+<tr>
+<td>
+<b>Algorithm 1</b> Iterative Proportional Fitting (IPF) Algorithm.
+</td>
+</tr>
+<tr>
+<td>
+    <b>function</b> IPF (collection of consistent margins <span class="math inline">\(q(x_{C_i})\)</span> for sets <span class="math inline">\(C_1, \cdots, C_k\)</span>)<br>         set <span class="math inline">\(p(x_V)\)</span> to uniform distribution;<br>         <b>while</b> <span class="math inline">\(\max_i \max_{x_{C_i}} |p(x_{C_i})-q(x_{C_i})|&gt;\text{tol}\)</span> <b>do</b><br>             <b>for</b> <span class="math inline">\(i\)</span> in <span class="math inline">\(1, \cdots, k\)</span> <b>do</b><br>                 update <span class="math inline">\(p(x_V)\)</span> to <span class="math inline">\(p(x_{V-C_i} \mid x_{C_i})q(x_{C_i})\)</span>;<br>             <b>end for</b><br>         <b>end while</b><br>         <b>return</b> distribution <span class="math inline">\(p\)</span> with margins <span class="math inline">\(p(x_{C_i}) \approx q(x_{C_i})\)</span>.<br>     <b>end function</b>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="note info">
+            <p>The algorithm is closely related to the <strong>message passing algorithm</strong>.</p>
+          </div>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Undirected-graphical-model/" rel="tag"><i class="fa fa-tag"></i> Undirected graphical model</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Mathematics/Numerical-linear-algebra/Linear_System" rel="prev" title="Linear System">
+      <i class="fa fa-chevron-left"></i> Linear System
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Mathematics/Numerical-linear-algebra/QR_Factorization_and_Least_Squares_Problem" rel="next" title="QR Decomposition and Least Squares Problem">
+      QR Decomposition and Least Squares Problem <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undirected-graph"><span class="nav-number">1.</span> <span class="nav-text">Undirected Graph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#markov-property"><span class="nav-number">2.</span> <span class="nav-text">Markov Property</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#decomposability"><span class="nav-number">3.</span> <span class="nav-text">Decomposability</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#multinomial-model"><span class="nav-number">4.</span> <span class="nav-text">Multinomial Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#iterative-proportional-fitting-ipf-algorithm"><span class="nav-number">4.1.</span> <span class="nav-text">Iterative Proportional Fitting (IPF) Algorithm</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tianyang Li"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Tianyang Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/litianyang0211" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;litianyang0211" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianyang.li@linacre.ox.ac.uk" title="Email → mailto:tianyang.li@linacre.ox.ac.uk" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/derekli0211" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;derekli0211" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tianyang Li</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'default',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
