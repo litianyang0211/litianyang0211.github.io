@@ -28,7 +28,7 @@
 <meta property="og:description" content="We introduce three ingredients of deep learning.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-16T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-31T20:55:53.446Z">
+<meta property="article:modified_time" content="2021-11-02T19:31:13.385Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Deep learning">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-31 20:55:53" itemprop="dateModified" datetime="2021-10-31T20:55:53+00:00">2021-10-31</time>
+                <time title="Modified: 2021-11-02 19:31:13" itemprop="dateModified" datetime="2021-11-02T19:31:13+00:00">2021-11-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,7 +264,7 @@
 <li><p><strong>Training algorithm</strong>: Networks need to be trained, to learn many parameters; this requires proper initialisation, effective optimization algorithms, and computational hardware.</p></li>
 </ul>
 <h2 id="architecture">Architecture</h2>
-<p><strong>Example 1.1 (Fully Connected DNN)</strong>    Repeated affine transformation followed by a nonlinear action: <span class="math display">\[\mathbf{h}_{i+1}=\sigma_i(W^{(i)}\mathbf{h}_i+\mathbf{b}^{(i)})\]</span> for <span class="math inline">\(i=1, \cdots, N-1\)</span>, where <span class="math inline">\(W^{(i)} \in \mathbb{R}^{n_{i+1} \times n_i}\)</span>, <span class="math inline">\(\mathbf{b}^{(i)} \in \mathbb{R}^{n_{i+1}}\)</span>, and <span class="math inline">\(\sigma(\cdot)\)</span> is a nonlinear activation such as <strong>ReLU</strong>, <span class="math inline">\(\sigma(z):=\max(0, z)=z_+\)</span>. The <strong>input</strong> is <span class="math inline">\(\mathbf{h}_1\)</span>, the <strong>output</strong> is <span class="math inline">\(\mathbf{h}_N\)</span>, and <span class="math inline">\(\mathbf{h}_i\)</span> for intermediate <span class="math inline">\(i=2, \cdots, N-1\)</span> are referred to as <strong>hidden layers</strong>. The number of layers <span class="math inline">\(N\)</span> is the <strong>depth</strong>, and <span class="math inline">\(N \gg 1\)</span> is called <strong>deep</strong>.</p>
+<p><strong>Example 1.1 (Fully Connected DNN)</strong>    Repeated affine transformation followed by a nonlinear action: <span class="math display">\[\mathbf{h}_{i+1}=\phi_i(W^{(i)}\mathbf{h}_i+\mathbf{b}^{(i)})\]</span> for <span class="math inline">\(i=1, \cdots, N-1\)</span>, where <span class="math inline">\(W^{(i)} \in \mathbb{R}^{n_{i+1} \times n_i}\)</span>, <span class="math inline">\(\mathbf{b}^{(i)} \in \mathbb{R}^{n_{i+1}}\)</span>, and <span class="math inline">\(\phi(\cdot)\)</span> is a nonlinear activation such as <strong>ReLU</strong>, <span class="math inline">\(\phi(z):=\max(0, z)=z_+\)</span>. The <strong>input</strong> is <span class="math inline">\(\mathbf{h}_1\)</span>, the <strong>output</strong> is <span class="math inline">\(\mathbf{h}_N\)</span>, and <span class="math inline">\(\mathbf{h}_i\)</span> for intermediate <span class="math inline">\(i=2, \cdots, N-1\)</span> are referred to as <strong>hidden layers</strong>. The number of layers <span class="math inline">\(N\)</span> is the <strong>depth</strong>, and <span class="math inline">\(N \gg 1\)</span> is called <strong>deep</strong>.</p>
 <p><strong>Example 1.2 (Convolutional Neural Network, CNN)</strong>    Convolutional neural network layers impose a structure on <span class="math inline">\(W^{(i)}\)</span>.</p>
 <p><strong>Example 1.3 (LeNET-5)</strong>    The architecture is composed of both fully connected and convolutional networks.</p>
 <h2 id="data">Data</h2>
