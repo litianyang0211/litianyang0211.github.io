@@ -28,7 +28,7 @@
 <meta property="og:description" content="We explore the QR decomposition, especially Householder QR decomposition. Then we seek the way to solve least squares problem and discuss its application.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-27T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-02T19:29:05.672Z">
+<meta property="article:modified_time" content="2021-11-02T21:08:06.517Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="QR decomposition">
 <meta property="article:tag" content="Least squares">
@@ -230,7 +230,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-02 19:29:05" itemprop="dateModified" datetime="2021-11-02T19:29:05+00:00">2021-11-02</time>
+                <time title="Modified: 2021-11-02 21:08:06" itemprop="dateModified" datetime="2021-11-02T21:08:06+00:00">2021-11-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -400,7 +400,7 @@ R\mathbf{x}-Q^T\mathbf{b} \\
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<p>The algorithm is obvious: We compute the QR decomposition <span class="math inline">\(A=QR\)</span> (using Householder QR), and then solve linear system <span class="math inline">\(R\mathbf{x}=Q^T\mathbf{b}\)</span>.</p>
+<p>The algorithm is obvious: We compute the QR decomposition <span class="math inline">\(A=QR\)</span> (using Householder QR), and then solve linear system <span class="math inline">\(R\mathbf{x}=Q^T\mathbf{b}\)</span>. Note that the process is backward stable.</p>
 <h2 id="normal-equation-solution">Normal Equation Solution</h2>
 <p>To solve the least squares problem, <span class="math inline">\(\mathbf{x}=R^{-1}Q^T\mathbf{b}\)</span> is the solution iff <span class="math inline">\(\mathbf{x}\)</span> is the solution for <span class="math inline">\(n \times n\)</span> <strong>normal equation</strong> <span class="math inline">\((A^T)\mathbf{x}=A^T\mathbf{b}\)</span>. Note that <span class="math inline">\(A^TA \succeq 0\)</span>. <span class="math inline">\(A^TA \succ 0\)</span> if <span class="math inline">\(\text{rank}(A)=n\)</span>, and thus we can use Cholesky decomposition to solve, i.e., <span class="math inline">\(A^TA=R^TR\)</span>. However, the method is not backward stable.</p>
 <h2 id="application-regression-and-function-approximation">Application: Regression and Function Approximation</h2>

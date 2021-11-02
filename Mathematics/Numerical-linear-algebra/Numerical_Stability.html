@@ -28,9 +28,10 @@
 <meta property="og:description" content="Not done.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-02T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-02T19:36:16.198Z">
+<meta property="article:modified_time" content="2021-11-02T22:17:52.464Z">
 <meta property="article:author" content="Tianyang Li">
-<meta property="article:tag" content="Numerical stability">
+<meta property="article:tag" content="Stability">
+<meta property="article:tag" content="Conditioning">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://litianyang0211.github.io/Mathematics/Numerical-linear-algebra/Numerical_Stability.html">
@@ -223,7 +224,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-11-02 00:00:00 / Modified: 19:36:16" itemprop="dateCreated datePublished" datetime="2021-11-02T00:00:00+00:00">2021-11-02</time>
+              <time title="Created: 2021-11-02 00:00:00 / Modified: 22:17:52" itemprop="dateCreated datePublished" datetime="2021-11-02T00:00:00+00:00">2021-11-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,7 +252,49 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="section"></h1>
+        <h1 id="floating-point-arithmetic">Floating Point Arithmetic</h1>
+<p>We denote by <span class="math inline">\(\text{fl}(X)\)</span> a computed version of <span class="math inline">\(X\)</span> (<span class="math inline">\(\text{fl}\)</span> stands for floating point).</p>
+<p>For basic operations such as addition and multiplication: <span class="math inline">\(\text{fl}(x+y)=x+y+c\varepsilon\)</span> where <span class="math inline">\(|c| \leq \max(|x|, |y|)\)</span>, and <span class="math inline">\(\text{fl}(xy)=xy+c\varepsilon\)</span> where <span class="math inline">\(|c| \leq \max(|xy|)\)</span>.</p>
+<h1 id="conditioning-and-stability">Conditioning and Stability</h1>
+<div class="note warning">
+            <p>It is important to solidify the definition of <strong>stability</strong> (which is a property of an algorithm) and <strong>conditioning</strong> (which concerns the sensitivity of a problem and has nothing to do with the algorithm used to solve it). We never say "this problem is backward stable" or "this algorithm is ill-conditioned". We can say "this problem is ill/well-conditioned" or "this algorithm is/is not backward stable". If a problem is <strong>ill-conditioned</strong> (<span class="math inline">\(\kappa \gg 1\)</span>), and the computed solution is not very accurate, then one should blame the problem, not the algorithm. In such case, a backward stable solution is usually still considered a good solution.</p>
+          </div>
+<p><strong>Definition 2.1</strong>    <strong>Conditioning</strong> is the sensitivity of a problem to perturbation in inputs, i.e., how large <strong>absolute condition number</strong> <span class="math display">\[\kappa:=\sup_{\delta x \to 0} \frac{\|f(x+\delta x)-f(x)\|}{\|\delta x\|}\]</span> is. In addition, the <strong>relative condition number</strong> <span class="math display">\[\kappa_r:=\sup_{\delta x} \frac{\|f(x+\delta x)-f(x)\|}{\|f(x)\|} \bigg{/} \frac{\|\delta x\|}{\|x\|}.\]</span></p>
+<p><strong>Definition 2.2</strong>    <strong>Backward stability</strong> is a property of an algorithm, which describes if the computed solution <span class="math inline">\(\widehat{y}\)</span> is a good solution, in that it is an exact solution of a nearby input, i.e., <span class="math inline">\(\widehat{y}=f(x+\Delta x)\)</span> for a small <span class="math inline">\(\Delta x\)</span>.</p>
+<h1 id="numerical-stability-backward-stability">Numerical Stability: Backward Stability</h1>
+<p>For a computational task <span class="math inline">\(Y=f(X)\)</span> and computed approximant <span class="math inline">\(\widehat{Y}\)</span>, ideally we have error <span class="math inline">\(\displaystyle \frac{\|Y-\widehat{Y}\|}{\|Y\|}=\varepsilon\)</span>, but it is seldom true, and often impossible. Good algorithm has <strong>backward stability</strong> <span class="math inline">\(\widehat{Y}=f(X+\Delta X)\)</span>, where <span class="math inline">\(\displaystyle \frac{\|\Delta X\|}{\|X\|}=\varepsilon\)</span> (exact solution of a slightly wrong input).</p>
+<p>Note that the input (matrix) is usually inexact, as storing it on a computer as a floating point object already incurs rounding errors. Consequently, <span class="math inline">\(f(X+\Delta X)\)</span> is just as good at <span class="math inline">\(f(X)\)</span> as at approximating <span class="math inline">\(f(X_*)\)</span> where <span class="math inline">\(\|\Delta X\|=\mathcal{O}(\|X-X_*\|)\)</span>.</p>
+<div class="note info">
+            <ul><li><p>Forward stability is <span class="math inline">\(\displaystyle \frac{\|Y-\widehat{Y}\|}{\|Y\|}=\mathcal{O}(\kappa(f)u)\)</span>, i.e., error is as small as backward stable algorithm.</p></li><li><p>Mixed forward-backward stability: the computed output is a slightly perturbed solution of a slightly perturbed problem.</p></li></ul>
+          </div>
+<h1 id="matrix-condition-number">Matrix Condition Number</h1>
+<p><strong>Definition 4.1</strong>    The <strong>matrix condition number</strong> is defined by <span class="math display">\[\kappa_2(A)=\frac{\sigma_\max(A)}{\sigma_\min(A)} (\geq 1).\]</span></p>
+<p><strong>Theorem 4.1</strong>    Consider a backward stable solution for <span class="math inline">\(A\mathbf{x}=\mathbf{b}\)</span> s.t. <span class="math inline">\((A+\Delta A)\widehat{\mathbf{x}}=\mathbf{b}\)</span> with <span class="math inline">\(\|\Delta A\| \leq \varepsilon\|A\|\)</span> and <span class="math inline">\(\kappa_2(A) \ll \varepsilon^{-1}\)</span> (so <span class="math inline">\(\|A^{-1}\Delta A\| \ll 1\)</span>). Then we have <span class="math display">\[\frac{\|\widehat{\mathbf{x}}-\mathbf{x}\|}{\|\mathbf{x}\|} \lesssim \varepsilon\kappa_2(A).\]</span></p>
+<strong><em>Proof.</em></strong> By Neumann series, <span class="math display">\[(A+\Delta A)^{-1}=(A(I+A^{-1}\Delta A))^{-1}=(I-A^{-1}\Delta A+\mathcal{O}(\|A^{-1}\Delta A\|^2))A^{-1}.\]</span> Then <span class="math display">\[\widehat{\mathbf{x}}=(A+\Delta A)^{-1}\mathbf{b}=A^{-1}\mathbf{b}-A^{-1}\Delta AA^{-1}\mathbf{b}+\mathcal{O}(\|A^{-1}\Delta A\|^2)=\mathbf{x}-A^{-1}\Delta A\mathbf{x}+\mathcal{O}(\|A^{-1}\Delta A\|^2).\]</span> Hence, <span class="math display">\[\|\mathbf{x}-\widehat{\mathbf{x}}\| \lesssim \|A^{-1}\Delta A\mathbf{x}\| \leq \|A^{-1}\|\|\Delta A\|\|\mathbf{x}\| \leq \varepsilon\|A\|\|A^{-1}\|\|\mathbf{x}\|=\varepsilon\kappa_2(A)\|\mathbf{x}\|.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h2 id="accurate-solution">Accurate Solution</h2>
+<p><strong>Theorem 4.2</strong>    Suppose <span class="math inline">\(Y=f(X)\)</span> computed backward stably, i.e., <span class="math inline">\(\widehat{Y}=f(X+\Delta X)\)</span>, where <span class="math inline">\(\displaystyle \frac{\|\Delta X\|}{\|X\|}=\varepsilon\)</span>, and conditioning <span class="math inline">\(\|f(X)-f(X+\Delta X)\| \lesssim \kappa\|\Delta X\|\)</span>, then <span class="math inline">\(\|\widehat{Y}-Y\| \lesssim \kappa\varepsilon\)</span>.</p>
+<p>If the problem is well-conditioned, then <span class="math inline">\(\kappa=\mathcal{O}(1)\)</span>. Important examples include the following:</p>
+<ul>
+<li><p>Well-conditioned linear system <span class="math inline">\(A\mathbf{x}=\mathbf{b}\)</span>, <span class="math inline">\(\kappa_2(A) \approx 1\)</span>.</p></li>
+<li><p>Eigenvalues of symmetric matrix, <span class="math inline">\(\lambda_i(A+E) \in \lambda_i(A)+[-\|E\|_2, \|E\|_2]\)</span>.</p></li>
+<li><p>Singular values of any matrix, <span class="math inline">\(\sigma_i(A+E) \in \sigma_i(A)+[-\|E\|_2, \|E\|_2]\)</span>.</p></li>
+</ul>
+<div class="note warning">
+            <p>Eigenvectors and singular vectors can be highly ill-conditioned.</p>
+          </div>
+<h1 id="stability-of-triangular-system">Stability of Triangular System</h1>
+<h2 id="backward-stability-of-triangular-system">Backward Stability of Triangular System</h2>
+<p><strong>Theorem 5.1</strong>    The computed solution <span class="math inline">\(\widehat{\mathbf{x}}\)</span> for a upper or lower triangular linear system <span class="math inline">\(R\mathbf{x}=\mathbf{b}\)</span> solved via backward or forward substitution is backward stable, i.e., <span class="math display">\[(R+\Delta R)\widehat{\mathbf{x}}=\mathbf{b}, \|\Delta R\|=\mathcal{O}(\varepsilon\|R\|).\]</span></p>
+<div class="note info">
+            <p>Backward error can be bounded componentwise, i.e., <span class="math inline">\(\displaystyle \frac{\|\widehat{\mathbf{x}}-\mathbf{x}\|}{\|\mathbf{x}\|} \leq \varepsilon\kappa_2(R)\)</span>. Poor worst-case bound is attainable when ill-conditioned. But triangular system is often better.</p>
+          </div>
+<h2 id="instability-of-amathbfxmathbfb-via-lu-with-pivot">(In)stability of <span class="math inline">\(A\mathbf{x}=\mathbf{b}\)</span> via LU with pivot</h2>
+<p><strong>Theorem 5.2</strong>    Computed <span class="math inline">\(\widehat{L}\widehat{U}\)</span> satisfies <span class="math inline">\(\displaystyle \frac{\|\widehat{L}\widehat{U}-A\|}{\|L\|\|U\|}=\varepsilon\)</span>.</p>
+<p>By stability of triangular systems <span class="math inline">\((L+\Delta L)(U+\Delta U)\widehat{\mathbf{x}}=\mathbf{b}\)</span>, if <span class="math inline">\(\|L\|\|U\|=\mathcal{O}(\|A\|)\)</span>, then <span class="math inline">\(\widehat{\mathbf{x}}\)</span> is a backward stable solution.</p>
+<p>But <span class="math inline">\(LU=A+\Delta A\)</span> or <span class="math inline">\(LU=PA+\Delta A\)</span> with <span class="math inline">\(\|\Delta A\|=\varepsilon\|A\|\)</span> (i.e., <span class="math inline">\(\|L\|\|U\|=\mathcal{O}(\|A\|)\)</span>) does not always hold. Without pivot (<span class="math inline">\(P=I\)</span>), <span class="math inline">\(\|L\|\|U\| \gg \|A\|\)</span> is unboundedly unstable. With pivot, the worst case is <span class="math inline">\(\|L\|\|U\| \gg \|A\|\)</span> grows exponentially with <span class="math inline">\(n\)</span>. In practice (average case), it is perfectly stable, and thus this is how <span class="math inline">\(A\mathbf{x}=\mathbf{b}\)</span> is solved, despite alternatives with guaranteed stability exist (but slower, e.g., SVD or QR).</p>
 
     </div>
 
@@ -262,7 +305,8 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Numerical-stability/" rel="tag"><i class="fa fa-tag"></i> Numerical stability</a>
+              <a href="/tags/Stability/" rel="tag"><i class="fa fa-tag"></i> Stability</a>
+              <a href="/tags/Conditioning/" rel="tag"><i class="fa fa-tag"></i> Conditioning</a>
           </div>
 
         
@@ -333,7 +377,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#floating-point-arithmetic"><span class="nav-number">1.</span> <span class="nav-text">Floating Point Arithmetic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conditioning-and-stability"><span class="nav-number">2.</span> <span class="nav-text">Conditioning and Stability</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#numerical-stability-backward-stability"><span class="nav-number">3.</span> <span class="nav-text">Numerical Stability: Backward Stability</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#matrix-condition-number"><span class="nav-number">4.</span> <span class="nav-text">Matrix Condition Number</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#accurate-solution"><span class="nav-number">4.1.</span> <span class="nav-text">Accurate Solution</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#stability-of-triangular-system"><span class="nav-number">5.</span> <span class="nav-text">Stability of Triangular System</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#backward-stability-of-triangular-system"><span class="nav-number">5.1.</span> <span class="nav-text">Backward Stability of Triangular System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#instability-of-amathbfxmathbfb-via-lu-with-pivot"><span class="nav-number">5.2.</span> <span class="nav-text">(In)stability of \(A\mathbf{x}&#x3D;\mathbf{b}\) via LU with pivot</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
