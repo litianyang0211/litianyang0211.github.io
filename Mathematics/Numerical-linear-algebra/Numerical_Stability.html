@@ -20,23 +20,20 @@
     var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="First we discuss the curse of dimensionality. Then we propose some possible solutions, such as compositional structured function, and intrinsic dimensionality.">
+  <meta name="description" content="Not done.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Role of Dimensionality">
-<meta property="og:url" content="https://litianyang0211.github.io/Computer-science/Deep-learning/Role_of_Dimensionality">
+<meta property="og:title" content="Numerical Stability">
+<meta property="og:url" content="https://litianyang0211.github.io/Mathematics/Numerical-linear-algebra/Numerical_Stability">
 <meta property="og:site_name" content="Tianyang Li">
-<meta property="og:description" content="First we discuss the curse of dimensionality. Then we propose some possible solutions, such as compositional structured function, and intrinsic dimensionality.">
+<meta property="og:description" content="Not done.">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://litianyang0211.github.io/images/High_Dimensionalty_1.png">
-<meta property="article:published_time" content="2021-11-01T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-01T10:43:44.058Z">
+<meta property="article:published_time" content="2021-11-02T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-02T19:36:16.198Z">
 <meta property="article:author" content="Tianyang Li">
-<meta property="article:tag" content="Deep learning">
-<meta property="article:tag" content="High dimensionality">
+<meta property="article:tag" content="Numerical stability">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://litianyang0211.github.io/images/High_Dimensionalty_1.png">
 
-<link rel="canonical" href="https://litianyang0211.github.io/Computer-science/Deep-learning/Role_of_Dimensionality.html">
+<link rel="canonical" href="https://litianyang0211.github.io/Mathematics/Numerical-linear-algebra/Numerical_Stability.html">
 
 
 <script id="page-configurations">
@@ -49,7 +46,7 @@
   };
 </script>
 
-  <title>Role of Dimensionality | Tianyang Li</title>
+  <title>Numerical Stability | Tianyang Li</title>
   
 
 
@@ -202,7 +199,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Computer-science/Deep-learning/Role_of_Dimensionality">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Mathematics/Numerical-linear-algebra/Numerical_Stability">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -215,7 +212,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Role of Dimensionality
+          Numerical Stability
         </h1>
 
         <div class="post-meta">
@@ -226,7 +223,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-11-01 00:00:00 / Modified: 10:43:44" itemprop="dateCreated datePublished" datetime="2021-11-01T00:00:00+00:00">2021-11-01</time>
+              <time title="Created: 2021-11-02 00:00:00 / Modified: 19:36:16" itemprop="dateCreated datePublished" datetime="2021-11-02T00:00:00+00:00">2021-11-02</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -234,16 +231,16 @@
               </span>
               <span class="post-meta-item-text">In</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a class=n href="/categories/Computer-science/" itemprop="url" rel="index"><span itemprop="name">Computer science</span></a>
+                  <a class=n href="/categories/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
                 </span>
                   /
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a class=n href="/categories/Computer-science/Deep-learning/" itemprop="url" rel="index"><span itemprop="name">Deep learning</span></a>
+                  <a class=n href="/categories/Mathematics/Numerical-linear-algebra/" itemprop="url" rel="index"><span itemprop="name">Numerical linear algebra</span></a>
                 </span>
             </span>
 
           
-            <div class="post-description">First we discuss the curse of dimensionality. Then we propose some possible solutions, such as compositional structured function, and intrinsic dimensionality.</div>
+            <div class="post-description">Not done.</div>
 
         </div>
       </header>
@@ -254,213 +251,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="curse-of-dimensionality">Curse of Dimensionality</h1>
-<p><a href="/Computer-science/Deep-learning/Exponential_Expressivity_with_Depth#thmY16">Yarotsky (2016)</a> showed the overall number of weights is <span class="math inline">\(\mathcal{O}(\varepsilon^{-d/n})\)</span>. Hence, if we want to approximate a function in a high dimension, then the function has to be extremely smooth. To avoid curse of dimensionality, we need more structure in the function <span class="math inline">\(F\)</span> to be approximated, e.g., compositional structure.</p>
-<h1 id="compositional-structured-function">Compositional Structured Function</h1>
-<p>Consider function with a binary tree hierarchical structure:</p>
-<p><img data-src="/images/High_Dimensionalty_1.png" /></p>
-<center>
-Figure 1: <span class="math inline">\(f(\mathbf{x})=h_3(h_{21}(h_{11}(x_1, x_2), h_{12}(x_3, x_4)), h_{22}(h_{13}(x_5, x_6), h_{14}(x_7, x_8)))\)</span> <a href="#PMR+17">[PMR$^+$17]</a>.
-</center>
-<p>Let <span class="math inline">\(W_m^{n, 2}\)</span> be the class of all compositional functions <span class="math inline">\(f(\cdot)\)</span> of <span class="math inline">\(n\)</span> variables with binary tree structure and constituent functions <span class="math inline">\(h(\cdot)\)</span> of <span class="math inline">\(2\)</span> variables with <span class="math inline">\(m\)</span> bounded derivatives. The set <span class="math inline">\(W_m^{n, 2}\)</span> can be effectively approximated using a DNN with a rate dictated by the ability to approximate functions <span class="math inline">\(\mathbb{R}^2 \to \mathbb{R}\)</span>; e.g., effectively locally <span class="math inline">\(d=2\)</span>.</p>
-<p><strong>Theorem (Poggio et al., 2017)</strong>    Let <span class="math inline">\(f(\cdot) \in W_m^{n, 2}\)</span> and consider a DNN with the same binary compositional tree structure and an activation <span class="math inline">\(\phi(\cdot)\)</span> which is infinitely differentiable, and not a polynomial. The function <span class="math inline">\(f(\cdot)\)</span> can be approximated by <span class="math inline">\(\varepsilon\)</span> with a number of weights that is <span class="math inline">\(\mathcal{O}((n-1)\varepsilon^{-2/m})\)</span>.</p>
-<div class="note info">
-            <p>The set <span class="math inline">\(W_m^{n, 2}\)</span> of all compositional functions <span class="math inline">\(f(\cdot)\)</span> of <span class="math inline">\(n\)</span> variables with binary tree structure are effectively <span class="math inline">\(d=2\)</span> in the DNN approximation requirements, but are much richer than <span class="math inline">\(d=2\)</span>.</p>
-          </div>
-<p>Functions can be approximated within <span class="math inline">\(\varepsilon\)</span> with a DNN from <span class="math inline">\(\mathcal{O}(\ln(1/\varepsilon))\)</span> layers with a number of weights:</p>
-<ul>
-<li><p><span class="math inline">\(\mathcal{O}(\varepsilon^{-d/m})\)</span> for generally locally smooth functions.</p></li>
-<li><p><span class="math inline">\(\mathcal{O}((n-1)\varepsilon^{-2/m})\)</span> for <span class="math inline">\(f(\cdot) \in W_m^{n, 2}\)</span>, binary tree structure and constituent functions in <span class="math inline">\(C_m[0, 1]^2\)</span>.</p></li>
-<li><p><span class="math inline">\(\mathcal{O}(\varepsilon^{-d/m})\)</span> for shallow NNs is the best possible for <span class="math inline">\(f(\cdot) \in W_m^n\)</span> which have non-binary hierarchical tree structures.</p></li>
-</ul>
-<p><strong>Definition (Poggio et al., 2017)</strong>    The <strong>effective dimensionality</strong> of a function class <span class="math inline">\(W\)</span> is said to be <span class="math inline">\(d\)</span> if for every <span class="math inline">\(\varepsilon&gt;0\)</span>, any function within <span class="math inline">\(W\)</span> can be approximated within an accuracy <span class="math inline">\(\varepsilon\)</span> by a DNN at rate <span class="math inline">\(\varepsilon^{-d}\)</span>.</p>
-<div class="note info">
-            <p>The definition could be extended to <strong>local effective dimensionality</strong> <span class="math inline">\(d_{\text{eff}}\)</span> and <strong>local smoothness</strong> <span class="math inline">\(m_{\text{eff}}\)</span> for rate <span class="math inline">\(\varepsilon^{-d_{\text{eff}}/m_{\text{eff}}}\)</span>. Restriction to a data class decreases <span class="math inline">\(d_\text{eff}\)</span> and localization can increase the smoothness <span class="math inline">\(m_\text{eff}\)</span> substantially.</p>
-          </div>
-<h1 id="intrinsic-dimensionality-of-sub-manifold">Intrinsic Dimensionality of Sub-Manifold</h1>
-<p>The <strong>intrinsic dimension</strong> for a data set can be thought of as the number of variables needed in a minimal representation of the data.</p>
-<p>For example, MNIST exemplar dataset classes are approximately under <span class="math inline">\(15\)</span> dimensions. Hein et al. (2005) estimated dimensionality within MNIST digit classes using three approaches: the hidden manifold model, and two others building on local linear embedding.</p>
-<center>
-Table 1: Number of Samples and Estimated Intrinsic Dimensionality of the Digits in MNIST <a href="#HeA05">[HeA05]</a>.
-</center>
-<table style="table-layout:fixed">
-<tbody>
-<tr>
-<td>
-<center>
-1
-</center>
-</td>
-<td>
-<center>
-2
-</center>
-</td>
-<td>
-<center>
-3
-</center>
-</td>
-<td>
-<center>
-4
-</center>
-</td>
-<td>
-<center>
-5
-</center>
-</td>
-</tr>
-<tr>
-<td>
-<center>
-7877
-</center>
-</td>
-<td>
-<center>
-6990
-</center>
-</td>
-<td>
-<center>
-7141
-</center>
-</td>
-<td>
-<center>
-6824
-</center>
-</td>
-<td>
-<center>
-6903
-</center>
-</td>
-</tr>
-<tr>
-<td>
-<center>
-8/7/7
-</center>
-</td>
-<td>
-<center>
-13/12/13
-</center>
-</td>
-<td>
-<center>
-14/13/13
-</center>
-</td>
-<td>
-<center>
-13/12/12
-</center>
-</td>
-<td>
-<center>
-12/12/12
-</center>
-</td>
-</tr>
-</tbody>
-</table>
-<table style="table-layout:fixed">
-<tbody>
-<tr>
-<td>
-<center>
-6
-</center>
-</td>
-<td>
-<center>
-7
-</center>
-</td>
-<td>
-<center>
-8
-</center>
-</td>
-<td>
-<center>
-9
-</center>
-</td>
-<td>
-<center>
-0
-</center>
-</td>
-</tr>
-<tr>
-<td>
-<center>
-6876
-</center>
-</td>
-<td>
-<center>
-7293
-</center>
-</td>
-<td>
-<center>
-6825
-</center>
-</td>
-<td>
-<center>
-6958
-</center>
-</td>
-<td>
-<center>
-6903
-</center>
-</td>
-</tr>
-<tr>
-<td>
-<center>
-11/11/11
-</center>
-</td>
-<td>
-<center>
-10/10/10
-</center>
-</td>
-<td>
-<center>
-14/13/13
-</center>
-</td>
-<td>
-<center>
-12/11/11
-</center>
-</td>
-<td>
-<center>
-12/11/11
-</center>
-</td>
-</tr>
-</tbody>
-</table>
-<h2 id="hidden-manifold-model">Hidden Manifold Model</h2>
-<p>A <strong>manifold model</strong> can explicitly represent the data through <span class="math display">\[X=f(CF/\sqrt{d}) \in \mathbb{R}^{p, n}\]</span> where <span class="math inline">\(F \in \mathbb{R}^{d, n}\)</span> are the <span class="math inline">\(d\)</span> features used to represent the data, <span class="math inline">\(C \in \mathbb{R}^{p, d}\)</span> combines the <span class="math inline">\(d&lt;n&lt;p\)</span> features, and <span class="math inline">\(f(\cdot)\)</span> is an entrywise locally smooth nonlinear function.</p>
-<div class="note info">
-            <p>The data model is the same as a <strong>generative adversarial network (GAN)</strong> and is similar to <strong>dictionary learning</strong> and <strong>subspace clustering model</strong> where <span class="math inline">\(C\)</span> is typically sparse.</p>
-          </div>
-<h1 id="reference">Reference</h1>
-<p><font size=2 style="line-height: 1;"> <span id="HeA05">[HeA05] Matthias Hein and Jean-Yves Audibert. Intrinsic Dimensionality Estimation of Submanifolds in <span class="math inline">\(\mathbb{R}^d\)</span>. In <em>Proceedings of the 22nd international conference on Machine learning</em>, 2005. </span></p>
-<p><span id="PMR+17">[PMR$^+$17] Tomaso Poggio, Hrushikesh Mhaskar, Lorenzo Rosasco, Brando Miranda, and Qianli Liao. Why and When can Deep - but not Shallow - Networks Avoid the Curse of Dimensionality: a Review. <em>International Journal of Automation and Computing</em>, 14(5): 503-519, 2015.</span> </font></p>
+        <h1 id="section"></h1>
 
     </div>
 
@@ -471,8 +262,7 @@ Table 1: Number of Samples and Estimated Intrinsic Dimensionality of the Digits 
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Deep-learning/" rel="tag"><i class="fa fa-tag"></i> Deep learning</a>
-              <a href="/tags/High-dimensionality/" rel="tag"><i class="fa fa-tag"></i> High dimensionality</a>
+              <a href="/tags/Numerical-stability/" rel="tag"><i class="fa fa-tag"></i> Numerical stability</a>
           </div>
 
         
@@ -481,13 +271,10 @@ Table 1: Number of Samples and Estimated Intrinsic Dimensionality of the Digits 
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/Statistics/Graphical-model/Gaussian_Graphical_Model" rel="prev" title="Gaussian Graphical Model">
-      <i class="fa fa-chevron-left"></i> Gaussian Graphical Model
+    <a href="/Computer-science/Deep-learning/Role_of_Dimensionality" rel="prev" title="Role of Dimensionality">
+      <i class="fa fa-chevron-left"></i> Role of Dimensionality
     </a></div>
-      <div class="post-nav-item">
-    <a href="/Mathematics/Numerical-linear-algebra/Numerical_Stability" rel="next" title="Numerical Stability">
-      Numerical Stability <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -546,7 +333,7 @@ Table 1: Number of Samples and Estimated Intrinsic Dimensionality of the Digits 
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#curse-of-dimensionality"><span class="nav-number">1.</span> <span class="nav-text">Curse of Dimensionality</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#compositional-structured-function"><span class="nav-number">2.</span> <span class="nav-text">Compositional Structured Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#intrinsic-dimensionality-of-sub-manifold"><span class="nav-number">3.</span> <span class="nav-text">Intrinsic Dimensionality of Sub-Manifold</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hidden-manifold-model"><span class="nav-number">3.1.</span> <span class="nav-text">Hidden Manifold Model</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
