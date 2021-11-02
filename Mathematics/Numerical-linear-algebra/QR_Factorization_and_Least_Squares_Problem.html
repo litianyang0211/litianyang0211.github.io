@@ -28,7 +28,7 @@
 <meta property="og:description" content="Not done.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-27T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-01T10:40:27.001Z">
+<meta property="article:modified_time" content="2021-11-02T19:20:18.842Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="QR decomposition">
 <meta property="article:tag" content="Least squares">
@@ -230,7 +230,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-01 10:40:27" itemprop="dateModified" datetime="2021-11-01T10:40:27+00:00">2021-11-01</time>
+                <time title="Modified: 2021-11-02 19:20:18" itemprop="dateModified" datetime="2021-11-02T19:20:18+00:00">2021-11-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,6 +260,160 @@
       
         <h1 id="qr-decomposition">QR Decomposition</h1>
 <p>For any <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span>, there exists a decomposition <span class="math display">\[A=QR,\]</span> where <span class="math inline">\(Q \in \mathbb{R}^{m \times n}\)</span> is orthonormal, and <span class="math inline">\(R \in \mathbb{R}^{n \times n}\)</span> is upper triangular.</p>
+<h1 id="qr-via-gram-schmidt">QR via Gram-Schmidt</h1>
+<p>Given matrix <span class="math inline">\(A=\begin{bmatrix} &amp; \\ \mathbf{a}_1 &amp; \cdots &amp; \mathbf{a}_n \\ &amp; \end{bmatrix} \in \mathbb{R}^{m \times n}\)</span> (assume <span class="math inline">\(\text{rank}(A)=n\)</span>), we want to find an orthonormal matrix <span class="math inline">\(\begin{bmatrix} &amp; \\ \mathbf{q}_1 &amp; \cdots &amp; \mathbf{q}_n \\ &amp; \end{bmatrix}\)</span> s.t. <span class="math inline">\(\text{Span}(\mathbf{q_1}, \cdots, \mathbf{q}_n)=\text{Span}(\mathbf{a}_1, \cdots, \mathbf{a}_n)\)</span>.</p>
+<p>The Gram-Schmidt algorithm performs the following: <span class="math display">\[\begin{aligned}
+\mathbf{q}_1&amp;=\frac{\mathbf{a}_1}{\|\mathbf{a}_1\|_2} \\
+\widetilde{\mathbf{q}}_2&amp;=\mathbf{a}_2-\mathbf{q}_1\mathbf{q}_1^T\mathbf{a}_2 \\
+\mathbf{q}_2&amp;=\frac{\widetilde{\mathbf{q}}_2}{\|\mathbf{q}_2\|_2} \\
+&amp;\ \ \vdots \\
+\widetilde{\mathbf{q}}_j&amp;=\mathbf{a}_j-\sum_{i=1}^{j-1} \mathbf{q}_i\mathbf{q}_i^T\mathbf{a}_j \\
+\mathbf{q}_j&amp;=\frac{\widetilde{\mathbf{q}}_j}{\|\mathbf{q}_j\|_2}
+\end{aligned}\]</span></p>
+<p>Gram-Schmidt gives a QR factorization. Let <span class="math inline">\(r_{ij}=\mathbf{q}_i^T\mathbf{a}_j\)</span>, <span class="math inline">\(i \neq j\)</span>, and <span class="math inline">\(\displaystyle r_{jj}=\left\|\mathbf{a}_j-\sum_{i=1}^{j-1} r_{ij}\mathbf{q}_i\right\|_2\)</span>. Then <span class="math display">\[\begin{aligned}
+\mathbf{a}_1&amp;=r_{11}\mathbf{q}_1 \\
+\mathbf{a}_2&amp;=r_{12}\mathbf{q}_1+r_{22}\mathbf{q}_2 \\
+&amp;\ \ \vdots \\
+\mathbf{a}_j&amp;=r_{1j}\mathbf{q}_1+r_{2j}\mathbf{q}_2+\cdots+r_{jj}\mathbf{q}_j
+\end{aligned}\]</span> which in turn is <span class="math inline">\(A=QR\)</span>, where <span class="math inline">\(Q^TQ=I_n\)</span> and <span class="math inline">\(R\)</span> is upper triangular.</p>
+<div class="note warning">
+            <p>Gram-Schmidt is not the recommended way to compute the QR factorization, as it is numerically unstable.</p>
+          </div>
+<h1 id="householder-qr-factorization">Householder QR Factorization</h1>
+<h2 id="householder-reflector">Householder Reflector</h2>
+<p><strong>Householder reflector</strong> is the class of matrices <span class="math inline">\(H_\mathbf{v}\)</span> that are symmetric, orthogonal, and can be written as a rank one update of the identity <span class="math display">\[H_\mathbf{v}=I-2\mathbf{v}\mathbf{v}^T, \|\mathbf{v}\|_2=1.\]</span> Note that if <span class="math inline">\(\mathbf{w}^T\mathbf{v}=0\)</span>, then <span class="math inline">\(H_\mathbf{v}\mathbf{w}=\mathbf{w}\)</span>.</p>
+<ul>
+<li><p><span class="math inline">\(H\)</span> is symmetric, as <span class="math inline">\(H^T=(I-2\mathbf{v}\mathbf{v}^T)^T=I^T-2\mathbf{v}\mathbf{v}^T=I-2\mathbf{v}\mathbf{v}^T=H\)</span>.</p></li>
+<li><p><span class="math inline">\(H\)</span> is orthogonal, as <span class="math inline">\(H^TH=HH^T=H^2=(I-2\mathbf{v}\mathbf{v}^T)(I-2\mathbf{v}\mathbf{v}^T)=I-4\mathbf{v}\mathbf{v}^T+4\mathbf{v}\mathbf{v}^T\mathbf{v}\mathbf{v}^T=I\)</span>.</p></li>
+<li><p>The eigenvalues of <span class="math inline">\(H\)</span> are <span class="math inline">\(1\)</span> (<span class="math inline">\(n-1\)</span> copies) and <span class="math inline">\(-1\)</span> (<span class="math inline">\(1\)</span> copy).</p></li>
+<li><p>Given <span class="math inline">\(\mathbf{u}, \mathbf{w} \in \mathbb{R}^n\)</span> s.t. <span class="math inline">\(\|\mathbf{u}\|_2=\|\mathbf{w}\|_2\)</span> and <span class="math inline">\(\mathbf{u} \neq \mathbf{w}\)</span>, <span class="math inline">\(H_\mathbf{v}=I-2\mathbf{v}\mathbf{v}^T\)</span> with <span class="math inline">\(\displaystyle \mathbf{v}=\frac{\mathbf{w}-\mathbf{u}}{\|\mathbf{w}-\mathbf{u}\|_2}\)</span> gives <span class="math inline">\(H_\mathbf{v}\mathbf{u}=\mathbf{w} \Leftrightarrow \mathbf{u}=H_\mathbf{v}\mathbf{w}\)</span> (and thus <strong>reflector</strong>).</p></li>
+</ul>
+<strong><em>Proof.</em></strong> Suppose w.l.o.g. that <span class="math inline">\(\|\mathbf{u}\|_2=\|\mathbf{w}\|_2=1\)</span>, then <span class="math display">\[\begin{aligned}
+H_\mathbf{v}\mathbf{u}&amp;=\mathbf{u}-2\frac{(\mathbf{w}-\mathbf{u})(\mathbf{w}-\mathbf{u})^T}{\|\mathbf{w}-\mathbf{u}\|_2^2}\mathbf{u}
+\\&amp;=\mathbf{u}-\frac{2(\mathbf{w}-\mathbf{u})^T\mathbf{u}}{\|\mathbf{w}-\mathbf{u}\|_2^2}(\mathbf{w}-\mathbf{u})
+\\&amp;=\left(1+\frac{2(\mathbf{w}-\mathbf{u})^T\mathbf{u}}{2(1-\mathbf{w}^T\mathbf{u})}\right)\mathbf{u}-\frac{2(\mathbf{w}-\mathbf{u})^T\mathbf{u}}{2(1-\mathbf{w}^T\mathbf{u})}\mathbf{w}
+\\&amp;=\left(1+\frac{2(\mathbf{w}^T\mathbf{u}-1)}{2(1-\mathbf{w}^T\mathbf{u})}\right)\mathbf{u}-\frac{2(\mathbf{w}^T\mathbf{u}-1)}{2(1-\mathbf{w}^T\mathbf{u})}\mathbf{w}
+\\&amp;=\mathbf{w}.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note info">
+            <p>By choosing the <span class="math inline">\(\mathbf{v}\)</span> appropriately, one can perform a variety of operations to a given <span class="math inline">\(\mathbf{x}\)</span>. A primary example is that <span class="math display">\[\mathbf{v}=\frac{\mathbf{x}-\|\mathbf{x}\|\mathbf{e}_1}{\|\mathbf{x}-\|\mathbf{x}\|\mathbf{e}_1\|}\]</span> which satisfies <span class="math inline">\(H\mathbf{x}=\begin{bmatrix} \|\mathbf{x}\| &amp; 0 &amp; \cdots &amp; 0 \end{bmatrix}^T\)</span>, i.e., an arbitrary vector <span class="math inline">\(\mathbf{x}\)</span> is mapped by <span class="math inline">\(H\)</span> to a multiple of <span class="math inline">\(\mathbf{e}_1\)</span>.</p>
+          </div>
+<h2 id="householder-qr-factorization-1">Householder QR Factorization</h2>
+<p>The first step to obtain QR is to find <span class="math inline">\(H_1\)</span> s.t. <span class="math inline">\(H_1\mathbf{a_1}=\begin{bmatrix} \|\mathbf{a}_1\|_2 \\ 0 \\ \vdots \\ 0 \end{bmatrix}\)</span> and repeat to get <span class="math inline">\(H_n \cdots H_2H_1A=R\)</span> (upper triangular), then <span class="math inline">\(A=(H_1 \cdots H_{n-1}H_n)R=QR\)</span>.</p>
+<p>We present a pictorial illustration. Suppose <span class="math inline">\(A=\begin{bmatrix} * &amp; * &amp; * &amp; * \\ * &amp; * &amp; * &amp; * \\ * &amp; * &amp; * &amp; * \\ * &amp; * &amp; * &amp; * \\ * &amp; * &amp; * &amp; * \end{bmatrix}\)</span>. We apply a sequence of Householder reflectors. First, <span class="math display">\[H_1A=(I-2\mathbf{v}_1\mathbf{v}_1^T)A=\begin{bmatrix}
+\|\mathbf{a}_1\|_2 &amp; \bullet &amp; \bullet &amp; \bullet \\
+0 &amp; \bullet &amp; \bullet &amp; \bullet \\
+0 &amp; \bullet &amp; \bullet &amp; \bullet \\
+0 &amp; \bullet &amp; \bullet &amp; \bullet \\
+0 &amp; \bullet &amp; \bullet &amp; \bullet
+\end{bmatrix},\ \text{where}\ H_1\mathbf{a}_1=\begin{bmatrix}
+\|\mathbf{a}_1\|_2 \\ 0 \\ \vdots \\ 0
+\end{bmatrix}.\]</span></p>
+<p>Then, <span class="math display">\[H_2H_1A=(I-2\mathbf{v}_2\mathbf{v}_2^T)H_1A=\begin{bmatrix}
+\|\mathbf{a}_1\|_2 &amp; \bullet &amp; \bullet &amp; \bullet \\
+0 &amp; \|\widetilde{\mathbf{a}}_2\|_2 &amp; \square &amp; \square \\
+0 &amp; 0 &amp; \square &amp; \square \\
+0 &amp; 0 &amp; \square &amp; \square \\
+0 &amp; 0 &amp; \square &amp; \square \\
+\end{bmatrix},\]</span> where we need <span class="math inline">\(\mathbf{v}_2=\begin{bmatrix} 0 \\ * \\ \vdots \\ * \end{bmatrix}\)</span> so that <span class="math inline">\(H_2=\begin{bmatrix} 1 &amp; 0 &amp; \cdots &amp; 0\\ 0 \\ \vdots \\ 0 \end{bmatrix}\)</span> does not affect the first row and column of <span class="math inline">\(H_1A\)</span>. We can choose <span class="math inline">\(\mathbf{u}=\begin{bmatrix} \bullet \\ \|\widetilde{\mathbf{a}}_2\|_2 \\ 0 \\ \vdots \\ 0 \end{bmatrix}\)</span> and <span class="math inline">\(\mathbf{w}=\widetilde{\mathbf{a}}_2\)</span>, where <span class="math inline">\(H_2\widetilde{\mathbf{a}}_2=\mathbf{u}\)</span>.</p>
+<p>Similarly, <span class="math display">\[H_n \cdots H_3H_2H_1A=\begin{bmatrix}
+\|\mathbf{a}_1\|_2 &amp; \bullet &amp; \bullet &amp; \bullet \\
+0 &amp; \|\widetilde{\mathbf{a}}_2\|_2 &amp; \square &amp; \square \\
+0 &amp; 0 &amp; \|\widehat{\mathbf{a}}_3\|_2 &amp; \triangle \\
+0 &amp; 0 &amp; 0 &amp; \|\dot{\mathbf{a}}_4\|_2 \\
+0 &amp; 0 &amp; 0 &amp; 0 \\
+\end{bmatrix}=\begin{bmatrix}
+R \\ O
+\end{bmatrix}.\]</span> Then <span class="math display">\[A=(H_1^T \cdots H_{n-1}^TH_n^T)\begin{bmatrix}
+R \\ O
+\end{bmatrix}=:Q_F\begin{bmatrix}
+R \\ O
+\end{bmatrix},\]</span> which is a <strong>full QR</strong>, where <span class="math inline">\(Q_F\)</span> is square orthogonal. We can write <span class="math inline">\(Q_f=\begin{bmatrix} Q &amp; Q_\perp \end{bmatrix}\)</span>, where <span class="math inline">\(Q \in \mathbb{R}^{m \times n}\)</span> is orthonormal, then <span class="math inline">\(A=QR\)</span> is the QR factorization.</p>
+<div class="note info">
+            <ul><li><p>The cost for Householder QR is <span class="math inline">\(\displaystyle \frac{4}{3}n^3\)</span> flops (twice that of LU).</p></li><li><p>Householder QR is unconditionally backward stable: the computed version satisfies <span class="math inline">\(\widehat{Q}\widehat{R}=A+\Delta A\)</span> and <span class="math inline">\(\|\widehat{Q}^T\widehat{Q}-I\|_2=\varepsilon\)</span>.</p></li><li><p>The algorithm gives a constructive proof for <span class="math inline">\(A=QR\)</span> existence.</p></li><li><p>To solve <span class="math inline">\(A\mathbf{x}=\mathbf{b}\)</span>, we can solve <span class="math inline">\(R\mathbf{x}=Q^T\mathbf{b}\)</span> via triangle solve. But the cost is double compared to that for LU (rarely used).</p></li></ul>
+          </div>
+<h1 id="givens-rotation">Givens Rotation</h1>
+<div class="note info">
+            <p>Each Householder reflector acts globally and it affects all the entries of the matrix. For structured matrix, such as sparse matrix, sometimes there is a better tool to reduce the matrix to triangular form (and other forms) by working more locally. <strong>Givens rotation</strong> gives a convenient tool for this.</p>
+          </div>
+<p>Given rotation is matrix of the form <span class="math display">\[G=\begin{bmatrix}
+c &amp; s \\
+-s &amp; c
+\end{bmatrix}, c^2+s^2=1.\]</span> Note that <span class="math inline">\(G^TG=I_2\)</span>, but <span class="math inline">\(G\)</span> is not symmetric.</p>
+<p>For example to compute the QR factorization for an upper Hessenberg matrix, one can perform <span class="math display">\[A=\begin{bmatrix}
+* &amp; * &amp; * &amp; * &amp; * \\
+* &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; &amp; * &amp; * &amp; * \\
+ &amp; &amp; &amp; * &amp; * \\
+\end{bmatrix}, G_1A=\begin{bmatrix}
+* &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; &amp; * &amp; * &amp; * \\
+ &amp; &amp; &amp; * &amp; * \\
+\end{bmatrix}, G_2G_1A=\begin{bmatrix}
+* &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; &amp; * &amp; * &amp; * \\
+ &amp; &amp; * &amp; * &amp; * \\
+ &amp; &amp; &amp; * &amp; * \\
+\end{bmatrix},\]</span> <span class="math display">\[G_3G_2G_1A=\begin{bmatrix}
+* &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; &amp; * &amp; * &amp; * \\
+ &amp; &amp; &amp; * &amp; * \\
+ &amp; &amp; &amp; * &amp; * \\
+\end{bmatrix}, G_4G_3G_2G_1A=G_3G_2G_1A=\begin{bmatrix}
+* &amp; * &amp; * &amp; * &amp; * \\
+ &amp; * &amp; * &amp; * &amp; * \\
+ &amp; &amp; * &amp; * &amp; * \\
+ &amp; &amp; &amp; * &amp; * \\
+ &amp; &amp; &amp; &amp; * \\
+\end{bmatrix}=:R.\]</span> Hence, <span class="math inline">\(A=G_1^TG_2^TG_3^TG_4^TR\)</span> is the QR factorization.</p>
+<div class="note info">
+            <ul><li><p><span class="math inline">\(G\)</span> acts locally on two rows.</p></li><li><p>Non-neighboring rows or columns are allowed. For example, a rotation acting on the <span class="math inline">\(i\)</span>th and <span class="math inline">\(j\)</span>th columns will have <span class="math inline">\(c\)</span> and <span class="math inline">\(s\)</span> values in the <span class="math inline">\((i, i)\)</span>, <span class="math inline">\((i, j)\)</span>, <span class="math inline">\((j, i)\)</span> and <span class="math inline">\((j, j)\)</span> entries.</p></li></ul>
+          </div>
+<h1 id="least-squares-problem">Least Squares Problem</h1>
+<h2 id="qr-solution">QR Solution</h2>
+<p>Given <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> (<span class="math inline">\(m \geq n\)</span>), and <span class="math inline">\(\mathbf{b} \in \mathbb{R}^m\)</span>, a least squares problem seeks to find <span class="math inline">\(\mathbf{x} \in \mathbb{R}^n\)</span> s.t. the residual is minimized: <span class="math display">\[\min_\mathbf{x} \|A\mathbf{x}-\mathbf{b}\|_2.\]</span></p>
+<div class="note info">
+            <ul><li><p>It is an overdetermined linear system, and <span class="math inline">\(A\mathbf{x}=\mathbf{b}\)</span> is usually impossible. Thus, the we minimize <span class="math inline">\(\|A\mathbf{x}-\mathbf{b}\|\)</span>.</p></li><li><p>We assume full rank, i.e., <span class="math inline">\(\text{rank}(A)=n\)</span>, which makes solution unique.</p></li></ul>
+          </div>
+<p><strong>Theorem 6.1</strong>    Let <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> (<span class="math inline">\(m&gt;n\)</span>), and <span class="math inline">\(\mathbf{b} \in \mathbb{R}^m\)</span>, with <span class="math inline">\(\text{rank}(A)=n\)</span>. The least suqares problem <span class="math inline">\(\displaystyle \min_\mathbf{x} \|A\mathbf{x}-\mathbf{b}\|_2\)</span> has a solution given by <span class="math inline">\(\mathbf{x}=R^{-1}Q^T\mathbf{b}\)</span>, where <span class="math inline">\(A=QR\)</span> is the QR factorization.</p>
+<strong><em>Proof.</em></strong> Let <span class="math inline">\(A=\begin{bmatrix} Q &amp; Q_\perp \end{bmatrix}\begin{bmatrix} R \\ O \end{bmatrix}=Q_F\begin{bmatrix} R \\ O \end{bmatrix}\)</span> be full QR factorization. Then <span class="math display">\[\|A\mathbf{x}-\mathbf{b}\|_2=\left\|\begin{bmatrix}
+Q &amp; Q_\perp
+\end{bmatrix}\begin{bmatrix}
+R \\ O
+\end{bmatrix}\mathbf{x}-\mathbf{b}\right\|_2=\left\|\begin{bmatrix}
+R \\ O
+\end{bmatrix}\mathbf{x}-\begin{bmatrix}
+Q^T\mathbf{b} \\ 
+Q^T_\perp\mathbf{b}
+\end{bmatrix}\right\|_2=\left\|\begin{bmatrix}
+R\mathbf{x}-Q^T\mathbf{b} \\
+-Q^T_\perp\mathbf{b}
+\end{bmatrix}\right\|_2.\]</span> Then <span class="math inline">\(\|A\mathbf{x}-\mathbf{b}\|_2\)</span> is minimized when <span class="math inline">\(R\mathbf{x}-Q^T\mathbf{b}\)</span>, i.e., <span class="math inline">\(\mathbf{x}=R^{-1}Q^T\mathbf{b}\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p>The algorithm is obvious: We compute the QR factorization <span class="math inline">\(A=QR\)</span> (using Householder QR), and then solve linear system <span class="math inline">\(R\mathbf{x}=Q^T\mathbf{b}\)</span>.</p>
+<h2 id="normal-equation-solution">Normal Equation Solution</h2>
+<p>To solve the least squares problem, <span class="math inline">\(\mathbf{x}=R^{-1}Q^T\mathbf{b}\)</span> is the solution iff <span class="math inline">\(\mathbf{x}\)</span> is the solution for <span class="math inline">\(n \times n\)</span> <strong>normal equation</strong> <span class="math inline">\((A^T)\mathbf{x}=A^T\mathbf{b}\)</span>. Note that <span class="math inline">\(A^TA \succeq 0\)</span>. <span class="math inline">\(A^TA \succ 0\)</span> if <span class="math inline">\(\text{rank}(A)=n\)</span>, and thus we can use Cholesky factorization to solve, i.e., <span class="math inline">\(A^TA=R^TR\)</span>. However, the method is not backward stable.</p>
+<h2 id="application-regression-and-function-approximation">Application: Regression and Function Approximation</h2>
+<p>Given function <span class="math inline">\(f: [-1, 1] \to \mathbb{R}\)</span>, we consider approximating via polynomial <span class="math display">\[f(x) \approx p(x)=\sum_{i=0} c_ix^i.\]</span> A very common technique is <strong>regression</strong>: We sample <span class="math inline">\(f\)</span> at points <span class="math inline">\(\{z_i\}_{i=1}^m\)</span>, and find coefficients <span class="math inline">\(\mathbf{c}\)</span> defined by <strong>Vandermonde system</strong> <span class="math inline">\(A\mathbf{c} \approx \mathbf{f}\)</span>: <span class="math display">\[\begin{bmatrix}
+1 &amp; z_1 &amp; \cdots &amp; z_1^n \\
+1 &amp; z_2 &amp; \cdots &amp; z_2^n \\
+\vdots &amp; \vdots &amp; &amp; \vdots \\
+1 &amp; z_m &amp; \cdots &amp; z_m^n
+\end{bmatrix}\begin{bmatrix}
+c_0 \\ \vdots \\ c_n
+\end{bmatrix} \approx \begin{bmatrix}
+f(z_1) \\ f(z_2) \\ \vdots \\ f(z_m)
+\end{bmatrix}.\]</span></p>
 
     </div>
 
@@ -345,7 +499,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#qr-decomposition"><span class="nav-number">1.</span> <span class="nav-text">QR Decomposition</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#qr-decomposition"><span class="nav-number">1.</span> <span class="nav-text">QR Decomposition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#qr-via-gram-schmidt"><span class="nav-number">2.</span> <span class="nav-text">QR via Gram-Schmidt</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#householder-qr-factorization"><span class="nav-number">3.</span> <span class="nav-text">Householder QR Factorization</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#householder-reflector"><span class="nav-number">3.1.</span> <span class="nav-text">Householder Reflector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#householder-qr-factorization-1"><span class="nav-number">3.2.</span> <span class="nav-text">Householder QR Factorization</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#givens-rotation"><span class="nav-number">4.</span> <span class="nav-text">Givens Rotation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#least-squares-problem"><span class="nav-number">5.</span> <span class="nav-text">Least Squares Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#qr-solution"><span class="nav-number">5.1.</span> <span class="nav-text">QR Solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#normal-equation-solution"><span class="nav-number">5.2.</span> <span class="nav-text">Normal Equation Solution</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application-regression-and-function-approximation"><span class="nav-number">5.3.</span> <span class="nav-text">Application: Regression and Function Approximation</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
