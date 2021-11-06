@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Proper initialization is essential for training. We first introduce the Xavier weight initialization.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DNN Initialization">
+<meta property="og:url" content="https://litianyang0211.github.io/Computer-science/Deep-learning/DNN_Initialization">
+<meta property="og:site_name" content="Tianyang Li">
+<meta property="og:description" content="Proper initialization is essential for training. We first introduce the Xavier weight initialization.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://litianyang0211.github.io/images/DNN_Initialization_1.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/DNN_Initialization_2.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/DNN_Initialization_3.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/DNN_Initialization_4.png">
+<meta property="article:published_time" content="2021-11-06T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-06T23:21:54.340Z">
+<meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="DNN">
+<meta property="article:tag" content="Initialization">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://litianyang0211.github.io/images/DNN_Initialization_1.png">
+
+<link rel="canonical" href="https://litianyang0211.github.io/Computer-science/Deep-learning/DNN_Initialization.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>DNN Initialization | Tianyang Li</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tianyang Li</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-blog">
+
+    <a href="/blog/" rel="section"><i class="fa fa-blog fa-fw"></i>Blog</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-projects">
+
+    <a href="/projects/" rel="section"><i class="fa fa-code fa-fw"></i>Projects</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Computer-science/Deep-learning/DNN_Initialization">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Tianyang Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianyang Li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DNN Initialization
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-lightbulb"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-11-06 00:00:00 / Modified: 23:21:54" itemprop="dateCreated datePublished" datetime="2021-11-06T00:00:00+00:00">2021-11-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Computer-science/" itemprop="url" rel="index"><span itemprop="name">Computer science</span></a>
+                </span>
+                  /
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Computer-science/Deep-learning/" itemprop="url" rel="index"><span itemprop="name">Deep learning</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">Proper initialization is essential for training. We first introduce the Xavier weight initialization.</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="xavier-weight-initialization">Xavier Weight Initialization</h1>
+<p>Xavier Glorot and Yoshua Bengio (2010) considered random initialized networks and the associated variance of pre-activation values and the gradients as they pass from layer to layer. Glorot and Bengio noted that for symmetric <span class="math inline">\(\phi(\cdot)\)</span> such as <span class="math inline">\(\tanh(\cdot)\)</span>, the hidden layer values <span class="math inline">\(\mathbf{h}_{i+1}=\phi_i(W^{(i)}\mathbf{h}_i+\mathbf{b}^{(i)})\)</span> are approximately Gaussian with a variance depending on the variance of the weight matrices <span class="math inline">\(W^{(i)}\)</span>.</p>
+<p>In particular, if <span class="math inline">\(\sigma_W\)</span> is selected appropriately (<span class="math inline">\(\sigma_W^2=1/(3n)\)</span>) then the variance of <span class="math inline">\(\mathbf{h}_i\)</span> is approximately constant through layers (bottom plot of <a href="#f1">Figure 1</a>); if <span class="math inline">\(\sigma_W\)</span> is small then the variance of <span class="math inline">\(\mathbf{h}_i\)</span> converges towards zero with depth (top plot of <a href="#f1">Figure 1</a>).</p>
+<p><span id="f1"><img data-src="/images/DNN_Initialization_1.png" /></span></p>
+<center>
+Figure 1: Activation values normalized histograms with hyperbolic tangent activation, with standard (top) vs normalized (bottom) initialization <a href="#GlB10">[GlB10]</a>.
+</center>
+<p>Similarly, the gradient of a loss function used for training shows the similar Gaussian behavior depending on <span class="math inline">\(\sigma_W\)</span>.</p>
+<p><span id="f2"><img data-src="/images/DNN_Initialization_2.png" /></span></p>
+<center>
+Figure 2: Back-propagated gradients normalized histograms with hyperbolic tangent activation, with standard (top) vs normalized (bottom) initialization <a href="#GlB10">[GlB10]</a>.
+</center>
+<p>The suggested <strong>Xavier initialization</strong> <span class="math inline">\(\sigma_W^2=1/(3n)\)</span> follows from balancing the variance of <span class="math inline">\(\mathbf{h}_i\)</span> and the gradient to be constant through depth.</p>
+<h1 id="random-dnn-recursion-correlation-map">Random DNN Recursion Correlation Map</h1>
+<p>Let <span class="math inline">\(f_{NN}(\mathbf{x})\)</span> denote a random Gaussian DNN: <span class="math display">\[\mathbf{h}^{(l)}=W^{(l)}\mathbf{z}^{(l)}+\mathbf{b}^{(l)}, \mathbf{z}^{(l+1)}=\phi(\mathbf{h}^{(l)}), l=0, \cdots, L-1,\]</span> which takes as input the vector <span class="math inline">\(\mathbf{x}\)</span>, and is parameterized by random weight matrices <span class="math inline">\(W^{(l)}\)</span> and bias vectors <span class="math inline">\(\mathbf{b}^{(l)}\)</span> with entries sampled i.i.d. from the Gaussian normal distribution <span class="math inline">\(\mathcal{N}(0, \sigma_W^2)\)</span> and <span class="math inline">\(\mathcal{N}(0, \sigma_\mathbf{b}^2)\)</span>. Define the <strong><span class="math inline">\(l^2\)</span> length of the pre-activation hidden layer</strong> <span class="math inline">\(\mathbf{h}^{(l)} \in \mathbb{R}^{n_l}\)</span> output as <span class="math display">\[q^l=n_l^{-1}\|\mathbf{h}^{(l)}\|^2_{l^2}:=\frac{1}{n_l}\sum_{i=1}^{n_l} (\mathbf{h}^{(l)}(i))^2,\]</span> which is the sample mean of the random entries <span class="math inline">\((\mathbf{h}^{(l)}(i))^2\)</span>, each of which are identically distributed.</p>
+<p>The norm of the hidden layer output <span class="math inline">\(q^l\)</span> has an expected value over the random draws of <span class="math inline">\(W^{(l)}\)</span> and <span class="math inline">\(\mathbf{b}^{(l)}\)</span> which satisfies <span class="math inline">\(\mathbb{E}[q^l]=\mathbb{E}[(\mathbf{h}^{(l)}(i))^2]\)</span> which as <span class="math inline">\(\mathbf{h}^{(l)}=W^{(l)}\phi(\mathbf{h}^{(l-1)})+\mathbf{b}^{(l)}\)</span> is <span class="math display">\[\begin{aligned}
+\mathbb{E}[q^l]&amp;=\mathbb{E}[(W_i^{(l)}\phi(\mathbf{h}^{(l-1)}))^2]+\mathbb{E}[(b_i^{(l)})^2]
+\\&amp;=\sigma_W^2n_{l-1}^{-1}\sum_{i=1}^{n_l-1} \phi(h_i^{(l-1)})^2+\sigma_\mathbf{b}^2
+\end{aligned}\]</span> where <span class="math inline">\(W_i^{(l)}\)</span> denotes the <span class="math inline">\(i\)</span>th row of <span class="math inline">\(W^{(l)}\)</span>.</p>
+<p>Approximating <span class="math inline">\(h_i^{(l-1)}\)</span> as Gaussian with variance <span class="math inline">\(q^{(l-1)}\)</span>: <span class="math display">\[n_{l-1}^{-1}\sum_{i=1}^{n_{l-1}} \phi(h_i^{(l-1)})^2=\mathbb{E}[\phi(H^{(l-1)})^2]=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \phi\left(\sqrt{q^{(l-1)}}z\right)^2e^{-z^2/2}\text{d}z\]</span> which gives a <strong>recursive map of <span class="math inline">\(q^l\)</span> between layers</strong> <span class="math display">\[q^{(l)}=\sigma_\mathbf{b}^2+\sigma_W^2\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \phi\left(\sqrt{q^{(l-1)}}z\right)^2e^{-z^2/2}\text{d}z=:\mathcal{V}(q^{(l-1)} \mid \sigma_W, \sigma_\mathbf{b}, \phi(\cdot)).\]</span> Note that the integral is larger for <span class="math inline">\(\phi(x)=|x|\)</span> than ReLU, which are larger than <span class="math inline">\(\phi(x)=\tanh(x)\)</span>, indicating smaller <span class="math inline">\(\sigma_W\)</span> and <span class="math inline">\(\sigma_\mathbf{b}\)</span> needed to ensure <span class="math inline">\(q^{(l)}\)</span> has a finite nonzero limit <span class="math inline">\(q^*\)</span>. As <a href="#f3">Figure 3</a> shown, the fixed points are all stable.</p>
+<p><span id="f3"><img data-src="/images/DNN_Initialization_3.png" /></span></p>
+<center>
+Figure 3: Dynamics of the squared length <span class="math inline">\(q^l\)</span> for a sigmoidal network (<span class="math inline">\(\phi(h)=\tanh(h)\)</span>) with <span class="math inline">\(1000\)</span> hidden units <a href="#PLR+16">[PLR$^+$16]</a>.
+</center>
+<p>A single input <span class="math inline">\(\mathbf{x}\)</span> has hidden pre-activation output converging to a fixed expected length. Consider the <strong>map governing the angle between the hidden layer pre-activations of two distinct inputs</strong> <span class="math inline">\(\mathbf{x}^{(0, a)}\)</span> and <span class="math inline">\(\mathbf{x}^{(0, b)}\)</span>: <span class="math display">\[q_{ab}^{(l)}=n_l^{-1}\sum_{i=1}^{n_l} h_i^{(l)}(\mathbf{x}^{(0, a)})h_i^{(l)}(\mathbf{x}^{(0, b)}).\]</span> Replacing the average in the sum with the expected values gives <span class="math display">\[q_{ab}^{(l)}=\sigma_\mathbf{b}^2+\sigma_W^2\mathbb{E}[\phi(\mathbf{h}^{(l-1)}(\mathbf{x}^{(0, a)}))\phi(\mathbf{h}^{(l-1)}(\mathbf{x}^{(0, b)}))]\]</span> where as before, <span class="math inline">\(h_i^{(l-1)}\)</span> is well modeled as being Gaussian with expected length <span class="math inline">\(q^{(l-1)}\)</span> which converges to fix points <span class="math inline">\(q^*\)</span>.</p>
+<p>Define the <strong>angle between the hidden layers</strong> as <span class="math inline">\(c^{(l)}=q_{12}^{(l)}/q^*\)</span>. Writing the expectation as integral, we have <span class="math display">\[c^{(l)}=\mathcal{C}(c^{(l-1)} \mid \sigma_W, \sigma_\mathbf{b}, \phi(\cdot)):=\sigma_\mathbf{b}^2+\sigma_W^2\iint \text{D}z_1\text{D}z_2\phi(u_1)\phi(u_2)\]</span> where <span class="math inline">\(\text{D}z=(2\pi)^{-1/2}e^{-z^2/2}\text{d}z\)</span>, <span class="math inline">\(u_1=\sqrt{q^*}z_1\)</span> and <span class="math inline">\(u_2=\sqrt{q^*}\left(c^{(l-1)}z_1+\sqrt{1-(c^{(l-1)})^2}z_2\right)\)</span>. Normalizing by <span class="math inline">\(q^*\)</span>, we have the <strong>correlation map</strong> <span class="math display">\[\rho^{(l+1)}=c^{(l+1)}:=R(\rho^{(l)}; \sigma_W, \sigma_\mathbf{b}, \phi(\cdot)),\]</span> where <span class="math inline">\(R(\rho)\)</span> measures how the correlation between two inputs evolve through the layers. By construction <span class="math inline">\(R(1)=1\)</span> as <span class="math inline">\(c^{(l)} \to q^*\)</span> as the two inputs converge to one another.</p>
+<p>For <span class="math inline">\(\sigma_\mathbf{b}^2&gt;0\)</span>, the correlation map satisfies <span class="math inline">\(R(0)&gt;0\)</span>, orthogonal <span class="math inline">\(\mathbf{x}^{(0, a)}\)</span> and <span class="math inline">\(\mathbf{x}^{(0, b)}\)</span> become increasingly correlated with depth.</p>
+<p>The stability of a point and its perturbation is determined by the slope of <span class="math inline">\(R(\cdot)\)</span> at <span class="math inline">\(\rho=1\)</span> is <span class="math display">\[\chi:=\frac{\partial R(\rho)}{\partial \rho}\bigg|_{\rho=1}=\frac{\partial \rho^{(l)}}{\partial \rho^{(l-1)}}\bigg|_{\rho=1}=\sigma_W^2\int \text{D}z\left[\phi&#39;\left(\sqrt{q^*}z\right)^2\right].\]</span> Stability of the fixed point at <span class="math inline">\(\rho=1\)</span> is determined by <span class="math inline">\(\chi\)</span>: if <span class="math inline">\(\chi&lt;1\)</span>, <span class="math inline">\(\rho=1\)</span> is locally stable and points which are sufficiently correlated all converge, with depth, to the same point; if <span class="math inline">\(\chi&gt;1\)</span>, <span class="math inline">\(\rho=1\)</span> is unstable and nearby points become uncorrelated with depth; it is preferable to choose <span class="math inline">\(\chi=1\)</span> if possible for <span class="math inline">\((\sigma_W, \sigma_\mathbf{b}, \phi(\cdot))\)</span>.</p>
+<p>As <a href="#f4">Figure 4</a> shown, initialization on the curve allows training very deep networks.</p>
+<p><span id="f4"><img data-src="/images/DNN_Initialization_4.png" /></span></p>
+<center>
+Figure 4: Edge of chaos curves for nonlinear activations <a href="#MAT21">[MAT21]</a>.
+</center>
+<h1 id="spectrum-of-the-jacobian">Spectrum of the Jacobian</h1>
+<h2 id="dnn-jacobian">DNN Jacobian</h2>
+<p>The <strong>Jacobian</strong> is given by <span class="math display">\[J=\frac{\partial \mathbf{z}^{(L)}}{\partial \mathbf{x}^{(0)}}=\prod_{l=0}^{L-1} D^{(l)}W^{(l)}\]</span> where <span class="math inline">\(D^{(l)}\)</span> is diagonal with entries <span class="math inline">\(D_{ii}^{(l)}=\phi&#39;(h_i^{(l)})\)</span>.</p>
+<p>The Jacobian can bound the local stability of the DNN: <span class="math display">\[\|H(\mathbf{x}+\varepsilon; \theta)-H(\mathbf{x}; \theta)\|=\|J\varepsilon+\mathcal{O}(\|\varepsilon\|^2)\| \leq \|\varepsilon\| \cdot \max\|J\|.\]</span></p>
+<p>For the sum of squares loss <span class="math inline">\(\mathcal{L}\)</span>, the gradient is computed as <span class="math display">\[\delta_l=D^l(W^{(l)})^T\delta_{l+1} \quad \text{and} \quad \delta_L=D^{(L)}\nabla_{\mathbf{h}^{(L)}}\mathcal{L}\]</span> which gives the formula for computing the <span class="math inline">\(\delta_l\)</span> for each layer as <span class="math display">\[\delta_l=\left(\prod_{k=l}^{L-1} D^{(k)}(W^{(k)})^T\right)D^{(L)}\nabla_{\mathbf{h}^{(L)}}\mathcal{L}\]</span> and the resulting gradient <span class="math inline">\(\nabla_\theta \mathcal{L}\)</span> with entries as <span class="math display">\[\frac{\partial \mathcal{L}}{\partial W^{(l)}}=\delta_{l+1} \cdot (\mathbf{h}^{(l)})^T \quad \text{and} \quad \frac{\partial \mathcal{L}}{\partial \mathbf{b}^{(l)}}=\delta_{l+1}.\]</span></p>
+<h2 id="stieltjes-and-mathcals-transform">Stieltjes and <span class="math inline">\(\mathcal{S}\)</span> Transform</h2>
+<p>For <span class="math inline">\(z \in \mathbb{C}-\mathbb{R}\)</span>, the <strong>Stieltjes transform</strong> <span class="math inline">\(G_\rho(z)\)</span> of a probability distribution and its inverse are given by <span class="math display">\[G_\rho(z)=\int_\mathbb{R} \frac{\rho(t)}{z-t}\text{d}t \quad \text{and} \quad \rho(\lambda)=-\pi^{-1}\lim_{\varepsilon \to 0_+} \text{Imag}(G_\rho(\lambda+i\varepsilon)).\]</span> The Stieltjes transform and <strong>moment generating function</strong> are related by <span class="math display">\[M_\rho(z):=zG_\rho(z)-1=\sum_{k=1}^\infty \frac{m_k}{z^k}\]</span> and the <strong><span class="math inline">\(\mathcal{S}\)</span> transform</strong> is defined as <span class="math display">\[S_\rho(z)=\frac{1+z}{zM_\rho^{-1}(z)}.\]</span> The <span class="math inline">\(\mathcal{S}\)</span> transform has the property that if <span class="math inline">\(\rho_1\)</span> and <span class="math inline">\(\rho_2\)</span> are freely independent, then <span class="math inline">\(S_{\rho_1\rho_2}=S_{\rho_1}S_{\rho_2}\)</span>.</p>
+<p>The <span class="math inline">\(\mathcal{S}\)</span> transform of <span class="math inline">\(JJ^T\)</span> is then given by <span class="math display">\[\mathcal{S}_{JJ^T}=\mathcal{S}_{D^2}^L\mathcal{S}_{W^TW}^L,\]</span> which can be computed through the moments <span class="math display">\[M_{JJ^T}(z)=\sum_{k=1}^\infty \frac{m_k}{z^k} \quad \text{and} \quad M_{D^2}(z)=\sum_{k=1}^\infty \frac{\mu_k}{z^k}\]</span> where <span class="math inline">\(\displaystyle \mu_k=\int (2\pi)^{-1/2}\phi&#39;\left(\sqrt{q^*}z\right)^{2k}e^{-z^2/2}\text{d}z\)</span>.</p>
+<p>In particular, <span class="math inline">\(m_1=(\sigma_W^2\mu_1)^L\)</span> and <span class="math inline">\(m_2=(\sigma_W^2\mu_1)^{2L}L(\mu_2^{-1}\mu_1^2+L^{-1}-1-s_1)\)</span>, where <span class="math inline">\(\sigma_W^2\mu_1=\chi\)</span> is the growth factor we observe with the edge of chaos, requiring <span class="math inline">\(\chi=1\)</span> to avoid rapid convergence of correlations to fixed points.</p>
+<h2 id="nonlinear-activation-stability">Nonlinear Activation Stability</h2>
+<p>Recall that <span class="math inline">\(m_1=\chi^L\)</span> is the expected value of the spectrum of <span class="math inline">\(JJ^T\)</span>, while the variance of the spectrum of <span class="math inline">\(JJ^T\)</span> is given by <span class="math display">\[\sigma_{JJ^T}^2=m_2-m_1^2=L(\mu_2\mu_1^{-2}-1-s_1)\]</span> where for <span class="math inline">\(W\)</span> Gaussian, <span class="math inline">\(s_1=-1\)</span>, and for <span class="math inline">\(W\)</span> orthogonal, <span class="math inline">\(s_1=0\)</span>.</p>
+<p>Pennington et al. (2018) found that for linear networks, the fixed point equation is <span class="math inline">\(q^*=\sigma_W^2q^*+\sigma^2_\mathbf{b}\)</span>, and <span class="math inline">\((\sigma_W, \sigma_\mathbf{b})=(1, 0)\)</span> is the only critical point; for ReLU networks, the fixed point equation is <span class="math inline">\(\displaystyle q^*=\frac{1}{2}\sigma_W^2q^*+\sigma_\mathbf{b}^2\)</span>, and <span class="math inline">\((\sigma_W, \sigma_\mathbf{b})=(\sqrt{2}, 0)\)</span> is the only critical point; Hard Tanh and Erf have curves as fixed points <span class="math inline">\(\chi(\sigma_W, \sigma_\mathbf{b})\)</span>.</p>
+<h1 id="controlling-the-variance-of-the-jacobian-spectra">Controlling the Variance of the Jacobian Spectra</h1>
+<p><strong>Definition</strong>    An activation function <span class="math inline">\(\phi: \mathbb{R} \to \mathbb{R}\)</span> satisfying the following properties is called <strong>scaled-bounded activation</strong>:</p>
+<p>    (1) continuous;</p>
+<p>    (2) odd, i.e., <span class="math inline">\(\phi(z)=-\phi(-z)\)</span> for all <span class="math inline">\(z \in \mathbb{R}\)</span>;</p>
+<p>    (3) linear around the origin and bounded, i.e., there exists <span class="math inline">\(a, k \in \mathbb{R}_{&gt;0}\)</span> s.t. <span class="math inline">\(\phi(z)=kz\)</span> for all <span class="math inline">\(z \in [-a, a]\)</span> and <span class="math inline">\(\phi(z) \leq ak\)</span> for all <span class="math inline">\(z \in \mathbb{R}\)</span>;</p>
+<p>    (4) twice differentiable at all points <span class="math inline">\(z \in \mathbb{R}-\mathcal{D}\)</span>, where <span class="math inline">\(\mathcal{D} \subset \mathbb{R}\)</span> is a finite set; furthermore <span class="math inline">\(|\phi&#39;(z)| \leq k\)</span> for all <span class="math inline">\(z \in \mathbb{R}-\mathcal{D}\)</span>.</p>
+<p><strong>Theorem (Murray et al., 2021)</strong>     Let <span class="math inline">\(\phi\)</span> be a scaled-bounded activation, <span class="math inline">\(\chi_1:=\sigma_W^2\mathbb{E}[\phi&#39;(\sqrt{q^*}Z)^2]=1\)</span>, where <span class="math inline">\(q^*&gt;0\)</span> is a fixed point of <span class="math inline">\(V_\phi\)</span>, and <span class="math inline">\(\sigma_\mathbf{b}^2&gt;0\)</span>. Let input <span class="math inline">\(\mathbf{x}\)</span> satisfy <span class="math inline">\(\|\mathbf{x}\|_2^2=q^*\)</span>. Then as <span class="math inline">\(y:=\sigma_\mathbf{b}^2/a^2 \to 0\)</span>, <span class="math display">\[\max_{\rho \in [0, 1]} |R_{\phi, q^*}(\rho)-\rho| \to 0 \quad \text{and} \quad |\mu_2/\mu_1^2-1| \to 0.\]</span></p>
+<div class="note info">
+            <p>This is independent of details of <span class="math inline">\(\phi(\cdot)\)</span> outside its linear region <span class="math inline">\([-a, a]\)</span>. Best performance is observed with <span class="math inline">\(a \sim 3\)</span>, or preferably a decreasing from about <span class="math inline">\(5\)</span> to <span class="math inline">\(2\)</span> during training.</p>
+          </div>
+<h1 id="dnn-random-initialization-summary">DNN Random Initialization Summary</h1>
+<ul>
+<li><p>The hidden layers converge to fixed expected length.</p></li>
+<li><p>Poole et al. (2016) showed pre-activation output is well modeled as Gaussian with variance <span class="math inline">\(q^*\)</span> determined by <span class="math inline">\((\sigma_W, \sigma_\mathbf{b}, \phi(\cdot))\)</span>. Moreover, the correlation between two inputs follows a similar map with correlations converging to a fixed point, with the behavior determined in part by <span class="math inline">\(\chi\)</span> where <span class="math inline">\(\chi=1\)</span> avoids correlation to the same point, or nearby points diverging.</p></li>
+<li><p>Very DNNs can be especially hard to train for activations with unfavorable initializations; e.g., ReLU with <span class="math inline">\(\chi=1\)</span> requires <span class="math inline">\((\sigma_W, \sigma_\mathbf{b})=(\sqrt{2}, 0)\)</span>.</p></li>
+<li><p>Pennington et al. (2018) showed more generally how to compute the moments for the Jacobian spectra, where <span class="math inline">\(\chi=1\)</span> is needed to avoid exponential growth or shrinkage with depth of gradients.</p></li>
+</ul>
+<h1 id="reference">Reference</h1>
+<p><font size=2 style="line-height: 1;"></p>
+<p><span id="GlB10">[GlB10] Xavier Glorot and Yoshua Bengio. Understanding the Difficulty of Training Deep Feedforward Neural Networks. In <em>Proceedings of the 13th International Conference on Artificial Intelligence and Statistics</em>, 2010.</span></p>
+<p><span id="MAT21">[MAT21] Michael Murray, Vinayak Abrol, and Jared Tanner. Activation Function Design for Deep Networks: Linearity and Effective Initialisation. <em>arXiv Preprint arXiv:2105.07741</em>, 2021.</span></p>
+<p><span id="PLR+16">[PLR$^+$16] Ben Poole, Subhaneil Lahiri, Maithra Raghu, Jascha Sohl-Dickstein, and Surya Ganguli. Exponential Expressivity in Deep Neural Networks through Transient Chaos. <em>Advances in Neural Information Processing Systems</em>, 29: 3360-3368, 2016.</span></p>
+<p></font></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/DNN/" rel="tag"><i class="fa fa-tag"></i> DNN</a>
+              <a href="/tags/Initialization/" rel="tag"><i class="fa fa-tag"></i> Initialization</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Mathematics/Numerical-linear-algebra/Numerical_Stability" rel="prev" title="Numerical Stability">
+      <i class="fa fa-chevron-left"></i> Numerical Stability
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#xavier-weight-initialization"><span class="nav-number">1.</span> <span class="nav-text">Xavier Weight Initialization</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#random-dnn-recursion-correlation-map"><span class="nav-number">2.</span> <span class="nav-text">Random DNN Recursion Correlation Map</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#spectrum-of-the-jacobian"><span class="nav-number">3.</span> <span class="nav-text">Spectrum of the Jacobian</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dnn-jacobian"><span class="nav-number">3.1.</span> <span class="nav-text">DNN Jacobian</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stieltjes-and-mathcals-transform"><span class="nav-number">3.2.</span> <span class="nav-text">Stieltjes and \(\mathcal{S}\) Transform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nonlinear-activation-stability"><span class="nav-number">3.3.</span> <span class="nav-text">Nonlinear Activation Stability</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#controlling-the-variance-of-the-jacobian-spectra"><span class="nav-number">4.</span> <span class="nav-text">Controlling the Variance of the Jacobian Spectra</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dnn-random-initialization-summary"><span class="nav-number">5.</span> <span class="nav-text">DNN Random Initialization Summary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tianyang Li"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Tianyang Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/litianyang0211" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;litianyang0211" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianyang.li@linacre.ox.ac.uk" title="Email → mailto:tianyang.li@linacre.ox.ac.uk" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/derekli0211" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;derekli0211" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tianyang Li</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'default',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
