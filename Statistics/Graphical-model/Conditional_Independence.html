@@ -28,7 +28,7 @@
 <meta property="og:description" content="A quick review of conditional independence.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-03T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-21T12:24:07.232Z">
+<meta property="article:modified_time" content="2021-11-07T16:03:56.347Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Conditional independence">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-21 13:24:07" itemprop="dateModified" datetime="2021-10-21T13:24:07+01:00">2021-10-21</time>
+                <time title="Modified: 2021-11-07 16:03:56" itemprop="dateModified" datetime="2021-11-07T16:03:56+00:00">2021-11-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -267,8 +267,8 @@
 <div class="note info">
             <p>If <span class="math inline">\(Z\)</span> is degenerate, i.e., there is some <span class="math inline">\(z\)</span> s.t. <span class="math inline">\(P(Z=z)=1\)</span>, then the definition above is the same as saying that <span class="math inline">\(X \perp\!\!\!\!\perp Y\)</span>.</p>
           </div>
-<p><strong>Example 1.1</strong>    Let <span class="math inline">\(X_1, \cdots, X_k\)</span> be a Markov chain. Then <span class="math inline">\(X_k\)</span> is independent of <span class="math inline">\(X_1, \cdots, X_{k-2}\)</span> conditional upon <span class="math inline">\(X_{k-1}\)</span>: <span class="math display">\[P(X_k=x_k \mid X_{k-1}=x_{k-1}, \cdots, X_1=x_1)=P(X_k=x_k \mid X_{k-1}=x_{k-1})\]</span> for all <span class="math inline">\(x_k, x_{k-1}, \cdots, x_1\)</span>, i.e., <span class="math inline">\(X_k \perp\!\!\!\!\perp X_1, \cdots, X_{k-2} \mid X_{k-1}\)</span>, a.k.a. <strong>Markov property</strong>, or <strong>memoryless property</strong>.</p>
-<p><span id="eg1.2"><strong>Example 1.2</strong></span>    Suppose <span class="math inline">\(\mathbf{X}_V=(X_1, \cdots, X_p)^T\)</span> is a multivariate Gaussian distribution, i.e., <span class="math display">\[f(\mathbf{x}_V; \mu, \Sigma)=\frac{1}{(2\pi)^{p/2}|\Sigma|^{p/2}}\exp\left[-\frac{1}{2}(\mathbf{x}_V-\mu)^T\Sigma^{-1}(\mathbf{x}_V-\mu)\right].\]</span> Then <span class="math display">\[X_p \mid X_1=x_1, \cdots, X_{p-1}=x_{p-1} \sim \mathcal{N}(\mu_p+\Sigma_{p, -p}\Sigma_{-p, -p}^{-1}(\mathbf{x}_{-p}-\mu_{-p}), \sigma_{pp \cdot 1 \cdots p-1}),\]</span> where <span class="math inline">\(\sigma_{aa \cdot B}=\sigma_{aa}-\Sigma_{aB}\Sigma_{BB}^{-1}\Sigma_{Ba}\)</span>, is called the <strong>Schur complement</strong> of entry <span class="math inline">\((a, a)\)</span> in <span class="math inline">\(\Sigma\)</span>.</p>
+<p><strong>Example 1.1</strong>    Let <span class="math inline">\(X_1, \ldots, X_k\)</span> be a Markov chain. Then <span class="math inline">\(X_k\)</span> is independent of <span class="math inline">\(X_1, \ldots, X_{k-2}\)</span> conditional upon <span class="math inline">\(X_{k-1}\)</span>: <span class="math display">\[P(X_k=x_k \mid X_{k-1}=x_{k-1}, \ldots, X_1=x_1)=P(X_k=x_k \mid X_{k-1}=x_{k-1})\]</span> for all <span class="math inline">\(x_k, x_{k-1}, \ldots, x_1\)</span>, i.e., <span class="math inline">\(X_k \perp\!\!\!\!\perp X_1, \ldots, X_{k-2} \mid X_{k-1}\)</span>, a.k.a. <strong>Markov property</strong>, or <strong>memoryless property</strong>.</p>
+<p><span id="eg1.2"><strong>Example 1.2</strong></span>    Suppose <span class="math inline">\(\mathbf{X}_V=(X_1, \ldots, X_p)^T\)</span> is a multivariate Gaussian distribution, i.e., <span class="math display">\[f(\mathbf{x}_V; \mu, \Sigma)=\frac{1}{(2\pi)^{p/2}|\Sigma|^{p/2}}\exp\left[-\frac{1}{2}(\mathbf{x}_V-\mu)^T\Sigma^{-1}(\mathbf{x}_V-\mu)\right].\]</span> Then <span class="math display">\[X_p \mid X_1=x_1, \ldots, X_{p-1}=x_{p-1} \sim \mathcal{N}(\mu_p+\Sigma_{p, -p}\Sigma_{-p, -p}^{-1}(\mathbf{x}_{-p}-\mu_{-p}), \sigma_{pp \cdot 1 \cdots p-1}),\]</span> where <span class="math inline">\(\sigma_{aa \cdot B}=\sigma_{aa}-\Sigma_{aB}\Sigma_{BB}^{-1}\Sigma_{Ba}\)</span>, is called the <strong>Schur complement</strong> of entry <span class="math inline">\((a, a)\)</span> in <span class="math inline">\(\Sigma\)</span>.</p>
 <p><strong>Theorem 1.1</strong>    Let <span class="math inline">\(X, Y, Z\)</span> be r.v.s. defined on a Cartesian product space. The following are equivalent:</p>
 <p>    (1) <span class="math inline">\(p(x \mid y, z)=p(x \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(y, z)&gt;0\)</span>;</p>
 <p>    (2) <span class="math inline">\(p(x, y \mid z)=p(x \mid z)p(y \mid z)\)</span> for all <span class="math inline">\(x, y, z\)</span> s.t. <span class="math inline">\(p(z)&gt;0\)</span>;</p>

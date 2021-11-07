@@ -28,7 +28,7 @@
 <meta property="og:description" content="We introduce the optimal low-rank approximation by SVD and its application in image compression.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-09T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-02T19:25:45.394Z">
+<meta property="article:modified_time" content="2021-11-07T16:13:02.493Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="SVD">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-02 19:25:45" itemprop="dateModified" datetime="2021-11-02T19:25:45+00:00">2021-11-02</time>
+                <time title="Modified: 2021-11-07 16:13:02" itemprop="dateModified" datetime="2021-11-07T16:13:02+00:00">2021-11-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,7 +264,7 @@
 <li><p>Low-rank approximation can bring <strong>computational</strong> benefits. In order to compute <span class="math inline">\(A\mathbf{x}\)</span>, by noting that <span class="math inline">\(A_r\mathbf{x}=U_r(\Sigma_r(V_r^T\mathbf{x}))\)</span>, we need only <span class="math inline">\(\mathcal{O}((m+n)r)\)</span> operations instead of <span class="math inline">\(\mathcal{O}(mn)\)</span>.</p></li>
 </ul>
 <h1 id="optimal-low-rank-approximation-by-svd">Optimal Low-Rank Approximation by SVD</h1>
-<p><strong>Theorem 2.1</strong>    For any <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> with singular values <span class="math inline">\(\sigma_1(A) \geq \cdots \geq \sigma_n(A) \geq 0\)</span>, and any non-negatvie integer <span class="math inline">\(r&lt;\min(m, n)\)</span>, <span class="math display">\[\|A-A_r\|_2=\sigma_{r+1}(A)=\min_{\text{rank}(B) \leq r} \|A-B\|_2,\]</span> where <span class="math inline">\(A_r=U_r\Sigma_rV_r^T\)</span> and <span class="math inline">\(\Sigma_r=\text{diag}(\sigma_1, \cdots, \sigma_r)\)</span>.</p>
+<p><strong>Theorem 2.1</strong>    For any <span class="math inline">\(A \in \mathbb{R}^{m \times n}\)</span> with singular values <span class="math inline">\(\sigma_1(A) \geq \cdots \geq \sigma_n(A) \geq 0\)</span>, and any non-negatvie integer <span class="math inline">\(r&lt;\min(m, n)\)</span>, <span class="math display">\[\|A-A_r\|_2=\sigma_{r+1}(A)=\min_{\text{rank}(B) \leq r} \|A-B\|_2,\]</span> where <span class="math inline">\(A_r=U_r\Sigma_rV_r^T\)</span> and <span class="math inline">\(\Sigma_r=\text{diag}(\sigma_1, \ldots, \sigma_r)\)</span>.</p>
 <p><strong><em>Proof.</em></strong> Since <span class="math inline">\(\text{rank}(B) \leq r\)</span>, we can write <span class="math inline">\(B=B_1B_2^T\)</span> where <span class="math inline">\(B_1 \in \mathbb{R}^{m \times r}\)</span> and <span class="math inline">\(B_2 \in \mathbb{R}^{n \times r}\)</span>. It follows that <span class="math inline">\(B_2^T\)</span> has a null space of dimension at least <span class="math inline">\(n-r\)</span>, and we can find an orthonormal matrix <span class="math inline">\(W \in \mathbb{C}^{n \times (n-r)}\)</span> s.t. <span class="math inline">\(B_2^TW=O\)</span>. Specifically, by SVD, <span class="math display">\[B_2^T=\widetilde{U}\widetilde{\Sigma}\widetilde{V}^T=\widetilde{U}\begin{bmatrix}
 \widetilde{\Sigma} &amp; O
 \end{bmatrix}\begin{bmatrix}

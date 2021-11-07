@@ -28,7 +28,7 @@
 <meta property="og:description" content="We introduce the exponential family, formulate the contingency table, and explore the log-linear model.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-12T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-10-31T23:14:50.197Z">
+<meta property="article:modified_time" content="2021-11-07T16:01:24.540Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Exponential family">
 <meta property="article:tag" content="Contingency table">
@@ -230,7 +230,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-10-31 23:14:50" itemprop="dateModified" datetime="2021-10-31T23:14:50+00:00">2021-10-31</time>
+                <time title="Modified: 2021-11-07 16:01:24" itemprop="dateModified" datetime="2021-11-07T16:01:24+00:00">2021-11-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,7 +273,7 @@ l(\theta)&amp;=\sum_{i=1}^n \langle \theta, \phi(X_i) \rangle -nA(\theta)+C
 \end{aligned}\]</span> Then <span class="math display">\[\nabla_\theta l(\theta)=n\overline{\phi(X)}-n\nabla_\theta A(\theta).\]</span> Let <span class="math inline">\(\nabla_\theta l(\theta)=0\)</span>, we have <span class="math display">\[\nabla_\theta A(\theta)=\overline{\phi(X)}.\]</span> Hence, MLE is given by <span class="math inline">\(\widehat{\theta}\)</span> where <span class="math inline">\(\mathbb{E}_\widehat{\theta}\phi(X)=\overline{\phi(X)}\)</span>.</p>
 <p><strong>Example 1.2</strong>    From <a href="#eg1.1">example 1.1</a>, we know that <span class="math inline">\(\overline{\phi(X)}=\overline{X}\)</span> and <span class="math inline">\(\widehat{\lambda}=\mathbb{E}_\widehat{\theta}\phi(X)=e^\widehat{\theta}=\overline{X}\)</span>.</p>
 <h1 id="multivariate-gaussian-distribution">Multivariate Gaussian Distribution</h1>
-<p><strong>Definition 3.1</strong>    Let <span class="math inline">\(X_V=(X_1, \cdots, X_p)^T \in \mathbb{R}^p\)</span> be a random vector. Let <span class="math inline">\(\mu \in \mathbb{R}^p\)</span> and <span class="math inline">\(\Sigma \in \mathbb{R}^{p \times p}\)</span> be a positive definite symmetric matrix. We say that <span class="math inline">\(X_V\)</span> has a <strong>multivariate Gaussian distribution</strong> or <strong>multivariate normal distribution</strong> with parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span> if for all <span class="math inline">\(x_V \in \mathbb{R}^p\)</span>, the joint density is <span class="math display">\[\begin{aligned}
+<p><strong>Definition 3.1</strong>    Let <span class="math inline">\(X_V=(X_1, \ldots, X_p)^T \in \mathbb{R}^p\)</span> be a random vector. Let <span class="math inline">\(\mu \in \mathbb{R}^p\)</span> and <span class="math inline">\(\Sigma \in \mathbb{R}^{p \times p}\)</span> be a positive definite symmetric matrix. We say that <span class="math inline">\(X_V\)</span> has a <strong>multivariate Gaussian distribution</strong> or <strong>multivariate normal distribution</strong> with parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span> if for all <span class="math inline">\(x_V \in \mathbb{R}^p\)</span>, the joint density is <span class="math display">\[\begin{aligned}
 f(x_V; \mu, \Sigma)&amp;=\frac{1}{(2\pi)^{p/2}|\Sigma|^{1/2}}\exp\left[-\frac{1}{2}(x_V-\mu)^T\Sigma^{-1}(x_V-\mu)\right]
 \\&amp;=\frac{1}{(2\pi)^{p/2}} \exp\left[-\frac{1}{2}x_V^TKx_V+\mu^TKx_V-\frac{1}{2}\mu^TK\mu+\frac{1}{2}\ln|K|\right],
 \end{aligned}\]</span> where the <strong>concentration matrix</strong> is <span class="math inline">\(K=\Sigma^{-1}\)</span>.</p>
@@ -281,7 +281,7 @@ f(x_V; \mu, \Sigma)&amp;=\frac{1}{(2\pi)^{p/2}|\Sigma|^{1/2}}\exp\left[-\frac{1}
             <p>Note that <span class="math display">\[\begin{aligned}-\frac{1}{2}x_V^TKx_V+\mu^TKx_V-\frac{1}{2}\mu^TK\mu+\frac{1}{2}\ln|K|&amp;=-\frac{1}{2}\text{Tr}(x_V^TKx_V)+\mu^TKx_V-A(\theta)\\&amp;=-\frac{1}{2}\text{Tr}(Kx_Vx_V^T)+\mu^TKx_V-A(\theta)\\&amp;=-\frac{1}{2}\text{vec}(K)^T\text{vec}(x_Vx_V^T)+\mu^TKx_V-A(\theta).\end{aligned}\]</span> Hence, the canonical parameter is <span class="math inline">\(\begin{bmatrix} -\frac{1}{2}\text{vec}(K) \\ K\mu \end{bmatrix}\)</span> and the sufficient statistic is <span class="math inline">\(\begin{bmatrix} \text{vec}(x_Vx_V^T) \\ x_V \end{bmatrix}\)</span>.</p>
           </div>
 <h1 id="contingency-table">Contingency Table</h1>
-<p><strong>Definition 4.1</strong>    Consider multivariate systems of vectors <span class="math inline">\(X_V=(X_v: v \in V)\)</span> for some set <span class="math inline">\(V=\{1, \cdots, p\}\)</span>, and <span class="math inline">\(X_A=(X_v: v \in A)\)</span> for any <span class="math inline">\(A \subseteq V\)</span>. We assume that each <span class="math inline">\(X_v \in \mathcal{X}_v=\{1, \cdots, d_v\}\)</span> (usually <span class="math inline">\(d_v=2\)</span>). If we have <span class="math inline">\(n\)</span> i.i.d. observations, then for <span class="math inline">\(i=1, \cdots, n\)</span>, <span class="math display">\[X_V^{(i)}=(X_1^{(i)}, \cdots, X_p^{(i)})^T.\]</span> Define <span class="math display">\[n(x_V)=\sum_{i=1}^n \mathbb{1}\{X_1^{(i)}=x_1, \cdots, X_p^{(i)}=x_p\},\]</span> i.e., the number of individuals who have the response pattern <span class="math inline">\(x_V\)</span>.</p>
+<p><strong>Definition 4.1</strong>    Consider multivariate systems of vectors <span class="math inline">\(X_V=(X_v: v \in V)\)</span> for some set <span class="math inline">\(V=\{1, \ldots, p\}\)</span>, and <span class="math inline">\(X_A=(X_v: v \in A)\)</span> for any <span class="math inline">\(A \subseteq V\)</span>. We assume that each <span class="math inline">\(X_v \in \mathcal{X}_v=\{1, \ldots, d_v\}\)</span> (usually <span class="math inline">\(d_v=2\)</span>). If we have <span class="math inline">\(n\)</span> i.i.d. observations, then for <span class="math inline">\(i=1, \ldots, n\)</span>, <span class="math display">\[X_V^{(i)}=(X_1^{(i)}, \ldots, X_p^{(i)})^T.\]</span> Define <span class="math display">\[n(x_V)=\sum_{i=1}^n \mathbb{1}\{X_1^{(i)}=x_1, \ldots, X_p^{(i)}=x_p\},\]</span> i.e., the number of individuals who have the response pattern <span class="math inline">\(x_V\)</span>.</p>
 <p>A <strong>marginal table</strong> only counts some of the variables: <span class="math display">\[n(x_A)=\sum_{i=1}^n \mathbb{1}\{X_a^{(i)}=x_a: a \in A\}=\sum_{x_{V-A}} n(x_A, x_{V-A}).\]</span></p>
 <p><strong>Example 4.1</strong>    Consider a contingency table:</p>
 <table style="table-layout:fixed">
@@ -372,7 +372,7 @@ Total
 </table>
 <p>Suppose <span class="math inline">\(x_V=(YE, NA)\)</span>, then <span class="math display">\[n(x_V)=\sum_{i=1}^n \mathbb{1}\{X_1^{(i)}=YE, X_2^{(i)}=NA\}=28.\]</span> Suppose <span class="math inline">\(A=\{1\}\)</span> and <span class="math inline">\(x_A=(YE)\)</span>. then <span class="math display">\[n(x_A)=\sum_{i=1}^n \mathbb{1}\{X_1^{(i)}=YE\}=46\]</span> or <span class="math display">\[n(x_A)=\sum_{x_2} n(x_A, x_2)=28+18=46.\]</span></p>
 <h2 id="probabilistic-model">Probabilistic Model</h2>
-<p>Suppose we have i.i.d. data, and we have <span class="math inline">\(P(X_V^{(i)}=x_V)=p(x_V)\)</span> for each <span class="math inline">\(X_v \in \{1, \cdots, d_v\}\)</span>. The distribution of the counts is <span class="math display">\[P(n(x_V): x_V \in \mathcal{X}_V)=\frac{n!}{\displaystyle \prod_{y_V \in \mathcal{X}_V}n(y_V)!}\prod_{y_V \in \mathcal{X}_V} p(y_V)^{n(y_V)}\]</span> for all <span class="math inline">\(p\)</span> s.t. <span class="math inline">\(\displaystyle \sum_{x_V} p(x_V)=1\)</span>.</p>
+<p>Suppose we have i.i.d. data, and we have <span class="math inline">\(P(X_V^{(i)}=x_V)=p(x_V)\)</span> for each <span class="math inline">\(X_v \in \{1, \ldots, d_v\}\)</span>. The distribution of the counts is <span class="math display">\[P(n(x_V): x_V \in \mathcal{X}_V)=\frac{n!}{\displaystyle \prod_{y_V \in \mathcal{X}_V}n(y_V)!}\prod_{y_V \in \mathcal{X}_V} p(y_V)^{n(y_V)}\]</span> for all <span class="math inline">\(p\)</span> s.t. <span class="math inline">\(\displaystyle \sum_{x_V} p(x_V)=1\)</span>.</p>
 <p>Note that <span class="math display">\[\begin{aligned}
 \ln P(n(x_V))&amp;=C+\sum_{y_V} n(y_V) \ln p(y_V)\ \ \left(\sum_{x_V} p(x_V)=1\right)
 \\&amp;=C+\sum_{y_V \neq 0_V} n(y_V) \ln\frac{p(y_V)}{p(0_V)}+n \ln p(0_V).
@@ -380,7 +380,7 @@ Total
 <h1 id="log-linear-model">Log-Linear Model</h1>
 <p><strong>Definition 5.1</strong>    Let <span class="math inline">\(p(x_V)&gt;0\)</span>, then the <strong>log-linear parameter</strong> <span class="math inline">\(\lambda_A(x_A)\)</span> for <span class="math inline">\(A \subseteq V\)</span> is defined by <span class="math display">\[\ln p(x_V)=\sum_{A \subseteq V} \lambda_A(x_A)=\lambda_\varnothing+\lambda_1(x_1)+\cdots+\lambda_V(x_V)\]</span> s.t. identifiability constraint <span class="math inline">\(\lambda_A(x_A)=0\)</span> if <span class="math inline">\(x_a=1\)</span> for any <span class="math inline">\(a \in A\)</span>.</p>
 <div class="note info">
-            <p>In the case of binary variables (i.e., each variable takes only two states, <span class="math inline">\(d_v=2\)</span>, or <span class="math inline">\(\mathcal{X}_v=\{1, 2\}\)</span>), there is only one possible non-zero level for each log-linear parameter <span class="math inline">\(\lambda_A(x_A)\)</span> which is when <span class="math inline">\(x_A=(2, \cdots, 2)\)</span>. In this case, we write <span class="math inline">\(\lambda_A=\lambda_A(2, \cdots, 2)\)</span>.</p>
+            <p>In the case of binary variables (i.e., each variable takes only two states, <span class="math inline">\(d_v=2\)</span>, or <span class="math inline">\(\mathcal{X}_v=\{1, 2\}\)</span>), there is only one possible non-zero level for each log-linear parameter <span class="math inline">\(\lambda_A(x_A)\)</span> which is when <span class="math inline">\(x_A=(2, \ldots, 2)\)</span>. In this case, we write <span class="math inline">\(\lambda_A=\lambda_A(2, \ldots, 2)\)</span>.</p>
           </div>
 <p><strong>Example 5.1</strong>    Suppose <span class="math inline">\(\pi_{xy}=p(x, y)\)</span>, and <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are binary. Then <span class="math inline">\(\ln \pi_{11}=\lambda_\varnothing\)</span>, <span class="math inline">\(\ln \pi_{21}=\lambda_\varnothing+\lambda_X\)</span>, <span class="math inline">\(\ln \pi_{12}=\lambda_\varnothing+\lambda_Y\)</span>, and <span class="math inline">\(\ln \pi_{22}=\lambda_\varnothing+\lambda_X+\lambda_Y+\lambda_{XY}\)</span>. Then <span class="math display">\[\lambda_{XY}=\ln\frac{\pi_{11}\pi_{22}}{\pi_{12}\pi_{21}}\]</span> where <span class="math inline">\(\displaystyle \frac{\pi_{11}\pi_{22}}{\pi_{12}\pi_{21}}\)</span> is the <strong>odds ratio</strong> between <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span>.</p>
 <p><strong>Theorem 5.1</strong>    Let <span class="math inline">\(p&gt;0\)</span> be a discrete distribution. Then <span class="math inline">\(X_a \perp\!\!\!\!\perp X_b \mid X_{V-\{a, b\}}\)</span> iff <span class="math inline">\(\lambda_{abC}=0\)</span> for all <span class="math inline">\(C \subseteq V-\{a, b\}\)</span>.</p>
@@ -389,13 +389,13 @@ Total
 <p>Under this conditional independence, the log-linear parameters for <span class="math inline">\(p(x_V)\)</span> are easily obtainable from those for <span class="math inline">\(p(x_A, x_C)\)</span> and <span class="math inline">\(p(x_B, x_C)\)</span>.</p>
 <p><strong><em><a target="_blank" rel="noopener" href="https://github.com/litianyang0211/OxfordNotes/blob/main/Graphical%20Models/Log-Linear%20Model.ipynb">HERE</a></em></strong> is the full demo of log-linear model.</p>
 <h2 id="poisson-multinomial-equivalence">Poisson-Multinomial Equivalence</h2>
-<p><strong>Theorem 5.2</strong>    Let <span class="math inline">\(X_i \sim \text{Poisson}(\mu_i)\)</span> independently, and let <span class="math inline">\(\displaystyle N=\sum_{i=1}^k X_i\)</span>. Then <span class="math display">\[N \sim \text{Poisson}(\mu)\]</span> and <span class="math display">\[(X_1, \cdots, X_k)^T \mid N=n \sim \text{Multinom}(n, (\pi_1, \cdots, \pi_k)^T),\]</span> where <span class="math inline">\(\displaystyle \mu=\sum_{i=1}^k \mu_i\)</span> and <span class="math inline">\(\displaystyle \pi_i=\frac{\mu_i}{\mu}\)</span>.</p>
+<p><strong>Theorem 5.2</strong>    Let <span class="math inline">\(X_i \sim \text{Poisson}(\mu_i)\)</span> independently, and let <span class="math inline">\(\displaystyle N=\sum_{i=1}^k X_i\)</span>. Then <span class="math display">\[N \sim \text{Poisson}(\mu)\]</span> and <span class="math display">\[(X_1, \ldots, X_k)^T \mid N=n \sim \text{Multinom}(n, (\pi_1, \ldots, \pi_k)^T),\]</span> where <span class="math inline">\(\displaystyle \mu=\sum_{i=1}^k \mu_i\)</span> and <span class="math inline">\(\displaystyle \pi_i=\frac{\mu_i}{\mu}\)</span>.</p>
 <strong><em>Proof.</em></strong> The Poisson likelihood is <span class="math display">\[\begin{aligned}
-L(\mu_1, \cdots, \mu_k; x_1, \cdots, x_k) &amp;\propto \prod_{i=1}^k e^{-\mu_i}\mu_i^{x_i}
+L(\mu_1, \ldots, \mu_k; x_1, \ldots, x_k) &amp;\propto \prod_{i=1}^k e^{-\mu_i}\mu_i^{x_i}
 \\&amp;=\prod_{i=1}^k e^{-\mu\pi_i}\mu^{x_i}\pi_i^{x_i}
 \\&amp;=\mu^{\sum_i x_i}e^{-\mu\sum_i \pi_i}\prod_{i=1}^k \pi_i^{x_i}
 \\&amp;=\mu^ne^{-\mu}\prod_{i=1}^k \pi_i^{x_i}
-\\&amp;=L(\mu; n) \cdot L(\pi_1, \cdots, \pi_k; x_1, \cdots, x_k \mid n).
+\\&amp;=L(\mu; n) \cdot L(\pi_1, \ldots, \pi_k; x_1, \ldots, x_k \mid n).
 \end{aligned}\]</span>
 <p align="right">
 <span class="math inline">\(\square\)</span>
