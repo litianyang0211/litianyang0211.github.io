@@ -28,7 +28,7 @@
 <meta property="og:description" content="Not done">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-07T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-07T11:13:21.982Z">
+<meta property="article:modified_time" content="2021-11-07T11:14:01.180Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="DNN">
 <meta property="article:tag" content="Optimization algorithm">
@@ -224,7 +224,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2021-11-07 00:00:00 / Modified: 11:13:21" itemprop="dateCreated datePublished" datetime="2021-11-07T00:00:00+00:00">2021-11-07</time>
+              <time title="Created: 2021-11-07 00:00:00 / Modified: 11:14:01" itemprop="dateCreated datePublished" datetime="2021-11-07T00:00:00+00:00">2021-11-07</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -253,7 +253,7 @@
 
       
         <h1 id="dnn-loss-function">DNN Loss Function</h1>
-<p>Consider a fully connected <span class="math inline">\(L\)</span> layer deep network given by <span class="math display">\[\mathbf{h}^{(\mathscr{l})}=W^{(\mathscr{l})}\mathbf{z}^{(\mathscr{l})}+\mathbf{b}^{(\mathscr{l})}, \mathbf{z}^{(l+1)}=\phi(\mathbf{h}^{(\mathscr{l})}), l=0, \cdots, L-1,\]</span> for <span class="math inline">\(l=1, \cdots, L\)</span> with nonlinear activation <span class="math inline">\(\phi(\cdot)\)</span> and <span class="math inline">\(W^{(\mathscr{l})} \in \mathbb{R}^{n_l \times n_{l-1}}\)</span>. The trainable parameters for DNN are <span class="math inline">\(\theta:=\{W^{(\mathscr{l})}, \mathbf{b}^{(\mathscr{l})}\}_{l=1}^L\)</span>, which are learned by minimizing a high dimensional (<span class="math inline">\(|\theta| \sim n^2L\)</span>) loss function such as <span class="math display">\[\mathcal{L}(\theta; \mathbf{x}, \mathbf{y})=(2m)^{-1}\sum_{\mu=1}^m \sum_{i=1}^{n_L} (h_L(x_\mu(i); \theta)-y_{i, \mu})^2.\]</span> The shape of <span class="math inline">\(\mathcal{L}(\theta)\)</span> and our knowledge about a good initial minimizer <span class="math inline">\(\theta^{(0)}\)</span> strongly influence our ability to learn the parameters <span class="math inline">\(\theta\)</span> for the DNN.</p>
+<p>Consider a fully connected <span class="math inline">\(L\)</span> layer deep network given by <span class="math display">\[\mathbf{h}^{(\mathscr{l})}=W^{(\mathscr{l})}\mathbf{z}^{(\mathscr{l})}+\mathbf{b}^{(\mathscr{l})}, \mathbf{z}^{(l+1)}=\phi(\mathbf{h}^{(\mathscr{l})}), l=0, \cdots, L-1,\]</span> for <span class="math inline">\(l=1, \cdots, L\)</span> with nonlinear activation <span class="math inline">\(\phi(\cdot)\)</span> and <span class="math inline">\(W^{(\mathscr{l})} \in \mathbb{R}^{n_\mathscr{l} \times n_{\mathscr{l}-1}}\)</span>. The trainable parameters for DNN are <span class="math inline">\(\theta:=\{W^{(\mathscr{l})}, \mathbf{b}^{(\mathscr{l})}\}_{l=1}^L\)</span>, which are learned by minimizing a high dimensional (<span class="math inline">\(|\theta| \sim n^2L\)</span>) loss function such as <span class="math display">\[\mathcal{L}(\theta; \mathbf{x}, \mathbf{y})=(2m)^{-1}\sum_{\mu=1}^m \sum_{i=1}^{n_L} (h_L(x_\mu(i); \theta)-y_{i, \mu})^2.\]</span> The shape of <span class="math inline">\(\mathcal{L}(\theta)\)</span> and our knowledge about a good initial minimizer <span class="math inline">\(\theta^{(0)}\)</span> strongly influence our ability to learn the parameters <span class="math inline">\(\theta\)</span> for the DNN.</p>
 <p>Let <span class="math inline">\(\displaystyle \delta_l:=\frac{\partial \mathcal{L}}{\partial \mathbf{h}^{(\mathscr{l})}}\)</span> and <span class="math inline">\(D^{(\mathscr{l})}\)</span> be the diagonal matrix with <span class="math inline">\(D_{ii}^{(\mathscr{l})}=\phi&#39;(h_i^{(\mathscr{l})})\)</span>, we have <span class="math display">\[\delta_l=D^{(\mathscr{l})}(W^{(\mathscr{l})})^T\delta_{l+1} \quad \text{and} \quad \delta_L=D^{(\mathscr{l})}\nabla_{\mathbf{h}^{(\mathscr{l})}} \mathcal{L}\]</span> which gives the formula for computing the <span class="math inline">\(\delta_l\)</span> for each layer as <span class="math display">\[\delta_l=\left(\prod_{k=l}^{L-1} D^{(k)}(W^{(k)})^T\right)D^{(\mathscr{l})}\nabla_{\mathbf{h}^{(\mathscr{l})}}\mathcal{L}\]</span> and the resulting gradient <span class="math inline">\(\nabla_\theta \mathcal{L}\)</span> with entries as <span class="math display">\[\frac{\partial \mathcal{L}}{\partial W^{(\mathscr{l})}} = \delta_{l+1} \cdot \mathbf{h}_l^T \quad \text{and} \quad \frac{\partial \mathcal{L}}{\partial \mathbf{b}^{(\mathscr{l})}} = \delta_{l+1}.\]</span></p>
 
     </div>
