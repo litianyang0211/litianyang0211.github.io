@@ -28,7 +28,7 @@
 <meta property="og:description" content="A quick review of linear algebra.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-07T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-07T16:11:32.216Z">
+<meta property="article:modified_time" content="2021-11-07T21:39:25.313Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Linear algebra">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-07 16:11:32" itemprop="dateModified" datetime="2021-11-07T16:11:32+00:00">2021-11-07</time>
+                <time title="Modified: 2021-11-07 21:39:25" itemprop="dateModified" datetime="2021-11-07T21:39:25+00:00">2021-11-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -348,12 +348,10 @@ Besides <span class="math display">\[\|\mathbf{x}\|_2=\sqrt{|x_1|^2+\cdots+|x_n|
 \\&amp;\leq \max_{\|\mathbf{x}\|_1=1} (|x_1|+\cdots+|x_n|)\|\mathbf{a}_k\|_1
 \\&amp;=\|\mathbf{a}_k\|_1,
 \end{aligned}\]</span> i.e., the largest <span class="math inline">\(\mathscr{l}^1\)</span> norm of the columns of <span class="math inline">\(A\)</span>, which is <span class="math inline">\(\displaystyle \max_i \sum_{j=1}^m |A_{ji}|\)</span>.</p>
-Suppose <span class="math inline">\(p=\infty\)</span>. Let the rows of <span class="math inline">\(A\)</span> be <span class="math inline">\(\mathbf{b}_1, \ldots, \mathbf{b}_m\)</span>, then <span class="math display">\[\begin{aligned}
-\|A\|_\infty&amp;=\max_{\|\mathbf{x}\|_\infty=1} \|A\mathbf{x}\|_\infty=\max_{\|\mathbf{x}\|_\infty=1} \max_i |b_{i1}x_1+\cdots+b_{in}x_n|
-\\&amp;\leq \max_{\|\mathbf{x}\|_\infty=1} \max_i (|b_{i1}||x_1|+\cdots+|b_{in}||x_n|)
-\\&amp;\leq \max_{\|\mathbf{x}\|_\infty=1} \max_i (|b_{i1}|+\cdots+|b_{in}|)
-\\&amp;=\max_i (|b_{i1}|+\cdots+|b_{in}|),
-\end{aligned}\]</span> i.e., the largest <span class="math inline">\(\mathscr{l}^1\)</span> norm of the rows of <span class="math inline">\(A\)</span>, which is <span class="math inline">\(\displaystyle \max_i \sum_{j=1}^n |A_{ij}|\)</span>.
+<p>Take <span class="math inline">\(\mathbf{x}=\mathbf{e}_k\)</span>, then <span class="math inline">\(\|A\mathbf{x}\|_1=\|A\mathbf{e}_k\|_1=\|\mathbf{a}_k\|_1\)</span>. Therefore, <span class="math display">\[\|A\|_1=\max_i \sum_{j=1}^m |A_{ji}|.\]</span></p>
+Suppose <span class="math inline">\(p=\infty\)</span>. Then <span class="math display">\[\begin{aligned}
+\|A\|_\infty&amp;=\max_{\|\mathbf{x}\|_\infty=1} \|A\mathbf{x}\|_\infty=\max_{\|\mathbf{x}\|_\infty=1} \max_i \left|\sum_{j=1}^n A_{ij}x_j\right|=\max_i \max_{\|\mathbf{x}\|_\infty=1} \left|\sum_{j=1}^n A_{ij}x_j\right|=\max_i \sum_{j=1}^n |A_{ij}|,
+\end{aligned}\]</span> i.e., the largest <span class="math inline">\(\mathscr{l}^1\)</span> norm of the rows of <span class="math inline">\(A\)</span>.
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
