@@ -28,7 +28,7 @@
 <meta property="og:description" content="We introduce the exponential family, formulate the contingency table, and explore the log-linear model.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-12T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-07T16:01:24.540Z">
+<meta property="article:modified_time" content="2021-11-08T15:21:20.708Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Exponential family">
 <meta property="article:tag" content="Contingency table">
@@ -230,7 +230,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-07 16:01:24" itemprop="dateModified" datetime="2021-11-07T16:01:24+00:00">2021-11-07</time>
+                <time title="Modified: 2021-11-08 15:21:20" itemprop="dateModified" datetime="2021-11-08T15:21:20+00:00">2021-11-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,15 +263,17 @@
 <div class="note info">
             <p>Note that <span class="math display">\[1=\int_\mathcal{X} p_\theta(x)\text{d}x=\exp[-A(\theta)]\int_\mathcal{X} \exp[\langle \theta, \phi(x) \rangle-C(x)]\text{d}x.\]</span> Hence, <span class="math display">\[A(\theta)=\ln\int_\mathcal{X} \exp[\langle \theta, \phi(x) \rangle-C(x)]\text{d}x.\]</span> The function <span class="math inline">\(A(\theta)\)</span> is the <strong>cumulant function</strong>, and <span class="math inline">\(\exp[A(\theta)]\)</span> is the <strong>partition function</strong>.</p>
           </div>
-<p><strong>Theorem 1.1</strong>    We have <span class="math inline">\(\nabla_\theta A(\theta)=\mathbb{E}_\theta\phi(X)\)</span>, and <span class="math inline">\(\nabla\nabla^TA(\theta)=\text{Cov}_\theta\phi(X)\)</span>. Consequently <span class="math inline">\(A(\theta)\)</span> is convex, because <span class="math inline">\(\text{Cov}_\theta\phi(X) \succeq 0\)</span>.</p>
-<p><span id="eg1.1"><strong>Example 1.1</strong></span>    Let <span class="math inline">\(X \sim \text{Poisson}(\lambda)\)</span>, we have <span class="math display">\[\ln f(x; \lambda)=-\lambda+x\ln\lambda-\ln x!,\]</span> then <span class="math inline">\(\phi(x)=x\)</span>, <span class="math inline">\(\theta=\ln\lambda\)</span>, <span class="math inline">\(A(\theta)=\lambda=e^\theta\)</span>. Then <span class="math display">\[A&#39;(\theta)=e^\theta=\mathbb{E}X\]</span> and <span class="math display">\[A&#39;&#39;(\theta)=e^\theta=\text{Var}X.\]</span></p>
+<p><strong>Theorem 1.1</strong>    We have <span class="math display">\[\nabla_\theta A(\theta)=\mathbb{E}_\theta\phi(X) \quad \text{and} \quad \nabla\nabla^TA(\theta)=\text{Cov}_\theta\phi(X).\]</span> Consequently <span class="math inline">\(A(\theta)\)</span> is convex, because <span class="math inline">\(\text{Cov}_\theta\phi(X) \succeq 0\)</span>.</p>
+<p><span id="eg1.1"><strong>Example 1.1</strong></span>    Let <span class="math inline">\(X \sim \text{Poisson}(\lambda)\)</span>, we have <span class="math display">\[\ln f(x; \lambda)=-\lambda+x\ln\lambda-\ln x!,\]</span> then <span class="math inline">\(\phi(x)=x\)</span>, <span class="math inline">\(\theta=\ln\lambda\)</span>, and <span class="math inline">\(A(\theta)=\lambda=e^\theta\)</span>. Then <span class="math display">\[A&#39;(\theta)=e^\theta=\mathbb{E}X\]</span> and <span class="math display">\[A&#39;&#39;(\theta)=e^\theta=\text{Var}X.\]</span></p>
 <h1 id="empirical-moment-matching">Empirical Moment Matching</h1>
 <p>To find the MLE in an exponential family, we maximize the log-likelihood (ignoring <span class="math inline">\(C\)</span>, since it is constant in <span class="math inline">\(\theta\)</span>). We have <span class="math display">\[\begin{aligned}
 l(\theta)&amp;=\sum_{i=1}^n \langle \theta, \phi(X_i) \rangle -nA(\theta)+C
 \\&amp;=\left\langle \theta, \sum_{i=1}^n \phi(X_i) \right\rangle-nA(\theta)+C
 \\&amp;=n\langle \theta, \overline{\phi(X)} \rangle-nA(\theta)+C.
-\end{aligned}\]</span> Then <span class="math display">\[\nabla_\theta l(\theta)=n\overline{\phi(X)}-n\nabla_\theta A(\theta).\]</span> Let <span class="math inline">\(\nabla_\theta l(\theta)=0\)</span>, we have <span class="math display">\[\nabla_\theta A(\theta)=\overline{\phi(X)}.\]</span> Hence, MLE is given by <span class="math inline">\(\widehat{\theta}\)</span> where <span class="math inline">\(\mathbb{E}_\widehat{\theta}\phi(X)=\overline{\phi(X)}\)</span>.</p>
-<p><strong>Example 1.2</strong>    From <a href="#eg1.1">example 1.1</a>, we know that <span class="math inline">\(\overline{\phi(X)}=\overline{X}\)</span> and <span class="math inline">\(\widehat{\lambda}=\mathbb{E}_\widehat{\theta}\phi(X)=e^\widehat{\theta}=\overline{X}\)</span>.</p>
+\end{aligned}\]</span> Then <span class="math display">\[\nabla_\theta l(\theta)=n\overline{\phi(X)}-n\nabla_\theta A(\theta).\]</span> Let <span class="math inline">\(\nabla_\theta l(\theta)=0\)</span>, we have <span class="math display">\[\nabla_\theta A(\theta)=\overline{\phi(X)}.\]</span> Hence, we should choose <span class="math inline">\(\theta\)</span> so that <span class="math inline">\(\mathbb{E}_\theta\phi(X)=\overline{\phi(X)}\)</span>. i.e., the mean of the sufficient statistics matches the empirical mean from the data.</p>
+<p><strong>Example 2.1</strong>    From <a href="#eg1.1">example 1.1</a>, we know that <span class="math inline">\(\overline{\phi(X)}=\overline{X}\)</span> and the MLE is <span class="math inline">\(\widehat{\lambda}=\overline{X}\)</span>.</p>
+<p><strong>Example 2.2</strong>    Let <span class="math inline">\(X \sim \text{Binomial}(n, p)\)</span> with <span class="math inline">\(n\)</span> fixed. We have <span class="math display">\[\ln f(x; p)=x \ln p+(n-x)\ln(1-p)+C=x\ln\frac{p}{1-p}+n\ln(1-p)+C,\]</span> then <span class="math inline">\(\phi(x)=x\)</span>, <span class="math inline">\(\displaystyle \theta=\ln\frac{p}{1-p}\)</span>, and <span class="math inline">\(A(\theta)=-n\ln(1-p)=n\ln(1+e^\theta)\)</span>. Then <span class="math display">\[A&#39;(\theta)=\frac{ne^\theta}{1+e^\theta}=np\]</span> and <span class="math display">\[A&#39;&#39;(\theta)=\frac{ne^\theta}{(1+e^\theta)^2}=np(1-p).\]</span></p>
+<p>Since <span class="math inline">\(\overline{\phi(X)}=\overline{X}\)</span> and thus the MLE is <span class="math inline">\(\displaystyle \widehat{p}=\overline{X}\)</span>.</p>
 <h1 id="multivariate-gaussian-distribution">Multivariate Gaussian Distribution</h1>
 <p><strong>Definition 3.1</strong>    Let <span class="math inline">\(X_V=(X_1, \ldots, X_p)^T \in \mathbb{R}^p\)</span> be a random vector. Let <span class="math inline">\(\mu \in \mathbb{R}^p\)</span> and <span class="math inline">\(\Sigma \in \mathbb{R}^{p \times p}\)</span> be a positive definite symmetric matrix. We say that <span class="math inline">\(X_V\)</span> has a <strong>multivariate Gaussian distribution</strong> or <strong>multivariate normal distribution</strong> with parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span> if for all <span class="math inline">\(x_V \in \mathbb{R}^p\)</span>, the joint density is <span class="math display">\[\begin{aligned}
 f(x_V; \mu, \Sigma)&amp;=\frac{1}{(2\pi)^{p/2}|\Sigma|^{1/2}}\exp\left[-\frac{1}{2}(x_V-\mu)^T\Sigma^{-1}(x_V-\mu)\right]
