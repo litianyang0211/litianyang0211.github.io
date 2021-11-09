@@ -28,7 +28,7 @@
 <meta property="og:description" content="We mainly discuss the stochastic gradient descent (SGD), especially about the global convergence of SGD, and decreasing the SGD noise level. In addition, we see the improvement in SGD (e.g., momentum">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-07T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-07T20:32:14.874Z">
+<meta property="article:modified_time" content="2021-11-09T10:39:54.066Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="DNN">
 <meta property="article:tag" content="Optimization algorithm">
@@ -223,10 +223,16 @@
                 <i class="far fa-lightbulb"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-11-07 00:00:00 / Modified: 20:32:14" itemprop="dateCreated datePublished" datetime="2021-11-07T00:00:00+00:00">2021-11-07</time>
+              <time title="Created: 2021-11-07 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-07T00:00:00+00:00">2021-11-07</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-edit"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-11-09 10:39:54" itemprop="dateModified" datetime="2021-11-09T10:39:54+00:00">2021-11-09</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -377,7 +383,7 @@ b_k^2 &amp;= b_{k-1}^2+\|\nabla_\theta\mathcal{L}(\theta^{(k)})\|^2 \\
 \end{aligned}\]</span></p>
 <p>For <span class="math inline">\(\mathcal{L}(\theta) \in \mathcal{C}_L^1\)</span>, that is <span class="math inline">\(L\)</span> minimal for which <span class="math inline">\(\|\nabla_\theta\mathcal{L}(\theta_1)-\nabla_\theta\mathcal{L}(\theta_2)\| \leq L\|\theta_1-\theta_2\|\)</span> for all <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span>, then scalar batch AdaGrad satisfies <span class="math display">\[\min_{k=1, \ldots, T-1} \|\nabla_\theta\mathcal{L}(\theta^{(k)})\|^2 \leq \varepsilon\]</span> for either <span class="math display">\[T=1+\lceil 2\varepsilon^{-1}\mathcal{L}(\theta^{(0)})(b_0+2\mathcal{L}(\theta^{(0)})) \rceil\ \ \text{if}\ \ b_0 \geq L\]</span> or <span class="math display">\[T=1+\lceil \varepsilon^{-1}(L^2-b_0^2+4(\mathcal{L}(\theta^{(0)})+(3/4+\ln(L/b_0))L)^2) \rceil\ \ \text{if}\ \ b_0&lt;L.\]</span> In contrast, if <span class="math inline">\(b_k\)</span> is a fixed constant <span class="math inline">\(b\)</span>, then if <span class="math inline">\(b&lt;L/2\)</span>, GD can diverge, while if <span class="math inline">\(b \geq L\)</span>, then <span class="math inline">\(T=2b\varepsilon^{-1}\mathcal{L}(\theta^{(0)})\)</span>.</p>
 <p>Iteration complexity for scalar batch AdaGrad following properties that for any non-negative values <span class="math inline">\(a_1, \ldots, a_T\)</span> with <span class="math inline">\(a_1&gt;0\)</span> <span class="math display">\[\sum_{\mathscr{l}=1}^T \frac{a_\mathscr{l}}{\sum_{i=1}^\mathscr{l} a_i} \leq \ln\left(\sum_{i=1}^T a_i\right)+1 \quad \text{and} \quad \sum_{\mathscr{l}=1}^T \frac{a_\mathscr{l}}{\sqrt{\sum_{i=1}^\mathscr{l}}a_i} \leq 2\sqrt{\sum_{i=1}^T a_i}.\]</span></p>
-<p>In addition, for any fixed <span class="math inline">\(\varepsilon \in (0, 1]\)</span> and <span class="math inline">\(L, b_0&gt;0\)</span>, the iterates <span class="math inline">\(b_{k+1}^2=b_k^2+a_k\)</span> has the property that after <span class="math inline">\(N=\lceil \varepsilon^{-1}(L^2-b_0^2) \rceil+1\)</span> iterations, either <span class="math inline">\(\displaystyle \min_{k=0}^{N-1} a_k \leq \varepsilon\)</span> or <span class="math inline">\(b_N \geq L\)</span>.</p>
+<p>In addition, for any fixed <span class="math inline">\(\varepsilon \in (0, 1]\)</span> and <span class="math inline">\(L, b_0&gt;0\)</span>, the iterates <span class="math inline">\(b_{k+1}^2=b_k^2+a_k\)</span> has the property that after <span class="math inline">\(N=\lceil \varepsilon^{-1}(L^2-b_0^2) \rceil+1\)</span> iterations, either <span class="math inline">\(\displaystyle \min_{0 \leq k \leq N-1} a_k \leq \varepsilon\)</span> or <span class="math inline">\(b_N \geq L\)</span>.</p>
 <p>Let <span class="math inline">\(k_0\)</span> be the first iterate s.t. <span class="math inline">\(b_{k_0} \geq L\)</span>, then for all <span class="math inline">\(k \geq k_0\)</span>, <span class="math display">\[b_k \leq b_{k_0-1}+2\mathcal{L}(\theta^{(k_0-1)}) \quad \text{(bounded above)}\]</span> and <span class="math display">\[\mathcal{L}(\theta^{(k_0-1)}) \leq \frac{L}{2}(1+2\ln(b_{k_0-1} / b_0)) \quad \text{(not diverged)}.\]</span></p>
 <h4 id="influence-of-mini-batch-or-other-gradient-approximation">Influence of Mini-batch or Other Gradient Approximation</h4>
 <p>Let <span class="math inline">\(\mathbf{g}^{(k)}\)</span> be an unbiased estimator of the gradient <span class="math inline">\(\nabla_\theta \mathcal{L}(\theta^{(k)})\)</span> of the training loss function at iteration <span class="math inline">\(k\)</span>, i.e., <span class="math inline">\(\mathbb{E}[\mathbf{g}^{(k)}]=\nabla_\theta\mathcal{L}(\theta^{(k)})\)</span>. Moreover, suppose there is a uniform bound <span class="math inline">\(\mathbb{E}[\|\mathbf{g}^{(k)}\|^2] \leq c_\mathbf{g}^2\)</span>. Then consider the stochastic scalar AdaGrad update as <span class="math display">\[\begin{aligned}
