@@ -28,7 +28,7 @@
 <meta property="og:description" content="Not done.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-09T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-15T16:32:00.124Z">
+<meta property="article:modified_time" content="2021-11-15T22:55:23.329Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Directed graphical model">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-15 16:32:00" itemprop="dateModified" datetime="2021-11-15T16:32:00+00:00">2021-11-15</time>
+                <time title="Modified: 2021-11-15 22:55:23" itemprop="dateModified" datetime="2021-11-15T22:55:23+00:00">2021-11-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -380,9 +380,9 @@ X_5 &amp;\perp\!\!\!\!\perp X_1, X_2 \mid X_3, X_4
 2((2)) --- 4((4))
           </pre>
 <p>Hence, <span class="math inline">\(X_2 \perp\!\!\!\!\perp X_1 \mid X_4\)</span>. Furthermore, <span class="math inline">\(X_1 \perp\!\!\!\!\perp X_2, X_4\)</span>.</p>
-<p><strong>Theorem 2.3 (Completeness of Global Markov Property)</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> be a DAG, then there exists a probability distribution <span class="math inline">\(p\)</span> s.t. <span class="math inline">\(X_A \perp\!\!\!\!\perp X_B \mid X_C\ [p]\)</span> iff <span class="math inline">\(A \perp_s B \mid C\ [(\mathcal{G}_{\text{an}(A \cup B \cup C)})^m]\)</span>.</p>
+<p><span id="thm2.3"><strong>Theorem 2.3 (Completeness of Global Markov Property)</strong></span>    Let <span class="math inline">\(\mathcal{G}\)</span> be a DAG, then there exists a probability distribution <span class="math inline">\(p\)</span> s.t. <span class="math inline">\(X_A \perp\!\!\!\!\perp X_B \mid X_C\ [p]\)</span> iff <span class="math inline">\(A \perp_s B \mid C\ [(\mathcal{G}_{\text{an}(A \cup B \cup C)})^m]\)</span>.</p>
 <div class="note info">
-            <p>In other words, if we look something up by the global Markov property and find no separation, then for most distributions that obey the global Markov property, the independence will not hold.</p>
+            <p>Any independence not exhibited by a separation will not generally hold in distributions Markov to <span class="math inline">\(\mathcal{G}\)</span>. In other words, the global Markov property gives all conditional independences that are implied by the DAG model.</p>
           </div>
 <p><strong>Theorem 2.4</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> be a DAG and <span class="math inline">\(p\)</span> be a probability density. The following are equivalent:</p>
 <p>    (1) <span class="math inline">\(p\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span>;</p>
@@ -413,20 +413,27 @@ In <span class="math inline">\(\mathcal{G}&#39;\)</span>, <span class="math inli
 <span class="math inline">\(\square\)</span>
 </p>
 <p><strong>Theorem 4.2</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> be DAGs, then <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> are Markov equivalent iff they have the same skeletons and v-structures.</p>
-<p><strong><em>Proof.</em></strong> (<span class="math inline">\(\Rightarrow\)</span>) If <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> have different skeletons, then <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> are not Markov equivalent.</p>
-<p>Suppose now <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> have same skeletons, and <span class="math inline">\(\mathcal{G}\)</span> has a v-structure <span class="math inline">\(i \to k \leftarrow j\)</span> but <span class="math inline">\(\mathcal{G}&#39;\)</span> does not. Then for all <span class="math inline">\(x_V \in \mathcal{X}_V\)</span>, <span class="math display">\[p(x_V)=p(x_k \mid x_i, x_j) \prod_{l \neq k} p(x_l).\]</span></p>
-<p>Since <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> have same skeletons, then either <span class="math inline">\(i \to k \to j\)</span> or <span class="math inline">\(i \leftarrow k \to j\)</span> or <span class="math inline">\(i \leftarrow k \leftarrow j\)</span>. Suppose there exists a <span class="math inline">\(d \in V\)</span> s.t. <span class="math inline">\(d \in W=\text{an}_{\mathcal{G}&#39;}(\{i, j, k\})\)</span> and <span class="math inline">\(i \to d \leftarrow j\)</span>, then we can find contradiction immediately (the graph is cyclic). Hence, <span class="math inline">\(i \not\sim j\)</span> in <span class="math inline">\((\mathcal{G}&#39;_W)^m\)</span>. Therefore, <span class="math inline">\(X_i \perp\!\!\!\!\perp X_j \mid X_{W-\{i, j\}}\)</span>. Since <span class="math inline">\(k \in W\)</span> as either <span class="math inline">\(k \in \text{pa}_{\mathcal{G}&#39;}(i)\)</span> or <span class="math inline">\(k \in \text{pa}_{\mathcal{G}&#39;}(j)\)</span>, then the independence does not hold in <span class="math inline">\(p\)</span> since we have a factor containing <span class="math inline">\(i\)</span>, <span class="math inline">\(j\)</span> and <span class="math inline">\(k\)</span>.</p>
-<center>
-<strong><em>TBC...</em></strong>
-</center>
+<p><strong><em>Proof.</em></strong> We only show the only if direction.</p>
+<p>If <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> have different skeletons, then <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> are not Markov equivalent.</p>
+<p>Suppose now <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> have same skeletons, and <span class="math inline">\(\mathcal{G}\)</span> has a v-structure <span class="math inline">\(i \to k \leftarrow j\)</span> but <span class="math inline">\(\mathcal{G}&#39;\)</span> does not. Let <span class="math display">\[p(x_V)=p(x_k \mid x_i, x_j) \prod_{l \neq k} p(x_l)\]</span> for all <span class="math inline">\(x_V \in \mathcal{X}_V\)</span>. Note that <span class="math inline">\(p\)</span> factorizes w.r.t. <span class="math inline">\(\mathcal{G}\)</span>.</p>
+Since <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> have same skeletons, then either <span class="math inline">\(i \to k \to j\)</span> or <span class="math inline">\(i \leftarrow k \to j\)</span> or <span class="math inline">\(i \leftarrow k \leftarrow j\)</span>. Suppose there exists a <span class="math inline">\(d \in V\)</span> s.t. <span class="math inline">\(d \in W=\text{an}_{\mathcal{G}&#39;}(\{i, j, k\})\)</span> and <span class="math inline">\(i \to d \leftarrow j\)</span>, then we can find contradiction immediately (the graph is cyclic). Hence, there is no common child of <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> in <span class="math inline">\(\mathcal{G}&#39;\)</span>, and thus <span class="math inline">\(i \not\sim j\)</span> in <span class="math inline">\((\mathcal{G}&#39;_W)^m\)</span>. Therefore, <span class="math inline">\(X_i \perp\!\!\!\!\perp X_j \mid X_{W-\{i, j\}}\)</span>. Since either <span class="math inline">\(k \in \text{pa}_{\mathcal{G}&#39;}(i)\)</span> or <span class="math inline">\(k \in \text{pa}_{\mathcal{G}&#39;}(j)\)</span>, then <span class="math inline">\(k \in W\)</span>. However, the independence does not hold in <span class="math inline">\(p\)</span> since we have a factor <span class="math inline">\(p(x_k \mid x_i, x_j)\)</span>. Hence, <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> are not Markov equivalent.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
 <h1 id="decomposability">5. Decomposability</h1>
-<p><strong>Theorem 5.1</strong>    A DAG is Markov equivalent to an undirected graph iff it contains no v-structures. In this case, the equivalent undirected graph is the skeleton of <span class="math inline">\(\mathcal{G}\)</span>.</p>
-<p><strong><em>Proof.</em></strong> We know that <span class="math inline">\(p\)</span> is Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>, then it is also Markov w.r.t. <span class="math inline">\(\mathcal{G}^m=\text{skel}(\mathcal{G})\)</span>.</p>
-<p>Suppose <span class="math inline">\(p\)</span> is Markov w.r.t. <span class="math inline">\(\mathcal{G}^m\)</span>. Let <span class="math inline">\(v\)</span> be a vertex with no children in <span class="math inline">\(\mathcal{G}\)</span>.</p>
-<center>
-<strong><em>TBC...</em></strong>
-</center>
+<p><strong>Theorem 5.1</strong>    A DAG <span class="math inline">\(\mathcal{G}\)</span> is Markov equivalent to an undirected graph iff it contains no v-structures. In this case, the equivalent undirected graph is the skeleton of <span class="math inline">\(\mathcal{G}\)</span>.</p>
+<p><strong><em>Proof.</em></strong> (<span class="math inline">\(\Leftarrow\)</span>) We know that if <span class="math inline">\(p\)</span> is Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>, then it is also Markov w.r.t. <span class="math inline">\(\mathcal{G}^m\)</span>. Since there is no v-structure, then <span class="math inline">\(\mathcal{G}^m=\text{skel}(\mathcal{G})\)</span>.</p>
+<p>Suppose <span class="math inline">\(p\)</span> is Markov w.r.t. <span class="math inline">\(\mathcal{G}^m\)</span>. Let <span class="math inline">\(v\)</span> be a vertex with no child in <span class="math inline">\(\mathcal{G}\)</span>. Since <span class="math inline">\(v\)</span> does not have child and <span class="math inline">\(\text{pa}_\mathcal{G}(v)\)</span> must be complete in <span class="math inline">\(\mathcal{G}^m\)</span>, then <span class="math inline">\(v \perp_s V-(\text{pa}_\mathcal{G}(v) \cup \{v\}) \mid \text{pa}_\mathcal{G}(v)\ [\mathcal{G}^m]\)</span>. Hence, by the global Markov property for <span class="math inline">\(\mathcal{G}^m\)</span>, <span class="math inline">\(X_v \perp\!\!\!\!\perp X_{V-(\text{pa}_\mathcal{G}(v) \cup \{v\})} \mid X_{\text{pa}_\mathcal{G}(v)}\ [p]\)</span>, i.e., <span class="math inline">\(X_v \perp\!\!\!\!\perp X_{\text{nd}_\mathcal{G}(v)-\text{pa}_\mathcal{G}(v)} \mid X_{\text{pa}_\mathcal{G}(v)}\ [p]\)</span>.</p>
+<p><span class="math inline">\(\mathcal{G}_{-v}\)</span> also has no v-structure, and so by induction, <span class="math inline">\(p(x_{V-\{v\}})\)</span> is Markov w.r.t. <span class="math inline">\(\mathcal{G}_{-v}\)</span>, and thus for all <span class="math inline">\(i \in V-\{v\}\)</span>, <span class="math inline">\(X_i \perp\!\!\!\!\perp X_{\text{nd}(i)-\text{pa}(i)} \mid X_{\text{pa}(i)}\ [p]\)</span>. Since <span class="math inline">\(X_v \perp\!\!\!\!\perp X_{\text{nd}_\mathcal{G}(v)-\text{pa}_\mathcal{G}(v)} \mid X_{\text{pa}_\mathcal{G}(v)}\ [p]\)</span>, then local Markov property for <span class="math inline">\(\mathcal{G}\)</span> holds. Hence, <span class="math inline">\(p\)</span> is Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>, and thus <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}^m\)</span> are Markov equivalent.</p>
+<p>(<span class="math inline">\(\Rightarrow\)</span>) If <span class="math inline">\(\mathcal{G}\)</span> has a v-structure <span class="math inline">\(i \to k \leftarrow j\)</span>, then there is an independence between <span class="math inline">\(X_i\)</span> and <span class="math inline">\(X_j\)</span> by the local Markov property. If we add the edge <span class="math inline">\(i \sim j\)</span>, then the undirected graph will not be Markov equivalent to <span class="math inline">\(\mathcal{G}\)</span>.</p>
+However, since <span class="math inline">\(i \sim j\)</span> in <span class="math inline">\(\mathcal{G}^m\)</span>, by <a href="#thm2.3">theorem 2.3</a>, we know there exists a distribution, Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>, where <span class="math inline">\(X_i\)</span> is not conditionally independent of <span class="math inline">\(X_j\)</span> given <span class="math inline">\(X_{V-\{i, j\}}\)</span>. Hence, if we do not add the edge <span class="math inline">\(i \sim j\)</span>, we also will not obtain a Markov equivalent graph. Hence, no undirected graph can be Markov equivalent to <span class="math inline">\(\mathcal{G}\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
 <p><strong>Corollary 5.2</strong>    A undirected graph is Markov equivalent to a directed graph iff the undirected graph is decomposable.</p>
+<div class="note info">
+            <p>Decomposable models represent the intersection of undirected and directed graphical models.</p>
+          </div>
 
     </div>
 
