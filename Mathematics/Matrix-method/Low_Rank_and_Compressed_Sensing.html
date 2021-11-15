@@ -257,7 +257,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="sherman-morrison-woodbury-formula">Sherman-Morrison-Woodbury Formula</h1>
+        <h1 id="sherman-morrison-woodbury-formula">1. Sherman-Morrison-Woodbury Formula</h1>
 <ul>
 <li><span class="math inline">\(\displaystyle (I-\mathbf{u}\mathbf{v}^T)^{-1}=I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\)</span>.</li>
 </ul>
@@ -300,11 +300,11 @@
 <ul>
 <li><span class="math inline">\((A-UV^T)^{-1}=A^{-1}+A^{-1}U(I-V^TA^{-1}U)^{-1}V^TA^{-1}\)</span>.</li>
 </ul>
-<h2 id="application-solving-a-perturbation-problem">Application: Solving a Perturbation Problem</h2>
+<h2 id="application-solving-a-perturbation-problem">1.1. Application: Solving a Perturbation Problem</h2>
 <ul>
 <li>Suppose <span class="math inline">\(A\mathbf{w}=\mathbf{b}\)</span> is solved for <span class="math inline">\(\mathbf{w}\)</span>, and we want to solve <span class="math inline">\((A-\mathbf{u}\mathbf{v}^T)\mathbf{x}=\mathbf{b}\)</span>. We first solve <span class="math inline">\(A\mathbf{z}=\mathbf{u}\)</span>, then <span class="math display">\[\mathbf{x}=\mathbf{w}+\frac{\mathbf{v}^T\mathbf{w}\mathbf{z}}{1-\mathbf{v}^T\mathbf{z}}.\]</span></li>
 </ul>
-<h2 id="application-recursive-least-squares">Application: Recursive Least Squares</h2>
+<h2 id="application-recursive-least-squares">1.2. Application: Recursive Least Squares</h2>
 <ul>
 <li>Suppose there is a new measurement in least squares: <span class="math inline">\(\begin{bmatrix} A \\ \mathbf{v} \end{bmatrix}\mathbf{x}=\begin{bmatrix} \mathbf{b} \\ b_\text{new} \end{bmatrix}\)</span>. The new normal equation is <span class="math display">\[\begin{bmatrix}
 A^T &amp; \mathbf{v}^T
@@ -316,11 +316,11 @@ A^T &amp; \mathbf{v}^T
 \mathbf{b} \\ b_\text{new}
 \end{bmatrix},\]</span> i.e., <span class="math inline">\((A^TA+\mathbf{v}^T\mathbf{v})\widehat{\mathbf{x}}_\text{new}=A^T\mathbf{b}+\mathbf{v}^Tb_\text{new}\)</span>. The update formula is <span class="math display">\[(A^TA+\mathbf{v}^T\mathbf{v})^{-1}=(A^TA)^{-1}-c(A^TA)^{-1}\mathbf{v}^T\mathbf{v}(A^TA)^{-1}\]</span> with <span class="math inline">\(\displaystyle c=\frac{1}{1+\mathbf{v}(A^TA)^{-1}\mathbf{v}^T}\)</span>. To find <span class="math inline">\(c\)</span>, we only need to solve the old equation <span class="math inline">\((A^TA)\mathbf{y}=\mathbf{v}^T\)</span>. The same idea applies when <span class="math inline">\(A\)</span> has more new rows.</li>
 </ul>
-<h2 id="application-kalman-filter">Application: Kalman Filter</h2>
+<h2 id="application-kalman-filter">1.3. Application: Kalman Filter</h2>
 <ul>
 <li>The update ideal also applies to <strong>dynamic least squares</strong>.</li>
 </ul>
-<h1 id="derivative-of-a-1">Derivative of <span class="math inline">\(A^{-1}\)</span></h1>
+<h1 id="derivative-of-a-1">2. Derivative of \(A^{-1}\)</h1>
 <ul>
 <li>Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are invertible. <span class="math inline">\(B^{-1}-A^{-1}=B^{-1}(A-B)A^{-1}\)</span>.</li>
 </ul>
@@ -331,7 +331,7 @@ A^T &amp; \mathbf{v}^T
 <ul>
 <li>Let <span class="math inline">\(\Delta A=B-A\)</span>, then <span class="math inline">\(\displaystyle \frac{\Delta A^{-1}}{\Delta t}=(A+\Delta A)^{-1}\left(-\frac{\Delta A}{\Delta t}\right)A^{-1}\)</span>. Therefore, as <span class="math inline">\(\Delta t \to 0\)</span>, <span class="math display">\[\frac{\text{d}A^{-1}}{\text{d}t}=-A^{-1}\frac{\text{d}A}{\text{d}t}A^{-1}.\]</span></li>
 </ul>
-<h1 id="change-in-eigenvalues-and-singular-values">Change in Eigenvalues and Singular Values</h1>
+<h1 id="change-in-eigenvalues-and-singular-values">3. Change in Eigenvalues and Singular Values</h1>
 <ul>
 <li><p><span class="math inline">\(A(t)\mathbf{x}(t)=\lambda(t)\mathbf{x}(t)\)</span>, <span class="math inline">\(\mathbf{y}^T(t)A(t)=\lambda(t)\mathbf{y}^T(t)\)</span>, and <span class="math inline">\(\mathbf{y}^T(t)\mathbf{x}(t)=1\)</span>. In matrix notation, <span class="math inline">\(AX=X\Lambda\)</span>, <span class="math inline">\(Y^TA=\Lambda Y^T\)</span>, and <span class="math inline">\(Y^TX=I\)</span>.</p></li>
 <li><p><span class="math inline">\(\lambda(t)=\mathbf{y}^T(t)A(t)\mathbf{x}(t)\)</span>.</p></li>
@@ -356,7 +356,7 @@ A^T &amp; \mathbf{v}^T
 <ul>
 <li><span class="math inline">\(\displaystyle \frac{\text{d}\sigma}{\text{d}t}=\mathbf{u}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{v}(t)\)</span>.</li>
 </ul>
-<h1 id="interlacing">Interlacing</h1>
+<h1 id="interlacing">4. Interlacing</h1>
 <ul>
 <li>Suppose the eigenvalues of a symmetric matrix <span class="math inline">\(S\)</span> is <span class="math inline">\(\mu_1 \geq \cdots \geq \mu_n\)</span>, and the eigenvalues of <span class="math inline">\(S+\mathbf{u}\mathbf{u}^T\)</span> is <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_n\)</span>, then <span class="math inline">\(\lambda_1 \geq \mu_1 \geq \lambda_2 \geq \mu_2 \geq \cdots \geq \lambda_n \geq \mu_n\)</span>.</li>
 </ul>
@@ -444,7 +444,7 @@ A^T &amp; \mathbf{v}^T
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sherman-morrison-woodbury-formula"><span class="nav-number">1.</span> <span class="nav-text">Sherman-Morrison-Woodbury Formula</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#application-solving-a-perturbation-problem"><span class="nav-number">1.1.</span> <span class="nav-text">Application: Solving a Perturbation Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application-recursive-least-squares"><span class="nav-number">1.2.</span> <span class="nav-text">Application: Recursive Least Squares</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application-kalman-filter"><span class="nav-number">1.3.</span> <span class="nav-text">Application: Kalman Filter</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#derivative-of-a-1"><span class="nav-number">2.</span> <span class="nav-text">Derivative of \(A^{-1}\)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#change-in-eigenvalues-and-singular-values"><span class="nav-number">3.</span> <span class="nav-text">Change in Eigenvalues and Singular Values</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#interlacing"><span class="nav-number">4.</span> <span class="nav-text">Interlacing</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sherman-morrison-woodbury-formula"><span class="nav-text">1. Sherman-Morrison-Woodbury Formula</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#application-solving-a-perturbation-problem"><span class="nav-text">1.1. Application: Solving a Perturbation Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application-recursive-least-squares"><span class="nav-text">1.2. Application: Recursive Least Squares</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application-kalman-filter"><span class="nav-text">1.3. Application: Kalman Filter</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#derivative-of-a-1"><span class="nav-text">2. Derivative of \(A^{-1}\)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#change-in-eigenvalues-and-singular-values"><span class="nav-text">3. Change in Eigenvalues and Singular Values</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#interlacing"><span class="nav-text">4. Interlacing</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

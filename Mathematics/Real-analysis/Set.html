@@ -257,8 +257,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="set-operation">Set Operation</h1>
-<h2 id="symmetric-difference">Symmetric Difference</h2>
+        <h1 id="set-operation">1. Set Operation</h1>
+<h2 id="symmetric-difference">1.1. Symmetric Difference</h2>
 <p><strong>Definition 1.1</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are two sets. The <strong>symmetric difference</strong> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, denoted <span class="math inline">\(A \triangle B\)</span>, is the set <span class="math inline">\((A-B) \cup (B-A)\)</span>. The symmetric difference of two sets, a.k.a. the <strong>disjunctive union</strong> is the set of elements which are in either of the sets, but not in their intersection.</p>
 <p><strong>Property 1.1</strong>    Suppose <span class="math inline">\(A, B\)</span> and <span class="math inline">\(C\)</span> are sets, and <span class="math inline">\(X\)</span> is a <strong>universal set</strong>:</p>
 <p>    (1) <span class="math inline">\(A \cup B=(A \cap B) \cup (A \triangle B)\)</span>;</p>
@@ -269,7 +269,7 @@
 <p>    (6) <span class="math inline">\(A^c \triangle B^c= A \triangle B\)</span>;</p>
 <p>    (7) <span class="math inline">\(A=A \triangle B \Leftrightarrow B=\varnothing\)</span>;</p>
 <p>    (8) For any <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, there exists an only set <span class="math inline">\(E\)</span> such that <span class="math inline">\(E \triangle A=B.\)</span> In fact, <span class="math inline">\(E=B \triangle A\)</span>.</p>
-<h2 id="limit-of-a-sequence-of-sets">Limit of a Sequence of Sets</h2>
+<h2 id="limit-of-a-sequence-of-sets">1.2. Limit of a Sequence of Sets</h2>
 <p><strong>Definition 1.2</strong>    Suppose <span class="math inline">\(\{A_k\}\)</span> is a sequence of sets. If <span class="math display">\[A_1 \supset \cdots \supset A_k \supset \cdots,\]</span> then <span class="math inline">\(\{A_k\}\)</span> is a <strong>decreasing sequence of sets</strong>. The limit of <span class="math inline">\(\{A_k\}\)</span>, denoted <span class="math inline">\(\displaystyle \lim_{k \to \infty} A_k\)</span>, is <span class="math inline">\(\displaystyle \bigcap_{k=1}^\infty A_k\)</span>.</p>
 <p>If <span class="math display">\[A_1 \subset \cdots \subset A_k \subset \cdots,\]</span> then <span class="math inline">\(\{A_k\}\)</span> is a <strong>increasing sequence of sets</strong>. The limit of <span class="math inline">\(\{A_k\}\)</span>, denoted <span class="math inline">\(\displaystyle \lim_{k \to \infty} A_k\)</span>, is <span class="math inline">\(\displaystyle \bigcup_{k=1}^\infty A_k\)</span>.</p>
 <p><strong>Example 1.1</strong>    Suppose <span class="math inline">\(A_n=[n, \infty), n \in \mathbb{N}\)</span>, then <span class="math inline">\(\displaystyle \lim_{n \to \infty} A_n=\varnothing\)</span>.</p>
@@ -294,7 +294,7 @@ Suppose <span class="math inline">\(\displaystyle x \in \varliminf_{k \to \infty
 <p><strong><em>Solution.</em></strong> Obviously, <span class="math inline">\([0, 1] \subset A_n\)</span>. For every <span class="math inline">\(x \in (1, 2)\)</span>, when <span class="math inline">\(m \to \infty\)</span>, there are infinite many sets in <span class="math inline">\(\{A_{2m}\}\)</span> such that <span class="math inline">\(x \notin A_{2m}\)</span>, and thus <span class="math inline">\(\displaystyle x \notin \varliminf_{n \to \infty} A_n\)</span>. There are infinite many sets in <span class="math inline">\(\{A_{2m+1}\}\)</span> such that <span class="math inline">\(x \in A_{2m+1}\)</span>, and thus <span class="math inline">\(\displaystyle \varlimsup_{n \to \infty} A_n=[0, 2)\)</span> and <span class="math inline">\(\displaystyle\varliminf_{n \to \infty} A_n=[0, 1]\)</span>.</p>
 <p><strong>Example 1.5</strong>    Use set notation to represent <span class="math inline">\(\displaystyle \lim_{n \to \infty} a_n=a\)</span>.</p>
 <p><strong><em>Solution.</em></strong> Since <span class="math inline">\(\displaystyle \lim_{n \to \infty} a_n=a\)</span>, then <span class="math display">\[\forall \varepsilon&gt;0, \exists N \in \mathbb{N}\ \text{s.t.}\ \forall n \geq N, |a_n-a|&lt;\varepsilon.\]</span> Therefore <span class="math display">\[a \in \bigcap_{\varepsilon \in \mathbb{R}^+} \bigcup_{N=1}^\infty \bigcap_{n \geq N} \{x: |a_n-x|&lt;\varepsilon\}=\bigcap_{\varepsilon \in \mathbb{R}^+} \varliminf_{n \to \infty} \{x: |a_n-x|&lt;\varepsilon\}.\]</span></p>
-<h1 id="cardinal-number">Cardinal Number</h1>
+<h1 id="cardinal-number">2. Cardinal Number</h1>
 <p><strong>Definition 2.1</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are sets. If there exists a bijection from <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span>, then we say <span class="math inline">\(A\)</span> is <strong>equipotent</strong> to <span class="math inline">\(B\)</span>, denoted as <span class="math inline">\(A \sim B\)</span>. Specifically, <span class="math inline">\(\varnothing \sim \varnothing\)</span>.</p>
 <p><strong>Property 2.1</strong>    An equipotent relationship is an equivalence relation, i.e., for any sets <span class="math inline">\(A, B\)</span> and <span class="math inline">\(C\)</span>:</p>
 <p>    (1) <span class="math inline">\(A \sim A\)</span>;</p>
@@ -302,7 +302,7 @@ Suppose <span class="math inline">\(\displaystyle x \in \varliminf_{k \to \infty
 <p>    (3) If <span class="math inline">\(A \sim B\)</span> and <span class="math inline">\(B \sim C\)</span>, then <span class="math inline">\(A \sim C\)</span>.</p>
 <p><strong>Definition 2.2</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are sets. If <span class="math inline">\(A \sim B\)</span>, then the <strong>cardinal number</strong> of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are equal, denoted as <span class="math inline">\(\overset{=}{A}=\overset{=}{B}\)</span>.</p>
 <div class="note info">
-            <p><font color="#696969" font size=2>基数的概念可以看作有限集合中所含元素个数的推广. 对于一个集合<span class="math inline">\(A\)</span>，我们考虑所有与<span class="math inline">\(A\)</span>对等的集合所构成的类. 公理集合论允许我们从每一个这样的类中按确定的方式选出一个代表（即所谓良序集——依某种意义排好了次序的集），我们把这个代表定义为这一类中各个集合的基数，记之为<span class="math inline">\(\overset{=}{A}\)</span>.</font></p>
+            <p><font color="#696969" font size="2">基数的概念可以看作有限集合中所含元素个数的推广. 对于一个集合<span class="math inline">\(A\)</span>，我们考虑所有与<span class="math inline">\(A\)</span>对等的集合所构成的类. 公理集合论允许我们从每一个这样的类中按确定的方式选出一个代表（即所谓良序集——依某种意义排好了次序的集），我们把这个代表定义为这一类中各个集合的基数，记之为<span class="math inline">\(\overset{=}{A}\)</span>.</font></p>
           </div>
 <p><strong>Definition 2.3</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are sets. If <span class="math inline">\(A \not\sim B\)</span>, and <span class="math inline">\(B^* \sim A\)</span> where <span class="math inline">\(B^* \subset B\)</span>, then <span class="math inline">\(\overset{=}{A}&lt;\overset{=}{B}\)</span> or <span class="math inline">\(\overset{=}{B}&gt;\overset{=}{A}\)</span>.</p>
 <div class="note info">
@@ -310,11 +310,11 @@ Suppose <span class="math inline">\(\displaystyle x \in \varliminf_{k \to \infty
           </div>
 <p><strong>Theorem 2.2 (Cantor-Bernstein Theorem)</strong>    Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are non-empty sets. If <span class="math inline">\(A\)</span> is equipotent to a subset of <span class="math inline">\(B\)</span>, and <span class="math inline">\(B\)</span> is equipotent to a subset of <span class="math inline">\(A\)</span>, then <span class="math inline">\(A \sim B\)</span>.</p>
 <p><strong>Corollary 2.3</strong>    If <span class="math inline">\(A \supset B \supset C\)</span> and <span class="math inline">\(A \sim C\)</span>, then <span class="math inline">\(A \sim B\)</span>.</p>
-<h1 id="countable-set-and-uncountable-set">Countable Set and Uncountable Set</h1>
+<h1 id="countable-set-and-uncountable-set">3. Countable Set and Uncountable Set</h1>
 <p><strong>Definition 3.1</strong>    The <strong>countable sets</strong> are the sets that are equipotent to <span class="math inline">\(\mathbb{N}\)</span>. Note that <span class="math inline">\(\overset{=}{\mathbb{N}}=\aleph_0\)</span>.</p>
 <p><strong>Definition 3.2</strong>    The <strong>uncountable sets</strong> are the sets that are not countable sets.</p>
 <div class="note info">
-            <p><font color="#696969" font size=2>关于可数集与不可数集的相关定理与推论在抽象数学一课中已经进行了详细探讨，在此不再赘述. 但我们仍应当记得——任何无限集合都至少包含一个可数子集，也意味着可数集在所有无限集中有最小的基数；可数集的任何无限子集仍是可数集；至多可数个至多可数集的并仍是至多可数集；<span class="math inline">\(\mathbb{Q}\)</span>是可数集；代数数集<span class="math inline">\(\mathcal{A}\)</span>是可数集；有限个至多可数集的直积是至多可数集；<span class="math inline">\(\mathbb{R}\)</span>是不可数集且<strong>连续基数</strong>记为<span class="math inline">\(\overset{=}{\mathbb{R}}=c&gt;\aleph_0\)</span>；至多可数个不可数集的并或直积是不可数集；值得特别注意的是：可数个至多可数集的直积<strong>不一定</strong>可数；<span class="math inline">\(c\)</span>个基数为<span class="math inline">\(c\)</span>的集合的并的基数仍然是<span class="math inline">\(c\)</span>.</font></p>
+            <p><font color="#696969" font size="2">关于可数集与不可数集的相关定理与推论在抽象数学一课中已经进行了详细探讨，在此不再赘述. 但我们仍应当记得——任何无限集合都至少包含一个可数子集，也意味着可数集在所有无限集中有最小的基数；可数集的任何无限子集仍是可数集；至多可数个至多可数集的并仍是至多可数集；<span class="math inline">\(\mathbb{Q}\)</span>是可数集；代数数集<span class="math inline">\(\mathcal{A}\)</span>是可数集；有限个至多可数集的直积是至多可数集；<span class="math inline">\(\mathbb{R}\)</span>是不可数集且<strong>连续基数</strong>记为<span class="math inline">\(\overset{=}{\mathbb{R}}=c&gt;\aleph_0\)</span>；至多可数个不可数集的并或直积是不可数集；值得特别注意的是：可数个至多可数集的直积<strong>不一定</strong>可数；<span class="math inline">\(c\)</span>个基数为<span class="math inline">\(c\)</span>的集合的并的基数仍然是<span class="math inline">\(c\)</span>.</font></p>
           </div>
 
     </div>
@@ -397,7 +397,7 @@ Suppose <span class="math inline">\(\displaystyle x \in \varliminf_{k \to \infty
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#set-operation"><span class="nav-number">1.</span> <span class="nav-text">Set Operation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#symmetric-difference"><span class="nav-number">1.1.</span> <span class="nav-text">Symmetric Difference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#limit-of-a-sequence-of-sets"><span class="nav-number">1.2.</span> <span class="nav-text">Limit of a Sequence of Sets</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cardinal-number"><span class="nav-number">2.</span> <span class="nav-text">Cardinal Number</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#countable-set-and-uncountable-set"><span class="nav-number">3.</span> <span class="nav-text">Countable Set and Uncountable Set</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#set-operation"><span class="nav-text">1. Set Operation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#symmetric-difference"><span class="nav-text">1.1. Symmetric Difference</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#limit-of-a-sequence-of-sets"><span class="nav-text">1.2. Limit of a Sequence of Sets</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cardinal-number"><span class="nav-text">2. Cardinal Number</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#countable-set-and-uncountable-set"><span class="nav-text">3. Countable Set and Uncountable Set</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -20,28 +20,34 @@
     var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Tianyang Li">
-<meta property="og:url" content="https://litianyang0211.github.io/index.html">
+  <meta name="description" content="Not done.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Junction Tree and Message Passing">
+<meta property="og:url" content="https://litianyang0211.github.io/Statistics/Graphical-model/Junction_Tree_and_Message_Passing">
 <meta property="og:site_name" content="Tianyang Li">
+<meta property="og:description" content="Not done.">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-10T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-11T11:44:26.091Z">
 <meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Junction tree">
+<meta property="article:tag" content="Message passing">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://litianyang0211.github.io/">
+<link rel="canonical" href="https://litianyang0211.github.io/Statistics/Graphical-model/Junction_Tree_and_Message_Passing.html">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Tianyang Li</title>
+  <title>Junction Tree and Message Passing | Tianyang Li</title>
   
 
 
@@ -187,10 +193,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-  	
-    	  
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -206,10 +212,9 @@
       <meta itemprop="name" content="Tianyang Li">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Statistics/Graphical-model/Junction_Tree_and_Message_Passing" class="post-title-link" itemprop="url">Junction Tree and Message Passing</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Junction Tree and Message Passing
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -242,6 +247,7 @@
             </span>
 
           
+            <div class="post-description">Not done.</div>
 
         </div>
       </header>
@@ -252,223 +258,101 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Not done.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Statistics/Graphical-model/Junction_Tree_and_Message_Passing">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+        <h1 id="junction-tree">1. Junction Tree</h1>
+<p><strong>Definition 1.1</strong>    A <strong>junction tree</strong> is a connected undirected graph without cycles (a tree), which has vertex <span class="math inline">\(C_i\)</span> that consists of subset of <span class="math inline">\(V\)</span>, and satisfies the property that if <span class="math inline">\(C_i \cap C_j=S\)</span>, then every vertex on the unique path from <span class="math inline">\(C_i\)</span> to <span class="math inline">\(C_j\)</span> contains <span class="math inline">\(S\)</span>.</p>
+<p><strong>Example 1.1</strong>    Given sets <span class="math inline">\(\{1, 2\}\)</span>, <span class="math inline">\(\{2, 3, 4\}\)</span>, <span class="math inline">\(\{2, 4, 5\}\)</span>, <span class="math inline">\(\{4, 6\}\)</span>, <span class="math inline">\(\{6, 7, 8\}\)</span>, we can build a junction tree:</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1, 2)) --- 2((2, 3, 4)) --- 3((4, 6))
+2 --- 4((2, 4, 5))
+3 --- 5((6, 7, 8))
+          </pre>
+<p>Equally, we could use a different ordering: <span class="math inline">\(\{6, 7, 8\}\)</span>, <span class="math inline">\(\{4, 6\}\)</span>, <span class="math inline">\(\{2, 4, 5\}\)</span>, <span class="math inline">\(\{1, 2\}\)</span>, <span class="math inline">\(\{2, 3, 4\}\)</span>.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph TB
+            1((1, 2))
+2((2, 3, 4))
+3((4, 6))
+1 & 2 & 3 --- 4((2, 4, 5))
+3 --- 5((6, 7, 8))
+          </pre>
+<p><strong>Theorem 1.1</strong>    If <span class="math inline">\(\mathcal{T}\)</span> is a junction tree, then its vertices satisfy the running intersection property. Conversely, if <span class="math inline">\(C_1, \ldots, C_k\)</span> satisfy the running intersection property, they can be arranged into a junction tree.</p>
+<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\(\mathcal{T}\)</span> is a junction tree. Pick a leaf <span class="math inline">\(C_k\)</span> and remove it to obtain <span class="math inline">\(\mathcal{T}^{-k}\)</span>. By the induction hypothesis, the remaining sets, <span class="math inline">\(C_1, \ldots, C_{k-1}\)</span> satisfy the running intersection property. Pick <span class="math inline">\(C_{\sigma(k)}\)</span> to be the unique neighbor of <span class="math inline">\(C_k\)</span> in <span class="math inline">\(\mathcal{T}\)</span>. By the junction tree property, <span class="math display">\[C_k \cap \left(\bigcup_{i&lt;k} C_i\right)=C_k \cap C_{\sigma(k)}.\]</span></p>
+<p>For the converse, we iteratively remove leaves, which will give us the reverse order of the junction tree property, <span class="math inline">\(C_k, \ldots, C_1\)</span>, where <span class="math inline">\(C_1, \ldots, C_k\)</span> satisfy the running intersection property.</p>
+<p><strong>Corollary 1.2</strong>    If <span class="math inline">\(C_1, \ldots, C_k\)</span> satisfy the running intersection property, then they satisfy the running intersection property starting with any node <span class="math inline">\(C_j\)</span>.</p>
+<p><strong>Definition 1.2</strong>    We associate each clique with a <strong>potential</strong> <span class="math inline">\(\psi_C\)</span>. Given two adjacent potentials <span class="math inline">\(C_i\)</span> and <span class="math inline">\(C_j\)</span>, where <span class="math inline">\(i&lt;j\)</span>, we define <span class="math inline">\(S_j=C_i \cap C_j\)</span>, which is a <strong>separator set</strong>. We associate potentials with separator sets <span class="math inline">\(\psi_S\)</span>.</p>
+<p><strong>Definition 1.3</strong>    We say that two potentials are <strong>consistent</strong> if they have the same margin over their intersection, i.e., for <span class="math inline">\(\psi_C(x_C)\)</span> and <span class="math inline">\(\psi_D(x_D)\)</span>, <span class="math display">\[\sum_{x_{C-D}} \psi_C(x_C)=f(x_{C \cap D})=\sum_{x_{D-C}} \psi_D(x_D).\]</span></p>
+<p><strong>Theorem 1.3</strong>    Suppose <span class="math inline">\(C_1, \ldots, C_k\)</span> satisfy the running intersection property with separator sets <span class="math inline">\(S_2, \ldots, S_k\)</span>, and let <span class="math display">\[p(x_V)=\prod_{i=1}^k \frac{\psi_{C_i}(x_{C_i})}{\psi_{S_i}(x_{S_i})}\]</span> for all <span class="math inline">\(x_V \in \mathcal{X}_V\)</span>. By convention, <span class="math inline">\(S_1=\varnothing\)</span> and <span class="math inline">\(\psi_{S_1}=1\)</span>. Then the potentials are all consistent iff <span class="math inline">\(\psi_{C_i}(x_{C_i})=p(x_{C_i})\)</span> and <span class="math inline">\(\psi_{S_i}(x_{S_i})=p(x_{S_i})\)</span> for all <span class="math inline">\(i=1, \ldots, k\)</span>.</p>
+<p><strong><em>Proof.</em></strong> (<span class="math inline">\(\Leftarrow\)</span>) If <span class="math inline">\(\psi_{C_i}(x_{C_i})=p(x_{C_i})\)</span>, then we know the potentials will be consistent.</p>
+<p>(<span class="math inline">\(\Rightarrow\)</span>) If <span class="math inline">\(k=1\)</span>, there is nothing to prove. Otherwise, let <span class="math display">\[R_k=C_k-S_k=C_k-\bigcup_{i&lt;k} C_i.\]</span> Then <span class="math display">\[p(x_{V-R_k})=\sum_{x_{R_k}} p(x_V)=\prod_{i=1}^{k-1} \frac{\psi_{C_i}(x_{C_i})}{\psi_{S_i}(x_{S_i})} \cdot \frac{1}{\psi_{S_k}(x_{S_k})} \sum_{x_{R_k}} \psi_{C_k}(x_{C_k})=\frac{\psi_{C_i}(x_{C_i})}{\psi_{S_i}(x_{S_i})},\]</span> i.e., <span class="math inline">\(p(x_{V-R_k})\)</span> only has <span class="math inline">\(k-1\)</span> cliques. By the induction hypothesis, <span class="math inline">\(\psi_{C_i}(x_{C_i})=p(x_{C_i})\)</span> and <span class="math inline">\(\psi_{S_i}(x_{S_i})=p(x_{S_i})\)</span> for all <span class="math inline">\(i&lt;k\)</span>.</p>
+<p>Since <span class="math inline">\(S_k \subseteq C_{\sigma(k)}\)</span>, then by consistency <span class="math display">\[\psi_{S_k}(x_{S_k})=\sum_{C_{\sigma(k)}-S_k} \psi_{C_{\sigma(k)}}(x_{C_{\sigma(k)}})=p(x_{S_k}).\]</span></p>
+<center>
+<strong><em>TBC...</em></strong>
+</center>
+<h1 id="message-passing">2. Message Passing</h1>
+<p><strong>Definition 2.1</strong>    Suppose we have potentials <span class="math inline">\(\psi_C\)</span>, <span class="math inline">\(\psi_D\)</span> and <span class="math inline">\(\psi_S\)</span>, where <span class="math inline">\(S=C \cap D\)</span>. Then <strong>passing a message</strong> from <span class="math inline">\(\psi_C\)</span> to <span class="math inline">\(\psi_D\)</span> involves:</p>
+<ul>
+<li><p><span class="math inline">\(\displaystyle \psi_S&#39;(x_S)=\sum_{x_{C-S}}\psi_C(x_C)\)</span>;</p></li>
+<li><p><span class="math inline">\(\displaystyle \psi_D&#39;(x_D)=\psi_D(x_D)\frac{\psi_S&#39;(x_S)}{\psi_S(x_S)}\)</span>.</p></li>
+</ul>
+<div class="note info">
+            <p>We have three important properties:</p><ul><li><p><span class="math inline">\(\displaystyle \prod_{i=1}^k \frac{\psi_{C_i}(x_{C_i})}{\psi_{S_i}(x_{S_i})}\)</span> is unchanged because <span class="math inline">\(\displaystyle \frac{\psi_D&#39;(x_D)}{\psi_S&#39;(x_S)}=\frac{\psi_D(x_D)}{\psi_S(x_S)}\)</span>;</p></li><li><p><span class="math inline">\(\psi_{S}&#39;\)</span> and <span class="math inline">\(\psi_C\)</span> are consistent;</p></li><li><p>If <span class="math inline">\(\psi_D\)</span> and <span class="math inline">\(\psi_S\)</span> are consistent, so are <span class="math inline">\(\psi_D&#39;\)</span> and <span class="math inline">\(\psi_S&#39;\)</span>, since <span class="math display">\[\sum_{x_{D-S}} \psi_D&#39;(x_D)=\frac{\psi_S&#39;(x_S)}{\psi_S(x_S)} \sum_{x_{D-S}} \psi_D(x_D)=\psi_S&#39;(x_S).\]</span></p></li></ul>
+          </div>
+<h1 id="junction-tree-algorithm">3. Junction Tree Algorithm</h1>
+<table frame="hsides" style="line-height:20px;">
+<tbody>
+<tr>
+<td>
+<b>Algorithm 1</b> Collect and Distribute Steps of the Junction Tree Algorithm.
+</td>
+</tr>
+<tr>
+<td>
+    <b>function</b> Collect(rooted tree <span class="math inline">\(\mathcal{T}\)</span>, potentials <span class="math inline">\(\psi_t\)</span>)<br>         let <span class="math inline">\(1 &lt; \cdots &lt; k\)</span> be a topological ordering of <span class="math inline">\(\mathcal{T}\)</span>;<br>         <b>for</b> <span class="math inline">\(t\)</span> in <span class="math inline">\(k, \ldots, 2\)</span> <b>do</b><br>             send message from <span class="math inline">\(\psi_t\)</span> to <span class="math inline">\(\psi_{\sigma(t)}\)</span>;<br>         <b>end for</b><br>         <b>return</b> updated potentials <span class="math inline">\(\psi_t\)</span><br>     <b>end function</b><br>     <b>function</b> Distribute(rooted tree <span class="math inline">\(\mathcal{T}\)</span>, potentials <span class="math inline">\(\psi_t\)</span>)<br>         let <span class="math inline">\(1 &lt; \cdots &lt; k\)</span> be a topological ordering of <span class="math inline">\(\mathcal{T}\)</span>;<br>         <b>for</b> <span class="math inline">\(t\)</span> in <span class="math inline">\(k, \ldots, 2\)</span> <b>do</b><br>             send message from <span class="math inline">\(\psi_{\sigma(t)}\)</span> to <span class="math inline">\(\psi_t\)</span>;<br>         <b>end for</b><br>         <b>return</b> updated potentials <span class="math inline">\(\psi_t\)</span><br>     <b>end function</b>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Theorem 3.1</strong>    Let <span class="math inline">\(\mathcal{T}\)</span> be a junction tree with potentials <span class="math inline">\(\psi_{C_i}(x_{C_i})\)</span>. Then after running the junction tree algorithm, all potentials will be consistent.</p>
+<p><strong><em>Proof.</em></strong> Collection ensures all cliques are consistent with <span class="math inline">\(\psi_{S_i}\)</span>. Distribution makes <span class="math inline">\(\psi_{C_{\sigma(i)}}\)</span> consistent with <span class="math inline">\(\psi_{S_i}\)</span> for each <span class="math inline">\(i\)</span>, and preserves the consistency between <span class="math inline">\(\psi_{S_i}\)</span> and <span class="math inline">\(\psi_{C_i}\)</span>.</p>
+<center>
+<strong><em>TBC...</em></strong>
+</center>
+<div class="note info">
+            <p>In practice, message passing is often done in parallel and we have the convergence after at most <span class="math inline">\(d\)</span> iterations, where <span class="math inline">\(d\)</span> is the length of the longest path of the tree.</p><p>Junction graphs in general (<em>loopy belief propagation</em>) also seem to lead to convergence, but it is still an open area of study.</p>
+          </div>
+<h1 id="evidence">4. Evidence</h1>
+<p>Denote evidence set <span class="math inline">\(E\)</span>, then <span class="math display">\[p(x_{V-E} \mid x_E=x_E^*)=\frac{p(x_{V-E}, x_E^*)}{p(x_E^*)}.\]</span> In junction tree situation, <span class="math display">\[p(x_V)=\prod_i \frac{\psi_{C_i}(x_{C_i})}{\psi_{S_i}(x_{S_i})}.\]</span> Replace <span class="math inline">\(\psi_{C_i}(x_{C_i})\)</span> with <span class="math inline">\(\displaystyle \frac{\psi_{C_i}(x_{C_i})}{p(x_E^*)}\)</span> if <span class="math inline">\(E \subseteq C_i\)</span>, then <span class="math display">\[\psi_{C_i}(x_{C_i})=p(x_{C_i} \mid x_E^*).\]</span></p>
+
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-    
-  	
-    	  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Statistics/Graphical-model/Directed_Graphical_Model">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Tianyang Li">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianyang Li">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
           
-            <a href="/Statistics/Graphical-model/Directed_Graphical_Model" class="post-title-link" itemprop="url">Directed Graphical Model</a>
-        </h2>
+          <div class="post-tags">
+              <a href="/tags/Junction-tree/" rel="tag"><i class="fa fa-tag"></i> Junction tree</a>
+              <a href="/tags/Message-passing/" rel="tag"><i class="fa fa-tag"></i> Message passing</a>
+          </div>
 
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-lightbulb"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-09 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-09T00:00:00+00:00">2021-11-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-edit"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-15 16:32:00" itemprop="dateModified" datetime="2021-11-15T16:32:00+00:00">2021-11-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a class=n href="/categories/Statistics/" itemprop="url" rel="index"><span itemprop="name">Statistics</span></a>
-                </span>
-                  /
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a class=n href="/categories/Statistics/Graphical-model/" itemprop="url" rel="index"><span itemprop="name">Graphical model</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Not done.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Statistics/Graphical-model/Directed_Graphical_Model">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-    
-  	
-    	  
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Computer-science/Deep-learning/Optimization_Algorithm_for_Training_DNN">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Tianyang Li">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Tianyang Li">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/Computer-science/Deep-learning/Optimization_Algorithm_for_Training_DNN" class="post-title-link" itemprop="url">Optimization Algorithm for Training DNN</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-lightbulb"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-11-07 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-07T00:00:00+00:00">2021-11-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-edit"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-09 10:39:54" itemprop="dateModified" datetime="2021-11-09T10:39:54+00:00">2021-11-09</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a class=n href="/categories/Computer-science/" itemprop="url" rel="index"><span itemprop="name">Computer science</span></a>
-                </span>
-                  /
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a class=n href="/categories/Computer-science/Deep-learning/" itemprop="url" rel="index"><span itemprop="name">Deep learning</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>We mainly discuss the stochastic gradient descent (SGD), especially about the global convergence of SGD, and decreasing the SGD noise level. In addition, we see the improvement in SGD (e.g., momentum and AdaGrad).</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Computer-science/Deep-learning/Optimization_Algorithm_for_Training_DNN">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Statistics/Graphical-model/Directed_Graphical_Model" rel="prev" title="Directed Graphical Model">
+      <i class="fa fa-chevron-left"></i> Directed Graphical Model
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-    
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-
   
 
 
@@ -521,6 +405,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#junction-tree"><span class="nav-text">1. Junction Tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#message-passing"><span class="nav-text">2. Message Passing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#junction-tree-algorithm"><span class="nav-text">3. Junction Tree Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#evidence"><span class="nav-text">4. Evidence</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -694,16 +579,6 @@ if (document.querySelectorAll('pre.mermaid').length) {
     
 
   
-  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
-  <script>
-      window.addEventListener('load', () => {
-      quicklink({
-        timeout : 3000,
-        priority: true,
-        ignores : [uri => uri.includes('#'),uri => uri === 'https://litianyang0211.github.io/',]
-      });
-      });
-  </script>
 
 </body>
 </html>

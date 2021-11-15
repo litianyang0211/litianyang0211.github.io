@@ -258,7 +258,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="column-space">Column Space</h1>
+        <h1 id="column-space">1. Column Space</h1>
 <ul>
 <li><span class="math inline">\(A\mathbf{x}\)</span> is a linear combination of the columns of <span class="math inline">\(A\)</span>, and the combinations of the columns fill out the <strong>column space</strong> of <span class="math inline">\(A\)</span>.</li>
 </ul>
@@ -275,7 +275,7 @@
 <ul>
 <li>The number of independent columns equals the number of independent rows. The column space and row space of <span class="math inline">\(A\)</span> both have dimension <span class="math inline">\(r\)</span>, with <span class="math inline">\(r\)</span> basis vectors - columns of <span class="math inline">\(C\)</span> and rows of <span class="math inline">\(R\)</span>.</li>
 </ul>
-<h1 id="factorization-of-matrix">Factorization of Matrix</h1>
+<h1 id="factorization-of-matrix">2. Factorization of Matrix</h1>
 <ul>
 <li><p><span class="math inline">\(A=LU\)</span> comes from <strong>elimination</strong>, where <span class="math inline">\(L\)</span> is lower triangular, and <span class="math inline">\(U\)</span> is upper triangular.</p></li>
 <li><p><span class="math inline">\(A=QR\)</span> comes from <strong>orthogonalizing</strong> the columns <span class="math inline">\(\mathbf{a}_1\)</span> to <span class="math inline">\(\mathbf{a}_n\)</span> as in <strong>Gram-Schmidt</strong>, where <span class="math inline">\(Q\)</span> has orthonormal columns (i.e., <span class="math inline">\(Q^TQ=I\)</span>), and <span class="math inline">\(R\)</span> is upper triangular.</p></li>
@@ -283,7 +283,7 @@
 <li><p><span class="math inline">\(A=X \Lambda X^{-1}\)</span> is <strong>diagonalization</strong> when <span class="math inline">\(A\)</span> is <span class="math inline">\(n \times n\)</span> with <span class="math inline">\(n\)</span> independent eigenvectors, where eigenvalues of <span class="math inline">\(A\)</span> are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and eigenvectors of <span class="math inline">\(A\)</span> are in the columns of <span class="math inline">\(X\)</span>.</p></li>
 <li><p><span class="math inline">\(A=U \Sigma V^T\)</span> is the <strong>singular value decomposition (SVD)</strong> of any matrix <span class="math inline">\(A\)</span>, where singular values <span class="math inline">\(\sigma_1, \ldots, \sigma_r\)</span> are in <span class="math inline">\(\Sigma\)</span>, and orthonormal singular vectors are in <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>.</p></li>
 </ul>
-<h1 id="fundamental-subspace">Fundamental Subspace</h1>
+<h1 id="fundamental-subspace">3. Fundamental Subspace</h1>
 <p>Suppose <span class="math inline">\(A\)</span> is an <span class="math inline">\(m \times n\)</span> matrix with rank <span class="math inline">\(r\)</span>.</p>
 <ul>
 <li><p>The <strong>column space</strong> <span class="math inline">\(C(A)\)</span> contains all combinations of the columns of <span class="math inline">\(A\)</span>.</p></li>
@@ -291,7 +291,7 @@
 <li><p>The <strong>null space</strong> <span class="math inline">\(N(A)\)</span> contains all solutions <span class="math inline">\(\mathbf{x}\)</span> to <span class="math inline">\(A\mathbf{x}=\mathbf{0}\)</span>.</p></li>
 <li><p>The <strong>left null space</strong> <span class="math inline">\(N(A^T)\)</span> contains all solutions <span class="math inline">\(\mathbf{y}\)</span> to <span class="math inline">\(A^T\mathbf{y}=\mathbf{0}\)</span>.</p></li>
 </ul>
-<h1 id="orthonormal-matrix">Orthonormal Matrix</h1>
+<h1 id="orthonormal-matrix">4. Orthonormal Matrix</h1>
 <ul>
 <li><p>If <span class="math inline">\(Q\)</span> is a matrix with <strong>orthonormal columns</strong>, then <span class="math inline">\(Q^TQ=I\)</span>.</p></li>
 <li><p><strong>Orthogonal matrix</strong> is square with orthonormal columns: <span class="math inline">\(Q^T=Q^{-1}\)</span>, and <span class="math inline">\(Q^TQ=QQ^T=I\)</span>.</p></li>
@@ -305,7 +305,7 @@
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<h2 id="householder-reflection">Householder Reflection</h2>
+<h2 id="householder-reflection">4.1. Householder Reflection</h2>
 <ul>
 <li><p>Householder matrix: <span class="math inline">\(H=I-2\mathbf{u}\mathbf{u}^T\)</span>, where <span class="math inline">\(\mathbf{u}^T\mathbf{u}=1\)</span>.</p></li>
 <li><p><span class="math inline">\(H\)</span> is orthogonal matrix.</p></li>
@@ -314,7 +314,7 @@
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<h1 id="eigenvalue-and-eigenvector">Eigenvalue and Eigenvector</h1>
+<h1 id="eigenvalue-and-eigenvector">5. Eigenvalue and Eigenvector</h1>
 <ul>
 <li>The <strong>eigenvector</strong> <span class="math inline">\(\mathbf{x}\)</span> of <span class="math inline">\(A\)</span> does not change direction when multiplying <span class="math inline">\(\mathbf{x}\)</span> by <span class="math inline">\(A\)</span>, i.e., <span class="math inline">\(A\mathbf{x}=\lambda\mathbf{x}\)</span>.</li>
 </ul>
@@ -325,7 +325,7 @@
 <li><p>The sum of eigenvalues of a square <span class="math inline">\(A\)</span> equals the <strong>trace</strong> (the diagonal sum) of <span class="math inline">\(A\)</span>.</p></li>
 <li><p>The product of eigenvalues of a square <span class="math inline">\(A\)</span> equals the determinant of <span class="math inline">\(A\)</span>.</p></li>
 </ul>
-<h2 id="similar-matrix">Similar Matrix</h2>
+<h2 id="similar-matrix">5.1. Similar Matrix</h2>
 <ul>
 <li><p>Two <span class="math inline">\(n \times n\)</span> matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are <strong>similar</strong> if there exists an invertible <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(P\)</span> such that <span class="math inline">\(B=P^{-1}AP\)</span>. <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> have same eigenvalues: <span class="math display">\[B\mathbf{y}=P^{-1}AP\mathbf{y}=\lambda\mathbf{y} \Rightarrow A(P\mathbf{y})=\lambda (P\mathbf{y}).\]</span></p></li>
 <li><p>Suppose <span class="math inline">\(A\)</span> has eigenvalues <span class="math inline">\(\lambda_1, \ldots, \lambda_n\)</span> with corresponding eigenvectors <span class="math inline">\(\mathbf{x}_1, \ldots, \mathbf{x}_n\)</span>. <span class="math inline">\(A=X\Lambda X^{-1}\)</span>, where eigenvalues of <span class="math inline">\(A\)</span> are on the diagonal of <span class="math inline">\(\Lambda\)</span>, and eigenvectors of <span class="math inline">\(A\)</span> are in the columns of <span class="math inline">\(X\)</span>, i.e., <span class="math inline">\(A\)</span> is similar to <span class="math inline">\(\Lambda\)</span>.</p></li>
@@ -340,7 +340,7 @@
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<h1 id="symmetric-postive-definite-matrix">Symmetric Postive Definite Matrix</h1>
+<h1 id="symmetric-postive-definite-matrix">6. Symmetric Postive Definite Matrix</h1>
 <ul>
 <li><p>All eigenvalues of a symmetric matrix <span class="math inline">\(S\)</span> are real numbers.</p></li>
 <li><p>The eigenvectors of <span class="math inline">\(S\)</span> can be chosen orthogonal.</p></li>
@@ -356,7 +356,7 @@
             <p>The <span class="math inline">\(k\)</span>th pivot is the ratio <span class="math inline">\(\displaystyle \frac{D_k}{D_{k-1}}\)</span> of the leading determinants (sizes <span class="math inline">\(k\)</span> and <span class="math inline">\(k-1\)</span>).</p>
           </div>
 <p><span id="7"></span></p>
-<h1 id="singular-value-decomposition-svd">Singular Value Decomposition (SVD)</h1>
+<h1 id="singular-value-decomposition-svd">7. Singular Value Decomposition (SVD)</h1>
 <ul>
 <li>The <strong>singular value decomposition</strong> of <span class="math inline">\(A\)</span> is <span class="math inline">\(A=U\Sigma V^T\)</span>, where <span class="math inline">\(U\)</span> contains orthonormal eigenvectors of <span class="math inline">\(AA^T\)</span>, <span class="math inline">\(\Sigma\)</span> contains singular values <span class="math inline">\(\sigma_1, \ldots, \sigma_r\)</span>, and <span class="math inline">\(V\)</span> contains orthonormal eigenvectors of <span class="math inline">\(A^TA\)</span>. Note that <span class="math inline">\(\sigma_1^2 \geq \ldots \geq \sigma_r^2\)</span> are the nonzero eigenvalues of both <span class="math inline">\(AA^T\)</span> and <span class="math inline">\(A^TA\)</span> for <span class="math inline">\(r\)</span> is the rank of <span class="math inline">\(A\)</span>.</li>
 </ul>
@@ -367,8 +367,8 @@
 <ul>
 <li>The pieces of the SVD: <span class="math inline">\(A=U\Sigma V^T=\sigma_1\mathbf{u}_1\mathbf{v}_1^T+\cdots+\sigma_r\mathbf{u}_r\mathbf{v}_r^T\)</span>.</li>
 </ul>
-<h1 id="norm-of-vector-and-matrix">Norm of Vector and Matrix</h1>
-<h2 id="vector-norm">Vector Norm</h2>
+<h1 id="norm-of-vector-and-matrix">8. Norm of Vector and Matrix</h1>
+<h2 id="vector-norm">8.1. Vector Norm</h2>
 <p>Suppose <span class="math inline">\(\mathbf{v} \in \mathbb{C}^n\)</span>.</p>
 <ul>
 <li><p><strong><span class="math inline">\(\mathscr{l}^2\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_2=\sqrt{|v_1|^2+\cdots+|v_n|^2}\)</span>.</p></li>
@@ -377,7 +377,7 @@
 <li><p><strong><span class="math inline">\(\mathscr{l}^p\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_p=(|v_1|^p+\cdots+|v_n|^p)^{1/p}\)</span>.</p></li>
 <li><p><strong><span class="math inline">\(S\)</span> norm</strong>: <span class="math inline">\(\|\mathbf{v}\|_S=\sqrt{\mathbf{v}^TS\mathbf{v}}\)</span> for any symmetric positive definite matrix <span class="math inline">\(S\)</span>.</p></li>
 </ul>
-<h2 id="matrix-norm">Matrix Norm</h2>
+<h2 id="matrix-norm">8.2. Matrix Norm</h2>
 <ul>
 <li><p><strong><span class="math inline">\(\mathscr{l}^2\)</span> norm</strong> or <strong>Spectral norm</strong>: <span class="math display">\[\begin{aligned}
 \|A\|_2&amp;=\max \frac{\|A\mathbf{x}\|_2}{\|\mathbf{x}\|_2}=\max\frac{\sqrt{\mathbf{x}^T(A^TA)\mathbf{x}}}{\sqrt{\mathbf{x}^T\mathbf{x}}}=\max\sqrt{\frac{\lambda_1c_1^2+\cdots+\lambda_rc_r^2}{c_1^2+\cdots+c_r^2}}
@@ -389,7 +389,7 @@
 <li><p><strong>Nuclear norm</strong>: <span class="math inline">\(\|A\|_N=\sigma_1+\cdots+\sigma_r\)</span>.</p></li>
 <li><p>For any orthogonal matrix <span class="math inline">\(Q\)</span>, we have <span class="math inline">\(\|Q\|_2=1\)</span>, <span class="math inline">\(\|Q\|_F=\sqrt{n}\)</span>, and <span class="math inline">\(\|Q\|_N=n\)</span>. The spectral, Frobenius and nuclear norms of any matrix stay the same when <span class="math inline">\(A\)</span> is multiplies (on either side) by an orthogonal matrix.</p></li>
 </ul>
-<h1 id="principal-component-analysis-pca">Principal Component Analysis (PCA)</h1>
+<h1 id="principal-component-analysis-pca">9. Principal Component Analysis (PCA)</h1>
 <ul>
 <li><strong>(Eckart-Young Theorem)</strong> If <span class="math inline">\(B\)</span> has rank <span class="math inline">\(k\)</span>, then <span class="math display">\[\|A-B\| \geq \|A-A_k\|,\]</span> where <span class="math inline">\(A_k=U_k\Sigma_kV_k^T=\sigma_1\mathbf{u}_1\mathbf{v}_1^T+\cdots+\sigma_k\mathbf{u}_k\mathbf{v}_k^T\)</span> with <span class="math inline">\(\text{rank}(A_k)=k\)</span>.</li>
 </ul>
@@ -478,7 +478,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#column-space"><span class="nav-number">1.</span> <span class="nav-text">Column Space</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#factorization-of-matrix"><span class="nav-number">2.</span> <span class="nav-text">Factorization of Matrix</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fundamental-subspace"><span class="nav-number">3.</span> <span class="nav-text">Fundamental Subspace</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#orthonormal-matrix"><span class="nav-number">4.</span> <span class="nav-text">Orthonormal Matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#householder-reflection"><span class="nav-number">4.1.</span> <span class="nav-text">Householder Reflection</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#eigenvalue-and-eigenvector"><span class="nav-number">5.</span> <span class="nav-text">Eigenvalue and Eigenvector</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#similar-matrix"><span class="nav-number">5.1.</span> <span class="nav-text">Similar Matrix</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#symmetric-postive-definite-matrix"><span class="nav-number">6.</span> <span class="nav-text">Symmetric Postive Definite Matrix</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#singular-value-decomposition-svd"><span class="nav-number">7.</span> <span class="nav-text">Singular Value Decomposition (SVD)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#norm-of-vector-and-matrix"><span class="nav-number">8.</span> <span class="nav-text">Norm of Vector and Matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vector-norm"><span class="nav-number">8.1.</span> <span class="nav-text">Vector Norm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#matrix-norm"><span class="nav-number">8.2.</span> <span class="nav-text">Matrix Norm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#principal-component-analysis-pca"><span class="nav-number">9.</span> <span class="nav-text">Principal Component Analysis (PCA)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#column-space"><span class="nav-text">1. Column Space</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#factorization-of-matrix"><span class="nav-text">2. Factorization of Matrix</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fundamental-subspace"><span class="nav-text">3. Fundamental Subspace</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#orthonormal-matrix"><span class="nav-text">4. Orthonormal Matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#householder-reflection"><span class="nav-text">4.1. Householder Reflection</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#eigenvalue-and-eigenvector"><span class="nav-text">5. Eigenvalue and Eigenvector</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#similar-matrix"><span class="nav-text">5.1. Similar Matrix</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#symmetric-postive-definite-matrix"><span class="nav-text">6. Symmetric Postive Definite Matrix</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#singular-value-decomposition-svd"><span class="nav-text">7. Singular Value Decomposition (SVD)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#norm-of-vector-and-matrix"><span class="nav-text">8. Norm of Vector and Matrix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vector-norm"><span class="nav-text">8.1. Vector Norm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#matrix-norm"><span class="nav-text">8.2. Matrix Norm</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#principal-component-analysis-pca"><span class="nav-text">9. Principal Component Analysis (PCA)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

@@ -257,8 +257,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="outer-measure">Outer Measure</h1>
-<h2 id="definition-and-example">Definition and Example</h2>
+        <h1 id="outer-measure">1. Outer Measure</h1>
+<h2 id="definition-and-example">1.1. Definition and Example</h2>
 <p><span id="def1.1"><strong>Definition 1.1</strong></span>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span>. The <strong>outer measure</strong> of <span class="math inline">\(E\)</span> is <span class="math display">\[m^*(E):=\inf\left\{\sum_{i=1}^\infty |I_i|: \bigcup_{i=1}^\infty I_i \supset E \right\},\]</span> where <span class="math inline">\(I_i\)</span> is open, and <span class="math inline">\(|I_i|\)</span> is the volume of <span class="math inline">\(I_i\)</span>.</p>
 <div class="note warning">
             <p>In <a href="#def1.1">definition 1.1</a>, we need <strong>at most countable</strong> <span class="math inline">\(\{I_i\}\)</span>. For example, if <span class="math inline">\([0, 1] \cap \mathbb{Q}\)</span> is covered by finite intervals, then those finite intervals and endpoints cover <span class="math inline">\([0, 1]\)</span>. Therefore, <span class="math inline">\(m^*([0, 1] \cap \mathbb{Q}) \geq 1\)</span>. Similarly, <span class="math inline">\(m^*([0, 1] \cap \mathbb{Q}^c) \geq 1\)</span>, and thus <span class="math inline">\(m^*([0, 1]) \geq 2\)</span>. In other cases, <span class="math inline">\(I_i\)</span> can be an empty set and thus <span class="math inline">\(\{I_i\}\)</span> can be finite.</p>
@@ -280,7 +280,7 @@
 <span class="math inline">\(\square\)</span>
 </p>
 <p><strong>Example 1.5</strong>    <span class="math inline">\(m^*([0, 1] \cap \mathbb{Q})=0\)</span>.</p>
-<h2 id="basic-property">Basic Property</h2>
+<h2 id="basic-property">1.2. Basic Property</h2>
 <p><strong>Property 1.1 (Nonnegativity)</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span>, <span class="math inline">\(m^*(E) \geq 0\)</span>. Besides, <span class="math inline">\(m^*(\varnothing)=0\)</span>.</p>
 <p><strong>Property 1.2 (Countable Subadditivity)</strong>    Suppose <span class="math inline">\(A_i \subset \mathbb{R}^n\)</span>. <span class="math inline">\(\displaystyle m^*\left(\bigcup_{i=1}^\infty A_i\right) \leq \sum_{i=1}^\infty m^*(A_i)\)</span>.</p>
 <strong><em>Proof.</em></strong> Take an arbitrary <span class="math inline">\(\varepsilon&gt;0\)</span>, there exists an open cover of <span class="math inline">\(A_i\)</span>, <span class="math inline">\(\displaystyle \bigcup_{m=1}^\infty I_{i, m}\)</span> such that <span class="math display">\[m^*(A_i) \geq \sum_{m=1}^\infty |I_{i, m}|-\frac{\varepsilon}{2^i}, \bigcup_{i=1}^\infty A_i \subset \bigcup_{i, m=1}^\infty I_{i, m}.\]</span> Therefore, <span class="math display">\[\begin{aligned}
@@ -304,11 +304,11 @@ We now suppose <span class="math inline">\(I\)</span> is an arbitrary interval. 
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<h1 id="measurable-set">Measurable Set</h1>
-<h2 id="definition">Definition</h2>
+<h1 id="measurable-set">2. Measurable Set</h1>
+<h2 id="definition">2.1. Definition</h2>
 <p><strong>Definition 2.1</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is bounded, and <span class="math inline">\(I \supset E\)</span> is open. The <strong>inner measure</strong> of <span class="math inline">\(E\)</span> is <span class="math display">\[m_*(E)=|I|-m^*(I-E).\]</span></p>
 <div class="note info">
-            <p><font color="#696969" font size=2>显然，若<span class="math inline">\(E\)</span>有界，且<span class="math inline">\(m^*(E)=m_*(E)\)</span>，我们能得到<strong>可测</strong>的定义. 然而，我们希望能对任何一个<span class="math inline">\(E\)</span>定义可测，而上述的定义则有所限制. 此外，这一定义需要同时使用内外测度的定义. 因此，Carathéodory提出了一个更简洁地等价定义.</font></p>
+            <p><font color="#696969" font size="2">显然，若<span class="math inline">\(E\)</span>有界，且<span class="math inline">\(m^*(E)=m_*(E)\)</span>，我们能得到<strong>可测</strong>的定义. 然而，我们希望能对任何一个<span class="math inline">\(E\)</span>定义可测，而上述的定义则有所限制. 此外，这一定义需要同时使用内外测度的定义. 因此，Carathéodory提出了一个更简洁地等价定义.</font></p>
           </div>
 <p><strong>Definition 2.2</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is a set. If for any set <span class="math inline">\(T \subset \mathbb{R}^n\)</span>, we have <span class="math display">\[m^*(T)=m^*(T \cap E)+m^*(T \cap E^c),\]</span> then <span class="math inline">\(E\)</span> is <strong>L-measurable</strong> or <strong>measurable</strong>. The <strong>L-measure</strong>, denoted <span class="math inline">\(m(E)\)</span>, equals to <span class="math inline">\(m^*(E)\)</span>. The collection of all measurable sets is called family of measurable sets, denoted as <span class="math inline">\(\mathscr{M}\)</span>.</p>
 <p><span id="thm2.1"><strong>Theorem 2.1</strong></span>    <span class="math inline">\(E\)</span> is measurable if and only if for any <span class="math inline">\(A \subset E\)</span> and <span class="math inline">\(B \subset E^c\)</span>, we have <span class="math display">\[m^*(A \cup B)=m^*(A)+m^*(B).\]</span></p>
@@ -317,7 +317,7 @@ We now suppose <span class="math inline">\(I\)</span> is an arbitrary interval. 
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<h2 id="operation">Operation</h2>
+<h2 id="operation">2.2. Operation</h2>
 <p><strong>Theorem 2.2</strong>    <span class="math inline">\(S\)</span> is measurable if and only if <span class="math inline">\(S^c\)</span> is measurable.</p>
 <strong><em>Proof.</em></strong> If <span class="math inline">\(S\)</span> is measurable, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[m^*(T)=m^*(T \cap S)+m^*(T \cap S^c)=m^*(T \cap (S^c)^c)+m^*(T \cap S^c),\]</span> which is equivalent to say that <span class="math inline">\(S^c\)</span> is measurable.
 <p align="right">
@@ -334,7 +334,7 @@ m^*(T)&amp;=m^*(T \cap S_1)+m^*(T \cap S_1^c) \\
 <span class="math inline">\(\square\)</span>
 </p>
 <div class="note info">
-            <p><font color="#696969" font size=2>对于不熟悉集合运算的读者，我们建议利用韦恩图逆推.</font></p>
+            <p><font color="#696969" font size="2">对于不熟悉集合运算的读者，我们建议利用韦恩图逆推.</font></p>
           </div>
 <p><strong>Theorem 2.4</strong>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, and <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[m^*(T \cap (S_1 \cup S_2))=m^*(T \cap S_1)+m^*(T \cap S_2).\]</span></p>
 <strong><em>Proof.</em></strong> Since <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then for any set <span class="math inline">\(T\)</span>, we have <span class="math inline">\(T \cap S_1 \subset S_1\)</span> and <span class="math inline">\(T \cap S^2 \subset S_1^c\)</span>. Since <span class="math inline">\(S_1\)</span> is measurable, then by <a href="#thm2.1">theorem 2.1</a>, <span class="math display">\[m^*(T \cap (S_1 \cup S_2))=m^*((T \cap S_1) \cup (T \cap S_2))=m^*(T \cap S_1)+m^*(T \cap S_2).\]</span>
@@ -391,17 +391,17 @@ Let <span class="math inline">\(\widetilde{S}_i=S_1-S_i\)</span>, then <span cla
             <p>The condition <span class="math inline">\(m(S_1)&lt;\infty\)</span> is important. For example, <span class="math inline">\(S_n=(n, \infty)\)</span>. It is obvious that <span class="math inline">\(\{S_n\}\)</span> is decreasing. Therefore, <span class="math inline">\(\displaystyle \lim_{n \to \infty} S_n=\bigcap_{n=1}^\infty S_n=\varnothing\)</span>, and <span class="math inline">\(\displaystyle m\left(\lim_{n \to \infty} S_n\right)=0\)</span>. However, <span class="math inline">\(m(S_n)=\infty\)</span>, and <span class="math inline">\(\displaystyle \lim_{n \to \infty} m(S_n)=\infty\)</span>.</p>
           </div>
 <p><strong>Theorem 2.14</strong>    Suppose <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> is a collection of measurable sets. If the upper limit and lower limit of <span class="math inline">\(\{S_i\}_{i=1}^\infty\)</span> and measure exist, then <span class="math inline">\(\displaystyle m\left(\varliminf_{i \to \infty} S_i \right) \leq \varliminf_{i \to \infty} m(S_i) \leq \varlimsup_{i \to \infty} m(S_i) \leq m\left(\varlimsup_{i \to \infty} S_i\right)\)</span>. Note that we need <span class="math inline">\(\displaystyle m\left(\bigcup_{i=1}^\infty S_i\right)&lt;\infty\)</span> to prove <span class="math inline">\(\displaystyle \varlimsup_{i \to \infty} m(S_i) \leq m\left(\varlimsup_{i \to \infty} S_i\right)\)</span>.</p>
-<h1 id="sigma-algebra"><span class="math inline">\(\sigma\)</span>-Algebra</h1>
+<h1 id="sigma-algebra">3. \(\sigma\)-Algebra</h1>
 <p><strong>Definition 3.1</strong>    Suppose <span class="math inline">\(\{F_i\}_{i=1}^\infty\)</span> is a collection of closed sets, and <span class="math inline">\(\{G_i\}_{i=1}^\infty\)</span> is a collection of open sets. If <span class="math inline">\(\displaystyle F=\bigcup_{i=1}^\infty F_i\)</span>, then <span class="math inline">\(F\)</span> is an <strong><span class="math inline">\(F_\sigma\)</span> set</strong>. If <span class="math inline">\(\displaystyle G=\bigcap_{i=1}^\infty G_i\)</span>, then <span class="math inline">\(G\)</span> is a <strong><span class="math inline">\(G_\delta\)</span> set</strong>.</p>
 <div class="note info">
-            <p><font color="#696969" font size=2><span class="math inline">\(F\)</span><strong>可能</strong>来自于法语中的fermé，意为闭. <span class="math inline">\(\sigma\)</span><strong>可能</strong>来自于德语中的Summe，意为总和. 因此<span class="math inline">\(F_\sigma\)</span>型集表示闭集的可数并. <span class="math inline">\(G\)</span><strong>可能</strong>来自于德语中的Gebiet，意为区域，可以理解为连通的开集. <span class="math inline">\(\delta\)</span><strong>可能</strong>来自于德语中的Durchschnitt，意为横断. 因此<span class="math inline">\(G_\delta\)</span>型集表示开集的可数交.</font></p>
+            <p><font color="#696969" font size="2"><span class="math inline">\(F\)</span><strong>可能</strong>来自于法语中的fermé，意为闭. <span class="math inline">\(\sigma\)</span><strong>可能</strong>来自于德语中的Summe，意为总和. 因此<span class="math inline">\(F_\sigma\)</span>型集表示闭集的可数并. <span class="math inline">\(G\)</span><strong>可能</strong>来自于德语中的Gebiet，意为区域，可以理解为连通的开集. <span class="math inline">\(\delta\)</span><strong>可能</strong>来自于德语中的Durchschnitt，意为横断. 因此<span class="math inline">\(G_\delta\)</span>型集表示开集的可数交.</font></p>
           </div>
 <p><strong>Definition 3.2</strong>    Suppose <span class="math inline">\(\Omega\)</span> is the family of sets including some subsets of <span class="math inline">\(X\)</span>. <span class="math inline">\(\Omega\)</span> is called a <strong><span class="math inline">\(\sigma\)</span>-algebra</strong> if it has the following properties:</p>
 <p>    (1) <span class="math inline">\(X \in \Omega\)</span>;</p>
 <p>    (2) <span class="math inline">\(\Omega\)</span> is closed under countable union;</p>
 <p>    (3) <span class="math inline">\(\Omega\)</span> is closed under complement.</p>
 <div class="note info">
-            <p><font color="#696969" font size=2>显然，可测集类<span class="math inline">\(\mathscr{M}\)</span>是<span class="math inline">\(\mathbb{R}^n\)</span>上的<span class="math inline">\(\sigma\)</span>-代数.</font></p>
+            <p><font color="#696969" font size="2">显然，可测集类<span class="math inline">\(\mathscr{M}\)</span>是<span class="math inline">\(\mathbb{R}^n\)</span>上的<span class="math inline">\(\sigma\)</span>-代数.</font></p>
           </div>
 <p><strong>Definition 3.3</strong>    Suppose <span class="math inline">\(\Sigma\)</span> is the family of sets including some subsets of <span class="math inline">\(X\)</span>. <strong><span class="math inline">\(\sigma\)</span>-algebra generated by <span class="math inline">\(\Sigma\)</span></strong> is the intersection of all <span class="math inline">\(\sigma\)</span>-algebras containing <span class="math inline">\(\Sigma\)</span> on <span class="math inline">\(X\)</span>.</p>
 <p><strong>Definition 3.4</strong>    <strong>Borel <span class="math inline">\(\sigma\)</span>-algebra</strong> is a <span class="math inline">\(\sigma\)</span>-algebra generated by all open sets on <span class="math inline">\(\mathbb{R}^n\)</span>, denoted as <span class="math inline">\(\mathscr{B}\)</span>. The element in <span class="math inline">\(\mathscr{B}\)</span> is called <strong>Borel set</strong>.</p>
@@ -423,7 +423,7 @@ Therefore, <span class="math inline">\(\mathscr{A}\)</span> is a <span class="ma
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<h1 id="family-of-measurable-sets">Family of Measurable Sets</h1>
+<h1 id="family-of-measurable-sets">4. Family of Measurable Sets</h1>
 <p><strong>Theorem 4.1</strong>    Any interval <span class="math inline">\(I\)</span> in <span class="math inline">\(\mathbb{R}^n\)</span> is measurable.</p>
 <p><strong>Theorem 4.2</strong>    Any Borel set is measurable.</p>
 <p><strong>Theorem 4.3</strong>    Any zero measure set <span class="math inline">\(A\)</span> is measurable.</p>
@@ -459,13 +459,13 @@ Because of countable subadditivity, we have <span class="math inline">\(m^*(T)=m
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<p><span id="thm4.8"><strong>Corollary 4.8</strong>    If <span class="math inline">\(E\)</span> is measurable, then there exists an <span class="math inline">\(F_\sigma\)</span> set <span class="math inline">\(F\)</span> such that <span class="math inline">\(F \subset E\)</span> and <span class="math inline">\(m(E-F)=0\)</span>.</p>
+<p><span id="thm4.8"><strong>Corollary 4.8</strong>    If <span class="math inline">\(E\)</span> is measurable, then there exists an <span class="math inline">\(F_\sigma\)</span> set <span class="math inline">\(F\)</span> such that <span class="math inline">\(F \subset E\)</span> and <span class="math inline">\(m(E-F)=0\)</span>.</span></p>
 <div class="note info">
-            <p><font color="#696969" font size=2>根据<a href="#thm4.7">定理4.7</a>与其<a href="#thm4.8">推论</a>，如果我们有了所有的<span class="math inline">\(G_\delta\)</span>型集（或<span class="math inline">\(F_\sigma\)</span>型集）与零测集，那么我们就知道了所有的可测集. 可测集一定可以表示为<span class="math display">\[E=G_\delta-M_0=F_\sigma \cup M_0.\]</span></font></p>
+            <p><font color="#696969" font size="2">根据<a href="#thm4.7">定理4.7</a>与其<a href="#thm4.8">推论</a>，如果我们有了所有的<span class="math inline">\(G_\delta\)</span>型集（或<span class="math inline">\(F_\sigma\)</span>型集）与零测集，那么我们就知道了所有的可测集. 可测集一定可以表示为<span class="math display">\[E=G_\delta-M_0=F_\sigma \cup M_0.\]</span></font></p>
           </div>
-<h1 id="non-measurable-set-in-mathbbr">Non-Measurable Set in <span class="math inline">\(\mathbb{R}\)</span></h1>
+<h1 id="non-measurable-set-in-mathbbr">5. Non-Measurable Set in \(\mathbb{R}\)</h1>
 <div class="note default">
-            <p><font color="#696969" font size=2>此前，我们一直在回答什么是可测集，并发现可测集是存在的——我们构造集合通常都是从区间出发，经过一系列并、交、差等运算来获得，而这样的集合都是Borel集，总是可测的. 我们还需要回答不可测集是否存在的问题——我们可以利用Lebesgue测度的平移不变性，构造一个不可测集. 当然，在一般的数学实践中，遇到不可测集的机会是极少的，它通常只是被用来构成各种特例.</font></p>
+            <p><font color="#696969" font size="2">此前，我们一直在回答什么是可测集，并发现可测集是存在的——我们构造集合通常都是从区间出发，经过一系列并、交、差等运算来获得，而这样的集合都是Borel集，总是可测的. 我们还需要回答不可测集是否存在的问题——我们可以利用Lebesgue测度的平移不变性，构造一个不可测集. 当然，在一般的数学实践中，遇到不可测集的机会是极少的，它通常只是被用来构成各种特例.</font></p>
           </div>
 <p><strong>Property 5.1 (Translation Invariance)</strong>    Suppose <span class="math inline">\(E\)</span> is measurable and <span class="math inline">\(\tau_\alpha E=\{x+\alpha: x \in E\}\)</span>, then <span class="math inline">\(\tau_\alpha E\)</span> is measurable and <span class="math inline">\(m^*(E)=m^*(\tau_\alpha E)\)</span>.</p>
 <p><strong>Property 5.2 (Reflection Invariance)</strong>    Suppose <span class="math inline">\(E\)</span> is measurable and <span class="math inline">\(\tau E=\{-x: x \in E\}\)</span>, then <span class="math inline">\(\tau E\)</span> is measurable and <span class="math inline">\(m^*(E)=m^*(\tau E)\)</span>.</p>
@@ -560,7 +560,7 @@ Because of countable subadditivity, we have <span class="math inline">\(m^*(T)=m
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#outer-measure"><span class="nav-number">1.</span> <span class="nav-text">Outer Measure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#definition-and-example"><span class="nav-number">1.1.</span> <span class="nav-text">Definition and Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basic-property"><span class="nav-number">1.2.</span> <span class="nav-text">Basic Property</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#measurable-set"><span class="nav-number">2.</span> <span class="nav-text">Measurable Set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#definition"><span class="nav-number">2.1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#operation"><span class="nav-number">2.2.</span> <span class="nav-text">Operation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sigma-algebra"><span class="nav-number">3.</span> <span class="nav-text">\(\sigma\)-Algebra</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#family-of-measurable-sets"><span class="nav-number">4.</span> <span class="nav-text">Family of Measurable Sets</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#non-measurable-set-in-mathbbr"><span class="nav-number">5.</span> <span class="nav-text">Non-Measurable Set in \(\mathbb{R}\)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#outer-measure"><span class="nav-text">1. Outer Measure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#definition-and-example"><span class="nav-text">1.1. Definition and Example</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#basic-property"><span class="nav-text">1.2. Basic Property</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#measurable-set"><span class="nav-text">2. Measurable Set</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#definition"><span class="nav-text">2.1. Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#operation"><span class="nav-text">2.2. Operation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sigma-algebra"><span class="nav-text">3. \(\sigma\)-Algebra</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#family-of-measurable-sets"><span class="nav-text">4. Family of Measurable Sets</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#non-measurable-set-in-mathbbr"><span class="nav-text">5. Non-Measurable Set in \(\mathbb{R}\)</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

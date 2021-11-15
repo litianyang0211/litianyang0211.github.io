@@ -258,14 +258,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="definition">Definition</h1>
+        <h1 id="definition">1. Definition</h1>
 <p><strong>Definition 1.1</strong>    Let <span class="math inline">\(\{p_\theta: \theta \in \Theta\}\)</span> be a collection of probability densities over <span class="math inline">\(\mathcal{X}\)</span>. We say that <span class="math inline">\(p\)</span> forms an <strong>exponential family</strong> if it can be written as <span class="math display">\[p_\theta(x)=\exp\left[\sum_{i=1}^p \theta_i\phi_i(x)-A(\theta)-C(x)\right].\]</span> If <span class="math inline">\(\Theta\)</span> is non-empty open set, we say that <span class="math inline">\(p_\theta\)</span> is <strong>regular</strong>. The function <span class="math inline">\(\phi_i\)</span> is the <strong>sufficient statistic</strong>, and the component <span class="math inline">\(\theta_i\)</span> is the <strong>canonical parameter</strong> or <strong>natural parameter</strong>. We can replace the sum with an inner product of vectors <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\phi\)</span>: <span class="math display">\[p_\theta(x)=\exp[\langle \theta, \phi(x) \rangle-A(\theta)-C(x)].\]</span></p>
 <div class="note info">
             <p>Note that <span class="math display">\[1=\int_\mathcal{X} p_\theta(x)\text{d}x=\exp[-A(\theta)]\int_\mathcal{X} \exp[\langle \theta, \phi(x) \rangle-C(x)]\text{d}x.\]</span> Hence, <span class="math display">\[A(\theta)=\ln\int_\mathcal{X} \exp[\langle \theta, \phi(x) \rangle-C(x)]\text{d}x.\]</span> The function <span class="math inline">\(A(\theta)\)</span> is the <strong>cumulant function</strong>, and <span class="math inline">\(\exp[A(\theta)]\)</span> is the <strong>partition function</strong>.</p>
           </div>
 <p><strong>Theorem 1.1</strong>    We have <span class="math display">\[\nabla_\theta A(\theta)=\mathbb{E}_\theta\phi(X) \quad \text{and} \quad \nabla\nabla^TA(\theta)=\text{Cov}_\theta\phi(X).\]</span> Consequently <span class="math inline">\(A(\theta)\)</span> is convex, because <span class="math inline">\(\text{Cov}_\theta\phi(X) \succeq 0\)</span>.</p>
 <p><span id="eg1.1"><strong>Example 1.1</strong></span>    Let <span class="math inline">\(X \sim \text{Poisson}(\lambda)\)</span>, we have <span class="math display">\[\ln f(x; \lambda)=-\lambda+x\ln\lambda-\ln x!,\]</span> then <span class="math inline">\(\phi(x)=x\)</span>, <span class="math inline">\(\theta=\ln\lambda\)</span>, and <span class="math inline">\(A(\theta)=\lambda=e^\theta\)</span>. Then <span class="math display">\[A&#39;(\theta)=e^\theta=\mathbb{E}X\]</span> and <span class="math display">\[A&#39;&#39;(\theta)=e^\theta=\text{Var}X.\]</span></p>
-<h1 id="empirical-moment-matching">Empirical Moment Matching</h1>
+<h1 id="empirical-moment-matching">2. Empirical Moment Matching</h1>
 <p>To find the MLE in an exponential family, we maximize the log-likelihood (ignoring <span class="math inline">\(C\)</span>, since it is constant in <span class="math inline">\(\theta\)</span>). We have <span class="math display">\[\begin{aligned}
 l(\theta)&amp;=\sum_{i=1}^n \langle \theta, \phi(X_i) \rangle -nA(\theta)+C
 \\&amp;=\left\langle \theta, \sum_{i=1}^n \phi(X_i) \right\rangle-nA(\theta)+C
@@ -274,7 +274,7 @@ l(\theta)&amp;=\sum_{i=1}^n \langle \theta, \phi(X_i) \rangle -nA(\theta)+C
 <p><strong>Example 2.1</strong>    From <a href="#eg1.1">example 1.1</a>, we know that <span class="math inline">\(\overline{\phi(X)}=\overline{X}\)</span> and the MLE is <span class="math inline">\(\widehat{\lambda}=\overline{X}\)</span>.</p>
 <p><strong>Example 2.2</strong>    Let <span class="math inline">\(X \sim \text{Binomial}(n, p)\)</span> with <span class="math inline">\(n\)</span> fixed. We have <span class="math display">\[\ln f(x; p)=x \ln p+(n-x)\ln(1-p)+C=x\ln\frac{p}{1-p}+n\ln(1-p)+C,\]</span> then <span class="math inline">\(\phi(x)=x\)</span>, <span class="math inline">\(\displaystyle \theta=\ln\frac{p}{1-p}\)</span>, and <span class="math inline">\(A(\theta)=-n\ln(1-p)=n\ln(1+e^\theta)\)</span>. Then <span class="math display">\[A&#39;(\theta)=\frac{ne^\theta}{1+e^\theta}=np\]</span> and <span class="math display">\[A&#39;&#39;(\theta)=\frac{ne^\theta}{(1+e^\theta)^2}=np(1-p).\]</span></p>
 <p>Since <span class="math inline">\(\overline{\phi(X)}=\overline{X}\)</span> and thus the MLE is <span class="math inline">\(\displaystyle \widehat{p}=\overline{X}\)</span>.</p>
-<h1 id="multivariate-gaussian-distribution">Multivariate Gaussian Distribution</h1>
+<h1 id="multivariate-gaussian-distribution">3. Multivariate Gaussian Distribution</h1>
 <p><strong>Definition 3.1</strong>    Let <span class="math inline">\(X_V=(X_1, \ldots, X_p)^T \in \mathbb{R}^p\)</span> be a random vector. Let <span class="math inline">\(\mu \in \mathbb{R}^p\)</span> and <span class="math inline">\(\Sigma \in \mathbb{R}^{p \times p}\)</span> be a positive definite symmetric matrix. We say that <span class="math inline">\(X_V\)</span> has a <strong>multivariate Gaussian distribution</strong> or <strong>multivariate normal distribution</strong> with parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\Sigma\)</span> if for all <span class="math inline">\(x_V \in \mathbb{R}^p\)</span>, the joint density is <span class="math display">\[\begin{aligned}
 f(x_V; \mu, \Sigma)&amp;=\frac{1}{(2\pi)^{p/2}|\Sigma|^{1/2}}\exp\left[-\frac{1}{2}(x_V-\mu)^T\Sigma^{-1}(x_V-\mu)\right]
 \\&amp;=\frac{1}{(2\pi)^{p/2}} \exp\left[-\frac{1}{2}x_V^TKx_V+\mu^TKx_V-\frac{1}{2}\mu^TK\mu+\frac{1}{2}\ln|K|\right],
@@ -282,7 +282,7 @@ f(x_V; \mu, \Sigma)&amp;=\frac{1}{(2\pi)^{p/2}|\Sigma|^{1/2}}\exp\left[-\frac{1}
 <div class="note info">
             <p>Note that <span class="math display">\[\begin{aligned}-\frac{1}{2}x_V^TKx_V+\mu^TKx_V-\frac{1}{2}\mu^TK\mu+\frac{1}{2}\ln|K|&amp;=-\frac{1}{2}\text{Tr}(x_V^TKx_V)+\mu^TKx_V-A(\theta)\\&amp;=-\frac{1}{2}\text{Tr}(Kx_Vx_V^T)+\mu^TKx_V-A(\theta)\\&amp;=-\frac{1}{2}\text{vec}(K)^T\text{vec}(x_Vx_V^T)+\mu^TKx_V-A(\theta).\end{aligned}\]</span> Hence, the canonical parameter is <span class="math inline">\(\begin{bmatrix} -\frac{1}{2}\text{vec}(K) \\ K\mu \end{bmatrix}\)</span> and the sufficient statistic is <span class="math inline">\(\begin{bmatrix} \text{vec}(x_Vx_V^T) \\ x_V \end{bmatrix}\)</span>.</p>
           </div>
-<h1 id="contingency-table">Contingency Table</h1>
+<h1 id="contingency-table">4. Contingency Table</h1>
 <p><strong>Definition 4.1</strong>    Consider multivariate systems of vectors <span class="math inline">\(X_V=(X_v: v \in V)\)</span> for some set <span class="math inline">\(V=\{1, \ldots, p\}\)</span>, and <span class="math inline">\(X_A=(X_v: v \in A)\)</span> for any <span class="math inline">\(A \subseteq V\)</span>. We assume that each <span class="math inline">\(X_v \in \mathcal{X}_v=\{1, \ldots, d_v\}\)</span> (usually <span class="math inline">\(d_v=2\)</span>). If we have <span class="math inline">\(n\)</span> i.i.d. observations, then for <span class="math inline">\(i=1, \ldots, n\)</span>, <span class="math display">\[X_V^{(i)}=(X_1^{(i)}, \ldots, X_p^{(i)})^T.\]</span> Define <span class="math display">\[n(x_V)=\sum_{i=1}^n \mathbb{1}\{X_1^{(i)}=x_1, \ldots, X_p^{(i)}=x_p\},\]</span> i.e., the number of individuals who have the response pattern <span class="math inline">\(x_V\)</span>.</p>
 <p>A <strong>marginal table</strong> only counts some of the variables: <span class="math display">\[n(x_A)=\sum_{i=1}^n \mathbb{1}\{X_a^{(i)}=x_a: a \in A\}=\sum_{x_{V-A}} n(x_A, x_{V-A}).\]</span></p>
 <p><strong>Example 4.1</strong>    Consider a contingency table:</p>
@@ -323,15 +323,15 @@ No aspirin (<span class="math inline">\(NA\)</span>)
 <th>
 <center>
 <span class="math inline">\(28\)</span>
-</th>
+</center></th>
 <th>
 <center>
 <span class="math inline">\(656\)</span>
-</th>
+</center></th>
 <th>
 <center>
 <span class="math inline">\(684\)</span>
-</th>
+</center></th>
 </tr>
 <tr>
 <th>
@@ -342,15 +342,15 @@ Aspirin (<span class="math inline">\(AS\)</span>)
 <th>
 <center>
 <span class="math inline">\(18\)</span>
-</th>
+</center></th>
 <th>
 <center>
 <span class="math inline">\(658\)</span>
-</th>
+</center></th>
 <th>
 <center>
 <span class="math inline">\(676\)</span>
-</th>
+</center></th>
 </tr>
 <th>
 <center>
@@ -360,26 +360,26 @@ Total
 <th>
 <center>
 <span class="math inline">\(46\)</span>
-</th>
+</center></th>
 <th>
 <center>
 <span class="math inline">\(1314\)</span>
-</th>
+</center></th>
 <th>
 <center>
 <span class="math inline">\(1360\)</span>
-</th>
-</tr>
+</center></th>
+
 </tbody>
 </table>
 <p>Suppose <span class="math inline">\(x_V=(YE, NA)\)</span>, then <span class="math display">\[n(x_V)=\sum_{i=1}^n \mathbb{1}\{X_1^{(i)}=YE, X_2^{(i)}=NA\}=28.\]</span> Suppose <span class="math inline">\(A=\{1\}\)</span> and <span class="math inline">\(x_A=(YE)\)</span>. then <span class="math display">\[n(x_A)=\sum_{i=1}^n \mathbb{1}\{X_1^{(i)}=YE\}=46\]</span> or <span class="math display">\[n(x_A)=\sum_{x_2} n(x_A, x_2)=28+18=46.\]</span></p>
-<h2 id="probabilistic-model">Probabilistic Model</h2>
+<h2 id="probabilistic-model">4.1. Probabilistic Model</h2>
 <p>Suppose we have i.i.d. data, and we have <span class="math inline">\(P(X_V^{(i)}=x_V)=p(x_V)\)</span> for each <span class="math inline">\(X_v \in \{1, \ldots, d_v\}\)</span>. The distribution of the counts is <span class="math display">\[P(n(x_V): x_V \in \mathcal{X}_V)=\frac{n!}{\displaystyle \prod_{y_V \in \mathcal{X}_V}n(y_V)!}\prod_{y_V \in \mathcal{X}_V} p(y_V)^{n(y_V)}\]</span> for all <span class="math inline">\(p\)</span> s.t. <span class="math inline">\(\displaystyle \sum_{x_V} p(x_V)=1\)</span>.</p>
 <p>Note that <span class="math display">\[\begin{aligned}
 \ln P(n(x_V))&amp;=C+\sum_{y_V} n(y_V) \ln p(y_V)\ \ \left(\sum_{x_V} p(x_V)=1\right)
 \\&amp;=C+\sum_{y_V \neq 0_V} n(y_V) \ln\frac{p(y_V)}{p(0_V)}+n \ln p(0_V).
 \end{aligned}\]</span> Then the multinomial model is an exponential family with <span class="math inline">\(\phi(\mathbf{n})=\mathbf{n}\)</span> and <span class="math inline">\(\displaystyle \theta(x_V)=\ln\frac{p(x_V)}{p(0_V)}\)</span>. The MLE for multinomial is <span class="math inline">\(\displaystyle \widehat{\theta}(x_V)=\ln\frac{n(x_V)}{n(0_V)}\)</span>.</p>
-<h1 id="log-linear-model">Log-Linear Model</h1>
+<h1 id="log-linear-model">5. Log-Linear Model</h1>
 <p><strong>Definition 5.1</strong>    Let <span class="math inline">\(p(x_V)&gt;0\)</span>, then the <strong>log-linear parameter</strong> <span class="math inline">\(\lambda_A(x_A)\)</span> for <span class="math inline">\(A \subseteq V\)</span> is defined by <span class="math display">\[\ln p(x_V)=\sum_{A \subseteq V} \lambda_A(x_A)=\lambda_\varnothing+\lambda_1(x_1)+\cdots+\lambda_V(x_V)\]</span> s.t. identifiability constraint <span class="math inline">\(\lambda_A(x_A)=0\)</span> if <span class="math inline">\(x_a=1\)</span> for any <span class="math inline">\(a \in A\)</span>.</p>
 <div class="note info">
             <p>In the case of binary variables (i.e., each variable takes only two states, <span class="math inline">\(d_v=2\)</span>, or <span class="math inline">\(\mathcal{X}_v=\{1, 2\}\)</span>), there is only one possible non-zero level for each log-linear parameter <span class="math inline">\(\lambda_A(x_A)\)</span> which is when <span class="math inline">\(x_A=(2, \ldots, 2)\)</span>. In this case, we write <span class="math inline">\(\lambda_A=\lambda_A(2, \ldots, 2)\)</span>.</p>
@@ -390,7 +390,7 @@ Total
 <p>Hence, <span class="math inline">\(\lambda_W(x_W)=\lambda_W^{AC}(x_W)\)</span> for any <span class="math inline">\(W \subseteq A \cup C\)</span> with <span class="math inline">\(W \cap A \neq \varnothing\)</span>, <span class="math inline">\(\lambda_W(x_W)=\lambda_W^{BC}(x_W)\)</span> for any <span class="math inline">\(W \subseteq B \cup C\)</span> with <span class="math inline">\(W \cap B \neq \varnothing\)</span>, and <span class="math inline">\(\lambda_W(x_W)=\lambda_W^{AC}(x_W)+\lambda_W^{BC}(x_W)-\lambda_W^C(x_W)\)</span> for any <span class="math inline">\(W \subseteq C\)</span>.</p>
 <p>Under this conditional independence, the log-linear parameters for <span class="math inline">\(p(x_V)\)</span> are easily obtainable from those for <span class="math inline">\(p(x_A, x_C)\)</span> and <span class="math inline">\(p(x_B, x_C)\)</span>.</p>
 <p><strong><em><a target="_blank" rel="noopener" href="https://github.com/litianyang0211/OxfordNotes/blob/main/Graphical%20Models/Log-Linear%20Model.ipynb">HERE</a></em></strong> is the full demo of log-linear model.</p>
-<h2 id="poisson-multinomial-equivalence">Poisson-Multinomial Equivalence</h2>
+<h2 id="poisson-multinomial-equivalence">5.1. Poisson-Multinomial Equivalence</h2>
 <p><strong>Theorem 5.2</strong>    Let <span class="math inline">\(X_i \sim \text{Poisson}(\mu_i)\)</span> independently, and let <span class="math inline">\(\displaystyle N=\sum_{i=1}^k X_i\)</span>. Then <span class="math display">\[N \sim \text{Poisson}(\mu)\]</span> and <span class="math display">\[(X_1, \ldots, X_k)^T \mid N=n \sim \text{Multinom}(n, (\pi_1, \ldots, \pi_k)^T),\]</span> where <span class="math inline">\(\displaystyle \mu=\sum_{i=1}^k \mu_i\)</span> and <span class="math inline">\(\displaystyle \pi_i=\frac{\mu_i}{\mu}\)</span>.</p>
 <strong><em>Proof.</em></strong> The Poisson likelihood is <span class="math display">\[\begin{aligned}
 L(\mu_1, \ldots, \mu_k; x_1, \ldots, x_k) &amp;\propto \prod_{i=1}^k e^{-\mu_i}\mu_i^{x_i}
@@ -425,8 +425,8 @@ L(\mu_1, \ldots, \mu_k; x_1, \ldots, x_k) &amp;\propto \prod_{i=1}^k e^{-\mu_i}\
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/Mathematics/Numerical-linear-algebra/Courant-Fisher_Minmax_Theorem" rel="prev" title="Courant-Fisher Minmax Theorem">
-      <i class="fa fa-chevron-left"></i> Courant-Fisher Minmax Theorem
+    <a href="/Mathematics/Network-science/Introduction_to_Network" rel="prev" title="Introduction to Network">
+      <i class="fa fa-chevron-left"></i> Introduction to Network
     </a></div>
       <div class="post-nav-item">
     <a href="/Computer-science/Deep-learning/Introduction_to_Deep_Learning" rel="next" title="Introduction to Deep Learning">
@@ -490,7 +490,7 @@ L(\mu_1, \ldots, \mu_k; x_1, \ldots, x_k) &amp;\propto \prod_{i=1}^k e^{-\mu_i}\
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#definition"><span class="nav-number">1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#empirical-moment-matching"><span class="nav-number">2.</span> <span class="nav-text">Empirical Moment Matching</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#multivariate-gaussian-distribution"><span class="nav-number">3.</span> <span class="nav-text">Multivariate Gaussian Distribution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#contingency-table"><span class="nav-number">4.</span> <span class="nav-text">Contingency Table</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#probabilistic-model"><span class="nav-number">4.1.</span> <span class="nav-text">Probabilistic Model</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#log-linear-model"><span class="nav-number">5.</span> <span class="nav-text">Log-Linear Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#poisson-multinomial-equivalence"><span class="nav-number">5.1.</span> <span class="nav-text">Poisson-Multinomial Equivalence</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#definition"><span class="nav-text">1. Definition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#empirical-moment-matching"><span class="nav-text">2. Empirical Moment Matching</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#multivariate-gaussian-distribution"><span class="nav-text">3. Multivariate Gaussian Distribution</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#contingency-table"><span class="nav-text">4. Contingency Table</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#probabilistic-model"><span class="nav-text">4.1. Probabilistic Model</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#log-linear-model"><span class="nav-text">5. Log-Linear Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#poisson-multinomial-equivalence"><span class="nav-text">5.1. Poisson-Multinomial Equivalence</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

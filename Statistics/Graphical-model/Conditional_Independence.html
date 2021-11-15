@@ -257,7 +257,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="definition">Definition</h1>
+        <h1 id="definition">1. Definition</h1>
 <p><strong>Definition 1.1</strong>    Let <span class="math inline">\(X, Y\)</span> be r.v.s. defined on <span class="math inline">\(\mathcal{X} \times \mathcal{Y}\)</span>. We denote the joint density <span class="math inline">\(p(x, y)\)</span>, and call <span class="math display">\[p(y)=\int_\mathcal{X} p(x, y)\text{d}x\]</span> the <strong>marginal density</strong> of <span class="math inline">\(Y\)</span>. The <strong>conditional density</strong> of <span class="math inline">\(X\)</span> given <span class="math inline">\(Y\)</span> is defined as any function <span class="math inline">\(p(x \mid y)\)</span> s.t. <span class="math display">\[p(x, y)=p(y)p(x \mid y).\]</span></p>
 <div class="note warning">
             <p>If <span class="math inline">\(p(y)&gt;0\)</span> then the solution is unique and given by the familiar expression <span class="math display">\[p(x \mid y)=\frac{p(x, y)}{p(y)}.\]</span></p>
@@ -284,7 +284,7 @@ Since <span class="math display">\[p(x \mid y, z)=\frac{p(x, y, z)}{p(y, z)}=\fr
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<h1 id="graphoid-axioms">Graphoid Axioms</h1>
+<h1 id="graphoid-axioms">2. Graphoid Axioms</h1>
 <p><strong>Theorem 2.1 (Graphoid Axioms)</strong>    Conditional independence satisfies the following properties:</p>
 <p>    (1) Symmetry: <span class="math inline">\(X \perp\!\!\!\!\perp Y \mid Z \Rightarrow Y \perp\!\!\!\!\perp X \mid Z\)</span>;</p>
 <p>         (<span class="math inline">\(X \perp\!\!\!\!\perp Y \Rightarrow Y \perp\!\!\!\!\perp Z\)</span>)</p>
@@ -307,7 +307,7 @@ Since <span class="math display">\[p(x \mid y, z)=\frac{p(x, y, z)}{p(y, z)}=\fr
 <div class="note info">
             <ul><li><p><strong>Symmetry</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span> then <span class="math inline">\(X\)</span> is irrelevant to <span class="math inline">\(Y\)</span>.</p></li><li><p><strong>Decomposition</strong> means that if some information is irrelevant to <span class="math inline">\(X\)</span> then part of it is also irrelevant to <span class="math inline">\(X\)</span>.</p></li><li><p><strong>Weak union</strong> means that if <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> together are irrelevant to <span class="math inline">\(X\)</span> then learning one of them does not make the other one relevant.</p></li><li><p><strong>Contraction</strong> means that if <span class="math inline">\(Y\)</span> is irrelevant to <span class="math inline">\(X\)</span>, and if learning <span class="math inline">\(Y\)</span> does not make <span class="math inline">\(W\)</span> relevant to <span class="math inline">\(X\)</span>, then both <span class="math inline">\(Y\)</span> and <span class="math inline">\(W\)</span> are irrelevant to <span class="math inline">\(X\)</span>.</p></li></ul>
           </div>
-<h1 id="functional-conditional-independence">Functional Conditional Independence</h1>
+<h1 id="functional-conditional-independence">3. Functional Conditional Independence</h1>
 <p><strong>Remark 3.1</strong>    Since the events <span class="math inline">\(\{Y=y\}\)</span> and <span class="math inline">\(\{Y=y, h(Y)=h(y)\}\)</span> are equal for any measurable function <span class="math inline">\(h\)</span>, it follows that <span class="math display">\[p(x \mid y, z)=p(x \mid y, h(y), z).\]</span></p>
 <p><strong>Example 3.1</strong>    Suppose <span class="math inline">\(X \sim f_\theta\)</span> for some parameter <span class="math inline">\(\theta \in \Theta\)</span>. We say that <span class="math inline">\(T=t(X)\)</span> is a <strong>sufficient statistic</strong> for <span class="math inline">\(\theta\)</span> if the likelihood can be written as <span class="math inline">\(L(\theta \mid X=x)=f_\theta(x)=g(t(x), \theta)h(x)\)</span>. Under a Bayesian interpretation of <span class="math inline">\(\theta\)</span>, this is equivalent to saying <span class="math inline">\(X \perp\!\!\!\!\perp \theta \mid T\)</span>.</p>
 <strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
@@ -319,9 +319,9 @@ p(\theta \mid x)&amp;=\frac{p(x \mid \theta)p(\theta)}{\int_\Theta p(x \mid \phi
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<h1 id="关于多元高斯分布的补充">关于多元高斯分布的补充</h1>
+<h1 id="关于多元高斯分布的补充">4. 关于多元高斯分布的补充</h1>
 <p>由<a href="#eg1.2">例1.2</a>，我们对多元高斯分布进行补充.</p>
-<h2 id="条件高斯分布">条件高斯分布</h2>
+<h2 id="条件高斯分布">4.1. 条件高斯分布</h2>
 <p>假设<span class="math inline">\(\mathbf{x} \in \mathbb{R}^p\)</span>服从<span class="math inline">\(\mathcal{N}(\mu, \Sigma)\)</span>. 将<span class="math inline">\(\mathbf{x}\)</span>和对应的均值<span class="math inline">\(\mu\)</span>做如下划分：<span class="math inline">\(\mathbf{x}=\begin{bmatrix} \mathbf{x}_a \\ \mathbf{x}_b \end{bmatrix}\)</span>和<span class="math inline">\(\mu=\begin{bmatrix} \mu_a \\ \mu_b \end{bmatrix}\)</span>，其中<span class="math inline">\(\mathbf{x}_a, \mu_a \in \mathbb{R}^k\)</span>，<span class="math inline">\(\mathbf{x}_b, \mu_b \in \mathbb{R}^{p-k}\)</span>. 将协方差矩阵<span class="math inline">\(\Sigma\)</span>划分为<span class="math inline">\(\Sigma=\begin{bmatrix} \Sigma_{aa} &amp; \Sigma_{ab} \\ \Sigma_{ba} &amp; \Sigma_{bb} \end{bmatrix}\)</span>. 由<span class="math inline">\(\Sigma\)</span>的对称性易知<span class="math inline">\(\Sigma_{aa}\)</span>和<span class="math inline">\(\Sigma_{bb}\)</span>对称，且<span class="math inline">\(\Sigma_{ba}=\Sigma_{ab}^T\)</span>.</p>
 <p>定义<strong>精度矩阵</strong><span class="math inline">\(\Lambda=\Sigma^{-1}\)</span>，并将其划分为<span class="math inline">\(\begin{bmatrix} \Lambda_{aa} &amp; \Lambda_{ab} \\ \Lambda_{ba} &amp; \Lambda_{bb} \end{bmatrix}\)</span>. 由于对称矩阵的逆仍然对称，故<span class="math inline">\(\Lambda_{aa}\)</span>和<span class="math inline">\(\Lambda_{bb}\)</span>对称，且<span class="math inline">\(\Lambda_{ba}=\Lambda_{ab}^T\)</span>.</p>
 <p>注意，对于一个一般的高斯分布，其指数项可以写成<span class="math display">\[(\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)=\mathbf{x}^T\Lambda\mathbf{x}-2\mathbf{x}^T\Lambda\mu+C.\]</span></p>
@@ -338,7 +338,7 @@ M &amp; -MBD^{-1} \\
 -D^{-1}CM &amp; D^{-1}+D^{-1}CMBD^{-1}
 \end{bmatrix}\]</span>其中<span class="math display">\[M=(A-BD^{-1}C)^{-1}.\]</span> 因为<span class="math inline">\(\begin{bmatrix} \Sigma_{aa} &amp; \Sigma_{ab} \\ \Sigma_{ba} &amp; \Sigma_{bb} \end{bmatrix}^{-1}=\begin{bmatrix} \Lambda_{aa} &amp; \Lambda_{ab} \\ \Lambda_{ba} &amp; \Lambda_{bb} \end{bmatrix}\)</span>，所以<span class="math display">\[\Lambda_{aa}=(\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba})^{-1}\]</span>以及<span class="math display">\[\Lambda_{ab}=-(\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba})^{-1}\Sigma_{ab}\Sigma_{bb}^{-1}.\]</span></p>
 <p>因此<span class="math inline">\(\boxed{\mathbb{E}[\mathbf{x}_a \mid \mathbf{x}_b]=\mu_a+\Sigma_{ab}\Sigma_{bb}^{-1}(\mathbf{x}_b-\mu_b)}\)</span>以及<span class="math inline">\(\boxed{\text{Var}[\mathbf{x}_a \mid \mathbf{x}_b]=\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba}}\)</span>.</p>
-<h2 id="边缘高斯分布">边缘高斯分布</h2>
+<h2 id="边缘高斯分布">4.2. 边缘高斯分布</h2>
 <p>设<span class="math inline">\(p(\mathbf{x}_a, \mathbf{x}_b)\)</span>为联合高斯分布，则其边缘概率分布为<span class="math display">\[p(\mathbf{x}_a)=\int p(\mathbf{x}_a, \mathbf{x}_b)\text{d}\mathbf{x}_b\]</span>也是一个高斯分布.</p>
 <p>由于上式涉及到关于<span class="math inline">\(\mathbf{x}_b\)</span>的积分，因此<span class="math display">\[\begin{aligned}
 (\mathbf{x}-\mu)^T\Lambda(\mathbf{x}-\mu)&amp;=\mathbf{x}_b^T\Lambda_{bb}\mathbf{x}_b-2\mathbf{x}_b^T\Lambda_{bb}\mu_b+2\mathbf{x}_b^T\Lambda_{ba}\mathbf{x}_a-2\mathbf{x}_b^T\Lambda_{ba}\mu_a+C
@@ -380,8 +380,8 @@ M &amp; -MBD^{-1} \\
       <i class="fa fa-chevron-left"></i> Low Rank and Compressed Sensing
     </a></div>
       <div class="post-nav-item">
-    <a href="/Mathematics/Numerical-linear-algebra/Linear_Algebra" rel="next" title="Linear Algebra">
-      Linear Algebra <i class="fa fa-chevron-right"></i>
+    <a href="/Mathematics/Network-science/Introduction_to_Network" rel="next" title="Introduction to Network">
+      Introduction to Network <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -441,7 +441,7 @@ M &amp; -MBD^{-1} \\
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#definition"><span class="nav-number">1.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#graphoid-axioms"><span class="nav-number">2.</span> <span class="nav-text">Graphoid Axioms</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#functional-conditional-independence"><span class="nav-number">3.</span> <span class="nav-text">Functional Conditional Independence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%A4%9A%E5%85%83%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E7%9A%84%E8%A1%A5%E5%85%85"><span class="nav-number">4.</span> <span class="nav-text">关于多元高斯分布的补充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="nav-number">4.1.</span> <span class="nav-text">条件高斯分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%B9%E7%BC%98%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="nav-number">4.2.</span> <span class="nav-text">边缘高斯分布</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#definition"><span class="nav-text">1. Definition</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#graphoid-axioms"><span class="nav-text">2. Graphoid Axioms</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#functional-conditional-independence"><span class="nav-text">3. Functional Conditional Independence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%A4%9A%E5%85%83%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E7%9A%84%E8%A1%A5%E5%85%85"><span class="nav-text">4. 关于多元高斯分布的补充</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="nav-text">4.1. 条件高斯分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%B9%E7%BC%98%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83"><span class="nav-text">4.2. 边缘高斯分布</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

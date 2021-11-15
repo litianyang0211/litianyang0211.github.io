@@ -28,7 +28,7 @@
 <meta property="og:description" content="We introduce the undirected graph and associated Markov property. Then we talk about decomposability and the benefits of decomposability. Finally, we explore the non-decomposable model.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-26T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-08T20:38:03.103Z">
+<meta property="article:modified_time" content="2021-11-11T10:37:34.749Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Undirected graphical model">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-08 20:38:03" itemprop="dateModified" datetime="2021-11-08T20:38:03+00:00">2021-11-08</time>
+                <time title="Modified: 2021-11-11 10:37:34" itemprop="dateModified" datetime="2021-11-11T10:37:34+00:00">2021-11-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,14 +257,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="undirected-graph">Undirected Graph</h1>
+        <h1 id="undirected-graph">1. Undirected Graph</h1>
 <p><strong>Definition 1.1</strong>    Let <span class="math inline">\(V\)</span> be a finite set. An <strong>undirected graph</strong> is a pair <span class="math inline">\(\mathcal{G}=(V, E)\)</span> where <span class="math inline">\(V\)</span> is a finite set of vertices, and <span class="math inline">\(E \subseteq \{\{i, j\}: i, j \in V, i \neq j\}\)</span> is a set of unordered distinct pairs of <span class="math inline">\(V\)</span>, called <strong>edges</strong>. If <span class="math inline">\(\{i, j\} \in E\)</span>, we say <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are <strong>adjacent</strong>, and we write <span class="math inline">\(i \sim j\)</span>. The vertices adjacent to <span class="math inline">\(i\)</span> are called the <strong>neighbors</strong> of <span class="math inline">\(i\)</span>, and the set of neighbors is called the <strong>boundary</strong> of <span class="math inline">\(i\)</span>, denoted <span class="math inline">\(\text{bd}_\mathcal{G}(i)\)</span>.</p>
 <p><strong>Example 1.1</strong>    The graph has <span class="math inline">\(V=\{1, 2, 3, 4\}\)</span>, and <span class="math inline">\(E=\{\{1, 2\}, \{2, 3\}, \{3, 4\}\}\)</span>.</p>
 <pre class="mermaid" style="text-align: center;">
             graph LR
             1((1)) --- 2((2)) --- 3((3)) --- 4((4))
           </pre>
-<h1 id="markov-property">Markov Property</h1>
+<h1 id="markov-property">2. Markov Property</h1>
 <p>We associate a collection of probability distributions with a graph via a <strong>Markov property</strong>. Vertices correspond to random variables, and the absence of an edge corresponds to some kind of independence.</p>
 <p><span id="def2.1"><strong>Definition 2.1</strong></span>    Let <span class="math inline">\(\mathcal{G}=(V, E)\)</span> be an undirected graph, and <span class="math inline">\(p(x_V)\)</span> be a probability distribution over r.v.s. <span class="math inline">\(X_V \in \mathcal{X}_V=\times_{v \in V} \mathcal{X}_v\)</span>. We say that <span class="math inline">\(p\)</span> obeys the <strong>pairwise Markov property</strong> w.r.t. <span class="math inline">\(\mathcal{G}\)</span> if whenever <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are not adjacent, <span class="math display">\[X_i \perp\!\!\!\!\perp X_j \mid X_{V-\{i, j\}}\ [p].\]</span></p>
 <p><strong>Example 2.1</strong>    A distribution is pairwise Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span> iff <span class="math inline">\(X_1 \perp\!\!\!\!\perp X_4 \mid X_2, X_3\)</span> and <span class="math inline">\(X_2 \perp\!\!\!\!\perp X_4 \mid X_1, X_3\)</span>.</p>
@@ -304,7 +304,7 @@
 1 --- 2((2)) --- 3
           </pre>
 <p><strong>Definition 2.6</strong>    Let <span class="math inline">\(W \subseteq V\)</span>, the <strong>induced subgraph</strong> over <span class="math inline">\(W\)</span>, denoted <span class="math inline">\(\mathcal{G}_W\)</span>, has vertices consisting of <span class="math inline">\(W\)</span>, and edges <span class="math inline">\(E_W=\{\{i, j\} \in E, i, j \in W\}\)</span>.</p>
-<p><strong>Example 2.6</strong>   <br />
+<p><strong>Example 2.6</strong>   <br>
 </p>
 <pre class="mermaid" style="text-align: center;">
             graph LR
@@ -341,7 +341,7 @@ Let <span class="math inline">\(\mathcal{C}_A(\mathcal{G})=\{C \in \mathcal{C}(\
 <div class="note info">
             <p><span class="math inline">\(p \in M_p(\mathcal{G}) \Leftarrow p \in M_g(\mathcal{G}) \Leftarrow p \in M_f(\mathcal{G})\)</span>. If <span class="math inline">\(p&gt;0\)</span>, then <span class="math inline">\(p \in M_f(\mathcal{G}) \Leftarrow p \in M_p(\mathcal{G})\)</span>.</p>
           </div>
-<h1 id="decomposability">Decomposability</h1>
+<h1 id="decomposability">3. Decomposability</h1>
 <p><strong>Definition 3.1</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> be an undirected graph, with vertices <span class="math inline">\(V=A \dot\cup B \dot\cup S\)</span>. We say <span class="math inline">\((A, S, B)\)</span> is a <strong>decomposition</strong> of <span class="math inline">\(\mathcal{G}\)</span> if <span class="math inline">\(\mathcal{G}_S\)</span> is complete, and <span class="math inline">\(A \perp_s B \mid S\ [\mathcal{G}]\)</span>. We say the decomposition is <strong>proper</strong> if <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are non-empty.</p>
 <p><strong>Example 3.1</strong>    For <span class="math inline">\(A=\{1, 2\}\)</span>, <span class="math inline">\(B=\{4\}\)</span> and <span class="math inline">\(S=\{3\}\)</span>, <span class="math inline">\((A, S, B)\)</span> is a proper decomposition. For <span class="math inline">\(A=\{1\}\)</span>, <span class="math inline">\(B=\{4\}\)</span> and <span class="math inline">\(S=\{2, 3\}\)</span>, <span class="math inline">\((A, S, B)\)</span> is a proper decomposition.</p>
 <pre class="mermaid" style="text-align: center;">
@@ -591,19 +591,19 @@ p(x_B, x_S)&amp;=\prod_{C&#39; \in \mathcal{C}_B(\mathcal{G})} \psi_{C&#39;}(x_{
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<p><span id="thm3.4"><strong>Theorem 3.4</strong><span>    Let <span class="math inline">\(\mathcal{G}\)</span> be a decomposable graph with cliques <span class="math inline">\(C_1, \ldots, C_k\)</span>. Then <span class="math inline">\(p(x_V)\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span> iff for all <span class="math inline">\(x_V\)</span>, <span class="math display">\[p(x_V)=\prod_{i=1}^k p(x_{C_i-S_i} \mid x_{S_i})=\prod_{i=1}^k \frac{p(x_{C_i})}{p(x_{S_i})}.\]</span> Furthermore, the quantities <span class="math inline">\(p(x_{C_i-S_i} \mid x_{S_i})\)</span> are variation independent (i.e., they may jointly take any set of values that would be valid individually), so inference for <span class="math inline">\(p(x_V)\)</span> can be based on separate inferences for each <span class="math inline">\(p(x_{C_i})\)</span>.</p>
+<p><span id="thm3.4"><strong>Theorem 3.4</strong><span>    Let <span class="math inline">\(\mathcal{G}\)</span> be a decomposable graph with cliques <span class="math inline">\(C_1, \ldots, C_k\)</span>. Then <span class="math inline">\(p(x_V)\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span> iff for all <span class="math inline">\(x_V\)</span>, <span class="math display">\[p(x_V)=\prod_{i=1}^k p(x_{C_i-S_i} \mid x_{S_i})=\prod_{i=1}^k \frac{p(x_{C_i})}{p(x_{S_i})}.\]</span> Furthermore, the quantities <span class="math inline">\(p(x_{C_i-S_i} \mid x_{S_i})\)</span> are variation independent (i.e., they may jointly take any set of values that would be valid individually), so inference for <span class="math inline">\(p(x_V)\)</span> can be based on separate inferences for each <span class="math inline">\(p(x_{C_i})\)</span>.</span></span></p>
 <p><strong><em>Proof.</em></strong> <span class="math inline">\((\Leftarrow)\)</span> Since <span class="math display">\[p(x_V)=\prod_{i=1}^k \frac{p(x_{C_i})}{p(x_{S_i})}:=\prod_{C \in \mathcal{C}(\mathcal{G})} \psi_C(x_C),\]</span> then <span class="math inline">\(p\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span>.</p>
 <p><span class="math inline">\((\Rightarrow)\)</span> If <span class="math inline">\(k=1\)</span>, then <span class="math inline">\(C_1=V\)</span>, i.e., <span class="math inline">\(p(x_V)=p(x_{C_1})\)</span>. Let <span class="math display">\[H_k=\left(\bigcup_{i&lt;k} C_i\right)-S_k,\]</span> we have proven that <span class="math inline">\(C_k-S_k \perp_s H_k \mid S_k\)</span>, and <span class="math inline">\((H_k, S_k, C_k-S_k)\)</span> is a proper decomposition.</p>
 The graph <span class="math inline">\(\mathcal{G}_{H_k \cup S_k}\)</span> has <span class="math inline">\(k-1\)</span> cliques, and by <a href="#thm3.3">lemma 3.3</a>, <span class="math inline">\(p(x_{H_k}, x_{S_k})\)</span> factorizes according to <span class="math inline">\(\mathcal{G}_{H_k \cup S_k}\)</span>. Then by induction hypothesis <span class="math display">\[p(x_{H_k}, x_{S_k})=\prod_{i=1}^{k-1} p(x_{C_i-S_i} \mid x_{S_i}).\]</span> By <a href="#thm3.3">lemma 3.3</a>, <span class="math inline">\(p(x_V)p(x_{S_k})=p(x_{H_k}, x_{S_k})p(x_{C_K})\)</span>, then <span class="math display">\[p(x_V)=\prod_{i=1}^{k-1} p(x_{C_i-S_i} \mid x_{S_i})p(x_{C_k-S_k} \mid x_{S_k}).\]</span> The variation independence follows from the fact that <span class="math inline">\(p(x_{C_k-S_k} \mid x_{S_k})\)</span> can take the form of any valid probability distribution.
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
-<h1 id="multinomial-model">Multinomial Model</h1>
+<h1 id="multinomial-model">4. Multinomial Model</h1>
 <div class="note info">
             <p><a href="#thm3.4">Theorem 3.4</a> is useful for statistical inference, since we only need to consider the margins of variables corresponding to cliques. Suppose we have a contingency table with counts <span class="math inline">\(n(x_V)\)</span>, the log likelihood for a decomposable graph is <span class="math display">\[\begin{aligned}l(p; n)&amp;=\sum_{x_V \in \mathcal{X}_V} n(x_V) \ln p(x_V)\\&amp;=\sum_{x_V \in \mathcal{X}_V} n(x_V)\sum_{i=1}^k \ln p(x_{C_i-S_i} \mid x_{S_i})\\&amp;=\sum_{i=1}^k \sum_{x_{C_i} \in \mathcal{X}_{C_i}} n(x_{C_i})\ln p(x_{C_i-S_i} \mid x_{S_i}).\end{aligned}\]</span> Using Lagrange multiplier, we can see that the likelihood is maximized by choosing <span class="math display">\[\widehat{p}(x_{C_i-S_i} \mid x_{S_i})=\frac{n(x_{C_i})}{n(x_{S_i})} \Rightarrow \widehat{p}(x_{C_i})=\frac{n(x_{C_i})}{n}.\]</span></p>
           </div>
 <p><strong>Theorem 4.1</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> be an undirected graph with counts <span class="math inline">\(n(x_V)\)</span>. Then the MLE under <span class="math inline">\(\mathcal{G}\)</span> is the unique distribution for which <span class="math display">\[n\widehat{p}(x_C)=n(x_C)\]</span> for all cliques <span class="math inline">\(C \in \mathcal{C}(\mathcal{G})\)</span>.</p>
-<h2 id="iterative-proportional-fitting-ipf-algorithm">Iterative Proportional Fitting (IPF) Algorithm</h2>
+<h2 id="iterative-proportional-fitting-ipf-algorithm">4.1. Iterative Proportional Fitting (IPF) Algorithm</h2>
 <p>The <strong>iterative proportional fitting (IPF) algorithm</strong>, a.k.a. the <strong>iterative proportional scaling (IPS) algorithm</strong>, starts with a discrete distribution that satisfies the Markov property for the graph <span class="math inline">\(\mathcal{G}\)</span> (usually we pick the uniform distribution so that everything is independent), and then iteratively fixes each margin <span class="math inline">\(p(x_C)\)</span> to match the required distribution (or match moment) using the update step.</p>
 <table frame="hsides" style="line-height:20px;">
 <tbody>
@@ -614,7 +614,7 @@ The graph <span class="math inline">\(\mathcal{G}_{H_k \cup S_k}\)</span> has <s
 </tr>
 <tr>
 <td>
-    <b>function</b> IPF (collection of consistent margins <span class="math inline">\(q(x_{C_i})\)</span> for sets <span class="math inline">\(C_1, \ldots, C_k\)</span>)<br>         set <span class="math inline">\(p(x_V)\)</span> to uniform distribution;<br>         <b>while</b> <span class="math inline">\(\max_i \max_{x_{C_i}} |p(x_{C_i})-q(x_{C_i})|&gt;\text{tol}\)</span> <b>do</b><br>             <b>for</b> <span class="math inline">\(i\)</span> in <span class="math inline">\(1, \ldots, k\)</span> <b>do</b><br>                 update <span class="math inline">\(p(x_V)\)</span> to <span class="math inline">\(p(x_{V-C_i} \mid x_{C_i})q(x_{C_i})\)</span>;<br>             <b>end for</b><br>         <b>end while</b><br>         <b>return</b> distribution <span class="math inline">\(p\)</span> with margins <span class="math inline">\(p(x_{C_i}) \approx q(x_{C_i})\)</span>.<br>     <b>end function</b>
+    <b>function</b> IPF(collection of consistent margins <span class="math inline">\(q(x_{C_i})\)</span> for sets <span class="math inline">\(C_1, \ldots, C_k\)</span>)<br>         set <span class="math inline">\(p(x_V)\)</span> to uniform distribution;<br>         <b>while</b> <span class="math inline">\(\max_i \max_{x_{C_i}} |p(x_{C_i})-q(x_{C_i})|&gt;\text{tol}\)</span> <b>do</b><br>             <b>for</b> <span class="math inline">\(i\)</span> in <span class="math inline">\(1, \ldots, k\)</span> <b>do</b><br>                 update <span class="math inline">\(p(x_V)\)</span> to <span class="math inline">\(p(x_{V-C_i} \mid x_{C_i})q(x_{C_i})\)</span>;<br>             <b>end for</b><br>         <b>end while</b><br>         <b>return</b> distribution <span class="math inline">\(p\)</span> with margins <span class="math inline">\(p(x_{C_i}) \approx q(x_{C_i})\)</span><br>     <b>end function</b>
 </td>
 </tr>
 </tbody>
@@ -647,12 +647,12 @@ Since log likelihood function is concave, then it converges to maximum.
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/Mathematics/Numerical-linear-algebra/Linear_System" rel="prev" title="Linear System">
-      <i class="fa fa-chevron-left"></i> Linear System
+    <a href="/Computer-science/Deep-learning/Exponential_Expressivity_with_Depth" rel="prev" title="Exponential Expressivity With Depth">
+      <i class="fa fa-chevron-left"></i> Exponential Expressivity With Depth
     </a></div>
       <div class="post-nav-item">
-    <a href="/Mathematics/Numerical-linear-algebra/QR_Decomposition_and_Least_Squares_Problem" rel="next" title="QR Decomposition and Least Squares Problem">
-      QR Decomposition and Least Squares Problem <i class="fa fa-chevron-right"></i>
+    <a href="/Statistics/Graphical-model/Gaussian_Graphical_Model" rel="next" title="Gaussian Graphical Model">
+      Gaussian Graphical Model <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -712,7 +712,7 @@ Since log likelihood function is concave, then it converges to maximum.
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undirected-graph"><span class="nav-number">1.</span> <span class="nav-text">Undirected Graph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#markov-property"><span class="nav-number">2.</span> <span class="nav-text">Markov Property</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#decomposability"><span class="nav-number">3.</span> <span class="nav-text">Decomposability</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#multinomial-model"><span class="nav-number">4.</span> <span class="nav-text">Multinomial Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#iterative-proportional-fitting-ipf-algorithm"><span class="nav-number">4.1.</span> <span class="nav-text">Iterative Proportional Fitting (IPF) Algorithm</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undirected-graph"><span class="nav-text">1. Undirected Graph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#markov-property"><span class="nav-text">2. Markov Property</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#decomposability"><span class="nav-text">3. Decomposability</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#multinomial-model"><span class="nav-text">4. Multinomial Model</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#iterative-proportional-fitting-ipf-algorithm"><span class="nav-text">4.1. Iterative Proportional Fitting (IPF) Algorithm</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

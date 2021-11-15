@@ -260,11 +260,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="curse-of-dimensionality">Curse of Dimensionality</h1>
+        <h1 id="curse-of-dimensionality">1. Curse of Dimensionality</h1>
 <p><a href="/Computer-science/Deep-learning/Exponential_Expressivity_with_Depth#thmY16">Yarotsky (2016)</a> showed the overall number of weights is <span class="math inline">\(\mathcal{O}(\varepsilon^{-d/n})\)</span>. Hence, if we want to approximate a function in a high dimension, then the function has to be extremely smooth. To avoid curse of dimensionality, we need more structure in the function <span class="math inline">\(F\)</span> to be approximated, e.g., compositional structure.</p>
-<h1 id="compositional-structured-function">Compositional Structured Function</h1>
+<h1 id="compositional-structured-function">2. Compositional Structured Function</h1>
 <p>Consider function with a binary tree hierarchical structure:</p>
-<p><img data-src="/images/High_Dimensionalty_1.png" /></p>
+<p><img data-src="/images/High_Dimensionalty_1.png"></p>
 <center>
 Figure 1: <span class="math inline">\(f(\mathbf{x})=h_3(h_{21}(h_{11}(x_1, x_2), h_{12}(x_3, x_4)), h_{22}(h_{13}(x_5, x_6), h_{14}(x_7, x_8)))\)</span> <a href="#PMR+17">[PMR$^+$17]</a>.
 </center>
@@ -283,7 +283,7 @@ Figure 1: <span class="math inline">\(f(\mathbf{x})=h_3(h_{21}(h_{11}(x_1, x_2),
 <div class="note info">
             <p>The definition could be extended to <strong>local effective dimensionality</strong> <span class="math inline">\(d_{\text{eff}}\)</span> and <strong>local smoothness</strong> <span class="math inline">\(m_{\text{eff}}\)</span> for rate <span class="math inline">\(\varepsilon^{-d_{\text{eff}}/m_{\text{eff}}}\)</span>. Restriction to a data class decreases <span class="math inline">\(d_\text{eff}\)</span> and localization can increase the smoothness <span class="math inline">\(m_\text{eff}\)</span> substantially.</p>
           </div>
-<h1 id="intrinsic-dimensionality-of-sub-manifold">Intrinsic Dimensionality of Sub-Manifold</h1>
+<h1 id="intrinsic-dimensionality-of-sub-manifold">3. Intrinsic Dimensionality of Sub-Manifold</h1>
 <p>The <strong>intrinsic dimension</strong> for a data set can be thought of as the number of variables needed in a minimal representation of the data.</p>
 <p>For example, MNIST exemplar dataset classes are approximately under <span class="math inline">\(15\)</span> dimensions. Hein et al. (2005) estimated dimensionality within MNIST digit classes using three approaches: the hidden manifold model, and two others building on local linear embedding.</p>
 <center>
@@ -459,16 +459,16 @@ Table 1: Number of Samples and Estimated Intrinsic Dimensionality of the Digits 
 </tr>
 </tbody>
 </table>
-<h2 id="hidden-manifold-model">Hidden Manifold Model</h2>
+<h2 id="hidden-manifold-model">3.1. Hidden Manifold Model</h2>
 <p>A <strong>manifold model</strong> can explicitly represent the data through <span class="math display">\[X=f(CF/\sqrt{d}) \in \mathbb{R}^{p, n}\]</span> where <span class="math inline">\(F \in \mathbb{R}^{d, n}\)</span> are the <span class="math inline">\(d\)</span> features used to represent the data, <span class="math inline">\(C \in \mathbb{R}^{p, d}\)</span> combines the <span class="math inline">\(d&lt;n&lt;p\)</span> features, and <span class="math inline">\(f(\cdot)\)</span> is an entrywise locally smooth nonlinear function.</p>
 <div class="note info">
             <p>The data model is the same as a <strong>generative adversarial network (GAN)</strong> and is similar to <strong>dictionary learning</strong> and <strong>subspace clustering model</strong> where <span class="math inline">\(C\)</span> is typically sparse.</p>
           </div>
-<h1 id="reference">Reference</h1>
-<p><font size=2 style="line-height: 1;"></p>
+<h1 id="reference">4. Reference</h1>
+<p><font size="2" style="line-height: 1;"></font></p>
 <p><span id="HA05">[HA05] Matthias Hein and Jean-Yves Audibert. Intrinsic Dimensionality Estimation of Submanifolds in <span class="math inline">\(\mathbb{R}^d\)</span>. In <em>Proceedings of the 22nd International Conference on Machine Learning</em>, 2005.</span></p>
 <p><span id="PMR+17">[PMR$^+$17] Tomaso Poggio, Hrushikesh Mhaskar, Lorenzo Rosasco, Brando Miranda, and Qianli Liao. Why and When can Deep - but not Shallow - Networks Avoid the Curse of Dimensionality: a Review. <em>International Journal of Automation and Computing</em>, 14(5): 503-519, 2015.</span></p>
-<p></font></p>
+<p></p>
 
     </div>
 
@@ -493,8 +493,8 @@ Table 1: Number of Samples and Estimated Intrinsic Dimensionality of the Digits 
       <i class="fa fa-chevron-left"></i> Gaussian Graphical Model
     </a></div>
       <div class="post-nav-item">
-    <a href="/Mathematics/Numerical-linear-algebra/Numerical_Stability" rel="next" title="Numerical Stability">
-      Numerical Stability <i class="fa fa-chevron-right"></i>
+    <a href="/Computer-science/Deep-learning/DNN_Initialization" rel="next" title="DNN Initialization">
+      DNN Initialization <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -554,7 +554,7 @@ Table 1: Number of Samples and Estimated Intrinsic Dimensionality of the Digits 
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#curse-of-dimensionality"><span class="nav-number">1.</span> <span class="nav-text">Curse of Dimensionality</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#compositional-structured-function"><span class="nav-number">2.</span> <span class="nav-text">Compositional Structured Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#intrinsic-dimensionality-of-sub-manifold"><span class="nav-number">3.</span> <span class="nav-text">Intrinsic Dimensionality of Sub-Manifold</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hidden-manifold-model"><span class="nav-number">3.1.</span> <span class="nav-text">Hidden Manifold Model</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#curse-of-dimensionality"><span class="nav-text">1. Curse of Dimensionality</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#compositional-structured-function"><span class="nav-text">2. Compositional Structured Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#intrinsic-dimensionality-of-sub-manifold"><span class="nav-text">3. Intrinsic Dimensionality of Sub-Manifold</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hidden-manifold-model"><span class="nav-text">3.1. Hidden Manifold Model</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference"><span class="nav-text">4. Reference</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
