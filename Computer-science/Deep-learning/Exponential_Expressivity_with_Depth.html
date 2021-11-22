@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://litianyang0211.github.io/images/Exponential_Expressivity_with_Depth_1.png">
 <meta property="article:published_time" content="2021-10-18T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-16T10:09:56.587Z">
+<meta property="article:modified_time" content="2021-11-22T21:18:17.545Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="DNN">
 <meta property="article:tag" content="Expressivity">
@@ -237,7 +237,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-16 10:09:56" itemprop="dateModified" datetime="2021-11-16T10:09:56+00:00">2021-11-16</time>
+                <time title="Modified: 2021-11-22 21:18:17" itemprop="dateModified" datetime="2021-11-22T21:18:17+00:00">2021-11-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -298,7 +298,7 @@
 <p>For <span class="math inline">\(\phi(x)=\max(x, 0)\)</span>, let <span class="math display">\[f(x)=h_3(x)=\phi(2\phi(x)-4\phi(x-1/2))\]</span> and iterate this two-layer network <span class="math inline">\(k\)</span> times to obtain a <span class="math inline">\(2k\)</span>-layer network <span class="math inline">\(f^k(x)\)</span> with the property that it is piecewise linear with change in slope at <span class="math inline">\(x_i=i2^{-k}\)</span> for <span class="math inline">\(i=0, \ldots, 2^k\)</span>; <span class="math inline">\(f^k(x_i)=0\)</span> for <span class="math inline">\(i\)</span> even and <span class="math inline">\(f^k(x_i)=1\)</span> for <span class="math inline">\(i\)</span> odd.</p>
 <p><img data-src="/images/Exponential_Expressivity_with_Depth_1.png"></p>
 <center>
-Figure 1: <span class="math inline">\(f\)</span>, <span class="math inline">\(f^2\)</span>, and <span class="math inline">\(f^3\)</span> <a href="#Tel15">[Tel15]</a>.
+Figure 1: <span class="math inline">\(f\)</span>, <span class="math inline">\(f^2\)</span>, and <span class="math inline">\(f^3\)</span> <a href="#T15">(Telgarsky, 2015)</a>.
 </center>
 <p>A two-layer network with the same <span class="math inline">\(\phi(x)\)</span> requires <span class="math inline">\(m=2^k\)</span> to exactly express <span class="math inline">\(f^k(x)\)</span>. The deep network can be thought of as having <span class="math inline">\(6k\)</span> parameters, whereas the two-layer network requires <span class="math inline">\(3 \cdot 2^k+1\)</span> parameters.</p>
 <p><span id="thmT15"><strong>Theorem (Telgarsky, 2015)</strong></span>    Define the function class <span class="math inline">\(F(\phi; m, L)\)</span> be the space of functions composed of <span class="math inline">\(L\)</span> layers fully connected <span class="math inline">\(m\)</span> widths feed forward network with nonlinear activation function <span class="math inline">\(\phi\)</span>. Let <span class="math display">\[\mathcal{R}(f)=n^{-1}\sum_{i=1}^n \chi[f(x_i) \neq y_i]\]</span> count the number of incorrect labels of the data set <span class="math inline">\(\{(x_i, y_i)\}_{i=1}^n\)</span>. Consider positive integers <span class="math inline">\(k, L, m\)</span> with <span class="math inline">\(m \leq 2^{(k-3)/L-1}\)</span>, then there exists a collection of <span class="math inline">\(n=2^k\)</span> points <span class="math inline">\(\{(x_i, y_i)\}_{i=1}^n\)</span> with <span class="math inline">\(x_i \in [0, 1]\)</span> and <span class="math inline">\(y_i \in \{0, 1\}\)</span> s.t. <span class="math display">\[\min_{f \in F(\phi; 2, 2k)} \mathcal{R}(f)=0\ \ \text{and}\ \ \min_{g \in F(\phi; m, L)} \mathcal{R}(g) \geq \frac{1}{6}.\]</span></p>
@@ -333,9 +333,9 @@ Figure 1: <span class="math inline">\(f\)</span>, <span class="math inline">\(f^
             <p>Unless <span class="math inline">\(\sigma_W\)</span> or <span class="math inline">\(\alpha\)</span> small enough at initialization, the pre-activation output is exponentially complex.</p>
           </div>
 <h1 id="reference">5. Reference</h1>
-<p><font size="2" style="line-height: 1;"></font></p>
-<p><span id="Tel15">[Tel15] Matus Telgarsky. Representation Benefits of Deep Feedforward Networks. <em>arXiv Preprint arXiv:1509.08101</em>, 2015.</span></p>
-<p></p>
+<div id="T15" style="line-height: 18px; font-size: 15px;">
+Matus Telgarsky. Representation Benefits of Deep Feedforward Networks. <em>arXiv Preprint arXiv:1509.08101</em>, 2015.
+</div>
 
     </div>
 
@@ -356,8 +356,8 @@ Figure 1: <span class="math inline">\(f\)</span>, <span class="math inline">\(f^
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/Computer-science/Deep-learning/Introduction_to_Deep_Learning" rel="prev" title="Introduction to Deep Learning">
-      <i class="fa fa-chevron-left"></i> Introduction to Deep Learning
+    <a href="/Statistics/Graphical-model/Exponential_Family_and_Contingency_Table" rel="prev" title="Exponential Family and Contingency Table">
+      <i class="fa fa-chevron-left"></i> Exponential Family and Contingency Table
     </a></div>
       <div class="post-nav-item">
     <a href="/Statistics/Graphical-model/Undirected_Graphical_Model" rel="next" title="Undirected Graphical Model">

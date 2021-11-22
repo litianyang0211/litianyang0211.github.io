@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://litianyang0211.github.io/images/High_Dimensionalty_1.png">
 <meta property="article:published_time" content="2021-11-01T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-16T10:09:51.351Z">
+<meta property="article:modified_time" content="2021-11-22T21:18:34.040Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="DNN">
 <meta property="article:tag" content="High dimensionality">
@@ -237,7 +237,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-16 10:09:51" itemprop="dateModified" datetime="2021-11-16T10:09:51+00:00">2021-11-16</time>
+                <time title="Modified: 2021-11-22 21:18:34" itemprop="dateModified" datetime="2021-11-22T21:18:34+00:00">2021-11-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -270,7 +270,7 @@
 <p>Consider function with a binary tree hierarchical structure:</p>
 <p><img data-src="/images/High_Dimensionalty_1.png"></p>
 <center>
-Figure 1: <span class="math inline">\(f(\mathbf{x})=h_3(h_{21}(h_{11}(x_1, x_2), h_{12}(x_3, x_4)), h_{22}(h_{13}(x_5, x_6), h_{14}(x_7, x_8)))\)</span> <a href="#PMR+17">[PMR$^+$17]</a>.
+Figure 1: <span class="math inline">\(f(\mathbf{x})=h_3(h_{21}(h_{11}(x_1, x_2), h_{12}(x_3, x_4)), h_{22}(h_{13}(x_5, x_6), h_{14}(x_7, x_8)))\)</span> <a href="#P+17">(Poggio et al., 2017)</a>.
 </center>
 <p>Let <span class="math inline">\(W_m^{n, 2}\)</span> be the class of all compositional functions <span class="math inline">\(f(\cdot)\)</span> of <span class="math inline">\(n\)</span> variables with binary tree structure and constituent functions <span class="math inline">\(h(\cdot)\)</span> of <span class="math inline">\(2\)</span> variables with <span class="math inline">\(m\)</span> bounded derivatives. The set <span class="math inline">\(W_m^{n, 2}\)</span> can be effectively approximated using a DNN with a rate dictated by the ability to approximate functions <span class="math inline">\(\mathbb{R}^2 \to \mathbb{R}\)</span>; e.g., effectively locally <span class="math inline">\(d=2\)</span>.</p>
 <p><strong>Theorem (Poggio et al., 2017)</strong>    Let <span class="math inline">\(f(\cdot) \in W_m^{n, 2}\)</span> and consider a DNN with the same binary compositional tree structure and an activation <span class="math inline">\(\phi(\cdot)\)</span> which is infinitely differentiable, and not a polynomial. The function <span class="math inline">\(f(\cdot)\)</span> can be approximated by <span class="math inline">\(\varepsilon\)</span> with a number of weights that is <span class="math inline">\(\mathcal{O}((n-1)\varepsilon^{-2/m})\)</span>.</p>
@@ -291,7 +291,7 @@ Figure 1: <span class="math inline">\(f(\mathbf{x})=h_3(h_{21}(h_{11}(x_1, x_2),
 <p>The <strong>intrinsic dimension</strong> for a data set can be thought of as the number of variables needed in a minimal representation of the data.</p>
 <p>For example, MNIST exemplar dataset classes are approximately under <span class="math inline">\(15\)</span> dimensions. Hein et al. (2005) estimated dimensionality within MNIST digit classes using three approaches: the hidden manifold model, and two others building on local linear embedding.</p>
 <center>
-Table 1: Number of Samples and Estimated Intrinsic Dimensionality of the Digits in MNIST <a href="#HA05">[HA05]</a>.
+Table 1: Number of Samples and Estimated Intrinsic Dimensionality of the Digits in MNIST <a href="#HA05">(Hein and Audibert, 2015)</a>.
 </center>
 <table style="table-layout:fixed">
 <tbody>
@@ -469,10 +469,15 @@ Table 1: Number of Samples and Estimated Intrinsic Dimensionality of the Digits 
             <p>The data model is the same as a <strong>generative adversarial network (GAN)</strong> and is similar to <strong>dictionary learning</strong> and <strong>subspace clustering model</strong> where <span class="math inline">\(C\)</span> is typically sparse.</p>
           </div>
 <h1 id="reference">4. Reference</h1>
-<p><font size="2" style="line-height: 1;"></font></p>
-<p><span id="HA05">[HA05] Matthias Hein and Jean-Yves Audibert. Intrinsic Dimensionality Estimation of Submanifolds in <span class="math inline">\(\mathbb{R}^d\)</span>. In <em>Proceedings of the 22nd International Conference on Machine Learning</em>, 2005.</span></p>
-<p><span id="PMR+17">[PMR$^+$17] Tomaso Poggio, Hrushikesh Mhaskar, Lorenzo Rosasco, Brando Miranda, and Qianli Liao. Why and When can Deep - but not Shallow - Networks Avoid the Curse of Dimensionality: a Review. <em>International Journal of Automation and Computing</em>, 14(5): 503-519, 2015.</span></p>
-<p></p>
+<div id="HA05" style="line-height: 18px; font-size: 15px;">
+Matthias Hein and Jean-Yves Audibert. Intrinsic Dimensionality Estimation of Submanifolds in <span class="math inline">\(\mathbb{R}^d\)</span>. In <em>Proceedings of the 22nd International Conference on Machine Learning</em>, 2005.
+</div>
+<div style="line-height: 18px; visibility: hidden;">
+ 
+</div>
+<div id="P+17" style="line-height: 18px; font-size: 15px;">
+Tomaso Poggio, Hrushikesh Mhaskar, Lorenzo Rosasco, Brando Miranda, and Qianli Liao. Why and When can Deep - but not Shallow - Networks Avoid the Curse of Dimensionality: a Review. <em>International Journal of Automation and Computing</em>, 14(5): 503-519, 2015.
+</div>
 
     </div>
 
