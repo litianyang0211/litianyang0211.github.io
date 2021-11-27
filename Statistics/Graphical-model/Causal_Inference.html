@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="Tianyang Li">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-18T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-20T23:08:28.085Z">
+<meta property="article:modified_time" content="2021-11-24T19:40:18.004Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Causal inference">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-20 23:08:28" itemprop="dateModified" datetime="2021-11-20T23:08:28+00:00">2021-11-20</time>
+                <time title="Modified: 2021-11-24 19:40:18" itemprop="dateModified" datetime="2021-11-24T19:40:18+00:00">2021-11-24</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -360,9 +360,9 @@ X --> R((R))
 <li><p><span class="math inline">\(C\)</span> must block all non-causal path from <span class="math inline">\(T\)</span> to <span class="math inline">\(Y\)</span>.</p></li>
 </ul>
 <div class="note info">
-            <p>We can divide a valid adjustment set <span class="math inline">\(C\)</span> into two components: <span class="math display">\[B=C \cap \text{nd}(T) \quad \text{and} \quad D=C-B=C \cap \text{de}(T).\]</span></p>
+            <p>We can divide a valid adjustment set <span class="math inline">\(C\)</span> into two components: <span class="math display">\[B=C \cap \text{nd}(T) \quad \text{and} \quad D=C-B=C \cap \text{de}(T).\]</span> We call <span class="math inline">\(B\)</span> the <strong>backdoor adjustment set</strong>.</p>
           </div>
-<p><strong>Theorem 4.1</strong>    If <span class="math inline">\(C\)</span> is a valid adjustment set for <span class="math inline">\((T, Y)\)</span>, then so is <span class="math inline">\(B=C \cap \text{nd}(T)\)</span>. In addition, for any <span class="math inline">\(d \in C-B\)</span>, either <span class="math inline">\(d \perp_d y \mid (C-\text{de}(d)) \cup \{t\}\)</span> or <span class="math inline">\(d \perp_d t \mid C-\text{de}(d)\)</span>.</p>
+<p><strong>Theorem 4.1</strong>    If <span class="math inline">\(C\)</span> is a valid adjustment set for <span class="math inline">\((T, Y)\)</span>, then so is <span class="math inline">\(B=C \cap \text{nd}(T)\)</span>.</p>
 <p><strong><em>Proof.</em></strong> If <span class="math inline">\(C \cap \text{forb}(T \to Y)=\varnothing\)</span>, then <span class="math inline">\(B \cap \text{forb}(T \to Y)=\varnothing\)</span> since <span class="math inline">\(B \subseteq C\)</span>.</p>
 <p>Consider path from <span class="math inline">\(T\)</span> to <span class="math inline">\(Y\)</span>. Any path beginning with an edge <span class="math inline">\(T \to \cdots\)</span> is either causal, or will meet a collider.</p>
 <ul>
@@ -373,12 +373,22 @@ X --> R((R))
 <ul>
 <li><p>If the path is blocked at a collider, then the collider is not in <span class="math inline">\(\text{an}(B)\)</span>.</p></li>
 <li><p>If the path is blocked at a non-collider that is not in <span class="math inline">\(\text{de}(T)\)</span>, then the non-collider is in <span class="math inline">\(B\)</span>.</p></li>
-<li><p>If the path is blocked at a non-collider that is in <span class="math inline">\(\text{de}(T)\)</span>, then</p></li>
+<li><p>If the path is blocked at a non-collider that is in <span class="math inline">\(\text{de}(T)\)</span>, then the non-collider is in <span class="math inline">\(D\)</span>. Hence, the path contains a collider in <span class="math inline">\(D\)</span>, where the path must be blocked by <span class="math inline">\(B\)</span>.</p></li>
 </ul>
+Hence <span class="math inline">\(B\)</span> is a valid adjustment set for <span class="math inline">\((T, Y)\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note info">
+            <p>Any set <span class="math inline">\(B \cup A\)</span> for <span class="math inline">\(A \subseteq D\)</span> with <span class="math inline">\(\text{an}(A) \cap D=A \cap D=A\)</span> is a valid adjustment set for <span class="math inline">\((T, Y)\)</span>.</p>
+          </div>
+<p><strong>Theorem 4.2</strong>    For any <span class="math inline">\(d \in C-B\)</span>, either <span class="math inline">\(d \perp_d y \mid (C-\text{de}(d)) \cup \{t\}\)</span> or <span class="math inline">\(d \perp_d t \mid C-\text{de}(d)\)</span>, where <span class="math inline">\(C\)</span> is a valid adjustment set for <span class="math inline">\((t, y)\)</span>,</p>
+<p><strong><em>Proof.</em></strong> Assume for a contradiction that both statements fail. Consider <span class="math inline">\(A=\text{an}(\{d, y, t\} \cup (C-\text{de}(d)))\)</span>. In <span class="math inline">\((\mathcal{G}_A)^m\)</span>, there are open undirected paths <span class="math inline">\(\pi_y\)</span> (from <span class="math inline">\(d\)</span> to <span class="math inline">\(y\)</span> given <span class="math inline">\((C-\text{de}(d)) \cup \{t\}\)</span>) and <span class="math inline">\(\pi_t\)</span> from (<span class="math inline">\(d\)</span> to <span class="math inline">\(t\)</span> given <span class="math inline">\(C-\text{de}(d)\)</span>).</p>
+<p>We can concatenate these two paths to obtain an open path <span class="math inline">\(\pi\)</span> from <span class="math inline">\(t\)</span> to <span class="math inline">\(y\)</span> given <span class="math inline">\((C-\text{de}(d)) \cup \{d\}\)</span>.</p>
 <center>
 <strong><em>TBC...</em></strong>
 </center>
-<p><span id="thm4.2"><strong>Lemma 4.2</strong></span>    If <span class="math inline">\(C\)</span> is a valid adjustment set and <span class="math inline">\(B=C \cap \text{nd}(t)\)</span>, then <span class="math display">\[\sum_{x_C} p(x_C)p(y \mid t, x_C)=\sum_{x_B} p(x_B)p(y \mid t, x_B).\]</span></p>
+<p><span id="thm4.3"><strong>Lemma 4.3</strong></span>    If <span class="math inline">\(C\)</span> is a valid adjustment set and <span class="math inline">\(B=C \cap \text{nd}(t)\)</span>, then <span class="math display">\[\sum_{x_C} p(x_C)p(y \mid t, x_C)=\sum_{x_B} p(x_B)p(y \mid t, x_B).\]</span></p>
 <p><strong><em>Proof.</em></strong> Take <span class="math inline">\(d \in D\)</span> that has no descendants in <span class="math inline">\(C-\{d\}\)</span>. We know that either <span class="math inline">\(d \perp_d y \mid (C-\{d\}) \cup \{t\}\)</span>, in which case we have <span class="math display">\[\begin{aligned}
 \sum_{x_C} p(x_C)p(y \mid t, x_C)&amp;=\sum_{x_{C-\{d\}}, x_d} p(x_{C-\{d\}}, x_d)p(y \mid t, x_{C-\{d\}}, x_d)
 \\&amp;=\sum_{x_{C-\{d\}}, x_d} p(x_{C-\{d\}}, x_d)p(y \mid t, x_{C-\{d\}})
@@ -395,7 +405,31 @@ By inductive argument, the result holds.
 <span class="math inline">\(\square\)</span>
 </p>
 <p><strong>Theorem 4.3</strong>    Let <span class="math inline">\(C\)</span> be a valid adjustment set for <span class="math inline">\(T \to Y\)</span>, then <span class="math display">\[p(y \mid \text{do}(t))=\sum_{x_C} p(x_C)p(y \mid t, x_C).\]</span></p>
-<p><strong><em>Proof.</em></strong>    By <a href="#thm4.2">lemma 4.2</a>, it is sufficient to prove for <span class="math inline">\(B=C \cap \text{nd}(t)\)</span>.</p>
+<p><strong><em>Proof.</em></strong>    By <a href="#thm4.3">lemma 4.2</a>, it is sufficient to prove with assumption that <span class="math inline">\(C\)</span> contains no descendants of <span class="math inline">\(t\)</span>. Since <span class="math inline">\(C \cap \text{de}(t) = \varnothing\)</span>, then <span class="math inline">\(t \perp_d C \mid \text{pa}(t)\)</span> by local Markov property.</p>
+<p>Suppose there is an open path <span class="math inline">\(\pi\)</span> from some <span class="math inline">\(s \in \text{pa}(t)\)</span> to <span class="math inline">\(y\)</span> given <span class="math inline">\(C \cup \{t\}\)</span>. If <span class="math inline">\(\pi\)</span> passes through <span class="math inline">\(t\)</span>, it is a collider on the path, and we can shorten it to give an open path from <span class="math inline">\(t\)</span> to <span class="math inline">\(y\)</span> that begins <span class="math inline">\(t \leftarrow\)</span>. If <span class="math inline">\(\pi\)</span> is open given <span class="math inline">\(C\)</span>, then we add <span class="math inline">\(s \to t\)</span> and path is open given a valid adjustment set, which is a contradiction. If <span class="math inline">\(\pi\)</span> is note open given <span class="math inline">\(C\)</span>, then there exits a collider <span class="math inline">\(r \in \text{an}(t)-\text{an}(C)\)</span>.</p>
+<center>
+<strong><em>TBC...</em></strong>
+</center>
+Then <span class="math display">\[\begin{aligned}
+p(y \mid \text{do}(t))&amp;=\sum_{x_{\text{pa}(t)}} p(y \mid t, x_{\text{pa}(t)})p(x_{\text{pa}(t)})
+\\&amp;=\sum_{x_{\text{pa}(t)}} p(x_{\text{pa}(t)}) \sum_{x_C} p(y, x_C \mid t, x_{\text{pa}(t)})
+\\&amp;=\sum_{x_{\text{pa}(t)}} p(x_{\text{pa}(t)}) \sum_{x_C} p(y \mid t, x_{\text{pa}(t)}, x_C)p(x_C \mid t, x_{\text{pa}(t)})
+\\&amp;=\sum_{x_{\text{pa}(t)}} p(x_{\text{pa}(t)}) \sum_{x_C} p(y \mid t, x_C)p(x_C \mid x_{\text{pa}(t)})
+\\&amp;=\sum_{x_C} p(y \mid t, x_C)\sum_{x_{\text{pa}(t)}} p(x_{\text{pa}(t)})p(x_C \mid x_{\text{pa}(t)})
+\\&amp;=\sum_{x_C} p(y \mid t, x_C)\sum_{x_{\text{pa}(t)}} p(x_{\text{pa}(t)}, x_C)
+\\&amp;=\sum_{x_C} p(y \mid t, x_C)p(x_C).
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="gaussian-causal-model">5. Gaussian Causal Model</h1>
+<p>The adjustment formula is a way of estimating causal effect using observational distributions: <span class="math display">\[\mathbb{E}[Y \mid \text{do}(z)]=\sum_{x_C}p(x_C)\mathbb{E}[Y \mid z, x_C].\]</span></p>
+<p>For multivariate Gaussian, <span class="math inline">\(\displaystyle \mathbb{E}[Y \mid z, x_C]=\beta_0+\beta_zz+\sum_{c \in C} \alpha_cx_c\)</span>, and thus <span class="math display">\[\begin{aligned}
+\mathbb{E}[Y \mid \text{do}(z)]&amp;=\int_{\mathcal{X}_C} p(x_C)\left(\beta_0+\beta_zz+\sum_{c \in C} \alpha_cx_c\right)\text{d}x_C
+\\&amp;=\beta_0+\beta_zz+\sum_{c \in C} \alpha_c\mathbb{E}[X_c].
+\end{aligned}\]</span></p>
+<p>The causal effect for <span class="math inline">\(Z\)</span> on <span class="math inline">\(Y\)</span> is <span class="math inline">\(\beta_z\)</span>.</p>
+<h1 id="structural-equation-model">6. Structural Equation Model</h1>
 
     </div>
 
@@ -480,7 +514,7 @@ By inductive argument, the result holds.
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#causal-inference"><span class="nav-text">1. Causal Inference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#causal-dag"><span class="nav-text">2. Causal DAG</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#d-separation"><span class="nav-text">3. d-Separation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#adjustment-set"><span class="nav-text">4. Adjustment Set</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#causal-inference"><span class="nav-text">1. Causal Inference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#causal-dag"><span class="nav-text">2. Causal DAG</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#d-separation"><span class="nav-text">3. d-Separation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#adjustment-set"><span class="nav-text">4. Adjustment Set</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gaussian-causal-model"><span class="nav-text">5. Gaussian Causal Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#structural-equation-model"><span class="nav-text">6. Structural Equation Model</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
