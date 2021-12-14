@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="Tianyang Li">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-10T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-09T17:18:34.300Z">
+<meta property="article:modified_time" content="2021-12-14T00:10:43.809Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Junction tree">
 <meta property="article:tag" content="Message passing">
@@ -233,7 +233,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-09 17:18:34" itemprop="dateModified" datetime="2021-12-09T17:18:34+00:00">2021-12-09</time>
+                <time title="Modified: 2021-12-14 00:10:43" itemprop="dateModified" datetime="2021-12-14T00:10:43+00:00">2021-12-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -301,13 +301,14 @@ Then <span class="math display">\[p(x_V)=p(x_{V-R_k})\frac{\psi_{C_k}(x_{C_k})}{
 <h1 id="message-passing">2. Message Passing</h1>
 <p><strong>Definition 2.1</strong>    Suppose we have potentials <span class="math inline">\(\psi_C\)</span>, <span class="math inline">\(\psi_D\)</span> and <span class="math inline">\(\psi_S\)</span>, where <span class="math inline">\(S=C \cap D\)</span>. Then <strong>passing a message</strong> from <span class="math inline">\(\psi_C\)</span> to <span class="math inline">\(\psi_D\)</span> involves:</p>
 <ul>
-<li><p><span class="math inline">\(\displaystyle \psi_S&#39;(x_S)=\sum_{x_{C-S}}\psi_C(x_C)\)</span>;</p></li>
+<li><p><span class="math inline">\(\displaystyle \psi_S&#39;(x_S)=\sum_{x_{C-S}}\psi_C(x_C)\)</span> (margin of <span class="math inline">\(\psi_C\)</span> over the variables in <span class="math inline">\(S\)</span>);</p></li>
 <li><p><span class="math inline">\(\displaystyle \psi_D&#39;(x_D)=\psi_D(x_D)\frac{\psi_S&#39;(x_S)}{\psi_S(x_S)}\)</span>.</p></li>
 </ul>
 <div class="note info">
-            <p>We have three important properties:</p><ul><li><p><span class="math inline">\(\displaystyle \prod_{i=1}^k \frac{\psi_{C_i}(x_{C_i})}{\psi_{S_i}(x_{S_i})}\)</span> is unchanged because <span class="math inline">\(\displaystyle \frac{\psi_D&#39;(x_D)}{\psi_S&#39;(x_S)}=\frac{\psi_D(x_D)}{\psi_S(x_S)}\)</span>;</p></li><li><p><span class="math inline">\(\psi_{S}&#39;\)</span> and <span class="math inline">\(\psi_C\)</span> are consistent;</p></li><li><p>If <span class="math inline">\(\psi_D\)</span> and <span class="math inline">\(\psi_S\)</span> are consistent, so are <span class="math inline">\(\psi_D&#39;\)</span> and <span class="math inline">\(\psi_S&#39;\)</span>, since <span class="math display">\[\sum_{x_{D-S}} \psi_D&#39;(x_D)=\frac{\psi_S&#39;(x_S)}{\psi_S(x_S)} \sum_{x_{D-S}} \psi_D(x_D)=\psi_S&#39;(x_S).\]</span></p></li></ul>
+            <p>We have three important properties:</p><ul><li><p><span class="math inline">\(\displaystyle \prod_{i=1}^k \frac{\psi_{C_i}(x_{C_i})}{\psi_{S_i}(x_{S_i})}\)</span> is unchanged because <span class="math inline">\(\displaystyle \frac{\psi_D&#39;(x_D)}{\psi_S&#39;(x_S)}=\frac{\psi_D(x_D)}{\psi_S(x_S)}\)</span>;</p></li><li><p><span class="math inline">\(\psi_{S}&#39;\)</span> and <span class="math inline">\(\psi_C\)</span> are consistent since <span class="math inline">\(\displaystyle \sum_{x_{S-C}}\psi&#39;_S(x_S)=\sum_{x_\varnothing}\psi&#39;_S(x_S)=\psi&#39;_S(x_S)=\sum_{x_{C-S}}\psi_C(x_C)\)</span>;</p></li><li><p>If <span class="math inline">\(\psi_D\)</span> and <span class="math inline">\(\psi_S\)</span> are consistent, so are <span class="math inline">\(\psi_D&#39;\)</span> and <span class="math inline">\(\psi_S&#39;\)</span>, since <span class="math display">\[\sum_{x_{D-S}} \psi_D&#39;(x_D)=\frac{\psi_S&#39;(x_S)}{\psi_S(x_S)} \sum_{x_{D-S}} \psi_D(x_D)=\psi_S&#39;(x_S).\]</span></p></li></ul><p>Hence, updating preserves the joint distribution and does not upset margins that are already consistent.</p>
           </div>
 <h1 id="junction-tree-algorithm">3. Junction Tree Algorithm</h1>
+<p>Given a tree, we can pick any vertex as a root, and direct all edges away from it.</p>
 <table frame="hsides" style="line-height:20px;">
 <tbody>
 <tr>
@@ -323,15 +324,16 @@ Then <span class="math display">\[p(x_V)=p(x_{V-R_k})\frac{\psi_{C_k}(x_{C_k})}{
 </tbody>
 </table>
 <p><strong>Theorem 3.1</strong>    Let <span class="math inline">\(\mathcal{T}\)</span> be a junction tree with potentials <span class="math inline">\(\psi_{C_i}(x_{C_i})\)</span>. Then after running the junction tree algorithm, all potentials will be consistent.</p>
-<p><strong><em>Proof.</em></strong> Collection ensures all cliques are consistent with <span class="math inline">\(\psi_{S_i}\)</span>. Distribution makes <span class="math inline">\(\psi_{C_{\sigma(i)}}\)</span> consistent with <span class="math inline">\(\psi_{S_i}\)</span> for each <span class="math inline">\(i\)</span>, and preserves the consistency between <span class="math inline">\(\psi_{S_i}\)</span> and <span class="math inline">\(\psi_{C_i}\)</span>.</p>
-<center>
-<strong><em>TBC...</em></strong>
-</center>
+<strong><em>Proof.</em></strong> Since we pass a message from <span class="math inline">\(\psi_{C_i}\)</span> to <span class="math inline">\(\psi_{C_{\sigma(i)}}\)</span> and by the property of message passing, <span class="math inline">\(\psi_{C_i}\)</span> and <span class="math inline">\(\psi_{S_i}\)</span> are consistent. By property, the consistency between <span class="math inline">\(\psi_{C_i}\)</span> and <span class="math inline">\(\psi_{S_i}\)</span> is preserved after future updates from <span class="math inline">\(\psi_{C_{\sigma(i)}}\)</span>. Similarly, distribution ensures <span class="math inline">\(\psi_{S_i}\)</span> and <span class="math inline">\(\psi_{C_{\sigma(i)}}\)</span> are consistent. Hence, all pairs of potentials are consistent.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
 <div class="note info">
             <p>In practice, message passing is often done in parallel and we have the convergence after at most <span class="math inline">\(d\)</span> iterations, where <span class="math inline">\(d\)</span> is the length of the longest path of the tree.</p><p>Junction graphs in general (<em>loopy belief propagation</em>) also seem to lead to convergence, but it is still an open area of study.</p>
           </div>
 <h1 id="evidence">4. Evidence</h1>
-<p>Denote evidence set <span class="math inline">\(E\)</span>, then <span class="math display">\[p(x_{V-E} \mid x_E=x_E^*)=\frac{p(x_{V-E}, x_E^*)}{p(x_E^*)}.\]</span> In junction tree situation, <span class="math display">\[p(x_V)=\prod_i \frac{\psi_{C_i}(x_{C_i})}{\psi_{S_i}(x_{S_i})}.\]</span> Replace <span class="math inline">\(\psi_{C_i}(x_{C_i})\)</span> with <span class="math inline">\(\displaystyle \frac{\psi_{C_i}(x_{C_i})}{p(x_E^*)}\)</span> if <span class="math inline">\(E \subseteq C_i\)</span>, then <span class="math display">\[\psi_{C_i}(x_{C_i})=p(x_{C_i} \mid x_E^*).\]</span></p>
+<p>Denote evidence set <span class="math inline">\(E\)</span>, then <span class="math display">\[p(x_{V-E} \mid x_E=x_E^*)=\frac{p(x_{V-E}, x_E^*)}{p(x_E^*)}.\]</span> In junction tree situation, <span class="math display">\[p(x_V)=\prod_i \frac{\psi_{C_i}(x_{C_i})}{\psi_{S_i}(x_{S_i})}.\]</span> If there is a clique that contains the node <span class="math inline">\(E\)</span> (<span class="math inline">\(E \subseteq C_i\)</span>), then we replace <span class="math inline">\(\psi_{C_i}(x_{C_i})\)</span> with <span class="math inline">\(\displaystyle \frac{\psi_{C_i}(x_{C_i})}{p(x_E^*)}\)</span>.</p>
+<p>After running the junction tree algorithm, we have <span class="math inline">\(\psi_{C_i}(x_{C_i})=p(x_{C_i} \mid x_E^*)\)</span>.</p>
 
     </div>
 
