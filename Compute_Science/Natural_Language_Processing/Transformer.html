@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Transformer">
+<meta property="og:url" content="https://litianyang0211.github.io/Compute_Science/Natural_Language_Processing/Transformer">
+<meta property="og:site_name" content="Tianyang Li">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_1.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_2.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_3.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_4.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_5.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_6.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_7.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_8.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_9.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_10.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_11.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_12.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_13.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_14.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_15.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_16.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_17.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_18.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_19.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_20.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_21.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_22.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_23.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_24.gif">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_25.gif">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_26.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_27.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_28.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_29.png">
+<meta property="article:published_time" content="2021-12-08T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-15T11:28:26.688Z">
+<meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Attention">
+<meta property="article:tag" content="Transformer">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://litianyang0211.github.io/images/Transformer_1.png">
+
+<link rel="canonical" href="https://litianyang0211.github.io/Compute_Science/Natural_Language_Processing/Transformer.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Transformer | Tianyang Li</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tianyang Li</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-posts">
+
+    <a href="/posts/" rel="section"><i class="fa fa-blog fa-fw"></i>Posts</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-projects">
+
+    <a href="/projects/" rel="section"><i class="fa fa-code fa-fw"></i>Projects</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-user-friends fa-fw"></i>Friends</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Compute_Science/Natural_Language_Processing/Transformer">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Tianyang Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianyang Li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Transformer
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-lightbulb"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-08 00:00:00" itemprop="dateCreated datePublished" datetime="2021-12-08T00:00:00+00:00">2021-12-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-edit"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-15 11:28:26" itemprop="dateModified" datetime="2021-12-15T11:28:26+00:00">2021-12-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+                </span>
+                  /
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Computer-Science/Natural-Language-Processing/" itemprop="url" rel="index"><span itemprop="name">Natural Language Processing</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description"><div></div></div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="introduction">1. Introduction</h1>
+<p>Transformer, 一种使用注意力（Attention）来加速训练的模型，这个模型最大的好处是可并行，即所有单词是同时训练的，这就大大增加了计算效率。Transformer使用了位置嵌入（Positional Encoding）来理解语言的顺序，使用自注意力机制（Self-Attention Mechanism）和全连接层进行计算。</p>
+<h1 id="abstract-model">2. Abstract Model</h1>
+<p>我们先将整个模型视为黑盒（Black Box），比如在机器翻译中，模型接收一种语言的句子作为输入，然后用另一种语言输出它的翻译。</p>
+<p><img data-src="/images/Transformer_1.png"></p>
+<p>进一步拆解，我们看到这个模型由编码层（Encoding）、解码层（Decoding）以及它们之间的连接层（Connection）组成。</p>
+<p><img data-src="/images/Transformer_2.png"></p>
+<p>编码层由多个编码器（Encoder）构成，解码层也由数量相同的解码器（Decoder）构成。编码层负责把输入（语言序列）映射成隐藏层，然后解码层再把隐藏层映射成自然语言序列。下文中我们会进一步看到：解码层输出的时候，通过<span class="math inline">\(N\)</span>个解码器才输出一个Token，并不是通过一个解码器就输出一个Token.</p>
+<p><img data-src="/images/Transformer_3.png"></p>
+<p>编码器在结构上都是相同的（但并不共享参数），每一个编码器都可以分为两个子层：</p>
+<p><img data-src="/images/Transformer_4.png"></p>
+<p>编码器的输入首先通过自注意力层——一个帮助编码器在编码特定单词时查看输入句子中其它单词的层。自注意力层的输出反馈给前馈神经网络（Feed-Forward Neural Network），每个输入位置对应的前馈神经网络是独立的。</p>
+<p>解码器同样也有这两个子层，但在两个子层间增加了注意力层，帮助解码器关注输入句子的相关部分。</p>
+<p><img data-src="/images/Transformer_5.png"></p>
+<h1 id="encoding">3. Encoding</h1>
+<p>正如自然语言处理（Natural Language Processing，NLP）应用的常见例子，我们首先使用嵌入（Embedding）算法将每个输入单词转换为向量（假设每个词映射到512维的向量上）：</p>
+<p><img data-src="/images/Transformer_6.png"></p>
+<p>嵌入只会发生在最底层的编码器中。每个编码器都会接收一个由大小为512的向量组成的列——在底层编码器中是词嵌入，而在其它编码器中是前一个编码器的输出。列的大小是可以设置的超参数，通常这是训练集中最长句子的长度。</p>
+<p>在输入序列的单词嵌入后，每个词嵌入都会通过编码器的两个子层。</p>
+<p><img data-src="/images/Transformer_7.png"></p>
+<p>在这里，我们要注意到Transformer的一个重要性质，即每个位置的单词仅仅经过自己的编码器路径。在自注意力层中，这些路径是相互依赖的。然而，前馈层没有这些依赖关系，因此这些路径在经过前馈层时可以并行执行。</p>
+<p>正如前文所提到的一样，编码器接收由向量组成的列作为输入，然后将其传入自注意力层处理，再传入前馈神经网络，最后将输入传入下一个编码器。</p>
+<p><img data-src="/images/Transformer_8.png"></p>
+<h1 id="self-attention">4. Self-Attention</h1>
+<h2 id="abstract-model-1">4.1. Abstract Model</h2>
+<p>假设这一句话是要翻译的输入语句：<code>The animal didn't cross the street because it was too tired.</code> 这个句子中的<code>it</code>指的是什么？是指<code>street</code>还是指<code>animal</code>？对人类而言，这是一个简单的问题，但对算法来说却不简单。当模型处理单词<code>it</code>时，自注意力机制允许它将<code>it</code>和<code>animal</code>联系起来。</p>
+<p>当模型处理每个单词（输入序列中的每个位置）时，自注意力允许它查看输入序列中的其它位置，以寻找有助于更好地编码该单词的线索。Transformer使用自注意力来将相关单词的理解编码到当前正在处理的单词中。</p>
+<h2 id="self-attention-in-detail">4.2. Self-Attention in Detail</h2>
+<p>我们先来看下如何用向量计算自注意力，再看下如何用矩阵计算。</p>
+<p>第一步，根据编码器的输入向量，生成三个向量。比如，对每个单词，生成查询（Query）向量、键（Key）向量和值（Value）向量。这些向量是根据嵌入乘以在训练过程中训练的三个矩阵得到的。注意，这些新向量的维度小于嵌入向量：新向量的维度是64，而嵌入和编码器输入及输出向量的维度是512. 新向量的维度不一定需要更小，但这样一种结构选择可以使多头注意力（Multi-Headed Attention）的计算更稳定。比如在下图中，<span class="math inline">\(\mathbf{x}_1 \cdot W^Q=\mathbf{q}_1\)</span>.</p>
+<p><img data-src="/images/Transformer_9.png"></p>
+<p>第二步，计算分值（Score）。假设我们计算上例中第一个单词<code>Thinking</code>的自注意力，我们需要给输入句子中的每个单词打分——分值决定了在某个位置对一个单词（比如<code>Thinking</code>）进行编码时，要把多少注意力放在输入句子的其它部分上。这个分值是通过查询向量（<code>Thinking</code>对应的查询向量）和所有单词的键向量依次做点积得到的。因此，当处理位置#1时，第一个分值是<span class="math inline">\(\mathbf{q}_1 \cdot \mathbf{k}_1\)</span>，第二个分值是<span class="math inline">\(\mathbf{q}_1 \cdot \mathbf{k}_2\)</span>.</p>
+<p><img data-src="/images/Transformer_10.png"></p>
+<p>第三步和第四步是将分值除以<span class="math inline">\(\sqrt{\dim(\mathbf{k})}=8\)</span>, 这会使梯度更稳定。然后通过<span class="math inline">\(\text{softmax}\)</span>传递结果——<span class="math inline">\(\text{softmax}\)</span>将分值标准化，使其全部为正值且和为<span class="math inline">\(1\)</span>.</p>
+<p><img data-src="/images/Transformer_11.png"></p>
+<p><span class="math inline">\(\text{softmax}\)</span>分值决定着在这个位置，每个单词的表达程度（关注度）。很明显，这个位置上的单词将具有最高的<span class="math inline">\(\text{softmax}\)</span>分值，但也有助于关注与当前单词相关的另一个单词。</p>
+<p>第五步，将每个值向量与<span class="math inline">\(\text{softmax}\)</span>分值相乘，保留想要关注的单词的值，并忽略不相关的单词。</p>
+<p>第六步，对加权值向量求和，产生该位置的自注意力的输出结果。</p>
+<p><img data-src="/images/Transformer_12.png"></p>
+<p>上述就是自注意力的计算过程，而生成的向量则继续传入前馈神经网络。在实际应用中，上述计算是以速度更快的矩阵形式进行的。</p>
+<h2 id="matrix-calculation-of-self-attention">4.3. Matrix Calculation of Self-Attention</h2>
+<p>首先，计算查询矩阵、键矩阵和值矩阵。将所有词嵌入合并成输入矩阵<span class="math inline">\(X\)</span>（<span class="math inline">\(X\)</span>中第<span class="math inline">\(i\)</span>行表示输入句子中的第<span class="math inline">\(i\)</span>个单词的向量），并将其分别乘以训练的权重矩阵<span class="math inline">\((W^Q, W^K, W^V)\)</span>，得到<span class="math inline">\(Q\)</span>, <span class="math inline">\(K\)</span>和<span class="math inline">\(V\)</span>（矩阵中第<span class="math inline">\(i\)</span>行表示第<span class="math inline">\(i\)</span>个单词的查询/键/值向量）。</p>
+<p><img data-src="/images/Transformer_13.png"></p>
+<p>最后，由于我们使用矩阵处理，我们可以将上述步骤合并成一个计算自注意力层输出的公式。</p>
+<p><img data-src="/images/Transformer_14.png"></p>
+<h2 id="multi-headed-attention">4.4. Multi-Headed Attention</h2>
+<p>我们通过增加多头注意力的机制，进一步细化了自注意力层，在如下两个方面提高了注意力层的性能：</p>
+<ol type="1">
+<li>多头注意力机制扩展了模型关注不同位置的能力。比如在上面的例子中，<span class="math inline">\(\mathbf{z}_1\)</span>包含了一些其它的编码，但它可能还是被实际的单词本身所支配，而知道<code>it</code>的指代对象对翻译<code>The animal didn't cross the street because it was too tired</code>会更有帮助。</li>
+<li>多头注意力为注意力层提供了多个表示子空间（Representation Subspace）。像下面的例子所示，在多头注意力下有多组查询/键/值权重矩阵（Transformer使用八个注意力头（Attention Head），因此每个编码器/解码器有八组）。每一组都是随机初始化的，经过训练之后，输入向量可以被映射到不同的表示子空间中。</li>
+</ol>
+<p><img data-src="/images/Transformer_15.png"></p>
+<p>如果我们计算多头注意力的自注意力，只需要使用不同的权重矩阵进行八次不同的计算，最终得到八个不同的<span class="math inline">\(Z\)</span>矩阵。</p>
+<p><img data-src="/images/Transformer_16.png"></p>
+<p>但这会带来一些麻烦：前馈层不能接收八个矩阵，所以我们需要一种方法将八个矩阵合并成一个矩阵——将矩阵合并，然后将这个大矩阵乘以一个额外的权重矩阵<span class="math inline">\(W^O\)</span>.</p>
+<p><img data-src="/images/Transformer_17.png"></p>
+<p>下面我们用一张完整图来表示多头注意力的自注意力。</p>
+<p><span id="f18"><img data-src="/images/Transformer_18.png"></span></p>
+<h1 id="positional-encoding">5. Positional Encoding</h1>
+<p>我们还没有讨论如何解释输入语句中单词的顺序——由于Transformer没有循环神经网络的迭代操作，所以我们必须提供每个单词的位置信息。</p>
+<p>为了解决词序问题，我们定义位置编码（Positional Encoding），其形状为<code>(max_seq_length, embedding_dim)</code>. 位置编码的维度与词嵌入的维度是相同的，均为<code>embedding_dim</code>; 而<code>max_seq_length</code>是超参数，指限定每个句子最长由多少个单词构成。</p>
+<p><img data-src="/images/Transformer_19.png"></p>
+<div class="note info">
+            <p>我们一般以单词为单位训练Transformer. 首先初始化单词编码大小<code>(vocab_size, embedding_dim)</code>, 其中<code>vocab_size</code>为词库中所有词的数量，<code>embedding_dim</code>为词嵌入的维度。在PyTorch中是<code>nn.Embedding(vocab_size, embedding_dim)</code>.</p>
+          </div>
+<p>假设词嵌入（位置编码）的维度为4：</p>
+<p><img data-src="/images/Transformer_20.png"></p>
+<p>利用位置编码的公式可以生成相应的位置编码：<span class="math display">\[\begin{aligned}
+\text{PE}(\text{pos}, 2i)&amp;=\sin(\text{pos}/10000^{2i/d_\text{model}}) \\
+\text{PE}(\text{pos}, 2i+1)&amp;=\cos(\text{pos}/10000^{2i/d_\text{model}})
+\end{aligned}\]</span> 其中<span class="math inline">\(\text{pos}\)</span>指的是一句话中某个单词的位置，取值范围是<span class="math inline">\([0, \text{max_seq_length})\)</span>, <span class="math inline">\(i\)</span>指的是词嵌入的维度序号，取值范围是<span class="math inline">\([0, \text{embedding_dim}/2)\)</span>, 以及<span class="math inline">\(d_\text{model}\)</span>指的是<code>embedding_dim</code>的值。这不是位置编码的唯一方法，然而它的优点是能够处理未知长度的序列。读者可以查看关于<a href="/Computer-science/Natural-language-processing/Positional_Encoding_in_Transformer">位置编码的更多解释</a>。</p>
+<p>在下图中，每行对应一个向量的位置编码，比如第一行是我们在输入序列中嵌入第一个单词的向量。每行包含512个值，每个值范围在<span class="math inline">\([-1, 1]\)</span>.</p>
+<p><img data-src="/images/Transformer_21.png"></p>
+<p>随着<span class="math inline">\(i\)</span>增大（从左往右纵向观察），位置编码函数周期变化越来越平缓。</p>
+<div class="note info">
+            <p>在Transformer中，位置编码是不可训练的，而在BERT中是可训练的。</p>
+          </div>
+<h1 id="residual">6. Residual</h1>
+<p>编码器结构中值得注意的一个细节是，每个编码器中的每个子层都有残差（Residual）连接，并且紧跟着Layer-Normalization操作。</p>
+<p><img data-src="/images/Transformer_22.png"></p>
+<p>在解码器中也是如此，考虑由两层编码器和两层解码器组成的Transformer, 其结构如下：</p>
+<p><img data-src="/images/Transformer_23.png"></p>
+<h1 id="encoder-and-decoder">7. Encoder and Decoder</h1>
+<p>解码器和编码器的原理是类似的，现在我们来看看它们是如何协同工作的。</p>
+<p>编码器从输入序列的处理开始，将顶部编码器的输出转换为一组注意力向量<span class="math inline">\(\mathbf{k}\)</span>和<span class="math inline">\(\mathbf{v}\)</span>. 每个解码器将在其Encoder-Decoder Attention层中使用这些注意力向量，这有助于解码器集中在输入序列中的适当位置：</p>
+<p><img data-src="/images/Transformer_24.gif"></p>
+<p>以下步骤一直重复，直到一个特殊符号出现指示Transformer解码器完成了翻译输出。每一步的输出在下一个时间步被馈送到底部解码器，解码器像编码器一样将其解码结果显示出来。此外，正如编码器的输入所做的处理，我们将位置编码嵌入并添加到解码器输入中，以指示每个单词的位置。</p>
+<p><img data-src="/images/Transformer_25.gif"></p>
+<p>解码器中的自注意力层与编码器中的稍有不同：在解码器中，自注意力层只允许关注早于当前输出的位置——在<span class="math inline">\(\text{softmax}\)</span>之前，通过遮挡未来位置（将其设置为<code>-inf</code>）来实现。</p>
+<p>Encoder-Decoder Attention层的工作原理与Multi-Headed Self-Attention是类似的，只是它从下层创建Query矩阵，并从编码器的输出中获取Key矩阵和Value矩阵。</p>
+<h1 id="linear-and-softmax-layer">8. Linear and Softmax Layer</h1>
+<p>解码器输出浮点向量，而线性层和<span class="math inline">\(\text{softmax}\)</span>层的主要工作是将其转化成单词。</p>
+<p>线性层是一个简单的全连接层，它将解码器生成的向量映射到一个更大的向量，称之为logits向量。假设模型从训练集中学习了10000个单词（输出词表），那么logits向量为10000维，每个分量表示某个单词的分值。然后<span class="math inline">\(\text{softmax}\)</span>层将这些分值转换为概率（全为正值且和为<span class="math inline">\(1\)</span>），最高值对应的分量上的单词就是这一步的输出单词。</p>
+<p><img data-src="/images/Transformer_26.png"></p>
+<h1 id="loss-function">9. Loss Function</h1>
+<p>我们用一个简单的例子来示范训练，比如将<code>merci</code>翻译为<code>thanks</code>, 这意味着输出的概率分布指向单词<code>thanks</code>. 但由于模型未经过训练，所以不太可能就是期望的输出。由于模型的参数都是随机初始化的，未训练的模型输出随机值，而我们可以对比实际输出，然后利用反向传播调整所有模型的参数，使输出更接近实际输出。</p>
+<p><img data-src="/images/Transformer_27.png"></p>
+<p>我们可以简单采用交叉熵（Cross Entropy）或Kullback-Leibler散度（KL Divergence）对比两个概率分布。</p>
+<p>这是一个过于简单的例子，而更真实的情况是，使用一个句子作为输入，比如输入<code>Je suis étudiant.</code>, 期望输出是<code>I am a student.</code> 在这个例子下，我们期望模型连续输出概率分布并满足以下条件：</p>
+<ol type="1">
+<li>每个概率分布由一个宽度为<code>vocab_size</code>的向量表示（一般而言为30000或50000）；</li>
+<li>第一个概率分布对<code>I</code>具有最高的概率；</li>
+<li>第二个概率分布对<code>am</code>具有最高的概率；</li>
+<li>依此类推，直到第五个输出分布指向<code>&lt;end of sentence&gt;</code>符号。</li>
+</ol>
+<p><img data-src="/images/Transformer_28.png"></p>
+<p>在足够大的训练集上训练足够时间后，我们希望生成的概率分布如下所示：</p>
+<p><img data-src="/images/Transformer_29.png"></p>
+<p>由于模型一次生成一个输出，我们可以假设模型从概率分布中选择概率最高的单词，然后丢弃其余单词，这种方法称为贪婪解码（Greedy Decoding）。另一种方法是波束搜索（Beam Search），比如说我们保留概率最高的两个单词（假设是<code>I</code>和<code>a</code>），在下一步运行模型两次：一次假设第一个输出位置是<code>I</code>，另一次假设第一个输出位置是<code>a</code>，同时考虑位置#1和#2，产生误差较小的模型被保留，然后我们对每一个位置重复这一操作。在我们的例子中，<code>beam_size=2</code>（意味着在任何时候，内存都保留两个部分的假设——未完成的翻译）以及<code>top_beams=2</code>（意味着模型将返回两次翻译）——这些都是我们可以在实践中调整的超参数。</p>
+<h1 id="reference">10. Reference</h1>
+<div id="A18" style="line-height: 18px; font-size: 15px;">
+Jay Alammar. The Illustrated Transformer. <em>Online: https://jalammar.github.io/illustrated-transformer</em>, 2018.
+</div>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Attention/" rel="tag"><i class="fa fa-tag"></i> Attention</a>
+              <a href="/tags/Transformer/" rel="tag"><i class="fa fa-tag"></i> Transformer</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Compute_Science/Machine_Learning/Machine_Learning_Paradigm" rel="prev" title="Machine Learning Paradigm">
+      <i class="fa fa-chevron-left"></i> Machine Learning Paradigm
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Compute_Science/Natural_Language_Processing/Positional_Encoding_in_Transformer" rel="next" title="Positional Encoding in Transformer">
+      Positional Encoding in Transformer <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-text">1. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract-model"><span class="nav-text">2. Abstract Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#encoding"><span class="nav-text">3. Encoding</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#self-attention"><span class="nav-text">4. Self-Attention</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#abstract-model-1"><span class="nav-text">4.1. Abstract Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#self-attention-in-detail"><span class="nav-text">4.2. Self-Attention in Detail</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#matrix-calculation-of-self-attention"><span class="nav-text">4.3. Matrix Calculation of Self-Attention</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multi-headed-attention"><span class="nav-text">4.4. Multi-Headed Attention</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#positional-encoding"><span class="nav-text">5. Positional Encoding</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#residual"><span class="nav-text">6. Residual</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#encoder-and-decoder"><span class="nav-text">7. Encoder and Decoder</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#linear-and-softmax-layer"><span class="nav-text">8. Linear and Softmax Layer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#loss-function"><span class="nav-text">9. Loss Function</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference"><span class="nav-text">10. Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tianyang Li"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Tianyang Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/litianyang0211" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;litianyang0211" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianyang.li@linacre.ox.ac.uk" title="Email → mailto:tianyang.li@linacre.ox.ac.uk" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/derek0211" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;derek0211" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tianyang Li</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'default',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

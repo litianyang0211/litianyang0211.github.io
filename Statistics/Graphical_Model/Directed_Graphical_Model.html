@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Directed Graphical Model">
+<meta property="og:url" content="https://litianyang0211.github.io/Statistics/Graphical_Model/Directed_Graphical_Model">
+<meta property="og:site_name" content="Tianyang Li">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-09T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-15T11:29:17.717Z">
+<meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Directed Graphical Model">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://litianyang0211.github.io/Statistics/Graphical_Model/Directed_Graphical_Model.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Directed Graphical Model | Tianyang Li</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tianyang Li</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-posts">
+
+    <a href="/posts/" rel="section"><i class="fa fa-blog fa-fw"></i>Posts</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-projects">
+
+    <a href="/projects/" rel="section"><i class="fa fa-code fa-fw"></i>Projects</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-user-friends fa-fw"></i>Friends</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Statistics/Graphical_Model/Directed_Graphical_Model">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Tianyang Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianyang Li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Directed Graphical Model
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-lightbulb"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-11-09 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-09T00:00:00+00:00">2021-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-edit"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-15 11:29:17" itemprop="dateModified" datetime="2021-12-15T11:29:17+00:00">2021-12-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Statistics/" itemprop="url" rel="index"><span itemprop="name">Statistics</span></a>
+                </span>
+                  /
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Statistics/Graphical-Model/" itemprop="url" rel="index"><span itemprop="name">Graphical Model</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description"><div></div></div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="directed-graph">1. Directed Graph</h1>
+<p><strong>Definition 1.1</strong>    A <strong>directed graph</strong> <span class="math inline">\(\mathcal{G}\)</span> is a pair <span class="math inline">\((V, D)\)</span> where <span class="math inline">\(V\)</span> is a finite set of <strong>vertices</strong>, and <span class="math inline">\(D \subseteq V \times V\)</span> is a set of <strong>ordered</strong> pairs <span class="math inline">\((i, j)\)</span> with <span class="math inline">\(i, j \in V\)</span> and <span class="math inline">\(i \neq j\)</span>. If <span class="math inline">\((i, j) \in D\)</span>, we write <span class="math inline">\(i \to j\)</span>. If <span class="math inline">\(i \to j\)</span> or <span class="math inline">\(i \leftarrow j\)</span>, we say <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are <strong>adjacent</strong> and write <span class="math inline">\(i \sim j\)</span>.</p>
+<p><strong>Definition 1.2</strong>    A <strong>path</strong> is a sequence of adjacent vertices without repetition. The path is <strong>directed</strong> if all the arrows point away from the start.</p>
+<p><strong>Example 1.1</strong>    Consider <span class="math inline">\(\mathcal{G}\)</span> with <span class="math inline">\(V=\{1, 2, 3, 4, 5\}\)</span> and <span class="math inline">\(D=\{(1, 3), (2, 3), (2, 4), (3, 5) ,(4, 5)\}\)</span>.</p>
+<pre class="mermaid" style="text-align: center;">
+            graph TB
+            1((1)) & 2((2)) --> 3((3))
+3 & 4((4)) --> 5((5))
+2 --> 4
+          </pre>
+<p>Note that <span class="math inline">\(1 \to 3 \leftarrow 2 \to 4 \to 5\)</span> and <span class="math inline">\(1 \to 3 \to 5\)</span> are two paths from <span class="math inline">\(1\)</span> to <span class="math inline">\(5\)</span>, and the second path is directed.</p>
+<p><strong>Definition 1.3</strong>    A <strong>directed cycle</strong> is a directed path from <span class="math inline">\(i\)</span> to <span class="math inline">\(j \neq i\)</span>, together with <span class="math inline">\(j \to i\)</span>.</p>
+<p><strong>Definition 1.4</strong>    Graph that contains no directed cycles is called <strong>acyclic</strong>, or more specifically, <strong>directed acyclic graph (DAG)</strong>.</p>
+<p><strong>Definition 1.5</strong>    If <span class="math inline">\(i \to j\)</span>, then <span class="math inline">\(i\)</span> is a <strong>parent</strong> of <span class="math inline">\(j\)</span>, and <span class="math inline">\(j\)</span> is a <strong>child</strong> of <span class="math inline">\(i\)</span>, denoted <span class="math inline">\(i \in \text{pa}_\mathcal{G}(j)\)</span> and <span class="math inline">\(j \in \text{ch}_\mathcal{G}(i)\)</span>. If <span class="math inline">\(a \to \cdots \to b\)</span> or <span class="math inline">\(a=b\)</span>, then <span class="math inline">\(a\)</span> is an <strong>ancestor</strong> of <span class="math inline">\(b\)</span>, and <span class="math inline">\(b\)</span> is a <strong>descendant</strong> of <span class="math inline">\(a\)</span>, denoted <span class="math inline">\(a \in \text{an}_\mathcal{G}(b)\)</span> and <span class="math inline">\(b \in \text{de}_\mathcal{G}(a)\)</span>. If <span class="math inline">\(w \notin \text{de}_\mathcal{G}(v)\)</span>, then <span class="math inline">\(w\)</span> is a <strong>non-descendant</strong> of <span class="math inline">\(v\)</span>, and we denote <span class="math inline">\(\text{nd}_\mathcal{G}(v)=V-\text{de}_\mathcal{G}(v)\)</span>.</p>
+<div class="note warning">
+            <p>A vertex is an ancestor and descendant of itself, and thus no vertex is a non-descendant of itself.</p>
+          </div>
+<p><strong>Example 1.2</strong>    Consider the graph <span class="math inline">\(\mathcal{G}\)</span>:</p>
+<pre class="mermaid" style="text-align: center;">
+            graph TB
+            1((1)) & 2((2)) --> 3((3))
+3 & 4((4)) --> 5((5))
+2 --> 4
+          </pre>
+<p>We have <span class="math inline">\(\text{pa}_\mathbf{G}(3)=\{1, 2\}\)</span>, <span class="math inline">\(\text{ch}_\mathcal{G}(5)=\varnothing\)</span>, <span class="math inline">\(\text{an}_\mathcal{G}(4)=\{2, 4\}\)</span>, <span class="math inline">\(\text{de}_\mathcal{G}(1)=\{1, 3 ,5\}\)</span>, and <span class="math inline">\(\text{nd}_\mathcal{G}(1)=\{2, 4\}\)</span>.</p>
+<p><strong>Definition 1.6</strong>    A <strong>topological ordering</strong> of the vertices of the graph is an ordering <span class="math inline">\(1, \ldots, k\)</span> s.t. <span class="math inline">\(i \in \text{pa}_\mathcal{G}(j)\)</span> implies that <span class="math inline">\(i&lt;j\)</span>. Acyclicity ensures that a topological ordering always exists.</p>
+<p><strong>Example 1.3</strong>    Consider the graph <span class="math inline">\(\mathcal{G}\)</span>:</p>
+<pre class="mermaid" style="text-align: center;">
+            graph TB
+            1((1)) & 2((2)) --> 3((3))
+3 & 4((4)) --> 5((5))
+2 --> 4
+          </pre>
+<p>The topological orderings are <span class="math display">\[\begin{aligned}
+&amp;1, 2, 3, 4, 5
+\\&amp;1, 2, 4, 3, 5
+\\&amp;2, 1, 3, 4, 5
+\\&amp;2, 1, 4, 3, 5
+\\&amp;2, 4, 1, 3, 5
+\end{aligned}\]</span></p>
+<h1 id="markov-property">2. Markov Property</h1>
+<div class="note no-icon">
+            <p>We associate a <strong>model</strong> with each DAG via various Markov properties.</p>
+          </div>
+<p>Consider any multivariate distribution with density <span class="math inline">\(p(x_V)\)</span>, where <span class="math inline">\(x_V \in \mathcal{X}_V\)</span>, and <span class="math inline">\(x_V=(x_1, \ldots, x_k)^T\)</span>. For all <span class="math inline">\(x_V \in \mathcal{X}_V\)</span>, <span class="math inline">\(p\)</span> factorizes as <span class="math display">\[p(x_V)=\prod_{i=1}^k p(x_i \mid x_1, \ldots, x_{i-1})=\prod_{i=1}^k p(x_i \mid x_{\text{pre}&lt;(i)}).\]</span></p>
+<p>A <strong>DAG model</strong> uses the form with a topological ordering of the graph, and states that the right-hand side of each factor only depends on the parents of <span class="math inline">\(i\)</span>.</p>
+<p><strong>Definition 2.1</strong>    We say that <span class="math inline">\(p\)</span> <strong>factorizes</strong> according to a directed graph <span class="math inline">\(\mathcal{G}\)</span> if for all <span class="math inline">\(x_V \in \mathcal{X}_V\)</span>, <span class="math display">\[p(x_V)=\prod_{i=1}^k p(x_i \mid x_{\text{pa}(i)}),\]</span> which implies that if ordering <span class="math inline">\(&lt;\)</span> is topological, for <span class="math inline">\(i \in V\)</span>, <span class="math display">\[p(x_i \mid x_{\text{pre}&lt;(i)})=p(x_i \mid x_{\text{pa}(i)}),\]</span> i.e., for all <span class="math inline">\(i \in V\)</span>, <span class="math display">\[X_i \perp\!\!\!\!\perp X_{\text{pre}&lt;(i)-\text{pa}(i)} \mid X_{\text{pa}(i)}\ [p],\]</span> which is called the <strong>ordered local Markov property</strong> corresponding to the ordering of the variables.</p>
+<p>Since the ordering is arbitrary provided that it is topological, we can pick <span class="math inline">\(&lt;\)</span> so that as many vertices come before <span class="math inline">\(i\)</span> as possible, then for all <span class="math inline">\(i \in V\)</span>, <span class="math display">\[X_i \perp\!\!\!\!\perp X_{\text{nd}(i)-\text{pa}(i)} \mid X_{\text{pa}(i)}\ [p],\]</span> which is called the <strong>local Markov property</strong> for <span class="math inline">\(\mathcal{G}\)</span>.</p>
+<p><strong>Example 2.1</strong>    Consider the graph <span class="math inline">\(\mathcal{G}\)</span>:</p>
+<pre class="mermaid" style="text-align: center;">
+            graph TB
+            1((1)) & 2((2)) --> 3((3))
+3 & 4((4)) --> 5((5))
+2 --> 4
+          </pre>
+<p>If we apply ordered local Markov property, we have <span class="math display">\[\begin{aligned}
+X_1 &amp;\perp\!\!\!\!\perp X_\varnothing \mid X_\varnothing \\
+X_2 &amp;\perp\!\!\!\!\perp X_1\mid X_\varnothing \\
+X_3 &amp;\perp\!\!\!\!\perp X_\varnothing \mid X_1, X_2 \\
+X_4 &amp;\perp\!\!\!\!\perp X_1, X_3 \mid X_2 \\
+X_5 &amp;\perp\!\!\!\!\perp X_1, X_2 \mid X_3, X_4
+\end{aligned}\]</span> and get three independences <span class="math display">\[\begin{aligned}
+X_2 &amp;\perp\!\!\!\!\perp X_1 \\
+X_4 &amp;\perp\!\!\!\!\perp X_1, X_3 \mid X_2 \\
+X_5 &amp;\perp\!\!\!\!\perp X_1, X_2 \mid X_3, X_4
+\end{aligned}\]</span></p>
+<p>If we apply local Markov property, we have <span class="math display">\[\begin{aligned}
+X_1 &amp;\perp\!\!\!\!\perp X_2, X_4 \\
+X_2 &amp;\perp\!\!\!\!\perp X_1 \\
+X_3 &amp;\perp\!\!\!\!\perp X_4 \mid X_1, X_2 \\
+X_4 &amp;\perp\!\!\!\!\perp X_1, X_3 \mid X_2 \\
+X_5 &amp;\perp\!\!\!\!\perp X_1, X_2 \mid X_3, X_4
+\end{aligned}\]</span></p>
+<p>Moreover, for instance, since <span class="math inline">\(X_4 \perp\!\!\!\!\perp X_1, X_3 \mid X_2\)</span> and <span class="math inline">\(X_5 \perp\!\!\!\!\perp X_1, X_2 \mid X_3, X_4\)</span>, we have <span class="math inline">\(X_4 \perp\!\!\!\!\perp X_1 \mid X_2, X_3\)</span> and <span class="math inline">\(X_5 \perp\!\!\!\!\perp X_1 \mid X_2, X_3, X_4\)</span>, and thus <span class="math inline">\(X_1 \perp\!\!\!\!\perp X_4, X_5 \mid X_2, X_3\)</span>.</p>
+<div class="note no-icon">
+            <p>We might wonder if there is a way to tell all independences immediately from the graph, and thus we need the concept of <strong>global Markov property</strong>.</p>
+          </div>
+<p><strong>Definition 2.2</strong>    An <strong>ancestral set</strong> is the set that contains all its own ancestors, i.e., <span class="math inline">\(\text{an}(A)=A\)</span>.</p>
+<p><strong>Example 2.2</strong>    Consider the graph <span class="math inline">\(\mathcal{G}\)</span>:</p>
+<pre class="mermaid" style="text-align: center;">
+            graph TB
+            1((1)) & 2((2)) --> 3((3))
+3 & 4((4)) --> 5((5))
+2 --> 4
+          </pre>
+<p><span class="math inline">\(\{1, 2, 3\}\)</span> is ancestral, but <span class="math inline">\(\{4\}\)</span> is not ancestral.</p>
+<p><span id="thm2.1"><strong>Theorem 2.1</strong></span>    Let <span class="math inline">\(A\)</span> be an ancestral set in <span class="math inline">\(\mathcal{G}\)</span>. If <span class="math inline">\(p(x_V)\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span>, then <span class="math inline">\(p(x_A)\)</span> factorizes according to <span class="math inline">\(\mathcal{G}_A\)</span>.</p>
+<strong><em>Proof.</em></strong> Suppose <span class="math inline">\(p(x_V)\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span>, then <span class="math display">\[p(x_V)=\prod_{i \in V} p(x_i \mid x_{\text{pa}(i)})=\prod_{i \in A} p(x_i \mid x_{\text{pa}(i)}) \prod_{i \in V-A} p(x_i \mid x_{\text{pa}(i)}).\]</span> Since <span class="math inline">\(A\)</span> is ancestral, then the first product does not depend on <span class="math inline">\(V-A\)</span>. Hence, for all <span class="math inline">\(x_A \in \mathcal{X}_A\)</span>, <span class="math display">\[p(x_A)=\sum_{x_{V-A}} p(x_V)=\prod_{i \in A} p(x_i \mid x_{\text{pa}(i)})\]</span> and thus <span class="math inline">\(p(x_A)\)</span> factorizes according to <span class="math inline">\(\mathcal{G}_A\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<div class="note info">
+            <p>In particular, if we wish to interrogate whether a conditional independence <span class="math inline">\(X_A \perp\!\!\!\!\perp X_B \mid X_C\ [p]\)</span> holds under a DAG model, we can restrict to checking if the independence holds in the induced subgraph over the ancestral set <span class="math inline">\(\text{an}(A \cup B \cup C)\)</span>, i.e., <span class="math inline">\(X_A \perp\!\!\!\!\perp X_B \mid X_c\ [p(x_{\text{an}(A, B, C)})]\)</span>.</p>
+          </div>
+<p><strong>Definition 2.3</strong>    A <strong>v-structure</strong> is a triple <span class="math inline">\(i \to k \leftarrow j\)</span> s.t. <span class="math inline">\(i \not\sim j\)</span>. The <strong>moral graph</strong> <span class="math inline">\(\mathcal{G}^m\)</span> is formed by joining any parents in a v-structure, and dropping the direction of edges.</p>
+<p><span id="thm2.2"><strong>Theorem 2.2</strong></span>    If <span class="math inline">\(p(x_V)\)</span> factorizes according to a DAG <span class="math inline">\(\mathcal{G}\)</span>, then <span class="math inline">\(p(x_V)\)</span> factorizes according to the undirected graph <span class="math inline">\(\mathcal{G}^m\)</span>.</p>
+<strong><em>Proof.</em></strong> If <span class="math inline">\(p(x_V)\)</span> factorizes according to a DAG <span class="math inline">\(\mathcal{G}\)</span>, then <span class="math display">\[p(x_V)=\prod_{i \in V} p(x_i \mid x_{\text{pa}(i)}).\]</span> Note that <span class="math inline">\(\{i\} \cup \text{pa}(i)\)</span> is complete in <span class="math inline">\(\mathcal{G}^m\)</span>. Let <span class="math inline">\(C_1\)</span> be the first clique with the smallest <span class="math inline">\(i\)</span> and let <span class="math display">\[\psi_{C_1}(x_{C_1})=\prod_{i \in C_1} p(x_i \mid x_{\text{pa}(i)}).\]</span> Let <span class="math inline">\(C_k\)</span> be the <span class="math inline">\(k\)</span>th clique with <span class="math inline">\(k\)</span>th smallest <span class="math inline">\(i\)</span> and let <span class="math display">\[\psi_{C_k}(x_{C_k})=\prod_{i \in C_k} p(x_i \mid x_{\text{pa}(i)})\]</span> but without the terms included in <span class="math inline">\(\psi_{C_j}\)</span> where <span class="math inline">\(j&lt;k\)</span>. We can find all cliques and <span class="math display">\[p(x_V)=\prod_{C_k} \psi_{C_k}(x_{C_k}),\]</span> i.e., <span class="math inline">\(p(x_V)\)</span> factorizes according to the undirected graph <span class="math inline">\(\mathcal{G}^m\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Definition 2.4</strong>    We say <span class="math inline">\(p(x_V)\)</span> satisfies the <strong>global Markov property</strong> w.r.t. a directed graph <span class="math inline">\(\mathcal{G}\)</span> if whenever <span class="math inline">\(A\)</span> is separated from <span class="math inline">\(B\)</span> by <span class="math inline">\(C\)</span> in <span class="math inline">\((\mathcal{G}_{\text{an}(A \cup B \cup C)})^m\)</span>, we have <span class="math inline">\(X_A \perp\!\!\!\!\perp X_B \mid X_C\ [p]\)</span>.</p>
+<p><strong>Example 2.3</strong>    Consider the graph <span class="math inline">\(\mathcal{G}\)</span>:</p>
+<pre class="mermaid" style="text-align: center;">
+            graph TB
+            1((1)) & 2((2)) --> 3((3))
+3 & 4((4)) --> 5((5))
+2 --> 4
+          </pre>
+<p>Suppose we want to know whether <span class="math inline">\(X_1 \perp\!\!\!\!\perp X_5 \mid X_3\)</span>. The moral graph <span class="math inline">\((\mathcal{G}_{\text{an}(X_1 \cup X_3 \cup X_5)})^m=\mathcal{G}^m\)</span>, i.e.,</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            1((1)) & 2((2)) --- 3((3))
+3 & 4((4)) --- 5((5))
+2 --- 4
+1 --- 2
+3 --- 4
+          </pre>
+<p><span class="math inline">\(\mathcal{G}^m\)</span> suggests that <span class="math inline">\(X_1\)</span> is not independent of <span class="math inline">\(X_5\)</span> given <span class="math inline">\(X_3\)</span>.</p>
+<p>Suppose we want to know whether <span class="math inline">\(X_2 \perp\!\!\!\!\perp X_1 \mid X_4\)</span>. The moral graph <span class="math inline">\((\mathcal{G}_{\text{an}(X_1 \cup X_2 \cup X_4)})^m\)</span> is</p>
+<pre class="mermaid" style="text-align: center;">
+            graph TB
+            1((1))
+2((2)) --- 4((4))
+          </pre>
+<p>Hence, <span class="math inline">\(X_2 \perp\!\!\!\!\perp X_1 \mid X_4\)</span>. Furthermore, <span class="math inline">\(X_1 \perp\!\!\!\!\perp X_2, X_4\)</span>.</p>
+<p><span id="thm2.3"><strong>Theorem 2.3 (Completeness of Global Markov Property)</strong></span>    Let <span class="math inline">\(\mathcal{G}\)</span> be a DAG, then there exists a probability distribution <span class="math inline">\(p\)</span> s.t. <span class="math inline">\(X_A \perp\!\!\!\!\perp X_B \mid X_C\ [p]\)</span> iff <span class="math inline">\(A \perp_s B \mid C\ [(\mathcal{G}_{\text{an}(A \cup B \cup C)})^m]\)</span>.</p>
+<div class="note info">
+            <p>Any independence not exhibited by a separation will not generally hold in distributions Markov to <span class="math inline">\(\mathcal{G}\)</span>. In other words, the global Markov property gives all conditional independences that are implied by the DAG model.</p>
+          </div>
+<p><strong>Theorem 2.4</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> be a DAG and <span class="math inline">\(p\)</span> be a probability density. The following are equivalent:</p>
+<p>    (1) <span class="math inline">\(p\)</span> factorizes according to <span class="math inline">\(\mathcal{G}\)</span>;</p>
+<p>    (2) <span class="math inline">\(p\)</span> is globally Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>;</p>
+<p>    (3) <span class="math inline">\(p\)</span> is locally Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>.</p>
+<p><strong><em>Proof.</em></strong> We need to show (1) <span class="math inline">\(\Rightarrow\)</span> (2) <span class="math inline">\(\Rightarrow\)</span> (3) <span class="math inline">\(\Rightarrow\)</span> (1).</p>
+<p>(i) Let <span class="math inline">\(W=\text{an}(A \cup B \cup C)\)</span> and suppose there is a separation <span class="math inline">\(A \perp_s B \mid C\ [(\mathcal{G}_W)^m]\)</span>. By <a href="#thm2.1">theorem 2.1</a>, we have for all <span class="math inline">\(x_W\)</span>, <span class="math display">\[p(x_W)=\prod_{i \in W} p(x_i \mid x_{\text{pa}(i)}).\]</span> Then by <a href="#thm2.2">theorem 2.2</a>, we know <span class="math inline">\(p(x_W)\)</span> factorizes according to <span class="math inline">\((\mathcal{G}_W)^m\)</span>. Therefore, <span class="math inline">\(p(x_W)\)</span> satisfies <span class="math inline">\(X_A \perp\!\!\!\!\perp X_B \mid X_C\ [p]\)</span>. Since <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(C\)</span> are arbitrary, then <span class="math inline">\(p\)</span> is globally Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>.</p>
+<p>(ii) Moralizing <span class="math inline">\(\mathcal{G}_{\{i\} \cup \text{nd}(i)}\)</span> will not add any edges adjacent to <span class="math inline">\(i\)</span>, and <span class="math inline">\(\{i\} \cup \text{nd}(i)\)</span> is an ancestral set. Hence, <span class="math display">\[i \perp_s \text{nd}(i)-\text{pa}(i) \mid \text{pa}(i)\ [(\mathcal{G}_{\{i\} \cup \text{nd}(i)})^m].\]</span> By the global Markov property, <span class="math inline">\(X_i \perp\!\!\!\!\perp X_{\text{nd}(i)-\text{pa}(i)} \mid X_{\text{pa}(i)}\ [p]\)</span>, i.e., <span class="math inline">\(p\)</span> is locally Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>.</p>
+(iii) We have <span class="math inline">\(X_i \perp\!\!\!\!\perp X_{\text{nd}(i)-\text{pa}(i)} \mid X_{\text{pa}(i)}\ [p]\)</span>. Let <span class="math inline">\(1, \ldots, k\)</span> be a topological order. Note that for all <span class="math inline">\(i \in V\)</span>, <span class="math display">\[X_i \perp\!\!\!\!\perp X_{\text{pre}&lt;(i)-\text{pa}(i)} \mid X_{\text{pa}(i)}\ [p].\]</span> Therefore, for all <span class="math inline">\(i \in V\)</span>, <span class="math display">\[p(x_i \mid x_{\text{pre}&lt;(i)})=p(x_i \mid x_{\text{pa}(i)})\]</span> and thus for all <span class="math inline">\(x_V \in \mathcal{X}_V\)</span>, <span class="math display">\[p(x_V)=\prod_{i=1}^k p(x_i \mid x_{\text{pre}&lt;(i)})=\prod_{i=1}^k p(x_i \mid x_{\text{pa}(i)}).\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="maximum-likelihood-estimation">3. Maximum Likelihood Estimation</h1>
+<p>Consider a contingency table with counts <span class="math inline">\(n(x_V)\)</span>, the likelihood is <span class="math display">\[\begin{aligned}
+l(p; n)&amp;=\sum_{x_V \in \mathcal{X}_V} n(x_V) \ln p(x_V)
+\\&amp;=\sum_{x_V \in \mathcal{X}_V} n(x_V) \sum_{i \in V} \ln p(x_i \mid x_{\text{pa}(i)})
+\\&amp;=\sum_{i \in V} \sum_{x_V \in \mathcal{X}_V} n(x_V)\ln p(x_i \mid x_{\text{pa}(i)})
+\\&amp;=\sum_{i \in V} \sum_{x_i \in \mathcal{X}_i} \sum_{x_{\text{pa}(i)} \in \mathcal{X}_{\text{pa}(i)}} \ln p(x_i \mid x_{\text{pa}(i)}) \sum_{x_O \in \mathcal{X}_V-\mathcal{X}_i-\mathcal{X}_{\text{pa}(i)}} n(x_V)
+\\&amp;=\sum_{i \in V} \sum_{x_{\text{pa}(i)} \in \mathcal{X}_{\text{pa}(i)}} \sum_{x_i \in \mathcal{X}_i} n(x_i, x_{\text{pa}(i)}) \ln p(x_i \mid x_{\text{pa}(i)})
+\end{aligned}\]</span> where each of the conditional distributions <span class="math inline">\(p(x_i \mid x_{\text{pa}(i)})\)</span> can be dealt with separately, i.e., we can separately maximize each inner sum <span class="math inline">\(\displaystyle \sum_{x_i \in \mathcal{X}_i} n(x_i, x_{\text{pa}(i)}) \ln p(x_i \mid x_{\text{pa}(i)})\)</span> s.t. <span class="math inline">\(\displaystyle \sum_{x_i \in \mathcal{X}_i} p(x_i \mid x_{\text{pa}(i)})=1\)</span>. Hence, the MLE of <span class="math inline">\(\mathcal{G}\)</span> is for all <span class="math inline">\(x_i\)</span> and <span class="math inline">\(x_\text{pa}(i)\)</span>, <span class="math display">\[\widehat{p}(x_i \mid x_{\text{pa}(i)})=\frac{n(x_i, x_{\text{pa}(i)})}{n(x_{\text{pa}(i)})}.\]</span></p>
+<p>Suppose each <span class="math inline">\(v \in V\)</span> has a model for <span class="math inline">\(p(x_v \mid x_{\text{pa}(v)})\)</span> and we have independent priors for each factor, i.e., <span class="math display">\[\pi(\theta)=\prod_{v \in V} \pi(\theta_v).\]</span> Therefore <span class="math display">\[p(x_V; \theta)=\prod_{i \in V} p(x_i \mid x_{\text{pa}(i)}; \theta_i)\]</span> and thus <span class="math display">\[\pi(\theta)p(x_V; \theta)=\prod_{i \in V} p(x_i \mid x_{\text{pa}(i)}; \theta_i)\pi(\theta_i).\]</span> Hence, <span class="math display">\[\theta_i \perp\!\!\!\!\perp X_{V-(\{i\} \cup \text{pa}(i))}, \theta_{-i} \mid X_i, X_{\text{pa}(i)}.\]</span></p>
+<h1 id="markov-equivalence">4. Markov Equivalence</h1>
+<p><strong>Definition 4.1</strong>    <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> are <strong>Markov equivalent</strong> if any <span class="math inline">\(p\)</span> which is Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span> is also Markov w.r.t. <span class="math inline">\(\mathcal{G}&#39;\)</span>, and vice versa.</p>
+<p><strong>Definition 4.2</strong>    Let <span class="math inline">\(\mathcal{G}=(V, D)\)</span> be a DAG, then the <strong>skeleton</strong> of <span class="math inline">\(\mathcal{G}\)</span> is the undirected graph <span class="math inline">\(\text{skel}(\mathcal{G})\)</span> obtained by dropping the orientations.</p>
+<p><strong>Lemma 4.1</strong>    If <span class="math inline">\(\text{skel}(\mathcal{G}) \neq \text{skel}(\mathcal{G}&#39;)\)</span>, then <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> are not Markov equivalent.</p>
+<p><strong><em>Proof.</em></strong> Suppose w.l.o.g. that <span class="math inline">\(i \to j\)</span> in <span class="math inline">\(\mathcal{G}\)</span> but not in <span class="math inline">\(\mathcal{G}&#39;\)</span>. Let <span class="math display">\[p(x_V)=p(x_j \mid x_i) \prod_{k \neq j} p(x_k).\]</span> Since <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are dependent, and there is no way that we can separate them in a moral graph, then <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> cannot be conditionally independent given any subset of <span class="math inline">\(V-\{i, j\}\)</span>.</p>
+In <span class="math inline">\(\mathcal{G}&#39;\)</span>, <span class="math inline">\(X_i \perp\!\!\!\!\perp X_{\text{nd}(i)-\text{pa(i)}} \mid X_{\text{pa}(i)}\)</span> and <span class="math inline">\(X_j \perp\!\!\!\!\perp X_{\text{nd}(j)-\text{pa(j)}} \mid X_{\text{pa}(j)}\)</span>. Therefore, <span class="math inline">\(X_i\)</span> and <span class="math inline">\(X_j\)</span> are conditionally independent given some subsets of <span class="math inline">\(V-\{i, j\}\)</span>. Hence, <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> are not Markov equivalent.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Theorem 4.2</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> be DAGs, then <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> are Markov equivalent iff they have the same skeletons and v-structures.</p>
+<p><strong><em>Proof.</em></strong> We only show the only if direction.</p>
+<p>If <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> have different skeletons, then <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> are not Markov equivalent.</p>
+<p>Suppose now <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> have same skeletons, and <span class="math inline">\(\mathcal{G}\)</span> has a v-structure <span class="math inline">\(i \to k \leftarrow j\)</span> but <span class="math inline">\(\mathcal{G}&#39;\)</span> does not. Let <span class="math display">\[p(x_V)=p(x_k \mid x_i, x_j) \prod_{l \neq k} p(x_l)\]</span> for all <span class="math inline">\(x_V \in \mathcal{X}_V\)</span>. Note that <span class="math inline">\(p\)</span> factorizes w.r.t. <span class="math inline">\(\mathcal{G}\)</span>.</p>
+Since <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> have same skeletons, then either <span class="math inline">\(i \to k \to j\)</span> or <span class="math inline">\(i \leftarrow k \to j\)</span> or <span class="math inline">\(i \leftarrow k \leftarrow j\)</span>. Suppose there exists a <span class="math inline">\(d \in V\)</span> s.t. <span class="math inline">\(d \in W=\text{an}_{\mathcal{G}&#39;}(\{i, j, k\})\)</span> and <span class="math inline">\(i \to d \leftarrow j\)</span>, then we can find contradiction immediately (the graph is cyclic). Hence, there is no common child of <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> in <span class="math inline">\(\mathcal{G}&#39;\)</span>, and thus <span class="math inline">\(i \not\sim j\)</span> in <span class="math inline">\((\mathcal{G}&#39;_W)^m\)</span>. Therefore, <span class="math inline">\(X_i \perp\!\!\!\!\perp X_j \mid X_{W-\{i, j\}}\)</span>. Since either <span class="math inline">\(k \in \text{pa}_{\mathcal{G}&#39;}(i)\)</span> or <span class="math inline">\(k \in \text{pa}_{\mathcal{G}&#39;}(j)\)</span>, then <span class="math inline">\(k \in W\)</span>. However, the independence does not hold in <span class="math inline">\(p\)</span> since we have a factor <span class="math inline">\(p(x_k \mid x_i, x_j)\)</span>. Hence, <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}&#39;\)</span> are not Markov equivalent.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<h1 id="decomposability">5. Decomposability</h1>
+<p><strong>Theorem 5.1</strong>    A DAG <span class="math inline">\(\mathcal{G}\)</span> is Markov equivalent to an undirected graph iff it contains no v-structures. In this case, the equivalent undirected graph is the skeleton of <span class="math inline">\(\mathcal{G}\)</span>.</p>
+<p><strong><em>Proof.</em></strong> (<span class="math inline">\(\Leftarrow\)</span>) Suppose there is no v-structure, then <span class="math inline">\(\mathcal{G}^m=\text{skel}(\mathcal{G})\)</span>. We know that if <span class="math inline">\(p\)</span> is Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>, then it is also Markov w.r.t. <span class="math inline">\(\mathcal{G}^m\)</span>.</p>
+<p>Suppose <span class="math inline">\(p\)</span> is Markov w.r.t. <span class="math inline">\(\mathcal{G}^m\)</span>. Let <span class="math inline">\(v\)</span> be a vertex with no child in <span class="math inline">\(\mathcal{G}\)</span>. Since <span class="math inline">\(v\)</span> does not have child and <span class="math inline">\(\text{pa}_\mathcal{G}(v)\)</span> must be complete in <span class="math inline">\(\mathcal{G}^m\)</span>, then <span class="math inline">\(v \perp_s V-(\text{pa}_\mathcal{G}(v) \cup \{v\}) \mid \text{pa}_\mathcal{G}(v)\ [\mathcal{G}^m]\)</span>. Hence, by the global Markov property for <span class="math inline">\(\mathcal{G}^m\)</span>, <span class="math inline">\(X_v \perp\!\!\!\!\perp X_{V-(\text{pa}_\mathcal{G}(v) \cup \{v\})} \mid X_{\text{pa}_\mathcal{G}(v)}\ [p]\)</span>, i.e., <span class="math inline">\(X_v \perp\!\!\!\!\perp X_{\text{nd}_\mathcal{G}(v)-\text{pa}_\mathcal{G}(v)} \mid X_{\text{pa}_\mathcal{G}(v)}\ [p]\)</span>, which is the local Markov property applied at <span class="math inline">\(v\)</span>.</p>
+<p><span class="math inline">\(\mathcal{G}_{-v}\)</span> also has no v-structure, and so by induction, <span class="math inline">\(p(x_{V-\{v\}})\)</span> is Markov w.r.t. <span class="math inline">\(\mathcal{G}_{-v}\)</span>, and thus for all <span class="math inline">\(i \in V-\{v\}\)</span>, <span class="math inline">\(X_i \perp\!\!\!\!\perp X_{\text{nd}(i)-\text{pa}(i)} \mid X_{\text{pa}(i)}\ [p]\)</span>. Since <span class="math inline">\(X_v \perp\!\!\!\!\perp X_{\text{nd}_\mathcal{G}(v)-\text{pa}_\mathcal{G}(v)} \mid X_{\text{pa}_\mathcal{G}(v)}\ [p]\)</span>, then local Markov property for <span class="math inline">\(\mathcal{G}\)</span> holds. Hence, <span class="math inline">\(p\)</span> is Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>, and thus <span class="math inline">\(\mathcal{G}\)</span> and <span class="math inline">\(\mathcal{G}^m\)</span> are Markov equivalent.</p>
+<p>(<span class="math inline">\(\Rightarrow\)</span>) If <span class="math inline">\(\mathcal{G}\)</span> has a v-structure <span class="math inline">\(i \to k \leftarrow j\)</span>, then there exists an independence between <span class="math inline">\(X_i\)</span> and <span class="math inline">\(X_j\)</span> by the local Markov property. If we add the edge <span class="math inline">\(i \sim j\)</span>, then the undirected graph <span class="math inline">\(\mathcal{G}^m\)</span> will not be Markov equivalent to <span class="math inline">\(\mathcal{G}\)</span>.</p>
+However, since <span class="math inline">\(i \sim j\)</span> in <span class="math inline">\(\mathcal{G}^m\)</span>, by <a href="#thm2.3">theorem 2.3</a>, we know there exists a distribution, Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>, where <span class="math inline">\(X_i\)</span> is not conditionally independent of <span class="math inline">\(X_j\)</span> given <span class="math inline">\(X_{V-\{i, j\}}\)</span>. Therefore, if we do not add the edge <span class="math inline">\(i \sim j\)</span>, the undirected graph <span class="math inline">\(\text{skel}(\mathcal{G})\)</span> will not be Markov equivalent to <span class="math inline">\(\mathcal{G}\)</span>. Hence, no undirected graph can be Markov equivalent to <span class="math inline">\(\mathcal{G}\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Corollary 5.2</strong>    A undirected graph is Markov equivalent to a directed graph iff the undirected graph is decomposable.</p>
+<div class="note info">
+            <p>Decomposable models represent the intersection of undirected and directed graphical models.</p>
+          </div>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Directed-Graphical-Model/" rel="tag"><i class="fa fa-tag"></i> Directed Graphical Model</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Compute_Science/Deep_Learning/Optimization_Algorithm_for_Training_DNN" rel="prev" title="Optimization Algorithm for Training DNN">
+      <i class="fa fa-chevron-left"></i> Optimization Algorithm for Training DNN
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Statistics/Graphical_Model/Junction_Tree_and_Message_Passing" rel="next" title="Junction Tree and Message Passing">
+      Junction Tree and Message Passing <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#directed-graph"><span class="nav-text">1. Directed Graph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#markov-property"><span class="nav-text">2. Markov Property</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maximum-likelihood-estimation"><span class="nav-text">3. Maximum Likelihood Estimation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#markov-equivalence"><span class="nav-text">4. Markov Equivalence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#decomposability"><span class="nav-text">5. Decomposability</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tianyang Li"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Tianyang Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/litianyang0211" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;litianyang0211" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianyang.li@linacre.ox.ac.uk" title="Email → mailto:tianyang.li@linacre.ox.ac.uk" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/derek0211" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;derek0211" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tianyang Li</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'default',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
