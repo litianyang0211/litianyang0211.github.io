@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1. Sherman-Morrison-Woodbury Formula  \(\displaystyle (I-\mathbf{u}\mathbf{v}^T)^{-1}&#x3D;I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\).  Proof. We have \[\begin{aligned} (I-\mathbf{u}\mathb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Low Rank and Compressed Sensing">
+<meta property="og:url" content="https://litianyang0211.github.io/Mathematics/Matrix_Method/Low_Rank_and_Compressed_Sensing">
+<meta property="og:site_name" content="Tianyang Li">
+<meta property="og:description" content="1. Sherman-Morrison-Woodbury Formula  \(\displaystyle (I-\mathbf{u}\mathbf{v}^T)^{-1}&#x3D;I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\).  Proof. We have \[\begin{aligned} (I-\mathbf{u}\mathb">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-10-01T23:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-15T11:29:59.120Z">
+<meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Matrix">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://litianyang0211.github.io/Mathematics/Matrix_Method/Low_Rank_and_Compressed_Sensing.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Low Rank and Compressed Sensing | Tianyang Li</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tianyang Li</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-posts">
+
+    <a href="/posts/" rel="section"><i class="fa fa-blog fa-fw"></i>Posts</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-projects">
+
+    <a href="/projects/" rel="section"><i class="fa fa-code fa-fw"></i>Projects</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-user-friends fa-fw"></i>Friends</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Mathematics/Matrix_Method/Low_Rank_and_Compressed_Sensing">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Tianyang Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianyang Li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Low Rank and Compressed Sensing
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-lightbulb"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-10-02 00:00:00" itemprop="dateCreated datePublished" datetime="2021-10-02T00:00:00+01:00">2021-10-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-edit"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-15 11:29:59" itemprop="dateModified" datetime="2021-12-15T11:29:59+00:00">2021-12-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
+                </span>
+                  /
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Mathematics/Matrix-Method/" itemprop="url" rel="index"><span itemprop="name">Matrix Method</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="sherman-morrison-woodbury-formula">1. Sherman-Morrison-Woodbury Formula</h1>
+<ul>
+<li><span class="math inline">\(\displaystyle (I-\mathbf{u}\mathbf{v}^T)^{-1}=I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\)</span>.</li>
+</ul>
+<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
+(I-\mathbf{u}\mathbf{v}^T)(I-\mathbf{u}\mathbf{v}^T)^{-1}&amp;=(I-\mathbf{u}\mathbf{v}^T)\left(I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\right)
+\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{(I-\mathbf{u}\mathbf{v}^T)\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
+\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{\mathbf{u}\mathbf{v}^T-\mathbf{u}(\mathbf{v}^T\mathbf{u})\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
+\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{(1-\mathbf{v}^T\mathbf{u})\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
+\\&amp;=I
+\end{aligned}\]</span> and <span class="math display">\[\begin{aligned}
+(I-\mathbf{u}\mathbf{v}^T)^{-1}(I-\mathbf{u}\mathbf{v}^T)&amp;=\left(I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\right)(I-\mathbf{u}\mathbf{v}^T)
+\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{\mathbf{u}\mathbf{v}^T(I-\mathbf{u}\mathbf{v}^T)}{1-\mathbf{v}^T\mathbf{u}}
+\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{\mathbf{u}\mathbf{v}^T-\mathbf{u}(\mathbf{v}^T\mathbf{u})\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
+\\&amp;=I.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li><span class="math inline">\((I_n-UV^T)^{-1}=I_n+U(I_k-V^TU)^{-1}V^T\)</span>, where <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are <span class="math inline">\(n \times k\)</span> matrices.</li>
+</ul>
+<strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
+(I_n-UV^T)(I_n-UV^T)^{-1}&amp;=I_n-UV^T+(I_n-UV^T)U(I_k-V^TU)^{-1}V^T
+\\&amp;=I_n-UV^T+(U-UV^TU)(I_k-V^TU)^{-1}V^T
+\\&amp;=I_n-UV^T+U(I_k-V^TU)(I_k-V^TU)^{-1}V^T
+\\&amp;=I_n-UV^T+UV^T
+\\&amp;=I_n
+\end{aligned}\]</span> and <span class="math display">\[\begin{aligned}
+(I_n-UV^T)^{-1}(I_n-UV^T)&amp;=I_n+U(I_k-V^TU)^{-1}V^T-(I_n+U(I_k-V^TU)^{-1}V^T)UV^T
+\\&amp;=I_n+U(I_k-V^TU)^{-1}V^T-UV^T-U(I_k-V^TU)^{-1}V^TUV^T
+\\&amp;=I_n-UV^T+U(I_k-V^TU)^{-1}V^T(I_n-UV^T)
+\\&amp;=I_n-UV^T+U(I_k-V^TU)^{-1}(V^T-V^TUV^T)
+\\&amp;=I_n-UV^T+U(I_k-V^TU)^{-1}(I_k-V^TU)V^T
+\\&amp;=I_n-UV^T+UV^T
+\\&amp;=I_n.
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li><span class="math inline">\((A-UV^T)^{-1}=A^{-1}+A^{-1}U(I-V^TA^{-1}U)^{-1}V^TA^{-1}\)</span>.</li>
+</ul>
+<h2 id="application-solving-a-perturbation-problem">1.1. Application: Solving a Perturbation Problem</h2>
+<ul>
+<li>Suppose <span class="math inline">\(A\mathbf{w}=\mathbf{b}\)</span> is solved for <span class="math inline">\(\mathbf{w}\)</span>, and we want to solve <span class="math inline">\((A-\mathbf{u}\mathbf{v}^T)\mathbf{x}=\mathbf{b}\)</span>. We first solve <span class="math inline">\(A\mathbf{z}=\mathbf{u}\)</span>, then <span class="math display">\[\mathbf{x}=\mathbf{w}+\frac{\mathbf{v}^T\mathbf{w}\mathbf{z}}{1-\mathbf{v}^T\mathbf{z}}.\]</span></li>
+</ul>
+<h2 id="application-recursive-least-squares">1.2. Application: Recursive Least Squares</h2>
+<ul>
+<li>Suppose there is a new measurement in least squares: <span class="math inline">\(\begin{bmatrix} A \\ \mathbf{v} \end{bmatrix}\mathbf{x}=\begin{bmatrix} \mathbf{b} \\ b_\text{new} \end{bmatrix}\)</span>. The new normal equation is <span class="math display">\[\begin{bmatrix}
+A^T &amp; \mathbf{v}^T
+\end{bmatrix}\begin{bmatrix}
+A \\ \mathbf{v}
+\end{bmatrix}\widehat{\mathbf{x}}_\text{new}=\begin{bmatrix}
+A^T &amp; \mathbf{v}^T
+\end{bmatrix}\begin{bmatrix}
+\mathbf{b} \\ b_\text{new}
+\end{bmatrix},\]</span> i.e., <span class="math inline">\((A^TA+\mathbf{v}^T\mathbf{v})\widehat{\mathbf{x}}_\text{new}=A^T\mathbf{b}+\mathbf{v}^Tb_\text{new}\)</span>. The update formula is <span class="math display">\[(A^TA+\mathbf{v}^T\mathbf{v})^{-1}=(A^TA)^{-1}-c(A^TA)^{-1}\mathbf{v}^T\mathbf{v}(A^TA)^{-1}\]</span> with <span class="math inline">\(\displaystyle c=\frac{1}{1+\mathbf{v}(A^TA)^{-1}\mathbf{v}^T}\)</span>. To find <span class="math inline">\(c\)</span>, we only need to solve the old equation <span class="math inline">\((A^TA)\mathbf{y}=\mathbf{v}^T\)</span>. The same idea applies when <span class="math inline">\(A\)</span> has more new rows.</li>
+</ul>
+<h2 id="application-kalman-filter">1.3. Application: Kalman Filter</h2>
+<ul>
+<li>The update ideal also applies to <strong>dynamic least squares</strong>.</li>
+</ul>
+<h1 id="derivative-of-a-1">2. Derivative of \(A^{-1}\)</h1>
+<ul>
+<li>Suppose <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are invertible. <span class="math inline">\(B^{-1}-A^{-1}=B^{-1}(A-B)A^{-1}\)</span>.</li>
+</ul>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are invertible, then <span class="math inline">\(B^{-1}(A-B)A^{-1}=B^{-1}AA^{-1}-B^{-1}BA^{-1}=B^{-1}-A^{-1}\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li>Let <span class="math inline">\(\Delta A=B-A\)</span>, then <span class="math inline">\(\displaystyle \frac{\Delta A^{-1}}{\Delta t}=(A+\Delta A)^{-1}\left(-\frac{\Delta A}{\Delta t}\right)A^{-1}\)</span>. Therefore, as <span class="math inline">\(\Delta t \to 0\)</span>, <span class="math display">\[\frac{\text{d}A^{-1}}{\text{d}t}=-A^{-1}\frac{\text{d}A}{\text{d}t}A^{-1}.\]</span></li>
+</ul>
+<h1 id="change-in-eigenvalues-and-singular-values">3. Change in Eigenvalues and Singular Values</h1>
+<ul>
+<li><p><span class="math inline">\(A(t)\mathbf{x}(t)=\lambda(t)\mathbf{x}(t)\)</span>, <span class="math inline">\(\mathbf{y}^T(t)A(t)=\lambda(t)\mathbf{y}^T(t)\)</span>, and <span class="math inline">\(\mathbf{y}^T(t)\mathbf{x}(t)=1\)</span>. In matrix notation, <span class="math inline">\(AX=X\Lambda\)</span>, <span class="math inline">\(Y^TA=\Lambda Y^T\)</span>, and <span class="math inline">\(Y^TX=I\)</span>.</p></li>
+<li><p><span class="math inline">\(\lambda(t)=\mathbf{y}^T(t)A(t)\mathbf{x}(t)\)</span>.</p></li>
+</ul>
+<strong><em>Proof.</em></strong> <span class="math inline">\(\mathbf{y}^T(t)A(t)\mathbf{x}(t)=\lambda(t)\mathbf{y}^T(t)\mathbf{x}(t)=\lambda(t)\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li><span class="math inline">\(\displaystyle \frac{\text{d}\lambda}{\text{d}t}=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)\)</span>.</li>
+</ul>
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(\lambda(t)=\mathbf{y}^T(t)A(t)\mathbf{x}(t)\)</span>, then <span class="math display">\[\begin{aligned}
+\frac{\text{d}\lambda}{\text{d}t}&amp;=\frac{\text{d}\mathbf{y}^T}{\text{d}t}A(t)\mathbf{x}(t)+\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\mathbf{y}^T(t)A(x)\frac{\text{d}\mathbf{x}}{\text{d}t}
+\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\left(\frac{\text{d}\mathbf{y}^T}{\text{d}t}\mathbf{x}(t)+\mathbf{y}^T(t)\frac{\text{d}\mathbf{x}}{\text{d}t}\right)
+\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\frac{\text{d}(\mathbf{y}^T\mathbf{x})}{\text{d}t}
+\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\frac{\text{d}(1)}{\text{d}t}
+\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t).
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<ul>
+<li><span class="math inline">\(\displaystyle \frac{\text{d}\sigma}{\text{d}t}=\mathbf{u}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{v}(t)\)</span>.</li>
+</ul>
+<h1 id="interlacing">4. Interlacing</h1>
+<ul>
+<li>Suppose the eigenvalues of a symmetric matrix <span class="math inline">\(S\)</span> is <span class="math inline">\(\mu_1 \geq \cdots \geq \mu_n\)</span>, and the eigenvalues of <span class="math inline">\(S+\mathbf{u}\mathbf{u}^T\)</span> is <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_n\)</span>, then <span class="math inline">\(\lambda_1 \geq \mu_1 \geq \lambda_2 \geq \mu_2 \geq \cdots \geq \lambda_n \geq \mu_n\)</span>.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Matrix/" rel="tag"><i class="fa fa-tag"></i> Matrix</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Mathematics/Matrix_Method/Computation_with_Large_Matrix" rel="prev" title="Computation With Large Matrix">
+      <i class="fa fa-chevron-left"></i> Computation With Large Matrix
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Statistics/Graphical_Model/Conditional_Independence" rel="next" title="Conditional Independence">
+      Conditional Independence <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sherman-morrison-woodbury-formula"><span class="nav-text">1. Sherman-Morrison-Woodbury Formula</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#application-solving-a-perturbation-problem"><span class="nav-text">1.1. Application: Solving a Perturbation Problem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application-recursive-least-squares"><span class="nav-text">1.2. Application: Recursive Least Squares</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#application-kalman-filter"><span class="nav-text">1.3. Application: Kalman Filter</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#derivative-of-a-1"><span class="nav-text">2. Derivative of \(A^{-1}\)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#change-in-eigenvalues-and-singular-values"><span class="nav-text">3. Change in Eigenvalues and Singular Values</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#interlacing"><span class="nav-text">4. Interlacing</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tianyang Li"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Tianyang Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/litianyang0211" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;litianyang0211" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianyang.li@linacre.ox.ac.uk" title="Email → mailto:tianyang.li@linacre.ox.ac.uk" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/derek0211" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;derek0211" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tianyang Li</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'default',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
