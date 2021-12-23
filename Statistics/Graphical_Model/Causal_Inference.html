@@ -25,11 +25,13 @@
 <meta property="og:url" content="https://litianyang0211.github.io/Statistics/Graphical_Model/Causal_Inference">
 <meta property="og:site_name" content="Tianyang Li">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-11-18T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-17T17:13:00.077Z">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Causal_Inference_1.png">
+<meta property="article:published_time" content="2021-12-22T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-23T17:24:45.684Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Causal Inference">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://litianyang0211.github.io/images/Causal_Inference_1.png">
 
 <link rel="canonical" href="https://litianyang0211.github.io/Statistics/Graphical_Model/Causal_Inference.html">
 
@@ -225,14 +227,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-11-18 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-18T00:00:00+00:00">2021-11-18</time>
+              <time title="Created: 2021-12-22 00:00:00" itemprop="dateCreated datePublished" datetime="2021-12-22T00:00:00+00:00">2021-12-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-17 17:13:00" itemprop="dateModified" datetime="2021-12-17T17:13:00+00:00">2021-12-17</time>
+                <time title="Modified: 2021-12-23 17:24:45" itemprop="dateModified" datetime="2021-12-23T17:24:45+00:00">2021-12-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -336,7 +338,7 @@ W --> Y
 <div class="note info">
             <p><span class="math inline">\(C=\text{pa}(t)\)</span> is an adjustment set.</p>
           </div>
-<p><strong>Definition 4.2</strong>    Given a causal effect <span class="math inline">\(T \to Y\)</span>, we define the <strong>causal nodes</strong> <span class="math inline">\(\text{cn}(T \to Y)\)</span> to be nodes on a causal path from <span class="math inline">\(T\)</span> to <span class="math inline">\(Y\)</span>, except for <span class="math inline">\(T\)</span>, i.e., <span class="math display">\[\text{cn}(T \to Y)=\text{an}(Y) \cap \text{de}(T)-\{T\}.\]</span> We define the <strong>forbidden nodes</strong> for <span class="math inline">\(T \to Y\)</span> as <span class="math display">\[\text{forb}(T \to Y)=\text{de}(\text{cn}(T \to Y)) \cup \{T\}.\]</span></p>
+<p><strong>Definition 4.2</strong>    Given a causal effect <span class="math inline">\(T \to Y\)</span>, we define the <strong>causal nodes</strong> <span class="math inline">\(\text{cn}(T \to Y)\)</span> to be nodes on a causal path from <span class="math inline">\(T\)</span> to <span class="math inline">\(Y\)</span>, except for <span class="math inline">\(T\)</span>, i.e., <span class="math display">\[\text{cn}(T \to Y)=\text{an}(Y) \cap \text{de}(T)-\{T\}.\]</span> We define the <strong>forbidden nodes</strong> for <span class="math inline">\(T \to Y\)</span> as consisting of <span class="math inline">\(T\)</span> or any descendants of causal nodes, i.e., <span class="math display">\[\text{forb}(T \to Y)=\text{de}(\text{cn}(T \to Y)) \cup \{T\}.\]</span></p>
 <p><strong>Example 4.1</strong>    </p>
 <pre class="mermaid" style="text-align: center;">
             graph LR
@@ -399,12 +401,9 @@ By iteratively removing such <span class="math inline">\(d\)</span>, the result 
 </p>
 <p><strong>Theorem 4.3</strong>    Let <span class="math inline">\(C\)</span> be a valid adjustment set for <span class="math inline">\(T \to Y\)</span>, then <span class="math display">\[p(y \mid \text{do}(t))=\sum_{x_C} p(x_C)p(y \mid t, x_C).\]</span></p>
 <p><strong><em>Proof.</em></strong>    By <a href="#thm4.3">lemma 4.2</a>, it is sufficient to prove with assumption that <span class="math inline">\(C\)</span> contains no descendants of <span class="math inline">\(t\)</span>. Since <span class="math inline">\(C \cap \text{de}(t) = \varnothing\)</span>, then <span class="math inline">\(t \perp_d C \mid \text{pa}(t)\)</span> by local Markov property.</p>
-<p>Suppose there is an open path <span class="math inline">\(\pi\)</span> from some <span class="math inline">\(s \in \text{pa}(t)\)</span> to <span class="math inline">\(y\)</span> given <span class="math inline">\(C \cup \{t\}\)</span>. If <span class="math inline">\(\pi\)</span> passes through <span class="math inline">\(t\)</span>, it is a collider on the path, and we can shorten it to give an open path from <span class="math inline">\(t\)</span> to <span class="math inline">\(y\)</span> that begins <span class="math inline">\(t \leftarrow\)</span>. If <span class="math inline">\(\pi\)</span> is open given <span class="math inline">\(C\)</span>, then we add <span class="math inline">\(s \to t\)</span> and path is open given a valid adjustment set, which is a contradiction. If <span class="math inline">\(\pi\)</span> is note open given <span class="math inline">\(C\)</span>, then there exits a collider <span class="math inline">\(r \in \text{an}(t)-\text{an}(C)\)</span>.</p>
-<center>
-<strong><em>TBC...</em></strong>
-</center>
+<p>Suppose there is an open path <span class="math inline">\(\pi\)</span> from some <span class="math inline">\(s \in \text{pa}(t)\)</span> to <span class="math inline">\(y\)</span> given <span class="math inline">\(C \cup \{t\}\)</span>. If <span class="math inline">\(\pi\)</span> passes through <span class="math inline">\(t\)</span>, then <span class="math inline">\(t\)</span> is a collider on the path, and we can shorten it to give an open path from <span class="math inline">\(t\)</span> to <span class="math inline">\(y\)</span> that begins <span class="math inline">\(t \leftarrow\)</span>, and thus the path from <span class="math inline">\(t\)</span> to <span class="math inline">\(y\)</span> is open given <span class="math inline">\(C\)</span>, which is a contradiction. If <span class="math inline">\(\pi\)</span> is open given <span class="math inline">\(C\)</span>, then the path from <span class="math inline">\(t\)</span> to <span class="math inline">\(y\)</span> is open given <span class="math inline">\(C\)</span>, which is a contradiction. If <span class="math inline">\(\pi\)</span> is not open given <span class="math inline">\(C\)</span>, then there exits a collider <span class="math inline">\(r \in \text{an}(t)-\text{an}(C)\)</span>, and there is a directed path from <span class="math inline">\(r\)</span> to <span class="math inline">\(t\)</span> that does not contain any element of <span class="math inline">\(C\)</span>. We concatenate the path from <span class="math inline">\(t\)</span> to <span class="math inline">\(y\)</span> and the path is open given <span class="math inline">\(C\)</span>. Hence, we will always obtain an open path from <span class="math inline">\(t\)</span> to <span class="math inline">\(y\)</span> given <span class="math inline">\(C\)</span>, which is a contradiction. Hence, <span class="math inline">\(y \perp_d \text{pa}(t) \mid C \cup \{t\}\)</span>.</p>
 Then <span class="math display">\[\begin{aligned}
-p(y \mid \text{do}(t))&amp;=\sum_{x_{\text{pa}(t)}} p(y \mid t, x_{\text{pa}(t)})p(x_{\text{pa}(t)})
+p(y \mid \text{do}(t))&amp;=\sum_{x_{\text{pa}(t)}} p(x_{\text{pa}(t)})p(y \mid t, x_{\text{pa}(t)})
 \\&amp;=\sum_{x_{\text{pa}(t)}} p(x_{\text{pa}(t)}) \sum_{x_C} p(y, x_C \mid t, x_{\text{pa}(t)})
 \\&amp;=\sum_{x_{\text{pa}(t)}} p(x_{\text{pa}(t)}) \sum_{x_C} p(y \mid t, x_{\text{pa}(t)}, x_C)p(x_C \mid t, x_{\text{pa}(t)})
 \\&amp;=\sum_{x_{\text{pa}(t)}} p(x_{\text{pa}(t)}) \sum_{x_C} p(y \mid t, x_C)p(x_C \mid x_{\text{pa}(t)})
@@ -423,6 +422,133 @@ p(y \mid \text{do}(t))&amp;=\sum_{x_{\text{pa}(t)}} p(y \mid t, x_{\text{pa}(t)}
 \end{aligned}\]</span></p>
 <p>The causal effect for <span class="math inline">\(Z\)</span> on <span class="math inline">\(Y\)</span> is <span class="math inline">\(\beta_z\)</span>.</p>
 <h1 id="structural-equation-model">6. Structural Equation Model</h1>
+<div class="note info">
+            <p>A <strong>structural equation model</strong> is a multivariate Gaussian causal model.</p>
+          </div>
+<p>Recall that <span class="math inline">\(p\)</span> is multivariate Gaussian and Markov w.r.t. a DAG <span class="math inline">\(\mathcal{G}\)</span> iff <span class="math display">\[X_v=\sum_{p \in \text{pa}(v)} \beta_{vp}X_p+\varepsilon_v\]</span> where <span class="math inline">\(\varepsilon_v \sim \mathcal{N}(0, \sigma_v^2)\)</span> and <span class="math inline">\(\varepsilon_v\)</span>'s are independent.</p>
+<p>In matrix form, <span class="math inline">\(X=BX+\varepsilon\)</span> and <span class="math inline">\(X=(I-B)^{-1}\varepsilon\)</span>, where <span class="math inline">\(B\)</span> is lower triangular, <span class="math inline">\(\varepsilon \sim \mathcal{N}_p(0, D)\)</span>, and <span class="math inline">\(D\)</span> is diagonal. We obtain <span class="math display">\[\Sigma=\text{Var}[X]=(I-B)^{-1}\text{Var}[\varepsilon](I-B)^{-T}=(I-B)^{-1}D(I-B)^{-T}.\]</span></p>
+<div class="note info">
+            <p>We know <span class="math display">\[(B^2)_{ij}=\sum_{k=1}^p \beta_{ik}\beta_{kj}\]</span> and <span class="math inline">\(\beta_{ik}\beta_{kj} \neq 0\)</span> only if <span class="math inline">\(j \to j \to i\)</span> is a directed path in <span class="math inline">\(\mathcal{G}\)</span>. Similarly, <span class="math display">\[(B^3)_{ij}=\sum_{k=1}^p\sum_{l=1}^p \beta_{ik}\beta_{kl}\beta_{lj}\]</span> and <span class="math inline">\(\beta_{ik}\beta_{kl}\beta_{lj} \neq 0\)</span> only if <span class="math inline">\(j \to l \to k \to i\)</span> is a directed path in <span class="math inline">\(\mathcal{G}\)</span>. Since the max path length in <span class="math inline">\(\mathcal{G}\)</span> is <span class="math inline">\(p-1\)</span>, then <span class="math inline">\(B^p=0\)</span>, i.e., <span class="math inline">\(B\)</span> is <strong>nilpotent</strong>.</p>
+          </div>
+<p>Since <span class="math inline">\(B\)</span> is nilpotent, then <span class="math inline">\((I-B)(I+B+B^2+\cdots+B^{p-1})=I\)</span>, i.e., <span class="math display">\[(I-B)^{-1}=I+B+B^2+\cdots+B^{p-1}.\]</span></p>
+<p><strong>Example 6.1</strong>    Consider a DAG</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            X((X)) --> |&beta;| Z((Z))
+X --> |&alpha;| Y((Y))
+Y --> |&gamma;| Z
+          </pre>
+<p>with <span class="math inline">\(X=\varepsilon_x\)</span>, <span class="math inline">\(Y=\alpha X+\varepsilon_y\)</span>, and <span class="math inline">\(Z=\beta X+\gamma Y+\varepsilon_z\)</span> for <span class="math inline">\((\varepsilon_x, \varepsilon_y, \varepsilon_z)^T \sim \mathcal{N}_3(0, I)\)</span>. The matrix form is <span class="math display">\[\begin{bmatrix}
+X \\ Y \\ Z
+\end{bmatrix}=\begin{bmatrix}
+0 &amp; 0 &amp; 0 \\
+\alpha &amp; 0 &amp; 0 \\
+\beta &amp; \gamma &amp; 0
+\end{bmatrix}\begin{bmatrix}
+X \\ Y \\ Z
+\end{bmatrix}+\begin{bmatrix}
+\varepsilon_x \\ \varepsilon_y \\ \varepsilon_z
+\end{bmatrix}\]</span> which is equivalent to <span class="math display">\[\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+-\alpha &amp; 1 &amp; 0 \\
+-\beta &amp; -\gamma &amp; 1
+\end{bmatrix}\begin{bmatrix}
+X \\ Y \\ Z
+\end{bmatrix}=\begin{bmatrix}
+\varepsilon_x \\ \varepsilon_y \\ \varepsilon_z
+\end{bmatrix}.\]</span> Therefore, <span class="math display">\[(I-B)^{-1}=\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+-\alpha &amp; 1 &amp; 0 \\
+-\beta &amp; -\gamma &amp; 1
+\end{bmatrix}^{-1}=\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\
+\alpha &amp; 1 &amp; 0 \\
+\beta+\alpha\gamma &amp; \gamma &amp; 1
+\end{bmatrix}\]</span> and <span class="math display">\[\Sigma=(I-B)^{-1}D(I-B)^{-T}=\begin{bmatrix}
+1 &amp; \alpha &amp; \beta+\alpha\gamma \\
+\alpha &amp; 1+\alpha^2 &amp; \alpha\beta+\alpha^2\gamma+\gamma \\
+\beta+\alpha\gamma &amp; \alpha\beta+\alpha^2\gamma+\gamma &amp; 1+\beta^2+\gamma^2+2\alpha\beta\gamma+\alpha^2\gamma^2
+\end{bmatrix}.\]</span></p>
+<p><strong>Definition 6.1</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> be a DAG with variables <span class="math inline">\(V\)</span>. A <strong>trek</strong> from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span> with <strong>source</strong> <span class="math inline">\(k\)</span> is a pair <span class="math inline">\((\pi_l, \pi_r)\)</span> or directed paths, where <span class="math inline">\(\pi_l\)</span> is directed from <span class="math inline">\(k\)</span> to <span class="math inline">\(i\)</span>, and <span class="math inline">\(\pi_r\)</span> is directed from <span class="math inline">\(k\)</span> to <span class="math inline">\(j\)</span>.</p>
+<div class="note info">
+            <ul><li><p>A vertex may be in both the left and right sides (<span class="math inline">\(\pi_l\)</span> and <span class="math inline">\(\pi_r\)</span>).</p></li><li><p>We may have <span class="math inline">\(i=k\)</span> or <span class="math inline">\(j=k\)</span> or both.</p></li></ul>
+          </div>
+<p><strong>Example 6.2</strong>    Consider a DAG</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            X((X)) --> Z((Z))
+X --> Y((Y))
+Y --> Z
+          </pre>
+<p>The treks from <span class="math inline">\(Y\)</span> to <span class="math inline">\(Z\)</span> are: <span class="math inline">\(Y \to Z\)</span>, <span class="math inline">\(Y \leftarrow X \to Z\)</span>, and <span class="math inline">\(Y \leftarrow X \to Y \to Z\)</span>.</p>
+<p>The treks from <span class="math inline">\(Z\)</span> to <span class="math inline">\(Z\)</span> are: <span class="math inline">\(Z\)</span>, <span class="math inline">\(Z \leftarrow X \to Z\)</span>, <span class="math inline">\(Z \leftarrow Y \to Z\)</span>, <span class="math inline">\(Z \leftarrow X \to Y \to Z\)</span>, <span class="math inline">\(Z \leftarrow Y \leftarrow X \to Z\)</span>, and <span class="math inline">\(Z \leftarrow Y \leftarrow X \to Y \to Z\)</span>.</p>
+<p><strong>Definition 6.2</strong>    Let <span class="math inline">\(\tau=(\pi_l, \pi_r)\)</span> be a trek with source <span class="math inline">\(k\)</span>. The <strong>trek covariance</strong> associated with <span class="math inline">\(\tau\)</span> is <span class="math display">\[c(\tau)=d_{kk}\left(\prod_{(i \to j) \in \pi_l} \beta_{ji}\right)\left(\prod_{(i \to j) \in \pi_r} \beta_{ji}\right).\]</span></p>
+<div class="note info">
+            <p>An empty product is <span class="math inline">\(1\)</span> by convention.</p>
+          </div>
+<p><strong>Example 6.3</strong>    Consider a DAG</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            X((X)) --> |&beta;| Z((Z))
+X --> |&alpha;| Y((Y))
+Y --> |&gamma;| Z
+          </pre>
+<p>Trek covariances include <span class="math inline">\(c(Z)=1\)</span>, <span class="math inline">\(c(Z \leftarrow X)=\beta\)</span>, <span class="math inline">\(c(Z \leftarrow X \to Y \to Z)=\beta\alpha\gamma\)</span>, and <span class="math inline">\(c(Y \to Z)=\gamma\)</span>.</p>
+<p><strong>Theorem 6.1 (Trek Rule)</strong>    Let <span class="math inline">\(\Sigma=(I-B)^{-1}D(I-B)^{-T}\)</span> be a covariance matrix that is Markov w.r.t. a DAG <span class="math inline">\(\mathcal{G}\)</span>. Then <span class="math display">\[\sigma_{ij}=\sum_{\tau \in \mathcal{T}_{ij}} c(\tau)\]</span> where <span class="math inline">\(\mathcal{T}_{ij}\)</span> is the set of treks from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span>.</p>
+<p><strong><em>Proof.</em></strong> For <span class="math inline">\(p=1\)</span>, <span class="math inline">\(\sigma_{11}=d_{11}\)</span>.</p>
+<p>Suppose the trek rule is true for <span class="math inline">\(|V| \leq p-1\)</span>. For <span class="math inline">\(\text{Cov}(X_i, X_j)\)</span>, where <span class="math inline">\(i, j&lt;p\)</span>, we know the trek rule holds by induction hypothesis. Since <span class="math display">\[X_p=\sum_{i \in \text{pa}(p)} \beta_{pi}X_i+\varepsilon_p,\]</span> then for <span class="math inline">\(j&lt;p\)</span>, <span class="math display">\[\begin{aligned}
+\text{Cov}(X_p, X_j)&amp;=\sum_{i \in \text{pa}(p)} \beta_{pi}\text{Cov}(X_i, X_j)+\text{Cov}(X_j, \varepsilon_p)
+\\&amp;=\sum_{i \in \text{pa}(p)} \beta_{pi}\sum_{\tau \in \mathcal{T}_{ij}} c(\tau)+0.
+\end{aligned}\]</span> Since any trek from <span class="math inline">\(p\)</span> to <span class="math inline">\(j\)</span> must consist of the combination of <span class="math inline">\(p \leftarrow i\)</span> for some parent <span class="math inline">\(i\)</span> of <span class="math inline">\(p\)</span>, and a trek from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span>, then <span class="math display">\[\text{Cov}(X_p, X_j)=\sum_{i \in \text{pa}(p)} \beta_{pi}\sum_{\tau \in \mathcal{T}_{ij}} c(\tau)=\sum_{\tau \in \mathcal{T}_{pj}} c(\tau).\]</span></p>
+Besides, <span class="math display">\[\begin{aligned}
+\text{Cov}(X_p, X_p)&amp;=\sum_{i \in \text{pa}(p)} \beta_{pi}\text{Cov}(X_i, X_p)+\text{Cov}(X_p, \varepsilon_p)
+\\&amp;=\sum_{i \in \text{pa}(p)} \beta_{pi} \sum_{\tau \in \mathcal{T}_{ip}} c(\tau)+\text{Var}[\varepsilon_p]
+\\&amp;=\sum_{\substack{\tau \in \mathcal{T}_{pp} \\ \tau \neq \{p\}}} c(\tau)+d_{pp}
+\\&amp;=\sum_{\tau \in \mathcal{T}_{pp}} c(\tau).
+\end{aligned}\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Example 6.4</strong>    Consider a DAG</p>
+<pre class="mermaid" style="text-align: center;">
+            graph LR
+            3((3)) --> 2((2)) & 4((4))
+1((1)) --> 2 --> 4
+          </pre>
+<p>For example, <span class="math display">\[\text{Cov}(X_2, X_2)=d_{22}+\beta_{23}^2d_{33}+\beta_{21}^2d_{11}\]</span> and <span class="math display">\[\text{Cov}(X_2, X_4)=\beta_{42}d_{22}+\beta_{23}\beta_{43}d_{33}+\beta_{23}^2\beta_{42}d_{33}+\beta_{21}^2\beta_{42}d_{11}.\]</span></p>
+<h1 id="optimal-adjustment-set">7. Optimal Adjustment Set</h1>
+<div class="note info">
+            <p>The set <span class="math inline">\(O\)</span> is <strong>optimal</strong> in that: <span class="math inline">\(\text{Var}[\widehat{\beta}_{ty \cdot O}]\)</span> is minimal; no subset of <span class="math inline">\(O\)</span> will give the same variance. <span class="math inline">\(\widehat{\beta}_{ty \cdot O}\)</span> is the least squares estimator of regression coefficient that is the effect of <span class="math inline">\(T\)</span> on <span class="math inline">\(Y\)</span> conditional on the variables in <span class="math inline">\(O\)</span>.</p>
+          </div>
+<p><strong>Proposition 7.1</strong>    Let <span class="math inline">\(\widehat{\beta}_{Cy}=(\widehat{\beta}_{cy \cdot C&#39;})_{c \in C}\)</span>, where <span class="math inline">\(C&#39;=C-\{c\}\)</span>, be the least squares estimator of <span class="math inline">\(\beta_{Cy}\)</span>, where <span class="math inline">\(Y \in \mathbb{R}^n\)</span> and <span class="math inline">\(X_C \in \mathbb{R}^{n \times q}\)</span>, then <span class="math display">\[\sqrt{n}(\widehat{\beta}_{Cy}-\beta_{Cy}) \overset{d}{\to} \mathcal{N}_q(0, \sigma_{yy \cdot C}\Sigma_{CC}^{-1}).\]</span></p>
+<p><strong><em>Proof.</em></strong> We know <span class="math display">\[\begin{aligned}
+\widehat{\beta}_{Cy}&amp;=(X_C^TX_C)^{-1}X_C^TY
+\\&amp;=\left(\frac{1}{n}X_C^TX_C\right)^{-1}\left(\frac{1}{n}X_C^TY\right)
+\\&amp;=\left(\frac{1}{n}X_C^TX_C\right)^{-1}\left(\frac{1}{n}X_C^T(X_C\beta_{Cy}+\varepsilon_y)\right)
+\\&amp;=\beta_{Cy}+\left(\frac{1}{n}X_C^TX_C\right)^{-1}\left(\frac{1}{n}X_C^T\varepsilon_y\right).
+\end{aligned}\]</span></p>
+<p>By the law of large numbers, <span class="math inline">\(\displaystyle \frac{1}{n}X_C^TX_C \overset{p}{\to} \Sigma_{CC}\)</span>, then <span class="math display">\[\sqrt{n}(\widehat{\beta}_{Cy}-\beta_{Cy})=\Sigma_{CC}^{-1}\frac{1}{\sqrt{n}}X_C^T\varepsilon_y+\mathcal{O}_p(1).\]</span></p>
+It is obvious that <span class="math inline">\(\mathbb{E}[\sqrt{n}(\widehat{\beta}_{Cy}-\beta_{Cy})] \overset{p}{\to} 0\)</span> since <span class="math inline">\(\mathbb{E}[\varepsilon_y]=0\)</span> and <span class="math inline">\(\mathbb{E}[\mathcal{O}_p(1)] \overset{p}{\to} 0\)</span>. Besides, <span class="math display">\[\text{Var}[\sqrt{n}(\widehat{\beta}_{Cy}-\beta_{Cy})] \overset{p}{\to} \Sigma_{CC}^{-1}\Sigma_{CC}(I_n\sigma_{yy \cdot C})\Sigma_{CC}^{-T}=\sigma_{yy \cdot C}\Sigma_{CC}^{-1}.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><span id="thm7.2"><strong>Proposition 7.2</strong></span>    Suppose <span class="math inline">\(C\)</span> and <span class="math inline">\(D\)</span> are valid adjustment sets for <span class="math inline">\(T \to Y\)</span>. Let <span class="math inline">\(C&#39;=C-D\)</span> and <span class="math inline">\(D&#39;=D-C\)</span>. If <span class="math inline">\(Y \perp\!\!\!\!\perp X_{D&#39;} \mid X_C, T\)</span> and <span class="math inline">\(T \perp\!\!\!\!\perp X_{C&#39;} \mid X_D\)</span>, then <span class="math display">\[\frac{\sigma_{yy \cdot tC}}{\sigma_{tt \cdot C}} \leq \frac{\sigma_{yy \cdot tD}}{\sigma_{tt \cdot D}}.\]</span></p>
+<strong><em>Proof.</em></strong> Note that <span class="math inline">\(C \cup D=C&#39; \cup D=C \cup D&#39;\)</span>. Since <span class="math inline">\(Y \perp\!\!\!\!\perp X_{D&#39;} \mid X_C, T\)</span>, then <span class="math inline">\(\sigma_{yy \cdot tC}=\sigma_{yy \cdot tCD&#39;}=\sigma_{yy \cdot tC&#39;D}\)</span>. If we remove elements from the conditioning set, the residual variance of <span class="math inline">\(Y\)</span> will only increase or not change, i.e., <span class="math inline">\(\sigma_{yy \cdot tC}=\sigma_{yy \cdot tC&#39;D} \leq \sigma_{yy \cdot tD}\)</span>. Since <span class="math inline">\(T \perp\!\!\!\!\perp X_{C&#39;} \mid X_D\)</span>, then <span class="math inline">\(\sigma_{tt \cdot D}=\sigma_{tt \cdot C&#39;D}=\sigma_{tt \cdot CD&#39;} \leq \sigma_{tt \cdot C}\)</span>. Hence, <span class="math display">\[\frac{\sigma_{yy \cdot tC}}{\sigma_{tt \cdot C}} \leq \frac{\sigma_{yy \cdot tD}}{\sigma_{tt \cdot D}}.\]</span>
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Definition 7.1</strong>    Given a causal graph <span class="math inline">\(\mathcal{G}\)</span> and a distribution that is Markov w.r.t. <span class="math inline">\(\mathcal{G}\)</span>, the <strong>optimal adjustment set</strong> is <span class="math display">\[O(T \to Y)=\text{pa}(\text{cn}(T \to Y))-(\text{cn}(T \to Y) \cup \{T\}).\]</span></p>
+<p><strong>Example 7.1</strong>    Consider the causal graph:</p>
+<p><img data-src="/images/Causal_Inference_1.png"></p>
+<p>Since <span class="math inline">\(\text{cn}(T \to Y)=\text{an}(Y) \cap \text{de}(T)-\{T\}=\{M, Y\}\)</span>, then <span class="math inline">\(\text{pa}(\text{cn}(T \to Y))=\{T, L, M, X, S\}\)</span>, and thus <span class="math inline">\(O(T \to Y)=\{T, L, M, X, S\}-\{M, Y, T\}=\{X, S, L\}\)</span>. Hence, we choose to block <span class="math inline">\(X\)</span>, and adjust <span class="math inline">\(S\)</span> and <span class="math inline">\(L\)</span>.</p>
+<p><strong>Theorem 7.3</strong>    Let <span class="math inline">\(\mathcal{G}\)</span> be a causal DAG containing variables <span class="math inline">\(T\)</span> and <span class="math inline">\(Y\)</span>. Then the set <span class="math inline">\(O(T \to Y)\)</span> is a valid adjustment set, and the asymptotic variance of <span class="math inline">\(\widehat{\beta}_{ty \cdot O}\)</span> is minimal over all valid adjustment sets.</p>
+<p><strong><em>Proof.</em></strong> <span class="math inline">\(O\)</span> contains no descendants of <span class="math inline">\(T\)</span>, and any non-causal path from <span class="math inline">\(T\)</span> to <span class="math inline">\(Y\)</span> is blocked since any such path will have a conditioned non-collider as the node immediately before it meets <span class="math inline">\(\text{cn}(T \to Y)\)</span>. Hence <span class="math inline">\(O\)</span> is a valid adjustment set.</p>
+<p>Suppose <span class="math inline">\(Z\)</span> is a valid adjustment set, <span class="math inline">\(O&#39;=O-Z\)</span>, and <span class="math inline">\(Z&#39;=Z-O\)</span>. Since <span class="math inline">\((Z \cup O) \cap \text{forb}(T \to Y)=\varnothing\)</span>, then any path (from <span class="math inline">\(Y\)</span> to vertex in <span class="math inline">\(Z&#39;\)</span>) that descends at any point from a node in <span class="math inline">\(\text{cn}(T \to Y)\)</span> are blocked. Any path (from <span class="math inline">\(Y\)</span> to vertex in <span class="math inline">\(Z&#39;\)</span>) that does not descend from <span class="math inline">\(\text{cn}(T \to Y)\)</span> must meet a parent of <span class="math inline">\(\text{cn}(T \to Y)\)</span>, i.e., either <span class="math inline">\(T\)</span> or vertex in <span class="math inline">\(O\)</span>, which is a non-collider on the path, and thus the path is blocked. Hence, <span class="math inline">\(Y \perp_d Z&#39; \mid O \cup \{T\}\)</span>.</p>
+<p>If there is an open path from <span class="math inline">\(T\)</span> to <span class="math inline">\(o \in O&#39;\)</span>, then we can concatenate with a directed causal path to <span class="math inline">\(Y\)</span> through <span class="math inline">\(\text{cn}(T \to Y)\)</span>, and obtain that <span class="math inline">\(Z\)</span> is not a valid adjustment set, which is a contradiction. Hence, <span class="math inline">\(T \perp_d O&#39; \mid Z\)</span>.</p>
+Therefore, by <a href="#thm7.2">proposition 7.2</a>, <span class="math inline">\(O(T \to Y)\)</span> has minimal variance.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
 
     </div>
 
@@ -442,13 +568,10 @@ p(y \mid \text{do}(t))&amp;=\sum_{x_{\text{pa}(t)}} p(y \mid t, x_{\text{pa}(t)}
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/Statistics/Graphical_Model/Junction_Tree_and_Message_Passing" rel="prev" title="Junction Tree and Message Passing">
-      <i class="fa fa-chevron-left"></i> Junction Tree and Message Passing
+    <a href="/Compute_Science/PyTorch/Transformer_in_PyTorch" rel="prev" title="Transformer in PyTorch">
+      <i class="fa fa-chevron-left"></i> Transformer in PyTorch
     </a></div>
-      <div class="post-nav-item">
-    <a href="/Compute_Science/Deep_Learning/Loss_Landscape" rel="next" title="Loss Landscape">
-      Loss Landscape <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -507,7 +630,7 @@ p(y \mid \text{do}(t))&amp;=\sum_{x_{\text{pa}(t)}} p(y \mid t, x_{\text{pa}(t)}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#causal-inference"><span class="nav-text">1. Causal Inference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#causal-dag"><span class="nav-text">2. Causal DAG</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#d-separation"><span class="nav-text">3. d-Separation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#adjustment-set"><span class="nav-text">4. Adjustment Set</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gaussian-causal-model"><span class="nav-text">5. Gaussian Causal Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#structural-equation-model"><span class="nav-text">6. Structural Equation Model</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#causal-inference"><span class="nav-text">1. Causal Inference</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#causal-dag"><span class="nav-text">2. Causal DAG</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#d-separation"><span class="nav-text">3. d-Separation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#adjustment-set"><span class="nav-text">4. Adjustment Set</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gaussian-causal-model"><span class="nav-text">5. Gaussian Causal Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#structural-equation-model"><span class="nav-text">6. Structural Equation Model</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#optimal-adjustment-set"><span class="nav-text">7. Optimal Adjustment Set</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

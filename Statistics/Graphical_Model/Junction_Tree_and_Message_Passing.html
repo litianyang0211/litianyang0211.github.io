@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="Tianyang Li">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-11-10T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-15T11:29:10.360Z">
+<meta property="article:modified_time" content="2021-12-20T15:29:26.698Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Junction Tree">
 <meta property="article:tag" content="Message Passing">
@@ -233,7 +233,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-15 11:29:10" itemprop="dateModified" datetime="2021-12-15T11:29:10+00:00">2021-12-15</time>
+                <time title="Modified: 2021-12-20 15:29:26" itemprop="dateModified" datetime="2021-12-20T15:29:26+00:00">2021-12-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -332,8 +332,7 @@ Then <span class="math display">\[p(x_V)=p(x_{V-R_k})\frac{\psi_{C_k}(x_{C_k})}{
             <p>In practice, message passing is often done in parallel and we have the convergence after at most <span class="math inline">\(d\)</span> iterations, where <span class="math inline">\(d\)</span> is the length of the longest path of the tree.</p><p>Junction graphs in general (<em>loopy belief propagation</em>) also seem to lead to convergence, but it is still an open area of study.</p>
           </div>
 <h1 id="evidence">4. Evidence</h1>
-<p>Denote evidence set <span class="math inline">\(E\)</span>, then <span class="math display">\[p(x_{V-E} \mid x_E=x_E^*)=\frac{p(x_{V-E}, x_E^*)}{p(x_E^*)}.\]</span> In junction tree situation, <span class="math display">\[p(x_V)=\prod_i \frac{\psi_{C_i}(x_{C_i})}{\psi_{S_i}(x_{S_i})}.\]</span> If there is a clique that contains the node <span class="math inline">\(E\)</span> (<span class="math inline">\(E \subseteq C_i\)</span>), then we replace <span class="math inline">\(\psi_{C_i}(x_{C_i})\)</span> with <span class="math inline">\(\displaystyle \frac{\psi_{C_i}(x_{C_i})}{p(x_E^*)}\)</span>.</p>
-<p>After running the junction tree algorithm, we have <span class="math inline">\(\psi_{C_i}(x_{C_i})=p(x_{C_i} \mid x_E^*)\)</span>.</p>
+<p>Denote evidence set <span class="math inline">\(E\)</span>, then <span class="math display">\[p(x_{V-E} \mid x_E=x_E^*)=\frac{p(x_{V-E}, x_E^*)}{p(x_E^*)}.\]</span> In junction tree situation, <span class="math display">\[p(x_V)=\prod_i \frac{\psi_{C_i}(x_{C_i})}{\psi_{S_i}(x_{S_i})}.\]</span> If there is a clique that contains the node <span class="math inline">\(E\)</span> (<span class="math inline">\(E \subseteq C_i\)</span>), then we replace <span class="math inline">\(\psi_{C_i}(x_{C_i})\)</span> with <span class="math inline">\(\displaystyle \frac{\psi_{C_i}(x_{C_i})}{p(x_E^*)}\)</span>. After running the junction tree algorithm, we have <span class="math inline">\(\psi_{C_i}(x_{C_i})=p(x_{C_i} \mid x_E^*)\)</span>.</p>
 
     </div>
 
@@ -358,8 +357,8 @@ Then <span class="math display">\[p(x_V)=p(x_{V-R_k})\frac{\psi_{C_k}(x_{C_k})}{
       <i class="fa fa-chevron-left"></i> Directed Graphical Model
     </a></div>
       <div class="post-nav-item">
-    <a href="/Statistics/Graphical_Model/Causal_Inference" rel="next" title="Causal Inference">
-      Causal Inference <i class="fa fa-chevron-right"></i>
+    <a href="/Compute_Science/Deep_Learning/Loss_Landscape" rel="next" title="Loss Landscape">
+      Loss Landscape <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
