@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Tensor">
+<meta property="og:url" content="https://litianyang0211.github.io/Mathematics/Linear_Algebra/Tensor">
+<meta property="og:site_name" content="Tianyang Li">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Tensor_1.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Tensor_2.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Tensor_3.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Tensor_4.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Tensor_5.png">
+<meta property="og:image" content="https://litianyang0211.github.io/images/Tensor_6.png">
+<meta property="article:published_time" content="2021-12-24T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-27T16:32:29.629Z">
+<meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="CP Decomposition">
+<meta property="article:tag" content="Tensor">
+<meta property="article:tag" content="Tucker Decomposition">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://litianyang0211.github.io/images/Tensor_1.png">
+
+<link rel="canonical" href="https://litianyang0211.github.io/Mathematics/Linear_Algebra/Tensor.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Tensor | Tianyang Li</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tianyang Li</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-posts">
+
+    <a href="/posts/" rel="section"><i class="fa fa-blog fa-fw"></i>Posts</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-projects">
+
+    <a href="/projects/" rel="section"><i class="fa fa-code fa-fw"></i>Projects</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-user-friends fa-fw"></i>Friends</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Mathematics/Linear_Algebra/Tensor">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Tianyang Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianyang Li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Tensor
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-lightbulb"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-12-24 00:00:00" itemprop="dateCreated datePublished" datetime="2021-12-24T00:00:00+00:00">2021-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-edit"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-12-27 16:32:29" itemprop="dateModified" datetime="2021-12-27T16:32:29+00:00">2021-12-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Mathematics/" itemprop="url" rel="index"><span itemprop="name">Mathematics</span></a>
+                </span>
+                  /
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Mathematics/Linear-Algebra/" itemprop="url" rel="index"><span itemprop="name">Linear Algebra</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description"><div></div></div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="preliminary">1. Preliminary</h1>
+<p>A <strong>tensor</strong> is a multidimensional array. A first-order tensor is a vector, a second-order tensor is a matrix, and tensor of order three or higher are called higher-order tensor. A third-order tensor has three indices:</p>
+<p><img data-src="/images/Tensor_1.png"></p>
+<center>
+Figure 1: A third-order tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I \times J \times K}\)</span>.
+</center>
+<h2 id="fibers">1.1. Fibers</h2>
+<p><strong>Fibers</strong> are the higher-order analogue of matrix rows and columns, defined by fixing every index but one. A matrix column is a mode-<span class="math inline">\(1\)</span> fiber and a matrix row is a mode-<span class="math inline">\(2\)</span> fiber. Third-order tensor <span class="math inline">\(\mathbfcal{X}\)</span> has column, row and tube fibers, denoted by <span class="math inline">\(\mathbf{x}_{:jk}\)</span>, <span class="math inline">\(\mathbf{x}_{i:k}\)</span> and <span class="math inline">\(\mathbf{x}_{ij:}\)</span>, respectively.</p>
+<div class="note info">
+            <p>当一个张量沿着第<span class="math inline">\(k\)</span>维展开时，我们就得到了mode-<span class="math inline">\(k\)</span> fiber.</p>
+          </div>
+<p><img data-src="/images/Tensor_2.png"></p>
+<center>
+Figure 2: Fibers of a third-order tensor.
+</center>
+<h2 id="slices">1.2. Slices</h2>
+<p><strong>Slices</strong> are two-dimensional sections of a tensor, defined by fixing all but two indices. Third-order tensor <span class="math inline">\(\mathbfcal{X}\)</span> has horizontal, lateral and frontal slides, denoted by <span class="math inline">\(\mathbf{X}_{i::}\)</span>, <span class="math inline">\(\mathbf{X}_{:j:}\)</span> and <span class="math inline">\(\mathbf{X}_{::k}\)</span>, respectively. The <span class="math inline">\(k\)</span>th frontal slice of a third-order tensor may be denoted more compactly as <span class="math inline">\(\mathbf{X}_k\)</span>.</p>
+<p><img data-src="/images/Tensor_3.png"></p>
+<center>
+Figure 3: Slices of a third-order tensor.
+</center>
+<h2 id="norm">1.3. Norm</h2>
+<p>The <strong>norm</strong> of a tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I_1 \times \cdots \times I_N}\)</span> is the square root of the sum of the squares of all its entries: <span class="math display">\[\|\mathbfcal{X}\|=\sqrt{\sum_{i_1=1}^{I_1} \cdots \sum_{i_N=1}^{I_N} x_{i_1, \ldots, x_N}^2}.\]</span></p>
+<h2 id="inner-product">1.4. Inner Product</h2>
+<p>The <strong>inner product</strong> of two same-sized tensors <span class="math inline">\(\mathbfcal{X}, \mathbfcal{Y} \in \mathbb{R}^{I_1 \times \cdots \times I_N}\)</span> is the sum of the products of their entries: <span class="math display">\[\langle \mathbfcal{X}, \mathbfcal{Y} \rangle=\sum_{i_1=1}^{I_1} \cdots \sum_{i_N=1}^{I_N} x_{i_1, \ldots, x_N}y_{i_1, \ldots, x_N}\]</span> which follows immediately that <span class="math inline">\(\langle \mathbfcal{X}, \mathbfcal{X} \rangle=\|\mathbfcal{X}\|^2\)</span>.</p>
+<h2 id="rank-one-tensor">1.5. Rank-One Tensor</h2>
+<p>An <span class="math inline">\(N\)</span>th-order tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I_1 \times \cdots \times I_N}\)</span> is <strong>rank-one</strong> if it can be written as the outer product of <span class="math inline">\(N\)</span> vectors: <span class="math display">\[\mathbfcal{X}=\mathbf{a}^{(1)} \circ \cdots \circ \mathbf{a}^{(N)}.\]</span> The symbol <span class="math inline">\(\circ\)</span> represents the vector outer product, which means that each element of the tensor is the product of the corresponding vector elements, i.e., for all <span class="math inline">\(1 \leq i_n \leq I_n\)</span>, <span class="math display">\[x_{i_1, \ldots, i_N}=a_{i_1}^{(1)} \cdots a_{i_N}^{(N)}.\]</span></p>
+<p><img data-src="/images/Tensor_4.png"></p>
+<center>
+Figure 4: Rank-one third-order tensor, <span class="math inline">\(\mathbfcal{X}=\mathbf{a} \circ \mathbf{b} \circ \mathbf{c}\)</span>. The <span class="math inline">\((i, j, k)\)</span> element of <span class="math inline">\(\mathbfcal{X}\)</span> is given by <span class="math inline">\(x_{ijk}=a_ib_jc_k\)</span>.
+</center>
+<h2 id="symmetry">1.6. Symmetry</h2>
+<p>A tensor is called <strong>cubical</strong> if every mode is the same size, i.e., <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I \times \cdots \times I}\)</span>. A cubical tensor is called <strong>supersymmetric</strong> if its elements remain constant under any permutation of the indices. For instance, a third-order tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I \times I \times I}\)</span> is supersymmetric if for all <span class="math inline">\(i, j, k=1, \ldots, I\)</span>, <span class="math display">\[x_{ijk}=x_{ikj}=x_{jik}=x_{jki}=x_{kij}=x_{kji}.\]</span></p>
+<p>Tensor can be partially <strong>symmetric</strong> in two or more modes. For instance, a third-order tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I \times I \times K}\)</span> is symmetric in modes one and two if all its frontal slices are symmetric, i.e., for all <span class="math inline">\(k=1, \ldots, K\)</span>, <span class="math display">\[\mathbf{X}_k=\mathbf{X}_k^T.\]</span></p>
+<div class="note info">
+            <p>张量在mode-<span class="math inline">\(1\)</span>和<span class="math inline">\(2\)</span>下对称，可以理解为展开第<span class="math inline">\(1\)</span>维和第<span class="math inline">\(2\)</span>维，固定剩余维度的情况下，所获得的slice是对称的。</p>
+          </div>
+<h2 id="diagonal-tensor">1.7. Diagonal Tensor</h2>
+<p>A tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I_1 \times \cdots \times I_N}\)</span> is <strong>diagonal</strong> if <span class="math inline">\(x_{i_1, \ldots, i_N} \neq 0\)</span> only if <span class="math inline">\(i_1=\cdots=i_N\)</span>.</p>
+<h2 id="matricization-transforming-a-tensor-into-a-matirx">1.8. Matricization: Transforming a Tensor into a Matirx</h2>
+<p><strong>Matricization</strong>, a.k.a. <strong>unfolding</strong> or <strong>flattening</strong>, is the process of reordering the elements of an <span class="math inline">\(N\)</span>th-order tensor into a matrix. For example, a <span class="math inline">\(2 \times 3 \times 4\)</span> tensor can be arranged as a <span class="math inline">\(6 \times 4\)</span> matrix or a <span class="math inline">\(3 \times 8\)</span> matrix.</p>
+<p>The <strong>mode-<span class="math inline">\(n\)</span> matricization</strong> of a tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I_1 \times \cdots \times I_N}\)</span> is denoted by <span class="math inline">\(\mathbf{X}_{(n)}\)</span> and arranges the mode-<span class="math inline">\(n\)</span> fibers to be the columns of the resulting matrix. Mathematically, tensor element <span class="math inline">\((i_1, \ldots, i_N)\)</span> maps to matrix element <span class="math inline">\((i_n, j)\)</span>, where <span class="math inline">\(\displaystyle j=1+\sum_{\substack{k=1 \\ k \neq n}}^N (i_k-1)J_k\)</span> and <span class="math inline">\(\displaystyle J_k=\prod_{\substack{m=1 \\m \neq n}}^{k-1} I_m\)</span>.</p>
+<p><strong>Example 1.1</strong>    Let the frontal slices of <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{3 \times 4 \times 2}\)</span> be <span class="math display">\[\mathbf{X}_1=\begin{bmatrix}
+1 &amp; 4 &amp; 7 &amp; 10 \\
+2 &amp; 5 &amp; 8 &amp; 11 \\
+3 &amp; 6 &amp; 9 &amp; 12
+\end{bmatrix} \quad \text{and} \quad \mathbf{X}_2=\begin{bmatrix}
+13 &amp; 16 &amp; 19 &amp; 22 \\
+14 &amp; 17 &amp; 20 &amp; 23 \\
+15 &amp; 18 &amp; 21 &amp; 24
+\end{bmatrix}.\]</span> Then the three mode-<span class="math inline">\(n\)</span> unfoldings are <span class="math display">\[\mathbf{X}_{(1)}=\begin{bmatrix}
+1 &amp; 4 &amp; 7 &amp; 10 &amp; 13 &amp; 16 &amp; 19 &amp; 22 \\
+2 &amp; 5 &amp; 8 &amp; 11 &amp; 14 &amp; 17 &amp; 20 &amp; 23 \\
+3 &amp; 6 &amp; 9 &amp; 12 &amp; 15 &amp; 18 &amp; 21 &amp; 24 \\
+\end{bmatrix},\]</span> <span class="math display">\[\mathbf{X}_{(2)}=\begin{bmatrix}
+1 &amp; 2 &amp; 3 &amp; 13 &amp; 14 &amp; 15 \\
+4 &amp; 5 &amp; 6 &amp; 16 &amp; 17 &amp; 18 \\
+7 &amp; 8 &amp; 9 &amp; 19 &amp; 20 &amp; 21 \\
+10 &amp; 11 &amp; 12 &amp; 22 &amp; 23 &amp; 24
+\end{bmatrix},\]</span> and</p>
+<p><span class="math display">\[\mathbf{X}_{(3)}=\begin{bmatrix}
+1 &amp; 2 &amp; 3 &amp; 4 &amp; \cdots &amp; 9 &amp; 10 &amp; 11 &amp; 12 \\
+13 &amp; 14 &amp; 15 &amp; 16 &amp; \cdots &amp; 21 &amp; 22 &amp; 23 &amp; 24 \\
+\end{bmatrix}.\]</span></p>
+<div class="note warning">
+            <p>不同的论文有时在展开时使用完全不同的排序方法，只要这些排序方法是前后一致的，一般来说不会给理论或计算带来影响。</p>
+          </div>
+<h2 id="the-n-mode-product">1.9. The \(n\)-Mode Product</h2>
+<p>The <strong><span class="math inline">\(n\)</span>-mode matrix product</strong> of a tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I_1 \times \cdots \times I_N}\)</span> with a matrix <span class="math inline">\(\mathbf{U} \in \mathbb{R}^{J \times I_n}\)</span> is denoted by <span class="math inline">\(\mathbfcal{X} \times_n \mathbf{U}\)</span> and is of size <span class="math inline">\(I_1 \times \cdots \times I_{n-1} \times J \times I_{n+1} \times \cdots I_N\)</span>. Elementwise, we have <span class="math display">\[(\mathbfcal{X} \times_n \mathbf{U})_{i_1, \ldots, i_{n-1}, j, i_{n+1}, \ldots, i_N}=\sum_{i_n=1}^{I_n} x_{i_1, \ldots, i_N}u_{j, i_n}.\]</span> Each mode-<span class="math inline">\(n\)</span> fiber is multiplied by the matrix <span class="math inline">\(\mathbf{U}\)</span>, and it can also be expressed in terms of unfolded tensors <span class="math display">\[\mathbfcal{Y}=\mathbfcal{X} \times_n \mathbf{U} \Leftrightarrow \mathbf{Y}_{(n)}=\mathbf{U}\mathbf{X}_{(n)}.\]</span></p>
+<p><strong>Example 1.2</strong>    Let the frontal slices of <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{3 \times 4 \times 2}\)</span> be <span class="math display">\[\mathbf{X}_1=\begin{bmatrix}
+1 &amp; 4 &amp; 7 &amp; 10 \\
+2 &amp; 5 &amp; 8 &amp; 11 \\
+3 &amp; 6 &amp; 9 &amp; 12
+\end{bmatrix} \quad \text{and} \quad \mathbf{X}_2=\begin{bmatrix}
+13 &amp; 16 &amp; 19 &amp; 22 \\
+14 &amp; 17 &amp; 20 &amp; 23 \\
+15 &amp; 18 &amp; 21 &amp; 24
+\end{bmatrix}.\]</span> Let <span class="math inline">\(\mathbf{U}=\begin{bmatrix} 1 &amp; 3 &amp; 5 \\ 2 &amp; 4 &amp; 6 \end{bmatrix}\)</span>, then <span class="math inline">\(\mathbfcal{Y}=\mathbfcal{X} \times_1 \mathbf{U} \in \mathbb{R}^{2 \times 4 \times 2}\)</span> with <span class="math display">\[\mathbf{Y}_1=\begin{bmatrix}
+22 &amp; 49 &amp; 76 &amp; 103 \\
+28 &amp; 64 &amp; 100 &amp; 136 \\
+\end{bmatrix} \quad \text{and} \quad \mathbf{Y}_2=\begin{bmatrix}
+130 &amp; 157 &amp; 184 &amp; 211 \\
+172 &amp; 208 &amp; 244 &amp; 280
+\end{bmatrix}.\]</span></p>
+<p>For distinct modes in a series of multiplications, the order of the multiplication is irrelevant, i.e., for <span class="math inline">\(m \neq n\)</span>, <span class="math display">\[\mathbfcal{X} \times_m \mathbf{A} \times_n \mathbf{B}=\mathbfcal{X} \times_n \mathbf{B} \times_m \mathbf{A}.\]</span> If the modes are the same, then <span class="math display">\[\mathbfcal{X} \times_n \mathbf{A} \times_n \mathbf{B}=\mathbfcal{X} \times_n (\mathbf{BA}).\]</span></p>
+<p>The <strong><span class="math inline">\(n\)</span>-mode vector product</strong> of a tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I_1 \times \cdots I_N}\)</span> with a vector <span class="math inline">\(\mathbf{v} \in \mathbb{R}^{I_n}\)</span> is denoted by <span class="math inline">\(\mathbfcal{X} \overline{\times}_n \mathbf{v}\)</span>. The result is of order <span class="math inline">\(N-1\)</span>, i.e., the size is <span class="math inline">\(I_1 \times \cdots \times I_{n-1} \times I_{n+1} \times \cdots \times I_N\)</span>. Elementwise, we have <span class="math display">\[(\mathbfcal{X} \overline{\times}_n \mathbf{v})_{i_1, \ldots, i_{n-1}, i_{n+1}, \ldots, i_N}=\sum_{i_n=1}^{I_n} x_{i_1, \ldots, i_N}v_{i_n}.\]</span> The idea is to compute the inner product of each mode-<span class="math inline">\(n\)</span> fiber with the vector <span class="math inline">\(\mathbf{v}\)</span>.</p>
+<p><strong>Example 1.3</strong>    Let the frontal slices of <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{3 \times 4 \times 2}\)</span> be <span class="math display">\[\mathbf{X}_1=\begin{bmatrix}
+1 &amp; 4 &amp; 7 &amp; 10 \\
+2 &amp; 5 &amp; 8 &amp; 11 \\
+3 &amp; 6 &amp; 9 &amp; 12
+\end{bmatrix} \quad \text{and} \quad \mathbf{X}_2=\begin{bmatrix}
+13 &amp; 16 &amp; 19 &amp; 22 \\
+14 &amp; 17 &amp; 20 &amp; 23 \\
+15 &amp; 18 &amp; 21 &amp; 24
+\end{bmatrix}.\]</span> Let <span class="math inline">\(\mathbf{v}=\begin{bmatrix} 1 \\ 2 \\ 3 \\ 4 \end{bmatrix}\)</span>, then <span class="math inline">\(\mathbfcal{X} \overline{\times}_2 \mathbf{v}=\begin{bmatrix} 70 &amp; 190 \\ 80 &amp; 200 \\ 90 &amp; 210 \end{bmatrix}\)</span>.</p>
+<p>When it comes to mode-<span class="math inline">\(n\)</span> vector multiplication, precedence matters because the order of the intermediate results changes, i.e., for <span class="math inline">\(m&lt;n\)</span>, <span class="math display">\[\mathbfcal{X} \overline{\times}_m \mathbf{a} \overline{\times}_n \mathbf{b}=(\mathbfcal{X} \overline{\times}_m \mathbf{a}) \overline{\times}_{n-1} \mathbf{b}=(\mathbfcal{X} \overline{\times}_n \mathbf{b}) \overline{\times}_m \mathbf{a}.\]</span></p>
+<h2 id="special-matrix-product">1.10. Special Matrix Product</h2>
+<h3 id="kronecker-product">1.10.1. Kronecker Product</h3>
+<p>Suppose <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{I \times J}\)</span> and <span class="math inline">\(\mathbf{B} \in \mathbb{R}^{K \times L}\)</span>, then <span class="math inline">\(\mathbf{A} \otimes \mathbf{B} \in \mathbb{R}^{(IK) \times (JL)}\)</span>, where <span class="math display">\[\mathbf{A} \otimes \mathbf{B}=\begin{bmatrix}
+a_{11}\mathbf{B} &amp; a_{12}\mathbf{B} &amp; \cdots &amp; a_{1J}\mathbf{B} \\
+a_{21}\mathbf{B} &amp; a_{22}\mathbf{B} &amp; \cdots &amp; a_{2J}\mathbf{B} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+a_{I1}\mathbf{B} &amp; a_{I2}\mathbf{B} &amp; \cdots &amp; a_{IJ}\mathbf{B}
+\end{bmatrix}=\begin{bmatrix}
+&amp;\\
+\mathbf{a}_1 \otimes \mathbf{b}_1 &amp; \mathbf{a}_1 \otimes \mathbf{b}_2 &amp; \cdots \mathbf{a}_J \otimes \mathbf{b}_{L-1} &amp; \mathbf{a}_n \otimes \mathbf{b}_L \\
+&amp;
+\end{bmatrix}.\]</span></p>
+<p><strong>Example 1.4</strong>    Suppose <span class="math inline">\(\mathbf{A}=\begin{bmatrix} 1 &amp; 3 \\ 2 &amp; 4 \end{bmatrix}\)</span> and <span class="math inline">\(\mathbf{B}=\begin{bmatrix} 5 &amp; 7 \\ 6 &amp; 8 \end{bmatrix}\)</span>, then <span class="math inline">\(\mathbf{A} \otimes \mathbf{B}=\begin{bmatrix} 5 &amp; 7 &amp; 15 &amp; 21 \\ 6 &amp; 8 &amp; 18 &amp; 24 \\ 10 &amp; 14 &amp; 20 &amp; 28 \\ 12 &amp; 16 &amp; 24 &amp; 32 \end{bmatrix}\)</span>.</p>
+<p><strong>Example 1.5</strong>    Suppose <span class="math inline">\(\mathbf{a}=\begin{bmatrix} 1 &amp; 2 \end{bmatrix}\)</span> and <span class="math inline">\(\mathbf{b}=\begin{bmatrix} 7 &amp; 8 \end{bmatrix}\)</span>, then <span class="math inline">\(\mathbf{a} \otimes \mathbf{b}=\begin{bmatrix} 7 &amp; 8 &amp; 14 &amp; 16 \end{bmatrix}\)</span>.</p>
+<p><strong>Example 1.6</strong>    Suppose <span class="math inline">\(\mathbf{a}=\begin{bmatrix} 1 &amp; 2 \end{bmatrix}\)</span> and <span class="math inline">\(\mathbf{b}=\begin{bmatrix} 7 \\ 8 \end{bmatrix}\)</span>, then <span class="math inline">\(\mathbf{a} \otimes \mathbf{b}=\begin{bmatrix} 7 &amp; 14 \\ 8 &amp; 16 \end{bmatrix}\)</span>.</p>
+<h3 id="khatrirao-product">1.10.2. Khatri–Rao Product</h3>
+<p><strong>Khatri–Rao product</strong> is the matching columnwise Kronecker product. Suppose <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{I \times K}\)</span> and <span class="math inline">\(\mathbf{B} \in \mathbb{R}^{J \times K}\)</span>, then <span class="math inline">\(\mathbf{A} \odot \mathbf{B} \in \mathbb{R}^{(IJ) \times K}\)</span>, where <span class="math display">\[\mathbf{A} \odot \mathbf{B}=\begin{bmatrix}
+&amp;\\
+\mathbf{a}_1 \otimes \mathbf{b}_1 &amp; \mathbf{a}_2 \otimes \mathbf{b}_2 &amp; \cdots \mathbf{a}_{K-1} \otimes \mathbf{b}_{K-1} &amp; \mathbf{a}_K \otimes \mathbf{b}_K \\
+&amp;
+\end{bmatrix}.\]</span></p>
+<p><strong>Example 1.7</strong>    Suppose <span class="math inline">\(\mathbf{A}=\begin{bmatrix} 1 &amp; 3 \\ 2 &amp; 4 \end{bmatrix}\)</span> and <span class="math inline">\(\mathbf{B}=\begin{bmatrix} 5 &amp; 7 \\ 6 &amp; 8 \end{bmatrix}\)</span>, then <span class="math inline">\(\mathbf{A} \odot \mathbf{B}=\begin{bmatrix} 5 &amp; 21 \\ 6 &amp; 24 \\ 10 &amp; 28 \\ 12 &amp; 32 \end{bmatrix}\)</span>.</p>
+<p>If <span class="math inline">\(\mathbf{a}\)</span> and <span class="math inline">\(\mathbf{b}\)</span> are vectors, then Khatri-Rao product and Kronecker product are identical, i.e., <span class="math inline">\(\mathbf{a} \otimes \mathbf{b}=\mathbf{a} \odot \mathbf{b}\)</span>.</p>
+<h3 id="hadamard-product">1.10.3. Hadamard Product</h3>
+<p><strong>Hadamard product</strong> is the elementwise matrix product. Suppose <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{I \times J}\)</span> and <span class="math inline">\(\mathbf{B} \in \mathbb{R}^{I \times J}\)</span>, then <span class="math inline">\(\mathbf{A} * \mathbf{B} \in \mathbb{R}^{I \times J}\)</span>, where <span class="math display">\[\mathbf{A} * \mathbf{B}=\begin{bmatrix}
+a_{11}b_{11} &amp; \cdots &amp; a_{1J}b_{1J} \\
+\vdots &amp; &amp; \vdots \\
+a_{I1}b_{I1} &amp; \cdots &amp; a_{IJ}b_{IJ}
+\end{bmatrix}.\]</span></p>
+<h3 id="property">1.10.4. Property</h3>
+<ul>
+<li><p><span class="math inline">\((\mathbf{A} \otimes \mathbf{B})(\mathbf{C} \otimes \mathbf{D})=\mathbf{AC} \otimes \mathbf{BD}\)</span>.</p></li>
+<li><p><span class="math inline">\((\mathbf{A} \otimes \mathbf{B})^\dagger=\mathbf{A}^\dagger \otimes \mathbf{B}^\dagger\)</span>, where <span class="math inline">\(\mathbf{A}^\dagger\)</span> denotes the Moore-Penrose pseudo-inverse of <span class="math inline">\(\mathbf{A}\)</span>.</p></li>
+<li><p><span class="math inline">\(\mathbf{A} \odot \mathbf{B} \odot \mathbf{C}=(\mathbf{A} \odot \mathbf{B}) \odot \mathbf{C}=\mathbf{A} \odot (\mathbf{B} \odot \mathbf{C})\)</span>.</p></li>
+<li><p><span class="math inline">\((\mathbf{A} \odot \mathbf{B})^T(\mathbf{A} \odot \mathbf{B})=\mathbf{A}^T\mathbf{A}*\mathbf{B}^T\mathbf{B}\)</span>.</p></li>
+<li><p><span class="math inline">\((\mathbf{A} \odot \mathbf{B})^\dagger=((\mathbf{A}^T\mathbf{A}) * (\mathbf{B}^T\mathbf{B}))^\dagger(\mathbf{A} \odot \mathbf{B})^T\)</span>.</p></li>
+</ul>
+<p><strong>Example 1.8</strong>    Let <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I_1 \times \cdots \times I_N}\)</span> and <span class="math inline">\(\mathbf{A}^{(n)} \in \mathbb{R}^{J_n \times I_n}\)</span> for all <span class="math inline">\(n \in \{1, \ldots, N\}\)</span>. Then for any <span class="math inline">\(n\)</span>, <span class="math display">\[\begin{aligned}
+\mathbfcal{Y}&amp;=\mathbfcal{X} \times_1 \mathbf{A}^{(1)} \times_2 \mathbf{A}^{(2)} \times_3 \cdots \times_N \mathbf{A}^{(N)} 
+\\\Leftrightarrow \mathbf{Y}_{(n)}&amp;=\mathbf{A}^{(n)}\mathbf{X}_{(n)}(\mathbf{A}^{(N)} \otimes \cdots \otimes \mathbf{A}^{(n+1)} \otimes \mathbf{A}^{(n-1)} \otimes \cdots \otimes \mathbf{A}^{(1)})^T.
+\end{aligned}\]</span></p>
+<h1 id="tensor-rank-and-candecompparafac-decomposition">2. Tensor Rank and CANDECOMP/PARAFAC Decomposition</h1>
+<h2 id="candecompparafac-cp-decomposition">2.1. CANDECOMP/PARAFAC (CP) Decomposition</h2>
+<p>We refer to the CANDECOMP/PARAFAC decomposition as CP. The CP decomposition factorizes a tensor into a sum of component rank-one tensors.</p>
+<p><img data-src="/images/Tensor_5.png"></p>
+<center>
+Figure 5: CP decomposition of a third-order tensor.
+</center>
+<p>For example, given a third-order tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I \times J \times K}\)</span>, <span class="math display">\[\mathbfcal{X} \approx \sum_{r=1}^R \mathbf{a}_r \circ \mathbf{b}_r \circ \mathbf{c}_r,\]</span> where <span class="math inline">\(R\)</span> is a positive integer and <span class="math inline">\(\mathbf{a}_r \in \mathbb{R}^I\)</span>, <span class="math inline">\(\mathbf{b}_r \in \mathbb{R}^J\)</span>, and <span class="math inline">\(\mathbf{c}_r \in \mathbb{R}^K\)</span> for <span class="math inline">\(r=1, \ldots, R\)</span>. Elementwise, for <span class="math inline">\(i=1, \ldots, I\)</span>, <span class="math inline">\(j=1, \ldots, J\)</span>, and <span class="math inline">\(k=1, \ldots, K\)</span>, <span class="math display">\[x_{ijk} \approx \sum_{r=1}^R a_{ir}b_{jr}c_{kr}.\]</span></p>
+<p>The <strong>factor matrix</strong> refers to the combination of the vectors from the rank-one components. For example, <span class="math inline">\(\mathbf{A}=\begin{bmatrix} &amp; \\ \mathbf{a}_1 &amp; \cdots &amp; \mathbf{a}_R \\ &amp; \end{bmatrix}.\)</span> With the definition, we can write the CP decomposition in matricized form (one per mode): <span class="math display">\[\begin{aligned}
+\mathbf{X}_{(1)} &amp;\approx \mathbf{A}(\mathbf{C} \odot \mathbf{B})^T, \\
+\mathbf{X}_{(2)} &amp;\approx \mathbf{B}(\mathbf{C} \odot \mathbf{A})^T, \\
+\mathbf{X}_{(3)} &amp;\approx \mathbf{C}(\mathbf{B} \odot \mathbf{A})^T.
+\end{aligned}\]</span></p>
+<p>The CP model can be concisely expressed as <span class="math display">\[\mathbfcal{X} \approx [\![\mathbf{A}, \mathbf{B}, \mathbf{C}]\!]=\sum_{r=1}^R \mathbf{a}_r \circ \mathbf{b}_r \circ \mathbf{c}_r.\]</span> It is often useful to assume that the columns of <span class="math inline">\(\mathbf{A}\)</span>, <span class="math inline">\(\mathbf{B}\)</span> and <span class="math inline">\(\mathbf{C}\)</span> are normalized to length <span class="math inline">\(1\)</span> with the weights absorbed into the vector <span class="math inline">\(\boldsymbol{\lambda} \in \mathbb{R}^R\)</span> so that <span class="math display">\[\mathbfcal{X} \approx [\![\boldsymbol{\lambda}; \mathbf{A}, \mathbf{B}, \mathbf{C}]\!]=\sum_{r=1}^R \lambda_r\mathbf{a}_r \circ \mathbf{b}_r \circ \mathbf{c}_r.\]</span></p>
+<p>For a general <span class="math inline">\(N\)</span>th-order tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I_1 \times \cdots \times I_N}\)</span>, the CP decomposition is <span class="math display">\[\mathbfcal{X} \approx [\![\boldsymbol{\lambda}; \mathbf{A}^{(1)}, \ldots, \mathbf{A}^{(N)}]\!]=\sum_{r=1}^R \lambda_r\mathbf{a}_r^{(1)} \circ \cdots \circ \mathbf{a}_r^{(N)}\]</span> where <span class="math inline">\(\boldsymbol{\lambda} \in \mathbb{R}^R\)</span> and <span class="math inline">\(\mathbf{A}^{(n)} \in \mathbb{R}^{I_n \times R }\)</span> for <span class="math inline">\(n=1, \ldots, N\)</span>. The mode-<span class="math inline">\(n\)</span> matricized version is given by <span class="math display">\[\mathbf{X}_{(n)} \approx \mathbf{A}^{(n)}\boldsymbol{\Lambda}(\mathbf{A}^{(N)} \odot \cdots \odot \mathbf{A}^{(n+1)} \odot \mathbf{A}^{(n-1)} \odot \cdots \odot \mathbf{A}^{(1)})^T\]</span> where <span class="math inline">\(\boldsymbol{\Lambda}=\text{diag}(\boldsymbol{\lambda})\)</span>.</p>
+<h2 id="tensor-rank">2.2. Tensor Rank</h2>
+<p>The <strong>rank</strong> of a tensor <span class="math inline">\(\mathbfcal{X}\)</span>, denoted <span class="math inline">\(\text{rank}(\mathbfcal{X})\)</span>, is defined as the smallest number of rank-one tensors that generate <span class="math inline">\(\mathbfcal{X}\)</span> as their sum, i.e., the smallest number of components in an exact CP decomposition. An exact CP decomposition with <span class="math inline">\(R=\text{rank}(\mathbfcal{X})\)</span> components is called the <strong>rank decomposition</strong>.</p>
+<p>The definition of tensor rank is an exact analogue to the definition of matrix rank, but the properties are quite different. One difference is that the rank of a real-valued tensor may actually be different over <span class="math inline">\(\mathbb{R}\)</span> and <span class="math inline">\(\mathbb{C}\)</span>. Another major difference is that there is no straightforward algorithm to determine the rank of a specific given tensor; the problem is NP-hard. In practice, the rank of a tensor is determined numerically by fitting various rank-<span class="math inline">\(R\)</span> CP models.</p>
+<p>The <strong>maximum rank</strong> is defined as the largest attainable rank, whereas the <strong>typical rank</strong> is any rank that occurs w.p. greater than zero (i.e., on a set with positive Lebesgue measure).</p>
+<div class="note info">
+            <p>比如在<span class="math inline">\(2 \times 2 \times 2\)</span>的张量中，通过Monte Carlo实验，我们发现张量的秩有<span class="math inline">\(79\%\)</span>的可能性是<span class="math inline">\(2\)</span>, 有<span class="math inline">\(21\%\)</span>的可能性是<span class="math inline">\(3\)</span>. 张量的秩为<span class="math inline">\(1\)</span>是理论可能的，但其概率为<span class="math inline">\(0\)</span>.</p>
+          </div>
+<p>For a third-order tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I \times J \times K}\)</span>, only the following weak upper bound on its maximum rank is known: <span class="math display">\[\text{rank}(\mathbfcal{X}) \leq \min\{IJ, IK, IK\}.\]</span></p>
+<p>For an <span class="math inline">\(N\)</span>-th order supersymmetric tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{C}^{I \times \cdots \times I}\)</span>, the <strong>symmetric rank</strong> (over <span class="math inline">\(\mathbb{C}\)</span>) of <span class="math inline">\(\mathbfcal{X}\)</span> is <span class="math display">\[\text{rank}_S(\mathbfcal{X})=\min\left\{ R: \mathbfcal{X}=\sum_{r=1}^R \mathbf{a}_r \circ \cdots \circ \mathbf{a}_r \right\}\]</span> where <span class="math inline">\(\mathbf{A} \in \mathbb{C}^{I \times R}\)</span>, i.e., the minimum number of symmetric rank-one factors.</p>
+<h2 id="uniqueness">2.3. Uniqueness</h2>
+<p>The rank decomposition of higher-order tensor is often unique, whereas matrix decomposition is not.</p>
+<p>Let <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I \times J \times K}\)</span> be a tensor of rank <span class="math inline">\(R\)</span>, i.e., <span class="math display">\[\mathbfcal{X}=\sum_{r=1}^R \mathbf{a}_r \circ \mathbf{b}_r \circ \mathbf{c}_r=[\![\mathbf{A}, \mathbf{B}, \mathbf{C}]\!].\]</span> Uniqueness means that this is the only possible combination of rank-one tensors that sums to <span class="math inline">\(\mathbfcal{X}\)</span>, with the exception of the elementary indeterminacies of scaling and permutation.</p>
+<div class="note info">
+            <p>置换不确定性是指秩一张量可以任意重新排序，也即对于任意的<span class="math inline">\(R \times R\)</span>置换矩阵<span class="math inline">\(\boldsymbol{\Pi}\)</span>, 有<span class="math display">\[\mathbfcal{X}=[\![\mathbf{A}, \mathbf{B}, \mathbf{C}]\!]=[\![\mathbf{A}\boldsymbol{\Pi}, \mathbf{B}\boldsymbol{\Pi}, \mathbf{C}\boldsymbol{\Pi}]\!].\]</span></p><p>缩放不确定性是指在保证最后的外积不变的情况下，我们可以缩放单个向量，也即<span class="math display">\[\mathcal{X}=\sum_{r=1}^R (\alpha_r\mathbf{a}) \circ (\beta_r\mathbf{b}_r) \circ (\gamma_r\mathbf{c}_r),\]</span> 其中对于<span class="math inline">\(r=1, \ldots, R\)</span>, 有<span class="math inline">\(\alpha_r\beta_r\gamma_r=1\)</span>.</p>
+          </div>
+<p>The <strong><span class="math inline">\(k\)</span>-rank</strong> of a matrix <span class="math inline">\(\mathbf{A}\)</span>, denoted <span class="math inline">\(k_\mathbf{A}\)</span>, is defined as the maximum value <span class="math inline">\(k\)</span> s.t. any <span class="math inline">\(k\)</span> columns are linearly independent.</p>
+<p>The sufficient condition for uniqueness of the CP decomposition <span class="math inline">\(\mathbfcal{X}=[\![\mathbf{A}, \mathbf{B}, \mathbf{C}]\!]\)</span> with rank <span class="math inline">\(R\)</span> is <span class="math display">\[k_\mathbf{A}+k_\mathbf{B}+k_\mathbf{C} \geq 2R+2.\]</span> The sufficient condition is also necessary for tensor of rank <span class="math inline">\(R=2\)</span> and <span class="math inline">\(R=3\)</span>, but not for <span class="math inline">\(R&gt;3\)</span>. The necessary condition for uniqueness of the CP decomposition <span class="math inline">\(\mathbfcal{X}=[\![\mathbf{A}, \mathbf{B}, \mathbf{C}]\!]\)</span> with rank <span class="math inline">\(R\)</span> is <span class="math display">\[\min\{ \text{rank}(\mathbf{A} \odot \mathbf{B}), \text{rank}(\mathbf{A} \odot \mathbf{C}), \text{rank}(\mathbf{B} \odot \mathbf{C}) \}=R.\]</span></p>
+<p>More generally, the sufficient condition for uniqueness of the CP decomposition <span class="math inline">\(\mathbfcal{X}=[\![\mathbf{A}^{(1)}, \ldots, \mathbf{A}^{(N)}]\!]\)</span> with rank <span class="math inline">\(R\)</span> is <span class="math display">\[\sum_{n=1}^N k_{\mathbf{A}^{(n)}} \geq 2R+(N-1).\]</span> The sufficient condition is also necessary for tensor of rank <span class="math inline">\(R=2\)</span> and <span class="math inline">\(R=3\)</span>, but not for <span class="math inline">\(R&gt;3\)</span>. The necessary condition for uniqueness of the CP decomposition <span class="math inline">\(\mathbfcal{X}=[\![\mathbf{A}^{(1)}, \ldots, \mathbf{A}^{(N)}]\!]\)</span> with rank <span class="math inline">\(R\)</span> is <span class="math display">\[\min_{n=1, \ldots, N} \text{rank}(\mathbf{A}^{(1)} \odot \cdots \mathbf{A}^{(n-1)} \odot \mathbf{A}^{(n+1)} \odot \cdots \odot \mathbf{A}^{(N)})=R.\]</span></p>
+<p>Since <span class="math inline">\(\text{rank}(\mathbf{A} \odot \mathbf{B}) \leq \text{rank}(\mathbf{A} \otimes \mathbf{B}) \leq \text{rank}(\mathbf{A}) \cdot \text{rank}(\mathbf{B})\)</span>, then a simpler necessary condition is <span class="math display">\[\min_{n=1, \ldots, N} \left( \prod_{\substack{m=1 \\ m \neq n}}^N \text{rank}(\mathbf{A}^{(m)}) \right) \geq R.\]</span></p>
+<p>The CP decomposition of <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I \times J \times K}\)</span> with rank <span class="math inline">\(R\)</span> is <strong>generically unique</strong> (i.e., w.p. <span class="math inline">\(1\)</span>) if <span class="math display">\[R \leq K \quad \text{and} \quad R(R-1) \leq \frac{I(I-1)J(J-1)}{2}.\]</span></p>
+<h2 id="low-rank-approximation-and-border-rank">2.4. Low-Rank Approximation and Border Rank</h2>
+<p>Recall that for a matrix, a best rank-<span class="math inline">\(k\)</span> approximation is given by the leading <span class="math inline">\(k\)</span> factors of the SVD. But the result does <strong>not</strong> hold for higher-order tensor; it is possible that the best rank-<span class="math inline">\(k\)</span> approximation may not even exist.</p>
+<p>A tensor is <strong>degenerate</strong> if it may be approximated arbitrarily well by a factorization of lower rank.</p>
+<div class="note info">
+            <p>举例来说，令<span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I \times J \times K}\)</span>为一个被下式定义的三阶张量<span class="math display">\[\mathcal{X}=\mathbf{a}_1 \circ \mathbf{b}_1 \circ \mathbf{c}_2+\mathbf{a}_1 \circ \mathbf{b}_2 \circ \mathbf{c}_1+\mathbf{a}_2 \circ \mathbf{b}_1 \circ \mathbf{c}_1,\]</span> 其中<span class="math inline">\(\mathbf{A} \in \mathbb{R}^{I \times 2}\)</span>, <span class="math inline">\(\mathbf{B} \in \mathbb{R}^{J \times 2}\)</span>, 以及<span class="math inline">\(\mathbf{C} \in \mathbb{R}^{K \times 2}\)</span>, 并且三个矩阵的列向量均为线性无关. 那么，这个张量就可以被一个秩二张量近似至任意程度<span class="math display">\[\mathbfcal{Y}=\alpha\left(\mathbf{a}_1+\frac{1}{\alpha}\mathbf{a}_2\right) \circ \left(\mathbf{b}_1+\frac{1}{\alpha}\mathbf{b}_2\right) \circ \left(\mathbf{c}_1+\frac{1}{\alpha}\mathbf{c}_2\right)-\alpha\mathbf{a}_1 \circ \mathbf{b}_1 \circ \mathbf{c}_1.\]</span> 那么，<span class="math display">\[\|\mathbfcal{X}-\mathbfcal{Y}\|=\frac{1}{\alpha} \left\| \mathbf{a}_2 \circ \mathbf{b}_2 \circ \mathbf{c}_1 + \mathbf{a}_2 \circ \mathbf{b}_1 \circ \mathbf{c}_2 + \mathbf{a}_1 \circ \mathbf{b}_2 \circ \mathbf{c}_2 + \frac{1}{\alpha}\mathbf{a}_2 \circ \mathbf{b}_2 \circ \mathbf{c}_2 \right\|.\]</span> 因为<span class="math inline">\(\|\mathbfcal{X}-\mathbfcal{Y}\|\)</span>可以被缩小至任意程度，因此<span class="math inline">\(\mathbfcal{X}\)</span>是退化的。此外，秩二张量空间并不是闭合的，比如此例中秩二张量的序列收敛于秩三张量。</p>
+          </div>
+<p>In the situation where a best low-rank approximation does not exist, it is useful to consider the concept of <strong>border rank</strong>, which is defined as the minimum number of rank-one tensors that are sufficient to approximate the given tensor with arbitrarily small nonzero error, i.e., <span class="math display">\[\widetilde{\text{rank}}(\mathbfcal{X})=\min\{ r \mid \forall \varepsilon&gt;0, \exists \mathbfcal{E}\ \text{s.t.}\ \|\mathbfcal{E}\| &lt; \varepsilon\ \text{and}\ \text{rank}(\mathbfcal{X}+\mathbfcal{E})=r \}.\]</span> Obviously, <span class="math display">\[\widetilde{\text{rank}}(\mathbfcal{X}) \leq \text{rank}(\mathbfcal{X}).\]</span></p>
+<h2 id="cp-decomposition-computation">2.5. CP Decomposition Computation</h2>
+<p>There is no finite algorithm for determining the rank of a tensor: the first issue that arises in computing a CP decomposition is how to choose the number of rank-one components.</p>
+<p>Assuming the number of components is fixed, we focus on the <strong>alternating least squares (ALS)</strong> method in the third-order case. Let <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I \times J \times K}\)</span> be a third-order tensor. We want to compute a CP decomposition with <span class="math inline">\(R\)</span> components that best approximates <span class="math inline">\(\mathbfcal{X}\)</span>, i.e., to find <span class="math display">\[\min_{\widehat{\mathbfcal{X}}} \|\mathbfcal{X}-\widehat{\mathbfcal{X}}\|\ \text{s.t.}\ \widehat{\mathbfcal{X}}=\sum_{r=1}^R \lambda_r\mathbf{a}_r \circ \mathbf{b}_r \circ \mathbf{c}_r=[\![\boldsymbol{\lambda}; \mathbf{A}, \mathbf{B}, \mathbf{C}]\!].\]</span> The ALS approach fixes <span class="math inline">\(\mathbf{B}\)</span> and <span class="math inline">\(\mathbf{C}\)</span> to solve for <span class="math inline">\(\mathbf{A}\)</span>, then fixes <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{C}\)</span> to solve for <span class="math inline">\(\mathbf{B}\)</span>, then fixes <span class="math inline">\(\mathbf{A}\)</span> and <span class="math inline">\(\mathbf{B}\)</span> to solve for <span class="math inline">\(\mathbf{C}\)</span>, and continues to repeat the entire procedure until convergence criterion is satisfied. Having fixed all but one matrix, the problem reduces to a linear least squares problem. For example, suppose <span class="math inline">\(\mathbf{B}\)</span> and <span class="math inline">\(\mathbf{C}\)</span> are fixed, and then we can rewrite the minimization problem in matrix form as <span class="math display">\[\min_{\widehat{\mathbf{A}}} \| \mathbf{X}_{(1)} - \widehat{\mathbf{A}}(\mathbf{C} \odot \mathbf{B})^T\|_F\]</span> where <span class="math inline">\(\widehat{\mathbf{A}}=\mathbf{A} \cdot \text{diag}(\boldsymbol{\lambda})\)</span>. The optimal solution is then given by <span class="math display">\[\widehat{\mathbf{A}}=\mathbf{X}_{(1)}[(\mathbf{C} \odot \mathbf{B})^T]^\dagger=\mathbf{X}_{(1)}(\mathbf{C} \odot \mathbf{B})(\mathbf{C}^T\mathbf{C} * \mathbf{B}^T\mathbf{B})^\dagger.\]</span></p>
+<div class="note warning">
+            <p>尽管<span class="math inline">\(\widehat{\mathbf{A}}=\mathbf{X}_{(1)}(\mathbf{C} \odot \mathbf{B})(\mathbf{C}^T\mathbf{C} * \mathbf{B}^T\mathbf{B})^\dagger\)</span>仅仅需要计算一个<span class="math inline">\(R \times R\)</span>而不是<span class="math inline">\(JK \times R\)</span>矩阵的伪逆矩阵，然而由于存在数值病态条件的可能，我们并不总是推荐使用这一公式。</p>
+          </div>
+<p>Finally, we normalize the columns of <span class="math inline">\(\widehat{\mathbf{A}}\)</span> to get <span class="math inline">\(\mathbf{A}\)</span>: let <span class="math inline">\(\lambda_r=\|\widehat{\mathbf{a}}_r\|\)</span> and <span class="math inline">\(\displaystyle \mathbf{a}_r=\frac{\widehat{\mathbf{a}}_r}{\lambda_r}\)</span> for <span class="math inline">\(r=1, \ldots, R\)</span>.</p>
+<p>The full ALS procedure to compute a CP decomposition with <span class="math inline">\(R\)</span> components for an <span class="math inline">\(N\)</span>-th order tensor <span class="math inline">\(\mathbfcal{X}\)</span> of size <span class="math inline">\(I_1 \times \cdots \times I_N\)</span> is:</p>
+<table frame="hsides" style="line-height:20px;">
+<tbody>
+<tr>
+<td>
+<b>Algorithm 1</b> ALS Algorithm
+</td>
+</tr>
+<tr>
+<td>
+    <b>procedure</b> <span class="math inline">\(\texttt{CP-ALS}(\mathbfcal{X}, R)\)</span><br>         initialize <span class="math inline">\(\mathbf{A}^{(n)} \in \mathbb{R}^{I_n \times R}\)</span> for <span class="math inline">\(n=1, \ldots, N\)</span>;<br>         <b>repeat</b><br>             <b>for</b> <span class="math inline">\(n=1, \ldots, N\)</span> <b>do</b><br>                 <span class="math inline">\(\mathbf{V} \leftarrow (\mathbf{A}^{(1)})^T\mathbf{A}^{(1)} * \cdots * (\mathbf{A}^{(n-1)})^T\mathbf{A}^{(n-1)} * (\mathbf{A}^{(n+1)})^T\mathbf{A}^{(n+1)} * \cdots * (\mathbf{A}^{(N)})^T\mathbf{A}^{(N)}\)</span>;<br>                 <span class="math inline">\(\mathbf{A}^{(n)} \leftarrow \mathbf{X}^{(n)}(\mathbf{A}^{(N)} \odot \cdots \odot \mathbf{A}^{(n+1)} \odot \mathbf{A}^{(n-1)} \odot \cdots \odot \mathbf{A}^{(1)})\mathbf{V}^\dagger\)</span>;<br>                 normalize columns of <span class="math inline">\(\mathbf{A}^{(n)}\)</span> (storing norms as <span class="math inline">\(\boldsymbol{\lambda}\)</span>);<br>             <b>end for</b><br>         <b>until</b> fit ceases to improve or maximum iterations exhausted;<br>         return <span class="math inline">\(\boldsymbol{\lambda}, \mathbf{A}^{(1)}, \ldots, \mathbf{A}^{(N)}\)</span>;<br>     <b>end procedure</b>
+</td>
+</tr>
+</tbody>
+</table>
+<p>In ALS algorithm,</p>
+<ul>
+<li><p>the factor matrices can be initialized in any way, such as randomly or by setting <span class="math inline">\(\mathbf{A}^{(n)}\)</span> to be <span class="math inline">\(R\)</span> leading left singular vectors of <span class="math inline">\(\mathbf{X}_{(n)}\)</span> for <span class="math inline">\(n=1, \ldots, N\)</span>;</p></li>
+<li><p>at each inner iteration, <span class="math inline">\(\mathbf{V}^\dagger\)</span> must be computed, but it is only of size <span class="math inline">\(R \times R\)</span>;</p></li>
+<li><p>possible stopping conditions include the following: little or no improvement in the objective function, little or no change in the factor matrices, the objective value is at or near zero, and exceeding a predefined maximum number of iterations.</p></li>
+</ul>
+<div class="note warning">
+            <p>ALS算法容易理解和实现，但往往需要很多次迭代才能收敛。而且，该算法并不保证我们能达到一个全局最小值，甚至不能保证是一个驻点（Stationary Point）。</p>
+          </div>
+<h1 id="compression-and-tucker-decomposition">3. Compression and Tucker Decomposition</h1>
+<h2 id="tucker-decomposition">3.1. Tucker Decomposition</h2>
+<p>The <strong>Tucker decomposition</strong> is a form of higher-order PCA, and it decomposes a tensor into a core tensor multiplied (or transformed) by a matrix along each mode. For a third-order tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I \times J \times K}\)</span>, <span class="math display">\[\mathbfcal{X} \approx \mathbfcal{G} \times_1 \mathbf{A} \times_2 \mathbf{B} \times_3 \mathbf{C}=\sum_{p=1}^P \sum_{q=1}^Q \sum_{r=1}^R g_{pqr}\mathbf{a}_p \circ \mathbf{b}_q \circ \mathbf{c}_r=[\![ \mathbfcal{G}; \mathbf{A}, \mathbf{B}, \mathbf{C} ]\!]\]</span> where <span class="math inline">\(\mathbf{A} \in \mathbb{R}^{I \times P}\)</span>, <span class="math inline">\(\mathbf{B} \in \mathbb{R}^{J \times Q}\)</span> and <span class="math inline">\(\mathbf{C} \in \mathbb{R}^{K \times R}\)</span> are the <strong>factor matrices</strong> (which are usually orthogonal), and can be thought of as the principal components in each mode. The tensor <span class="math inline">\(\mathbfcal{G} \in \mathbb{R}^{P \times Q \times R}\)</span> is called the <strong>core tensor</strong> and its entries show the the level of interaction between the different components.</p>
+<p>Elementwise, for <span class="math inline">\(i=1, \ldots, I\)</span>, <span class="math inline">\(j=1, \ldots, J\)</span> and <span class="math inline">\(k=1, \ldots, K\)</span>, <span class="math display">\[x_{ijk} \approx \sum_{p=1}^P \sum_{q=1}^Q \sum_{r=1}^R g_{pqr}a_{ip}b_{jq}c_{kr}\]</span> where <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span> and <span class="math inline">\(R\)</span> are the number of components (i.e., columns) in the factor matrices <span class="math inline">\(\mathbf{A}\)</span>, <span class="math inline">\(\mathbf{B}\)</span> and <span class="math inline">\(\mathbf{C}\)</span>, respectively. If <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\)</span> and <span class="math inline">\(R\)</span> are smaller than <span class="math inline">\(I\)</span>, <span class="math inline">\(J\)</span> and <span class="math inline">\(K\)</span>, the core tensor <span class="math inline">\(\mathbfcal{G}\)</span> can be thought of as a compressed version of <span class="math inline">\(\mathbfcal{X}\)</span>.</p>
+<p>CP and be viewed as a special case of Tucker where the core tensor is superdiagonal and <span class="math inline">\(P=Q=R\)</span>.</p>
+<p>The Tucker decomposition in matricized form (one per mode): <span class="math display">\[\begin{aligned}
+\mathbf{X}_{(1)} &amp;\approx \mathbf{A}\mathbf{G}_{(1)}(\mathbf{C} \otimes \mathbf{B})^T, \\
+\mathbf{X}_{(2)} &amp;\approx \mathbf{B}\mathbf{G}_{(2)}(\mathbf{C} \otimes \mathbf{A})^T, \\
+\mathbf{X}_{(3)} &amp; \approx \mathbf{C}\mathbf{G}_{(3)}(\mathbf{B} \otimes \mathbf{A})^T.
+\end{aligned}\]</span></p>
+<p>In general, the Tucker decomposition is <span class="math display">\[\mathbfcal{X} \approx [\![ \mathbfcal{G}; \mathbf{A}^{(1)}, \ldots, \mathbf{A}^{(N)} ]\!]=\mathbf{G} \times_1 \mathbf{A}^{(1)} \times_2 \cdots \times_N \mathbf{A}^{(N)}\]</span> or elementwise, for <span class="math inline">\(i_n=1, \ldots, I_n\)</span>, <span class="math inline">\(n=1, \ldots, N\)</span>, <span class="math display">\[x_{i_1, \ldots, i_N} \approx \sum_{r_1=1}^{R_1} \cdots \sum_{r_N=1}^{R_N} g_{r_1, \ldots, r_N} a_{i_1, r_1}^{(1)} \cdots a_{i_N, r_N}^{(N)}.\]</span> The matricized version is <span class="math display">\[\mathbf{X}_{(n)} \approx \mathbf{A}^{(n)}\mathbf{G}_{(n)}(\mathbf{A}^{(N)} \otimes \cdots \otimes \mathbf{A}^{(n+1)} \otimes \mathbf{A}^{(n-1)} \otimes \cdots \otimes \mathbf{A}^{(1)})^T.\]</span></p>
+<div class="note info">
+            <p>此外，还有两个Tucker分解的变形是值得注意的。</p><p>第一个是<strong>Tucker2分解</strong>，这个方法只使用两个矩阵来分解，第三个矩阵为单位矩阵，比如说：<span class="math display">\[\mathbfcal{X}=\mathbfcal{G} \times_1 \mathbf{A} \times_2 \mathbf{B}=[\![\mathbfcal{G}; \mathbf{A}, \mathbf{B}, \mathbf{I}]\!].\]</span> Tucker2分解与Tucker分解的区别在于，<span class="math inline">\(\mathbfcal{G} \in \mathbb{R}^{P \times Q \times K}\)</span>和<span class="math inline">\(\mathbf{C}=\mathbf{I}\)</span>.</p><p>类似的，<strong>Tucker1分解</strong>只利用某一个矩阵来分解，并将剩余矩阵设为单位矩阵，比如说：<span class="math display">\[\mathbfcal{X}=\mathbfcal{G} \times_1 \mathbf{A}=[\![\mathbfcal{G}; \mathbf{A}, \mathbf{I}, \mathbf{I}]\!].\]</span> 这等价于一个标准的二维主成分分析，因为<span class="math inline">\(\mathbf{X}_{(1)}=\mathbf{A}\mathbf{G}_{(1)}\)</span>.</p>
+          </div>
+<h2 id="n-rank">3.2. \(n\)-Rank</h2>
+<p>Let <span class="math inline">\(\mathbfcal{X}\)</span> be an <span class="math inline">\(N\)</span>th-order tensor of size <span class="math inline">\(I_1 \times \cdots \times I_N\)</span>. The <strong><span class="math inline">\(n\)</span>-rank</strong> of <span class="math inline">\(\mathbfcal{X}\)</span>, denoted <span class="math inline">\(\text{rank}_n(\mathbfcal{X})\)</span>, is the column rank of <span class="math inline">\(\mathbf{X}_{(n)}\)</span>, i.e., the <span class="math inline">\(n\)</span>-rank is the dimension of the vector space spanned by the mode-<span class="math inline">\(n\)</span> fibers. If we let <span class="math inline">\(R_n=\text{rank}_n(\mathbfcal{X})\)</span> for <span class="math inline">\(n=1, \ldots, N\)</span>, then we can say that <span class="math inline">\(\mathbfcal{X}\)</span> is a rank-<span class="math inline">\((R_1, \ldots, R_N)\)</span> tensor. Trivially, <span class="math inline">\(R_n \leq I_n\)</span> for all <span class="math inline">\(n=1, \ldots, N\)</span>.</p>
+<p>For a given tensor <span class="math inline">\(\mathbfcal{X}\)</span>, we can easily find an exact Tucker decomposition of rank <span class="math inline">\((R_1, \ldots, R_N)\)</span>. If, however, we compute a Tucker decomposition of rank <span class="math inline">\((R_1, \ldots, R_N)\)</span> where <span class="math inline">\(R_n&lt;\text{rank}_n(\mathbfcal{X})\)</span> for one or more <span class="math inline">\(n\)</span>, then it will be necessarily inexact and more difficult to compute. For instance, a <strong>truncated Tucker decomposition</strong> does not exactly reproduce <span class="math inline">\(\mathbfcal{X}\)</span>:</p>
+<p><img data-src="/images/Tensor_6.png"></p>
+<center>
+Figure 6: Truncated Tucker decomposition of a third-order tensor.
+</center>
+<h2 id="tucker-decomposition-computation">3.3. Tucker Decomposition Computation</h2>
+<p>We focus on the <strong>higher-order orthogonal iteration (HOOI)</strong> algorithm. Let <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I_1 \times \cdots I_N}\)</span>, the optimization problem we want to solve is <span class="math display">\[\min_{\mathbfcal{G}, \mathbf{A}^{(1)}, \ldots, \mathbf{A}^{(N)}} \|\mathbfcal{X} - [\![ \mathbfcal{G}; \mathbf{A}^{(1)}, \ldots, \mathbf{A}^{(N)} ]\!]\|\]</span> s.t. <span class="math inline">\(\mathbfcal{G} \in \mathbb{R}^{R_1 \times \cdots \times R_N}\)</span>, <span class="math inline">\(\mathbf{A}^{(n)} \in \mathbb{R}^{I_n \times R_n}\)</span>, and columnwise orthogonal for <span class="math inline">\(n=1, \ldots, N\)</span>. By rewriting the objective function in vectorized form as <span class="math display">\[\| \text{vec}(\mathbfcal{X}) - (\mathbf{A}^{(N)} \otimes \cdots \otimes \mathbf{A}^{(1)}) \text{vec}(\mathbfcal{G}) \|\]</span> it is obvious that core tensor <span class="math inline">\(\mathbfcal{G}\)</span> must satisfy <span class="math inline">\(\mathbfcal{G}=\mathbfcal{X} \times_1 (\mathbf{A}^{(1)})^T \times_2 \cdots \times_N (\mathbf{A}^{(N)})^T\)</span>. Rewrite the objective function, we have <span class="math display">\[\begin{aligned}
+\|\mathbfcal{X} - [\![\mathbfcal{G}; \mathbf{A}^{(1)}, \ldots, \mathbf{A}^{(N)}]\!] \|^2&amp;=\|\mathbfcal{X}\|^2 - 2 \langle \mathbfcal{X}, [\![\mathbfcal{G}; \mathbf{A}^{(1)}, \ldots, \mathbf{A}^{(N)}]\!] \rangle + \| [\![\mathbfcal{G}; \mathbf{A}^{(1)}, \ldots, \mathbf{A}^{(N)}]\!] \|^2
+\\&amp;=\|\mathbfcal{X}\|^2 - 2 \langle \mathbfcal{X} \times_1 (\mathbf{A}^{(1)})^T \times_2 \cdots \times_N (\mathbf{A}^{(N)})^T, \mathbfcal{G} \rangle + \|\mathbfcal{G}\|^2
+\\&amp;=\|\mathbfcal{X}\|^2 - 2 \langle \mathbfcal{G}, \mathbfcal{G} \rangle + \|\mathbfcal{G}\|^2
+\\&amp;=\|\mathbfcal{X}\|^2-\|\mathbfcal{G}\|^2
+\\&amp;=\|\mathbfcal{X}\|^2-\|\mathbfcal{X} \times_1 (\mathbf{A}^{(1)})^T \times_2 \cdots \times_N (\mathbf{A}^{(N)})^T\|^2.
+\end{aligned}\]</span></p>
+<p>We can use an ALS approach to solve. Since <span class="math inline">\(\|\mathbfcal{X}\|^2\)</span> is constant, it is equivalent to solve <span class="math display">\[\max_{\mathbf{A}^{(n)}} \|\mathbfcal{X} \times_1 (\mathbf{A}^{(1)})^T \times_2 \cdots \times_N (\mathbf{A}^{(N)})^T\|\]</span> s.t. <span class="math inline">\(\mathbf{A}^{(n)} \in \mathbb{R}^{I_n \times R_n}\)</span> and columnwise orthogonal. In matrix form: <span class="math display">\[\|(\mathbf{A}^{(n)})^T \mathbf{X}_{(n)} (\mathbf{A}^{(N)} \otimes \cdots \otimes \mathbf{A}^{(n+1)} \otimes \mathbf{A}^{(n-1)} \otimes \cdots \otimes \mathbf{A}^{(1)})\|.\]</span> The solution can be determined using the SVD: simply set <span class="math inline">\(\mathbf{A}^{(n)}\)</span> to be the <span class="math inline">\(R_n\)</span> leading left singular vectors of <span class="math inline">\(\mathbf{W}=\mathbf{X}_{(n)} (\mathbf{A}^{(N)} \otimes \cdots \otimes \mathbf{A}^{(n+1)} \otimes \mathbf{A}^{(n-1)} \otimes \cdots \otimes \mathbf{A}^{(1)})\)</span>, and the method will converge to a solution where the objective function ceases to decrease, but it is not guaranteed to converge to the global optimum or even a stationary point.</p>
+<p>The ALS algorithm to compute a rank-<span class="math inline">\((R_1, \ldots, R_N)\)</span> Tucker decomposition for an <span class="math inline">\(N\)</span>th-order tensor <span class="math inline">\(\mathbfcal{X}\)</span> of size <span class="math inline">\(I_1 \times \cdots I_N\)</span>, a.k.a. HOOI, is:</p>
+<table frame="hsides" style="line-height:20px;">
+<tbody>
+<tr>
+<td>
+<b>Algorithm 2</b> HOOI Algorithm
+</td>
+</tr>
+<tr>
+<td>
+    <b>procedure</b> <span class="math inline">\(\texttt{HOOI}(\mathbfcal{X}, R_1, \ldots, R_N)\)</span><br>         initialize <span class="math inline">\(\mathbf{A}^{(n)} \in \mathbb{R}^{I_n \times R}\)</span> for <span class="math inline">\(n=1, \ldots, N\)</span> using <span class="math inline">\(\texttt{HOSVD}\)</span>;<br>         <b>repeat</b><br>             <b>for</b> <span class="math inline">\(n=1, \ldots, N\)</span> <b>do</b><br>                 <span class="math inline">\(\mathbfcal{Y} \leftarrow \mathbfcal{X} \times_1 (\mathbf{A}^{(1)})^T \times_2 \cdots \times_{n-1} (\mathbf{A}^{(n-1)})^T \times_{n+1} (\mathbf{A}^{(n+1)})^T \times_{n+2} \cdots \times_N (\mathbf{A}^{(N)})^T\)</span>;<br>                 <span class="math inline">\(\mathbf{A}^{(n)} \leftarrow R_n\)</span> leading left singular vectors of <span class="math inline">\(\mathbf{Y}_{(n)}\)</span>;<br>             <b>end for</b><br>         <b>until</b> fit ceases to improve or maximum iterations exhausted;<br>         <span class="math inline">\(\mathbfcal{G} \leftarrow \mathbfcal{X} \times_1 (\mathbf{A}^{(1)})^T \times_2 \cdots \times_N (\mathbf{A}^{(N)})^T\)</span>;<br>         return <span class="math inline">\(\mathbfcal{G}, \mathbf{A}^{(1)}, \ldots, \mathbf{A}^{(N)}\)</span>;<br>     <b>end procedure</b>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Higher-order SVD (HOSVD)</strong> is:</p>
+<table frame="hsides" style="line-height:20px;">
+<tbody>
+<tr>
+<td>
+<b>Algorithm 3</b> HOSVD Algorithm
+</td>
+</tr>
+<tr>
+<td>
+    <b>procedure</b> <span class="math inline">\(\texttt{HOSVD}(\mathbfcal{X}, R_1, \ldots, R_N)\)</span><br>         <b>for</b> <span class="math inline">\(n=1, \ldots, N\)</span> <b>do</b><br>             <span class="math inline">\(\mathbf{A}^{(n)} \leftarrow R_n\)</span> leading left singular vectors of <span class="math inline">\(\mathbf{X}_{(n)}\)</span>;<br>         <b>end for</b><br>         <span class="math inline">\(\mathbfcal{G} \leftarrow \mathbfcal{X} \times_1 (\mathbf{A}^{(1)})^T \times_2 \cdots \times_N (\mathbf{A}^{(N)})^T\)</span>;<br>         return <span class="math inline">\(\mathbfcal{G}, \mathbf{A}^{(1)}, \ldots, \mathbf{A}^{(N)}\)</span>;<br>     <b>end procedure</b>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="lack-of-uniqueness">3.4. Lack of Uniqueness</h2>
+<p>Tucker decomposition is not unique. For example, consider <span class="math inline">\(\mathbfcal{X} \approx [\![\mathbfcal{G}; \mathbf{A}, \mathbf{B}, \mathbf{C}]\!]\)</span>. Let <span class="math inline">\(\mathbf{U} \in \mathbb{R}^{P \times P}\)</span>, <span class="math inline">\(\mathbf{V} \in \mathbb{R}^{Q \times Q}\)</span> and <span class="math inline">\(\mathbf{W} \in \mathbb{R}^{R \times R}\)</span> be nonsingular matrices, then <span class="math display">\[[\![\mathbfcal{G}; \mathbf{A}, \mathbf{B}, \mathbf{C}]\!]=[\![\mathbfcal{G} \times_1 \mathbf{U} \times_2 \mathbf{V} \times_3 \mathbf{W}; \mathbf{AU}^{-1}, \mathbf{BV}^{-1}, \mathbf{CW}^{-1}]\!],\]</span> i.e., we can modify the core <span class="math inline">\(\mathbfcal{G}\)</span> without affecting the fit so long as we apply the inverse modification to the factor matrices.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/CP-Decomposition/" rel="tag"><i class="fa fa-tag"></i> CP Decomposition</a>
+              <a href="/tags/Tensor/" rel="tag"><i class="fa fa-tag"></i> Tensor</a>
+              <a href="/tags/Tucker-Decomposition/" rel="tag"><i class="fa fa-tag"></i> Tucker Decomposition</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Statistics/Graphical_Model/Causal_Inference" rel="prev" title="Causal Inference">
+      <i class="fa fa-chevron-left"></i> Causal Inference
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#preliminary"><span class="nav-text">1. Preliminary</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fibers"><span class="nav-text">1.1. Fibers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#slices"><span class="nav-text">1.2. Slices</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#norm"><span class="nav-text">1.3. Norm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inner-product"><span class="nav-text">1.4. Inner Product</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rank-one-tensor"><span class="nav-text">1.5. Rank-One Tensor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#symmetry"><span class="nav-text">1.6. Symmetry</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#diagonal-tensor"><span class="nav-text">1.7. Diagonal Tensor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#matricization-transforming-a-tensor-into-a-matirx"><span class="nav-text">1.8. Matricization: Transforming a Tensor into a Matirx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#the-n-mode-product"><span class="nav-text">1.9. The \(n\)-Mode Product</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#special-matrix-product"><span class="nav-text">1.10. Special Matrix Product</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kronecker-product"><span class="nav-text">1.10.1. Kronecker Product</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#khatrirao-product"><span class="nav-text">1.10.2. Khatri–Rao Product</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#hadamard-product"><span class="nav-text">1.10.3. Hadamard Product</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#property"><span class="nav-text">1.10.4. Property</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tensor-rank-and-candecompparafac-decomposition"><span class="nav-text">2. Tensor Rank and CANDECOMP&#x2F;PARAFAC Decomposition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#candecompparafac-cp-decomposition"><span class="nav-text">2.1. CANDECOMP&#x2F;PARAFAC (CP) Decomposition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tensor-rank"><span class="nav-text">2.2. Tensor Rank</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#uniqueness"><span class="nav-text">2.3. Uniqueness</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#low-rank-approximation-and-border-rank"><span class="nav-text">2.4. Low-Rank Approximation and Border Rank</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cp-decomposition-computation"><span class="nav-text">2.5. CP Decomposition Computation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#compression-and-tucker-decomposition"><span class="nav-text">3. Compression and Tucker Decomposition</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tucker-decomposition"><span class="nav-text">3.1. Tucker Decomposition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#n-rank"><span class="nav-text">3.2. \(n\)-Rank</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tucker-decomposition-computation"><span class="nav-text">3.3. Tucker Decomposition Computation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lack-of-uniqueness"><span class="nav-text">3.4. Lack of Uniqueness</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tianyang Li"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Tianyang Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/litianyang0211" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;litianyang0211" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianyang.li@linacre.ox.ac.uk" title="Email → mailto:tianyang.li@linacre.ox.ac.uk" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/derek0211" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;derek0211" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tianyang Li</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'default',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
