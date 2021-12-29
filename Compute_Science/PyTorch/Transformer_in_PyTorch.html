@@ -28,11 +28,11 @@
 <meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_in_PyTorch_1.png">
 <meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_in_PyTorch_2.png">
 <meta property="article:published_time" content="2021-12-11T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-29T12:52:39.439Z">
+<meta property="article:modified_time" content="2021-12-29T13:04:35.756Z">
 <meta property="article:author" content="Tianyang Li">
-<meta property="article:tag" content="Transformer">
-<meta property="article:tag" content="Attention">
 <meta property="article:tag" content="PyTorch">
+<meta property="article:tag" content="Attention">
+<meta property="article:tag" content="Transformer">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://litianyang0211.github.io/images/Transformer_in_PyTorch_1.png">
 
@@ -237,7 +237,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-29 12:52:39" itemprop="dateModified" datetime="2021-12-29T12:52:39+00:00">2021-12-29</time>
+                <time title="Modified: 2021-12-29 13:04:35" itemprop="dateModified" datetime="2021-12-29T13:04:35+00:00">2021-12-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -266,7 +266,7 @@
 
       
         <h1 id="prelim">1. Prelim</h1>
-<p>本文使用PyTorch实现<a href="/Computer-Science/Natural-Language-Processing/Transformer">Transformer</a>, 并进一步补充细节。</p>
+<p>本文使用PyTorch实现<a href="/Computer_Science/Natural_Language_Processing/Transformer">Transformer</a>, 并进一步补充细节。</p>
 <p>首先导入所需模块：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> math, copy, time</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># seaborn用于可视化自注意力</span></span><br><span class="line"><span class="keyword">import</span> seaborn</span><br><span class="line">seaborn.set_context(context=<span class="string">&quot;talk&quot;</span>)</span><br></pre></td></tr></table></figure>
 <h1 id="model-architecture">2. Model Architecture</h1>
@@ -390,9 +390,9 @@ Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Transformer/" rel="tag"><i class="fa fa-tag"></i> Transformer</a>
-              <a href="/tags/Attention/" rel="tag"><i class="fa fa-tag"></i> Attention</a>
               <a href="/tags/PyTorch/" rel="tag"><i class="fa fa-tag"></i> PyTorch</a>
+              <a href="/tags/Attention/" rel="tag"><i class="fa fa-tag"></i> Attention</a>
+              <a href="/tags/Transformer/" rel="tag"><i class="fa fa-tag"></i> Transformer</a>
           </div>
 
         
