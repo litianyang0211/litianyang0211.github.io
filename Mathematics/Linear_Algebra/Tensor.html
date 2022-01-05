@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="article">
@@ -271,7 +271,7 @@
       
         <h1 id="preliminary">1. Preliminary</h1>
 <p>A <strong>tensor</strong> is a multidimensional array. A first-order tensor is a vector, a second-order tensor is a matrix, and tensor of order three or higher are called higher-order tensor. A third-order tensor has three indices:</p>
-<p><img data-src="/images/Tensor_1.png"></p>
+<p><img src="/images/Tensor_1.png"></p>
 <center>
 Figure 1: A third-order tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I \times J \times K}\)</span>.
 </center>
@@ -280,13 +280,13 @@ Figure 1: A third-order tensor <span class="math inline">\(\mathbfcal{X} \in \ma
 <div class="note info">
             <p>当一个张量沿着第<span class="math inline">\(k\)</span>维展开时，我们就得到了mode-<span class="math inline">\(k\)</span> fiber.</p>
           </div>
-<p><img data-src="/images/Tensor_2.png"></p>
+<p><img src="/images/Tensor_2.png"></p>
 <center>
 Figure 2: Fibers of a third-order tensor.
 </center>
 <h2 id="slices">1.2. Slices</h2>
 <p><strong>Slices</strong> are two-dimensional sections of a tensor, defined by fixing all but two indices. Third-order tensor <span class="math inline">\(\mathbfcal{X}\)</span> has horizontal, lateral and frontal slides, denoted by <span class="math inline">\(\mathbf{X}_{i::}\)</span>, <span class="math inline">\(\mathbf{X}_{:j:}\)</span> and <span class="math inline">\(\mathbf{X}_{::k}\)</span>, respectively. The <span class="math inline">\(k\)</span>th frontal slice of a third-order tensor may be denoted more compactly as <span class="math inline">\(\mathbf{X}_k\)</span>.</p>
-<p><img data-src="/images/Tensor_3.png"></p>
+<p><img src="/images/Tensor_3.png"></p>
 <center>
 Figure 3: Slices of a third-order tensor.
 </center>
@@ -296,7 +296,7 @@ Figure 3: Slices of a third-order tensor.
 <p>The <strong>inner product</strong> of two same-sized tensors <span class="math inline">\(\mathbfcal{X}, \mathbfcal{Y} \in \mathbb{R}^{I_1 \times \cdots \times I_N}\)</span> is the sum of the products of their entries: <span class="math display">\[\langle \mathbfcal{X}, \mathbfcal{Y} \rangle=\sum_{i_1=1}^{I_1} \cdots \sum_{i_N=1}^{I_N} x_{i_1, \ldots, x_N}y_{i_1, \ldots, x_N}\]</span> which follows immediately that <span class="math inline">\(\langle \mathbfcal{X}, \mathbfcal{X} \rangle=\|\mathbfcal{X}\|^2\)</span>.</p>
 <h2 id="rank-one-tensor">1.5. Rank-One Tensor</h2>
 <p>An <span class="math inline">\(N\)</span>th-order tensor <span class="math inline">\(\mathbfcal{X} \in \mathbb{R}^{I_1 \times \cdots \times I_N}\)</span> is <strong>rank-one</strong> if it can be written as the outer product of <span class="math inline">\(N\)</span> vectors: <span class="math display">\[\mathbfcal{X}=\mathbf{a}^{(1)} \circ \cdots \circ \mathbf{a}^{(N)}.\]</span> The symbol <span class="math inline">\(\circ\)</span> represents the vector outer product, which means that each element of the tensor is the product of the corresponding vector elements, i.e., for all <span class="math inline">\(1 \leq i_n \leq I_n\)</span>, <span class="math display">\[x_{i_1, \ldots, i_N}=a_{i_1}^{(1)} \cdots a_{i_N}^{(N)}.\]</span></p>
-<p><img data-src="/images/Tensor_4.png"></p>
+<p><img src="/images/Tensor_4.png"></p>
 <center>
 Figure 4: Rank-one third-order tensor, <span class="math inline">\(\mathbfcal{X}=\mathbf{a} \circ \mathbf{b} \circ \mathbf{c}\)</span>. The <span class="math inline">\((i, j, k)\)</span> element of <span class="math inline">\(\mathbfcal{X}\)</span> is given by <span class="math inline">\(x_{ijk}=a_ib_jc_k\)</span>.
 </center>
@@ -409,7 +409,7 @@ a_{I1}b_{I1} &amp; \cdots &amp; a_{IJ}b_{IJ}
 <h1 id="tensor-rank-and-candecompparafac-decomposition">2. Tensor Rank and CANDECOMP/PARAFAC Decomposition</h1>
 <h2 id="candecompparafac-cp-decomposition">2.1. CANDECOMP/PARAFAC (CP) Decomposition</h2>
 <p>We refer to the CANDECOMP/PARAFAC decomposition as CP. The CP decomposition factorizes a tensor into a sum of component rank-one tensors.</p>
-<p><img data-src="/images/Tensor_5.png"></p>
+<p><img src="/images/Tensor_5.png"></p>
 <center>
 Figure 5: CP decomposition of a third-order tensor.
 </center>
@@ -496,7 +496,7 @@ Figure 5: CP decomposition of a third-order tensor.
 <h2 id="n-rank">3.2. \(n\)-Rank</h2>
 <p>Let <span class="math inline">\(\mathbfcal{X}\)</span> be an <span class="math inline">\(N\)</span>th-order tensor of size <span class="math inline">\(I_1 \times \cdots \times I_N\)</span>. The <strong><span class="math inline">\(n\)</span>-rank</strong> of <span class="math inline">\(\mathbfcal{X}\)</span>, denoted <span class="math inline">\(\text{rank}_n(\mathbfcal{X})\)</span>, is the column rank of <span class="math inline">\(\mathbf{X}_{(n)}\)</span>, i.e., the <span class="math inline">\(n\)</span>-rank is the dimension of the vector space spanned by the mode-<span class="math inline">\(n\)</span> fibers. If we let <span class="math inline">\(R_n=\text{rank}_n(\mathbfcal{X})\)</span> for <span class="math inline">\(n=1, \ldots, N\)</span>, then we can say that <span class="math inline">\(\mathbfcal{X}\)</span> is a rank-<span class="math inline">\((R_1, \ldots, R_N)\)</span> tensor. Trivially, <span class="math inline">\(R_n \leq I_n\)</span> for all <span class="math inline">\(n=1, \ldots, N\)</span>.</p>
 <p>For a given tensor <span class="math inline">\(\mathbfcal{X}\)</span>, we can easily find an exact Tucker decomposition of rank <span class="math inline">\((R_1, \ldots, R_N)\)</span>. If, however, we compute a Tucker decomposition of rank <span class="math inline">\((R_1, \ldots, R_N)\)</span> where <span class="math inline">\(R_n&lt;\text{rank}_n(\mathbfcal{X})\)</span> for one or more <span class="math inline">\(n\)</span>, then it will be necessarily inexact and more difficult to compute. For instance, a <strong>truncated Tucker decomposition</strong> does not exactly reproduce <span class="math inline">\(\mathbfcal{X}\)</span>:</p>
-<p><img data-src="/images/Tensor_6.png"></p>
+<p><img src="/images/Tensor_6.png"></p>
 <center>
 Figure 6: Truncated Tucker decomposition of a third-order tensor.
 </center>
@@ -690,7 +690,6 @@ Figure 6: Truncated Tucker decomposition of a third-order tensor.
 
   
   <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

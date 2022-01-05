@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="article">
@@ -30,9 +30,9 @@
 <meta property="article:published_time" content="2021-12-11T00:00:00.000Z">
 <meta property="article:modified_time" content="2022-01-01T15:03:04.475Z">
 <meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Transformer">
 <meta property="article:tag" content="Attention">
 <meta property="article:tag" content="PyTorch">
-<meta property="article:tag" content="Transformer">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://litianyang0211.github.io/images/Transformer_in_PyTorch_1.png">
 
@@ -271,7 +271,7 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> math, copy, time</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># seaborn用于可视化自注意力</span></span><br><span class="line"><span class="keyword">import</span> seaborn</span><br><span class="line">seaborn.set_context(context=<span class="string">&quot;talk&quot;</span>)</span><br></pre></td></tr></table></figure>
 <h1 id="model-architecture">2. Model Architecture</h1>
 <p>大部分热门的神经序列转导模型（Neural Sequence Transduction Model）都具有编码—解码架构 <a href="#BCB14">(Bahdanau, Cho, and Bengio, 2014)</a>. Transformer也使用了这一架构：</p>
-<span id="f1"><img data-src="/images/Transformer_in_PyTorch_1.png"></span>
+<span id="f1"><img src="/images/Transformer_in_PyTorch_1.png"></span>
 <center>
 Figure 1: Model architecture of Transformer <a href="#V+17">(Vaswani et al., 2017)</a>.
 </center>
@@ -312,7 +312,7 @@ Figure 1: Model architecture of Transformer <a href="#V+17">(Vaswani et al., 201
 <p>Attention mechanisms have become an integral part of compelling sequence modeling and transduction models in various tasks, allowing modeling of dependencies without regard to their distance in the input or output sequences.</p>
 </blockquote>
 <p>简而言之，注意力机制将序列中的数据点联系起来。Transformer使用一种特定类型的注意力机制，称为多头注意力（Multi-Head Attention）——这是模型中最重要的部分。多头注意力如下图所示：</p>
-<span id="f2"><img data-src="/images/Transformer_in_PyTorch_2.png"></span>
+<span id="f2"><img src="/images/Transformer_in_PyTorch_2.png"></span>
 <center>
 Figure 2: (Left) Scaled dot-product attention. (Right) Multi-Head attention consists of several attention layers running in parallel <a href="#V+17">(Vaswani et al., 2017)</a>.
 </center>
@@ -393,9 +393,9 @@ Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N
       <footer class="post-footer">
           
           <div class="post-tags">
+              <a href="/tags/Transformer/" rel="tag"><i class="fa fa-tag"></i> Transformer</a>
               <a href="/tags/Attention/" rel="tag"><i class="fa fa-tag"></i> Attention</a>
               <a href="/tags/PyTorch/" rel="tag"><i class="fa fa-tag"></i> PyTorch</a>
-              <a href="/tags/Transformer/" rel="tag"><i class="fa fa-tag"></i> Transformer</a>
           </div>
 
         
@@ -535,7 +535,6 @@ Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N
 
   
   <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

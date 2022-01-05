@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="1. Multivariate Gaussian Distribution Definition 1.1    \(X_V\) has a multivariate Gaussian distribution with parameters \(\mu\) and \(\Sigma\) if the joint density is \[f(x_V; \mu, \Sigma)&#x3D;\frac{1}{(">
@@ -280,7 +280,7 @@ The converse holds similarly.
 <p>Let <span class="math inline">\(X_V^{(1)}, \ldots, X_V^{(n)} \overset{\text{i.i.d.}}{\sim} \mathcal{N}_p(0, \Sigma)\)</span>. The sufficient statistic for <span class="math inline">\(\Sigma\)</span> is the sample covariance matrix <span class="math display">\[W=\frac{1}{n}\sum_{i=1}^n X_V^{(i)}(X_V^{(i)})^T.\]</span> In addition, <span class="math inline">\(\widehat{\Sigma}=W\)</span> is the MLE for <span class="math inline">\(\Sigma\)</span> under the <em>unrestricted model</em> (i.e., when all edges are present in the graph). Let <span class="math inline">\(\widehat{\Sigma}^\mathcal{G}\)</span> denote the MLE for <span class="math inline">\(\Sigma\)</span> under the <em>restriction</em> that the distribution satisfies the Markov property for <span class="math inline">\(\mathcal{G}\)</span>, and <span class="math inline">\(\widehat{K}^\mathcal{G}\)</span> denote the inverse of <span class="math inline">\(\widehat{\Sigma}^\mathcal{G}\)</span>.</p>
 <p>For a decomposable graph <span class="math inline">\(\mathcal{G}\)</span> with cliques <span class="math inline">\(C_1, \ldots, C_k\)</span>, the MLE can be written in the form <span class="math display">\[(\widehat{\Sigma}^\mathcal{G})^{-1}=\sum_{i=1}^k\{(W_{C_i, C_i})^{-1}\}_{C_i, C_i}-\sum_{i=2}^k \{(W_{S_i, S_i})^{-1}\}_{S_i, S_i}.\]</span></p>
 <p><strong>Example 3.1</strong>    Whittaker (1990) analyzed data on five maths test results administered to 88 students, in analysis, algebra, vectors, mechanics and statistics. Some of the entries in the concentration matrix are quite small, suggesting that conditional independence holds. We want to fit a graphical model and check if it gives an excellent fit.</p>
-<p><img data-src="/images/Gaussian_Graphical_Model_1.png"></p>
+<p><img src="/images/Gaussian_Graphical_Model_1.png"></p>
 <center>
 Figure 1: A graph for the maths test data.
 </center>
@@ -633,7 +633,6 @@ Statistics
 
   
   <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
