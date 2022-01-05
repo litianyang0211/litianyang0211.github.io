@@ -28,7 +28,7 @@
 <meta property="og:description" content="1. Outer Measure 1.1. Definition and Example Definition 1.1    Suppose \(E \subset \mathbb{R}^n\). The outer measure of \(E\) is \[m^*(E):&#x3D;\inf\left\{\sum_{i&#x3D;1}^\infty |I_i|: \bigcup_{i&#x3D;1}^\infty I_i">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-06-01T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-15T11:30:37.831Z">
+<meta property="article:modified_time" content="2022-01-01T11:41:07.765Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Measure">
 <meta name="twitter:card" content="summary">
@@ -234,7 +234,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-15 11:30:37" itemprop="dateModified" datetime="2021-12-15T11:30:37+00:00">2021-12-15</time>
+                <time title="Modified: 2022-01-01 11:41:07" itemprop="dateModified" datetime="2022-01-01T11:41:07+00:00">2022-01-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -312,7 +312,7 @@ We now suppose <span class="math inline">\(I\)</span> is an arbitrary interval. 
 <h2 id="definition">2.1. Definition</h2>
 <p><strong>Definition 2.1</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is bounded, and <span class="math inline">\(I \supset E\)</span> is open. The <strong>inner measure</strong> of <span class="math inline">\(E\)</span> is <span class="math display">\[m_*(E)=|I|-m^*(I-E).\]</span></p>
 <div class="note info">
-            <p><font color="#696969" font size="2">显然，若<span class="math inline">\(E\)</span>有界，且<span class="math inline">\(m^*(E)=m_*(E)\)</span>，我们能得到<strong>可测</strong>的定义. 然而，我们希望能对任何一个<span class="math inline">\(E\)</span>定义可测，而上述的定义则有所限制. 此外，这一定义需要同时使用内外测度的定义. 因此，Carathéodory提出了一个更简洁地等价定义.</font></p>
+            <p>显然，若<span class="math inline">\(E\)</span>有界，且<span class="math inline">\(m^*(E)=m_*(E)\)</span>，我们能得到<strong>可测</strong>的定义. 然而，我们希望能对任何一个<span class="math inline">\(E\)</span>定义可测，而上述的定义则有所限制. 此外，这一定义需要同时使用内外测度的定义. 因此，Carathéodory提出了一个更简洁地等价定义.</p>
           </div>
 <p><strong>Definition 2.2</strong>    Suppose <span class="math inline">\(E \subset \mathbb{R}^n\)</span> is a set. If for any set <span class="math inline">\(T \subset \mathbb{R}^n\)</span>, we have <span class="math display">\[m^*(T)=m^*(T \cap E)+m^*(T \cap E^c),\]</span> then <span class="math inline">\(E\)</span> is <strong>L-measurable</strong> or <strong>measurable</strong>. The <strong>L-measure</strong>, denoted <span class="math inline">\(m(E)\)</span>, equals to <span class="math inline">\(m^*(E)\)</span>. The collection of all measurable sets is called family of measurable sets, denoted as <span class="math inline">\(\mathscr{M}\)</span>.</p>
 <p><span id="thm2.1"><strong>Theorem 2.1</strong></span>    <span class="math inline">\(E\)</span> is measurable if and only if for any <span class="math inline">\(A \subset E\)</span> and <span class="math inline">\(B \subset E^c\)</span>, we have <span class="math display">\[m^*(A \cup B)=m^*(A)+m^*(B).\]</span></p>
@@ -338,7 +338,7 @@ m^*(T)&amp;=m^*(T \cap S_1)+m^*(T \cap S_1^c) \\
 <span class="math inline">\(\square\)</span>
 </p>
 <div class="note info">
-            <p><font color="#696969" font size="2">对于不熟悉集合运算的读者，我们建议利用韦恩图逆推.</font></p>
+            <p>对于不熟悉集合运算的读者，我们建议利用韦恩图逆推.</p>
           </div>
 <p><strong>Theorem 2.4</strong>    If <span class="math inline">\(S_1\)</span> and <span class="math inline">\(S_2\)</span> are measurable, and <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then for any set <span class="math inline">\(T\)</span>, <span class="math display">\[m^*(T \cap (S_1 \cup S_2))=m^*(T \cap S_1)+m^*(T \cap S_2).\]</span></p>
 <strong><em>Proof.</em></strong> Since <span class="math inline">\(S_1 \cap S_2=\varnothing\)</span>, then for any set <span class="math inline">\(T\)</span>, we have <span class="math inline">\(T \cap S_1 \subset S_1\)</span> and <span class="math inline">\(T \cap S^2 \subset S_1^c\)</span>. Since <span class="math inline">\(S_1\)</span> is measurable, then by <a href="#thm2.1">theorem 2.1</a>, <span class="math display">\[m^*(T \cap (S_1 \cup S_2))=m^*((T \cap S_1) \cup (T \cap S_2))=m^*(T \cap S_1)+m^*(T \cap S_2).\]</span>
@@ -398,14 +398,14 @@ Let <span class="math inline">\(\widetilde{S}_i=S_1-S_i\)</span>, then <span cla
 <h1 id="sigma-algebra">3. \(\sigma\)-Algebra</h1>
 <p><strong>Definition 3.1</strong>    Suppose <span class="math inline">\(\{F_i\}_{i=1}^\infty\)</span> is a collection of closed sets, and <span class="math inline">\(\{G_i\}_{i=1}^\infty\)</span> is a collection of open sets. If <span class="math inline">\(\displaystyle F=\bigcup_{i=1}^\infty F_i\)</span>, then <span class="math inline">\(F\)</span> is an <strong><span class="math inline">\(F_\sigma\)</span> set</strong>. If <span class="math inline">\(\displaystyle G=\bigcap_{i=1}^\infty G_i\)</span>, then <span class="math inline">\(G\)</span> is a <strong><span class="math inline">\(G_\delta\)</span> set</strong>.</p>
 <div class="note info">
-            <p><font color="#696969" font size="2"><span class="math inline">\(F\)</span><strong>可能</strong>来自于法语中的fermé，意为闭. <span class="math inline">\(\sigma\)</span><strong>可能</strong>来自于德语中的Summe，意为总和. 因此<span class="math inline">\(F_\sigma\)</span>型集表示闭集的可数并. <span class="math inline">\(G\)</span><strong>可能</strong>来自于德语中的Gebiet，意为区域，可以理解为连通的开集. <span class="math inline">\(\delta\)</span><strong>可能</strong>来自于德语中的Durchschnitt，意为横断. 因此<span class="math inline">\(G_\delta\)</span>型集表示开集的可数交.</font></p>
+            <p><span class="math inline">\(F\)</span><strong>可能</strong>来自于法语中的fermé，意为闭. <span class="math inline">\(\sigma\)</span><strong>可能</strong>来自于德语中的Summe，意为总和. 因此<span class="math inline">\(F_\sigma\)</span>型集表示闭集的可数并. <span class="math inline">\(G\)</span><strong>可能</strong>来自于德语中的Gebiet，意为区域，可以理解为连通的开集. <span class="math inline">\(\delta\)</span><strong>可能</strong>来自于德语中的Durchschnitt，意为横断. 因此<span class="math inline">\(G_\delta\)</span>型集表示开集的可数交.</p>
           </div>
 <p><strong>Definition 3.2</strong>    Suppose <span class="math inline">\(\Omega\)</span> is the family of sets including some subsets of <span class="math inline">\(X\)</span>. <span class="math inline">\(\Omega\)</span> is called a <strong><span class="math inline">\(\sigma\)</span>-algebra</strong> if it has the following properties:</p>
 <p>    (1) <span class="math inline">\(X \in \Omega\)</span>;</p>
 <p>    (2) <span class="math inline">\(\Omega\)</span> is closed under countable union;</p>
 <p>    (3) <span class="math inline">\(\Omega\)</span> is closed under complement.</p>
 <div class="note info">
-            <p><font color="#696969" font size="2">显然，可测集类<span class="math inline">\(\mathscr{M}\)</span>是<span class="math inline">\(\mathbb{R}^n\)</span>上的<span class="math inline">\(\sigma\)</span>-代数.</font></p>
+            <p>显然，可测集类<span class="math inline">\(\mathscr{M}\)</span>是<span class="math inline">\(\mathbb{R}^n\)</span>上的<span class="math inline">\(\sigma\)</span>-代数.</p>
           </div>
 <p><strong>Definition 3.3</strong>    Suppose <span class="math inline">\(\Sigma\)</span> is the family of sets including some subsets of <span class="math inline">\(X\)</span>. <strong><span class="math inline">\(\sigma\)</span>-algebra generated by <span class="math inline">\(\Sigma\)</span></strong> is the intersection of all <span class="math inline">\(\sigma\)</span>-algebras containing <span class="math inline">\(\Sigma\)</span> on <span class="math inline">\(X\)</span>.</p>
 <p><strong>Definition 3.4</strong>    <strong>Borel <span class="math inline">\(\sigma\)</span>-algebra</strong> is a <span class="math inline">\(\sigma\)</span>-algebra generated by all open sets on <span class="math inline">\(\mathbb{R}^n\)</span>, denoted as <span class="math inline">\(\mathscr{B}\)</span>. The element in <span class="math inline">\(\mathscr{B}\)</span> is called <strong>Borel set</strong>.</p>
@@ -465,11 +465,11 @@ Because of countable subadditivity, we have <span class="math inline">\(m^*(T)=m
 </p>
 <p><span id="thm4.8"><strong>Corollary 4.8</strong>    If <span class="math inline">\(E\)</span> is measurable, then there exists an <span class="math inline">\(F_\sigma\)</span> set <span class="math inline">\(F\)</span> such that <span class="math inline">\(F \subset E\)</span> and <span class="math inline">\(m(E-F)=0\)</span>.</span></p>
 <div class="note info">
-            <p><font color="#696969" font size="2">根据<a href="#thm4.7">定理4.7</a>与其<a href="#thm4.8">推论</a>，如果我们有了所有的<span class="math inline">\(G_\delta\)</span>型集（或<span class="math inline">\(F_\sigma\)</span>型集）与零测集，那么我们就知道了所有的可测集. 可测集一定可以表示为<span class="math display">\[E=G_\delta-M_0=F_\sigma \cup M_0.\]</span></font></p>
+            <p>根据<a href="#thm4.7">定理4.7</a>与其<a href="#thm4.8">推论</a>，如果我们有了所有的<span class="math inline">\(G_\delta\)</span>型集（或<span class="math inline">\(F_\sigma\)</span>型集）与零测集，那么我们就知道了所有的可测集. 可测集一定可以表示为<span class="math display">\[E=G_\delta-M_0=F_\sigma \cup M_0.\]</span></p>
           </div>
 <h1 id="non-measurable-set-in-mathbbr">5. Non-Measurable Set in \(\mathbb{R}\)</h1>
 <div class="note default">
-            <p><font color="#696969" font size="2">此前，我们一直在回答什么是可测集，并发现可测集是存在的——我们构造集合通常都是从区间出发，经过一系列并、交、差等运算来获得，而这样的集合都是Borel集，总是可测的. 我们还需要回答不可测集是否存在的问题——我们可以利用Lebesgue测度的平移不变性，构造一个不可测集. 当然，在一般的数学实践中，遇到不可测集的机会是极少的，它通常只是被用来构成各种特例.</font></p>
+            <p>此前，我们一直在回答什么是可测集，并发现可测集是存在的——我们构造集合通常都是从区间出发，经过一系列并、交、差等运算来获得，而这样的集合都是Borel集，总是可测的. 我们还需要回答不可测集是否存在的问题——我们可以利用Lebesgue测度的平移不变性，构造一个不可测集. 当然，在一般的数学实践中，遇到不可测集的机会是极少的，它通常只是被用来构成各种特例.</p>
           </div>
 <p><strong>Property 5.1 (Translation Invariance)</strong>    Suppose <span class="math inline">\(E\)</span> is measurable and <span class="math inline">\(\tau_\alpha E=\{x+\alpha: x \in E\}\)</span>, then <span class="math inline">\(\tau_\alpha E\)</span> is measurable and <span class="math inline">\(m^*(E)=m^*(\tau_\alpha E)\)</span>.</p>
 <p><strong>Property 5.2 (Reflection Invariance)</strong>    Suppose <span class="math inline">\(E\)</span> is measurable and <span class="math inline">\(\tau E=\{-x: x \in E\}\)</span>, then <span class="math inline">\(\tau E\)</span> is measurable and <span class="math inline">\(m^*(E)=m^*(\tau E)\)</span>.</p>
@@ -608,7 +608,7 @@ Because of countable subadditivity, we have <span class="math inline">\(m^*(T)=m
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class=""></i>
   </span>

@@ -28,11 +28,11 @@
 <meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_in_PyTorch_1.png">
 <meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_in_PyTorch_2.png">
 <meta property="article:published_time" content="2021-12-11T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-29T13:04:35.756Z">
+<meta property="article:modified_time" content="2022-01-01T15:03:04.475Z">
 <meta property="article:author" content="Tianyang Li">
-<meta property="article:tag" content="Transformer">
 <meta property="article:tag" content="Attention">
 <meta property="article:tag" content="PyTorch">
+<meta property="article:tag" content="Transformer">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://litianyang0211.github.io/images/Transformer_in_PyTorch_1.png">
 
@@ -237,7 +237,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-29 13:04:35" itemprop="dateModified" datetime="2021-12-29T13:04:35+00:00">2021-12-29</time>
+                <time title="Modified: 2022-01-01 15:03:04" itemprop="dateModified" datetime="2022-01-01T15:03:04+00:00">2022-01-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -317,6 +317,9 @@ Figure 1: Model architecture of Transformer <a href="#V+17">(Vaswani et al., 201
 Figure 2: (Left) Scaled dot-product attention. (Right) Multi-Head attention consists of several attention layers running in parallel <a href="#V+17">(Vaswani et al., 2017)</a>.
 </center>
 <p>我们可以通过注意力构建多头注意力层，注意力公式输出值（Value）的加权平均，而权重来自查询（Query）和键（Key）的计算：<span class="math display">\[\text{Attention}(Q, K, V)=\text{softmax}\left(\frac{QK^T}{\sqrt{\dim(\mathbf{k})}}\right)V.\]</span></p>
+<div class="note info">
+            <p>自注意力机制的核心就是通过<span class="math inline">\(Q\)</span>和<span class="math inline">\(K\)</span>计算得到注意力权重，然后再作用于<span class="math inline">\(V\)</span>得到整个权重和输出。模型在对当前位置的信息进行编码时，会将注意力集中于自身的位置，而可能忽略其它位置，因此其中一种解决方案就是采用多头注意力机制。同时，使用多头注意力机制还能够使注意力层输出包含不同子空间中的编码表示信息，从而增强模型的表达能力。</p>
+          </div>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">attention</span>(<span class="params">query, key, value, mask=<span class="literal">None</span>, dropout=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    query, key和value的形状为(batch_size, head_num, seq_length, num_features)</span></span><br><span class="line"><span class="string">    head_num为注意力头的个数</span></span><br><span class="line"><span class="string">    seq_length是源语言传过来的memory中，当前序列的词的个数</span></span><br><span class="line"><span class="string">    num_features是每个词对应的向量表示</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    d_k = query.size(-<span class="number">1</span>) <span class="comment"># Q与K向量的num_features必须相等</span></span><br><span class="line">    scores = torch.matmul(query, key.transpose(-<span class="number">2</span>, -<span class="number">1</span>)) / math.sqrt(d_k)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 使用mask，对已经计算好的scores，按照mask矩阵填-1e9</span></span><br><span class="line">    <span class="comment"># 这样在下一步在计算softmax时，被设置成-1e9的数对应的值可以被忽略</span></span><br><span class="line">    <span class="keyword">if</span> mask <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        scores = scores.masked_fill(mask==<span class="number">0</span>, -<span class="number">1e9</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 对scores的最后一个维度执行softmax</span></span><br><span class="line">    p_attn = F.softmax(scores, dim=-<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> dropout <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span>:</span><br><span class="line">        p_attn = dropout(p_attn)</span><br><span class="line">        </span><br><span class="line">    <span class="comment"># 返回p_attn是为了可视化显示多头注意力机制</span></span><br><span class="line">    <span class="keyword">return</span> torch.matmul(p_attn, value), p_attn</span><br></pre></td></tr></table></figure>
 <div class="note info">
             <ul><li><code>.matmul</code>用于计算高维矩阵，比如维度为<code>(batch_size, head_num, seq_length, num_features)</code>的矩阵。</li></ul>
@@ -342,7 +345,7 @@ Figure 2: (Left) Scaled dot-product attention. (Right) Multi-Head attention cons
 <p><code>DecoderLayer</code>中大部分的类是重复使用的，但我们要注意：底层的<code>MultiHeadAttention</code>输入目标语言序列，而上一层的<code>MultiHeadAttention</code>则要考虑源语言和目标语言。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DecoderLayer</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, size, self_attn, src_attn, feed_forward, dropout</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(DecoderLayer, self).__init__()</span><br><span class="line">        self.size = size</span><br><span class="line">        self.self_attn = self_attn</span><br><span class="line">        self.src_attn = src_attn</span><br><span class="line">        self.feed_forward = feed_forward</span><br><span class="line">        self.sublayer = clones(SublayerConnection(size, dropout), <span class="number">3</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x, memory, src_mask, tgt_mask</span>):</span></span><br><span class="line">        m = memory <span class="comment"># 来自源语言序列的Encoder之后的输出，供目标语言的序列检索匹配</span></span><br><span class="line">        x = self.sublayer[<span class="number">0</span>](x, <span class="keyword">lambda</span> x: self.self_attn(x, x, x, tgt_mask))</span><br><span class="line">        x = self.sublayer[<span class="number">1</span>](x, <span class="keyword">lambda</span> x: self.src_attn(x, m, m, src_mask))</span><br><span class="line">        <span class="keyword">return</span> self.sublayer[<span class="number">2</span>](x, self.feed_forward)</span><br></pre></td></tr></table></figure>
 <h2 id="decoder">4.7. Decoder</h2>
-<p><code>Decoder</code>与`<code>Encoder</code>也是类似的：</p>
+<p><code>Decoder</code>与<code>Encoder</code>也是类似的：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Decoder</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, layer, N</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(Decoder, self).__init__()</span><br><span class="line">        self.layers = clones(layer, N)</span><br><span class="line">        self.norm = nn.LayerNorm(layer.size) <span class="comment"># layer.size=d_model</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x, memory, src_mask, tgt_mask</span>):</span></span><br><span class="line">        <span class="keyword">for</span> layer <span class="keyword">in</span> self.layers:</span><br><span class="line">            x = layer(x, memory, src_mask, tgt_mask)</span><br><span class="line">        <span class="keyword">return</span> self.norm(x)</span><br></pre></td></tr></table></figure>
 <h1 id="generator">5. Generator</h1>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Generator</span>(<span class="params">nn.Module</span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    根据decoder的隐状态输出一个单词</span></span><br><span class="line"><span class="string">    d_model是decoder输出的大小，vocab是目标语言词典大小</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, d_model, vocab</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(Generator, self).__init__()</span><br><span class="line">        self.proj = nn.Linear(d_model, vocab) <span class="comment"># 全连接成vocab大小，作为softmax的输入</span></span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span>(<span class="params">self, x</span>):</span></span><br><span class="line">        <span class="keyword">return</span> F.log_softmax(self.proj(x), dim=-<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
@@ -390,9 +393,9 @@ Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Transformer/" rel="tag"><i class="fa fa-tag"></i> Transformer</a>
               <a href="/tags/Attention/" rel="tag"><i class="fa fa-tag"></i> Attention</a>
               <a href="/tags/PyTorch/" rel="tag"><i class="fa fa-tag"></i> PyTorch</a>
+              <a href="/tags/Transformer/" rel="tag"><i class="fa fa-tag"></i> Transformer</a>
           </div>
 
         
@@ -510,7 +513,7 @@ Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2021</span>
+  <span itemprop="copyrightYear">2022</span>
   <span class="with-love">
     <i class=""></i>
   </span>
