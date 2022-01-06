@@ -20,20 +20,18 @@
     var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1. Topology of Loss Landscape Consider the loss function \[\mathcal{L}(\theta; X, Y)&#x3D;n^{-1}\sum_{\mu&#x3D;1}^n l(\theta; \mathbf{x}_\mu, \mathbf{y}_\mu)\] and its associated level set \[\Omega_\mathcal{L}(">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Loss Landscape">
-<meta property="og:url" content="https://litianyang0211.github.io/Compute_Science/Deep_Learning/Loss_Landscape">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Machine Learning Paradigm">
+<meta property="og:url" content="https://litianyang0211.github.io/Computer_Science/Machine_Learning/Machine_Learning_Paradigm">
 <meta property="og:site_name" content="Tianyang Li">
-<meta property="og:description" content="1. Topology of Loss Landscape Consider the loss function \[\mathcal{L}(\theta; X, Y)&#x3D;n^{-1}\sum_{\mu&#x3D;1}^n l(\theta; \mathbf{x}_\mu, \mathbf{y}_\mu)\] and its associated level set \[\Omega_\mathcal{L}(">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-11-19T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-15T11:27:48.250Z">
+<meta property="article:published_time" content="2021-12-07T00:00:00.000Z">
+<meta property="article:modified_time" content="2021-12-23T22:15:26.520Z">
 <meta property="article:author" content="Tianyang Li">
-<meta property="article:tag" content="Loss Landscape">
+<meta property="article:tag" content="Machine Learning">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://litianyang0211.github.io/Compute_Science/Deep_Learning/Loss_Landscape.html">
+<link rel="canonical" href="https://litianyang0211.github.io/Computer_Science/Machine_Learning/Machine_Learning_Paradigm.html">
 
 
 <script id="page-configurations">
@@ -46,7 +44,7 @@
   };
 </script>
 
-  <title>Loss Landscape | Tianyang Li</title>
+  <title>Machine Learning Paradigm | Tianyang Li</title>
   
 
 
@@ -204,7 +202,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Compute_Science/Deep_Learning/Loss_Landscape">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Computer_Science/Machine_Learning/Machine_Learning_Paradigm">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -217,7 +215,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Loss Landscape
+          Machine Learning Paradigm
         </h1>
 
         <div class="post-meta">
@@ -227,14 +225,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2021-11-19 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-19T00:00:00+00:00">2021-11-19</time>
+              <time title="Created: 2021-12-07 00:00:00" itemprop="dateCreated datePublished" datetime="2021-12-07T00:00:00+00:00">2021-12-07</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-15 11:27:48" itemprop="dateModified" datetime="2021-12-15T11:27:48+00:00">2021-12-15</time>
+                <time title="Modified: 2021-12-23 22:15:26" itemprop="dateModified" datetime="2021-12-23T22:15:26+00:00">2021-12-23</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,11 +244,12 @@
                 </span>
                   /
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a class=n href="/categories/Computer-Science/Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Deep Learning</span></a>
+                  <a class=n href="/categories/Computer-Science/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a>
                 </span>
             </span>
 
           
+            <div class="post-description"><div></div></div>
 
         </div>
       </header>
@@ -261,33 +260,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="topology-of-loss-landscape">1. Topology of Loss Landscape</h1>
-<p>Consider the <strong>loss function</strong> <span class="math display">\[\mathcal{L}(\theta; X, Y)=n^{-1}\sum_{\mu=1}^n l(\theta; \mathbf{x}_\mu, \mathbf{y}_\mu)\]</span> and its associated <strong>level set</strong> <span class="math display">\[\Omega_\mathcal{L}(\lambda)=\{\theta: \mathcal{L}(\theta; X, Y) \leq \lambda\}.\]</span></p>
-<p>Define the <strong>number of connected components</strong>, say <span class="math inline">\(N_\lambda\)</span> in <span class="math inline">\(\Omega_\mathcal{L}(\lambda)\)</span>. If <span class="math inline">\(N_\lambda=1\)</span> for all <span class="math inline">\(\lambda\)</span>, then <span class="math inline">\(\mathcal{L}(\theta; X, Y)\)</span> has no isolated local minima and any descent method can obtain a global minima. If <span class="math inline">\(N_\lambda&gt;1\)</span>, there may be spurious valleys in which the minima in the connected component does not achieve the global minima.</p>
-<h2 id="linear-network-single-component">1.1. Linear Network: Single Component</h2>
-<p><strong>Theorem (Freeman et al., 2016)</strong>     Let <span class="math inline">\(H(\mathbf{x}; \theta)\)</span> be an <span class="math inline">\(L\)</span> layer net given by <span class="math inline">\(\mathbf{h}^{(\mathscr{l})}=W^{(\mathscr{l})}\mathbf{h}^{(\mathscr{l}-1)}\)</span> with <span class="math inline">\(W^{(\mathscr{l})} \in \mathbb{R}^{n_\mathscr{l} \times n_{\mathscr{l}-1}}\)</span>, then if <span class="math inline">\(n_\mathscr{l}&gt;\min(n_0, n_L)\)</span> for <span class="math inline">\(0&lt;\mathscr{l}&lt;L\)</span>, the sum of squares loss function has a single connected component.</p>
-<h2 id="relu-network-multiple-components">1.2. ReLU Network: Multiple Components</h2>
-<p><strong>Theorem (Freeman et al., 2016)</strong>     Let <span class="math inline">\(H(\mathbf{x}; \theta)\)</span> be an <span class="math inline">\(L\)</span> layer net given by <span class="math inline">\(\mathbf{h}^{(\mathscr{l})}=\phi(W^{(\mathscr{l})}\mathbf{h}^{(\mathscr{l}-1)})\)</span> with <span class="math inline">\(W^{(\mathscr{l})} \in \mathbb{R}^{n_\mathscr{l} \times n_{\mathscr{l}-1}}\)</span> and <span class="math inline">\(\phi(\cdot)=\max(0, \cdot)\)</span>, then for any choice of <span class="math inline">\(n_\mathscr{l}\)</span>, there is a distribution of data <span class="math inline">\((X, Y)\)</span> s.t. there are more than one single connected component.</p>
-<h2 id="relu-activation-network-nearly-connected">1.3. ReLu Activation Network: Nearly Connected</h2>
-<p><strong>Theorem (Venturi et al., 2016)</strong>     Consider a two layer ReLu network <span class="math inline">\(H(\mathbf{x}, \theta)=W^{(2)}\phi(W^{(1)}\mathbf{x})\)</span> with <span class="math inline">\(W^{(1)} \in \mathbb{R}^{m \times n}\)</span> and <span class="math inline">\(W^{(2)} \in \mathbb{R}^m\)</span>, then for any two parameters <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span> with <span class="math inline">\(\mathcal{L}(\theta_i) \leq \lambda\)</span> for <span class="math inline">\(i=1, 2\)</span>, then there is a path <span class="math inline">\(\gamma(t)\)</span> between <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span> s.t. <span class="math inline">\(\mathcal{L}(\theta_{\gamma(t)}) \leq \max(\lambda, m^{-1/n})\)</span>.</p>
-<h2 id="quadratic-activation-network-single-component">1.4. Quadratic Activation Network: Single Component</h2>
-<p><strong>Theorem (Venturi et al., 2016)</strong>     Let <span class="math inline">\(H(\mathbf{x}; \theta)\)</span> be an <span class="math inline">\(L\)</span> layer net given by <span class="math inline">\(\mathbf{h}^{(\mathscr{l})}=\phi(W^{(\mathscr{l})}\mathbf{h}^{(\mathscr{l}-1)})\)</span> with <span class="math inline">\(W^{(\mathscr{l})} \in \mathbb{R}^{n_\mathscr{l} \times n_{\mathscr{l}-1}}\)</span> and quadratic activation <span class="math inline">\(\phi(z)=z^2\)</span>, then once the number of parameters <span class="math inline">\(n_\mathscr{l} \geq 3N^{2^\mathscr{l}}\)</span> where <span class="math inline">\(N\)</span> is the number of data entries, then the sum of squares loss function has a single connected component. For the two layer case with a single quadratic activation this simplifies to <span class="math inline">\(n&gt;2N\)</span>.</p>
-<h1 id="manifold-of-global-minimizer">2. Manifold of Global Minimizer</h1>
-<p><strong>Theorem (Cooper, 2021)</strong>     Let <span class="math inline">\(H(\mathbf{x}; \theta)\)</span> be a DNN from <span class="math inline">\(\mathbb{R}^n\)</span> to <span class="math inline">\(\mathbb{R}^r\)</span> with smooth nonlinear activation <span class="math inline">\(\phi(\cdot)\)</span>, let the loss function over <span class="math inline">\(d\)</span> distinct data elements be defined as <span class="math display">\[\mathcal{L}=(2m)^{-1}\sum_{\mu=1}^d \|H(\mathbf{x}_\mu; \theta)-\mathbf{y}_\mu\|^2_2,\]</span> and let <span class="math inline">\(\Omega_{\mathcal{L}}^*(0)=\{\theta: \mathcal{L}(\theta; X, Y)=0\}\)</span> be the set of weight and bias trainable parameters for which the DNN exactly fits the <span class="math inline">\(d\)</span> data elements. Then, subject to possibly arbitrarily small perturbation, the set <span class="math inline">\(\Omega_\mathcal{L}^*(0)\)</span> is a smooth <span class="math inline">\((d-rn)\)</span> dimensional sub-manifold (possibly empty) of <span class="math inline">\(\mathbb{R}^d\)</span>.</p>
-<h1 id="summary">3. Summary</h1>
+        <h1 id="supervised-and-unsupervised-machine-learning">1. Supervised and Unsupervised Machine Learning</h1>
+<h2 id="supervised-learning">1.1. Supervised Learning</h2>
 <ul>
-<li><p>Loss landscape for DNN can be non-convex and hence difficult to optimize.</p></li>
-<li><p>The number of components of a loss landscape level curve can be analyzed, and in some settings has a single component greatly aiding its optimization.</p></li>
-<li><p>Increasing width of a DNN can improve the loss landscape.</p></li>
-<li><p>The local shape of random net can be analyzed, showing that when near a minima the Hessian has only non-negative eigenvalues.</p></li>
-<li><p>When the amount of data exceeds the product of the input and output dimensions, DNN with smooth non-linear activations which exactly fit the data, have smooth manifold of a known dimension.</p></li>
+<li><p>We have access to a <strong>labeled dataset</strong> of input-output pairs: <span class="math inline">\(\mathcal{D}=\{x_n, y_n\}_{n=1}^N\)</span>.</p></li>
+<li><p>The aim is to learn a <strong>predictive model</strong> <span class="math inline">\(f\)</span> that takes an input <span class="math inline">\(x \in \mathcal{X}\)</span> and predicts its corresponding output <span class="math inline">\(y \in \mathcal{Y}\)</span>.</p></li>
+<li><p>Examples: classification and regression.</p></li>
 </ul>
-<h1 id="improvement">4. Improvement</h1>
+<h2 id="unsupervised-learning">1.2. Unsupervised Learning</h2>
 <ul>
-<li><p>Larger training batch size narrows the loss function while weight decay (adding <span class="math inline">\(\|\theta\|\)</span> to the loss, broadens the loss function).</p></li>
-<li><p>Adding skip connections through residual networks can greatly smooth the loss landscape.</p></li>
-<li><p>Batch normalization can help train parameters in bulk and in so doing improve the training rate (though superfluous for expressivity).</p></li>
-<li><p>CNN can even be convexified which may limit overall accuracy, but ensures ease of training regardless of initialization.</p></li>
+<li><p>We have no clear output variable that we are attempting to predict: <span class="math inline">\(\mathcal{D}=\{x_n\}_{n=1}^N\)</span>, which is referred to as <strong>unlabeled data</strong>.</p></li>
+<li><p>The aim is to extract some salient features for the dataset, such as underlying structure, patterns, or characteristics.</p></li>
+<li><p>Examples: clustering, feature extraction, density estimation, representation learning, data visualization, data compression, and deep generative model.</p></li>
+</ul>
+<h1 id="discriminative-and-generative-machine-learning">2. Discriminative and Generative Machine Learning</h1>
+<ul>
+<li><p><strong>Discriminative method</strong> directly makes predictions.</p></li>
+<li><p><strong>Generative method</strong> tries to explain how the data is generated.</p></li>
+</ul>
+<h2 id="discriminative-machine-learning">2.1. Discriminative Machine Learning</h2>
+<ul>
+<li><p>In supervised setting, discriminative method directly learns a mapping <span class="math inline">\(f_\theta\)</span> from input <span class="math inline">\(x\)</span> to output <span class="math inline">\(y\)</span> (or characterization of <span class="math inline">\(y\)</span>, e.g., class probability).</p></li>
+<li><p><strong>Training</strong> uses <span class="math inline">\(\mathcal{D}=\{x_n, y_n\}_{n=1}^N\)</span> to estimate optimal values of the parameters <span class="math inline">\(\theta^*\)</span> by minimizing an expected loss or risk.</p></li>
+<li><p><strong>Prediction</strong> at a new input <span class="math inline">\(x\)</span> involves simply applying <span class="math inline">\(f_{\widehat{\theta}}(x)\)</span>, where <span class="math inline">\(\widehat{\theta}\)</span> is estimate of <span class="math inline">\(\theta^*\)</span>.</p></li>
+<li><p>The set of allowable <span class="math inline">\(\theta\)</span> does not need to be fixed: in <strong>non-parametric</strong> approach, the dimensionality of <span class="math inline">\(\theta\)</span> increases with dataset size.</p></li>
+<li><p>Though less common, there are discriminative unsupervised method.</p></li>
+<li><p>Examples: neural network, support vector machine, random forest, linear or logistic regression, and <span class="math inline">\(k\)</span>-nearest neighbors.</p></li>
+</ul>
+<h2 id="generative-machine-learning">2.2. Generative Machine Learning</h2>
+<ul>
+<li><p>Generative method constructs a <strong>probabilistic model</strong> to explain how the data is generated. For example, with labeled data <span class="math inline">\(\mathcal{D}=\{x_n, y_n\}_{n=1}^N\)</span>, we might construct a joint model <span class="math inline">\(p(X, Y)\)</span> over input and output.</p></li>
+<li><p>Generative method can still be used for prediction since generative method implies a predictive model via the conditional distribution <span class="math inline">\(p(Y=y \mid X=x)\)</span>.</p></li>
+<li><p><strong>Model parameters</strong> <span class="math inline">\(\theta\)</span> can be generative. For example, with unsupervised data <span class="math inline">\(\mathcal{D}=\{x_n\}_{n=1}^N\)</span>, we might construct a generative model <span class="math inline">\(p(\theta, X)\)</span>, which is the foundation for Bayesian machine learning.</p></li>
+<li><p>Examples: mixture model, probabilistic context-free grammar, deep generative model, Boltzmann machine, and Bayesian approach.</p></li>
 </ul>
 
     </div>
@@ -299,7 +304,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Loss-Landscape/" rel="tag"><i class="fa fa-tag"></i> Loss Landscape</a>
+              <a href="/tags/Machine-Learning/" rel="tag"><i class="fa fa-tag"></i> Machine Learning</a>
           </div>
 
         
@@ -308,12 +313,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/Statistics/Graphical_Model/Junction_Tree_and_Message_Passing" rel="prev" title="Junction Tree and Message Passing">
-      <i class="fa fa-chevron-left"></i> Junction Tree and Message Passing
+    <a href="/Computer_Science/PyTorch/Introduction_to_PyTorch" rel="prev" title="Introduction to PyTorch">
+      <i class="fa fa-chevron-left"></i> Introduction to PyTorch
     </a></div>
       <div class="post-nav-item">
-    <a href="/Compute_Science/PyTorch/Introduction_to_PyTorch" rel="next" title="Introduction to PyTorch">
-      Introduction to PyTorch <i class="fa fa-chevron-right"></i>
+    <a href="/Computer_Science/Natural_Language_Processing/Transformer" rel="next" title="Transformer">
+      Transformer <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -373,7 +378,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#topology-of-loss-landscape"><span class="nav-text">1. Topology of Loss Landscape</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#linear-network-single-component"><span class="nav-text">1.1. Linear Network: Single Component</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#relu-network-multiple-components"><span class="nav-text">1.2. ReLU Network: Multiple Components</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#relu-activation-network-nearly-connected"><span class="nav-text">1.3. ReLu Activation Network: Nearly Connected</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#quadratic-activation-network-single-component"><span class="nav-text">1.4. Quadratic Activation Network: Single Component</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#manifold-of-global-minimizer"><span class="nav-text">2. Manifold of Global Minimizer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#summary"><span class="nav-text">3. Summary</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#improvement"><span class="nav-text">4. Improvement</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#supervised-and-unsupervised-machine-learning"><span class="nav-text">1. Supervised and Unsupervised Machine Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#supervised-learning"><span class="nav-text">1.1. Supervised Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unsupervised-learning"><span class="nav-text">1.2. Unsupervised Learning</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#discriminative-and-generative-machine-learning"><span class="nav-text">2. Discriminative and Generative Machine Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#discriminative-machine-learning"><span class="nav-text">2.1. Discriminative Machine Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#generative-machine-learning"><span class="nav-text">2.2. Generative Machine Learning</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
