@@ -28,11 +28,11 @@
 <meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_in_PyTorch_1.png">
 <meta property="og:image" content="https://litianyang0211.github.io/images/Transformer_in_PyTorch_2.png">
 <meta property="article:published_time" content="2021-12-11T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-01-06T01:18:56.043Z">
+<meta property="article:modified_time" content="2022-01-06T17:38:24.135Z">
 <meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Transformer">
 <meta property="article:tag" content="Attention">
 <meta property="article:tag" content="PyTorch">
-<meta property="article:tag" content="Transformer">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://litianyang0211.github.io/images/Transformer_in_PyTorch_1.png">
 
@@ -237,7 +237,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-06 01:18:56" itemprop="dateModified" datetime="2022-01-06T01:18:56+00:00">2022-01-06</time>
+                <time title="Modified: 2022-01-06 17:38:24" itemprop="dateModified" datetime="2022-01-06T17:38:24+00:00">2022-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -306,7 +306,7 @@ Figure 1: Model architecture of Transformer <a href="#V+17">(Vaswani et al., 201
 <center>
 Figure 2: (Left) Scaled dot-product attention. (Right) Multi-Head attention consists of several attention layers running in parallel <a href="#V+17">(Vaswani et al., 2017)</a>.
 </center>
-<p>我们可以通过注意力构建多头注意力层，注意力公式输出值（Value）的加权平均，而权重来自查询（Query）和键（Key）的计算：<span class="math display">\[\text{Attention}(Q, K, V)=\text{softmax}\left(\frac{QK^T}{\sqrt{\dim(\mathbf{k})}}\right)V.\]</span></p>
+<p>我们可以通过注意力构建多头注意力层，注意力公式输出值（Value）的加权平均，而权重来自查询（Query）和键（Key）的计算：<span class="math display">\[\text{Attention}(Q, K, V)=\text{softmax}\left(\frac{QK^\top}{\sqrt{\dim(\mathbf{k})}}\right)V.\]</span></p>
 <div class="note info">
             <p>自注意力机制的核心就是通过<span class="math inline">\(Q\)</span>和<span class="math inline">\(K\)</span>计算得到注意力权重，然后再作用于<span class="math inline">\(V\)</span>得到整个权重和输出。模型在对当前位置的信息进行编码时，会将注意力集中于自身的位置，而可能忽略其它位置，因此其中一种解决方案就是采用多头注意力机制。同时，使用多头注意力机制还能够使注意力层输出包含不同子空间中的编码表示信息，从而增强模型的表达能力。</p>
           </div>
@@ -378,9 +378,9 @@ Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N
       <footer class="post-footer">
           
           <div class="post-tags">
+              <a href="/tags/Transformer/" rel="tag"><i class="fa fa-tag"></i> Transformer</a>
               <a href="/tags/Attention/" rel="tag"><i class="fa fa-tag"></i> Attention</a>
               <a href="/tags/PyTorch/" rel="tag"><i class="fa fa-tag"></i> PyTorch</a>
-              <a href="/tags/Transformer/" rel="tag"><i class="fa fa-tag"></i> Transformer</a>
           </div>
 
         

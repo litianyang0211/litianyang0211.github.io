@@ -27,7 +27,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://litianyang0211.github.io/images/Causal_Inference_1.png">
 <meta property="article:published_time" content="2021-12-22T00:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-23T17:24:45.684Z">
+<meta property="article:modified_time" content="2022-01-06T17:24:40.230Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Causal Inference">
 <meta name="twitter:card" content="summary">
@@ -234,7 +234,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-23 17:24:45" itemprop="dateModified" datetime="2021-12-23T17:24:45+00:00">2021-12-23</time>
+                <time title="Modified: 2022-01-06 17:24:40" itemprop="dateModified" datetime="2022-01-06T17:24:40+00:00">2022-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -426,7 +426,7 @@ p(y \mid \text{do}(t))&amp;=\sum_{x_{\text{pa}(t)}} p(x_{\text{pa}(t)})p(y \mid 
             <p>A <strong>structural equation model</strong> is a multivariate Gaussian causal model.</p>
           </div>
 <p>Recall that <span class="math inline">\(p\)</span> is multivariate Gaussian and Markov w.r.t. a DAG <span class="math inline">\(\mathcal{G}\)</span> iff <span class="math display">\[X_v=\sum_{p \in \text{pa}(v)} \beta_{vp}X_p+\varepsilon_v\]</span> where <span class="math inline">\(\varepsilon_v \sim \mathcal{N}(0, \sigma_v^2)\)</span> and <span class="math inline">\(\varepsilon_v\)</span>'s are independent.</p>
-<p>In matrix form, <span class="math inline">\(X=BX+\varepsilon\)</span> and <span class="math inline">\(X=(I-B)^{-1}\varepsilon\)</span>, where <span class="math inline">\(B\)</span> is lower triangular, <span class="math inline">\(\varepsilon \sim \mathcal{N}_p(0, D)\)</span>, and <span class="math inline">\(D\)</span> is diagonal. We obtain <span class="math display">\[\Sigma=\text{Var}[X]=(I-B)^{-1}\text{Var}[\varepsilon](I-B)^{-T}=(I-B)^{-1}D(I-B)^{-T}.\]</span></p>
+<p>In matrix form, <span class="math inline">\(X=BX+\varepsilon\)</span> and <span class="math inline">\(X=(I-B)^{-1}\varepsilon\)</span>, where <span class="math inline">\(B\)</span> is lower triangular, <span class="math inline">\(\varepsilon \sim \mathcal{N}_p(0, D)\)</span>, and <span class="math inline">\(D\)</span> is diagonal. We obtain <span class="math display">\[\Sigma=\text{Var}[X]=(I-B)^{-1}\text{Var}[\varepsilon](I-B)^{-\top}=(I-B)^{-1}D(I-B)^{-\top}.\]</span></p>
 <div class="note info">
             <p>We know <span class="math display">\[(B^2)_{ij}=\sum_{k=1}^p \beta_{ik}\beta_{kj}\]</span> and <span class="math inline">\(\beta_{ik}\beta_{kj} \neq 0\)</span> only if <span class="math inline">\(j \to j \to i\)</span> is a directed path in <span class="math inline">\(\mathcal{G}\)</span>. Similarly, <span class="math display">\[(B^3)_{ij}=\sum_{k=1}^p\sum_{l=1}^p \beta_{ik}\beta_{kl}\beta_{lj}\]</span> and <span class="math inline">\(\beta_{ik}\beta_{kl}\beta_{lj} \neq 0\)</span> only if <span class="math inline">\(j \to l \to k \to i\)</span> is a directed path in <span class="math inline">\(\mathcal{G}\)</span>. Since the max path length in <span class="math inline">\(\mathcal{G}\)</span> is <span class="math inline">\(p-1\)</span>, then <span class="math inline">\(B^p=0\)</span>, i.e., <span class="math inline">\(B\)</span> is <strong>nilpotent</strong>.</p>
           </div>
@@ -438,7 +438,7 @@ p(y \mid \text{do}(t))&amp;=\sum_{x_{\text{pa}(t)}} p(x_{\text{pa}(t)})p(y \mid 
 X --> |&alpha;| Y((Y))
 Y --> |&gamma;| Z
           </pre>
-<p>with <span class="math inline">\(X=\varepsilon_x\)</span>, <span class="math inline">\(Y=\alpha X+\varepsilon_y\)</span>, and <span class="math inline">\(Z=\beta X+\gamma Y+\varepsilon_z\)</span> for <span class="math inline">\((\varepsilon_x, \varepsilon_y, \varepsilon_z)^T \sim \mathcal{N}_3(0, I)\)</span>. The matrix form is <span class="math display">\[\begin{bmatrix}
+<p>with <span class="math inline">\(X=\varepsilon_x\)</span>, <span class="math inline">\(Y=\alpha X+\varepsilon_y\)</span>, and <span class="math inline">\(Z=\beta X+\gamma Y+\varepsilon_z\)</span> for <span class="math inline">\((\varepsilon_x, \varepsilon_y, \varepsilon_z)^\top \sim \mathcal{N}_3(0, I)\)</span>. The matrix form is <span class="math display">\[\begin{bmatrix}
 X \\ Y \\ Z
 \end{bmatrix}=\begin{bmatrix}
 0 &amp; 0 &amp; 0 \\
@@ -464,7 +464,7 @@ X \\ Y \\ Z
 1 &amp; 0 &amp; 0 \\
 \alpha &amp; 1 &amp; 0 \\
 \beta+\alpha\gamma &amp; \gamma &amp; 1
-\end{bmatrix}\]</span> and <span class="math display">\[\Sigma=(I-B)^{-1}D(I-B)^{-T}=\begin{bmatrix}
+\end{bmatrix}\]</span> and <span class="math display">\[\Sigma=(I-B)^{-1}D(I-B)^{-\top}=\begin{bmatrix}
 1 &amp; \alpha &amp; \beta+\alpha\gamma \\
 \alpha &amp; 1+\alpha^2 &amp; \alpha\beta+\alpha^2\gamma+\gamma \\
 \beta+\alpha\gamma &amp; \alpha\beta+\alpha^2\gamma+\gamma &amp; 1+\beta^2+\gamma^2+2\alpha\beta\gamma+\alpha^2\gamma^2
@@ -494,7 +494,7 @@ X --> |&alpha;| Y((Y))
 Y --> |&gamma;| Z
           </pre>
 <p>Trek covariances include <span class="math inline">\(c(Z)=1\)</span>, <span class="math inline">\(c(Z \leftarrow X)=\beta\)</span>, <span class="math inline">\(c(Z \leftarrow X \to Y \to Z)=\beta\alpha\gamma\)</span>, and <span class="math inline">\(c(Y \to Z)=\gamma\)</span>.</p>
-<p><strong>Theorem 6.1 (Trek Rule)</strong>    Let <span class="math inline">\(\Sigma=(I-B)^{-1}D(I-B)^{-T}\)</span> be a covariance matrix that is Markov w.r.t. a DAG <span class="math inline">\(\mathcal{G}\)</span>. Then <span class="math display">\[\sigma_{ij}=\sum_{\tau \in \mathcal{T}_{ij}} c(\tau)\]</span> where <span class="math inline">\(\mathcal{T}_{ij}\)</span> is the set of treks from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span>.</p>
+<p><strong>Theorem 6.1 (Trek Rule)</strong>    Let <span class="math inline">\(\Sigma=(I-B)^{-1}D(I-B)^{-\top}\)</span> be a covariance matrix that is Markov w.r.t. a DAG <span class="math inline">\(\mathcal{G}\)</span>. Then <span class="math display">\[\sigma_{ij}=\sum_{\tau \in \mathcal{T}_{ij}} c(\tau)\]</span> where <span class="math inline">\(\mathcal{T}_{ij}\)</span> is the set of treks from <span class="math inline">\(i\)</span> to <span class="math inline">\(j\)</span>.</p>
 <p><strong><em>Proof.</em></strong> For <span class="math inline">\(p=1\)</span>, <span class="math inline">\(\sigma_{11}=d_{11}\)</span>.</p>
 <p>Suppose the trek rule is true for <span class="math inline">\(|V| \leq p-1\)</span>. For <span class="math inline">\(\text{Cov}(X_i, X_j)\)</span>, where <span class="math inline">\(i, j&lt;p\)</span>, we know the trek rule holds by induction hypothesis. Since <span class="math display">\[X_p=\sum_{i \in \text{pa}(p)} \beta_{pi}X_i+\varepsilon_p,\]</span> then for <span class="math inline">\(j&lt;p\)</span>, <span class="math display">\[\begin{aligned}
 \text{Cov}(X_p, X_j)&amp;=\sum_{i \in \text{pa}(p)} \beta_{pi}\text{Cov}(X_i, X_j)+\text{Cov}(X_j, \varepsilon_p)
@@ -522,13 +522,13 @@ Besides, <span class="math display">\[\begin{aligned}
           </div>
 <p><strong>Proposition 7.1</strong>    Let <span class="math inline">\(\widehat{\beta}_{Cy}=(\widehat{\beta}_{cy \cdot C&#39;})_{c \in C}\)</span>, where <span class="math inline">\(C&#39;=C-\{c\}\)</span>, be the least squares estimator of <span class="math inline">\(\beta_{Cy}\)</span>, where <span class="math inline">\(Y \in \mathbb{R}^n\)</span> and <span class="math inline">\(X_C \in \mathbb{R}^{n \times q}\)</span>, then <span class="math display">\[\sqrt{n}(\widehat{\beta}_{Cy}-\beta_{Cy}) \overset{d}{\to} \mathcal{N}_q(0, \sigma_{yy \cdot C}\Sigma_{CC}^{-1}).\]</span></p>
 <p><strong><em>Proof.</em></strong> We know <span class="math display">\[\begin{aligned}
-\widehat{\beta}_{Cy}&amp;=(X_C^TX_C)^{-1}X_C^TY
-\\&amp;=\left(\frac{1}{n}X_C^TX_C\right)^{-1}\left(\frac{1}{n}X_C^TY\right)
-\\&amp;=\left(\frac{1}{n}X_C^TX_C\right)^{-1}\left(\frac{1}{n}X_C^T(X_C\beta_{Cy}+\varepsilon_y)\right)
-\\&amp;=\beta_{Cy}+\left(\frac{1}{n}X_C^TX_C\right)^{-1}\left(\frac{1}{n}X_C^T\varepsilon_y\right).
+\widehat{\beta}_{Cy}&amp;=(X_C^\top X_C)^{-1}X_C^\top Y
+\\&amp;=\left(\frac{1}{n}X_C^\top X_C\right)^{-1}\left(\frac{1}{n}X_C^\top Y\right)
+\\&amp;=\left(\frac{1}{n}X_C^\top X_C\right)^{-1}\left(\frac{1}{n}X_C^\top(X_C\beta_{Cy}+\varepsilon_y)\right)
+\\&amp;=\beta_{Cy}+\left(\frac{1}{n}X_C^\top X_C\right)^{-1}\left(\frac{1}{n}X_C^\top\varepsilon_y\right).
 \end{aligned}\]</span></p>
-<p>By the law of large numbers, <span class="math inline">\(\displaystyle \frac{1}{n}X_C^TX_C \overset{p}{\to} \Sigma_{CC}\)</span>, then <span class="math display">\[\sqrt{n}(\widehat{\beta}_{Cy}-\beta_{Cy})=\Sigma_{CC}^{-1}\frac{1}{\sqrt{n}}X_C^T\varepsilon_y+\mathcal{O}_p(1).\]</span></p>
-It is obvious that <span class="math inline">\(\mathbb{E}[\sqrt{n}(\widehat{\beta}_{Cy}-\beta_{Cy})] \overset{p}{\to} 0\)</span> since <span class="math inline">\(\mathbb{E}[\varepsilon_y]=0\)</span> and <span class="math inline">\(\mathbb{E}[\mathcal{O}_p(1)] \overset{p}{\to} 0\)</span>. Besides, <span class="math display">\[\text{Var}[\sqrt{n}(\widehat{\beta}_{Cy}-\beta_{Cy})] \overset{p}{\to} \Sigma_{CC}^{-1}\Sigma_{CC}(I_n\sigma_{yy \cdot C})\Sigma_{CC}^{-T}=\sigma_{yy \cdot C}\Sigma_{CC}^{-1}.\]</span>
+<p>By the law of large numbers, <span class="math inline">\(\displaystyle \frac{1}{n}X_C^\top X_C \overset{p}{\to} \Sigma_{CC}\)</span>, then <span class="math display">\[\sqrt{n}(\widehat{\beta}_{Cy}-\beta_{Cy})=\Sigma_{CC}^{-1}\frac{1}{\sqrt{n}}X_C^\top\varepsilon_y+\mathcal{O}_p(1).\]</span></p>
+It is obvious that <span class="math inline">\(\mathbb{E}[\sqrt{n}(\widehat{\beta}_{Cy}-\beta_{Cy})] \overset{p}{\to} 0\)</span> since <span class="math inline">\(\mathbb{E}[\varepsilon_y]=0\)</span> and <span class="math inline">\(\mathbb{E}[\mathcal{O}_p(1)] \overset{p}{\to} 0\)</span>. Besides, <span class="math display">\[\text{Var}[\sqrt{n}(\widehat{\beta}_{Cy}-\beta_{Cy})] \overset{p}{\to} \Sigma_{CC}^{-1}\Sigma_{CC}(I_n\sigma_{yy \cdot C})\Sigma_{CC}^{-\top}=\sigma_{yy \cdot C}\Sigma_{CC}^{-1}.\]</span>
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>

@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="1. Sherman-Morrison-Woodbury Formula  \(\displaystyle (I-\mathbf{u}\mathbf{v}^T)^{-1}&#x3D;I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\).  Proof. We have \[\begin{aligned} (I-\mathbf{u}\mathb">
+  <meta name="description" content="1. Sherman-Morrison-Woodbury Formula  \(\displaystyle (I-\mathbf{u}\mathbf{v}^\top)^{-1}&#x3D;I+\frac{\mathbf{u}\mathbf{v}^\top}{1-\mathbf{v}^\top\mathbf{u}}\).  Proof. We have \[\begin{aligned} (I-\mathbf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Low Rank and Compressed Sensing">
 <meta property="og:url" content="https://litianyang0211.github.io/Mathematics/Linear_Algebra/Low_Rank_and_Compressed_Sensing">
 <meta property="og:site_name" content="Tianyang Li">
-<meta property="og:description" content="1. Sherman-Morrison-Woodbury Formula  \(\displaystyle (I-\mathbf{u}\mathbf{v}^T)^{-1}&#x3D;I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\).  Proof. We have \[\begin{aligned} (I-\mathbf{u}\mathb">
+<meta property="og:description" content="1. Sherman-Morrison-Woodbury Formula  \(\displaystyle (I-\mathbf{u}\mathbf{v}^\top)^{-1}&#x3D;I+\frac{\mathbf{u}\mathbf{v}^\top}{1-\mathbf{v}^\top\mathbf{u}}\).  Proof. We have \[\begin{aligned} (I-\mathbf">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-01T23:00:00.000Z">
-<meta property="article:modified_time" content="2021-12-24T00:14:24.754Z">
+<meta property="article:modified_time" content="2022-01-06T17:37:43.855Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Matrix">
 <meta name="twitter:card" content="summary">
@@ -234,7 +234,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-12-24 00:14:24" itemprop="dateModified" datetime="2021-12-24T00:14:24+00:00">2021-12-24</time>
+                <time title="Modified: 2022-01-06 17:37:43" itemprop="dateModified" datetime="2022-01-06T17:37:43+00:00">2022-01-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -263,62 +263,62 @@
       
         <h1 id="sherman-morrison-woodbury-formula">1. Sherman-Morrison-Woodbury Formula</h1>
 <ul>
-<li><span class="math inline">\(\displaystyle (I-\mathbf{u}\mathbf{v}^T)^{-1}=I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\)</span>.</li>
+<li><span class="math inline">\(\displaystyle (I-\mathbf{u}\mathbf{v}^\top)^{-1}=I+\frac{\mathbf{u}\mathbf{v}^\top}{1-\mathbf{v}^\top\mathbf{u}}\)</span>.</li>
 </ul>
 <strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
-(I-\mathbf{u}\mathbf{v}^T)(I-\mathbf{u}\mathbf{v}^T)^{-1}&amp;=(I-\mathbf{u}\mathbf{v}^T)\left(I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\right)
-\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{(I-\mathbf{u}\mathbf{v}^T)\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
-\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{\mathbf{u}\mathbf{v}^T-\mathbf{u}(\mathbf{v}^T\mathbf{u})\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
-\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{(1-\mathbf{v}^T\mathbf{u})\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
+(I-\mathbf{u}\mathbf{v}^\top)(I-\mathbf{u}\mathbf{v}^\top)^{-1}&amp;=(I-\mathbf{u}\mathbf{v}^\top)\left(I+\frac{\mathbf{u}\mathbf{v}^\top}{1-\mathbf{v}^\top\mathbf{u}}\right)
+\\&amp;=I-\mathbf{u}\mathbf{v}^\top+\frac{(I-\mathbf{u}\mathbf{v}^\top)\mathbf{u}\mathbf{v}^\top}{1-\mathbf{v}^\top\mathbf{u}}
+\\&amp;=I-\mathbf{u}\mathbf{v}^\top+\frac{\mathbf{u}\mathbf{v}^\top-\mathbf{u}(\mathbf{v}^\top\mathbf{u})\mathbf{v}^\top}{1-\mathbf{v}^\top\mathbf{u}}
+\\&amp;=I-\mathbf{u}\mathbf{v}^\top+\frac{(1-\mathbf{v}^\top\mathbf{u})\mathbf{u}\mathbf{v}^\top}{1-\mathbf{v}^\top\mathbf{u}}
 \\&amp;=I
 \end{aligned}\]</span> and <span class="math display">\[\begin{aligned}
-(I-\mathbf{u}\mathbf{v}^T)^{-1}(I-\mathbf{u}\mathbf{v}^T)&amp;=\left(I+\frac{\mathbf{u}\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}\right)(I-\mathbf{u}\mathbf{v}^T)
-\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{\mathbf{u}\mathbf{v}^T(I-\mathbf{u}\mathbf{v}^T)}{1-\mathbf{v}^T\mathbf{u}}
-\\&amp;=I-\mathbf{u}\mathbf{v}^T+\frac{\mathbf{u}\mathbf{v}^T-\mathbf{u}(\mathbf{v}^T\mathbf{u})\mathbf{v}^T}{1-\mathbf{v}^T\mathbf{u}}
+(I-\mathbf{u}\mathbf{v}^\top)^{-1}(I-\mathbf{u}\mathbf{v}^\top)&amp;=\left(I+\frac{\mathbf{u}\mathbf{v}^\top}{1-\mathbf{v}^\top\mathbf{u}}\right)(I-\mathbf{u}\mathbf{v}^\top)
+\\&amp;=I-\mathbf{u}\mathbf{v}^\top+\frac{\mathbf{u}\mathbf{v}^\top(I-\mathbf{u}\mathbf{v}^\top)}{1-\mathbf{v}^\top\mathbf{u}}
+\\&amp;=I-\mathbf{u}\mathbf{v}^\top+\frac{\mathbf{u}\mathbf{v}^\top-\mathbf{u}(\mathbf{v}^\top\mathbf{u})\mathbf{v}^\top}{1-\mathbf{v}^\top\mathbf{u}}
 \\&amp;=I.
 \end{aligned}\]</span>
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
 <ul>
-<li><span class="math inline">\((I_n-UV^T)^{-1}=I_n+U(I_k-V^TU)^{-1}V^T\)</span>, where <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are <span class="math inline">\(n \times k\)</span> matrices.</li>
+<li><span class="math inline">\((I_n-UV^\top)^{-1}=I_n+U(I_k-V^\top U)^{-1}V^\top\)</span>, where <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> are <span class="math inline">\(n \times k\)</span> matrices.</li>
 </ul>
 <strong><em>Proof.</em></strong> We have <span class="math display">\[\begin{aligned}
-(I_n-UV^T)(I_n-UV^T)^{-1}&amp;=I_n-UV^T+(I_n-UV^T)U(I_k-V^TU)^{-1}V^T
-\\&amp;=I_n-UV^T+(U-UV^TU)(I_k-V^TU)^{-1}V^T
-\\&amp;=I_n-UV^T+U(I_k-V^TU)(I_k-V^TU)^{-1}V^T
-\\&amp;=I_n-UV^T+UV^T
+(I_n-UV^\top)(I_n-UV^\top)^{-1}&amp;=I_n-UV^\top+(I_n-UV^\top)U(I_k-V^\top U)^{-1}V^\top
+\\&amp;=I_n-UV^\top+(U-UV^\top U)(I_k-V^\top U)^{-1}V^\top
+\\&amp;=I_n-UV^\top+U(I_k-V^\top U)(I_k-V^\top U)^{-1}V^\top
+\\&amp;=I_n-UV^\top+UV^\top
 \\&amp;=I_n
 \end{aligned}\]</span> and <span class="math display">\[\begin{aligned}
-(I_n-UV^T)^{-1}(I_n-UV^T)&amp;=I_n+U(I_k-V^TU)^{-1}V^T-(I_n+U(I_k-V^TU)^{-1}V^T)UV^T
-\\&amp;=I_n+U(I_k-V^TU)^{-1}V^T-UV^T-U(I_k-V^TU)^{-1}V^TUV^T
-\\&amp;=I_n-UV^T+U(I_k-V^TU)^{-1}V^T(I_n-UV^T)
-\\&amp;=I_n-UV^T+U(I_k-V^TU)^{-1}(V^T-V^TUV^T)
-\\&amp;=I_n-UV^T+U(I_k-V^TU)^{-1}(I_k-V^TU)V^T
-\\&amp;=I_n-UV^T+UV^T
+(I_n-UV^\top)^{-1}(I_n-UV^\top)&amp;=I_n+U(I_k-V^\top U)^{-1}V^\top-(I_n+U(I_k-V^\top U)^{-1}V^\top)UV^\top
+\\&amp;=I_n+U(I_k-V^\top U)^{-1}V^\top-UV^\top-U(I_k-V^\top U)^{-1}V^\top UV^\top
+\\&amp;=I_n-UV^\top+U(I_k-V^\top U)^{-1}V^\top(I_n-UV^\top)
+\\&amp;=I_n-UV^\top+U(I_k-V^\top U)^{-1}(V^\top-V^\top UV^\top)
+\\&amp;=I_n-UV^\top+U(I_k-V^\top U)^{-1}(I_k-V^\top U)V^\top
+\\&amp;=I_n-UV^\top+UV^\top
 \\&amp;=I_n.
 \end{aligned}\]</span>
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
 <ul>
-<li><span class="math inline">\((A-UV^T)^{-1}=A^{-1}+A^{-1}U(I-V^TA^{-1}U)^{-1}V^TA^{-1}\)</span>.</li>
+<li><span class="math inline">\((A-UV^\top)^{-1}=A^{-1}+A^{-1}U(I-V^\top A^{-1}U)^{-1}V^\top A^{-1}\)</span>.</li>
 </ul>
 <h2 id="application-solving-a-perturbation-problem">1.1. Application: Solving a Perturbation Problem</h2>
 <ul>
-<li>Suppose <span class="math inline">\(A\mathbf{w}=\mathbf{b}\)</span> is solved for <span class="math inline">\(\mathbf{w}\)</span>, and we want to solve <span class="math inline">\((A-\mathbf{u}\mathbf{v}^T)\mathbf{x}=\mathbf{b}\)</span>. We first solve <span class="math inline">\(A\mathbf{z}=\mathbf{u}\)</span>, then <span class="math display">\[\mathbf{x}=\mathbf{w}+\frac{\mathbf{v}^T\mathbf{w}\mathbf{z}}{1-\mathbf{v}^T\mathbf{z}}.\]</span></li>
+<li>Suppose <span class="math inline">\(A\mathbf{w}=\mathbf{b}\)</span> is solved for <span class="math inline">\(\mathbf{w}\)</span>, and we want to solve <span class="math inline">\((A-\mathbf{u}\mathbf{v}^\top)\mathbf{x}=\mathbf{b}\)</span>. We first solve <span class="math inline">\(A\mathbf{z}=\mathbf{u}\)</span>, then <span class="math display">\[\mathbf{x}=\mathbf{w}+\frac{\mathbf{v}^\top\mathbf{w}\mathbf{z}}{1-\mathbf{v}^\top\mathbf{z}}.\]</span></li>
 </ul>
 <h2 id="application-recursive-least-squares">1.2. Application: Recursive Least Squares</h2>
 <ul>
 <li>Suppose there is a new measurement in least squares: <span class="math inline">\(\begin{bmatrix} A \\ \mathbf{v} \end{bmatrix}\mathbf{x}=\begin{bmatrix} \mathbf{b} \\ b_\text{new} \end{bmatrix}\)</span>. The new normal equation is <span class="math display">\[\begin{bmatrix}
-A^T &amp; \mathbf{v}^T
+A^\top &amp; \mathbf{v}^\top
 \end{bmatrix}\begin{bmatrix}
 A \\ \mathbf{v}
 \end{bmatrix}\widehat{\mathbf{x}}_\text{new}=\begin{bmatrix}
-A^T &amp; \mathbf{v}^T
+A^\top &amp; \mathbf{v}^\top
 \end{bmatrix}\begin{bmatrix}
 \mathbf{b} \\ b_\text{new}
-\end{bmatrix},\]</span> i.e., <span class="math inline">\((A^TA+\mathbf{v}^T\mathbf{v})\widehat{\mathbf{x}}_\text{new}=A^T\mathbf{b}+\mathbf{v}^Tb_\text{new}\)</span>. The update formula is <span class="math display">\[(A^TA+\mathbf{v}^T\mathbf{v})^{-1}=(A^TA)^{-1}-c(A^TA)^{-1}\mathbf{v}^T\mathbf{v}(A^TA)^{-1}\]</span> with <span class="math inline">\(\displaystyle c=\frac{1}{1+\mathbf{v}(A^TA)^{-1}\mathbf{v}^T}\)</span>. To find <span class="math inline">\(c\)</span>, we only need to solve the old equation <span class="math inline">\((A^TA)\mathbf{y}=\mathbf{v}^T\)</span>. The same idea applies when <span class="math inline">\(A\)</span> has more new rows.</li>
+\end{bmatrix},\]</span> i.e., <span class="math inline">\((A^\top A+\mathbf{v}^\top\mathbf{v})\widehat{\mathbf{x}}_\text{new}=A^\top\mathbf{b}+\mathbf{v}^\top b_\text{new}\)</span>. The update formula is <span class="math display">\[(A^\top A+\mathbf{v}^\top\mathbf{v})^{-1}=(A^\top A)^{-1}-c(A^\top A)^{-1}\mathbf{v}^\top\mathbf{v}(A^\top A)^{-1}\]</span> with <span class="math inline">\(\displaystyle c=\frac{1}{1+\mathbf{v}(A^\top A)^{-1}\mathbf{v}^\top}\)</span>. To find <span class="math inline">\(c\)</span>, we only need to solve the old equation <span class="math inline">\((A^\top A)\mathbf{y}=\mathbf{v}^\top\)</span>. The same idea applies when <span class="math inline">\(A\)</span> has more new rows.</li>
 </ul>
 <h2 id="application-kalman-filter">1.3. Application: Kalman Filter</h2>
 <ul>
@@ -337,32 +337,32 @@ A^T &amp; \mathbf{v}^T
 </ul>
 <h1 id="change-in-eigenvalues-and-singular-values">3. Change in Eigenvalues and Singular Values</h1>
 <ul>
-<li><p><span class="math inline">\(A(t)\mathbf{x}(t)=\lambda(t)\mathbf{x}(t)\)</span>, <span class="math inline">\(\mathbf{y}^T(t)A(t)=\lambda(t)\mathbf{y}^T(t)\)</span>, and <span class="math inline">\(\mathbf{y}^T(t)\mathbf{x}(t)=1\)</span>. In matrix notation, <span class="math inline">\(AX=X\Lambda\)</span>, <span class="math inline">\(Y^TA=\Lambda Y^T\)</span>, and <span class="math inline">\(Y^TX=I\)</span>.</p></li>
-<li><p><span class="math inline">\(\lambda(t)=\mathbf{y}^T(t)A(t)\mathbf{x}(t)\)</span>.</p></li>
+<li><p><span class="math inline">\(A(t)\mathbf{x}(t)=\lambda(t)\mathbf{x}(t)\)</span>, <span class="math inline">\(\mathbf{y}^\top(t)A(t)=\lambda(t)\mathbf{y}^\top(t)\)</span>, and <span class="math inline">\(\mathbf{y}^\top(t)\mathbf{x}(t)=1\)</span>. In matrix notation, <span class="math inline">\(AX=X\Lambda\)</span>, <span class="math inline">\(Y^\top A=\Lambda Y^\top\)</span>, and <span class="math inline">\(Y^\top X=I\)</span>.</p></li>
+<li><p><span class="math inline">\(\lambda(t)=\mathbf{y}^\top(t)A(t)\mathbf{x}(t)\)</span>.</p></li>
 </ul>
-<strong><em>Proof.</em></strong> <span class="math inline">\(\mathbf{y}^T(t)A(t)\mathbf{x}(t)=\lambda(t)\mathbf{y}^T(t)\mathbf{x}(t)=\lambda(t)\)</span>.
+<strong><em>Proof.</em></strong> <span class="math inline">\(\mathbf{y}^\top(t)A(t)\mathbf{x}(t)=\lambda(t)\mathbf{y}^\top(t)\mathbf{x}(t)=\lambda(t)\)</span>.
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
 <ul>
-<li><span class="math inline">\(\displaystyle \frac{\text{d}\lambda}{\text{d}t}=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)\)</span>.</li>
+<li><span class="math inline">\(\displaystyle \frac{\text{d}\lambda}{\text{d}t}=\mathbf{y}^\top(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)\)</span>.</li>
 </ul>
-<strong><em>Proof.</em></strong> Since <span class="math inline">\(\lambda(t)=\mathbf{y}^T(t)A(t)\mathbf{x}(t)\)</span>, then <span class="math display">\[\begin{aligned}
-\frac{\text{d}\lambda}{\text{d}t}&amp;=\frac{\text{d}\mathbf{y}^T}{\text{d}t}A(t)\mathbf{x}(t)+\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\mathbf{y}^T(t)A(x)\frac{\text{d}\mathbf{x}}{\text{d}t}
-\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\left(\frac{\text{d}\mathbf{y}^T}{\text{d}t}\mathbf{x}(t)+\mathbf{y}^T(t)\frac{\text{d}\mathbf{x}}{\text{d}t}\right)
-\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\frac{\text{d}(\mathbf{y}^T\mathbf{x})}{\text{d}t}
-\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\frac{\text{d}(1)}{\text{d}t}
-\\&amp;=\mathbf{y}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t).
+<strong><em>Proof.</em></strong> Since <span class="math inline">\(\lambda(t)=\mathbf{y}^\top(t)A(t)\mathbf{x}(t)\)</span>, then <span class="math display">\[\begin{aligned}
+\frac{\text{d}\lambda}{\text{d}t}&amp;=\frac{\text{d}\mathbf{y}^\top}{\text{d}t}A(t)\mathbf{x}(t)+\mathbf{y}^\top(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\mathbf{y}^\top(t)A(x)\frac{\text{d}\mathbf{x}}{\text{d}t}
+\\&amp;=\mathbf{y}^\top(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\left(\frac{\text{d}\mathbf{y}^\top}{\text{d}t}\mathbf{x}(t)+\mathbf{y}^\top(t)\frac{\text{d}\mathbf{x}}{\text{d}t}\right)
+\\&amp;=\mathbf{y}^\top(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\frac{\text{d}(\mathbf{y}^\top\mathbf{x})}{\text{d}t}
+\\&amp;=\mathbf{y}^\top(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t)+\lambda(t)\frac{\text{d}(1)}{\text{d}t}
+\\&amp;=\mathbf{y}^\top(t)\frac{\text{d}A}{\text{d}t}\mathbf{x}(t).
 \end{aligned}\]</span>
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
 <ul>
-<li><span class="math inline">\(\displaystyle \frac{\text{d}\sigma}{\text{d}t}=\mathbf{u}^T(t)\frac{\text{d}A}{\text{d}t}\mathbf{v}(t)\)</span>.</li>
+<li><span class="math inline">\(\displaystyle \frac{\text{d}\sigma}{\text{d}t}=\mathbf{u}^\top(t)\frac{\text{d}A}{\text{d}t}\mathbf{v}(t)\)</span>.</li>
 </ul>
 <h1 id="interlacing">4. Interlacing</h1>
 <ul>
-<li>Suppose the eigenvalues of a symmetric matrix <span class="math inline">\(S\)</span> is <span class="math inline">\(\mu_1 \geq \cdots \geq \mu_n\)</span>, and the eigenvalues of <span class="math inline">\(S+\mathbf{u}\mathbf{u}^T\)</span> is <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_n\)</span>, then <span class="math inline">\(\lambda_1 \geq \mu_1 \geq \lambda_2 \geq \mu_2 \geq \cdots \geq \lambda_n \geq \mu_n\)</span>.</li>
+<li>Suppose the eigenvalues of a symmetric matrix <span class="math inline">\(S\)</span> is <span class="math inline">\(\mu_1 \geq \cdots \geq \mu_n\)</span>, and the eigenvalues of <span class="math inline">\(S+\mathbf{u}\mathbf{u}^\top\)</span> is <span class="math inline">\(\lambda_1 \geq \cdots \geq \lambda_n\)</span>, then <span class="math inline">\(\lambda_1 \geq \mu_1 \geq \lambda_2 \geq \mu_2 \geq \cdots \geq \lambda_n \geq \mu_n\)</span>.</li>
 </ul>
 
     </div>
