@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Clustering">
+<meta property="og:url" content="https://litianyang0211.github.io/Computer_Science/Machine_Learning/Clustering">
+<meta property="og:site_name" content="Tianyang Li">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-02T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-06T22:30:44.798Z">
+<meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Clustering">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://litianyang0211.github.io/Computer_Science/Machine_Learning/Clustering.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Clustering | Tianyang Li</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tianyang Li</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-posts">
+
+    <a href="/posts/" rel="section"><i class="fa fa-blog fa-fw"></i>Posts</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-projects">
+
+    <a href="/projects/" rel="section"><i class="fa fa-code fa-fw"></i>Projects</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-user-friends fa-fw"></i>Friends</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Computer_Science/Machine_Learning/Clustering">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Tianyang Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianyang Li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Clustering
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-lightbulb"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-02 00:00:00" itemprop="dateCreated datePublished" datetime="2022-01-02T00:00:00+00:00">2022-01-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-edit"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-06 22:30:44" itemprop="dateModified" datetime="2022-01-06T22:30:44+00:00">2022-01-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+                </span>
+                  /
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Computer-Science/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description"><div></div></div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="clustering">1. Clustering</h1>
+<ul>
+<li><p>Clustering is an unsupervised learning task that is equivalent to the idea of separating things into groups. A clustering algorithm groups datapoints into clusters based on some notion of similarity.</p></li>
+<li><p>Cluster assignments represent discrete summaries of datapoints, and clustering is like an extreme form of compression to provide a characterization.</p></li>
+<li><p>In general, there is no definition of what the right clustering is.</p></li>
+<li><p>Intuitively, clustering aims to group similar items together and to place separate dissimilar items into different groups. But two objectives can contradict each other: similarity is not a transitive relation, while being in the same cluster is an equivalence relation.</p></li>
+</ul>
+<h2 id="type-of-clustering">1.1. Type of Clustering</h2>
+<ul>
+<li><p>Model-free clustering (discriminative).</p></li>
+<li><p>Model-based clustering (generative).</p></li>
+</ul>
+<h2 id="desired-fundamental-property">1.2. Desired Fundamental Property</h2>
+<p>Suppose clustering method is a map <span class="math inline">\(\mathcal{F}: (\mathcal{D}=\{\mathbf{x}_i\}_{i=1}^n, \rho) \mapsto \{C_1, \ldots, C_K\}\)</span> which takes dataset <span class="math inline">\(\mathcal{D}\)</span> and a dissimilarity function <span class="math inline">\(\rho\)</span> as an input, and returns a partition of <span class="math inline">\(\mathcal{D}\)</span>. Three basic properties are required:</p>
+<ul>
+<li><p><strong>Scale invariance</strong>. For any <span class="math inline">\(\alpha&gt;0\)</span>, <span class="math inline">\(\mathcal{F}(\mathcal{D}, \alpha\rho)=\mathcal{F}(\mathcal{D}, \rho)\)</span>.</p></li>
+<li><p><strong>Richness</strong>. For any partition <span class="math inline">\(C=\{C_1, \ldots, C_K\}\)</span> of <span class="math inline">\(\mathcal{D}\)</span>, there exists a dissimilarity function <span class="math inline">\(\rho_C\)</span> s.t. <span class="math inline">\(\mathcal{F}(\mathcal{D}, \rho_C)=C\)</span>.</p></li>
+<li><p><strong>Consistency</strong>. Suppose <span class="math inline">\(\rho\)</span> and <span class="math inline">\(\rho&#39;\)</span> are two dissimilarities s.t. the following hold for all <span class="math inline">\(\mathbf{x}_i, \mathbf{x}_j \in \mathcal{D}\)</span>: (1) if <span class="math inline">\(\mathbf{x}_i\)</span> and <span class="math inline">\(\mathbf{x}_j\)</span> belong to the same cluster in <span class="math inline">\(\mathcal{F}(\mathcal{D}, \rho)\)</span>, then <span class="math inline">\(\rho&#39;(\mathbf{x}_i, \mathbf{x}_j) \leq \rho(\mathbf{x}_i, \mathbf{x}_j)\)</span>; (2) if <span class="math inline">\(\mathbf{x}_i\)</span> and <span class="math inline">\(\mathbf{x}_j\)</span> belong to different clusters in <span class="math inline">\(\mathcal{F}(\mathcal{D}, \rho)\)</span>, then <span class="math inline">\(\rho&#39;(\mathbf{x}_i, \mathbf{x}_j) \geq \rho(\mathbf{x}_i, \mathbf{x}_j)\)</span>. Then <span class="math inline">\(\mathcal{F}(\mathcal{D}, \rho&#39;)=\mathcal{F}(\mathcal{D}, \rho)\)</span>.</p></li>
+</ul>
+<div class="note warning">
+            <p>Kleinberg (2003) proved that no clustering method can simultaneously satisfy all three properties (but it is easy to ensure two properties hold). Therefore, we cannot derive axioms of clustering, and thus different choices will lead to different behavior.</p>
+          </div>
+<h1 id="k-means">2. \(K\)-Means</h1>
+<ul>
+<li><p><strong><span class="math inline">\(K\)</span>-means algorithm</strong> is a simple partition-based, model-free, clustering algorithm.</p></li>
+<li><p><span class="math inline">\(K\)</span>-means algorithm uses a preassigned number of clusters <span class="math inline">\(K\)</span>, represents each cluster using a <strong>cluster centroid</strong> (or <strong>prototype</strong>) <span class="math inline">\(\boldsymbol{\mu}_k\)</span>, and measures the quality of each cluster <span class="math inline">\(C_k\)</span> using its <strong>within-cluster deviance</strong> from the cluster centroids <span class="math display">\[W(C_k, \boldsymbol{\mu}_k)=\sum_{i \in C_k} \|\mathbf{x}_i-\boldsymbol{\mu}_k\|_2^2.\]</span></p></li>
+<li><p>The overall quality of the clustering is given by the <strong>total within-cluster deviance</strong> <span class="math display">\[W=\sum_{k=1}^K W(C_k, \boldsymbol{\mu}_k)=\sum_{k=1}^K \sum_{i \in C_k} \|\mathbf{x}_i-\boldsymbol{\mu}_k\|_2^2=\sum_{i=1}^n \|\mathbf{x}_i-\boldsymbol{\mu}_{c_i}\|_2^2\]</span> where <span class="math inline">\(c_i=k\)</span> iff <span class="math inline">\(i \in C_k\)</span>.</p></li>
+</ul>
+<h2 id="optimization">2.1. Optimization</h2>
+<ul>
+<li><p><span class="math inline">\(W\)</span> is the objective function used to select both the cluster centroids and the assignment of points to clusters.</p></li>
+<li><p>The joint optimization is intractable, but we can use a coordinate descent approach. Given partition <span class="math inline">\(\{C_k\}\)</span>, we can find the optimal centroids by differentiating <span class="math inline">\(W\)</span> w.r.t. <span class="math inline">\(\boldsymbol{\mu}_k\)</span>: <span class="math display">\[\frac{\partial W}{\partial\boldsymbol{\mu}_k}=2\sum_{i \in C_k}(\mathbf{x}_i-\boldsymbol{\mu}_k)=0 \Rightarrow \boldsymbol{\mu}_k=\frac{1}{|C_k|}\sum_{i \in C_k} \mathbf{x}_i.\]</span> Given the centroids, we can find the optimal partition by assigning each datapoint to the closest centroid: <span class="math display">\[c_i=\mathop{\arg\min}_k \|\mathbf{x}_i-\boldsymbol{\mu}_k\|_2^2.\]</span> Thus we can employ an iterative alternating optimization.</p></li>
+</ul>
+<h2 id="k-means-algorithm">2.2. \(K\)-Means Algorithm</h2>
+<table frame="hsides" style="line-height:20px;">
+<tbody>
+<tr>
+<td>
+<b>Algorithm 1</b> <span class="math inline">\(K\)</span>-Means Algorithm.
+</td>
+</tr>
+<tr>
+<td>
+    initialize <span class="math inline">\(K\)</span> cluster centroids <span class="math inline">\(\boldsymbol{\mu}_1, \ldots, \boldsymbol{\mu}_K\)</span>;<br>     <b>repeat</b><br>         <b>for</b> <span class="math inline">\(i=1, \ldots, n\)</span> <b>do</b><br>             assign each <span class="math inline">\(\mathbf{x}_i\)</span> to the cluster with the nearest centroid, i.e., <span class="math inline">\(c_i:=\mathop{\arg\min}_k \|\mathbf{x}_i-\boldsymbol{\mu}_k\|_2^2\)</span>;<br>         <b>end for</b><br>         set <span class="math inline">\(C_k:=\{i: c_i=k\}\)</span> for each <span class="math inline">\(k\)</span>;<br>         set <span class="math inline">\(\boldsymbol{\mu}_1, \ldots, \boldsymbol{\mu}_K\)</span> to the averages of the new clusters, i.e., <span class="math inline">\(\boldsymbol{\mu}_k:=|C_k|^{-1} \sum_{i \in C_k} \mathbf{x}_i\)</span>;<br>     <b>until</b> convergent;<br>     return the partition <span class="math inline">\(\{C_1, \ldots, C_K\}\)</span> and means <span class="math inline">\(\boldsymbol{\mu}_1, \ldots, \boldsymbol{\mu}_K\)</span>;
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="property">2.3. Property</h2>
+<ul>
+<li><p><span class="math inline">\(K\)</span>-Means algorithm stops in a finite number of iterations.</p></li>
+<li><p><span class="math inline">\(K\)</span>-Means algorithm need not converge to global optimum.</p></li>
+</ul>
+<h2 id="practicality">2.4. Practicality</h2>
+<p>Performance can be very sensitive to certain choices:</p>
+<ul>
+<li><p>Distance measure. Euclidean distance can be greatly affected by measurement unit and by strong correlations, and we can use <strong>Mahalanobis distance</strong> instead: <span class="math display">\[\|\mathbf{x}-\mathbf{y}\|_M=\sqrt{(\mathbf{x}-\mathbf{y})^\top M^{-1}(\mathbf{x}-\mathbf{y})}\]</span> where <span class="math inline">\(M\)</span> is a positive semi-definite matrix.</p></li>
+<li><p>Initialization. We can perform a number of runs from different configurations and pick the end result with minimum <span class="math inline">\(W\)</span>. In addition, we can use <span class="math inline">\(K\)</span>-means<span class="math inline">\(++\)</span>.</p></li>
+<li><p><span class="math inline">\(K\)</span>. Since <span class="math inline">\(W\)</span> will always improve with larger number of clusters <span class="math inline">\(K\)</span>, then determination of <span class="math inline">\(K\)</span> requires an additional regularization criterion, e.g., DP-means.</p></li>
+</ul>
+<h2 id="k-means-1">2.5. \(K\)-Means\(++\)</h2>
+<p><strong><span class="math inline">\(K\)</span>-means<span class="math inline">\(++\)</span></strong> is a simple and effective approach for initializing centroids.</p>
+<table frame="hsides" style="line-height:20px;">
+<tbody>
+<tr>
+<td>
+<b>Algorithm 2</b> <span class="math inline">\(K\)</span>-Means<span class="math inline">\(++\)</span> Algorithm.
+</td>
+</tr>
+<tr>
+<td>
+    choose a datapoint <span class="math inline">\(\mathbf{x}_{i1}\)</span> at random from <span class="math inline">\(\mathcal{D}\)</span> and set <span class="math inline">\(\boldsymbol{\mu}_1 \leftarrow \mathbf{x}_{i1}\)</span>;<br>     choose a second datapoint w.p. <span class="math inline">\(P(i)=\rho_i^2/\sum_{j=1}^n \rho_j^2\)</span> where <span class="math inline">\(\rho_i^2=\|\mathbf{x}_i-\boldsymbol{\mu}_1\|_2^2\)</span> and set <span class="math inline">\(\boldsymbol{\mu}_2\)</span> to its value;<br>     <b>for</b> <span class="math inline">\(k=3, \ldots, K\)</span> <b>do</b><br>         choose <span class="math inline">\(k\)</span>th datapoint w.p. <span class="math inline">\(P(i)\)</span> where <span class="math inline">\(\rho_i^2=\min\{\|\mathbf{x}_i-\boldsymbol{\mu}_1\|_2^2, \ldots, \|\mathbf{x}_i-\boldsymbol{\mu}_{k-1}\|_2^2\}\)</span>;<br>         set <span class="math inline">\(\boldsymbol{\mu}_k\)</span> to its value;<br>     <b>end for</b>
+</td>
+</tr>
+</tbody>
+</table>
+<p>It is proved that <span class="math display">\[\mathbb{E}[W(\{C_k^{++}\})] \leq 8(\ln K+2)W^*\]</span> where <span class="math inline">\(W^*\)</span> is the within-cluster deviance of the globally optimal clustering and the expectation is taken over the random sampling used in the initialisation.</p>
+<h2 id="dirichlet-process-means">2.6. Dirichlet-Process-Means</h2>
+<p>The <strong>Dirichlet-process-means</strong>, a.k.a. <strong>DP-means</strong> algorithm, is a variant that allows <span class="math inline">\(K\)</span> to be set adaptively by iteratively adding clusters. Like <span class="math inline">\(K\)</span>-means, DP-means terminates after a finite number of iterations.</p>
+<table frame="hsides" style="line-height:20px;">
+<tbody>
+<tr>
+<td>
+<b>Algorithm 3</b> DP-Means Algorithm.
+</td>
+</tr>
+<tr>
+<td>
+    choose a cluster cost hyperparameter <span class="math inline">\(\lambda\)</span> (with larger <span class="math inline">\(\lambda\)</span> producing less clusters);<br>     initialize <span class="math inline">\(K=1\)</span> and <span class="math inline">\(\boldsymbol{\mu}_1=n^{-1}\sum_{i=1}^n \mathbf{x}_i\)</span>;<br>     <b>repeat</b><br>         <b>for</b> <span class="math inline">\(i=1, \ldots, n\)</span> <b>do</b><br>             <b>if</b> <span class="math inline">\(\min_{k=1, \ldots, K} \|\mathbf{x}_i-\boldsymbol{\mu}_k\|_2^2&gt;\lambda\)</span> <b>then</b><br>                 set <span class="math inline">\(c_i \leftarrow K+1\)</span>, <span class="math inline">\(\boldsymbol{\mu}_{K+1} \leftarrow \mathbf{x}_i\)</span>;<br>             <b>else</b><br>                 set <span class="math inline">\(c_i \leftarrow \mathop{\arg\min}_{k=1, \ldots, K} \|\mathbf{x}_i-\boldsymbol{\mu}_k\|_2^2\)</span>;<br>                 update the previous and current cluster centroids that item <span class="math inline">\(i\)</span> belongs to appropriately;<br>             <b>end if</b><br>         <b>end for</b><br>     <b>until</b> stop changing the cluster assignments for all items;
+</td>
+</tr>
+</tbody>
+</table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Clustering/" rel="tag"><i class="fa fa-tag"></i> Clustering</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Computer_Science/Machine_Learning/Principle_Component_Analysis" rel="prev" title="Principle Component Analysis">
+      <i class="fa fa-chevron-left"></i> Principle Component Analysis
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Computer_Science/Machine_Learning/Empirical_Risk_Minimization" rel="next" title="Empirical Risk Minimization">
+      Empirical Risk Minimization <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#clustering"><span class="nav-text">1. Clustering</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#type-of-clustering"><span class="nav-text">1.1. Type of Clustering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#desired-fundamental-property"><span class="nav-text">1.2. Desired Fundamental Property</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#k-means"><span class="nav-text">2. \(K\)-Means</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#optimization"><span class="nav-text">2.1. Optimization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means-algorithm"><span class="nav-text">2.2. \(K\)-Means Algorithm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#property"><span class="nav-text">2.3. Property</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#practicality"><span class="nav-text">2.4. Practicality</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#k-means-1"><span class="nav-text">2.5. \(K\)-Means\(++\)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dirichlet-process-means"><span class="nav-text">2.6. Dirichlet-Process-Means</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tianyang Li"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Tianyang Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/litianyang0211" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;litianyang0211" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianyang.li@linacre.ox.ac.uk" title="Email → mailto:tianyang.li@linacre.ox.ac.uk" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/derek0211" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;derek0211" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tianyang Li</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'default',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
