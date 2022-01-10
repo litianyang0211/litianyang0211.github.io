@@ -21,17 +21,17 @@
   </script>
 
   <meta property="og:type" content="article">
-<meta property="og:title" content="Inversion Method">
-<meta property="og:url" content="https://litianyang0211.github.io/Statistics/Simulation_Method/Inversion_Method">
+<meta property="og:title" content="Transformation Method">
+<meta property="og:url" content="https://litianyang0211.github.io/Statistics/Simulation_Method/Transformation_Method">
 <meta property="og:site_name" content="Tianyang Li">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-01-08T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-01-10T21:40:41.594Z">
+<meta property="article:published_time" content="2022-01-09T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-10T21:40:50.975Z">
 <meta property="article:author" content="Tianyang Li">
-<meta property="article:tag" content="Inversion Method">
+<meta property="article:tag" content="Transformation Method">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://litianyang0211.github.io/Statistics/Simulation_Method/Inversion_Method.html">
+<link rel="canonical" href="https://litianyang0211.github.io/Statistics/Simulation_Method/Transformation_Method.html">
 
 
 <script id="page-configurations">
@@ -44,7 +44,7 @@
   };
 </script>
 
-  <title>Inversion Method | Tianyang Li</title>
+  <title>Transformation Method | Tianyang Li</title>
   
 
 
@@ -202,7 +202,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Statistics/Simulation_Method/Inversion_Method">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Statistics/Simulation_Method/Transformation_Method">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -215,7 +215,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Inversion Method
+          Transformation Method
         </h1>
 
         <div class="post-meta">
@@ -225,14 +225,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-01-08 00:00:00" itemprop="dateCreated datePublished" datetime="2022-01-08T00:00:00+00:00">2022-01-08</time>
+              <time title="Created: 2022-01-09 00:00:00" itemprop="dateCreated datePublished" datetime="2022-01-09T00:00:00+00:00">2022-01-09</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-10 21:40:41" itemprop="dateModified" datetime="2022-01-10T21:40:41+00:00">2022-01-10</time>
+                <time title="Modified: 2022-01-10 21:40:50" itemprop="dateModified" datetime="2022-01-10T21:40:50+00:00">2022-01-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,26 +260,41 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="inversion-method">1. Inversion Method</h1>
-<p>The <strong>inversion method</strong> allows to sample from a distribution <span class="math inline">\(\pi\)</span> using draws from a uniform distribution <span class="math inline">\(\mathcal{U}_{[0, 1]}\)</span>, and the quantile function associated with <span class="math inline">\(\pi\)</span>. Consider a real-valued r.v. <span class="math inline">\(X\)</span> and its associated CDF <span class="math inline">\(F(x)=\mathbb{P}(X \leq x)\)</span>.</p>
+        <h1 id="transformation-method">1. Transformation Method</h1>
+<p>Suppose we have a <span class="math inline">\(\mathbb{Y}\)</span>-valued r.v. <span class="math inline">\(Y \sim q\)</span> which we can simulate and some other <span class="math inline">\(\mathbb{X}\)</span>-valued r.v. <span class="math inline">\(X \sim \pi\)</span> which we want to simulate. The <strong>transformation method</strong> is to find a function <span class="math inline">\(\varphi: \mathbb{Y} \to \mathbb{X}\)</span> with the property that if we simulate <span class="math inline">\(Y \sim q\)</span> and set <span class="math inline">\(X=\varphi(Y)\)</span>, then we get <span class="math inline">\(X \sim \pi\)</span>.</p>
 <div class="note info">
-            <p>The CDF <span class="math inline">\(F: \mathbb{R} \to [0, 1]\)</span> is</p><ul><li><p>increasing, i.e. if <span class="math inline">\(x \leq y\)</span>, then <span class="math inline">\(F(x) \leq F(y)\)</span>;</p></li><li><p>right continuous, i.e. <span class="math inline">\(F(x+\varepsilon) \to F(x)\)</span> as <span class="math inline">\(\varepsilon \to 0\)</span>;</p></li><li><p><span class="math inline">\(F(x) \to 0\)</span> as <span class="math inline">\(x \to -\infty\)</span> and <span class="math inline">\(F(x) \to 1\)</span> as <span class="math inline">\(x \to +\infty\)</span>.</p></li></ul>
+            <p>Inversion method is a special case of transformation method where <span class="math inline">\(Y\)</span> is uniformly distributed and <span class="math inline">\(\varphi\)</span> is the generalized inverse of the CDF.</p>
           </div>
-<p>Define the <strong>generalized inverse</strong> <span class="math display">\[F^-(u)=\inf_{x \in \mathbb{R}} \{F(x) \geq u\},\]</span> a.k.a. the <strong>quantile function</strong> or <strong>inverse CDF</strong>. Note that <span class="math inline">\(F^-(u)=F^{-1}(u)\)</span> if <span class="math inline">\(F\)</span> is continuous.</p>
-<p><strong>Theorem 1.1 (Inversion Method)</strong>    Let <span class="math inline">\(F\)</span> be a CDF and <span class="math inline">\(U \sim \mathcal{U}_{[0, 1]}\)</span>, then <span class="math inline">\(X=F^-(U)\)</span> has CDF <span class="math inline">\(F\)</span>.</p>
-<strong><em>Proof.</em></strong> If <span class="math inline">\(F^-(u) \leq x\)</span>, then <span class="math inline">\(u \leq F(x).\)</span> Thus for <span class="math inline">\(U \sim \mathcal{U}_{[0, 1]}\)</span>, we have <span class="math display">\[\mathbb{P}(X=F^-(U) \leq x)=\mathbb{P}(U \leq F(x))=F(x),\]</span> i.e., <span class="math inline">\(F\)</span> is the CDF of <span class="math inline">\(F^-(U)\)</span>.
+<h1 id="example">2. Example</h1>
+<p><strong>Example 2.1 (Gamma Distribution)</strong>    Let <span class="math inline">\(Y_i\)</span>, <span class="math inline">\(i=1, \ldots, \alpha\)</span> for <span class="math inline">\(\alpha \in \mathbb{N}\)</span>, be i.i.d. r.v. with <span class="math inline">\(Y_i \sim \mathcal{E}(1)\)</span> and <span class="math display">\[X=\frac{1}{\beta}\sum_{i=1}^\alpha Y_i\]</span> with <span class="math inline">\(\beta \in \mathbb{R}^+\)</span>, then <span class="math inline">\(X \sim \mathcal{G}(\alpha, \beta)\)</span>, where <span class="math inline">\(\mathcal{G}(\alpha, \beta)\)</span> is the Gamma distribution of density <span class="math inline">\(\pi(x) \propto x^{\alpha-1}e^{-\beta x}\)</span>.</p>
+<p><strong>Example 2.2 (Beta Distribution)</strong>    Let <span class="math inline">\(X_1 \sim \mathcal{G}(\alpha, 1)\)</span> and <span class="math inline">\(X_2 \sim \mathcal{G}(\beta, 1)\)</span> be independent, then <span class="math display">\[\frac{X_1}{X_1+X_2} \sim \mathcal{B}(\alpha, \beta),\]</span> where <span class="math inline">\(\mathcal{B}(\alpha, \beta)\)</span> is the Beta distribution of density <span class="math inline">\(\pi(x) \propto x^{\alpha-1}(1-x)^{\beta-1}\)</span>.</p>
+<p>For continuous r.v., another useful tool is the transformation/change of variable formula for probability density function (PDF).</p>
+<p><strong>Example 2.3 (Gaussian Distribution with Box-Muller Algorithm)</strong>    Let <span class="math inline">\(U_1 \sim \mathcal{U}_{[0, 1]}\)</span> and <span class="math inline">\(U_2 \sim \mathcal{U}_{[0, 1]}\)</span> be independent, and set <span class="math inline">\(R=\sqrt{-2\ln(U_1)}\)</span> and <span class="math inline">\(\vartheta=2\pi U_2\)</span>. We have <span class="math display">\[\begin{aligned}
+X&amp;=R\cos\vartheta=\sqrt{-2\ln(U_1)}\cos(2\pi U_2) \sim \mathcal{N}(0, 1), \\
+Y&amp;=R\sin\vartheta=\sqrt{-2\ln(U_1)}\sin(2\pi U_2) \sim \mathcal{N}(0, 1).
+\end{aligned}\]</span></p>
+<p><strong><em>Proof.</em></strong> Suppose <span class="math inline">\((x, y)=h(u_1, u_2)\)</span>, then <span class="math inline">\((u_1, u_2)=h^{-1}(x, y)\)</span>. By change of variable formula, we have <span class="math display">\[f_{X, Y}(x, y)=f_{U_1, U_2}(h^{-1}(x, y))|J^{-1}(h^{-1}(x, y))|.\]</span> We have <span class="math display">\[\begin{aligned}
+J(h^{-1}(x, y))&amp;=\left|\begin{matrix}
+\displaystyle\frac{\partial x}{\partial u_1} &amp; \displaystyle\frac{\partial x}{\partial u_2} \\
+\displaystyle\frac{\partial y}{\partial u_1} &amp; \displaystyle\frac{\partial y}{\partial u_2}
+\end{matrix}\right|=\left|\begin{matrix}
+-\cos(2\pi u_2)/(u_1\sqrt{-2\ln(u_1)}) &amp; -2\pi\sin(2\pi u_2)\sqrt{-2\ln(u_1)} \\
+-\sin(2\pi u_2)/(u_1\sqrt{-2\ln(u_1)}) &amp; 2\pi\cos(2\pi u_2)\sqrt{-2\ln(u_1)}
+\end{matrix}\right|
+\\&amp;=-\frac{2\pi}{u_1}.
+\end{aligned}\]</span></p>
+Hence, <span class="math display">\[J^{-1}(h^{-1}(x, y))=-\frac{u_1}{2\pi}=-\frac{\exp(-(x^2+y^2)/2)}{2\pi}\]</span> and thus <span class="math display">\[f_{X, Y}(x, y)=\left(\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{x^2}{2}\right)\right)\left(\frac{1}{\sqrt{2\pi}}\exp\left(-\frac{y^2}{2}\right)\right),\]</span> i.e. <span class="math inline">\(X \sim \mathcal{N}(0, 1)\)</span> and <span class="math inline">\(Y \sim \mathcal{N}(0, 1)\)</span> are independent.
 <p align="right">
 <span class="math inline">\(\square\)</span>
 </p>
+<p><strong>Example 2.4 (Multivariate Gaussian Distribution)</strong>    Let <span class="math inline">\(Z=(Z_1, \ldots, Z_d)\)</span> be a collection of <span class="math inline">\(d\)</span> independent standard normal r.v.s., and <span class="math inline">\(L\)</span> be a real invertible <span class="math inline">\(d \times d\)</span> matrix satisfying <span class="math inline">\(LL^T=\Sigma\)</span> and <span class="math inline">\(X=LZ+\mu\)</span>, then <span class="math inline">\(X \sim \mathcal{N}(\mu, \Sigma)\)</span>.</p>
 <div class="note info">
-            <p>If <span class="math inline">\(U \sim \mathcal{U}_{[0, 1]}\)</span> and <span class="math inline">\(F^-\)</span> is the quantile function associated with a distribution <span class="math inline">\(\pi\)</span>, then <span class="math inline">\(F^-(U)\)</span> is distributed according to <span class="math inline">\(\pi\)</span>.</p>
+            <p>In practice, we use a Cholesky factorization <span class="math inline">\(\Sigma=LL^T\)</span> where <span class="math inline">\(L\)</span> is a lower triangular matrix.</p>
           </div>
-<h1 id="example">2. Example</h1>
-<p><strong>Example 2.1 (Exponential Distribution)</strong>    If <span class="math inline">\(F(x)=1-e^{-\lambda x}\)</span> for all <span class="math inline">\(x \in \mathbb{R}^+\)</span>, then <span class="math display">\[F^-(u)=F^{-1}(u)=-\frac{\ln(1-u)}{\lambda}.\]</span> Hence <span class="math inline">\(\displaystyle -\frac{\ln(1-U)}{\lambda}\)</span> and <span class="math inline">\(\displaystyle -\frac{\ln(U)}{\lambda}\)</span> where <span class="math inline">\(U \sim \mathcal{U}_{[0, 1]}\)</span> are distributed according to an exponential distribution <span class="math inline">\(\mathcal{E}(\lambda)\)</span>.</p>
-<p><strong>Example 2.2 (Cauchy Distribution)</strong>    The Cauchy distribution has CDF <span class="math display">\[F(x)=\frac{1}{2}+\frac{\arctan(x)}{\pi}\]</span> for all <span class="math inline">\(x \in \mathbb{R}\)</span>. Hence we have <span class="math display">\[F^-(u)=F^{-1}(u)=\tan\left(\pi\left(u-\frac{1}{2}\right)\right).\]</span></p>
-<p><strong>Example 2.3 (Geometric Distribution)</strong>    <span class="math inline">\(F(x)=1-q^x\)</span> for <span class="math inline">\(x=1, 2, \ldots\)</span>, where <span class="math inline">\(0&lt;p&lt;1\)</span> and <span class="math inline">\(q=1-p\)</span>. The smallest <span class="math inline">\(x \in \mathbb{N}\)</span> giving <span class="math inline">\(F(x) \geq u\)</span> is the smallest <span class="math inline">\(x \in \mathbb{N}\)</span> satisfying <span class="math inline">\(\displaystyle x \geq \frac{\ln(1-u)}{\ln(q)}\)</span>. Hence <span class="math display">\[x=F^-(u)=\left\lceil \frac{\ln(1-u)}{\ln(q)} \right\rceil\]</span> where we can replace <span class="math inline">\(1-u\)</span> with <span class="math inline">\(u\)</span>.</p>
-<h1 id="comment">3. Comment</h1>
-<p>The inversion method can be used to generate r.v.s. with values in any countable set. The limitation is that we need to be able to evaluate the generalized inverse of the CDF <span class="math inline">\(F^-\)</span>, which is typically unknown for the distribution encountered in real application.</p>
+<p><strong>Example 2.5 (Poisson Distribution)</strong>    In practice, a Poisson r.v. can be simulated using uniform r.v.s. <span class="math inline">\(U_i\)</span>, by defining <span class="math display">\[\begin{aligned}
+X&amp;=\min\left\{n: -\sum_{i=1}^n \ln(U_i)&gt;t\right\}-1
+\\&amp;=\min\left\{n: \prod_{i=1}^n U_i&lt;e^{-t}\right\}-1.
+\end{aligned}\]</span></p>
 
     </div>
 
@@ -290,7 +305,7 @@
       <footer class="post-footer">
           
           <div class="post-tags">
-              <a href="/tags/Inversion-Method/" rel="tag"><i class="fa fa-tag"></i> Inversion Method</a>
+              <a href="/tags/Transformation-Method/" rel="tag"><i class="fa fa-tag"></i> Transformation Method</a>
           </div>
 
         
@@ -299,13 +314,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/Statistics/Simulation_Method/Introduction_to_Monte_Carlo_Method" rel="prev" title="Introduction to Monte Carlo Method">
-      <i class="fa fa-chevron-left"></i> Introduction to Monte Carlo Method
+    <a href="/Statistics/Simulation_Method/Inversion_Method" rel="prev" title="Inversion Method">
+      <i class="fa fa-chevron-left"></i> Inversion Method
     </a></div>
-      <div class="post-nav-item">
-    <a href="/Statistics/Simulation_Method/Transformation_Method" rel="next" title="Transformation Method">
-      Transformation Method <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -364,7 +376,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#inversion-method"><span class="nav-text">1. Inversion Method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#example"><span class="nav-text">2. Example</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#comment"><span class="nav-text">3. Comment</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#transformation-method"><span class="nav-text">1. Transformation Method</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#example"><span class="nav-text">2. Example</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
