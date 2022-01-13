@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.loli.net/css?family=Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"litianyang0211.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Duality in Convex Optimization">
+<meta property="og:url" content="https://litianyang0211.github.io/Computer_Science/Machine_Learning/Duality_in_Convex_Optimization">
+<meta property="og:site_name" content="Tianyang Li">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-01-12T00:00:00.000Z">
+<meta property="article:modified_time" content="2022-01-13T11:28:06.374Z">
+<meta property="article:author" content="Tianyang Li">
+<meta property="article:tag" content="Duality">
+<meta property="article:tag" content="KKT Conditions">
+<meta property="article:tag" content="Optimization">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://litianyang0211.github.io/Computer_Science/Machine_Learning/Duality_in_Convex_Optimization.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Duality in Convex Optimization | Tianyang Li</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tianyang Li</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-posts">
+
+    <a href="/posts/" rel="section"><i class="fa fa-blog fa-fw"></i>Posts</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-projects">
+
+    <a href="/projects/" rel="section"><i class="fa fa-code fa-fw"></i>Projects</a>
+
+  </li>
+        <li class="menu-item menu-item-friends">
+
+    <a href="/friends/" rel="section"><i class="fa fa-user-friends fa-fw"></i>Friends</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://litianyang0211.github.io/Computer_Science/Machine_Learning/Duality_in_Convex_Optimization">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Tianyang Li">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tianyang Li">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Duality in Convex Optimization
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-lightbulb"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-01-12 00:00:00" itemprop="dateCreated datePublished" datetime="2022-01-12T00:00:00+00:00">2022-01-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-edit"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-01-13 11:28:06" itemprop="dateModified" datetime="2022-01-13T11:28:06+00:00">2022-01-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Computer-Science/" itemprop="url" rel="index"><span itemprop="name">Computer Science</span></a>
+                </span>
+                  /
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a class=n href="/categories/Computer-Science/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description"><div></div></div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="background">1. Background</h1>
+<p>Much of machine learning requires to perform <strong>optimization</strong> subject to <strong>constraints</strong> on the variables. Constrained optimization problem must have a convex dual problem form that is the basis for support vector machine (SVM).</p>
+<h1 id="lagrangian">2. Lagrangian</h1>
+<p>Consider a general constrained optimization problem with objective function <span class="math inline">\(f_0: \mathbb{R}^n \to \mathbb{R}\)</span>, <span class="math inline">\(m\)</span> inequality and <span class="math inline">\(r\)</span> equality constraints: <span class="math display">\[\begin{align}\begin{aligned}
+\min\ &amp;f_0(\mathbf{x}) \\
+\text{s.t.}\ &amp;f_i(\mathbf{x}) \leq 0, &amp; i=1, \ldots, m, \\
+&amp;h_j(\mathbf{x})=0, &amp; j=1, \ldots, r,
+\end{aligned}\tag{P}\end{align}\]</span> which is known as the <strong>primal problem</strong>. We denote its optimum value as <span class="math inline">\(p^*=f_0(\mathbf{x}^*)\)</span> and <span class="math display">\[\mathcal{D}=\bigcap_{i=0}^m \text{dom}(f_i) \cap \bigcap_{j=1}^r \text{dom}(h_j)\]</span> be the <strong>domain</strong> of the problem, and require <span class="math inline">\(\mathcal{D} \subseteq \mathbb{R}^n\)</span>, where <span class="math inline">\(f_0\)</span>, <span class="math inline">\(f_i\)</span> and <span class="math inline">\(h_j\)</span> are all defined to be nonempty. Any <span class="math inline">\(\mathbf{x} \in \mathcal{D}\)</span> where <span class="math inline">\(f_i(\mathbf{x}) \leq 0\)</span> for all <span class="math inline">\(i\)</span>, and <span class="math inline">\(h_j(\mathbf{x})=0\)</span> for all <span class="math inline">\(j\)</span> is known as a <strong>primal feasible point</strong>.</p>
+<p>The Lagrangian <span class="math inline">\(\mathcal{L}: \mathbb{R}^n \times \mathbb{R}^m \times \mathbb{R}^r \to \mathbb{R}\)</span> is <span class="math display">\[\mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}, \boldsymbol{\nu})=f_0(\mathbf{x})+\sum_{i=1}^m \lambda_if_i(\mathbf{x})+\sum_{j=1}^r \nu_jh_j(\mathbf{x})\]</span> where <span class="math inline">\(\boldsymbol{\lambda} \in \mathbb{R}^m\)</span> and <span class="math inline">\(\boldsymbol{\nu} \in \mathbb{R}^r\)</span> are Lagrange multipliers, a.k.a. <strong>dual variables</strong>.</p>
+<p>The <strong>Lagrange dual function</strong> (<strong>dual function</strong>) is <span class="math display">\[g(\boldsymbol{\lambda}, \boldsymbol{\nu})=\inf_{x \in \mathcal{D}} \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}, \boldsymbol{\nu}).\]</span></p>
+<p>The domain of <span class="math inline">\(g\)</span>, <span class="math inline">\(\text{dom}(g)\)</span>, is the set of values <span class="math inline">\((\boldsymbol{\lambda}, \boldsymbol{\nu})\)</span> for which the Lagrangian is bounded from below, i.e. <span class="math inline">\(g(\boldsymbol{\lambda}, \boldsymbol{\nu})&gt;-\infty\)</span>. A <strong>dual feasible pair</strong> <span class="math inline">\((\boldsymbol{\lambda}, \boldsymbol{\nu})\)</span> is a pair where <span class="math inline">\(\boldsymbol{\lambda} \succeq 0\)</span> and <span class="math inline">\((\boldsymbol{\lambda}, \boldsymbol{\nu}) \in \text{dom}(g)\)</span>.</p>
+<div class="note info">
+            <p>In principle (but not in practice), we could convert <span class="math inline">\((\text{P})\)</span> to an unconstrained problem by <span class="math display">\[\min \widetilde{f}(\mathbf{x}):=f_0(\mathbf{x})+\sum_{i=1}^m I\_(f_i(\mathbf{x}))+\sum_{j=1}^r I_0(h_j(\mathbf{x}))\]</span> where <span class="math inline">\(I\_(u)=\begin{cases} 0, &amp;u \leq 0 \\ \infty, &amp;u&gt;0 \end{cases}\)</span> and <span class="math inline">\(I_0(u)=\begin{cases} 0, &amp;u=0 \\ \infty, &amp;u \neq 0 \end{cases}\)</span>.</p><p>If <span class="math inline">\(\boldsymbol{\lambda} \succeq 0\)</span>, then the Lagrangian is a lower bound on <span class="math inline">\(\widetilde{f}(x)\)</span>, i.e. for all <span class="math inline">\(\mathbf{x} \in \mathbb{R}^n\)</span>, <span class="math inline">\(\boldsymbol{\lambda} \in \mathbb{R}^m\)</span> with <span class="math inline">\(\boldsymbol{\lambda} \succeq 0\)</span>, and <span class="math inline">\(\boldsymbol{\nu} \in \mathbb{R}^r\)</span>, <span class="math inline">\(\mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}, \boldsymbol{\nu}) \leq \widetilde{f}(\mathbf{x})\)</span>. More concretely we have <span class="math display">\[I\_(f_i(\mathbf{x}))=\sup_{\lambda_i \in \mathbb{R}^+} \lambda_if_i(\mathbf{x})=\begin{cases}0, &amp;f_i(\mathbf{x}) \leq 0 \\\infty, &amp;f_i(\mathbf{x})&gt;0\end{cases}\]</span> and <span class="math display">\[I_0(h_j(\mathbf{x}))=\sup_{\nu_j \in \mathbb{R}} \nu_jh_j(\mathbf{x})=\begin{cases}0, &amp;h_i(\mathbf{x})=0 \\\infty, &amp;h_j(\mathbf{x}) \neq 0\end{cases}\]</span> and thus <span class="math display">\[\begin{aligned}\widetilde{f}(\mathbf{x})&amp;=f_0(\mathbf{x})+\sum_{i=1}^m \sup_{\lambda_i \in \mathbb{R}^+} \lambda_if_i(\mathbf{x})+\sum_{j=1}^r \sup_{\nu_j \in \mathbb{R}} \nu_jh_j(\mathbf{x})\\&amp;=\sup_{\forall i, j: \lambda_i \in \mathbb{R}^+, \nu_j \in \mathbb{R}} \left(f_0(\mathbf{x})+\sum_{i=1}^m \lambda_if_i(\mathbf{x})+\sum_{j=1}^r \nu_jh_j(\mathbf{x})\right)\\&amp;=\sup_{\boldsymbol{\lambda} \succeq 0, \boldsymbol{\nu}} \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}, \boldsymbol{\nu}).\end{aligned}\]</span></p>
+          </div>
+<h1 id="dual-problem">3. Dual Problem</h1>
+<p>The <strong>dual problem</strong> attempts to find the best lower bound <span class="math inline">\(g(\boldsymbol{\lambda}, \boldsymbol{\nu})\)</span> on the optimal solution <span class="math inline">\(p^*\)</span> of <span class="math inline">\((\text{P})\)</span>:<span class="math display">\[\begin{align}\begin{aligned}
+\max\ &amp;g(\boldsymbol{\lambda}, \boldsymbol{\nu}) \\
+\text{s.t.}\ &amp;\boldsymbol{\lambda} \succeq 0
+\end{aligned}\tag{D}\end{align}\]</span> and we denote its optimum values as <span class="math inline">\(d^*=g(\boldsymbol{\lambda}^*, \boldsymbol{\nu}^*)\)</span>.</p>
+<div class="note info">
+            <p><span class="math inline">\((\text{D})\)</span> is a convex optimization problem, since the function being maximized is concave and the constraint set is convex.</p>
+          </div>
+<p><span id="thm3.1"><strong>Theorem 3.1</strong></span>    When <span class="math inline">\(\boldsymbol{\lambda} \succeq 0\)</span>, then for all <span class="math inline">\(\boldsymbol{\nu}\)</span> we have <span class="math inline">\(g(\boldsymbol{\lambda}, \boldsymbol{\nu}) \leq p^*\)</span>.</p>
+<strong><em>Proof.</em></strong> Assume <span class="math inline">\(\mathbf{x} \in \mathcal{D}\)</span> is feasible and <span class="math inline">\(\boldsymbol{\lambda} \succeq 0\)</span>, then <span class="math display">\[\sum_{i=1}^m \lambda_if_i(\mathbf{x})+\sum_{j=1}^r \nu_jh_j(\mathbf{x}) \leq 0\]</span> and so for all <span class="math inline">\(\mathbf{x}\)</span>, <span class="math display">\[\begin{aligned}
+g(\boldsymbol{\lambda}, \boldsymbol{\nu})&amp;=\inf_{\mathbf{x} \in \mathcal{D}} \left(f_0(\mathbf{x})+\sum_{i=1}^m \lambda_if_i(\mathbf{x})+\sum_{j=1}^r \nu_jh_j(\mathbf{x})\right)
+\\&amp;\leq f_0(\mathbf{x})+\sum_{i=1}^m \lambda_if_i(\mathbf{x})+\sum_{j=1}^r \nu_jh_j(\mathbf{x})
+\\&amp;\leq f_0(\mathbf{x}).
+\end{aligned}\]</span> Hence, <span class="math inline">\(g(\boldsymbol{\lambda}, \boldsymbol{\nu}) \leq p^*\)</span>.
+<p align="right">
+<span class="math inline">\(\square\)</span>
+</p>
+<p><strong>Property 3.2 (Weak Duality)</strong>    <span class="math inline">\(d^* \leq p^*\)</span>.</p>
+<p><strong><em>Proof.</em></strong> From <a href="#thm3.1">theorem 3.1</a>, we immediately have <span class="math display">\[d^*=\sup_{\boldsymbol{\lambda} \succeq 0, \boldsymbol{\nu}} g(\boldsymbol{\lambda}, \boldsymbol{\nu}) \leq p^*.\]</span></p>
+<p>The difference <span class="math inline">\(p^*-d^*\)</span> is called the <strong>optimal duality gap</strong>. If the duality gap is zero, then <strong>strong duality</strong> holds, i.e. <span class="math inline">\(d^*=p^*\)</span>. Most common (but not only) sufficient condition for strong duality is <strong>Slater's condition</strong> for a convex optimization problem, i.e.</p>
+<ul>
+<li><p>each <span class="math inline">\(f_i(\mathbf{x})\)</span> is a convex function and each <span class="math inline">\(h_j(\mathbf{x})\)</span> is affine (<span class="math inline">\(h_j(\mathbf{x})=\mathbf{a}_j^\top\mathbf{x}-b_j=0\)</span> and thus we can represent the equality constraints as <span class="math inline">\(A\mathbf{x}=\mathbf{b}\)</span>);</p></li>
+<li><p>there exists a strictly feasible point <span class="math inline">\(\widetilde{\mathbf{x}} \in \text{relint}(\mathcal{D})\)</span> s.t. for all <span class="math inline">\(i\)</span>, <span class="math inline">\(f_i(\widetilde{\mathbf{x}})&lt;0\)</span>, and <span class="math inline">\(A\widetilde{\mathbf{x}}=\mathbf{b}\)</span>, where <span class="math inline">\(\text{relint}(\mathcal{D})\)</span> is the <strong>relative interior</strong> of <span class="math inline">\(\mathcal{D}\)</span>.</p></li>
+</ul>
+<p>Condition under which strong duality holds is called <strong>constraint qualification</strong>.</p>
+<h2 id="saddle-point-characterization-of-weak-and-strong-duality">3.1. Saddle Point Characterization of Weak and Strong Duality</h2>
+<p>The primal problem can be solved using the unconstrained saddle point problem <span class="math display">\[p^*=\inf_{x \in \mathcal{D}} \widetilde{f}(\mathbf{x})=\inf_{x \in \mathcal{D}} \sup_{\boldsymbol{\lambda} \succeq 0, \boldsymbol{\nu}} \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}, \boldsymbol{\nu}).\]</span> Deriving the <strong>dual form</strong> of the problem equates to switching the order of optimizations <span class="math display">\[d^*=\sup_{\boldsymbol{\lambda} \succeq 0, \boldsymbol{\nu}} \inf_{x \in \mathcal{D}} \mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}, \boldsymbol{\nu}).\]</span> The <strong>max-min inequality</strong> guarantees that <span class="math inline">\(d^* \leq p^*\)</span>.</p>
+<h2 id="optimality-condition">3.2. Optimality Condition</h2>
+<p>Suppose the primal is equal to the dual, and let <span class="math inline">\(\mathbf{x}^*\)</span> be the optimum solution of <span class="math inline">\((\text{P})\)</span> and <span class="math inline">\((\boldsymbol{\lambda}^*, \boldsymbol{\nu}^*)\)</span> be the optimum solution of <span class="math inline">\((\text{D})\)</span>, then <span class="math display">\[\begin{aligned}
+f_0(\mathbf{x}^*)&amp;=g(\boldsymbol{\lambda}^*, \boldsymbol{\nu}^*)
+\\&amp;=\inf_{\mathbf{x} \in \mathcal{D}} \left(f_0(\mathbf{x})+\sum_{i=1}^m \lambda_i^*f_i(\mathbf{x})+\sum_{j=1}^r \nu_j^*h_j(\mathbf{x})\right)
+\\&amp;\leq f_0(\mathbf{x}^*)+\sum_{i=1}^m \lambda_i^*f_i(\mathbf{x}^*)+\sum_{j=1}^r \nu_j^*h_j(\mathbf{x}^*)
+\\&amp;\leq f_0(\mathbf{x}^*).
+\end{aligned}\]</span> It follows that <span class="math display">\[\sum_{i=1}^m \lambda_i^*f_i(\mathbf{x}^*)=0\]</span> which is the condition of <strong>complementary slackness</strong> i.e. <span class="math display">\[\begin{aligned}
+\lambda_i^*&gt;0 &amp;\Rightarrow f_i(\mathbf{x}^*)=0, \\
+f_i(\mathbf{x}^*)&lt;0 &amp;\Rightarrow \lambda_i^*=0.
+\end{aligned}\]</span></p>
+<p>Suppose <span class="math inline">\(f_i\)</span> and <span class="math inline">\(h_i\)</span> are differentiable and the duality gap is zero, then since <span class="math inline">\(\mathbf{x}^*\)</span> minimizes <span class="math inline">\(\mathcal{L}(\mathbf{x}, \boldsymbol{\lambda}^*, \boldsymbol{\nu}^*)\)</span>, we have <span class="math display">\[\nabla f_0(\mathbf{x}^*)+\sum_{i=1}^m \lambda_i^* \nabla f_i(\mathbf{x}^*)+\sum_{j=1}^r \nu_i^* \nabla h_j(\mathbf{x}^*)=\mathbf{0}.\]</span></p>
+<p>Gathering the various conditions for optimality, the <strong>KKT conditions</strong> for the primal and dual variables <span class="math inline">\((\mathbf{x}, \boldsymbol{\lambda}, \boldsymbol{\nu})\)</span> are <span class="math display">\[\begin{aligned}
+\nabla f_0(\mathbf{x})+\sum_{i=1}^m \lambda_i \nabla f_i(\mathbf{x})+\sum_{j=1}^r \nu_i \nabla h_i(\mathbf{x}) &amp;=0, \\
+f_i(\mathbf{x}) &amp;\leq 0, i=1, \ldots, m, \\
+h_j(\mathbf{x}) &amp;=0, j=1, \ldots, r, \\
+\lambda_i &amp;\geq 0, i=1, \ldots, m, \\
+\lambda_if_i(\mathbf{x}) &amp;=0, i=1, \ldots, m.
+\end{aligned}\]</span></p>
+<p>If a convex optimization problem with differentiable objective and constraint functions satisfies Slater's condition, then the KKT conditions are necessary and sufficient for global optimality.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Duality/" rel="tag"><i class="fa fa-tag"></i> Duality</a>
+              <a href="/tags/KKT-Conditions/" rel="tag"><i class="fa fa-tag"></i> KKT Conditions</a>
+              <a href="/tags/Optimization/" rel="tag"><i class="fa fa-tag"></i> Optimization</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/Statistics/Simulation_Method/Rejection_Sampling" rel="prev" title="Rejection Sampling">
+      <i class="fa fa-chevron-left"></i> Rejection Sampling
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#background"><span class="nav-text">1. Background</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lagrangian"><span class="nav-text">2. Lagrangian</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#dual-problem"><span class="nav-text">3. Dual Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#saddle-point-characterization-of-weak-and-strong-duality"><span class="nav-text">3.1. Saddle Point Characterization of Weak and Strong Duality</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#optimality-condition"><span class="nav-text">3.2. Optimality Condition</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tianyang Li"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Tianyang Li</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/litianyang0211" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;litianyang0211" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:tianyang.li@linacre.ox.ac.uk" title="Email → mailto:tianyang.li@linacre.ox.ac.uk" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/derek0211" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;derek0211" rel="noopener" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class=""></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tianyang Li</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme    : 'default',
+      logLevel : 3,
+      flowchart: { curve     : 'linear' },
+      gantt    : { axisFormat: '%m/%d/%Y' },
+      sequence : { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
