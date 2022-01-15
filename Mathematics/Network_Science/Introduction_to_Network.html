@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="Tianyang Li">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-10-10T23:00:00.000Z">
-<meta property="article:modified_time" content="2022-01-14T22:37:48.734Z">
+<meta property="article:modified_time" content="2022-01-15T16:23:55.793Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Network">
 <meta name="twitter:card" content="summary">
@@ -232,7 +232,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-14 22:37:48" itemprop="dateModified" datetime="2022-01-14T22:37:48+00:00">2022-01-14</time>
+                <time title="Modified: 2022-01-15 16:23:55" itemprop="dateModified" datetime="2022-01-15T16:23:55+00:00">2022-01-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -324,7 +324,7 @@ p(x; t)=\int_{-\infty}^\infty f(x-x&#39;)p(x&#39;; t-1)\text{d}x&#39;
 \end{aligned}\end{align}\]</span></span> because the probability of visiting <span class="math inline">\(x\)</span> at time <span class="math inline">\(t\)</span> is the probability of having visited <span class="math inline">\(x&#39;\)</span> at time <span class="math inline">\(t-1\)</span> and performing a jump of displacement <span class="math inline">\(x-x&#39;\)</span>. Eq. <a href="#eq7">(7)</a> for the entire range of <span class="math inline">\(x\)</span> is more easily solved in the Fourier domain, where the <strong>Fourier transform</strong> is defined by <span class="math display">\[\widehat{p}(k; t)=\int_{-\infty}^\infty p(x; t)e^{-ikx}\text{d}x.\]</span> The original function is recovered through the <strong>inverse Fourier transform</strong> given by <span class="math display">\[p(x; t)=\frac{1}{2\pi}\int_{-\infty}^\infty \widehat{p}(k; t)e^{ikx}\text{d}k.\]</span> Therefore, <span class="math inline">\(p(x; t)\)</span> is a combination of the <strong>oscillatory functions</strong> <span class="math inline">\(e^{ikx}\)</span>, which form a base in the space of functions. The Fourier mode <span class="math inline">\(\widehat{p}(k; t)\)</span> is the projection of <span class="math inline">\(p(x; t)\)</span> onto the base. The Fourier transform of <span class="math inline">\(f(x)\)</span>, <span class="math inline">\(\widehat{f}(k)\)</span>, is called the <strong>structure function of the random walk</strong>. The Taylor expansion around <span class="math inline">\(k=0\)</span> yields <span class="math display">\[\widehat{p}(k; t)=\langle e^{-ikx} \rangle=1-ik\langle x \rangle-\frac{1}{2}k^2\langle x^2 \rangle+\mathcal{O}(k^3),\]</span> which implies that the moments of <span class="math inline">\(p(x; t)\)</span> are obtained from the derivatives of <span class="math inline">\(\widehat{p}(k; t)\)</span> at <span class="math inline">\(k=0\)</span>.</p>
 <p>The Fourier transform transfers a convolution to a product, and thus working in the Fourier domain is often recommended when dealing with problems involving summations of r.v.s.. Eq. <a href="#eq7">(7)</a> is equivalent to <span class="math display">\[\widehat{p}(k; t)=\widehat{f}(k)\widehat{p}(k; t-1).\]</span> If the walker is initially located at <span class="math inline">\(x=0\)</span> s.t. <span class="math inline">\(p(x; 0)=\delta(x)\)</span>, which translates to <span class="math inline">\(\wideaht{k; 0)=1\)</span>, we obtain <span class="math display">\[\widehat{p}(k; t)=[\widehat{f}(k)]^t.\]</span> Using the inverse Fourier transform, the formal solution of the random walk in the time domain is given by <span class="math display">\[p(x; t)=\frac{1}{2\pi}\int_{-\infty}^\infty [\widehat{f}(k)]^te^{ikx}\text{d}k.\]</span> When the first two moments of the structure function <span class="math inline">\(\widehat{f}(k)\)</span> are finite, the solution converges to the Gaussian profile <span class="math display">\[p(x; t)=\frac{1}{(2\pi Dt)^{1/2}}\exp\left(-\frac{(x-vt)^2}{4Dt}\right)\]</span> with a variance growing linearly with time.</p>
 <div class="note warning">
-            <p>To be continued.</p>
+            <p>To be completed.</p>
           </div>
 <h2 id="power-law-distribution">1.4. Power-Law Distribution</h2>
 <h2 id="maximum-likelihood">1.5. Maximum Likelihood</h2>
