@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="Tianyang Li">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-01-29T00:00:00.000Z">
-<meta property="article:modified_time" content="2022-01-30T13:14:35.313Z">
+<meta property="article:modified_time" content="2022-02-02T14:35:39.843Z">
 <meta property="article:author" content="Tianyang Li">
 <meta property="article:tag" content="Importance Sampling">
 <meta name="twitter:card" content="summary">
@@ -204,7 +204,7 @@
                   <i class="far fa-edit"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-01-30 13:14:35" itemprop="dateModified" datetime="2022-01-30T13:14:35+00:00">2022-01-30</time>
+                <time title="Modified: 2022-02-02 14:35:39" itemprop="dateModified" datetime="2022-02-02T14:35:39+00:00">2022-02-02</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -281,7 +281,7 @@ Therefore, by Slutsky's theorem, we have <span class="math display">\[\sqrt{n}(\
 <li><p>The asymptotic variance for <span class="math inline">\(\widehat{I}_n^\text{NIS}\)</span> is <span class="math display">\[\mathbb{V}_\text{as}[\widehat{I}_n^\text{NIS}]=\frac{\mathbb{E}_q[(w(X)(\varphi(X)-I))^2]}{(\mathbb{E}_q[w(X)])^2} \approx \frac{n^{-1} \sum_{i=1}^n \widetilde{w}^2(X_i)(\varphi(X_i)-\widehat{I}_n^\text{NIS})^2}{(n^{-1}\sum_{i=1}^n \widetilde{w}(X_i))^2}.\]</span></p></li>
 </ul>
 <h1 id="diagnostic">4. Diagnostic</h1>
-<p>Importance sampling works well when all weights roughly equal. Therefore, we solve for <span class="math inline">\(n_e\)</span> in <span class="math display">\[\frac{1}{n}\mathbb{V}_\text{as}[\widehat{I}_n^\text{NIS}]=\frac{\sigma^2}{n_e}\]</span> where <span class="math inline">\(\displaystyle \frac{\sigma^2}{n_e}\)</span> corresponds to the variance of an unweighted sample of size <span class="math inline">\(n_e\)</span>. The solution is <span class="math display">\[n_e=\frac{(\sum_{i=1}^n \widetilde{w}(X_i))^2}{\sum_{i=1}^n \widetilde{w}^2(X_i)}\]</span> which is called the <strong>effective sample size</strong>.</p>
+<p>We solve for <span class="math inline">\(n_e\)</span> in <span class="math display">\[\frac{1}{n}\mathbb{V}_\text{as}[\widehat{I}_n^\text{NIS}]=\frac{\sigma^2}{n_e}\]</span> where <span class="math inline">\(\displaystyle \frac{\sigma^2}{n_e}\)</span> corresponds to the variance of an unweighted sample of size <span class="math inline">\(n_e\)</span>. The solution is <span class="math display">\[n_e=\frac{(\sum_{i=1}^n \widetilde{w}(X_i))^2}{\sum_{i=1}^n \widetilde{w}^2(X_i)}\]</span> which is called the <strong>effective sample size</strong>.</p>
 
     </div>
 
